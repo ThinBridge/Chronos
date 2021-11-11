@@ -2,9 +2,6 @@ Chronosの開発の手引き
 =====================
 
  * 開発には Visual Studio 2019 (ATL/MFC含) が必要です。
- * バイナリファイルの管理に[Git LFS](https://git-lfs.github.com/)を利用しています。
-   * Windows環境の場合は"Git for Windows"に標準で含まれています。
-   * Ubuntu環境の場合は`sudo apt install git-lfs`でインストールください。
 
 ## ビルド手順
 
