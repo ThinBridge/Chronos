@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="FullScreenTitleBar.cpp">
+      <Filter>etc</Filter>
+    </ClCompile>
+    <ClCompile Include="MyComboBoxEx.cpp">
+      <Filter>etc</Filter>
+    </ClCompile>
+    <ClCompile Include="APIHook.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
+    <ClCompile Include="BroFrame.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
+    <ClCompile Include="BroView.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
+    <ClCompile Include="Sazabi.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
+    <ClCompile Include="client_app.cpp">
+      <Filter>CEF</Filter>
+    </ClCompile>
+    <ClCompile Include="client_handler.cpp">
+      <Filter>CEF</Filter>
+    </ClCompile>
+    <ClCompile Include="CTabWnd.cpp">
+      <Filter>etc</Filter>
+    </ClCompile>
+    <ClCompile Include="CWnd.cpp">
+      <Filter>etc</Filter>
+    </ClCompile>
+    <ClCompile Include="sbcommon.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgAuth.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDL.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDomainDetail.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDebugWnd.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSetting.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="fav.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="FullScreenTitleBarConst.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="FullScreenTitleBar.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemIDList.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="MyComboBoxEx.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\buffer.h">
+      <Filter>minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\MinHook.h">
+      <Filter>minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\trampoline.h">
+      <Filter>minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\HDE\hde32.h">
+      <Filter>minhook\HDE</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\HDE\hde64.h">
+      <Filter>minhook\HDE</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\HDE\pstdint.h">
+      <Filter>minhook\HDE</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\HDE\table32.h">
+      <Filter>minhook\HDE</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\HDE\table64.h">
+      <Filter>minhook\HDE</Filter>
+    </ClInclude>
+    <ClInclude Include="APIHook.h">
+      <Filter>SB</Filter>
+    </ClInclude>
+    <ClInclude Include="BroFrame.h">
+      <Filter>SB</Filter>
+    </ClInclude>
+    <ClInclude Include="BroView.h">
+      <Filter>SB</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>SB</Filter>
+    </ClInclude>
+    <ClInclude Include="sbcommon.h">
+      <Filter>SB</Filter>
+    </ClInclude>
+    <ClInclude Include="Sazabi.h">
+      <Filter>SB</Filter>
+    </ClInclude>
+    <ClInclude Include="client_app.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="client_handler.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="client_util.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
+    <ClInclude Include="CTabWnd.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="CWnd.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAuth.h">
+      <Filter>DLG</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDL.h">
+      <Filter>DLG</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDomainDetail.h">
+      <Filter>DLG</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDebugWnd.h">
+      <Filter>DLG</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSetting.h">
+      <Filter>DLG</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\Sazabi.ico">
+      <Filter>res</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Sazabi.rc2">
+      <Filter>res</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="minhook\buffer.hh">
+      <Filter>minhook</Filter>
+    </None>
+    <None Include="minhook\hook.hh">
+      <Filter>minhook</Filter>
+    </None>
+    <None Include="minhook\trampoline.hh">
+      <Filter>minhook</Filter>
+    </None>
+    <None Include="minhook\HDE\hde32.hh">
+      <Filter>minhook\HDE</Filter>
+    </None>
+    <None Include="minhook\HDE\hde64.hh">
+      <Filter>minhook\HDE</Filter>
+    </None>
+    <None Include="res\closeup.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\coldtool.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\hottoolb.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\maximizeup.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\minimizeup.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\mjr.bmp">
+      <Filter>res</Filter>
+    </None>
+    <None Include="res\SGThinforie.ico">
+      <Filter>res</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="minhook">
+      <UniqueIdentifier>{d4380f46-e4c7-48c2-b074-855bf9d78111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="minhook\HDE">
+      <UniqueIdentifier>{84032f84-ab53-424e-bcdb-e5641ebdc102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SB">
+      <UniqueIdentifier>{39f75f6b-f098-4e45-bce7-4f42d3775380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{4d657860-a2d1-4059-bd07-9138a0003788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CEF">
+      <UniqueIdentifier>{48a87f3a-21fc-4930-ada8-a7d0df1f6bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="etc">
+      <UniqueIdentifier>{bd7b1f6f-22c9-4eea-b314-9109e49fede2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DLG">
+      <UniqueIdentifier>{88dec3b5-3932-4179-937c-b15af5d43a03}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Sazabi.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\toolbar.bmp">
+      <Filter>res</Filter>
+    </Image>
+    <Image Include="res\key.bmp">
+      <Filter>res</Filter>
+    </Image>
+    <Image Include="res\DL.bmp">
+      <Filter>res</Filter>
+    </Image>
+    <Image Include="res\close_button.bmp" />
+    <Image Include="res\bg.bmp" />
+    <Image Include="res\blank.png" />
+    <Image Include="res\blank.bmp" />
+    <Image Include="res\small.ico" />
+    <Image Include="res\warn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\sazabi.manifest">
+      <Filter>res</Filter>
+    </Manifest>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,41 @@
+//
+// SGSECIKEYWEB.RC2 - このリソースは Microsoft Visual C++ で直接編集することはできません
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+//#define IDS_AFXBARRES_MENU_BAR_TITLE    16006
+//#define IDS_AFXBARRES_TOOLBAR_OPTIONS   17017
+//#define IDS_AFXBARRES_ADD_REMOVE_BTNS   17018
+//#define IDB_AFXBARRES_MENU_IMAGES24     17080
+//#define IDB_AFXBARRES_MENU_IMAGES       16129
+//#define IDS_AFXBARRES_PROPSHT_CAPTION   16103
+//#define IDS_AFXBARRES_ALL_COMMANDS      16110
+//#define IDS_AFXBARRES_NEW_MENU          16014
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+//IDB_AFXBARRES_MENU_IMAGES24 BITMAP                "res\\menuimg-pro24.bmp"
+//IDB_AFXBARRES_MENU_IMAGES BITMAP                  "res\\menuimg-pro.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+//STRINGTABLE
+//BEGIN
+//    IDS_AFXBARRES_MENU_BAR_TITLE "Menu Bar"
+//    IDS_AFXBARRES_TOOLBAR_OPTIONS "Toolbar Options"
+//    IDS_AFXBARRES_ADD_REMOVE_BTNS "&Add or Remove Buttons"
+//    IDS_AFXBARRES_PROPSHT_CAPTION "Customize"
+//    IDS_AFXBARRES_ALL_COMMANDS "All Commands"
+//    IDS_AFXBARRES_NEW_MENU  "New Menu"
+//END
+
+/////////////////////////////////////////////////////////////////////////////
+// 独自にリソースを編集する場合はこの場所に追加してください...
+/////////////////////////////////////////////////////////////////////////////

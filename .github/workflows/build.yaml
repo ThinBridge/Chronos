@@ -1,0 +1,17 @@
+on: [push]
+name: Build Chronos
+jobs:
+  build:
+    runs-on: [ windows-2019 ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.0.2
+      - name: Setup cache for CEF
+        uses: actions/cache@v2
+        with:
+          path: cef-cache
+          key: ${{ runner.os }}-cef
+      - name: Setup CEF
+        run: .\setup-cef.bat
+      - name: Compile Chronos
+        run: msbuild /p:Platform=Win32 /p:Configuration=R64_CSG

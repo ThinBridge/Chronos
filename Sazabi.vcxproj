@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="D64_CSG|Win32">
+      <Configuration>D64_CSG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="R64_CSG|Win32">
+      <Configuration>R64_CSG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <Keyword>MFCProj</Keyword>
+    <ProjectGuid>{83410426-0B15-352C-4BC5-CCD2A7EF1930}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">
+    <OutDir>.\R32\</OutDir>
+    <IntDir>.\ChronosRelease\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>ChronosN</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'">
+    <OutDir>.\D32\</OutDir>
+    <IntDir>.\ChronosDebug\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>ChronosN</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\ChronosRelease\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\ChronosRelease\Sazabi.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>.\ChronosRelease\</ObjectFileName>
+      <ProgramDataBaseFileName>.\ChronosRelease\</ProgramDataBaseFileName>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalOptions>/source-charset:.932 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\Sazabi.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0411</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\ChronosRelease\Sazabi.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>.\R32\ChronosN.exe</OutputFile>
+      <TerminalServerAware>true</TerminalServerAware>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ProgramDatabaseFile>.\ChronosRelease\Chronos.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <HeapReserveSize>
+      </HeapReserveSize>
+      <HeapCommitSize>
+      </HeapCommitSize>
+      <StackReserveSize>
+      </StackReserveSize>
+      <StackCommitSize>
+      </StackCommitSize>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+      <LargeAddressAware>true</LargeAddressAware>
+      <OptimizeReferences>true</OptimizeReferences>
+      <DelayLoadDLLs>libcef.dll;gdiplus.dll;VERSION.dll;WINMM.dll;IMM32.dll;WINHTTP.dll;WININET.dll;UxTheme.dll;WINSPOOL.DRV;MSIMG32.dll;user32.dll;gdi32.dll;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleaut32.dll;oledlg.dll;dwmapi.dll;secur32.dll;oleacc.dll</DelayLoadDLLs>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\ChronosDebug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\ChronosDebug\Sazabi.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>.\ChronosDebug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\ChronosDebug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <AdditionalOptions>/source-charset:.932 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Debug\Sazabi.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0411</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\ChronosDebug\Sazabi.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+      <LargeAddressAware>true</LargeAddressAware>
+      <HeapReserveSize>4194304</HeapReserveSize>
+      <StackReserveSize>4194304</StackReserveSize>
+      <HeapCommitSize>16384</HeapCommitSize>
+      <StackCommitSize>16384</StackCommitSize>
+      <TerminalServerAware>true</TerminalServerAware>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="APIHook.cpp" />
+    <ClCompile Include="BroFrame.cpp" />
+    <ClCompile Include="BroView.cpp" />
+    <ClCompile Include="client_app.cpp" />
+    <ClCompile Include="client_handler.cpp" />
+    <ClCompile Include="CTabWnd.cpp" />
+    <ClCompile Include="CWnd.cpp" />
+    <ClCompile Include="DlgAuth.cpp" />
+    <ClCompile Include="DlgDebugWnd.cpp" />
+    <ClCompile Include="DlgDL.cpp" />
+    <ClCompile Include="DlgDomainDetail.cpp" />
+    <ClCompile Include="DlgSetting.cpp" />
+    <ClCompile Include="FullScreenTitleBar.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MyComboBoxEx.cpp" />
+    <ClCompile Include="Sazabi.cpp" />
+    <ClCompile Include="sbcommon.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'">stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Sazabi.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="APIHook.h" />
+    <ClInclude Include="BroFrame.h" />
+    <ClInclude Include="BroView.h" />
+    <ClInclude Include="client_app.h" />
+    <ClInclude Include="client_handler.h" />
+    <ClInclude Include="client_util.h" />
+    <ClInclude Include="CTabWnd.h" />
+    <ClInclude Include="CWnd.h" />
+    <ClInclude Include="DlgAuth.h" />
+    <ClInclude Include="DlgDebugWnd.h" />
+    <ClInclude Include="DlgDL.h" />
+    <ClInclude Include="DlgDomainDetail.h" />
+    <ClInclude Include="DlgSetting.h" />
+    <ClInclude Include="fav.h" />
+    <ClInclude Include="FullScreenTitleBar.h" />
+    <ClInclude Include="FullScreenTitleBarConst.h" />
+    <ClInclude Include="ItemIDList.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="minhook\buffer.h" />
+    <ClInclude Include="minhook\HDE\hde32.h" />
+    <ClInclude Include="minhook\HDE\hde64.h" />
+    <ClInclude Include="minhook\HDE\pstdint.h" />
+    <ClInclude Include="minhook\HDE\table32.h" />
+    <ClInclude Include="minhook\HDE\table64.h" />
+    <ClInclude Include="minhook\MinHook.h" />
+    <ClInclude Include="minhook\trampoline.h" />
+    <ClInclude Include="MyComboBoxEx.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="sbcommon.h" />
+    <ClInclude Include="Sazabi.h" />
+    <ClInclude Include="StdAfx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\Sazabi.ico" />
+    <CustomBuild Include="res\Sazabi.rc2">
+      <FileType>RC</FileType>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="minhook\buffer.hh">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="minhook\HDE\hde32.hh" />
+    <None Include="minhook\HDE\hde64.hh" />
+    <None Include="minhook\hook.hh">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="minhook\trampoline.hh">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="res\closeup.bmp" />
+    <None Include="res\coldtool.bmp" />
+    <None Include="res\hottoolb.bmp" />
+    <None Include="res\maximizeup.bmp" />
+    <None Include="res\minimizeup.bmp" />
+    <None Include="res\mjr.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bg.bmp" />
+    <Image Include="res\close_button.bmp" />
+    <Image Include="res\key.bmp" />
+    <Image Include="res\small.ico" />
+    <Image Include="res\toolbar.bmp" />
+    <Image Include="res\warn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\sazabi.manifest" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Sazabi.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

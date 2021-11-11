@@ -1,0 +1,10 @@
+UseTab: true
+IndentWidth: 8
+AccessModifierOffset: -8
+NamespaceIndentation: All
+BreakBeforeBraces: Allman
+SortIncludes: false
+AllowShortIfStatementsOnASingleLine: true
+IndentCaseLabels: false
+PointerAlignment: Left
+ColumnLimit: 0

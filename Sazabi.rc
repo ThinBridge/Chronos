@@ -1,0 +1,1081 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
+#pragma code_page(932)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "ファイル(&F)"
+    BEGIN
+        MENUITEM "新規作成-ウィンドウ(&N)\tCtrl+N",      ID_NEW_BLANK
+        MENUITEM "新規作成-ウィンドウ(現在のページ)",          ID_NEW
+        MENUITEM "新規セッション",                     ID_NEW_SESSION
+        MENUITEM SEPARATOR
+        MENUITEM "ウィンドウの復元",                    ID_RESTORE_WND
+        MENUITEM "ウィンドウの保存",                    ID_SAVE_WND
+        MENUITEM SEPARATOR
+        MENUITEM "印刷(PDF出力)",                   ID_PRINT_PDF
+        MENUITEM "印刷(&P)...\tCtrl+P",           ID_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "閉じる(&C)",                     ID_W_CLOSE
+        MENUITEM SEPARATOR
+        POPUP "最近閉じたウィンドウ"
+        BEGIN
+            MENUITEM "なし",                          ID_CLOSE_WND_HISTORY_DUMMY
+        END
+    END
+    POPUP "編集(&E)"
+    BEGIN
+        MENUITEM "切り取り(&T)\tCtrl+X",            ID_CUT
+        MENUITEM "コピー(&C)\tCtrl+C",             ID_COPY
+        MENUITEM "貼り付け(&P)\tCtrl+V",            ID_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "全て選択(&A)\tCtrl+A",            ID_SEL_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "このページの検索(&F)...\tCtrl+F",     ID_FIND_PAGE
+    END
+    POPUP "表示(&V)"
+    BEGIN
+        MENUITEM "前に戻る\t Alt+←",                ID_GO_BACK
+        MENUITEM "次に進む\t Alt+→",                ID_GO_FORWARD
+        MENUITEM "中止\tEsc",                     ID_VIEW_STOP
+        MENUITEM "最新の情報に更新\t F5",               ID_VIEW_REFRESH
+        MENUITEM "ホーム ページ\tAlt+Home",           ID_GO_START_PAGE
+        MENUITEM SEPARATOR
+        MENUITEM "全画面表示(&F)\tF11",              ID_FULL_SCREEN
+    END
+    POPUP "お気に入り(&A)"
+    BEGIN
+        MENUITEM "お気に入りに追加(&A)...",             ID_ADD_FAVORITE
+        MENUITEM "お気に入りの整理(&O)...",             ID_ORGANIZE_FAVORITE
+        MENUITEM SEPARATOR
+        MENUITEM "DUMMY",                       ID_FAVORITE_DUMMY
+    END
+    POPUP "ツール(&T)"
+    BEGIN
+        MENUITEM "ファイルマネージャ",                   ID_OPEN_THIN_FILER
+        MENUITEM SEPARATOR
+        MENUITEM "設定(&P)...",                   ID_SETTINGS
+    END
+    POPUP "ウィンドウ(&W)"
+    BEGIN
+        MENUITEM "閉じる(&C)",                     ID_W_CLOSE
+        MENUITEM "全てのウィンドウを閉じる(&X)",            IDC_APP_EXIT
+        MENUITEM "このウィンドウ以外を閉じる",               IDC_APP_EXIT_BUT_THIS
+        MENUITEM "次のウィンドウ\tCtrl+Tab",           ID_NEXT_WND
+        MENUITEM "前のウィンドウ\tShift+Ctrl+Tab",     ID_PREV_WND
+        MENUITEM SEPARATOR
+        MENUITEM "DUMMY",                       ID_WINDOW_DUMMY
+    END
+    POPUP "ヘルプ(&H)"
+    BEGIN
+        MENUITEM "バージョン情報(&A)...",              ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "ブラウザーキャッシュを削除する(&X)",         IDC_APP_DELETE_CACHE
+    END
+END
+
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 (日本) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_BACK MENU
+BEGIN
+    POPUP "BACK"
+    BEGIN
+        MENUITEM "1つ戻る",                        ID_BF_BACK1
+        MENUITEM "2つ戻る",                        ID_BF_BACK2
+        MENUITEM "3つ戻る",                        ID_BF_BACK3
+        MENUITEM "4つ戻る",                        ID_BF_BACK4
+        MENUITEM "5つ戻る",                        ID_BF_BACK5
+    END
+END
+
+IDR_MENU_FORWARD MENU
+BEGIN
+    POPUP "FORWARD"
+    BEGIN
+        MENUITEM "1つ進む",                        ID_BF_FORWARD1
+        MENUITEM "2つ進む",                        ID_BF_FORWARD2
+        MENUITEM "3つ進む",                        ID_BF_FORWARD3
+        MENUITEM "4つ進む",                        ID_BF_FORWARD4
+        MENUITEM "5つ進む",                        ID_BF_FORWARD5
+    END
+END
+
+IDR_MENU_TAB MENU
+BEGIN
+    POPUP "TAB_MENU"
+    BEGIN
+        MENUITEM "新しいタブ",                       ID_NEW_BLANK
+        MENUITEM "タブを複製",                       ID_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "タブを閉じる",                      ID_W_CLOSE
+        MENUITEM "全てのウィンドウを閉じる(&X)",            IDC_APP_EXIT
+        MENUITEM "他のタブを全て閉じる",                  IDC_APP_EXIT_BUT_THIS
+        MENUITEM "右のタブを全て閉じる",                  ID_TAB_CLOSE_RIGHT
+        MENUITEM "左のタブを全て閉じる",                  ID_TAB_CLOSE_LEFT
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Sazabi.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
+    "#include ""l.jpn\\afxres.rc""          // 標準のコンポーネント\r\n"
+    "#ifndef _AFXDLL\r\n"
+    "#include ""afxribbon.rc"" // ribbon and control bar resources\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Sazabi.ico"
+
+IDI_ICON2               ICON                    "res\\small.ico"
+
+IDI_ICON3               ICON                    "res\\warn.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 467, 306
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 9, "MS UI Gothic", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,407,282,50,14,WS_GROUP
+    EDITTEXT        IDC_EDIT1,7,15,450,240,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL
+    ICON            IDR_MAINFRAME,IDC_STATIC_LOGO_ABOUT,12,261,20,20,SS_NOTIFY
+    PUSHBUTTON      "Close All VOS Process",IDC_VOS_CLOSE_PROCESS,37,263,86,14
+    PUSHBUTTON      "Show Developer Tools",IDC_SHOW_DEV_TOOLS,37,282,86,14
+    PUSHBUTTON      "CEF Version Information",IDC_CEF_VERSION,305,282,86,14
+END
+
+IDD_SETTINGS_DLG DIALOGEX 0, 0, 480, 335
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Advanced Settings"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREE_CTRL,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_DISABLEDRAGDROP | TVS_SHOWSELALWAYS | WS_BORDER | WS_HSCROLL | WS_TABSTOP,3,3,100,306
+    CONTROL         "",IDC_PAGE_FRAME,"Static",SS_GRAYFRAME,105,19,365,290
+    DEFPUSHBUTTON   "&OK",IDOK,365,315,51,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,420,315,51,14
+    LTEXT           "",IDC_CAPTION_BAR,108,4,365,11,SS_CENTERIMAGE
+END
+
+IDD_SETTINGS_DLG_LOG DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "ログ出力設定"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "DebugLog",IDC_STATIC,10,7,350,66,WS_GROUP
+    CONTROL         "DebugLog出力を有効にする",IDC_CHECK_ENABLE_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,20,105,10
+    CONTROL         "0:全てのログ種別を出力",IDC_RADIO_LOG_ALL,"Button",BS_AUTORADIOBUTTON,27,34,93,10
+    CONTROL         "1:ファイル出力なし、OutputDebugString出力のみ",IDC_RADIO_LOG_NOFILE,
+                    "Button",BS_AUTORADIOBUTTON,27,46,171,10
+    CONTROL         "2:一般情報[GE]とURL情報[URL]のみファイル出力",IDC_RADIO_LOG_GE_URL,
+                    "Button",BS_AUTORADIOBUTTON,27,58,173,10
+    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,8,76,100,14
+    GROUPBOX        "監査ログ設定",IDC_STATIC,10,97,350,185,WS_GROUP
+    CONTROL         "監査ログ出力を有効にする",IDC_CHECK_EnableLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
+    LTEXT           "ログサーバーURL",IDC_STATIC,26,125,283,8
+    EDITTEXT        IDC_EDIT_LogServerURL,26,136,328,14,ES_AUTOHSCROLL
+    LTEXT           "追加リクエストヘッダー情報",IDC_STATIC,26,154,283,8
+    EDITTEXT        IDC_EDIT_RequestHeader,26,165,328,14,ES_AUTOHSCROLL
+    LTEXT           "ログ-メソッド-形式",IDC_STATIC,27,186,283,8
+    CONTROL         "GET:URLクエリパラメータ形式",IDC_RADIO_LOG_GET,"Button",BS_AUTORADIOBUTTON,27,198,193,10
+    CONTROL         "POST:JSON形式",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
+    CONTROL         "ダウンロード操作を記録する",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
+    CONTROL         "アップロード操作を記録する",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
+    CONTROL         "閲覧履歴を記録する",IDC_CHECK_EnableBrowsingLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
+    CONTROL         "詳細な閲覧履歴を記録する",IDC_CHECK_EnableAccessAllLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
+END
+
+IDD_SETTINGS_DLG_DSP DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "画面表示設定"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "タブを有効にする",IDC_CHECK_TAB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,161,10
+    CONTROL         "GPUレンダリングを有効にする",IDC_CHECK_GPU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,161,10
+    CONTROL         "Rebar(メニュー、ツールバー、アドレスバー)を表示する",IDC_CHECK_DISABLE_REBAR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,55,238,10
+    CONTROL         "Rebarにロゴを表示する",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,161,10
+    CONTROL         "ステータスバーを表示する",IDC_CHECK_DISABLE_STATUSBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,85,153,10
+    GROUPBOX        "ポップアップウィンドウ",IDC_STATIC,8,133,265,45
+    LTEXT           "幅マージン",IDC_STATIC,15,145,45,8
+    EDITTEXT        IDC_EDIT_W,62,143,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "高さマージン",IDC_STATIC,15,163,45,8
+    EDITTEXT        IDC_EDIT_H,62,162,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "ズーム表示",IDC_STATIC,8,188,265,33
+    LTEXT           "拡大・縮小率",IDC_STATIC,15,202,43,8
+    EDITTEXT        IDC_EDIT_ZOOM,61,200,28,13,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
+    LTEXT           "%",IDC_STATIC,93,202,16,8
+    PUSHBUTTON      "選択",IDC_BUTTON1,100,200,42,13
+    CONTROL         "PDF表示を有効にする",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,161,10
+END
+
+IDD_SETTINGS_DLG_SEC DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "URLリダイレクトを有効にする",IDC_CHECK_EnableZoneFilterScript,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,100,10
+    PUSHBUTTON      "スクリプト エディター ウィンドウを開く...",IDC_BUTTON_SCRIPT_EDIT,8,25,121,14
+    LTEXT           "情報メッセージ表示時間",IDC_STATIC,8,50,74,8
+    COMBOBOX        IDC_COMBO1,87,46,68,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "指定ブラウザー1",IDC_STATIC,8,70,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser1,65,68,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "参照...",IDC_BUTTON_BROWSE1,303,67,30,14
+    LTEXT           "指定ブラウザー2",IDC_STATIC,8,92,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser2,65,88,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "参照...",IDC_BUTTON_BROWSE2,303,87,30,14
+    LTEXT           "指定ブラウザー3",IDC_STATIC,8,114,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser3,65,112,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "参照...",IDC_BUTTON_BROWSE3,303,111,30,14
+    LTEXT           "指定ブラウザー4",IDC_STATIC,8,136,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser4,65,134,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "参照...",IDC_BUTTON_BROWSE4,303,133,30,14
+    LTEXT           "指定ブラウザー5",IDC_STATIC,8,158,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser5,65,156,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "参照...",IDC_BUTTON_BROWSE5,303,155,30,14
+END
+
+IDD_SETTINGS_DLG_CONNECTION DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "インターネット接続設定",IDC_STATIC,3,9,353,28,WS_GROUP
+    CONTROL         "システム設定を利用する",IDC_RAD_PX_IE,"Button",BS_AUTORADIOBUTTON,10,21,81,10
+    CONTROL         "ダイレクト接続（プロキシ無し)",IDC_RAD_PX_NA,"Button",BS_AUTORADIOBUTTON,103,21,94,10
+    CONTROL         "マニュアル設定",IDC_RAD_PX_EF,"Button",BS_AUTORADIOBUTTON,206,21,66,10
+    GROUPBOX        "マニュアル設定項目",IDC_STATIC,3,43,353,227,WS_GROUP
+    LTEXT           "プロキシ サーバー / 自動構成スクリプト (プロキシ サーバーまたは、自動構成スクリプトを指定して下さい。)",IDC_STATIC,14,60,334,8
+    EDITTEXT        IDC_EDIT_ProxyAddress,14,71,340,14,ES_AUTOHSCROLL
+    LTEXT           "プロキシ例外",IDC_STATIC,14,103,41,8
+    EDITTEXT        IDC_EDIT_ProxyBypassAddress,14,115,340,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "例外サイトではプロキシを利用しない\nセミコロン;を使用してエントリを分けて下さい\nローカルアドレスにプロキシを利用しない場合は、<local>と指定して下さい。",IDC_STATIC,14,170,340,32,0,WS_EX_STATICEDGE
+    LTEXT           "UserAgent追加文字列",IDC_STATIC,14,241,82,8
+    EDITTEXT        IDC_UserAgentAppendStr,107,239,168,13,ES_AUTOHSCROLL
+END
+
+IDD_SETTINGS_DLG_FILEMGR DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "全体設定",IDC_STATIC,8,6,343,79
+    LTEXT           "ダウンロード/アップロードアイテムの既定のパス",IDC_STATIC,12,18,132,8
+    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL
+    LTEXT           "表示するアイテムの拡張子",IDC_STATIC,12,37,79,8
+    EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
+    LTEXT           "実行、開封、転送を禁止する拡張子",IDC_STATIC,12,56,111,8
+    EDITTEXT        IDC_DisallowExt,160,56,179,14,ES_AUTOHSCROLL
+    GROUPBOX        "ダウンロード設定",IDC_STATIC,8,90,343,67
+    LTEXT           "ダウンロードアイテム転送先",IDC_STATIC,12,105,80,8
+    EDITTEXT        IDC_TransferPath,99,103,246,14,ES_AUTOHSCROLL
+    LTEXT           "サブフォルダー \n 環境変数・時間フォーマットを指定可能\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,138,27
+    EDITTEXT        IDC_TransferSubFolder,144,121,200,14,ES_AUTOHSCROLL
+    GROUPBOX        "アップロード設定",IDC_STATIC,8,161,343,74
+    LTEXT           "アップロードアイテム受入元",IDC_STATIC,12,174,79,8
+    EDITTEXT        IDC_UploadPath,99,171,246,14,ES_AUTOHSCROLL
+    CONTROL         "アップロードアイテムを表示する",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,189,104,10
+    GROUPBOX        "機能設定",IDC_STATIC,8,238,343,42
+    LTEXT           "右クリックメニュー設定",IDC_STATIC,12,251,64,8
+    COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "「開封済みにする」を行った場合に、確認メッセージを表示しない",IDC_DisableOpendOpAlert,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
+    LTEXT           "※拡張子を複数設定する場合は、|で区切ります。例）|.elf|.lnk|",IDC_STATIC,12,74,187,8
+    CONTROL         "アップロードアイテムを自動更新する",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
+    CONTROL         "ミラーリングモードを有効にする",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
+    LTEXT           "自動更新間隔(ミリ秒)",IDC_STATIC,17,220,68,8
+    EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
+END
+
+IDD_DLG_SC_EDITOR DIALOGEX 0, 0, 544, 376
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Script Editor  Window"
+FONT 10, "ＭＳ ゴシック", 400, 0, 0x80
+BEGIN
+    EDITTEXT        IDC_EDIT1,2,33,538,337,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    PUSHBUTTON      "保存",IDOK,4,13,50,14
+    PUSHBUTTON      "閉じる",IDCANCEL,56,13,50,14
+    GROUPBOX        "テンプレート挿入：",IDC_STATIC,110,3,386,28
+    PUSHBUTTON      "Function OnRedirect",IDC_BUTTON_FUNC,115,13,81,14
+    PUSHBUTTON      "TB_Global_URL",IDC_BUTTON_URL,197,13,57,14
+    PUSHBUTTON      "TB_Global_TOP_PAGE",IDC_BUTTON_TOP,255,13,77,14
+    PUSHBUTTON      "TB_TRACE_LOG",IDC_BUTTON_TB_TRACE_LOG,333,13,65,14
+    PUSHBUTTON      "ヘルプ",IDC_BUTTON1,399,13,42,14
+    LTEXT           "1行",IDC_STATIC_LINE,499,13,42,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+END
+
+IDD_SETTINGS_DLG_INIT DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    LTEXT           "ホームページURL",IDC_STATIC,8,12,149,8
+    EDITTEXT        IDC_EDIT_INIT_URL_PARAM,8,27,315,13,ES_AUTOHSCROLL
+    LTEXT           "起動時の表示オプションパラメータ",IDC_STATIC,8,55,195,8
+    COMBOBOX        IDC_EDIT_INIT_OP_PARAM,8,70,90,20,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "起動時に表示するメッセージ",IDC_STATIC,8,95,149,8
+    EDITTEXT        IDC_EDIT_INIT_MSG,8,110,315,101,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+END
+
+IDD_DLG_DEBUG_WND DIALOGEX 0, 0, 630, 380
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "TRACE Log Monitor  Window"
+FONT 10, "ＭＳ ゴシック", 400, 0, 0x80
+BEGIN
+    PUSHBUTTON      "クリップボードにコピー",IDC_BUTTON1,5,5,93,14
+    PUSHBUTTON      "表示クリア",IDOK,103,5,50,14
+    PUSHBUTTON      "閉じる",IDCANCEL,155,5,50,14
+    CONTROL         "Auto Scroll",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,230,7,60,10
+    LTEXT           "0件",IDC_STATIC_LINE,299,5,57,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,3,21,622,358
+END
+
+IDD_DLG_AUTH DIALOGEX 0, 0, 250, 108
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "認証"
+FONT 10, "メイリオ", 400, 0, 0x80
+BEGIN
+    LTEXT           "認証が必要です。",IDC_STATIC_MSG,34,7,209,33
+    LTEXT           "ユーザー名：",IDC_STATIC,7,44,42,8
+    EDITTEXT        IDC_EDIT_ID,53,44,183,14,ES_AUTOHSCROLL
+    LTEXT           "パスワード：",IDC_STATIC,7,66,42,8
+    EDITTEXT        IDC_EDIT_PW,53,66,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "ログイン",IDOK,133,87,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,187,87,50,14
+    CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
+END
+
+IDD_SETTINGS_DLG_URL_FILTER DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "URLフィルター設定"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "URLフィルターを有効にする",IDC_CHECK_ENABLE_URL_FILTER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "指定したドメインの読込を制限します。(未指定の場合は、許可)※パターンマッチングにワイルドカードを利用可能 *? ",IDC_STATIC,8,25,339,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "新規登録",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "削除",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 170, 30
+STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_BORDER
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 8, "Meiryo UI", 400, 0, 0x80
+BEGIN
+    LTEXT           "loading...",IDC_STATIC_MSG,31,9,134,11
+    ICON            IDR_MAINFRAME,IDC_STATIC_LOGO_ABOUT,5,5,20,20,SS_NOTIFY
+END
+
+IDD_DIALOG4 DIALOGEX 0, 0, 325, 84
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ファイル ダウンロード"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         IDD_DLG_DEBUG_WND,IDC_STATIC,"Static",SS_BITMAP,7,3,16,14
+    LTEXT           "File",IDC_STATIC_FN,35,5,283,12
+    CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,6,20,312,15
+    LTEXT           "MSG",IDC_STATIC_DL_MSG,6,39,308,8
+    LTEXT           "transfer",IDC_STATIC_TL,6,50,308,8
+    PUSHBUTTON      "ファイルを開く",IDC_BUTTON_FO,75,66,77,14
+    PUSHBUTTON      "フォルダーを開く",IDC_BUTTON_DIRO,157,66,77,14
+    PUSHBUTTON      "キャンセル",IDC_BUTTON1,239,66,77,14
+END
+
+IDD_SETTINGS_DLG_GEN DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "全般設定"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "インスタンスの2重起動を許可する",IDC_CHECK_DISABLE_MULTIPLE_INSTANCE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,217,10
+    CONTROL         "メモリーキャッシュモードを有効にする",IDC_ENABLE_MEMCACHE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,232,10
+    CONTROL         "自動クラッシュ回復機能を有効にする",IDC_CHECK_ENABLECRASHRECOVERY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,224,10
+    GROUPBOX        "設定画面の表示を制限する",IDC_STATIC,8,71,304,85
+    GROUPBOX        "制限解除 キーコンビネーション",IDC_STATIC,12,85,294,62
+    CONTROL         "Shift",IDC_CHK_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,101,30,10
+    CONTROL         "Ctrl",IDC_CHK_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,56,101,27,10
+    CONTROL         "Alt",IDC_CHK_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,90,101,25,10
+    CONTROL         "←",IDC_CHK_LEFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,101,23,10
+    CONTROL         "↑",IDC_CHK_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,101,23,10
+    CONTROL         "→",IDC_CHK_RIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,182,101,23,10
+    CONTROL         "↓",IDC_CHK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,101,23,10
+    PUSHBUTTON      "キー コンビネーション 動作チェック",IDC_BUTTON1,18,122,105,14
+END
+
+IDD_SETTINGS_DLG_CAP DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "動作制限設定"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "ファイルのダウンロードを禁止する",IDC_EnableDownloadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
+    CONTROL         "ファイルのアップロードを禁止する",IDC_EnableUploadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
+    CONTROL         "ブラウザーキャッシュ(インターネット一時ファイル)を起動/終了時に削除する",IDC_EnableDeleteCache,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,44,277,10
+    GROUPBOX        "リソース制限",IDC_STATIC,5,60,355,111
+    CONTROL         "起動時間を制限する",IDC_Enable_ProcessRunTime,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,76,90,10
+    EDITTEXT        IDC_EDIT_LIMIT_TIME,18,91,52,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "分 ( 8時間=480分 / 12時間=720分 / 24時間=1440分)",IDC_STATIC,76,93,232,8
+    LTEXT           "メモリー 最大値(MB)",IDC_STATIC,11,121,64,8
+    EDITTEXT        IDC_MemoryUsageLimit,83,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "ウィンドウ数 最大値",IDC_STATIC,11,142,64,8
+    EDITTEXT        IDC_WindowCountLimit,84,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_DIALOG5 DIALOGEX 0, 0, 297, 109
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ドメインフィルター設定"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "有効にする",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "ドメイン",IDC_STATIC,18,33,33,8
+    EDITTEXT        IDC_EDIT1,56,32,233,14,ES_AUTOHSCROLL
+    GROUPBOX        "アクション",IDC_STATIC,18,52,271,24,WS_GROUP
+    CONTROL         "拒否",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,63,32,10
+    CONTROL         " 許可",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,63,34,10
+    DEFPUSHBUTTON   "OK",IDOK,187,86,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,240,86,50,14
+END
+
+IDD_SETTINGS_DLG_CUSTOM_SCRIPT DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "カスタムスクリプト設定"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "カスタムスクリプトを有効にする",IDC_CHECK_ENABLE_CUSTOM_SCRIPT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "指定したURL読込完了後にカスタムJavaScriptを実行します。※パターンマッチングにワイルドカードを利用可能 *? ",IDC_STATIC,8,25,349,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "新規登録",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "削除",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,142,271,100,14
+    PUSHBUTTON      "Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
+END
+
+IDD_DIALOG6 DIALOGEX 0, 0, 415, 89
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "CustomScript設定"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "有効にする",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "ターゲットURL",IDC_STATIC,11,33,52,8
+    EDITTEXT        IDC_EDIT1,70,32,338,14,ES_AUTOHSCROLL
+    LTEXT           "ファイル名",IDC_STATIC,11,51,39,8
+    EDITTEXT        IDC_EDIT2,70,50,169,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON1,242,50,20,14
+    DEFPUSHBUTTON   "OK",IDOK,304,66,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,358,66,50,14
+END
+
+IDD_DLG_AUTH_PWC DIALOGEX 0, 0, 261, 157
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "パスワード変更"
+FONT 10, "メイリオ", 400, 0, 0x80
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
+    LTEXT           "パスワードの変更",IDC_STATIC_MSG,34,7,220,33
+    LTEXT           "ユーザー名：",IDC_STATIC,7,48,42,8
+    EDITTEXT        IDC_EDIT_ID,71,45,183,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "現在のパスワード：",IDC_STATIC,7,68,62,8
+    EDITTEXT        IDC_EDIT_PW_CURRENT,71,65,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "新しいパスワード：",IDC_STATIC,7,93,62,8
+    EDITTEXT        IDC_EDIT_PW_NEW,71,90,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "パスワードの確認：",IDC_STATIC,7,113,62,8
+    EDITTEXT        IDC_EDIT_PW_NEW2,71,110,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,144,136,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,202,136,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 12,111,91,0
+ PRODUCTVERSION 12,111,91,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "FileDescription", "Chronos"
+            VALUE "FileVersion", "12.111.91.0"
+            VALUE "InternalName", "Chronos"
+            VALUE "LegalCopyright", " "
+            VALUE "OriginalFilename", "Chronos.EXE"
+            VALUE "ProductName", "Chronos"
+            VALUE "ProductVersion", "12.111.91.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 457
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 296
+    END
+
+    IDD_SETTINGS_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_LOG, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_DSP, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_SEC, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_CONNECTION, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_FILEMGR, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_SC_EDITOR, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_INIT, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_DEBUG_WND, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_AUTH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_SETTINGS_DLG_URL_FILTER, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG4, DIALOG
+    BEGIN
+        RIGHTMARGIN, 323
+        BOTTOMMARGIN, 68
+    END
+
+    IDD_SETTINGS_DLG_GEN, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_CAP, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG5, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 102
+    END
+
+    IDD_SETTINGS_DLG_CUSTOM_SCRIPT, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG6, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 408
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 81
+    END
+
+    IDD_DLG_AUTH_PWC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 254
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 150
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "F",            ID_FIND_PAGE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F11,         ID_FULL_SCREEN,         VIRTKEY, NOINVERT
+    VK_LEFT,        ID_GO_BACK,             VIRTKEY, ALT, NOINVERT
+    VK_RIGHT,       ID_GO_FORWARD,          VIRTKEY, ALT, NOINVERT
+    VK_HOME,        ID_GO_START_PAGE,       VIRTKEY, ALT, NOINVERT
+    "N",            ID_NEW_BLANK,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_NEW_BLANK_TAB,       VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         ID_NEXT_WND,            VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         ID_PREV_WND,            VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "P",            ID_PRINT,               VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_REOPEN_CLOSE_TAB,    VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "1",            ID_SEL_TAB_1,           VIRTKEY, CONTROL, NOINVERT
+    "2",            ID_SEL_TAB_2,           VIRTKEY, CONTROL, NOINVERT
+    "3",            ID_SEL_TAB_3,           VIRTKEY, CONTROL, NOINVERT
+    "4",            ID_SEL_TAB_4,           VIRTKEY, CONTROL, NOINVERT
+    "5",            ID_SEL_TAB_5,           VIRTKEY, CONTROL, NOINVERT
+    "6",            ID_SEL_TAB_6,           VIRTKEY, CONTROL, NOINVERT
+    "7",            ID_SEL_TAB_7,           VIRTKEY, CONTROL, NOINVERT
+    "8",            ID_SEL_TAB_8,           VIRTKEY, CONTROL, NOINVERT
+    "9",            ID_SEL_TAB_LAST,        VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_SET_ADDRESSBAR,      VIRTKEY, ALT, NOINVERT
+    "L",            ID_SET_ADDRESSBAR,      VIRTKEY, CONTROL, NOINVERT
+    "K",            ID_SET_SEARCHBAR,       VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, CONTROL, NOINVERT
+    VK_ESCAPE,      ID_VIEW_STOP,           VIRTKEY, NOINVERT
+    VK_F4,          ID_W_CLOSE,             VIRTKEY, CONTROL, NOINVERT
+    "W",            ID_W_CLOSE,             VIRTKEY, CONTROL, NOINVERT
+    VK_OEM_MINUS,   ID_ZOOM_DOWN,           VIRTKEY, CONTROL, NOINVERT
+    "0",            ID_ZOOM_RESET,          VIRTKEY, CONTROL, NOINVERT
+    VK_OEM_PLUS,    ID_ZOOM_UP,             VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, SHIFT, NOINVERT
+    "R",            ID_VIEW_REFRESH,        VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_SET_ADDRESSBAR,      VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_COLDTOOLBAR         BITMAP                  "res\\coldtool.bmp"
+
+IDB_HOTTOOLBAR          BITMAP                  "res\\hottoolb.bmp"
+
+IDR_MAINFRAME           BITMAP                  "res\\toolbar.bmp"
+
+IDB_BITMAP4             BITMAP                  "res\\mjr.bmp"
+
+IDB_CLOSE               BITMAP                  "res\\closeup.bmp"
+
+IDB_MAX                 BITMAP                  "res\\maximizeup.bmp"
+
+IDB_MIN                 BITMAP                  "res\\minimizeup.bmp"
+
+IDB_BMP_KEY             BITMAP                  "res\\key.bmp"
+
+IDB_BITMAP5             BITMAP                  "res\\close_button.bmp"
+
+IDB_BITMAP6             BITMAP                  "res\\bg.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 23, 23
+BEGIN
+    BUTTON      ID_GO_BACK
+    BUTTON      ID_GO_FORWARD
+    BUTTON      ID_VIEW_STOP
+    BUTTON      ID_VIEW_REFRESH
+    BUTTON      ID_GO_START_PAGE
+    SEPARATOR
+    BUTTON      ID_PRINT
+    SEPARATOR
+    BUTTON      ID_OPEN_THIN_FILER
+    SEPARATOR
+    BUTTON      ID_TAB_LIST
+    BUTTON      ID_NEW_BLANK
+    SEPARATOR
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_AUTH AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_DSP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_INIT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_LOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_SEC AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CONNECTION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_URL_FILTER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_SC_EDITOR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG4 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_GEN AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CAP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG5 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_FILEMGR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CUSTOM_SCRIPT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG6 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_AUTH_PWC AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_DEBUG_WND AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "Chronos"
+    IDS_STRING_FRM1         "アドレス(&D)"
+    IDS_STRING_FRM2         "HTMLファイル(*.htm;*.html;*.shtml)|*.htm;*.html;*.shtml|テキストファイル(*.txt)|*.txt|GIFファイル(*.gif)|*.gif|JPEGファイル(*.jpg;*.jpeg)|*.jpg;*.jpeg|PNGファイル(*.png)|*.png|全てのファイル(*.*)|*.*||"
+    IDS_STRING_FRM3         "開く"
+    IDS_STRING_CEF_LIC      "\n====Copyright License Texts====\nChromium Embedded Framework\nCopyright (c) 2008-2020 Marshall A. Greenblatt. Portions Copyright (c)\n2006-2009 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the name Chromium Embedded\nFramework nor the names of its contributors may be used to endorse\nor promote products derived from this software without specific prior\nwritten permission.\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n""AS IS"" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    IDS_STRING_FAV_NANE     "なし"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_CLOSE_ALL_WINDOW "全てのウィンドウを閉じますか?"
+    IDS_STRING_ADMIN_LOCK_FEATURE "この機能へのアクセスは、システム管理者により制限されています。 "
+    IDS_STRING_ZONE_MSG_DBL "要求されたページを既定のブラウザで表示します。"
+    IDS_STRING_ZONE_MSG_NG  "要求されたページは許可されていないため表示できません。"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_ZONE_MSG_IE  "要求されたページをInternet Explorerで表示します。"
+    IDS_STRING_ZONE_MSG_FF  "要求されたページをMozilla Firefoxで表示します。"
+    IDS_STRING_ZONE_MSG_CHR "要求されたページをGoogle Chromeで表示します。"
+    IDS_STRING_ZONE_MSG_EDG "要求されたページをMicrosoft Edgeで表示します。"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_ZONE_MSG_CUSTOM "要求されたページを指定のブラウザで表示します。"
+    IDS_STRING_DISABLE_EXEC "外部プログラムの実行は、システム管理者により制限されています。"
+    IDS_STRING_AUTO_RECOVERY 
+                            "以前表示していたウィンドウを可能な限り復元しますか？\n\n動作に問題が発生し不正終了した可能性があります。\n\nご迷惑をおかけして申し訳ありません。\n日時：%s\nウィンドウ枚数：%d"
+    IDS_STRING_UNDO         "元に戻す(&U)"
+    IDS_STRING_CUT          "切り取り(&T)"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_COPY         "コピー(&C)"
+    IDS_STRING_PASTE        "貼り付け(&P)"
+    IDS_STRING_DELETE       "削除(&D)"
+    IDS_STRING_SELECTALL    "すべて選択(&A)"
+    IDS_STRING_PASTE_GO     "貼り付けて移動"
+    IDS_STRING_PASTE_SEARCH "貼り付けて検索"
+    IDS_STRING_GO           "移動"
+    IDS_STRING_SEARCH       "検索"
+    IDS_STRING_SEL_SEARCH   "「%s」を検索"
+    IDS_STRING_OPEN_NOACTIVE "新しいウィンドウで開く(非アクティブ)"
+    IDS_STRING_SETTINGS     "設定(&P)..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_ICON       " "
+    ID_INDICATOR_PROCESS    " "
+    ID_INDICATOR_SSL        " "
+    ID_INDICATOR_ZONE       " "
+    ID_INDICATOR_COMPAT     " "
+    ID_INDICATOR_ZOOM       " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "Chronos"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            " "
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        " "
+    ID_INDICATOR_CAPS       " "
+    ID_INDICATOR_NUM        " "
+    ID_INDICATOR_SCRL       " "
+    ID_INDICATOR_OVR        " "
+    ID_INDICATOR_REC        " "
+    ID_INDICATOR_KANA       " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          " "
+    AFX_IDS_SCMOVE          " "
+    AFX_IDS_SCMINIMIZE      " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       " "
+END
+
+STRINGTABLE
+BEGIN
+    ID_ADD_FAVORITE         "お気に入りに追加(&A)..."
+    ID_ORGANIZE_FAVORITE    "お気に入りの整理(&O)..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_PRINT                "印刷(&P)..."
+    ID_PRINT_PDF            "印刷(PDF出力)"
+END
+
+STRINGTABLE
+BEGIN
+    ID_W_CLOSE              "閉じる"
+    ID_PREV_WND             "前のウィンドウ\tShift+Ctrl+Tab"
+    ID_NEXT_WND             "次のウィンドウ\tCtrl+Tab"
+    IDC_APP_EXIT            "全てのウィンドウを閉じる"
+    IDC_APP_EXIT_BUT_THIS   "このウィンドウ以外を閉じる"
+END
+
+STRINGTABLE
+BEGIN
+    ID_RESTORE_WND          "ウィンドウを復元しますか？"
+    ID_SAVE_WND             "ウィンドウを保存しますか？"
+    ID_OPEN_THIN_FILER      "ファイルマネージャを起動"
+    ID_NEW_BLANK            "タブ・ウインドウを追加"
+    ID_TAB_LIST             "タブウインドウ一覧"
+END
+
+#endif    // 日本語 (日本) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE 17, 1
+#pragma code_page(932)
+#endif //_WIN32
+#include "res\Sazabi.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
+#include "l.jpn\afxres.rc"          // 標準のコンポーネント
+#ifndef _AFXDLL
+#include "afxribbon.rc" // ribbon and control bar resources
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
