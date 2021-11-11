@@ -9,7 +9,6 @@
 @echo "|  +- include      ... Header file                    |"
 @echo "|  +- D32                                             |"
 @echo "|  +- R32                                             |"
-@echo "|                                                     |"
 @echo "+=====================================================+"
 
 set BASEDIR=%~dp0

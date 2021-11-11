@@ -9,9 +9,7 @@ jobs:
       - name: Setup cache for CEF
         uses: actions/cache@v2
         with:
-          path: |
-            cef-cache
-            !cef-cache/*.bz2
+          path: cef-cache/*/
           key: cef-${{ runner.os }}-${{ hashFiles('setup-cef.bat') }}
       - name: Setup CEF
         run: .\setup-cef.bat
