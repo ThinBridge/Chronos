@@ -33,13 +33,17 @@ IF NOT EXIST "cef-cache\%CEFVER%" (
 	cmake -E tar -xjf %CEFVER%.tar.bz2%
 )
 
+@echo =========== Current CEF cache folder ==================
+@dir "%BASEDIR%\cef-cache"
+@echo =======================================================
+
 @REM ------------------
 @REM Build CEF binaries
 @REM ------------------
 cd "%BASEDIR%\cef-cache\%CEFVER%"
 cmake -B build -D USE_ATL=Off -DUSE_SANDBOX=Off -A Win32 .
-cmake --build build -j
-cmake --build build --config Release -j
+cmake --build build
+cmake --build build --config Release
 
 @REM ------------------
 @REM Install CEF assets
