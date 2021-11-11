@@ -1,12 +1,14 @@
 Chronosの開発の手引き
 =====================
 
- * 開発には Visual Studio 2019 (ATL/MFC含) が必要です。
+ * 開発には Visual Studio 2019が必要です。
+   * `Desktop Development with C++ > C++ CMake tools for Windows` を選択
+   * `Desktop Development with C++ > C++ MFC for latest ...` を選択
 
 ## ビルド手順
 
  1. このレポジトリをローカルにクローンする。
- 2. 同梱されている`setup-cef.bat`を実行し、ビルド環境をセットアップする。
+ 2. スタートメニューから開発者コマンドプロンプトを開き`setup-cef.bat`を実行する。
  3. Visual Studio 2019でプロジェクトを開く。
  4. メニューから「Local Windows Debugger」を実行する。
 
