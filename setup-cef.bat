@@ -38,8 +38,8 @@ IF NOT EXIST "cef-cache\%CEFVER%" (
 @REM ------------------
 cd "%BASEDIR%\cef-cache\%CEFVER%"
 cmake -B build -D USE_ATL=Off -DUSE_SANDBOX=Off -A Win32 .
-cmake --build build
-cmake --build build --config Release
+cmake --build build -j
+cmake --build build --config Release -j
 
 @REM ------------------
 @REM Install CEF assets

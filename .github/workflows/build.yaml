@@ -9,9 +9,11 @@ jobs:
       - name: Setup cache for CEF
         uses: actions/cache@v2
         with:
-          path: cef-cache
-          key: ${{ runner.os }}-cef
+          path: |
+            cef-cache
+            !cef-cache/*.bz2
+          key: cef-${{ runner.os }}-${{ hashFiles('setup-cef.bat') }}
       - name: Setup CEF
         run: .\setup-cef.bat
       - name: Compile Chronos
-        run: msbuild /p:Platform=Win32 /p:Configuration=R64_CSG
+        run: msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG
