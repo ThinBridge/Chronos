@@ -951,7 +951,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 	CefRefPtr<CefBrowser> browser,
 	CefRefPtr<CefFrame> frame,
 	CefRefPtr<CefRequest> request,
-	CefRefPtr<CefRequestCallback> callback)
+	CefRefPtr<CefCallback> callback)
 {
 	PROC_TIME(OnBeforeResourceLoad)
 
@@ -1036,15 +1036,18 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		//2021-01-07Googleにログインできない。。。
 		//調査結果、FirefoxにすればOK, Edge/87.0.0.0をつけてもOK
 		//デフォルトのUAをEdgeに変更する対応にする。
-		//if(strHost==_T("accounts.google.com"))
-		//{
-		//	request->GetHeaderMap(cefHeaders);
-		//	cefHeaders.erase("User-Agent");
-		//	cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"));
-		//	cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66"));
-		//	cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.0.0"));
-		//	request->SetHeaderMap(cefHeaders);
-		//}
+		//2021-11-30 ↑の対策がNGになっていることに気がついた。UAにEdgeをつけてもNG
+		//↓のコード復活
+		//accounts.google.comへのアクセス時は、FirefoxのUAにしてしまう。
+		if(strHost==_T("accounts.google.com"))
+		{
+			request->GetHeaderMap(cefHeaders);
+			cefHeaders.erase("User-Agent");
+			cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0"));
+			//cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66"));
+			//cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.0.0"));
+			request->SetHeaderMap(cefHeaders);
+		}
 
 		CString strURLChk; //Queryを除く。無駄な情報を省く。
 		//strURLChk.Format(_T("%s://%s%s"), strScheme, strHost, strPath);
@@ -1056,7 +1059,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		}
 		else
 		{
-			callback->Continue(false);
+			callback->Continue();
 			return RV_CANCEL;
 		}
 	}
@@ -1563,19 +1566,18 @@ CefRefPtr<CefResourceHandler> ClientHandler::GetResourceHandler(CefRefPtr<CefBro
 	return nullptr;
 }
 
-bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefRequestCallback> callback)
+bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefCallback> callback)
 {
-	static const int64 max_size = 1024 * 1024 * 20; // 20mb.
-
+	//static const int64 max_size = 1024 * 1024 * 20; // 20mb.
 	// Grant the quota request if the size is reasonable.
-	callback->Continue(new_size <= max_size);
-
+	//callback->Continue(new_size <= max_size);
+	callback->Continue();
 	// call parent
 	return CefRequestHandler::OnQuotaRequest(browser, origin_url, new_size, callback);
 }
 
 bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
-				       ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefRequestCallback> callback)
+				       ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefCallback> callback)
 {
 	CString szMessage;
 
@@ -1595,7 +1597,7 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 	}
 
 	// continue
-	callback->Continue(true);
+	callback->Continue();
 
 	return TRUE;
 }
