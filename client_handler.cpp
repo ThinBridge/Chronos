@@ -997,8 +997,6 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		}
 	}
 
-	if (!theApp.m_AppSettings.IsEnableURLFilter())
-		return RV_CONTINUE;
 
 	// get URL requested
 	CefString newURL = request->GetURL();
@@ -1049,6 +1047,9 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 			request->SetHeaderMap(cefHeaders);
 		}
 
+		if (!theApp.m_AppSettings.IsEnableURLFilter())
+			return RV_CONTINUE;
+
 		CString strURLChk; //Query‚ðœ‚­B–³‘Ê‚Èî•ñ‚ðÈ‚­B
 		//strURLChk.Format(_T("%s://%s%s"), strScheme, strHost, strPath);
 		strURLChk.Format(_T("%s://%s"), strScheme, strHost);
@@ -1059,7 +1060,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		}
 		else
 		{
-			callback->Continue();
+			callback->Cancel();
 			return RV_CANCEL;
 		}
 	}
@@ -1568,10 +1569,11 @@ CefRefPtr<CefResourceHandler> ClientHandler::GetResourceHandler(CefRefPtr<CefBro
 
 bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefCallback> callback)
 {
-	//static const int64 max_size = 1024 * 1024 * 20; // 20mb.
+	static const int64 max_size = 1024 * 1024 * 20; // 20mb.
 	// Grant the quota request if the size is reasonable.
 	//callback->Continue(new_size <= max_size);
-	callback->Continue();
+	if(new_size > max_size)
+		callback->Cancel();
 	// call parent
 	return CefRequestHandler::OnQuotaRequest(browser, origin_url, new_size, callback);
 }
