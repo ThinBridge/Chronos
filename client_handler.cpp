@@ -28,7 +28,6 @@ ClientHandler::ClientHandler()
 {
 	m_bDownLoadStartFlg = FALSE;
 	m_RendererPID = 0;
-	pChildView=NULL;
 }
 
 ClientHandler::~ClientHandler()
@@ -73,14 +72,24 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	// get browser ID
 	INT nBrowserId = browser->GetIdentifier();
 	
-	//CEF93からポインタを直接SendMessageで渡すことができなくなった。
-	//関数を直接呼び出す
-	if(pChildView)
-		((CChildView*)pChildView)->SetBrowserPtr(nBrowserId, browser);
 
-	//// The frame window will be the parent of the browser window
-	//HWND hWindow = GetSafeParentWnd(browser);
-
+	// The frame window will be the parent of the browser window
+	HWND hWindow = GetSafeParentWnd(browser);
+	if (SafeWnd(hWindow))
+	{
+		//CEF93からポインタを直接SendMessageで渡すことができなくなった。
+		//関数を直接呼び出す
+		CChildView* pChild = NULL;
+		pChild = theApp.GetChildViewPtr(hWindow);
+		if (pChild)
+		{
+			if (SafeWnd(pChild->m_hWnd))
+			{
+				if (pChild->m_hWnd == hWindow)
+					((CChildView*)pChild)->SetBrowserPtr(nBrowserId, browser);
+			}
+		}
+	}
 	//// assign new browser
 	////CefBrowser* pBrowser = browser;
 	//if (SafeWnd(hWindow))

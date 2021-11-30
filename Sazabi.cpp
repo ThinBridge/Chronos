@@ -604,6 +604,27 @@ void CSazabi::SendLoggingMsg(int LOG_TYPE, LPCTSTR lpFileName, HWND hWnd)
 		}
 	}
 }
+CChildView* CSazabi::GetChildViewPtr(HWND hWnd)
+{
+	CChildView* pChild = NULL;
+	pChild = GetActiveViewPtr();
+	if (IsWnd(pChild))
+	{
+		if(pChild->m_hWnd==hWnd)
+			return pChild;
+	}
+	
+	CBrowserFrame* pFrame = NULL;
+	pFrame = ((CMainFrame*)m_pMainWnd)->GetBrowserFrameFromChildWnd(hWnd);
+	if (IsWnd(pFrame))
+	{
+		if (IsWnd(&pFrame->m_wndView))
+		{
+			return &pFrame->m_wndView;
+		}
+	}
+	return NULL;
+}
 
 void CSazabi::InitProcessSetting()
 {

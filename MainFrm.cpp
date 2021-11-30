@@ -1444,7 +1444,12 @@ BOOL CMainFrame::SetActiveFramePtr(CBrowserFrame* pTarget)
 {
 	try
 	{
-		if (m_pActiveWindow != pTarget)
+		if(!theApp.IsWnd(m_pActiveWindow))
+		{
+			m_pActiveWindow = pTarget;
+			return TRUE;
+		}
+		if(m_pActiveWindow != pTarget)
 		{
 			if (m_pActiveWindow && m_pActiveWindow->m_cTabWnd)
 				m_pPrevActiveWindow = m_pActiveWindow;

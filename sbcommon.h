@@ -54,7 +54,7 @@ static TCHAR sgSZB_UA_START[] = _T("Mozilla/5.0 (");
 //2021-01-07Googleにログインできない CEF経由ではNGになった。
 //調査結果、FirefoxにすればOK, Edge/87.0.0.0をつけてもOK
 //デフォルトのUAをEdgeに変更する対応にする。
-static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.4577.82 Chronos/SystemGuard");
+static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/94.0.4606.54 Safari/537.36 Edg/94.0.4606.54 Chronos/SystemGuard");
 typedef HRESULT(WINAPI* pfnDwmIsCompositionEnabled)(BOOL* pfEnabled);
 typedef HRESULT(WINAPI* pfnDwmGetWindowAttribute)(HWND hwnd, DWORD dwAttribute, LPCVOID pvAttribute, DWORD cbAttribute);
 typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);

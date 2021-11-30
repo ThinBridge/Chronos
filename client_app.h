@@ -13,9 +13,9 @@ public:
 	~ClientApp(void);
 
 	// CefApp methods:
-	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
+	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override { return this; }
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line);
-	virtual void OnContextInitialized() OVERRIDE;
+	virtual void OnContextInitialized() override;
 
 private:
 	IMPLEMENT_REFCOUNTING(ClientApp);
@@ -39,7 +39,7 @@ public:
 	bool Visit(CefRefPtr<CefNavigationEntry> entry,
 		   bool current,
 		   int index,
-		   int total) OVERRIDE
+		   int total) override
 	{
 		if (!entry->IsValid()) return true;
 
@@ -71,18 +71,18 @@ public:
 	}
 
 public:
-	void AddRef() const OVERRIDE
+	void AddRef() const override
 	{
 	}
-	bool Release() const OVERRIDE
+	bool Release() const override
 	{
 		return true;
 	}
-	bool HasOneRef() const OVERRIDE
+	bool HasOneRef() const override
 	{
 		return false;
 	}
-	bool HasAtLeastOneRef() const OVERRIDE
+	bool HasAtLeastOneRef() const override
 	{
 		return false;
 	}
@@ -98,18 +98,18 @@ public:
 public:
 	CBrowserFrame* m_pwndFrame;
 	void SetFramePtr(CBrowserFrame* pwndFrame) { m_pwndFrame = pwndFrame; }
-	void AddRef() const OVERRIDE
+	void AddRef() const override
 	{
 	}
-	bool Release() const OVERRIDE
+	bool Release() const override
 	{
 		return true;
 	}
-	bool HasOneRef() const OVERRIDE
+	bool HasOneRef() const override
 	{
 		return false;
 	}
-	bool HasAtLeastOneRef() const OVERRIDE
+	bool HasAtLeastOneRef() const override
 	{
 		return false;
 	}
@@ -122,18 +122,18 @@ public:
 					     CefRefPtr<CefImage> image);
 
 public:
-	void AddRef() const OVERRIDE
+	void AddRef() const override
 	{
 	}
-	bool Release() const OVERRIDE
+	bool Release() const override
 	{
 		return true;
 	}
-	bool HasOneRef() const OVERRIDE
+	bool HasOneRef() const override
 	{
 		return false;
 	}
-	bool HasAtLeastOneRef() const OVERRIDE
+	bool HasAtLeastOneRef() const override
 	{
 		return false;
 	}

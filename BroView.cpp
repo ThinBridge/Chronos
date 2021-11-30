@@ -1951,7 +1951,6 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 					info.SetAsChild(hWnd, rect);
 					CefBrowserSettings browserSettings;
 					pCreateView->m_clientHandler = new ClientHandler();
-					pCreateView->m_clientHandler->pChildView = pCreateView;
 					pCreateView->m_clientHandler->CreateBrowser(info, browserSettings, CefString(strURL));
 				}
 			}
@@ -2444,6 +2443,7 @@ LRESULT CChildView::OnCloseBrowser(WPARAM wParam, LPARAM lParam)
 //}
 void CChildView::SetBrowserPtr(INT nBrowserId,CefRefPtr<CefBrowser> browser)
 {
+	ASSERT(!m_nBrowserID);
 	m_cefBrowser = browser;
 	m_nBrowserID = nBrowserId;
 	this->PostMessage(WM_SIZE);
@@ -2490,7 +2490,6 @@ void CChildView::Navigate(LPCTSTR pszURL)
 		CefBrowserSettings browserSettings;
 
 		m_clientHandler = new ClientHandler();
-		m_clientHandler->pChildView = this;
 		m_clientHandler->CreateBrowser(info, browserSettings, CefString(pszURL));
 		return;
 	}
