@@ -16,7 +16,7 @@ CChildView::CChildView()
 	m_dbZoomSizeDefault = 0.0;
 	m_bWndCloseFlg = FALSE;
 	//SZB
-	m_cefBrowser = NULL;
+	m_cefBrowser = nullptr;
 	m_popupFeatures = NULL;
 	m_pFindDialog = NULL;
 	m_pFocusWnd = NULL;
@@ -30,11 +30,11 @@ CChildView::~CChildView()
 	//SZB
 	if (m_cefBrowser)
 	{
-		m_cefBrowser = NULL;
+		m_cefBrowser = nullptr;
 	}
 	if (m_clientHandler)
 	{
-		m_clientHandler = NULL;
+		m_clientHandler = nullptr;
 	}
 
 	if (m_popupFeatures)
@@ -105,7 +105,7 @@ BEGIN_MESSAGE_MAP(CChildView,ViewBaseClass )
 	ON_MESSAGE(WM_APP_CEF_DOWNLOAD_UPDATE, &CChildView::OnDownloadUpdate)
 	ON_MESSAGE(WM_APP_CEF_SEARCH_URL, &CChildView::OnSearchURL)
 	ON_MESSAGE(WM_APP_CEF_CLOSE_BROWSER, &CChildView::OnCloseBrowser)
-	ON_MESSAGE(WM_APP_CEF_NEW_BROWSER, &CChildView::OnNewBrowser)
+	//ON_MESSAGE(WM_APP_CEF_NEW_BROWSER, &CChildView::OnNewBrowser)
 	ON_MESSAGE(WM_APP_CEF_DOWNLOAD_BLANK_PAGE,&CChildView::OnDownloadBlankPage)
 	ON_MESSAGE(WM_APP_CEF_NEW_WINDOW, &CChildView::OnNewWindow)
 	ON_MESSAGE(WM_NEW_WINDOW_URL, OnCreateNewBrowserWindow)
@@ -883,6 +883,7 @@ void CChildView::ReSetRendererPID()
 {
 	try
 	{
+		if (!theApp.IsWnd(this))return;
 		if (IsBrowserNull()) return;
 		CefRefPtr<CefFrame> frame;
 		frame = m_cefBrowser->GetMainFrame();
@@ -1950,6 +1951,7 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 					info.SetAsChild(hWnd, rect);
 					CefBrowserSettings browserSettings;
 					pCreateView->m_clientHandler = new ClientHandler();
+					pCreateView->m_clientHandler->pChildView = pCreateView;
 					pCreateView->m_clientHandler->CreateBrowser(info, browserSettings, CefString(strURL));
 				}
 			}
@@ -2279,7 +2281,8 @@ LRESULT CChildView::OnFaviconChange(WPARAM wParam, LPARAM lParam)
 	{
 		if (FRM->m_cTabWnd)
 		{
-			m_cefBrowser->GetHost()->DownloadImage(pszFavURL, true, 100, false, &FRM->m_FaviconCB);
+			if (m_cefBrowser)
+				m_cefBrowser->GetHost()->DownloadImage(pszFavURL, true, 100, false, &FRM->m_FaviconCB);
 		}
 	}
 	return S_OK;
@@ -2289,7 +2292,10 @@ LRESULT CChildView::OnCopyImage(WPARAM wParam, LPARAM lParam)
 	LPCTSTR lpszURL = (LPCTSTR)wParam;
 	CString strURL(lpszURL);
 	if (!strURL.IsEmpty())
-		m_cefBrowser->GetHost()->DownloadImage(lpszURL, false, 0, false, &FRM->m_ImageCopy);
+	{
+		if (m_cefBrowser)
+			m_cefBrowser->GetHost()->DownloadImage(lpszURL, false, 0, false, &FRM->m_ImageCopy);
+	}
 	return S_OK;
 }
 
@@ -2427,14 +2433,20 @@ LRESULT CChildView::OnCloseBrowser(WPARAM wParam, LPARAM lParam)
 	return S_OK;
 }
 
-LRESULT CChildView::OnNewBrowser(WPARAM wParam, LPARAM lParam)
+//LRESULT CChildView::OnNewBrowser(WPARAM wParam, LPARAM lParam)
+//{
+//	PROC_TIME(OnNewBrowser)
+//	m_nBrowserID = (INT)wParam;
+//	CefBrowser* browser = (CefBrowser *)lParam;
+//	m_cefBrowser = browser;
+//	this->PostMessage(WM_SIZE);
+//	return S_OK;
+//}
+void CChildView::SetBrowserPtr(INT nBrowserId,CefRefPtr<CefBrowser> browser)
 {
-	PROC_TIME(OnNewBrowser)
-	m_nBrowserID = (INT)wParam;
-	CefBrowser *browser = (CefBrowser *)lParam;
 	m_cefBrowser = browser;
+	m_nBrowserID = nBrowserId;
 	this->PostMessage(WM_SIZE);
-	return S_OK;
 }
 
 LRESULT CChildView::OnAuthenticate(WPARAM wParam, LPARAM lParam)
@@ -2478,6 +2490,7 @@ void CChildView::Navigate(LPCTSTR pszURL)
 		CefBrowserSettings browserSettings;
 
 		m_clientHandler = new ClientHandler();
+		m_clientHandler->pChildView = this;
 		m_clientHandler->CreateBrowser(info, browserSettings, CefString(pszURL));
 		return;
 	}

@@ -28,6 +28,7 @@ ClientHandler::ClientHandler()
 {
 	m_bDownLoadStartFlg = FALSE;
 	m_RendererPID = 0;
+	pChildView=NULL;
 }
 
 ClientHandler::~ClientHandler()
@@ -71,15 +72,21 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 
 	// get browser ID
 	INT nBrowserId = browser->GetIdentifier();
-	// The frame window will be the parent of the browser window
-	HWND hWindow = GetSafeParentWnd(browser);
+	
+	//CEF93からポインタを直接SendMessageで渡すことができなくなった。
+	//関数を直接呼び出す
+	if(pChildView)
+		((CChildView*)pChildView)->SetBrowserPtr(nBrowserId, browser);
 
-	// assign new browser
-	CefBrowser* pBrowser = browser;
-	if (SafeWnd(hWindow))
-	{
-		::SendMessageTimeout(hWindow, WM_APP_CEF_NEW_BROWSER, (WPARAM)nBrowserId, (LPARAM)pBrowser, SMTO_NORMAL, 1000, NULL);
-	}
+	//// The frame window will be the parent of the browser window
+	//HWND hWindow = GetSafeParentWnd(browser);
+
+	//// assign new browser
+	////CefBrowser* pBrowser = browser;
+	//if (SafeWnd(hWindow))
+	//{
+	//	::SendMessageTimeout(hWindow, WM_APP_CEF_NEW_BROWSER, (WPARAM)nBrowserId, (LPARAM)pBrowser, SMTO_NORMAL, 1000, NULL);
+	//}
 	// call parent
 	CefLifeSpanHandler::OnAfterCreated(browser);
 }
@@ -811,7 +818,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 		return;
 	}
 
-	CEFDownloadItemValues values;
+	CEFDownloadItemValues values={0};
 
 	values.bIsValid = download_item->IsValid();
 	values.bIsInProgress = download_item->IsInProgress();
@@ -824,7 +831,9 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 
 	if (download_item->IsValid())
 	{
-		lstrcpyn(values.szFullPath, download_item->GetFullPath().c_str(), 512);
+		CefString cefFulPath = download_item->GetFullPath();
+		if(cefFulPath.c_str())
+			lstrcpyn(values.szFullPath, cefFulPath.c_str(), 512);
 	}
 	HWND hWindow = GetSafeParentWnd(browser);
 	UINT nBrowserId = browser->GetIdentifier();
@@ -850,7 +859,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 				CString strFilePath;
 				strFilePath = values.szFullPath;
 
-				if (!strFilePath.IsEmpty() && ::PathFileExists(strFilePath))
+				//if (!strFilePath.IsEmpty() && ::PathFileExists(strFilePath))
 				{
 					theApp.m_DlMgr.SetDlProgress(nBrowserId, TRUE);
 					::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)TRUE, NULL, SMTO_NORMAL, 1000, NULL);
@@ -883,20 +892,32 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 						}
 					}
 				}
-				else
+				if (theApp.m_DlMgr.IsCanceld(nBrowserId))
 				{
-					if (theApp.m_DlMgr.IsCanceld(nBrowserId))
-					{
-						theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
-						::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
+					theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
+					::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
 
-						callback->Cancel();
-						theApp.m_DlMgr.Release_DLDlg(nBrowserId);
-						EmptyWindowClose(browser);
-						m_bDownLoadStartFlg = FALSE;
-						return;
-					}
+					callback->Cancel();
+					theApp.m_DlMgr.Release_DLDlg(nBrowserId);
+					EmptyWindowClose(browser);
+					m_bDownLoadStartFlg = FALSE;
+					return;
 				}
+
+				//else
+				//{
+				//	if (theApp.m_DlMgr.IsCanceld(nBrowserId))
+				//	{
+				//		theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
+				//		::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
+
+				//		callback->Cancel();
+				//		theApp.m_DlMgr.Release_DLDlg(nBrowserId);
+				//		EmptyWindowClose(browser);
+				//		m_bDownLoadStartFlg = FALSE;
+				//		return;
+				//	}
+				//}
 				return;
 			}
 			if (values.bIsCanceled)
@@ -1530,7 +1551,7 @@ bool ClientHandler::GetAuthCredentials(CefRefPtr<CefBrowser> browser,
 
 CefRefPtr<CefResourceHandler> ClientHandler::GetResourceHandler(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request)
 {
-	return NULL;
+	return nullptr;
 }
 
 bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefRequestCallback> callback)
@@ -1561,7 +1582,6 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 	int iRet = theApp.SB_MessageBox(hWindow, szMessage, NULL, MB_YESNO | MB_ICONWARNING | MB_DEFBUTTON2, TRUE);
 	if (iRet == IDNO)
 	{
-		EmptyWindowClose(browser);
 		return FALSE;
 	}
 
@@ -1783,11 +1803,11 @@ bool ClientHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
 		if (args->GetType(0) == VTYPE_INT)
 		{
 			m_RendererPID = args->GetInt(0);
-			CefBrowser* pBrowser = browser;
+			CefRefPtr<CefBrowser> pBrowser = browser;
 			HWND hWindow = GetSafeParentWnd(browser);
 			if (SafeWnd(hWindow))
 			{
-				::SendMessageTimeout(hWindow, WM_APP_CEF_SET_RENDERER_PID, (WPARAM)m_RendererPID, (LPARAM)pBrowser, SMTO_NORMAL, 1000, NULL);
+				::SendMessageTimeout(hWindow, WM_APP_CEF_SET_RENDERER_PID, (WPARAM)m_RendererPID,0, SMTO_NORMAL, 1000, NULL);
 			}
 		}
 		return true;

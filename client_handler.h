@@ -157,8 +157,13 @@ public:
 			strURL = strURLC.c_str();
 			if (strURL.IsEmpty())
 			{
-				browser->GetMainFrame()->ExecuteJavaScript(
-				    "window.close();", "", 0);
+				HWND hRetNULL = {0};
+				hRetNULL = GetParent(hWindow);
+				if(SafeWnd(hRetNULL))
+					::PostMessage(hRetNULL, WM_COMMAND, ID_W_CLOSE, 0);
+				//CEF93‚©‚ç“®‚©‚È‚¢
+				//browser->GetMainFrame()->ExecuteJavaScript(
+				//    "window.close();", "", 0);
 			}
 		}
 	}
@@ -246,7 +251,10 @@ protected:
 	IMPLEMENT_REFCOUNTING(ClientHandler);
 
 	// Include the default locking implementation.
-	IMPLEMENT_LOCKING(ClientHandler);
+//	IMPLEMENT_LOCKING(ClientHandler);
+
+public:
+	CWnd* pChildView;
 };
 class AppRenderer : public CefApp, public CefRenderProcessHandler
 {

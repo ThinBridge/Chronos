@@ -51,7 +51,7 @@ protected:
 	afx_msg LRESULT OnSearchURL(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnFindDialogMessage(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCloseBrowser(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnNewBrowser(WPARAM wParam, LPARAM lParam);
+	//afx_msg LRESULT OnNewBrowser(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnNewWindow(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnAuthenticate(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnBadCertificate(WPARAM wParam, LPARAM lParam);
@@ -60,6 +60,7 @@ protected:
 	afx_msg LRESULT OnCopyImage(WPARAM wParam, LPARAM lParam);
 
 public:
+	void SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser);
 	void ReSetRendererPID();
 	CString GetLocationURL()
 	{

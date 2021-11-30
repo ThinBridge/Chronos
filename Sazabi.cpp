@@ -4165,7 +4165,7 @@ void CSazabi::UnInitializeCef()
 	if (m_bCEFInitialized)
 	{
 		m_bCEFInitialized = FALSE;
-		m_cefApp = NULL;
+		m_cefApp = nullptr;
 		if (!m_bMultiThreadedMessageLoop)
 			CefDoMessageLoopWork();
 		// shutdown CEF
@@ -4995,7 +4995,7 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 				return exitCode;
 			}
 		}
-		int exit_code = CefExecuteProcess(mainargs, NULL, sandbox_info);
+		int exit_code = CefExecuteProcess(mainargs, nullptr, sandbox_info);
 		if (exit_code >= 0)
 		{
 			return exit_code;

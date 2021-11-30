@@ -12,7 +12,7 @@
 @echo "+=====================================================+"
 
 set BASEDIR=%~dp0
-set CEFVER=cef_binary_91.1.23+g04c8d56+chromium-91.0.4472.164_windows32_minimal
+set CEFVER=cef_binary_93.1.14+gf38ce34+chromium-93.0.4577.82_windows32_minimal
 set CEFHOST=https://cef-builds.spotifycdn.com
 
 @REM -----------------

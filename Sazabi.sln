@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.960
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sazabi", "Sazabi.vcxproj", "{83410426-0B15-352C-4BC5-CCD2A7EF1930}"
 EndProject
@@ -15,8 +15,10 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{83410426-0B15-352C-4BC5-CCD2A7EF1930}.D64_CSG|Win32.ActiveCfg = D64_CSG|Win32
 		{83410426-0B15-352C-4BC5-CCD2A7EF1930}.D64_CSG|Win32.Build.0 = D64_CSG|Win32
+		{83410426-0B15-352C-4BC5-CCD2A7EF1930}.D64_CSG|x64.ActiveCfg = D64_CSG|Win32
 		{83410426-0B15-352C-4BC5-CCD2A7EF1930}.R64_CSG|Win32.ActiveCfg = R64_CSG|Win32
 		{83410426-0B15-352C-4BC5-CCD2A7EF1930}.R64_CSG|Win32.Build.0 = R64_CSG|Win32
+		{83410426-0B15-352C-4BC5-CCD2A7EF1930}.R64_CSG|x64.ActiveCfg = R64_CSG|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
