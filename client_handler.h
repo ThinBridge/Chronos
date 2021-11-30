@@ -11,6 +11,9 @@
 #include "include/cef_version.h"
 #include "include/base/cef_lock.h"
 #include "resource.h"
+
+#define OVERRIDE override
+
 class MyV8Handler : public CefV8Handler
 {
 public:
