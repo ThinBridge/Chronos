@@ -16,7 +16,8 @@ Chronosの開発の手引き
       - `rlib`: リリース版のコンパイルに必要なライブラリ（CEFから抽出）
       - `include`: CEFのヘッダファイル（CEFから抽出）
  3. Visual Studio 2019でプロジェクト（Sazabi.sln）を開く。
- 4. メニューから「Local Windows Debugger」を実行する。
+ 4. 構成を「R64_CSG」（リリース版）または「D64_CSG」（デバッグ版）から選択する。
+ 5. メニューから「Local Windows Debugger」を実行する。
 
 ## Chromiumのバージョンの更新手順
 
