@@ -16,6 +16,7 @@ Chronosの開発の手引き
 
  1. `setup-cef.bat`に記載されている`CEFVER`を更新する。
  2. `setup-cef.bat`を再実行する。
+ 3. sbcommon.hのユーザーエージェント文字列を更新する。
  3. Visual Studio上でChronosをビルドする。
 
 ## Chromiumのバージョンを確認する方法
