@@ -9,14 +9,22 @@ Chronosの開発の手引き
 
  1. このレポジトリをローカルにクローンする。
  2. スタートメニューから開発者コマンドプロンプトを開き`setup-cef.bat`を実行する。
+    * この段階で以下のディレクトリが作成される。
+      - `D32`: デバッグ版の実行ファイル一式（CEFから抽出＋Chronos固有のビルド済みバイナリが置かれる）
+      - `R32`: リリース版の実行ファイル一式（CEFから抽出＋Chronos固有のビルド済みバイナリが置かれる）
+      - `lib`: デバッグ版のコンパイルに必要なライブラリ（CEFから抽出）
+      - `rlib`: リリース版のコンパイルに必要なライブラリ（CEFから抽出）
+      - `include`: CEFのヘッダファイル（CEFから抽出）
  3. Visual Studio 2019でプロジェクトを開く。
  4. メニューから「Local Windows Debugger」を実行する。
 
 ## Chromiumのバージョンの更新手順
 
  1. `setup-cef.bat`に記載されている`CEFVER`を更新する。
+    * https://cef-builds.spotifycdn.com/index.html#windows32 に掲載されている「Windows 32」且つ「minimal」のものを使用する。
  2. `setup-cef.bat`を再実行する。
  3. sbcommon.hのユーザーエージェント文字列を更新する。
+    * `sgSZB_UA_END` に含まれるバージョンを、CEFのバージョンに合わせる。
  3. Visual Studio上でChronosをビルドする。
 
 ## Chromiumのバージョンを確認する方法
