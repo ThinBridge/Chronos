@@ -606,7 +606,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 		SendLogDataUtil stTargetURL(lpTargetURL);
 
 		CTime timeDlg = CTime::GetCurrentTime();
-		SendLogDataUtil stTime(timeDlg.Format(_T("%Y-%m-%d %X")));
+		SendLogDataUtil stTime(timeDlg.Format(_T("%Y-%m-%d %H:%M:%S")));
 
 		CString strURL(strServerURL);
 		CString strURLParam;

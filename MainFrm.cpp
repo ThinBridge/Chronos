@@ -2713,7 +2713,7 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 
 			CString strWriteTime;
 			CTime time = CTime::GetCurrentTime();
-			strWriteTime.Format(_T("%s\n"), time.Format(_T("%Y-%m-%d %X")));
+			strWriteTime.Format(_T("%s\n"), time.Format(_T("%Y-%m-%d %H:%M:%S")));
 			int iCnt = 0;
 			if (bAppendMode)
 			{
