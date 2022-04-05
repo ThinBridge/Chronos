@@ -879,6 +879,7 @@ public:
 	void Clear()
 	{
 		EnableAdvancedLogMode = 0;
+		EnableAdvancedLogVerboseMode = 0;
 		AdvancedLogLevel = 0;
 		ShowLogo = 0;
 		EnableTab = 0;
@@ -961,6 +962,7 @@ public:
 	void CopyData(AppSettings& Data)
 	{
 		Data.EnableAdvancedLogMode = EnableAdvancedLogMode;
+		Data.EnableAdvancedLogVerboseMode = EnableAdvancedLogVerboseMode;
 		Data.AdvancedLogLevel = AdvancedLogLevel;
 		Data.ShowLogo = ShowLogo;
 		Data.EnableTab = EnableTab;
@@ -1097,6 +1099,7 @@ private:
 
 	//ログ出力設定
 	int EnableAdvancedLogMode;
+	int EnableAdvancedLogVerboseMode;
 	int AdvancedLogLevel;
 	//////////////////////////////////////////////////
 	int EnableLogging;
@@ -1206,6 +1209,7 @@ public:
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//ログ出力設定
 		EnableAdvancedLogMode = FALSE;
+		EnableAdvancedLogVerboseMode = FALSE;
 		AdvancedLogLevel = 0;
 		EnableLogging = 0;
 		EnableUploadLogging = 0;
@@ -1437,6 +1441,11 @@ public:
 				if (strTemp2.CompareNoCase(_T("EnableAdvancedLogMode")) == 0)
 				{
 					EnableAdvancedLogMode = strTemp3 == _T("1") ? TRUE : FALSE;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("EnableAdvancedLogVerboseMode")) == 0)
+				{
+					EnableAdvancedLogVerboseMode = strTemp3 == _T("1") ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("ShowLogo")) == 0)
@@ -1893,6 +1902,7 @@ public:
 
 		//ログ出力設定
 		strRet += EXTVAL(EnableAdvancedLogMode)
+		strRet += EXTVAL(EnableAdvancedLogVerboseMode)
 		strRet += EXTVAL(AdvancedLogLevel)
 		strRet += EXTVAL(EnableLogging)
 		strRet += EXTVAL(EnableUploadLogging)
@@ -1935,6 +1945,7 @@ public:
 public:
 	//Is Functions Getter##########################################################
 	inline BOOL IsAdvancedLogMode()				{return EnableAdvancedLogMode;}
+	inline BOOL IsAdvancedLogVerboseMode()				{return EnableAdvancedLogVerboseMode;}
 	inline BOOL IsShowLogo()					{return ShowLogo;}
 	inline BOOL IsEnableTab()					{return EnableTab; }
 	inline BOOL IsEnablePDFExtension()			{return EnablePDFExtension; }
@@ -2017,6 +2028,7 @@ public:
 
 	//Set Functions Setter##########################################################
 	inline void SetAdvancedLogMode(DWORD dVal)				{ EnableAdvancedLogMode = dVal ? 1 : 0; }
+	inline void SetAdvancedLogVerboseMode(DWORD dVal)				{ EnableAdvancedLogVerboseMode = dVal ? 1 : 0; }
 	inline void SetShowLogo(DWORD dVal)						{ ShowLogo = dVal ? 1 : 0; }
 	inline void SetEnableTab(DWORD dVal)					{ EnableTab = dVal ? 1 : 0; }
 	inline void SetEnablePDFExtension(DWORD dVal)			{ EnablePDFExtension = dVal ? 1 : 0; }

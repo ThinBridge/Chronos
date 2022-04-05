@@ -4126,7 +4126,14 @@ void CSazabi::InitializeCef()
 			CString strLogFile(m_strCEFCachePath);
 			strLogFile += _T("\\CEFDebug.log");
 			CefString(&settings.log_file) = strLogFile;
-			settings.log_severity = cef_log_severity_t::LOGSEVERITY_DEFAULT;
+			if (m_AppSettings.IsAdvancedLogVerboseMode())
+			{
+				settings.log_severity = cef_log_severity_t::LOGSEVERITY_VERBOSE;
+			}
+			else
+			{
+				settings.log_severity = cef_log_severity_t::LOGSEVERITY_DEFAULT;
+			}
 		}
 		else
 			settings.log_severity = cef_log_severity_t::LOGSEVERITY_DISABLE;
