@@ -99,7 +99,7 @@ public:
 	virtual bool GetAuthCredentials(CefRefPtr<CefBrowser> browser, const CefString& origin_url, bool isProxy, const CefString& host, int paort, const CefString& realm, const CefString& scheme, CefRefPtr<CefAuthCallback> callback) override;
 
 	virtual CefRefPtr<CefResourceHandler> GetResourceHandler(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request) override;
-	virtual bool OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefCallback> callback) override;
+
 	virtual void OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution) override;
 	virtual void OnRenderViewReady(CefRefPtr<CefBrowser> browser) override;
 	virtual bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool user_gesture, bool is_redirect) override;
@@ -116,17 +116,28 @@ public:
 		return this;
 	}
 
+#ifdef _CEF87
+	virtual bool OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefRequestCallback> callback) override;
+	virtual bool OnCertificateError(CefRefPtr<CefBrowser> browser, ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefRequestCallback> callback) override;
+	virtual ReturnValue OnBeforeResourceLoad(
+	    CefRefPtr<CefBrowser> browser,
+	    CefRefPtr<CefFrame> frame,
+	    CefRefPtr<CefRequest> request,
+	    CefRefPtr<CefRequestCallback> callback) override;
+#else
+	virtual bool OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefCallback> callback) override;
 	virtual bool OnCertificateError(CefRefPtr<CefBrowser> browser, ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefCallback> callback) override;
-	virtual bool OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
-				      CefRefPtr<CefFrame> frame,
-				      const CefString& target_url,
-				      WindowOpenDisposition target_disposition,
-				      bool user_gesture) override;
 	virtual ReturnValue OnBeforeResourceLoad(
 	    CefRefPtr<CefBrowser> browser,
 	    CefRefPtr<CefFrame> frame,
 	    CefRefPtr<CefRequest> request,
 	    CefRefPtr<CefCallback> callback) override;
+#endif
+	virtual bool OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
+				      CefRefPtr<CefFrame> frame,
+				      const CefString& target_url,
+				      WindowOpenDisposition target_disposition,
+				      bool user_gesture) override;
 
 	// CefJSDialogHandler methods
 	virtual bool OnBeforeUnloadDialog(CefRefPtr<CefBrowser> browser, const CefString& message_text, bool is_reload, CefRefPtr<CefJSDialogCallback> callback) override;

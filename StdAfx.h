@@ -142,6 +142,9 @@ struct CEFDownloadItemValues
 	TCHAR szFullPath[512];
 };
 
+#define _CEF87
+
+
 #if _DEBUG
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>

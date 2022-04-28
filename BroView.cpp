@@ -1948,9 +1948,13 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 					CRect rect;
 					pCreateView->GetClientRect(rect);
 					CefWindowInfo info;
+#ifdef _CEF87
+					info.SetAsChild(hWnd, rect);
+#else
 					CefRect windowBounds;
 					windowBounds.Set(rect.right,rect.top,rect.Width(),rect.Height());
 					info.SetAsChild(hWnd, windowBounds);
+#endif
 					CefBrowserSettings browserSettings;
 					pCreateView->m_clientHandler = new ClientHandler();
 					pCreateView->m_clientHandler->CreateBrowser(info, browserSettings, CefString(strURL));
@@ -2014,9 +2018,13 @@ LRESULT CChildView::OnNewWindow(WPARAM wParam, LPARAM lParam)
 	HWND hWnd = pCreateView->GetSafeHwnd();
 	CRect rect;
 	pCreateView->GetClientRect(rect);
+#ifdef _CEF87
+	windowInfo->SetAsChild(hWnd, rect);
+#else
 	CefRect windowBounds;
 	windowBounds.Set(rect.right, rect.top, rect.Width(), rect.Height());
 	windowInfo->SetAsChild(hWnd, windowBounds);
+#endif
 	return S_OK;
 }
 
@@ -2489,9 +2497,13 @@ void CChildView::Navigate(LPCTSTR pszURL)
 		GetClientRect(&rect);
 
 		CefWindowInfo info;
+#ifdef _CEF87
+		info.SetAsChild(GetSafeHwnd(), rect);
+#else
 		CefRect windowBounds;
-		windowBounds.Set(rect.right, rect.top,rect.right-rect.left,rect.bottom-rect.top);
+		windowBounds.Set(rect.right, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 		info.SetAsChild(GetSafeHwnd(), windowBounds);
+#endif
 
 		CefBrowserSettings browserSettings;
 

@@ -6,3 +6,6 @@ lib/
 include/
 rlib/
 cef-cache/
+/.vs
+/ChronosDebug
+/ChronosRelease

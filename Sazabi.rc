@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 resources
+// 日本語 (ニュートラル) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
@@ -96,7 +96,7 @@ BEGIN
     END
 END
 
-#endif    // 日本語 resources
+#endif    // 日本語 (ニュートラル) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -576,8 +576,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 12,111,96,1
- PRODUCTVERSION 12,111,96,1
+ FILEVERSION 12,111,87,1
+ PRODUCTVERSION 12,111,87,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -593,12 +593,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "12.111.96.1"
+            VALUE "FileVersion", "12.111.87.1"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "12.111.96.1"
+            VALUE "ProductVersion", "12.111.87.1"
         END
     END
     BLOCK "VarFileInfo"

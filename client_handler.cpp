@@ -947,11 +947,19 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 		}
 	}
 }
+#ifdef _CEF87
+cef_return_value_t ClientHandler::OnBeforeResourceLoad(
+    CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame,
+    CefRefPtr<CefRequest> request,
+    CefRefPtr<CefRequestCallback> callback)
+#else
 cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 	CefRefPtr<CefBrowser> browser,
 	CefRefPtr<CefFrame> frame,
 	CefRefPtr<CefRequest> request,
 	CefRefPtr<CefCallback> callback)
+#endif
 {
 	PROC_TIME(OnBeforeResourceLoad)
 
@@ -1567,19 +1575,37 @@ CefRefPtr<CefResourceHandler> ClientHandler::GetResourceHandler(CefRefPtr<CefBro
 	return nullptr;
 }
 
+#ifdef _CEF87
+bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefRequestCallback> callback)
+{
+	static const int64 max_size = 1024 * 1024 * 20; // 20mb.
+
+	// Grant the quota request if the size is reasonable.
+	callback->Continue(new_size <= max_size);
+
+	// call parent
+	return CefRequestHandler::OnQuotaRequest(browser, origin_url, new_size, callback);
+}
+#else
 bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefCallback> callback)
 {
 	static const int64 max_size = 1024 * 1024 * 20; // 20mb.
 	// Grant the quota request if the size is reasonable.
-	//callback->Continue(new_size <= max_size);
-	if(new_size > max_size)
+	// callback->Continue(new_size <= max_size);
+	if (new_size > max_size)
 		callback->Cancel();
 	// call parent
 	return CefRequestHandler::OnQuotaRequest(browser, origin_url, new_size, callback);
 }
+#endif
 
+#ifdef _CEF87
+bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
+				       ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefRequestCallback> callback)
+#else
 bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 				       ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefCallback> callback)
+#endif
 {
 	CString szMessage;
 
@@ -1598,9 +1624,11 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 		return FALSE;
 	}
 
-	// continue
+#ifdef _CEF87
+	callback->Continue(true);
+#else
 	callback->Continue();
-
+#endif
 	return TRUE;
 }
 
