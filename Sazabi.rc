@@ -1120,7 +1120,7 @@ BEGIN
         MENUITEM "Save Window",                 ID_SAVE_WND
         MENUITEM SEPARATOR
         MENUITEM "Print to PDF",                ID_PRINT_PDF
-        MENUITEM "&Print…\tCtrl+P",            ID_PRINT
+        MENUITEM "&Print...\tCtrl+P",            ID_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Close",                      ID_W_CLOSE
         MENUITEM SEPARATOR
@@ -1137,7 +1137,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Select &All\tCtrl+A",         ID_SEL_ALL
         MENUITEM SEPARATOR
-        MENUITEM "&Find on this Page…\tCtrl+F", ID_FIND_PAGE
+        MENUITEM "&Find on this Page...\tCtrl+F", ID_FIND_PAGE
     END
     POPUP "&View"
     BEGIN
@@ -1151,8 +1151,8 @@ BEGIN
     END
     POPUP "F&avorites"
     BEGIN
-        MENUITEM "&Add to favorites…",         ID_ADD_FAVORITE
-        MENUITEM "&Organize favorites…",       ID_ORGANIZE_FAVORITE
+        MENUITEM "&Add to favorites...",         ID_ADD_FAVORITE
+        MENUITEM "&Organize favorites...",       ID_ORGANIZE_FAVORITE
         MENUITEM SEPARATOR
         MENUITEM "DUMMY",                       ID_FAVORITE_DUMMY
     END
@@ -1160,7 +1160,7 @@ BEGIN
     BEGIN
         MENUITEM "&File Manager",               ID_OPEN_THIN_FILER
         MENUITEM SEPARATOR
-        MENUITEM "&Preferences…",              ID_SETTINGS
+        MENUITEM "&Preferences...",              ID_SETTINGS
     END
     POPUP "&Window"
     BEGIN
@@ -1174,7 +1174,7 @@ BEGIN
     END
     POPUP "&Help"
     BEGIN
-        MENUITEM "&About…",                    ID_APP_ABOUT
+        MENUITEM "&About...",                    ID_APP_ABOUT
         MENUITEM SEPARATOR
         MENUITEM "Cleanup Browser Cache (&X)",  IDC_APP_DELETE_CACHE
     END
@@ -1333,7 +1333,7 @@ BEGIN
                     "Button",BS_AUTORADIOBUTTON,27,46,171,10
     CONTROL         "2:Output only general information [GE] and URL [URL] to a log file",IDC_RADIO_LOG_GE_URL,
                     "Button",BS_AUTORADIOBUTTON,27,58,173,10
-    PUSHBUTTON      "Debug TRACE Window…",IDC_BUTTON1,8,76,100,14
+    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,8,76,100,14
     GROUPBOX        "Audit log options",IDC_STATIC,10,97,350,185,WS_GROUP
     CONTROL         "Enable audit logs output",IDC_CHECK_EnableLogging,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
@@ -1383,24 +1383,24 @@ FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
     CONTROL         "Enable URL redirection",IDC_CHECK_EnableZoneFilterScript,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,100,10
-    PUSHBUTTON      "Open Script Editor Window…",IDC_BUTTON_SCRIPT_EDIT,8,25,121,14
+    PUSHBUTTON      "Open Script Editor Window...",IDC_BUTTON_SCRIPT_EDIT,8,25,121,14
     LTEXT           "Duration of information messages to be shown",IDC_STATIC,8,50,74,8
     COMBOBOX        IDC_COMBO1,87,46,68,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Custom browser 1",IDC_STATIC,8,70,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser1,65,68,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE1,303,67,30,14
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE1,303,67,30,14
     LTEXT           "Custom browser 2",IDC_STATIC,8,92,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser2,65,88,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE2,303,87,30,14
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE2,303,87,30,14
     LTEXT           "Custom browser 3",IDC_STATIC,8,114,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser3,65,112,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE3,303,111,30,14
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE3,303,111,30,14
     LTEXT           "Custom browser 4",IDC_STATIC,8,136,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser4,65,134,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE4,303,133,30,14
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE4,303,133,30,14
     LTEXT           "Custom browser 5",IDC_STATIC,8,158,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser5,65,156,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE5,303,155,30,14
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE5,303,155,30,14
 END
 
 IDD_SETTINGS_DLG_CONNECTION DIALOGEX 0, 0, 370, 291
@@ -1533,7 +1533,7 @@ STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_BORDER
 EXSTYLE WS_EX_TOOLWINDOW
 FONT 8, "Meiryo UI", 400, 0, 0x80
 BEGIN
-    LTEXT           "loading…",IDC_STATIC_MSG,31,9,134,11
+    LTEXT           "loading...",IDC_STATIC_MSG,31,9,134,11
     ICON            IDR_MAINFRAME,IDC_STATIC_LOGO_ABOUT,5,5,20,20,SS_NOTIFY
 END
 
@@ -1623,8 +1623,8 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
     PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
     PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
-    PUSHBUTTON      "Debug TRACE Window…",IDC_BUTTON1,142,271,100,14
-    PUSHBUTTON      "Developer Tools…",IDC_SHOW_DEV_TOOLS,246,271,100,14
+    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,142,271,100,14
+    PUSHBUTTON      "Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
 END
 
 IDD_DIALOG6 DIALOGEX 0, 0, 415, 89
@@ -1637,7 +1637,7 @@ BEGIN
     EDITTEXT        IDC_EDIT1,70,32,338,14,ES_AUTOHSCROLL
     LTEXT           "File name",IDC_STATIC,11,51,39,8
     EDITTEXT        IDC_EDIT2,70,50,169,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "…",IDC_BUTTON1,242,50,20,14
+    PUSHBUTTON      "...",IDC_BUTTON1,242,50,20,14
     DEFPUSHBUTTON   "OK",IDOK,304,66,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,358,66,50,14
 END
@@ -2050,9 +2050,9 @@ BEGIN
     IDS_STRING_ZONE_MSG_NG  "The requested page is not allowed to access."
     IDS_STRING_CONFIRM_CANCEL_DOWNLOAD  "Do you want the window with a download in progress to be closed?\n\nThe download will be canceled if you close the window.\nPlease choose ""No"" to continue downloading."
     IDS_STRING_WELCOME_MSG "Thank you for using %s Version %s."
-    IDS_STRING_STARTING_FILEMGR "Starting file manager…"
+    IDS_STRING_STARTING_FILEMGR "Starting file manager..."
     IDS_STRING_CONFIRM_CLEAR_CACHE "Do you want the browser cache to be cleared?\nClick ""Yes"" to restart the bwoser with cleared cache."
-    IDS_STRING_STARTING_NEW_SESSION "Starting New Session…"
+    IDS_STRING_STARTING_NEW_SESSION "Starting New Session..."
     IDS_STRING_AUTH_REQUIRED "Authentication required.\nThe connecting host [%s] requries username and password."
 END
 
@@ -2087,7 +2087,7 @@ BEGIN
     IDS_STRING_SEARCH       "Search"
     IDS_STRING_SEL_SEARCH   "Search ""%s"""
     IDS_STRING_OPEN_NOACTIVE "Open in new inactive window"
-    IDS_STRING_SETTINGS     "&Preferences…"
+    IDS_STRING_SETTINGS     "&Preferences..."
 END
 
 STRINGTABLE
@@ -2135,13 +2135,13 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_ADD_FAVORITE         "&Add to Favorites…"
-    ID_ORGANIZE_FAVORITE    "&Organize Favorites…"
+    ID_ADD_FAVORITE         "&Add to Favorites..."
+    ID_ORGANIZE_FAVORITE    "&Organize Favorites..."
 END
 
 STRINGTABLE
 BEGIN
-    ID_PRINT                "&Print…"
+    ID_PRINT                "&Print..."
     ID_PRINT_PDF            "Print to PDF"
 END
 
@@ -2174,7 +2174,7 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_SETTINGS_MENU_LABEL "&Preferences…"
+    ID_SETTINGS_MENU_LABEL "&Preferences..."
 END
 
 STRINGTABLE
