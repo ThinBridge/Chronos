@@ -1054,6 +1054,1047 @@ END
 
 
 
+// English resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New Window\tCtrl+N",             ID_NEW_BLANK
+        MENUITEM "New Window (with Current Page)",  ID_NEW
+        MENUITEM "New Session",                     ID_NEW_SESSION
+        MENUITEM SEPARATOR
+        MENUITEM "Restore Window",                  ID_RESTORE_WND
+        MENUITEM "Save Window",                     ID_SAVE_WND
+        MENUITEM SEPARATOR
+        MENUITEM "Print to PDF",                    ID_PRINT_PDF
+        MENUITEM "&Print…\tCtrl+P",               ID_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Close",                          ID_W_CLOSE
+        MENUITEM SEPARATOR
+        POPUP "Recently Closed Windows"
+        BEGIN
+            MENUITEM "No Item",                     ID_CLOSE_WND_HISTORY_DUMMY
+        END
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Cu&t\tCtrl+X",                    ID_CUT
+        MENUITEM "&Copy\tCtrl+C",                   ID_COPY
+        MENUITEM "&Paste\tCtrl+V",                  ID_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Select &All\tCtrl+A",             ID_SEL_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Find on this Page…\tCtrl+F",   ID_FIND_PAGE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Back\t Alt+←",                   ID_GO_BACK
+        MENUITEM "Forward\t Alt+→",                ID_GO_FORWARD
+        MENUITEM "Stop\tEsc",                       ID_VIEW_STOP
+        MENUITEM "Refresh\t F5",                    ID_VIEW_REFRESH
+        MENUITEM "Home Page\tAlt+Home",             ID_GO_START_PAGE
+        MENUITEM SEPARATOR
+        MENUITEM "&Full Screen\tF11",               ID_FULL_SCREEN
+    END
+    POPUP "F&avorites"
+    BEGIN
+        MENUITEM "&Add to favorites…",            ID_ADD_FAVORITE
+        MENUITEM "&Organize favorites…",          ID_ORGANIZE_FAVORITE
+        MENUITEM SEPARATOR
+        MENUITEM "DUMMY",                           ID_FAVORITE_DUMMY
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "&File Manager",                   ID_OPEN_THIN_FILER
+        MENUITEM SEPARATOR
+        MENUITEM "O&ptions…",                     ID_SETTINGS
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&Close",                          ID_W_CLOSE
+        MENUITEM "Close All Winodws (&X)",          IDC_APP_EXIT
+        MENUITEM "Close All Windows But this",      IDC_APP_EXIT_BUT_THIS
+        MENUITEM "Next Window\tCtrl+Tab",           ID_NEXT_WND
+        MENUITEM "Previous Window\tShift+Ctrl+Tab", ID_PREV_WND
+        MENUITEM SEPARATOR
+        MENUITEM "DUMMY",                           ID_WINDOW_DUMMY
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About…",                       ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Cleanup Browser Cache (&X)",      IDC_APP_DELETE_CACHE
+    END
+END
+
+#endif    // English resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_BACK MENU
+BEGIN
+    POPUP "BACK"
+    BEGIN
+        MENUITEM "Go Back 1 entry",                 ID_BF_BACK1
+        MENUITEM "Go Back 2 entries",               ID_BF_BACK2
+        MENUITEM "Go Back 3 entries",               ID_BF_BACK3
+        MENUITEM "Go Back 4 entries",               ID_BF_BACK4
+        MENUITEM "Go Back 5 entries",               ID_BF_BACK5
+    END
+END
+
+IDR_MENU_FORWARD MENU
+BEGIN
+    POPUP "FORWARD"
+    BEGIN
+        MENUITEM "Go Forward 1 entry",              ID_BF_FORWARD1
+        MENUITEM "Go Forward 2 entries",            ID_BF_FORWARD2
+        MENUITEM "Go Forward 3 entries",            ID_BF_FORWARD3
+        MENUITEM "Go Forward 4 entries",            ID_BF_FORWARD4
+        MENUITEM "Go Forward 5 entries",            ID_BF_FORWARD5
+    END
+END
+
+IDR_MENU_TAB MENU
+BEGIN
+    POPUP "TAB_MENU"
+    BEGIN
+        MENUITEM "New Tab",                         ID_NEW_BLANK
+        MENUITEM "Suplicate Tab",                   ID_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "Close Tab",                       ID_W_CLOSE
+        MENUITEM "Close All Windows But this (&X)", IDC_APP_EXIT
+        MENUITEM "Close All Tabs But this",         IDC_APP_EXIT_BUT_THIS
+        MENUITEM "Close Tabs to Right",             ID_TAB_CLOSE_RIGHT
+        MENUITEM "Close Tabs to Left",              ID_TAB_CLOSE_LEFT
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Sazabi.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
+    "#include ""l.jpn\\afxres.rc""          // 標準のコンポーネント\r\n"
+    "#ifndef _AFXDLL\r\n"
+    "#include ""afxribbon.rc"" // ribbon and control bar resources\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Sazabi.ico"
+
+IDI_ICON2               ICON                    "res\\small.ico"
+
+IDI_ICON3               ICON                    "res\\warn.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 467, 306
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 9, "MS UI Gothic", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,407,282,50,14,WS_GROUP
+    EDITTEXT        IDC_EDIT1,7,15,450,240,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL
+    ICON            IDR_MAINFRAME,IDC_STATIC_LOGO_ABOUT,12,261,20,20,SS_NOTIFY
+    PUSHBUTTON      "Close All VOS Process",IDC_VOS_CLOSE_PROCESS,37,263,86,14
+    PUSHBUTTON      "Show Developer Tools",IDC_SHOW_DEV_TOOLS,37,282,86,14
+    PUSHBUTTON      "CEF Version Information",IDC_CEF_VERSION,305,282,86,14
+END
+
+IDD_SETTINGS_DLG DIALOGEX 0, 0, 480, 335
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Advanced Settings"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREE_CTRL,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_DISABLEDRAGDROP | TVS_SHOWSELALWAYS | WS_BORDER | WS_HSCROLL | WS_TABSTOP,3,3,100,306
+    CONTROL         "",IDC_PAGE_FRAME,"Static",SS_GRAYFRAME,105,19,365,290
+    DEFPUSHBUTTON   "&OK",IDOK,365,315,51,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,420,315,51,14
+    LTEXT           "",IDC_CAPTION_BAR,108,4,365,11,SS_CENTERIMAGE
+END
+
+IDD_SETTINGS_DLG_LOG DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Logging"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "DebugLog",IDC_STATIC,10,7,350,66,WS_GROUP
+    CONTROL         "Enable DebugLog output",IDC_CHECK_ENABLE_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,20,105,10
+    CONTROL         "0:Output all logs",IDC_RADIO_LOG_ALL,"Button",BS_AUTORADIOBUTTON,27,34,93,10
+    CONTROL         "1:Output to OutputDebugString only (no file output)",IDC_RADIO_LOG_NOFILE,
+                    "Button",BS_AUTORADIOBUTTON,27,46,171,10
+    CONTROL         "2:Output only general information [GE] and URL [URL] to a log file",IDC_RADIO_LOG_GE_URL,
+                    "Button",BS_AUTORADIOBUTTON,27,58,173,10
+    PUSHBUTTON      "Debug TRACE Window…",IDC_BUTTON1,8,76,100,14
+    GROUPBOX        "Audit log options",IDC_STATIC,10,97,350,185,WS_GROUP
+    CONTROL         "Enable audit logs output",IDC_CHECK_EnableLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
+    LTEXT           "Log server URL",IDC_STATIC,26,125,283,8
+    EDITTEXT        IDC_EDIT_LogServerURL,26,136,328,14,ES_AUTOHSCROLL
+    LTEXT           "Additional request headers",IDC_STATIC,26,154,283,8
+    EDITTEXT        IDC_EDIT_RequestHeader,26,165,328,14,ES_AUTOHSCROLL
+    LTEXT           "Log-method-format",IDC_STATIC,27,186,283,8
+    CONTROL         "GET:as URL query parameters",IDC_RADIO_LOG_GET,"Button",BS_AUTORADIOBUTTON,27,198,193,10
+    CONTROL         "POST:as JSON",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
+    CONTROL         "Log downloads",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
+    CONTROL         "Log uploads",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
+    CONTROL         "Log browsing histories",IDC_CHECK_EnableBrowsingLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
+    CONTROL         "Log detailed browsing histories",IDC_CHECK_EnableAccessAllLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
+END
+
+IDD_SETTINGS_DLG_DSP DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Appearance"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Show tabs",IDC_CHECK_TAB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,161,10
+    CONTROL         "Enable GPU rendering",IDC_CHECK_GPU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,161,10
+    CONTROL         "Show Rebar (menubar, toolbar and address bar)",IDC_CHECK_DISABLE_REBAR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,55,238,10
+    CONTROL         "Show logo on the Rebar",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,161,10
+    CONTROL         "Show status bar",IDC_CHECK_DISABLE_STATUSBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,85,153,10
+    GROUPBOX        "Popup windows",IDC_STATIC,8,133,265,45
+    LTEXT           "Horizontal margin",IDC_STATIC,15,145,45,8
+    EDITTEXT        IDC_EDIT_W,62,143,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Vertical margin",IDC_STATIC,15,163,45,8
+    EDITTEXT        IDC_EDIT_H,62,162,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "Zoom",IDC_STATIC,8,188,265,33
+    LTEXT           "Zoom percentage",IDC_STATIC,15,202,43,8
+    EDITTEXT        IDC_EDIT_ZOOM,61,200,28,13,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
+    LTEXT           "%",IDC_STATIC,93,202,16,8
+    PUSHBUTTON      "Choose",IDC_BUTTON1,100,200,42,13
+    CONTROL         "Enable PDF viewer",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,161,10
+END
+
+IDD_SETTINGS_DLG_SEC DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable URL redirection",IDC_CHECK_EnableZoneFilterScript,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,100,10
+    PUSHBUTTON      "Open Script Editor Window…",IDC_BUTTON_SCRIPT_EDIT,8,25,121,14
+    LTEXT           "Duration of information messages to be shown",IDC_STATIC,8,50,74,8
+    COMBOBOX        IDC_COMBO1,87,46,68,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Custom browser 1",IDC_STATIC,8,70,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser1,65,68,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE1,303,67,30,14
+    LTEXT           "Custom browser 2",IDC_STATIC,8,92,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser2,65,88,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE2,303,87,30,14
+    LTEXT           "Custom browser 3",IDC_STATIC,8,114,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser3,65,112,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE3,303,111,30,14
+    LTEXT           "Custom browser 4",IDC_STATIC,8,136,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser4,65,134,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE4,303,133,30,14
+    LTEXT           "Custom browser 5",IDC_STATIC,8,158,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser5,65,156,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose…",IDC_BUTTON_BROWSE5,303,155,30,14
+END
+
+IDD_SETTINGS_DLG_CONNECTION DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Internet connection",IDC_STATIC,3,9,353,28,WS_GROUP
+    CONTROL         "Use system network settings",IDC_RAD_PX_IE,"Button",BS_AUTORADIOBUTTON,10,21,81,10
+    CONTROL         "Direct connection (no proxy)",IDC_RAD_PX_NA,"Button",BS_AUTORADIOBUTTON,103,21,94,10
+    CONTROL         "Manual settings",IDC_RAD_PX_EF,"Button",BS_AUTORADIOBUTTON,206,21,66,10
+    GROUPBOX        "Manual setting items",IDC_STATIC,3,43,353,227,WS_GROUP
+    LTEXT           "Proxy server / PAC file (please set one of any.)",IDC_STATIC,14,60,334,8
+    EDITTEXT        IDC_EDIT_ProxyAddress,14,71,340,14,ES_AUTOHSCROLL
+    LTEXT           "Direct connection websites",IDC_STATIC,14,103,41,8
+    EDITTEXT        IDC_EDIT_ProxyBypassAddress,14,115,340,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "Listed websites will be connected directly without proxy.\nPlease list entries separated with semicolons ;\nPut <local> if local addresses to be connected directly.",IDC_STATIC,14,170,340,32,0,WS_EX_STATICEDGE
+    LTEXT           "Extra UserAgent string",IDC_STATIC,14,241,82,8
+    EDITTEXT        IDC_UserAgentAppendStr,107,239,168,13,ES_AUTOHSCROLL
+END
+
+IDD_SETTINGS_DLG_FILEMGR DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "General options",IDC_STATIC,8,6,343,79
+    LTEXT           "Default path of downloaded and uploaded items",IDC_STATIC,12,18,132,8
+    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL
+    LTEXT           "File extensions for visible items",IDC_STATIC,12,37,79,8
+    EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
+    LTEXT           "File extensions to forbid running, opening and transferring",IDC_STATIC,12,56,111,8
+    EDITTEXT        IDC_DisallowExt,160,56,179,14,ES_AUTOHSCROLL
+    GROUPBOX        "Downlaod options",IDC_STATIC,8,90,343,67
+    LTEXT           "Transfer path for downloaded items",IDC_STATIC,12,105,80,8
+    EDITTEXT        IDC_TransferPath,99,103,246,14,ES_AUTOHSCROLL
+    LTEXT           "Sub folders \n Environment variables and time format are available.\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,138,27
+    EDITTEXT        IDC_TransferSubFolder,144,121,200,14,ES_AUTOHSCROLL
+    GROUPBOX        "Upload options",IDC_STATIC,8,161,343,74
+    LTEXT           "Accepted path for upload items",IDC_STATIC,12,174,79,8
+    EDITTEXT        IDC_UploadPath,99,171,246,14,ES_AUTOHSCROLL
+    CONTROL         "Show upload items",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,189,104,10
+    GROUPBOX        "Feature options",IDC_STATIC,8,238,343,42
+    LTEXT           "Context menu options",IDC_STATIC,12,251,64,8
+    COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Never confirm for 'mark as opened' command",IDC_DisableOpendOpAlert,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
+    LTEXT           "*Separate multiple file extensions with a pipe |. For example: |.elf|.lnk|",IDC_STATIC,12,74,187,8
+    CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
+    CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
+    LTEXT           "Interval of auto-sync (in milliseconds)",IDC_STATIC,17,220,68,8
+    EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
+END
+
+IDD_DLG_SC_EDITOR DIALOGEX 0, 0, 544, 376
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Script Editor Window"
+FONT 10, "MS Gothic", 400, 0, 0x80
+BEGIN
+    EDITTEXT        IDC_EDIT1,2,33,538,337,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    PUSHBUTTON      "Save",IDOK,4,13,50,14
+    PUSHBUTTON      "Close",IDCANCEL,56,13,50,14
+    GROUPBOX        "Insert template:",IDC_STATIC,110,3,386,28
+    PUSHBUTTON      "Function OnRedirect",IDC_BUTTON_FUNC,115,13,81,14
+    PUSHBUTTON      "TB_Global_URL",IDC_BUTTON_URL,197,13,57,14
+    PUSHBUTTON      "TB_Global_TOP_PAGE",IDC_BUTTON_TOP,255,13,77,14
+    PUSHBUTTON      "TB_TRACE_LOG",IDC_BUTTON_TB_TRACE_LOG,333,13,65,14
+    PUSHBUTTON      "Help",IDC_BUTTON1,399,13,42,14
+    LTEXT           "1 line",IDC_STATIC_LINE,499,13,42,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+END
+
+IDD_SETTINGS_DLG_INIT DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    LTEXT           "Home page URL",IDC_STATIC,8,12,149,8
+    EDITTEXT        IDC_EDIT_INIT_URL_PARAM,8,27,315,13,ES_AUTOHSCROLL
+    LTEXT           "Command line parameters for visual options",IDC_STATIC,8,55,195,8
+    COMBOBOX        IDC_EDIT_INIT_OP_PARAM,8,70,90,20,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Startup message",IDC_STATIC,8,95,149,8
+    EDITTEXT        IDC_EDIT_INIT_MSG,8,110,315,101,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+END
+
+IDD_DLG_DEBUG_WND DIALOGEX 0, 0, 630, 380
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "TRACE Log Monitor Window"
+FONT 10, "MS Gothic", 400, 0, 0x80
+BEGIN
+    PUSHBUTTON      "Copy to the clipboard",IDC_BUTTON1,5,5,93,14
+    PUSHBUTTON      "Cler",IDOK,103,5,50,14
+    PUSHBUTTON      "Close",IDCANCEL,155,5,50,14
+    CONTROL         "Auto scroll",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,230,7,60,10
+    LTEXT           "No item",IDC_STATIC_LINE,299,5,57,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,3,21,622,358
+END
+
+IDD_DLG_AUTH DIALOGEX 0, 0, 250, 108
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Authentication"
+FONT 10, "Meiryo", 400, 0, 0x80
+BEGIN
+    LTEXT           "Authentication required.",IDC_STATIC_MSG,34,7,209,33
+    LTEXT           "User:",IDC_STATIC,7,44,42,8
+    EDITTEXT        IDC_EDIT_ID,53,44,183,14,ES_AUTOHSCROLL
+    LTEXT           "Password:",IDC_STATIC,7,66,42,8
+    EDITTEXT        IDC_EDIT_PW,53,66,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Login",IDOK,133,87,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,187,87,50,14
+    CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
+END
+
+IDD_SETTINGS_DLG_URL_FILTER DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "URL Filtering"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable URL filters",IDC_CHECK_ENABLE_URL_FILTER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "Restricted domains to be loaded (default=allowed) / Wildcards (* and ?) are available in patterns",IDC_STATIC,8,25,339,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 170, 30
+STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_BORDER
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 8, "Meiryo UI", 400, 0, 0x80
+BEGIN
+    LTEXT           "loading…",IDC_STATIC_MSG,31,9,134,11
+    ICON            IDR_MAINFRAME,IDC_STATIC_LOGO_ABOUT,5,5,20,20,SS_NOTIFY
+END
+
+IDD_DIALOG4 DIALOGEX 0, 0, 325, 84
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Download"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         IDD_DLG_DEBUG_WND,IDC_STATIC,"Static",SS_BITMAP,7,3,16,14
+    LTEXT           "File",IDC_STATIC_FN,35,5,283,12
+    CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,6,20,312,15
+    LTEXT           "MSG",IDC_STATIC_DL_MSG,6,39,308,8
+    LTEXT           "transfer",IDC_STATIC_TL,6,50,308,8
+    PUSHBUTTON      "Open file",IDC_BUTTON_FO,75,66,77,14
+    PUSHBUTTON      "Open folder",IDC_BUTTON_DIRO,157,66,77,14
+    PUSHBUTTON      "Cancel",IDC_BUTTON1,239,66,77,14
+END
+
+IDD_SETTINGS_DLG_GEN DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "General"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Allow to run multiple instances",IDC_CHECK_DISABLE_MULTIPLE_INSTANCE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,217,10
+    CONTROL         "Enable memory cache",IDC_ENABLE_MEMCACHE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,232,10
+    CONTROL         "Enable crash recovery",IDC_CHECK_ENABLECRASHRECOVERY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,224,10
+    GROUPBOX        "Restrict access to options",IDC_STATIC,8,71,304,85
+    GROUPBOX        "Key combination to bypass restriction",IDC_STATIC,12,85,294,62
+    CONTROL         "Shift",IDC_CHK_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,101,30,10
+    CONTROL         "Ctrl",IDC_CHK_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,56,101,27,10
+    CONTROL         "Alt",IDC_CHK_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,90,101,25,10
+    CONTROL         "←",IDC_CHK_LEFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,101,23,10
+    CONTROL         "↑",IDC_CHK_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,101,23,10
+    CONTROL         "→",IDC_CHK_RIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,182,101,23,10
+    CONTROL         "↓",IDC_CHK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,101,23,10
+    PUSHBUTTON      "Test key combination",IDC_BUTTON1,18,122,105,14
+END
+
+IDD_SETTINGS_DLG_CAP DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Restriction"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Forbid to download files",IDC_EnableDownloadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
+    CONTROL         "Forbid to upload files",IDC_EnableUploadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
+    CONTROL         "Clear browser caches (internet temporary files) on every startup and shutdown",IDC_EnableDeleteCache,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,44,277,10
+    GROUPBOX        "Resource restrictions",IDC_STATIC,5,60,355,111
+    CONTROL         "Restrict running time",IDC_Enable_ProcessRunTime,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,76,90,10
+    EDITTEXT        IDC_EDIT_LIMIT_TIME,18,91,52,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "min. (8 hours = 480 min. / 12 hours = 720 min. / 24 hours = 1440 min.)",IDC_STATIC,76,93,232,8
+    LTEXT           "Maximum allocated RAM (MB)",IDC_STATIC,11,121,64,8
+    EDITTEXT        IDC_MemoryUsageLimit,83,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Maximum count of windows",IDC_STATIC,11,142,64,8
+    EDITTEXT        IDC_WindowCountLimit,84,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_DIALOG5 DIALOGEX 0, 0, 297, 109
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Domain filters"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Enable",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "Domain",IDC_STATIC,18,33,33,8
+    EDITTEXT        IDC_EDIT1,56,32,233,14,ES_AUTOHSCROLL
+    GROUPBOX        "Action",IDC_STATIC,18,52,271,24,WS_GROUP
+    CONTROL         "Deny",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,63,32,10
+    CONTROL         " Allow",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,63,34,10
+    DEFPUSHBUTTON   "OK",IDOK,187,86,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,240,86,50,14
+END
+
+IDD_SETTINGS_DLG_CUSTOM_SCRIPT DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Custom scripts"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable custom scripts",IDC_CHECK_ENABLE_CUSTOM_SCRIPT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "Custom scripts will run when specified URLs are completely loaded. *Wildcards (* and ?) are available in patterns ",IDC_STATIC,8,25,349,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "Debug TRACE Window…",IDC_BUTTON1,142,271,100,14
+    PUSHBUTTON      "Developer Tools…",IDC_SHOW_DEV_TOOLS,246,271,100,14
+END
+
+IDD_DIALOG6 DIALOGEX 0, 0, 415, 89
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Custom script"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Enable",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "Target URL",IDC_STATIC,11,33,52,8
+    EDITTEXT        IDC_EDIT1,70,32,338,14,ES_AUTOHSCROLL
+    LTEXT           "File name",IDC_STATIC,11,51,39,8
+    EDITTEXT        IDC_EDIT2,70,50,169,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "…",IDC_BUTTON1,242,50,20,14
+    DEFPUSHBUTTON   "OK",IDOK,304,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,358,66,50,14
+END
+
+IDD_DLG_AUTH_PWC DIALOGEX 0, 0, 261, 157
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Change password"
+FONT 10, "Meiryo", 400, 0, 0x80
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
+    LTEXT           "Change password",IDC_STATIC_MSG,34,7,220,33
+    LTEXT           "User:",IDC_STATIC,7,48,42,8
+    EDITTEXT        IDC_EDIT_ID,71,45,183,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Current password:",IDC_STATIC,7,68,62,8
+    EDITTEXT        IDC_EDIT_PW_CURRENT,71,65,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "New password:",IDC_STATIC,7,93,62,8
+    EDITTEXT        IDC_EDIT_PW_NEW,71,90,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Retype new password:",IDC_STATIC,7,113,62,8
+    EDITTEXT        IDC_EDIT_PW_NEW2,71,110,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,144,136,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,202,136,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 12,111,96,1
+ PRODUCTVERSION 12,111,96,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "FileDescription", "Chronos"
+            VALUE "FileVersion", "12.111.96.1"
+            VALUE "InternalName", "Chronos"
+            VALUE "LegalCopyright", " "
+            VALUE "OriginalFilename", "Chronos.EXE"
+            VALUE "ProductName", "Chronos"
+            VALUE "ProductVersion", "12.111.96.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 457
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 296
+    END
+
+    IDD_SETTINGS_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_LOG, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_DSP, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_SEC, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_CONNECTION, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_FILEMGR, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_SC_EDITOR, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_INIT, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_DEBUG_WND, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_AUTH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_SETTINGS_DLG_URL_FILTER, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG4, DIALOG
+    BEGIN
+        RIGHTMARGIN, 323
+        BOTTOMMARGIN, 68
+    END
+
+    IDD_SETTINGS_DLG_GEN, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_CAP, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG5, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 102
+    END
+
+    IDD_SETTINGS_DLG_CUSTOM_SCRIPT, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG6, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 408
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 81
+    END
+
+    IDD_DLG_AUTH_PWC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 254
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 150
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "F",            ID_FIND_PAGE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F11,         ID_FULL_SCREEN,         VIRTKEY, NOINVERT
+    VK_LEFT,        ID_GO_BACK,             VIRTKEY, ALT, NOINVERT
+    VK_RIGHT,       ID_GO_FORWARD,          VIRTKEY, ALT, NOINVERT
+    VK_HOME,        ID_GO_START_PAGE,       VIRTKEY, ALT, NOINVERT
+    "N",            ID_NEW_BLANK,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_NEW_BLANK_TAB,       VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         ID_NEXT_WND,            VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         ID_PREV_WND,            VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "P",            ID_PRINT,               VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_REOPEN_CLOSE_TAB,    VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "1",            ID_SEL_TAB_1,           VIRTKEY, CONTROL, NOINVERT
+    "2",            ID_SEL_TAB_2,           VIRTKEY, CONTROL, NOINVERT
+    "3",            ID_SEL_TAB_3,           VIRTKEY, CONTROL, NOINVERT
+    "4",            ID_SEL_TAB_4,           VIRTKEY, CONTROL, NOINVERT
+    "5",            ID_SEL_TAB_5,           VIRTKEY, CONTROL, NOINVERT
+    "6",            ID_SEL_TAB_6,           VIRTKEY, CONTROL, NOINVERT
+    "7",            ID_SEL_TAB_7,           VIRTKEY, CONTROL, NOINVERT
+    "8",            ID_SEL_TAB_8,           VIRTKEY, CONTROL, NOINVERT
+    "9",            ID_SEL_TAB_LAST,        VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_SET_ADDRESSBAR,      VIRTKEY, ALT, NOINVERT
+    "L",            ID_SET_ADDRESSBAR,      VIRTKEY, CONTROL, NOINVERT
+    "K",            ID_SET_SEARCHBAR,       VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, CONTROL, NOINVERT
+    VK_ESCAPE,      ID_VIEW_STOP,           VIRTKEY, NOINVERT
+    VK_F4,          ID_W_CLOSE,             VIRTKEY, CONTROL, NOINVERT
+    "W",            ID_W_CLOSE,             VIRTKEY, CONTROL, NOINVERT
+    VK_OEM_MINUS,   ID_ZOOM_DOWN,           VIRTKEY, CONTROL, NOINVERT
+    "0",            ID_ZOOM_RESET,          VIRTKEY, CONTROL, NOINVERT
+    VK_OEM_PLUS,    ID_ZOOM_UP,             VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, SHIFT, NOINVERT
+    "R",            ID_VIEW_REFRESH,        VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_SET_ADDRESSBAR,      VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_COLDTOOLBAR         BITMAP                  "res\\coldtool.bmp"
+
+IDB_HOTTOOLBAR          BITMAP                  "res\\hottoolb.bmp"
+
+IDR_MAINFRAME           BITMAP                  "res\\toolbar.bmp"
+
+IDB_BITMAP4             BITMAP                  "res\\mjr.bmp"
+
+IDB_CLOSE               BITMAP                  "res\\closeup.bmp"
+
+IDB_MAX                 BITMAP                  "res\\maximizeup.bmp"
+
+IDB_MIN                 BITMAP                  "res\\minimizeup.bmp"
+
+IDB_BMP_KEY             BITMAP                  "res\\key.bmp"
+
+IDB_BITMAP5             BITMAP                  "res\\close_button.bmp"
+
+IDB_BITMAP6             BITMAP                  "res\\bg.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 23, 23
+BEGIN
+    BUTTON      ID_GO_BACK
+    BUTTON      ID_GO_FORWARD
+    BUTTON      ID_VIEW_STOP
+    BUTTON      ID_VIEW_REFRESH
+    BUTTON      ID_GO_START_PAGE
+    SEPARATOR
+    BUTTON      ID_PRINT
+    SEPARATOR
+    BUTTON      ID_OPEN_THIN_FILER
+    SEPARATOR
+    BUTTON      ID_TAB_LIST
+    BUTTON      ID_NEW_BLANK
+    SEPARATOR
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_AUTH AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_DSP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_INIT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_LOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_SEC AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CONNECTION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_URL_FILTER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_SC_EDITOR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG4 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_GEN AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CAP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG5 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_FILEMGR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CUSTOM_SCRIPT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG6 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_AUTH_PWC AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_DEBUG_WND AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "Chronos"
+    IDS_STRING_FRM1         "Address(&D)"
+    IDS_STRING_FRM2         "HTML files(*.htm;*.html;*.shtml)|*.htm;*.html;*.shtml|Text files(*.txt)|*.txt|GIF images(*.gif)|*.gif|JPEG images(*.jpg;*.jpeg)|*.jpg;*.jpeg|PNG images(*.png)|*.png|All files(*.*)|*.*||"
+    IDS_STRING_FRM3         "Open"
+    IDS_STRING_CEF_LIC      "\n====Copyright License Texts====\nChromium Embedded Framework\nCopyright (c) 2008-2020 Marshall A. Greenblatt. Portions Copyright (c)\n2006-2009 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the name Chromium Embedded\nFramework nor the names of its contributors may be used to endorse\nor promote products derived from this software without specific prior\nwritten permission.\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n""AS IS"" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    IDS_STRING_FAV_NANE     "Nothing"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_CLOSE_ALL_WINDOW "Are you sure to close all windows?"
+    IDS_STRING_ADMIN_LOCK_FEATURE "System administrator restricted access to this feature. "
+    IDS_STRING_ZONE_MSG_DBL "The requested page is opened by the default browser."
+    IDS_STRING_ZONE_MSG_NG  "The requested page is not allowed to access."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_ZONE_MSG_IE  "The requested page is opened by Internet Explorer."
+    IDS_STRING_ZONE_MSG_FF  "The requested page is opened by Mozilla Firefox."
+    IDS_STRING_ZONE_MSG_CHR "The requested page is opened by Google Chrome."
+    IDS_STRING_ZONE_MSG_EDG "The requested page is opened by Microsoft Edge."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_ZONE_MSG_CUSTOM "The requested page is opened by a custom browser."
+    IDS_STRING_DISABLE_EXEC "System administrator restricted the requested program to run."
+    IDS_STRING_AUTO_RECOVERY 
+                            "Do you want the previous browsing session to be restored as best it can be?\n\nThe program might crashed by something trouble.\n\nWe are sorry for causing you trouble.\nDate: %s\nNumber of browser windows: %d"
+    IDS_STRING_UNDO         "&Undo"
+    IDS_STRING_CUT          "Cu&t"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_COPY         "&Copy"
+    IDS_STRING_PASTE        "&Paste"
+    IDS_STRING_DELETE       "&Delete"
+    IDS_STRING_SELECTALL    "Select &All"
+    IDS_STRING_PASTE_GO     "Paste and Go"
+    IDS_STRING_PASTE_SEARCH "Paste and Search"
+    IDS_STRING_GO           "Go to a location"
+    IDS_STRING_SEARCH       "Search"
+    IDS_STRING_SEL_SEARCH   "Search \"%s\""
+    IDS_STRING_OPEN_NOACTIVE "Open in new inactive window"
+    IDS_STRING_SETTINGS     "&Preferences…"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_ICON       " "
+    ID_INDICATOR_PROCESS    " "
+    ID_INDICATOR_SSL        " "
+    ID_INDICATOR_ZONE       " "
+    ID_INDICATOR_COMPAT     " "
+    ID_INDICATOR_ZOOM       " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "Chronos"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            " "
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        " "
+    ID_INDICATOR_CAPS       " "
+    ID_INDICATOR_NUM        " "
+    ID_INDICATOR_SCRL       " "
+    ID_INDICATOR_OVR        " "
+    ID_INDICATOR_REC        " "
+    ID_INDICATOR_KANA       " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          " "
+    AFX_IDS_SCMOVE          " "
+    AFX_IDS_SCMINIMIZE      " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       " "
+END
+
+STRINGTABLE
+BEGIN
+    ID_ADD_FAVORITE         "&Add to Favorites…"
+    ID_ORGANIZE_FAVORITE    "&Organize Favorites…"
+END
+
+STRINGTABLE
+BEGIN
+    ID_PRINT                "&Print…"
+    ID_PRINT_PDF            "Print to PDF"
+END
+
+STRINGTABLE
+BEGIN
+    ID_W_CLOSE              "Close"
+    ID_PREV_WND             "Previous Window\tShift+Ctrl+Tab"
+    ID_NEXT_WND             "Next Window\tCtrl+Tab"
+    IDC_APP_EXIT            "Close All Windows"
+    IDC_APP_EXIT_BUT_THIS   "Close Other Windows"
+END
+
+STRINGTABLE
+BEGIN
+    ID_RESTORE_WND          "Do you want a window become restored?"
+    ID_SAVE_WND             "Do you want a window become saved?"
+    ID_OPEN_THIN_FILER      "Start File Manager"
+    ID_NEW_BLANK            "Open New Tab or Window"
+    ID_TAB_LIST             "List of Tabs and Windows"
+END
+
+#endif    // English resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
 #ifndef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
