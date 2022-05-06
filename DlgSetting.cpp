@@ -1997,9 +1997,15 @@ void CDlgSetDomainFilter::OnPaint()
 BOOL CDlgSetDomainFilter::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
-	m_List.InsertColumn(URL, _T("ドメイン名"), LVCFMT_LEFT, 480);
-	m_List.InsertColumn(ACTION, _T("アクション"), LVCFMT_LEFT, 120);
-	m_List.InsertColumn(ENABLE, _T("有効"), LVCFMT_CENTER, 50);
+	CString columnLabelDomain;
+	CString columnLabelAction;
+	CString columnLabelEnable;
+	columnLabelDomain.LoadString(ID_SETTINGS_COLUMN_HEADER_DOMAIN);
+	columnLabelAction.LoadString(ID_SETTINGS_COLUMN_HEADER_ACTION);
+	columnLabelEnable.LoadString(ID_SETTINGS_COLUMN_HEADER_ENABLED);
+	m_List.InsertColumn(URL, columnLabelDomain, LVCFMT_LEFT, 480);
+	m_List.InsertColumn(ACTION, columnLabelAction, LVCFMT_LEFT, 120);
+	m_List.InsertColumn(ENABLE, columnLabelEnable, LVCFMT_CENTER, 50);
 	ListView_SetExtendedListViewStyle(m_List.m_hWnd, LVS_EX_FULLROWSELECT);
 
 	if (theApp.m_AppSettingsDlgCurrent.IsEnableURLFilter())
@@ -2614,9 +2620,15 @@ void CDlgSetCustomScript::OnPaint()
 BOOL CDlgSetCustomScript::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
-	m_List.InsertColumn(URL, _T("URL"), LVCFMT_LEFT, 480);
-	m_List.InsertColumn(FILENAME, _T("ファイル名"), LVCFMT_LEFT, 150);
-	m_List.InsertColumn(ENABLE, _T("有効"), LVCFMT_CENTER, 50);
+	CString columnLabelURL;
+	CString columnLabelFile;
+	CString columnLabelEnable;
+	columnLabelURL.LoadString(ID_SETTINGS_COLUMN_HEADER_URL);
+	columnLabelFile.LoadString(ID_SETTINGS_COLUMN_HEADER_FILE);
+	columnLabelEnable.LoadString(ID_SETTINGS_COLUMN_HEADER_ENABLED);
+	m_List.InsertColumn(URL, columnLabelURL, LVCFMT_LEFT, 480);
+	m_List.InsertColumn(FILENAME, columnLabelFile, LVCFMT_LEFT, 150);
+	m_List.InsertColumn(ENABLE, columnLabelEnable, LVCFMT_CENTER, 50);
 	ListView_SetExtendedListViewStyle(m_List.m_hWnd, LVS_EX_FULLROWSELECT);
 
 	if (theApp.m_AppSettingsDlgCurrent.IsEnableCustomScript())

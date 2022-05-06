@@ -94,6 +94,11 @@
 #define IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT 232
 #define IDS_STRING_SETTINGS_DLG_TITLE_LOG           233
 #define IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       234
+#define IDS_SETTINGS_COLUMN_HEADER_URL              235
+#define IDS_SETTINGS_COLUMN_HEADER_DOMAIN           236
+#define IDS_SETTINGS_COLUMN_HEADER_FILE             237
+#define IDS_SETTINGS_COLUMN_HEADER_ACTION           238
+#define IDS_SETTINGS_COLUMN_HEADER_ENABLED          239
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002

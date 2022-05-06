@@ -1063,6 +1063,15 @@ BEGIN
     ID_TAB_LIST             "タブウインドウ一覧"
 END
 
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_COLUMN_HEADER_URL     "URL"
+    ID_SETTINGS_COLUMN_HEADER_DOMAIN  "ドメイン名"
+    ID_SETTINGS_COLUMN_HEADER_FILE    "ファイル名"
+    ID_SETTINGS_COLUMN_HEADER_ACTION  "アクション"
+    ID_SETTINGS_COLUMN_HEADER_ENABLED "有効"
+END
+
 #endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -2126,6 +2135,15 @@ BEGIN
     ID_OPEN_THIN_FILER      "Start File Manager"
     ID_NEW_BLANK            "Open New Tab or Window"
     ID_TAB_LIST             "List of Tabs and Windows"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_COLUMN_HEADER_URL     "URL"
+    ID_SETTINGS_COLUMN_HEADER_DOMAIN  "Domain"
+    ID_SETTINGS_COLUMN_HEADER_FILE    "Filename"
+    ID_SETTINGS_COLUMN_HEADER_ACTION  "Action"
+    ID_SETTINGS_COLUMN_HEADER_ENABLED "Enabled"
 END
 
 #endif    // English resources
