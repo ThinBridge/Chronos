@@ -3395,29 +3395,49 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 	this->m_pSettingDlg->SetTitle(strTitle);
 
 	//全般設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetGen), _T("全般設定"), IDD_SETTINGS_DLG_GEN, _T("全般設定"));
+	CString titleGen;
+	titleGen.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_GEN);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetGen), titleGen, IDD_SETTINGS_DLG_GEN, titleGen);
 	//画面表示設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDSP), _T("画面表示設定"), IDD_SETTINGS_DLG_DSP, _T("画面表示設定"));
+	CString titleDSP;
+	titleDSP.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_DSP);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDSP), titleDSP, IDD_SETTINGS_DLG_DSP, titleDSP);
 	//起動関連設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetINIT), _T("起動関連設定"), IDD_SETTINGS_DLG_INIT, _T("起動関連設定"));
+	CString titleINIT;
+	titleINIT.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_DSP);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetINIT), titleINIT, IDD_SETTINGS_DLG_INIT, titleINIT);
 	//インターネット接続設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetConnectionSetting), _T("インターネット接続設定"), IDD_SETTINGS_DLG_CONNECTION, _T("インターネット接続設定"));
+	CString titleConnection;
+	titleConnection.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetConnectionSetting), titleConnection, IDD_SETTINGS_DLG_CONNECTION, titleConnection);
 	//リソース制限設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCAP), _T("機能制限設定"), IDD_SETTINGS_DLG_CAP, _T("機能制限設定"));
+	CString titleCAP;
+	titleCAP.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CAP);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCAP), titleCAP, IDD_SETTINGS_DLG_CAP, titleCAP);
 	//リダイレクト設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetSEC), _T("リダイレクト設定"), IDD_SETTINGS_DLG_SEC, _T("リダイレクト設定"));
+	CString titleSEC;
+	titleSEC.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_SEC);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetSEC), titleSEC, IDD_SETTINGS_DLG_SEC, titleSEC);
 	//URLフィルター設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDomainFilter), _T("URLフィルター設定"), IDD_SETTINGS_DLG_URL_FILTER, _T("URLフィルター設定"));
+	CString titleURLFilter;
+	titleURLFilter.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDomainFilter), titleURLFilter, IDD_SETTINGS_DLG_URL_FILTER, titleURLFilter);
 	//CustomScript設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCustomScript), _T("カスタムスクリプト設定"), IDD_SETTINGS_DLG_CUSTOM_SCRIPT, _T("カスタムスクリプト設定"));
+	CString titleCustomScript;
+	titleCustomScript.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCustomScript), titleCustomScript, IDD_SETTINGS_DLG_CUSTOM_SCRIPT, titleCustomScript);
 
 	//ログ出力設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetLog), _T("ログ出力設定"), IDD_SETTINGS_DLG_LOG, _T("ログ出力設定"));
+	CString titleLog;
+	titleLog.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_LOG);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetLog), titleLog, IDD_SETTINGS_DLG_LOG, titleLog);
 
 	if (this->IsSGMode())
 	{
 		//ファイルマネージャ設定
-		this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetFileMgr), _T("ファイルマネージャ設定"), IDD_SETTINGS_DLG_FILEMGR, _T("ファイルマネージャ設定"));
+		CString titleFileMgr;
+		titleFileMgr.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR);
+		this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetFileMgr), titleFileMgr, IDD_SETTINGS_DLG_FILEMGR, titleFileMgr);
 	}
 
 	this->m_pSettingDlg->DoModal();

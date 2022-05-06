@@ -937,6 +937,20 @@ END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_SETTINGS_DLG_TITLE_GEN           "全般設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_DSP           "画面表示設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_INIT          "起動関連設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION    "インターネット接続設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_CAP           "機能制限設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_SEC           "リダイレクト設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER    "URLフィルター設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "カスタムスクリプト設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_LOG           "ログ出力設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       "ファイルマネージャ設定"
+END
+
+STRINGTABLE
+BEGIN
     IDS_STRING_CLOSE_ALL_WINDOW "全てのウィンドウを閉じますか?"
     IDS_STRING_ADMIN_LOCK_FEATURE "この機能へのアクセスは、システム管理者により制限されています。 "
     IDS_STRING_ZONE_MSG_DBL "要求されたページを既定のブラウザで表示します。"
@@ -1982,6 +1996,20 @@ BEGIN
     IDS_STRING_FRM3         "Open"
     IDS_STRING_CEF_LIC      "\n====Copyright License Texts====\nChromium Embedded Framework\nCopyright (c) 2008-2020 Marshall A. Greenblatt. Portions Copyright (c)\n2006-2009 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the name Chromium Embedded\nFramework nor the names of its contributors may be used to endorse\nor promote products derived from this software without specific prior\nwritten permission.\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n""AS IS"" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
     IDS_STRING_FAV_NANE     "Nothing"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_SETTINGS_DLG_TITLE_GEN           "General"
+    IDS_STRING_SETTINGS_DLG_TITLE_DSP           "Appearance"
+    IDS_STRING_SETTINGS_DLG_TITLE_INIT          "Startup"
+    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION    "Internet Connection"
+    IDS_STRING_SETTINGS_DLG_TITLE_CAP           "Restriction"
+    IDS_STRING_SETTINGS_DLG_TITLE_SEC           "Redirection"
+    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER    "URL Filtering"
+    IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "Custom Scripts"
+    IDS_STRING_SETTINGS_DLG_TITLE_LOG           "Logging"
+    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       "File Manager"
 END
 
 STRINGTABLE

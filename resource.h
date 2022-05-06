@@ -84,6 +84,16 @@
 #define IDD_DLG_AUTH_PWC                222
 #define IDI_ICON2                       223
 #define IDI_ICON3                       224
+#define IDS_STRING_SETTINGS_DLG_TITLE_GEN           225
+#define IDS_STRING_SETTINGS_DLG_TITLE_DSP           226
+#define IDS_STRING_SETTINGS_DLG_TITLE_INIT          227
+#define IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION    228
+#define IDS_STRING_SETTINGS_DLG_TITLE_CAP           229
+#define IDS_STRING_SETTINGS_DLG_TITLE_SEC           230
+#define IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER    231
+#define IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT 232
+#define IDS_STRING_SETTINGS_DLG_TITLE_LOG           233
+#define IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       234
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002
