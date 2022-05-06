@@ -1069,17 +1069,17 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "&New Window\tCtrl+N",             ID_NEW_BLANK
-        MENUITEM "New Window (with Current Page)",  ID_NEW
-        MENUITEM "New Session",                     ID_NEW_SESSION
+        MENUITEM "&New Window\tCtrl+N",         ID_NEW_BLANK
+        MENUITEM "New Window (with Current Page)", ID_NEW
+        MENUITEM "New Session",                 ID_NEW_SESSION
         MENUITEM SEPARATOR
-        MENUITEM "Restore Window",                  ID_RESTORE_WND
-        MENUITEM "Save Window",                     ID_SAVE_WND
+        MENUITEM "Restore Window",              ID_RESTORE_WND
+        MENUITEM "Save Window",                 ID_SAVE_WND
         MENUITEM SEPARATOR
-        MENUITEM "Print to PDF",                    ID_PRINT_PDF
-        MENUITEM "&Print…\tCtrl+P",               ID_PRINT
+        MENUITEM "Print to PDF",                ID_PRINT_PDF
+        MENUITEM "&Print…\tCtrl+P",            ID_PRINT
         MENUITEM SEPARATOR
-        MENUITEM "&Close",                          ID_W_CLOSE
+        MENUITEM "&Close",                      ID_W_CLOSE
         MENUITEM SEPARATOR
         POPUP "Recently Closed Windows"
         BEGIN
@@ -1088,52 +1088,52 @@ BEGIN
     END
     POPUP "&Edit"
     BEGIN
-        MENUITEM "Cu&t\tCtrl+X",                    ID_CUT
-        MENUITEM "&Copy\tCtrl+C",                   ID_COPY
-        MENUITEM "&Paste\tCtrl+V",                  ID_PASTE
+        MENUITEM "Cu&t\tCtrl+X",                ID_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_PASTE
         MENUITEM SEPARATOR
-        MENUITEM "Select &All\tCtrl+A",             ID_SEL_ALL
+        MENUITEM "Select &All\tCtrl+A",         ID_SEL_ALL
         MENUITEM SEPARATOR
-        MENUITEM "&Find on this Page…\tCtrl+F",   ID_FIND_PAGE
+        MENUITEM "&Find on this Page…\tCtrl+F", ID_FIND_PAGE
     END
     POPUP "&View"
     BEGIN
-        MENUITEM "Back\t Alt+←",                   ID_GO_BACK
-        MENUITEM "Forward\t Alt+→",                ID_GO_FORWARD
-        MENUITEM "Stop\tEsc",                       ID_VIEW_STOP
-        MENUITEM "Refresh\t F5",                    ID_VIEW_REFRESH
-        MENUITEM "Home Page\tAlt+Home",             ID_GO_START_PAGE
+        MENUITEM "Back\t Alt+←",               ID_GO_BACK
+        MENUITEM "Forward\t Alt+→",            ID_GO_FORWARD
+        MENUITEM "Stop\tEsc",                   ID_VIEW_STOP
+        MENUITEM "Refresh\t F5",                ID_VIEW_REFRESH
+        MENUITEM "Home Page\tAlt+Home",         ID_GO_START_PAGE
         MENUITEM SEPARATOR
-        MENUITEM "&Full Screen\tF11",               ID_FULL_SCREEN
+        MENUITEM "&Full Screen\tF11",           ID_FULL_SCREEN
     END
     POPUP "F&avorites"
     BEGIN
-        MENUITEM "&Add to favorites…",            ID_ADD_FAVORITE
-        MENUITEM "&Organize favorites…",          ID_ORGANIZE_FAVORITE
+        MENUITEM "&Add to favorites…",         ID_ADD_FAVORITE
+        MENUITEM "&Organize favorites…",       ID_ORGANIZE_FAVORITE
         MENUITEM SEPARATOR
-        MENUITEM "DUMMY",                           ID_FAVORITE_DUMMY
+        MENUITEM "DUMMY",                       ID_FAVORITE_DUMMY
     END
     POPUP "&Tools"
     BEGIN
-        MENUITEM "&File Manager",                   ID_OPEN_THIN_FILER
+        MENUITEM "&File Manager",               ID_OPEN_THIN_FILER
         MENUITEM SEPARATOR
-        MENUITEM "O&ptions…",                     ID_SETTINGS
+        MENUITEM "O&ptions…",                  ID_SETTINGS
     END
     POPUP "&Window"
     BEGIN
-        MENUITEM "&Close",                          ID_W_CLOSE
-        MENUITEM "Close All Winodws (&X)",          IDC_APP_EXIT
-        MENUITEM "Close All Windows But this",      IDC_APP_EXIT_BUT_THIS
-        MENUITEM "Next Window\tCtrl+Tab",           ID_NEXT_WND
+        MENUITEM "&Close",                      ID_W_CLOSE
+        MENUITEM "Close All Winodws (&X)",      IDC_APP_EXIT
+        MENUITEM "Close All Windows But this",  IDC_APP_EXIT_BUT_THIS
+        MENUITEM "Next Window\tCtrl+Tab",       ID_NEXT_WND
         MENUITEM "Previous Window\tShift+Ctrl+Tab", ID_PREV_WND
         MENUITEM SEPARATOR
-        MENUITEM "DUMMY",                           ID_WINDOW_DUMMY
+        MENUITEM "DUMMY",                       ID_WINDOW_DUMMY
     END
     POPUP "&Help"
     BEGIN
-        MENUITEM "&About…",                       ID_APP_ABOUT
+        MENUITEM "&About…",                    ID_APP_ABOUT
         MENUITEM SEPARATOR
-        MENUITEM "Cleanup Browser Cache (&X)",      IDC_APP_DELETE_CACHE
+        MENUITEM "Cleanup Browser Cache (&X)",  IDC_APP_DELETE_CACHE
     END
 END
 
@@ -1157,11 +1157,11 @@ IDR_MENU_BACK MENU
 BEGIN
     POPUP "BACK"
     BEGIN
-        MENUITEM "Go Back 1 entry",                 ID_BF_BACK1
-        MENUITEM "Go Back 2 entries",               ID_BF_BACK2
-        MENUITEM "Go Back 3 entries",               ID_BF_BACK3
-        MENUITEM "Go Back 4 entries",               ID_BF_BACK4
-        MENUITEM "Go Back 5 entries",               ID_BF_BACK5
+        MENUITEM "Go Back 1 entry",             ID_BF_BACK1
+        MENUITEM "Go Back 2 entries",           ID_BF_BACK2
+        MENUITEM "Go Back 3 entries",           ID_BF_BACK3
+        MENUITEM "Go Back 4 entries",           ID_BF_BACK4
+        MENUITEM "Go Back 5 entries",           ID_BF_BACK5
     END
 END
 
@@ -1169,11 +1169,11 @@ IDR_MENU_FORWARD MENU
 BEGIN
     POPUP "FORWARD"
     BEGIN
-        MENUITEM "Go Forward 1 entry",              ID_BF_FORWARD1
-        MENUITEM "Go Forward 2 entries",            ID_BF_FORWARD2
-        MENUITEM "Go Forward 3 entries",            ID_BF_FORWARD3
-        MENUITEM "Go Forward 4 entries",            ID_BF_FORWARD4
-        MENUITEM "Go Forward 5 entries",            ID_BF_FORWARD5
+        MENUITEM "Go Forward 1 entry",          ID_BF_FORWARD1
+        MENUITEM "Go Forward 2 entries",        ID_BF_FORWARD2
+        MENUITEM "Go Forward 3 entries",        ID_BF_FORWARD3
+        MENUITEM "Go Forward 4 entries",        ID_BF_FORWARD4
+        MENUITEM "Go Forward 5 entries",        ID_BF_FORWARD5
     END
 END
 
@@ -1181,14 +1181,14 @@ IDR_MENU_TAB MENU
 BEGIN
     POPUP "TAB_MENU"
     BEGIN
-        MENUITEM "New Tab",                         ID_NEW_BLANK
-        MENUITEM "Suplicate Tab",                   ID_NEW
+        MENUITEM "New Tab",                     ID_NEW_BLANK
+        MENUITEM "Suplicate Tab",               ID_NEW
         MENUITEM SEPARATOR
-        MENUITEM "Close Tab",                       ID_W_CLOSE
+        MENUITEM "Close Tab",                   ID_W_CLOSE
         MENUITEM "Close All Windows But this (&X)", IDC_APP_EXIT
-        MENUITEM "Close All Tabs But this",         IDC_APP_EXIT_BUT_THIS
-        MENUITEM "Close Tabs to Right",             ID_TAB_CLOSE_RIGHT
-        MENUITEM "Close Tabs to Left",              ID_TAB_CLOSE_LEFT
+        MENUITEM "Close All Tabs But this",     IDC_APP_EXIT_BUT_THIS
+        MENUITEM "Close Tabs to Right",         ID_TAB_CLOSE_RIGHT
+        MENUITEM "Close Tabs to Left",          ID_TAB_CLOSE_LEFT
     END
 END
 
@@ -1222,8 +1222,8 @@ BEGIN
     "LANGUAGE 17, 1\r\n"
     "#pragma code_page(932)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\Sazabi.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
-    "#include ""l.jpn\\afxres.rc""          // 標準のコンポーネント\r\n"
+    "#include ""res\\Sazabi.rc2""  // Microsoft Visual C++ ????????????????\r\n"
+    "#include ""l.jpn\\afxres.rc""          // ??????????\r\n"
     "#ifndef _AFXDLL\r\n"
     "#include ""afxribbon.rc"" // ribbon and control bar resources\r\n"
     "#endif\r\n"
@@ -1292,7 +1292,8 @@ BEGIN
                     "Button",BS_AUTORADIOBUTTON,27,58,173,10
     PUSHBUTTON      "Debug TRACE Window…",IDC_BUTTON1,8,76,100,14
     GROUPBOX        "Audit log options",IDC_STATIC,10,97,350,185,WS_GROUP
-    CONTROL         "Enable audit logs output",IDC_CHECK_EnableLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
+    CONTROL         "Enable audit logs output",IDC_CHECK_EnableLogging,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
     LTEXT           "Log server URL",IDC_STATIC,26,125,283,8
     EDITTEXT        IDC_EDIT_LogServerURL,26,136,328,14,ES_AUTOHSCROLL
     LTEXT           "Additional request headers",IDC_STATIC,26,154,283,8
@@ -1302,8 +1303,10 @@ BEGIN
     CONTROL         "POST:as JSON",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
     CONTROL         "Log downloads",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
     CONTROL         "Log uploads",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
-    CONTROL         "Log browsing histories",IDC_CHECK_EnableBrowsingLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
-    CONTROL         "Log detailed browsing histories",IDC_CHECK_EnableAccessAllLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
+    CONTROL         "Log browsing histories",IDC_CHECK_EnableBrowsingLogging,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
+    CONTROL         "Log detailed browsing histories",IDC_CHECK_EnableAccessAllLogging,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
 END
 
 IDD_SETTINGS_DLG_DSP DIALOGEX 0, 0, 370, 291
@@ -1391,8 +1394,8 @@ BEGIN
     GROUPBOX        "Downlaod options",IDC_STATIC,8,90,343,67
     LTEXT           "Transfer path for downloaded items",IDC_STATIC,12,105,80,8
     EDITTEXT        IDC_TransferPath,99,103,246,14,ES_AUTOHSCROLL
-    LTEXT           "Sub folders \n Environment variables and time format are available.\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,138,27
-    EDITTEXT        IDC_TransferSubFolder,144,121,200,14,ES_AUTOHSCROLL
+    LTEXT           "Sub folders \n Environment variables and time format are available.\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,162,27
+    EDITTEXT        IDC_TransferSubFolder,183,122,162,14,ES_AUTOHSCROLL
     GROUPBOX        "Upload options",IDC_STATIC,8,161,343,74
     LTEXT           "Accepted path for upload items",IDC_STATIC,12,174,79,8
     EDITTEXT        IDC_UploadPath,99,171,246,14,ES_AUTOHSCROLL
@@ -1400,11 +1403,12 @@ BEGIN
     GROUPBOX        "Feature options",IDC_STATIC,8,238,343,42
     LTEXT           "Context menu options",IDC_STATIC,12,251,64,8
     COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Never confirm for 'mark as opened' command",IDC_DisableOpendOpAlert,
+    CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpendOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
     LTEXT           "*Separate multiple file extensions with a pipe |. For example: |.elf|.lnk|",IDC_STATIC,12,74,187,8
     CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
-    CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
+    CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
     LTEXT           "Interval of auto-sync (in milliseconds)",IDC_STATIC,17,220,68,8
     EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
 END
@@ -1513,7 +1517,8 @@ BEGIN
     CONTROL         "Allow to run multiple instances",IDC_CHECK_DISABLE_MULTIPLE_INSTANCE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,217,10
     CONTROL         "Enable memory cache",IDC_ENABLE_MEMCACHE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,232,10
-    CONTROL         "Enable crash recovery",IDC_CHECK_ENABLECRASHRECOVERY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,224,10
+    CONTROL         "Enable crash recovery",IDC_CHECK_ENABLECRASHRECOVERY,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,224,10
     GROUPBOX        "Restrict access to options",IDC_STATIC,8,71,304,85
     GROUPBOX        "Key combination to bypass restriction",IDC_STATIC,12,85,294,62
     CONTROL         "Shift",IDC_CHK_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,101,30,10
@@ -1531,8 +1536,10 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Restriction"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "Forbid to download files",IDC_EnableDownloadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
-    CONTROL         "Forbid to upload files",IDC_EnableUploadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
+    CONTROL         "Forbid to download files",IDC_EnableDownloadRestriction,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
+    CONTROL         "Forbid to upload files",IDC_EnableUploadRestriction,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
     CONTROL         "Clear browser caches (internet temporary files) on every startup and shutdown",IDC_EnableDeleteCache,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,44,277,10
     GROUPBOX        "Resource restrictions",IDC_STATIC,5,60,355,111
@@ -1565,7 +1572,8 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Custom scripts"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "Enable custom scripts",IDC_CHECK_ENABLE_CUSTOM_SCRIPT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    CONTROL         "Enable custom scripts",IDC_CHECK_ENABLE_CUSTOM_SCRIPT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
     LTEXT           "Custom scripts will run when specified URLs are completely loaded. *Wildcards (* and ?) are available in patterns ",IDC_STATIC,8,25,349,8
     CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
     PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
@@ -1979,7 +1987,8 @@ END
 STRINGTABLE
 BEGIN
     IDS_STRING_CLOSE_ALL_WINDOW "Are you sure to close all windows?"
-    IDS_STRING_ADMIN_LOCK_FEATURE "System administrator restricted access to this feature. "
+    IDS_STRING_ADMIN_LOCK_FEATURE 
+                            "System administrator restricted access to this feature. "
     IDS_STRING_ZONE_MSG_DBL "The requested page is opened by the default browser."
     IDS_STRING_ZONE_MSG_NG  "The requested page is not allowed to access."
 END
@@ -1994,7 +2003,8 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_ZONE_MSG_CUSTOM "The requested page is opened by a custom browser."
+    IDS_STRING_ZONE_MSG_CUSTOM 
+                            "The requested page is opened by a custom browser."
     IDS_STRING_DISABLE_EXEC "System administrator restricted the requested program to run."
     IDS_STRING_AUTO_RECOVERY 
                             "Do you want the previous browsing session to be restored as best it can be?\n\nThe program might crashed by something trouble.\n\nWe are sorry for causing you trouble.\nDate: %s\nNumber of browser windows: %d"
@@ -2012,7 +2022,7 @@ BEGIN
     IDS_STRING_PASTE_SEARCH "Paste and Search"
     IDS_STRING_GO           "Go to a location"
     IDS_STRING_SEARCH       "Search"
-    IDS_STRING_SEL_SEARCH   "Search \"%s\""
+    IDS_STRING_SEL_SEARCH   "Search ""%s"""
     IDS_STRING_OPEN_NOACTIVE "Open in new inactive window"
     IDS_STRING_SETTINGS     "&Preferences…"
 END
