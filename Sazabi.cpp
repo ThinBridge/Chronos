@@ -4656,8 +4656,10 @@ void CAboutDlg::OnDetailShow()
 {
 	if (theApp.m_AppSettings.GetKeyCombination() != 0)
 	{
+		CString welcomeMsg;
+		welcomeMsg.LoadString(IDS_STRING_WELCOME_MSG);
 		CString strMsg;
-		strMsg.Format(_T("%s Version %s‚ðŒä—˜—p’¸‚«‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B"), theApp.m_strThisAppName, theApp.m_strThisAppVersionString);
+		strMsg.Format(welcomeMsg, theApp.m_strThisAppName, theApp.m_strThisAppVersionString);
 		::MessageBox(this->GetSafeHwnd(), strMsg, theApp.m_strThisAppName, MB_ICONINFORMATION | MB_OK);
 		if (theApp.bValidKeyCombi())
 		{

@@ -955,6 +955,12 @@ BEGIN
     IDS_STRING_ADMIN_LOCK_FEATURE "この機能へのアクセスは、システム管理者により制限されています。 "
     IDS_STRING_ZONE_MSG_DBL "要求されたページを既定のブラウザで表示します。"
     IDS_STRING_ZONE_MSG_NG  "要求されたページは許可されていないため表示できません。"
+    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD  "ダウンロード中のウインドウを閉じてもよろしいですか？\n\nウインドウを閉じるとダウンロードがキャンセルされます。\nダウンロードを続行する場合は、「いいえ」をクリックして下さい。"
+    IDS_STRING_WELCOME_MSG "%s Version %sを御利用頂きありがとうございます。"
+    IDS_STRING_STARTING_FILEMGR "ファイルマネージャ起動中..."
+    IDS_STRING_CONFIRM_CLEAR_CACHE "ブラウザーキャッシュを削除しますか？ \n「はい」を押すとブラウザーを再起動します。"
+    IDS_STRING_STARTING_NEW_SESSION "新規セッション起動中..."
+    IDS_STRING_AUTH_REQUIRED "認証が必要です。\n接続先ホスト[%s]には、ユーザー名とパスワードが必要です。"
 END
 
 STRINGTABLE
@@ -1072,6 +1078,20 @@ BEGIN
     ID_SETTINGS_COLUMN_HEADER_ENABLED "有効"
 END
 
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_MENU_LABEL "設定(&P)..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_MSG_FILE_DOWNLOAD_RESTRICTED "ファイル ダウンロードは、システム管理者により制限されています。"
+    ID_DEFAULT_FILE_BASENAME "無題"
+    ID_FILE_TYPE_PDF "PDF ドキュメント (*.pdf)|*.pdf||"
+    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "名前を付けてPDF ドキュメントを保存"
+    ID_PRINT_TO_PDF_FINISH_MSG "PDFドキュメントの作成が完了しました。"
+END
+
 #endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -1140,7 +1160,7 @@ BEGIN
     BEGIN
         MENUITEM "&File Manager",               ID_OPEN_THIN_FILER
         MENUITEM SEPARATOR
-        MENUITEM "O&ptions…",                  ID_SETTINGS
+        MENUITEM "&Preferences…",              ID_SETTINGS
     END
     POPUP "&Window"
     BEGIN
@@ -2028,6 +2048,12 @@ BEGIN
                             "System administrator restricted access to this feature. "
     IDS_STRING_ZONE_MSG_DBL "The requested page is opened by the default browser."
     IDS_STRING_ZONE_MSG_NG  "The requested page is not allowed to access."
+    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD  "Do you want the window with a download in progress to be closed?\n\nThe download will be canceled if you close the window.\nPlease choose ""No"" to continue downloading."
+    IDS_STRING_WELCOME_MSG "Thank you for using %s Version %s."
+    IDS_STRING_STARTING_FILEMGR "Starting file manager…"
+    IDS_STRING_CONFIRM_CLEAR_CACHE "Do you want the browser cache to be cleared?\nClick ""Yes"" to restart the bwoser with cleared cache."
+    IDS_STRING_STARTING_NEW_SESSION "Starting New Session…"
+    IDS_STRING_AUTH_REQUIRED "Authentication required.\nThe connecting host [%s] requries username and password."
 END
 
 STRINGTABLE
@@ -2144,6 +2170,20 @@ BEGIN
     ID_SETTINGS_COLUMN_HEADER_FILE    "Filename"
     ID_SETTINGS_COLUMN_HEADER_ACTION  "Action"
     ID_SETTINGS_COLUMN_HEADER_ENABLED "Enabled"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_MENU_LABEL "&Preferences…"
+END
+
+STRINGTABLE
+BEGIN
+    ID_MSG_FILE_DOWNLOAD_RESTRICTED "System administrator restricted file downloads."
+    ID_DEFAULT_FILE_BASENAME "No Title"
+    ID_FILE_TYPE_PDF "PDF Documents (*.pdf)|*.pdf||"
+    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "Save a PDF document as"
+    ID_PRINT_TO_PDF_FINISH_MSG "Printing as a PDF document finished."
 END
 
 #endif    // English resources
