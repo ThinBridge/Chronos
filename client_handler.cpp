@@ -48,7 +48,9 @@ bool ClientHandler::DoClose(CefRefPtr<CefBrowser> browser)
 		{
 			SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
 			hWindow = GetParent(hWindow);
-			int iRet = theApp.SB_MessageBox(hWindow, _T("ダウンロード中のウインドウを閉じてもよろしいですか？\n\nウインドウを閉じるとダウンロードがキャンセルされます。\nダウンロードを続行する場合は、「いいえ」をクリックして下さい。"), NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
+			CString confirmMsg;
+			confirmMsg.LoadString(IDS_STRING_CONFIRM_CANCEL_DOWNLOAD);
+			int iRet = theApp.SB_MessageBox(hWindow, confirmMsg, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
 			if (iRet != IDYES)
 			{
 				return true;
@@ -236,16 +238,37 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 		{
 			if (theApp.m_bTabEnable_Init)
 			{
-				model->InsertItemAt(0, CEF_MENU_ID_OPEN_LINK_NEW, _T("新しいタブで開く"));
-				model->InsertItemAt(1, CEF_MENU_ID_OPEN_LINK_NEW_NOACTIVE, _T("新しいタブで開く(非アクティブ)"));
+				CString contextMenuOpenLinkTabLabel;
+				contextMenuOpenLinkTabLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_TAB);
+				CefString cefContextMenuOpenLinkTabLabel(contextMenuOpenLinkTabLabel);
+				model->InsertItemAt(0, CEF_MENU_ID_OPEN_LINK_NEW, cefContextMenuOpenLinkTabLabel);
+
+				CString contextMenuOpenLinkTabInactiveLabel;
+				contextMenuOpenLinkTabInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE);
+				CefString cefContextMenuOpenLinkTabInactiveLabel(contextMenuOpenLinkTabInactiveLabel);
+				model->InsertItemAt(1, CEF_MENU_ID_OPEN_LINK_NEW_NOACTIVE, cefContextMenuOpenLinkTabInactiveLabel);
 			}
 			else
 			{
-				model->InsertItemAt(0, CEF_MENU_ID_OPEN_LINK_NEW, _T("新しいウィンドウで開く"));
-				model->InsertItemAt(1, CEF_MENU_ID_OPEN_LINK_NEW_NOACTIVE, _T("新しいウィンドウで開く(非アクティブ)"));
+				CString contextMenuOpenLinkWindowLabel;
+				contextMenuOpenLinkWindowLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_WINDOW);
+				CefString cefContextMenuOpenLinkWindowLabel(contextMenuOpenLinkWindowLabel);
+				model->InsertItemAt(0, CEF_MENU_ID_OPEN_LINK_NEW, cefContextMenuOpenLinkWindowLabel);
+
+				CString contextMenuOpenLinkWindowInactiveLabel;
+				contextMenuOpenLinkWindowInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE);
+				CefString cefContextMenuOpenLinkWindowInactiveLabel(contextMenuOpenLinkWindowInactiveLabel);
+				model->InsertItemAt(1, CEF_MENU_ID_OPEN_LINK_NEW_NOACTIVE, cefContextMenuOpenLinkWindowInactiveLabel);
 			}
-			model->InsertItemAt(2, CEF_MENU_ID_COPY_LINK, _T("リンクのアドレスをコピー"));
-			model->InsertItemAt(3, CEF_MENU_ID_SAVE_FILE, _T("名前を付けてリンク先を保存"));
+			CString contextMenuCopyLinkLabel;
+			contextMenuCopyLinkLabel.LoadString(ID_CONTEXT_MENU_COPY_LINK);
+			CefString cefContextMenuCopyLinkLabel(contextMenuCopyLinkLabel);
+			model->InsertItemAt(2, CEF_MENU_ID_COPY_LINK, cefContextMenuCopyLinkLabel);
+
+			CString contextMenuSaveLinkLabel;
+			contextMenuSaveLinkLabel.LoadString(ID_CONTEXT_MENU_SAVE_LINK);
+			CefString cefContextMenuSaveLinkLabel(contextMenuSaveLinkLabel);
+			model->InsertItemAt(3, CEF_MENU_ID_SAVE_FILE, cefContextMenuSaveLinkLabel);
 		}
 		if ((Flg & (CM_TYPEFLAG_MEDIA | CM_MEDIATYPE_IMAGE)) != 0)
 		{
@@ -255,19 +278,46 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 				model->Remove(MENU_ID_FORWARD);
 				if (theApp.m_bTabEnable_Init)
 				{
-					model->AddItem(CEF_MENU_ID_OPEN_IMG, _T("新しいタブで画像を開く"));
-					model->AddItem(CEF_MENU_ID_OPEN_IMG_NOACTIVE, _T("新しいタブで画像を開く(非アクティブ)"));
+					CString contextMenuOpenImgTabLabel;
+					contextMenuOpenImgTabLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_TAB);
+					CefString cefContextMenuOpenImgTabLabel(contextMenuOpenImgTabLabel);
+					model->AddItem(CEF_MENU_ID_OPEN_IMG, cefContextMenuOpenImgTabLabel);
+
+					CString contextMenuOpenImgTabInactiveLabel;
+					contextMenuOpenImgTabInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE);
+					CefString cefContextMenuOpenImgTabInactiveLabel(contextMenuOpenImgTabInactiveLabel);
+					model->AddItem(CEF_MENU_ID_OPEN_IMG_NOACTIVE, cefContextMenuOpenImgTabInactiveLabel);
 				}
 				else
 				{
-					model->AddItem(CEF_MENU_ID_OPEN_IMG, _T("新しいウィンドウで画像を開く"));
-					model->AddItem(CEF_MENU_ID_OPEN_IMG_NOACTIVE, _T("新しいウィンドウで画像を開く(非アクティブ)"));
+					CString contextMenuOpenImgWindowLabel;
+					contextMenuOpenImgWindowLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_WINDOW);
+					CefString cefContextMenuOpenImgWindowLabel(contextMenuOpenImgWindowLabel);
+					model->AddItem(CEF_MENU_ID_OPEN_IMG, cefContextMenuOpenImgWindowLabel);
+
+					CString contextMenuOpenImgWindowInactiveLabel;
+					contextMenuOpenImgWindowInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE);
+					CefString cefContextMenuOpenImgWindowInactiveLabel(contextMenuOpenImgWindowInactiveLabel);
+					model->AddItem(CEF_MENU_ID_OPEN_IMG_NOACTIVE, cefContextMenuOpenImgWindowInactiveLabel);
 				}
 
-				model->AddItem(CEF_MENU_ID_SAVE_IMG, _T("名前を付けて画像を保存"));
+				CString contextMenuSaveImgLabel;
+				contextMenuSaveImgLabel.LoadString(ID_CONTEXT_MENU_SAVE_IMG);
+				CefString cefContextMenuSaveImgLabel(contextMenuSaveImgLabel);
+				model->AddItem(CEF_MENU_ID_SAVE_IMG, cefContextMenuSaveImgLabel);
+
 				if (!theApp.IsSGMode())
-					model->AddItem(CEF_MENU_ID_IMG_COPY, _T("画像をコピー"));
-				model->AddItem(CEF_MENU_ID_IMG_COPY_LINK, _T("画像アドレスをコピー"));
+				{
+					CString contextMenuCopyImgLabel;
+					contextMenuCopyImgLabel.LoadString(ID_CONTEXT_MENU_COPY_IMG);
+					CefString cefContextMenuCopyImgLabel(contextMenuCopyImgLabel);
+					model->AddItem(CEF_MENU_ID_IMG_COPY, cefContextMenuCopyImgLabel);
+				}
+
+				CString contextMenuCopyImgLinkLabel;
+				contextMenuCopyImgLinkLabel.LoadString(ID_CONTEXT_MENU_COPY_IMG_LINK);
+				CefString cefContextMenuCopyImgLinkLabel(contextMenuCopyImgLinkLabel);
+				model->AddItem(CEF_MENU_ID_IMG_COPY_LINK, cefContextMenuCopyImgLinkLabel);
 			}
 		}
 		if (Flg & CM_TYPEFLAG_SELECTION)
@@ -281,16 +331,30 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 			if (!strSelText.IsEmpty())
 			{
 				SBUtil::GetDivChar(strSelText, 48, strSelText, TRUE);
+				CString contextMenuSearchLabel;
+				contextMenuSearchLabel.LoadString(ID_CONTEXT_MENU_SEARCH);
 				CString strFmt;
-				strFmt.Format(_T("Googleで検索：\"%s\""), strSelText);
+				strFmt.Format(contextMenuSearchLabel, strSelText);
 				CefString strCFmt(strFmt);
 				model->InsertItemAt(0, CEF_MENU_ID_OPEN_SEARCH, strCFmt);
 			}
 		}
 	}
-	model->AddItem(MENU_ID_RELOAD, _T("再読み込み"));
-	model->AddItem(CEF_MENU_ID_PRINT_PDF, _T("印刷(PDF出力)"));
-	model->AddItem(MENU_ID_PRINT, _T("印刷"));
+
+	CString contextMenuReloadLabel;
+	contextMenuReloadLabel.LoadString(ID_CONTEXT_MENU_RELOAD);
+	CefString cefContextMenuReloadLabel(contextMenuReloadLabel);
+	model->AddItem(MENU_ID_RELOAD, cefContextMenuReloadLabel);
+
+	CString contextMenuPrintPDFLabel;
+	contextMenuPrintPDFLabel.LoadString(ID_CONTEXT_MENU_PRINT_PDF);
+	CefString cefContextMenuPrintPDFLabel(contextMenuPrintPDFLabel);
+	model->AddItem(CEF_MENU_ID_PRINT_PDF, cefContextMenuPrintPDFLabel);
+
+	CString contextMenuPrintLabel;
+	contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
+	CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
+	model->AddItem(MENU_ID_PRINT, cefContextMenuPrintLabel);
 
 	// call parent
 	CefContextMenuHandler::OnBeforeContextMenu(browser, frame, params, model);
@@ -677,7 +741,9 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 			HWND hWindowFrm = GetParent(hWindow);
 			if (SafeWnd(hWindowFrm))
 				hWindow = hWindowFrm;
-			theApp.SB_MessageBox(hWindow, _T("ファイル ダウンロードは、システム管理者により制限されています。"), NULL, MB_OK | MB_ICONWARNING, TRUE);
+			CString alertMsg;
+			alertMsg.LoadString(ID_MSG_FILE_DOWNLOAD_RESTRICTED);
+			theApp.SB_MessageBox(hWindow, alertMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
 		}
 		EmptyWindowClose(browser);
 		return;
@@ -733,14 +799,16 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		if (theApp.m_DlMgr.IsDlProgress(nBrowserId))
 		{
 			HWND hWindowFrm = GetParent(hWindow);
-			int iRet = theApp.SB_MessageBox(hWindowFrm, _T("別のダウンロード処理を実行中です。\n終了するまで次のファイルのダウンロードは出来ません。"), NULL, MB_OK | MB_ICONWARNING, TRUE);
+			CString inProgressDownloadMessage;
+			inProgressDownloadMessage.LoadString(ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS);
+			int iRet = theApp.SB_MessageBox(hWindowFrm, inProgressDownloadMessage, NULL, MB_OK | MB_ICONWARNING, TRUE);
 			return;
 		}
 
 		CString szFilter;
-		szFilter = _T("すべてのファイル(*.*)|*.*||");
+		szFilter.LoadString(ID_FILE_TYPE_ALL);
 		CString strTitle;
-		strTitle = _T("ダウンロードファイルを保存");
+		strTitle.LoadString(ID_DOWNLOAD_FILE_CHOOSER_TITLE);
 		CStringW strCaption(theApp.m_strThisAppName);
 		CStringW strRootDrive(theApp.m_AppSettings.GetRootPath());
 		CStringW strMsg;
@@ -879,13 +947,23 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 						szStatus = FormatTransferInfo(values.nReceived, values.nTotal, values.nProgress);
 						theApp.m_DlMgr.Show_DLDlg(TRUE, nBrowserId);
 						CString strSpeed;
+						CString strSpeedTemplate;
 						// format read
 						if (values.nSpeed < 1024)
-							strSpeed.Format(_T("%I64u B / 秒"), values.nSpeed);
+						{
+							strSpeedTemplate.LoadString(ID_TRANSFER_SPEED_B);
+							strSpeed.Format(strSpeedTemplate, values.nSpeed);
+						}
 						else if (values.nSpeed < 1048576)
-							strSpeed.Format(_T("%0.1f KB / 秒"), static_cast<LONGLONG>(values.nSpeed) / 1024.0);
+						{
+							strSpeedTemplate.LoadString(ID_TRANSFER_SPEED_KB);
+							strSpeed.Format(strSpeedTemplate, static_cast<LONGLONG>(values.nSpeed) / 1024.0);
+						}
 						else
-							strSpeed.Format(_T("%0.2f MB / 秒"), static_cast<LONGLONG>(values.nSpeed) / 1048576.0);
+						{
+							strSpeedTemplate.LoadString(ID_TRANSFER_SPEED_MB);
+							strSpeed.Format(strSpeedTemplate, static_cast<LONGLONG>(values.nSpeed) / 1048576.0);
+						}
 						theApp.m_DlMgr.Set_DLDlgState(nBrowserId, values.nProgress, values.szFullPath, szStatus, strSpeed);
 
 						if (theApp.m_DlMgr.IsCanceld(nBrowserId))
@@ -1180,282 +1258,297 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	CString strErrorHTMLFmt;
 
 	CString strErrorMsg;
-	strErrorMsg = _T("一般的なネットワークエラー");
+	strErrorMsg.LoadString(ID_ERROR_MSG_FAILED);
 	switch (errorCode)
 	{
 		case ERR_NONE:
 		{
-			strErrorMsg = _T("N/A");
+			strErrorMsg.LoadString(ID_ERROR_MSG_NONE);
 			break;
 		}
 		case ERR_FAILED:
 		{
-			strErrorMsg = _T("一般的なネットワークエラー");
+			strErrorMsg.LoadString(ID_ERROR_MSG_FAILED);
 			break;
 		}
 		case ERR_ABORTED:
 		{
-			strErrorMsg = _T("キャンセルされました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_ABORTED);
 			 break;
 		}
 		case ERR_INVALID_ARGUMENT:
 		{
-			strErrorMsg = _T("引数が不正です。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_ARGUMENT);
 			break;
 		}
 		case ERR_INVALID_HANDLE:
 		{
-			strErrorMsg = _T("ハンドルが不正です。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_HANDLE);
 			break;
 		}
 		case ERR_FILE_NOT_FOUND:
 		{
-			strErrorMsg = _T("ファイルが見つかりません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_FILE_NOT_FOUND);
 			break;
 		}
 		case ERR_TIMED_OUT:
 		{
-			strErrorMsg = _T("タイムアウトしました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_TIMED_OUT);
 			break;
 		}
 		case ERR_FILE_TOO_BIG:
 		{
-			strErrorMsg = _T("ファイルサイズが大きすぎます。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_FILE_TOO_BIG);
 			break;
 		}
 		case ERR_UNEXPECTED:
 		{
-			strErrorMsg = _T("予期せぬ例外が発生しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_UNEXPECTED);
 			break;
 		}
 		case ERR_ACCESS_DENIED:
 		{
-			strErrorMsg = _T("アクセスが拒否されました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_ACCESS_DENIED);
 			break;
 		}
 		case ERR_NOT_IMPLEMENTED:
 		{
-			strErrorMsg = _T("実装されていません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_NOT_IMPLEMENTED);
 			break;
 		}
 		case ERR_CONNECTION_CLOSED:
 		{
-			strErrorMsg = _T("接続が閉じられました (TCP FIN)”");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_CLOSED);
 			break;
 		}
 		case ERR_CONNECTION_RESET:
 		{
-			strErrorMsg = _T("接続がリセットされました (TCP RST)");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_RESET);
 			break;
 		}
 		case ERR_CONNECTION_REFUSED:
 		{
-			strErrorMsg = _T("サーバーに接続を拒否されました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_REFUSED);
 			break;
 		}
 		case ERR_CONNECTION_ABORTED:
 		{
-			strErrorMsg = _T("接続が中断されました (no ACK received)");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_ABORTED);
 			break;
 		}
 		case ERR_CONNECTION_FAILED:
 		{
-			strErrorMsg = _T("接続に失敗しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_FAILED);
 			break;
 		}
 		case ERR_NAME_NOT_RESOLVED:
 		{
-			strErrorMsg = _T("ホスト名が解決できません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_NAME_NOT_RESOLVED);
 			break;
 		}
 		case ERR_INTERNET_DISCONNECTED:
 		{
-			strErrorMsg = _T("インターネット接続が失われました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_INTERNET_DISCONNECTED);
 			break;
 		}
 		case ERR_SSL_PROTOCOL_ERROR:
 		{
-			strErrorMsg = _T("SSL プロトコルエラー");
+			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_PROTOCOL_ERROR);
 			break;
 		}
 		case ERR_ADDRESS_INVALID:
 		{
-			strErrorMsg = _T("不正な IP アドレス または ポート番号です。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_ADDRESS_INVALID);
 			break;
 		}
 		case ERR_ADDRESS_UNREACHABLE:
 		{
-			strErrorMsg = _T("到達不能な IP アドレスです。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_ADDRESS_UNREACHABLE);
 			break;
 		}
 		case ERR_SSL_CLIENT_AUTH_CERT_NEEDED:
 		{
-			strErrorMsg = _T("サーバーがSSLクライアント認証用の証明書を要求しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED);
 			break;
 		}
 		case ERR_TUNNEL_CONNECTION_FAILED:
 		{
-			strErrorMsg = _T("トンネル接続に失敗しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED);
 			break;
 		}
 		case ERR_NO_SSL_VERSIONS_ENABLED:
 		{
-			strErrorMsg = _T("利用可能なSSLプロトコルバージョンがありません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED);
 			break;
 		}
 		case ERR_SSL_VERSION_OR_CIPHER_MISMATCH:
 		{
-			strErrorMsg = _T("クライアントとサーバーは、一般的なSSLプロトコルのバージョンまたは Cipher Suite をサポートしていません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH);
 			break;
 		}
 		case ERR_SSL_RENEGOTIATION_REQUESTED:
 		{
-			strErrorMsg = _T("サーバーが再ネゴシエーションを要求しました。 (再ハンドシェイク)");
+			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED);
 			break;
 		}
 		case ERR_CERT_COMMON_NAME_INVALID:
 		{
-			strErrorMsg = _T("サーバーは、証明書の共通名とホスト名が一致しない証明書であると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_COMMON_NAME_INVALID);
 			break;
 		}
 		case ERR_CERT_DATE_INVALID:
 		{
-			strErrorMsg = _T("サーバーは、証明書の期限が不正であると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_DATE_INVALID);
 			break;
 		}
 		case ERR_CERT_AUTHORITY_INVALID:
 		{
-			strErrorMsg = _T("サーバーは、信頼されていない機関によって署名された証明書であると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_AUTHORITY_INVALID);
 			break;
 		}
 		case ERR_CERT_CONTAINS_ERRORS:
 		{
-			strErrorMsg = _T("サーバーは、エラーを含む証明書であると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_CONTAINS_ERRORS);
 			break;
 		}
 		case ERR_CERT_NO_REVOCATION_MECHANISM:
 		{
-			strErrorMsg = _T("この証明書には、失効したかを判断する仕組みがありません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM);
 			break;
 		}
 		case ERR_CERT_UNABLE_TO_CHECK_REVOCATION:
 		{
-			strErrorMsg = _T("このサイトのセキュリティ証明書の失効情報は利用できません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION);
 			break;
 		}
 		case ERR_CERT_REVOKED:
 		{
-			strErrorMsg = _T("サーバーは、証明書が失効していると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_REVOKED);
 			break;
 		}
 		case ERR_CERT_INVALID:
 		{
-			strErrorMsg = _T("サーバーは、証明書が無効であると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_INVALID);
 			break;
 		}
 		case ERR_CERT_WEAK_SIGNATURE_ALGORITHM:
 		{
-			strErrorMsg = _T("サーバーは、脆弱な署名アルゴリズムを使用して署名された証明書であると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM);
 			break;
 		}
 		case ERR_CERT_NON_UNIQUE_NAME:
 		{
-			strErrorMsg = _T("証明書に指定されたホスト名はユニークでありません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NON_UNIQUE_NAME);
 			break;
 		}
 		case ERR_CERT_WEAK_KEY:
 		{
-			strErrorMsg = _T("サーバーは、証明書が脆弱なキーを含んでいると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_WEAK_KEY);
 			break;
 		}
 		case ERR_CERT_NAME_CONSTRAINT_VIOLATION:
 		{
-			strErrorMsg = _T("サーバーは、証明書のDNS名が命名規約に違反していると返しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION);
 			break;
 		}
 		case ERR_CERT_VALIDITY_TOO_LONG:
 		{
-			strErrorMsg = _T("証明書の有効期間が長すぎます");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG);
 			break;
 		}
 		case ERR_INVALID_URL:
 		{
-			strErrorMsg = _T("URLが不正です。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_URL);
 			break;
 		}
 		case ERR_DISALLOWED_URL_SCHEME:
 		{
-			strErrorMsg = _T("許可されていないURLスキーマです。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_DISALLOWED_URL_SCHEME);
 			break;
 		}
 		case ERR_UNKNOWN_URL_SCHEME:
 		{
-			strErrorMsg = _T("未定義のURLスキーマです。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_UNKNOWN_URL_SCHEME);
 			break;
 		}
 		case ERR_TOO_MANY_REDIRECTS:
 		{
-			strErrorMsg = _T("このウェブページにはリダイレクトループが含まれています。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_TOO_MANY_REDIRECTS);
 			break;
 		}
 		case ERR_UNSAFE_REDIRECT:
 		{
-			strErrorMsg = _T("安全でないリダイレクトを要求しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_UNSAFE_REDIRECT);
 			break;
 		}
 		case ERR_UNSAFE_PORT:
 		{
-			strErrorMsg = _T("安全でないポートを要求しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_UNSAFE_PORT);
 			break;
 		}
 		case ERR_INVALID_RESPONSE:
 		{
-			strErrorMsg = _T("レスポンスが不正です。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_RESPONSE);
 			break;
 		}
 		case ERR_INVALID_CHUNKED_ENCODING:
 		{
-			strErrorMsg = _T("不正なチャンクエンコードです。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_CHUNKED_ENCODING);
 			break;
 		}
 		case ERR_METHOD_NOT_SUPPORTED:
 		{
-			strErrorMsg = _T("メソッドがサポートされていません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_METHOD_NOT_SUPPORTED);
 			break;
 		}
 		case ERR_UNEXPECTED_PROXY_AUTH:
 		{
-			strErrorMsg = _T("Proxyサーバー認証エラー");
+			strErrorMsg.LoadString(ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH);
 			break;
 		}
 		case ERR_EMPTY_RESPONSE:
 		{
-			strErrorMsg = _T("レスポンスが空白です。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_EMPTY_RESPONSE);
 			break;
 		}
 		case ERR_RESPONSE_HEADERS_TOO_BIG:
 		{
-			strErrorMsg = _T("レスポンスヘッダーが大きすぎます。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG);
 			break;
 		}
 		case ERR_CACHE_MISS:
 		{
-			strErrorMsg = _T("キャッシュ ミスが発生しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_CACHE_MISS);
 			break;
 		}
 		case ERR_INSECURE_RESPONSE:
 		{
-			strErrorMsg = _T("安全でないレスポンスが発生しました。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_INSECURE_RESPONSE);
 			break;
 		}
 		case ERR_PROXY_CONNECTION_FAILED:
 		{
-			strErrorMsg = _T("Proxyサーバーに接続できません。");
+			strErrorMsg.LoadString(ID_ERROR_MSG_PROXY_CONNECTION_FAILED);
 			break;
 		}
 		default:
 			break;
 	}
+
+	CString errorPageTitle;
+	errorPageTitle.LoadString(ID_ERROR_PAGE_TITLE);
+	CString errorPageHeading;
+	errorPageHeading.LoadString(ID_ERROR_PAGE_HEADING);
+	CString errorPageHeadingDetails;
+	errorPageHeadingDetails.LoadString(ID_ERROR_PAGE_HEADING_DETAILS);
+	CString errorPageHeadingURL;
+	errorPageHeadingURL.LoadString(ID_ERROR_PAGE_HEADING_URL);
+	CString errorPageHeadingCode;
+	errorPageHeadingCode.LoadString(ID_ERROR_PAGE_HEADING_CODE);
+	CString errorPageHeadingMsg;
+	errorPageHeadingMsg.LoadString(ID_ERROR_PAGE_HEADING_MSG);
+	CString errorPageHeadingName;
+	errorPageHeadingName.LoadString(ID_ERROR_PAGE_HEADING_NAME);
 
 	CString strFaildUrl(failedUrl.c_str());
 	strFaildUrl.Replace(_T("<"), _T(""));
@@ -1466,7 +1559,9 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	strFaildUrl.Replace(_T("`"), _T(""));
 	strFaildUrl.Replace(_T("javascript"), _T(""));
 	strFaildUrl.Replace(_T("eval("), _T(""));
-	strErrorHTMLFmt = _T("<html><head><meta http-equiv='Content-Type' content='text/html; charset=Shift_JIS'/><title>読込エラー</title>");
+	strErrorHTMLFmt = _T("<html><head><meta http-equiv='Content-Type' content='text/html; charset=Shift_JIS'/><title>");
+	strErrorHTMLFmt += errorPageTitle;
+	strErrorHTMLFmt += _T("</title>");
 	strErrorHTMLFmt += _T("<style type='text/css'>");
 	strErrorHTMLFmt += _T("*{margin:0;padding:0;font-weight:normal;color:#444;}");
 	strErrorHTMLFmt += _T("html{overflow-y:scroll;background-color:#5b85b0;}");
@@ -1480,24 +1575,33 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	strErrorHTMLFmt += _T("#cause h4{color:#666;font-size:24px;font-weight:bold;}");
 	strErrorHTMLFmt += _T("#white_box{margin:0 auto;width:90%;height:40%;background-color:white;text-align:left}");
 	strErrorHTMLFmt += _T("</style></head><body>");
-	strErrorHTMLFmt += _T("<div id='base'><div id='container'><h1>アクセスしようとしたページが表示できませんでした。</h1>");
+	strErrorHTMLFmt += _T("<div id='base'><div id='container'><h1>");
+	strErrorHTMLFmt += errorPageHeading;
+	strErrorHTMLFmt += _T("</h1>");
 	strErrorHTMLFmt += _T("<h2>");
 	strErrorHTMLFmt += strErrorMsg;
 	strErrorHTMLFmt += _T("</h2>");
-	strErrorHTMLFmt += _T("<h3>詳細</h3><div id='white_box'>");
+	strErrorHTMLFmt += _T("<h3>");
+	strErrorHTMLFmt += errorPageHeadingDetails;
+	strErrorHTMLFmt += _T("</h3><div id='white_box'>");
 	strErrorHTMLFmt += _T("<div id='cause'>");
-	strErrorHTMLFmt += _T("<h4>URL：<a href='");
+	strErrorHTMLFmt += _T("<h4>");
+	strErrorHTMLFmt += errorPageHeadingURL;
+	strErrorHTMLFmt += _T("<a href='");
 	strErrorHTMLFmt += strFaildUrl;
 	strErrorHTMLFmt += _T("'/>");
 	strErrorHTMLFmt += strFaildUrl;
 	strErrorHTMLFmt += _T("</a></h4>");
-	strErrorHTMLFmt += _T("<h4>エラーコード：");
+	strErrorHTMLFmt += _T("<h4>");
+	strErrorHTMLFmt += errorPageHeadingCode;
 	strErrorHTMLFmt += strErrorCode;
 	strErrorHTMLFmt += _T("</h4>");
-	strErrorHTMLFmt += _T("<h4>エラー内容：");
+	strErrorHTMLFmt += _T("<h4>");
+	strErrorHTMLFmt += errorPageHeadingMsg;
 	strErrorHTMLFmt += strErrorMsg;
 	strErrorHTMLFmt += _T("</h4>");
-	strErrorHTMLFmt += _T("<h4>エラー名称：");
+	strErrorHTMLFmt += _T("<h4>");
+	strErrorHTMLFmt += errorPageHeadingName;
 	strErrorHTMLFmt += errorText.c_str();
 	strErrorHTMLFmt += _T("</h4></div></div></div></div></body></html>");
 
@@ -1546,10 +1650,12 @@ bool ClientHandler::GetAuthCredentials(CefRefPtr<CefBrowser> browser,
 
 		CString strHost(values.lpszHost);
 		CDlgAuth Dlg(CWnd::FromHandle(hWindow)->GetParent());
+		CString authRequiredMsg;
 		if (isProxy)
-			Dlg.m_strMsgTxt.Format(_T("認証が必要です。\nプロキシ[%s]には、ユーザー名とパスワードを指定する必要があります。"), strHost);
+			authRequiredMsg.LoadString(IDS_STRING_PROXY_AUTH_REQUIRED);
 		else
-			Dlg.m_strMsgTxt.Format(_T("認証が必要です。\n接続先ホスト[%s]には、ユーザー名とパスワードが必要です。"), strHost);
+			authRequiredMsg.LoadString(IDS_STRING_HOST_AUTH_REQUIRED);
+		Dlg.m_strMsgTxt.Format(authRequiredMsg, strHost);
 		if (IDOK == Dlg.DoModal())
 		{
 			_tcscpy_s(values.szUserName, Dlg.m_strID);
@@ -1583,9 +1689,9 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 {
 	CString szMessage;
 
-	szMessage.Format(_T("安全な接続ではありません。\n危険性を認識したうえで、接続を続行する場合は、「はい」をクリックして下さい。\n\n \"%s\"の所有者によるウェブサイトの設定が不適切です。\n\nあなたの情報が盗まれることを防ぐため、このウェブサイトへの接続は確立されません。\n"), request_url.c_str());
-	szMessage += _T("不正なセキュリティ証明書を使用しています。 \n発行者の証明書が不明であるためこの証明書は信頼されません。 \nサーバーが適正な中間証明書を送信しない可能性があります。 \n\n");
-	szMessage += _T("「いいえ」をクリックすると接続をキャンセルします。");
+	CString confirmMsg;
+	confirmMsg.LoadString(IDS_STRING_CONFIRM_INSECURE_CONNECTION);
+	szMessage.Format(confirmMsg, request_url.c_str());
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (hWindow)
 	{
@@ -1722,7 +1828,7 @@ bool ClientHandler::OnBeforeUnloadDialog(CefRefPtr<CefBrowser> browser,
 	strMsg = pszMessage;
 	//if(strMsg==_T("Is it OK to leave/reload this page?"))
 	{
-		strMsg = _T("このサイトを離れますか？\n行った変更が保存されない可能性があります。");
+		strMsg.LoadString(IDS_STRING_CONFIRM_LEAVE_PAGE);
 	}
 	int iRet = theApp.SB_MessageBox(hWindow, strMsg, NULL, MB_ICONWARNING | MB_YESNO | MB_TASKMODAL, TRUE);
 	callback->Continue(iRet == IDYES ? true : false, str);
@@ -1887,7 +1993,9 @@ bool MyV8Handler::Execute(const CefString& name,
 		}
 		else
 		{
-			exception = CefString(_T("パラメータが不一致です。"));
+			CString exceptionMsg;
+			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMTER);
+			exception = CefString(exceptionMsg);
 			return false;
 		}
 		return false;
@@ -1956,7 +2064,9 @@ bool MyV8Handler::Execute(const CefString& name,
 		}
 		else
 		{
-			exception = CefString(_T("パラメータが不一致です。"));
+			CString exceptionMsg;
+			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMTER);
+			exception = CefString(exceptionMsg);
 			return false;
 		}
 		return false;

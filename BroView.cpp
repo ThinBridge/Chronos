@@ -2468,7 +2468,7 @@ LRESULT CChildView::OnAuthenticate(WPARAM wParam, LPARAM lParam)
 	CString strHost(lpValues->lpszHost);
 	CDlgAuth Dlg(this);
 	CString authRequiredMsg;
-	authRequiredMsg.LoadString(IDS_STRING_AUTH_REQUIRED);
+	authRequiredMsg.LoadString(IDS_STRING_HOST_AUTH_REQUIRED);
 	Dlg.m_strMsgTxt.Format(authRequiredMsg, strHost);
 
 	Dlg.Create(IDD_DLG_AUTH, this);
