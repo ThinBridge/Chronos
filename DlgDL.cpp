@@ -79,7 +79,9 @@ void CDlgDL::OnBnClickedCancel()
 		CDialogEx::OnCancel();
 		return;
 	}
-	int iRet = ::MessageBox(this->m_hWnd, _T("ダウンロードをキャンセルしますか？"), theApp.m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
+	CString confirmMsg;
+	confirmMsg.LoadString(ID_CONFIRM_CANCEL_DOWNLOAD);
+	int iRet = ::MessageBox(this->m_hWnd, confirmMsg, theApp.m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
 	if (iRet == IDYES)
 	{
 		m_bDLCancel = TRUE;
@@ -126,7 +128,9 @@ void CDlgDL::OnBnClickedButton1()
 
 		return;
 	}
-	int iRet = ::MessageBox(this->m_hWnd, _T("ダウンロードをキャンセルしますか？"), theApp.m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
+	CString confirmMsg;
+	confirmMsg.LoadString(ID_CONFIRM_CANCEL_DOWNLOAD);
+	int iRet = ::MessageBox(this->m_hWnd, confirmMsg, theApp.m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
 	if (iRet == IDYES)
 	{
 		m_bDLCancel = TRUE;
@@ -163,7 +167,9 @@ void ProgressDlg::SetMsg(const CString& str)
 
 void ProgressDlg::SetMsgExec(const CString& str)
 {
-	SetDlgItemText(IDC_STATIC_TX, _T("起動中"));
+	CString startingMsg;
+	startingMsg.LoadString(ID_DL_START_APP_IN_PROGRESS);
+	SetDlgItemText(IDC_STATIC_TX, startingMsg);
 	SetDlgItemText(IDC_STATIC_MSG, str);
 	CString strCnt;
 	m_iCntg++;
@@ -203,60 +209,64 @@ void CDlgDL::OnBnClickedButtonFo()
 			ULONGLONG hRet = 0;
 			SetLastError(NO_ERROR);
 			hRet = (ULONGLONG)ShellExecute(this->m_hWnd, NULL, m_strFileFullPath, NULL, m_strFileFolderPath, SW_SHOW);
-			CString strErrMsg;
+			CString errMsg;
 			if (hRet <= 32)
 			{
 				switch (hRet)
 				{
 				case 0:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("メモリまたはリソースが不足している恐れがあります。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_LOW_RESOURCE);
 					break;
 				case ERROR_FILE_NOT_FOUND:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("指定されたファイルが見つかりませんでした。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_FILE_NOT_FOUND);
 					break;
 				case ERROR_PATH_NOT_FOUND:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("指定されたパスが見つかりませんでした。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_PATH_NOT_FOUND);
 					break;
 				case ERROR_BAD_FORMAT:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T(".exeファイルが無効です。Win32の.exeではないか、.exeイメージ内にエラーがあります。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_BAD_FORMAT);
 					break;
 				case SE_ERR_ACCESSDENIED:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("オペレーティングシステムが、指定されたファイルへのアクセスを拒否しました。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_ACCESSDENIED);
 					break;
 				case SE_ERR_ASSOCINCOMPLETE:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("ファイル名の関連付けが不完全または無効です。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_ASSOCINCOMPLETE);
 					break;
 				case SE_ERR_DDEBUSY:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("ほかのDDEトランザクションが現在処理中なので、DDEトランザクションを完了できませんでした。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_DDEBUSY);
 					break;
 				case SE_ERR_DDEFAIL:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("DDEトランザクションが失敗しました。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_DDEFAIL);
 					break;
 				case SE_ERR_DDETIMEOUT:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("	要求がタイムアウトしたので、DDEトランザクションを完了できませんでした。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_DDETIMEOUT);
 					break;
 				case SE_ERR_DLLNOTFOUND:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("指定されたダイナミックリンクライブラリ（DLL）が見つかりませんでした。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_DLLNOTFOUND);
 					break;
 					//			case SE_ERR_FNF:
-					//				strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"),_T("指定されたファイルが見つかりませんでした。"));
+					//				errMsg.LoadString(ID_DL_START_APP_FAILED_FILE_NOT_FOUND);
 					//				break;
 				case SE_ERR_NOASSOC:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("指定されたファイル拡張子に関連付けられたアプリケーションがありません。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_NOASSOC);
 					break;
 				case SE_ERR_OOM:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("操作を完了するのに十分なメモリがありません。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_OOM);
 					break;
 					//			case SE_ERR_PNF:
-					//				strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"),_T("指定されたパスが、見つかりませんでした。"));
+					//				errMsg.LoadString(ID_DL_START_APP_FAILED_PATH_NOT_FOUND);
 					//				break;
 				case SE_ERR_SHARE:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("共有違反が発生しました。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_SHARE);
 					break;
 				default:
-					strErrMsg.Format(_T("アプリケーションを起動できません。\n%s"), _T("例外が発生しました。"));
+					errMsg.LoadString(ID_DL_START_APP_FAILED_DEFAULT);
 					break;
 				}
+				CString errMsgBase;
+				errMsgBase.LoadString(ID_DL_START_APP_FAILED_BASE);
+				CString strErrMsg;
+				strErrMsg.Format(errMsgBase, errMsg);
 				strErrMsg += _T("\n");
 				strErrMsg += m_strFileFullPath;
 				::MessageBox(this->m_hWnd, strErrMsg, theApp.m_pszAppName, MB_OK | MB_ICONWARNING);

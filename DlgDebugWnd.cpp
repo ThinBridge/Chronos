@@ -102,8 +102,10 @@ BOOL CDlgDebugWnd::OnInitDialog()
 	ListView_SetItemState(m_List.m_hWnd, -1, 0, LVIS_SELECTED);
 
 	((CButton*)GetDlgItem(IDC_CHECK1))->SetCheck(m_bAutoScFlg);
+	CString strCount;
+	strCount.LoadString(ID_DEBUG_ITEMS_COUNT);
 	CString strDataLineCnt;
-	strDataLineCnt.Format(_T("%d件"), m_pOwnerData.GetCount());
+	strDataLineCnt.Format(strCount, m_pOwnerData.GetCount());
 	SetDlgItemText(IDC_STATIC_LINE, strDataLineCnt);
 
 	int iRet = 0;
@@ -194,8 +196,10 @@ void CDlgDebugWnd::OnBnClickedOk()
 {
 	ClearData();
 	ListView_SetItemCountEx(m_List.m_hWnd, m_pOwnerData.GetCount(), LVSICF_NOINVALIDATEALL);
+	CString strCount;
+	strCount.LoadString(ID_DEBUG_ITEMS_COUNT);
 	CString strDataLineCnt;
-	strDataLineCnt.Format(_T("%d件"), m_pOwnerData.GetCount());
+	strDataLineCnt.Format(strCount, m_pOwnerData.GetCount());
 	SetDlgItemText(IDC_STATIC_LINE, strDataLineCnt);
 	m_List.InvalidateRect(NULL, TRUE);
 }
@@ -439,8 +443,10 @@ void CDlgDebugWnd::SetLogMsg(
 				pData->mMESSAGE6 = pMESSAGE6;
 			m_pOwnerData.Add(pData);
 			::SendMessageTimeout(m_List.m_hWnd, LVM_SETITEMCOUNT, (WPARAM)m_pOwnerData.GetCount(), (LPARAM)LVSICF_NOSCROLL | LVSICF_NOINVALIDATEALL, SMTO_NORMAL, 250, NULL);
+			CString strCount;
+			strCount.LoadString(ID_DEBUG_ITEMS_COUNT);
 			CString strDataLineCnt;
-			strDataLineCnt.Format(_T("%d件"), m_pOwnerData.GetCount());
+			strDataLineCnt.Format(strCount, m_pOwnerData.GetCount());
 			SetDlgItemText(IDC_STATIC_LINE, strDataLineCnt);
 			if (m_bAutoScFlg)
 			{
@@ -657,7 +663,9 @@ BOOL CDlgSCEditor::PreTranslateMessage(MSG* pMsg)
 			lr = CDialogEx::PreTranslateMessage(pMsg);
 
 			dwLineIndex = (DWORD)m_Edit.SendMessage(EM_LINEFROMCHAR, -1, 0);
-			strLine.Format(_T("%d行"), dwLineIndex + 1);
+			CString strLineCount;
+			strLineCount.LoadString(ID_DEBUG_ITEMS_COUNT);
+			strLine.Format(strLineCount, dwLineIndex + 1);
 			SetDlgItemText(IDC_STATIC_LINE, strLine);
 			return lr;
 		}
@@ -835,7 +843,9 @@ void CDlgSCEditor::OnBnClickedButtonUrl()
 void CDlgSCEditor::OnBnClickedOk()
 {
 	int iRet = 0;
-	iRet = ::MessageBox(this->m_hWnd, _T("保存しますか？"), theApp.m_strThisAppName, MB_ICONQUESTION | MB_YESNO);
+	CString confirmMsg;
+	confirmMsg.LoadString(ID_DEBUG_CONFIRM_SAVE_RESULT);
+	iRet = ::MessageBox(this->m_hWnd, confirmMsg, theApp.m_strThisAppName, MB_ICONQUESTION | MB_YESNO);
 	if (iRet != IDYES)
 		return;
 	WriteText();
@@ -900,8 +910,10 @@ void CDlgSCEditor::WriteText()
 	}
 	else
 	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_DEBUG_ALERT_SAVE_FAILED);
 		CString strSaveMsg;
-		strSaveMsg.Format(_T("ファイルの保存に失敗しました。\n\n別のプログラムがファイルを開いているか、書込権限が不足しています。操作を完了できません。ファイルを閉じてから再実行してください。\n\n%s"), m_strFilePath);
+		strSaveMsg.Format(alertMsg, m_strFilePath);
 		::MessageBox(this->m_hWnd, strSaveMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 	}
 }

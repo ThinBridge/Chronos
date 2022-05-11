@@ -216,7 +216,11 @@ public:
 
 		// format read
 		if (dwBytesRead < 1)
-			szRead.Format(_T("不明"));
+		{
+			CString undeterminedMsg;
+			undeterminedMsg.LoadString(ID_TRANSFER_SIZE_UNDEFERMINED);
+			szSize.Format(undeterminedMsg);
+		}
 		else if (dwBytesRead < 1024)
 			szRead.Format(_T("%I64u B"), dwBytesRead);
 		else if (dwBytesRead < 1048576)
@@ -226,7 +230,11 @@ public:
 
 		// format size
 		if (dwFileSize < 1)
-			szSize.Format(_T("不明"));
+		{
+			CString undeterminedMsg;
+			undeterminedMsg.LoadString(ID_TRANSFER_SIZE_UNDEFERMINED);
+			szSize.Format(undeterminedMsg);
+		}
 		else if (dwFileSize < 1024)
 			szSize.Format(_T("%I64u B"), dwFileSize);
 		else if (dwFileSize < 1048576)
@@ -235,7 +243,9 @@ public:
 			szSize.Format(_T("%0.2f MB"), static_cast<LONGLONG>(dwFileSize) / 1048576.0);
 
 		// return text
-		szText.Format(_T("受信済サイズ %s / 全体サイズ %s ( %d %%)"), szRead, szSize, abs(dwProgress));
+		CString progressMsg;
+		progressMsg.LoadString(ID_TRANSFER_PROGRESS_MSG);
+		szText.Format(progressMsg, szRead, szSize, abs(dwProgress));
 
 		return szText;
 	}

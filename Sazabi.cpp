@@ -132,8 +132,10 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 #ifdef _DEBUG
 			return TRUE;
 #endif
+			CString alertMsg;
+			alertMsg.LoadString(IDS_STRING_ALERT_MISSING_FILES);
 			CString strMsg;
-			strMsg.Format(_T("%s\n起動に必要なファイルが見つかりません。[%s]"), _T("起動できません。再セットアップを行ってください。"), strChronosVirtAppPath);
+			strMsg.Format(alertMsg, strChronosVirtAppPath);
 			::MessageBox(NULL, strMsg, m_strThisAppName, MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 			//Debugで困るのでShitキーを押している場合は、続行。
 			if (::GetKeyState(VK_SHIFT) < 0)
@@ -1600,8 +1602,10 @@ int CSazabi::ExitInstance()
 			ProgressDlg DlgMsgP(NULL);
 			DlgMsgP.Create(MAKEINTRESOURCE(IDD_DIALOG1), NULL);
 			DlgMsgP.ShowWindow(SW_SHOW);
+			CString statusMsg;
+			statusMsg.LoadString(IDS_STRING_CLEARING_CACHE);
 			CString strDlgMsg;
-			strDlgMsg.Format(_T("ブラウザーキャッシュ クリア中..."));
+			strDlgMsg.Format(statusMsg);
 			DlgMsgP.SetMsg(strDlgMsg);
 
 			this->UnInitializeCef();
@@ -1623,8 +1627,10 @@ int CSazabi::ExitInstance()
 					hMutex = ::CreateMutex(NULL, FALSE, _T("tfgszb_close"));
 					if (::GetLastError() != ERROR_ALREADY_EXISTS)
 					{
+						CString confirmMsg;
+						confirmMsg.LoadString(IDS_STRING_CONFIRM_CLOSE_APPLICATION);
 						CString strMsg;
-						strMsg.Format(_T("%s%s"), m_strThisAppName, _T("を終了してもよろしいですか？"));
+						strMsg.Format(confirmMsg, m_strThisAppName);
 						int iRt = 0;
 						//シャットダウン処理中は、メッセージボックスを表示しない。
 						if (m_bShutdownFlg)
@@ -2088,8 +2094,10 @@ BOOL CSazabi::CloseVOSProc()
 	strString.Replace(_T("\r\n"), _T("\n"));
 	if (!strString.IsEmpty())
 	{
+		CString confirmMsg;
+		confirmMsg.LoadString(IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS);
 		CString strMsg;
-		strMsg.Format(_T("%s\n%s"), _T("VOSで実行中のプロセスを強制終了してもよろしいですか？"), strString);
+		strMsg.Format(_T("%s\n%s"), confirmMsg, strString);
 		int iRet = AfxMessageBox(strMsg, MB_ICONQUESTION | MB_YESNO);
 		if (iRet != IDYES)
 			return FALSE;
@@ -4282,7 +4290,9 @@ BOOL CSazabi::IsLimitChkEx()
 		//Window Count Limits
 		if (iWindowCnt + 1 > iWindowL)
 		{
-			logmsg.Format(_T("ウィンドウの数が上限値(%d)に達しています。\n他の不要なウィンドウを閉じてから再度実行して下さい。(%s)\n SYSTEM Resource allocation failuer.Please close window or restart the application."), iWindowL, m_strThisAppName);
+			CString alertMsg;
+			alertMsg.LoadString(IDS_STRING_TOO_MANY_WINDOWS_MSG);
+			logmsg.Format(alertMsg, iWindowL, m_strThisAppName);
 			WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 			::MessageBox(m_pMainWnd->m_hWnd, logmsg, m_strThisAppName, MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 			bRet = TRUE;
@@ -4295,7 +4305,9 @@ BOOL CSazabi::IsLimitChkEx()
 		//GDI/ User /Mamory Limits
 		if (iMemSize > iMemL * 1024 * 1024)
 		{
-			logmsg.Format(_T("システムリソースが不足しています。\nアプリケーション(%s)を終了します。\n SYSTEM Resource allocation failuer.Please close window or restart the application."), m_strThisAppName);
+			CString alertMsg;
+			alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN);
+			logmsg.Format(alertMsg, m_strThisAppName);
 			WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 			m_bAbortFlg = TRUE;
 			::MessageBox(m_pMainWnd->m_hWnd, logmsg, m_strThisAppName, MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
@@ -4317,7 +4329,9 @@ BOOL CSazabi::IsLimitChkEx()
 			iMemSize = GetMemoryUsageSize();
 			if (iMemSize > (iMemL - 250) * 1024 * 1024)
 			{
-				logmsg.Format(_T("警告:システムリソースが不足しています。\n他のウィンドウを閉じるか、アプリケーション(%s)を再起動して下さい。\n SYSTEM Resource allocation failuer.Please close window or restart the application."), m_strThisAppName);
+				CString alertMsg;
+				alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST);
+				logmsg.Format(alertMsg, m_strThisAppName);
 				WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 				::MessageBox(m_pMainWnd->m_hWnd, logmsg, m_strThisAppName, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
 				bRet = TRUE;

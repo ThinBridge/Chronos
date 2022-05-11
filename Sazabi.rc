@@ -951,6 +951,7 @@ END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_STARTING_BROWSER "%s 起動中..."
     IDS_STRING_CLOSE_ALL_WINDOW "全てのウィンドウを閉じますか?"
     IDS_STRING_ADMIN_LOCK_FEATURE "この機能へのアクセスは、システム管理者により制限されています。 "
     IDS_STRING_ZONE_MSG_DBL "要求されたページを既定のブラウザで表示します。"
@@ -964,6 +965,15 @@ BEGIN
     IDS_STRING_PROXY_AUTH_REQUIRED "認証が必要です。\nプロキシ[%s]には、ユーザー名とパスワードを指定する必要があります。"
     IDS_STRING_CONFIRM_INSECURE_CONNECTION "安全な接続ではありません。\n危険性を認識したうえで、接続を続行する場合は、「はい」をクリックして下さい。\n\n ""%s""の所有者によるウェブサイトの設定が不適切です。\n\nあなたの情報が盗まれることを防ぐため、このウェブサイトへの接続は確立されません。\n不正なセキュリティ証明書を使用しています。 \n発行者の証明書が不明であるためこの証明書は信頼されません。 \nサーバーが適正な中間証明書を送信しない可能性があります。 \n\n「いいえ」をクリックすると接続をキャンセルします。"
     IDS_STRING_CONFIRM_LEAVE_PAGE "このサイトを離れますか？\n行った変更が保存されない可能性があります。"
+    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT "起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"
+    IDS_STRING_ALERT_MISSING_FILES "起動できません。再セットアップを行ってください。\n起動に必要なファイルが見つかりません。[%s]"
+    IDS_STRING_CLEARING_CACHE "ブラウザーキャッシュ クリア中..."
+    IDS_STRING_CONFIRM_CLOSE_APPLICATION "%sを終了してもよろしいですか？"
+    IDS_STRING_TOO_MANY_WINDOWS_MSG "ウィンドウの数が上限値(%d)に達しています。\n他の不要なウィンドウを閉じてから再度実行して下さい。(%s)"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT     "ご迷惑をおかけして申し訳ありません。\nシステムリソースが不足しているため\nアプリケーション(%s)を終了します。"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN "システムリソースが不足しています。\nアプリケーション(%s)を終了します。"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST "警告:システムリソースが不足しています。\n他のウィンドウを閉じるか、アプリケーション(%s)を再起動して下さい。"
+    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "VOSで実行中のプロセスを強制終了してもよろしいですか？"
 END
 
 STRINGTABLE
@@ -1109,17 +1119,43 @@ END
 
 STRINGTABLE
 BEGIN
+    ID_OPEN_FILE_CHOOSER_TITLE "開く"
     ID_MSG_FILE_DOWNLOAD_RESTRICTED "ファイル ダウンロードは、システム管理者により制限されています。"
     ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS "別のダウンロード処理を実行中です。\n終了するまで次のファイルのダウンロードは出来ません。"
+    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "ファイルダウンロード"
     ID_DEFAULT_FILE_BASENAME "無題"
     ID_FILE_TYPE_ALL "すべてのファイル(*.*)|*.*||"
     ID_FILE_TYPE_PDF "PDF ドキュメント (*.pdf)|*.pdf||"
+    ID_FILE_TYPE_EXE "Executables (*.exe)|*.exe||"
+    ID_FILE_TYPE_JS  "JavaScriptファイル (*.js)|*.js||"
     ID_DOWNLOAD_FILE_CHOOSER_TITLE "ダウンロードファイルを保存"
     ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "名前を付けてPDF ドキュメントを保存"
     ID_PRINT_TO_PDF_FINISH_MSG "PDFドキュメントの作成が完了しました。"
+    ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "ダウンロード(%d%%) %s"
     ID_TRANSFER_SPEED_B "%I64u B / 秒"
     ID_TRANSFER_SPEED_KB "%0.1f KB / 秒"
     ID_TRANSFER_SPEED_MB "%0.2f MB / 秒"
+    ID_TRANSFER_SIZE_UNDEFERMINED "不明"
+    ID_TRANSFER_PROGRESS_MSG "受信済サイズ %s / 全体サイズ %s ( %d %%)"
+    ID_CONFIRM_CANCEL_DOWNLOAD             "ダウンロードをキャンセルしますか？"
+    ID_DL_START_APP_IN_PROGRESS            "起動中"
+    ID_DL_START_APP_FAILED_BASE            "アプリケーションを起動できません。\n%s"
+    ID_DL_START_APP_FAILED_LOW_RESOURCE    "メモリまたはリソースが不足している恐れがあります。"
+    ID_DL_START_APP_FAILED_FILE_NOT_FOUND  "指定されたファイルが見つかりませんでした。"
+    ID_DL_START_APP_FAILED_PATH_NOT_FOUND  "指定されたパスが見つかりませんでした。"
+    ID_DL_START_APP_FAILED_BAD_FORMAT      ".exeファイルが無効です。Win32の.exeではないか、.exeイメージ内にエラーがあります。"
+    ID_DL_START_APP_FAILED_ACCESSDENIED    "オペレーティングシステムが、指定されたファイルへのアクセスを拒否しました。"
+    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "ファイル名の関連付けが不完全または無効です。"
+    ID_DL_START_APP_FAILED_DDEBUSY         "ほかのDDEトランザクションが現在処理中なので、DDEトランザクションを完了できませんでした。"
+    ID_DL_START_APP_FAILED_DDEFAIL         "DDEトランザクションが失敗しました。"
+    ID_DL_START_APP_FAILED_DDETIMEOUT      "要求がタイムアウトしたので、DDEトランザクションを完了できませんでした。"
+    ID_DL_START_APP_FAILED_DLLNOTFOUND     "指定されたダイナミックリンクライブラリ（DLL）が見つかりませんでした。"
+    ID_DL_START_APP_FAILED_NOASSOC         "指定されたファイル拡張子に関連付けられたアプリケーションがありません。"
+    ID_DL_START_APP_FAILED_OOM             "操作を完了するのに十分なメモリがありません。"
+    ID_DL_START_APP_FAILED_SHARE           "共有違反が発生しました。"
+    ID_DL_START_APP_FAILED_DEFAULT         "例外が発生しました。"
+    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "閉じる"
+    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "ダウンロードの完了"
 END
 
 STRINGTABLE
@@ -1186,6 +1222,66 @@ BEGIN
     ID_ERROR_PAGE_HEADING_MSG "エラー内容："
     ID_ERROR_PAGE_HEADING_NAME "エラー名称："
     ID_ERROR_MISMATCHED_PARAMTER "パラメータが不一致です。"
+END
+
+STRINGTABLE
+BEGIN
+	ID_ALERT_CANNOT_SAVE_CONFIGS "設定ファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。"
+	ID_KEY_COMBINATION_EMPTY     "キーコンビネーションを設定して下さい。"
+	ID_KEY_COMBINATION_CONFIRM   "キーコンビネーションの確認画面\n設定したキーコンビネーションを押したまま、\nEnterキーを押すかOKボタンをクリックして下さい。\n設定値：%s"
+	ID_KEY_COMBINATION_SUCCEEDED "成功\nキーコンビネーションを確認しました。\n設定値：%s\n入力値：%s"
+	ID_KEY_COMBINATION_FAILED    "失敗\nキーコンビネーションの確認に失敗しました。\n設定値：%s\n入力値：%s"
+	ID_ACTION_LABEL_ALLOW "○ 許可"
+	ID_ACTION_LABEL_DENY  "x 拒否"
+	ID_CANNOT_SAVE_URL_FILTER "[URLフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+	ID_CANNOT_LOAD_CUSTOM_SCRIPT "[カスタムスクリプト設定]\nファイルの読込に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+	ID_CANNOT_SAVE_CUSTOM_SCRIPT "[カスタムスクリプト設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+	ID_ALERT_ALREADY_ADDED_DOMAIN "このドメイン名は、既に登録されています。\n%d行目\n%s\n"
+	ID_ALERT_ALREADY_ADDED_URL_OR_FILE "このURL・File名は、既に登録されています。\n%d行目\n%s\n%s\n"
+	ID_ALERT_EMPTY_URL "URLを入力して下さい。"
+	ID_ALERT_EMPTY_FILENAME "ファイル名を入力して下さい。"
+	ID_ALERT_EMPTY_DOMAIN "ドメインを入力して下さい。"
+	ID_INFO_DLG_LIST_HIDE "表示しない"
+	ID_INFO_DLG_LIST_0_5  "0.5秒"
+	ID_INFO_DLG_LIST_1_0  "1.0秒"
+	ID_INFO_DLG_LIST_1_5  "1.5秒"
+	ID_INFO_DLG_LIST_2_0  "2.0秒"
+	ID_INFO_DLG_LIST_2_5  "2.5秒"
+	ID_INFO_DLG_LIST_3_0  "3.0秒"
+	ID_INFO_DLG_LIST_3_5  "3.5秒"
+	ID_INFO_DLG_LIST_4_0  "4.0秒"
+	ID_INFO_DLG_LIST_4_5  "4.5秒"
+	ID_INFO_DLG_LIST_5_0  "5.0秒"
+	ID_INFO_DLG_LIST_5_5  "5.5秒"
+	ID_INFO_DLG_LIST_6_0  "6.0秒"
+	ID_INFO_DLG_LIST_6_5  "6.5秒"
+	ID_INFO_DLG_LIST_7_0  "7.0秒"
+	ID_INFO_DLG_LIST_7_5  "7.5秒"
+	ID_INFO_DLG_LIST_8_0  "8.0秒"
+	ID_INFO_DLG_LIST_8_5  "8.5秒"
+	ID_INFO_DLG_LIST_9_0  "9.0秒"
+	ID_INFO_DLG_LIST_9_5  "9.5秒"
+	ID_INFO_DLG_LIST_10_0 "10.0秒"
+    ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "「開封済みにする」を表示しない"
+    ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "「開封済みにする」を表示する"
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER       "「転送する」を表示する"
+    ID_MISSING_PROXY_CONFIG "[インターネット接続設定]\n[インターネット接続設定]-「マニュアル設定」を選択した場合\nプロキシ サーバー/自動構成スクリプトを登録して下さい。(空白不可)"
+END
+
+STRINGTABLE
+BEGIN
+    ID_AUTH_ALERT_EMPTY_USER "ユーザー名を入力して下さい。"
+    ID_AUTH_REQUIRED "認証が必要です。"
+    ID_AUTH_ALERT_MISMATCHED_PASSWORD "新しいパスワードとパスワードの確認が一致していません。再度入力して下さい。"
+    ID_AUTH_CHANGE_PASSWORD "パスワード変更"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DEBUG_ITEMS_COUNT "%d件"
+    ID_DEBUG_LINES_COUNT "%d行"
+    ID_DEBUG_CONFIRM_SAVE_RESULT "保存しますか？"
+    ID_DEBUG_ALERT_SAVE_FAILED "ファイルの保存に失敗しました。\n\n別のプログラムがファイルを開いているか、書込権限が不足しています。操作を完了できません。ファイルを閉じてから再実行してください。\n\n%s"
 END
 
 #endif    // 日本語 (日本) resources
@@ -2139,6 +2235,7 @@ END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_STARTING_BROWSER "Starting %s..."
     IDS_STRING_CLOSE_ALL_WINDOW "Are you sure to close all windows?"
     IDS_STRING_ADMIN_LOCK_FEATURE 
                             "System administrator restricted access to this feature. "
@@ -2153,6 +2250,15 @@ BEGIN
     IDS_STRING_PROXY_AUTH_REQUIRED "Authentication required.\nThe proxy [%s] requries username and password."
     IDS_STRING_CONFIRM_INSECURE_CONNECTION "Insecure connection.\nClick ""Yes"" to contine connection if you have understanding about the risk.\n\n The owner of ""%s"" did not configure the website.\n\nWe blocked the connection to the website to guard your information to be stolen.\nIt uses an invalid security certificate.\nThe certificate is not trusted due to its unknown certificator.\nThe web server might send an invalid intermediate certificate.\n\nClick ""No"" to cancel the connection."
     IDS_STRING_CONFIRM_LEAVE_PAGE "Are you sure to leave this webpage?\nUnsaved changes may be lost."
+    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT "Closing application due to max out the limit of the running time (maximum = %d min.)\nPlease restart the application."
+    IDS_STRING_ALERT_MISSING_FILES "Cannot start application. Please setup again.\nSomme required files are missing. [%s]"
+    IDS_STRING_CLEARING_CACHE "Clearing browser caches..."
+    IDS_STRING_CONFIRM_CLOSE_APPLICATION "Do you want %s to be closed?"
+    IDS_STRING_TOO_MANY_WINDOWS_MSG "Too many windows (maximum count = %d): Please close obsolete windows. (%s)"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT     "We are sorry for causing you trouble.\nClosing application (%s) due to low system resource."
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN "SYSTEM Resource allocation failuer. Closing the application (%s)."
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST "SYSTEM Resource allocation failuer. Please close window or restart the application (%s)."
+    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "Do you want the process running on VOS to be terminated?"
 END
 
 STRINGTABLE
@@ -2299,17 +2405,43 @@ END
 
 STRINGTABLE
 BEGIN
+    ID_OPEN_FILE_CHOOSER_TITLE "Open"
     ID_MSG_FILE_DOWNLOAD_RESTRICTED "System administrator restricted file downloads."
     ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS "There is an in-progress download.\nYou cannot start next download until it is finished."
+    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "File Download"
     ID_DEFAULT_FILE_BASENAME "No Title"
     ID_FILE_TYPE_ALL "All (*.*)|*.*||"
     ID_FILE_TYPE_PDF "PDF Documents (*.pdf)|*.pdf||"
+    ID_FILE_TYPE_EXE "Executables (*.exe)|*.exe||"
+    ID_FILE_TYPE_JS  "JavaScript files (*.js)|*.js||"
     ID_DOWNLOAD_FILE_CHOOSER_TITLE "Choose a file to be downloaded"
     ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "Choose a PDF document to be saved"
     ID_PRINT_TO_PDF_FINISH_MSG "Printing as a PDF document finished."
+    ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "Download (%d%%) %s"
     ID_TRANSFER_SPEED_B "%I64u B / Sec."
     ID_TRANSFER_SPEED_KB "%0.1f KB / Sec."
     ID_TRANSFER_SPEED_MB "%0.2f MB / Sec."
+    ID_TRANSFER_SIZE_UNDEFERMINED "Undefermined"
+    ID_TRANSFER_PROGRESS_MSG "%s received / %s total ( %d %%)"
+    ID_CONFIRM_CANCEL_DOWNLOAD             "Do you want the download to be canceled?"
+    ID_DL_START_APP_IN_PROGRESS            "Starting"
+    ID_DL_START_APP_FAILED_BASE            "Failed to start application.\n%s"
+    ID_DL_START_APP_FAILED_LOW_RESOURCE    "Low memory or system resource."
+    ID_DL_START_APP_FAILED_FILE_NOT_FOUND  "Specified file not found."
+    ID_DL_START_APP_FAILED_PATH_NOT_FOUND  "Specified path not found."
+    ID_DL_START_APP_FAILED_BAD_FORMAT      "Invalid executable file. It may be a non-Win32 executable or broken."
+    ID_DL_START_APP_FAILED_ACCESSDENIED    "File access denied by the operating system."
+    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "Incomplete or invalid file association."
+    ID_DL_START_APP_FAILED_DDEBUSY         "Failed to complete DDE transaction, due to in-progress transaction by other application."
+    ID_DL_START_APP_FAILED_DDEFAIL         "Failed to complete DDE transaction."
+    ID_DL_START_APP_FAILED_DDETIMEOUT      "Failed to complete DDE transaction, due to timed out."
+    ID_DL_START_APP_FAILED_DLLNOTFOUND     "Missing DLL (dynamic link library)."
+    ID_DL_START_APP_FAILED_NOASSOC         "No associated applitaion for the file type."
+    ID_DL_START_APP_FAILED_OOM             "Low memory to complete the operation."
+    ID_DL_START_APP_FAILED_SHARE           "Sharing violation is reported."
+    ID_DL_START_APP_FAILED_DEFAULT         "Unknown exception is reported."
+    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "Close"
+    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "Completely Downloaded"
 END
 
 STRINGTABLE
@@ -2376,6 +2508,66 @@ BEGIN
     ID_ERROR_PAGE_HEADING_MSG "Error Message: "
     ID_ERROR_PAGE_HEADING_NAME "Error Name: "
     ID_ERROR_MISMATCHED_PARAMTER "Mismatched parameters."
+END
+
+STRINGTABLE
+BEGIN
+	ID_ALERT_CANNOT_SAVE_CONFIGS "Failed to save configurations to the file.\nIt may be held by some other applications.\nPlease retry after closing other applications."
+	ID_KEY_COMBINATION_EMPTY     "Please set any key combination."
+	ID_KEY_COMBINATION_CONFIRM   "Confirming the key combination.\nPress Enter key or click the OK button, with pressed key combination.\nConfig: %s"
+	ID_KEY_COMBINATION_SUCCEEDED "Success\nConfimed the key combination.\nConfig: %s\nInput: %s"
+	ID_KEY_COMBINATION_FAILED    "Failure\nFailed to confirm the key combination.\nConfig: %s\nInput: %s"
+	ID_ACTION_LABEL_ALLOW "Allow"
+	ID_ACTION_LABEL_DENY  "Deny"
+	ID_CANNOT_SAVE_URL_FILTER "[URL filter]\nCould not save the file.\nIt may be held by some other applications.\nPlease retry after closing other applications.\n%s"
+	ID_CANNOT_LOAD_CUSTOM_SCRIPT "[Custom scripts]\nCould not load the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
+	ID_CANNOT_SAVE_CUSTOM_SCRIPT "[Custom scripts]\nCould not save the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
+	ID_ALERT_ALREADY_ADDED_DOMAIN "Already added domain.\nLine at %d\n%s\n"
+	ID_ALERT_ALREADY_ADDED_URL_OR_FILE "Already added URL or filename.\nLine at %d\n%s\n%s\n"
+	ID_ALERT_EMPTY_URL "Please input any URL."
+	ID_ALERT_EMPTY_FILENAME "Please input any filename."
+	ID_ALERT_EMPTY_DOMAIN "Please input any domain."
+	ID_INFO_DLG_LIST_HIDE "Hide"
+	ID_INFO_DLG_LIST_0_5  "0.5 sec."
+	ID_INFO_DLG_LIST_1_0  "1.0 sec."
+	ID_INFO_DLG_LIST_1_5  "1.5 sec."
+	ID_INFO_DLG_LIST_2_0  "2.0 sec."
+	ID_INFO_DLG_LIST_2_5  "2.5 sec."
+	ID_INFO_DLG_LIST_3_0  "3.0 sec."
+	ID_INFO_DLG_LIST_3_5  "3.5 sec."
+	ID_INFO_DLG_LIST_4_0  "4.0 sec."
+	ID_INFO_DLG_LIST_4_5  "4.5 sec."
+	ID_INFO_DLG_LIST_5_0  "5.0 sec."
+	ID_INFO_DLG_LIST_5_5  "5.5 sec."
+	ID_INFO_DLG_LIST_6_0  "6.0 sec."
+	ID_INFO_DLG_LIST_6_5  "6.5 sec."
+	ID_INFO_DLG_LIST_7_0  "7.0 sec."
+	ID_INFO_DLG_LIST_7_5  "7.5 sec."
+	ID_INFO_DLG_LIST_8_0  "8.0 sec."
+	ID_INFO_DLG_LIST_8_5  "8.5 sec."
+	ID_INFO_DLG_LIST_9_0  "9.0 sec."
+	ID_INFO_DLG_LIST_9_5  "9.5 sec."
+	ID_INFO_DLG_LIST_10_0 "10.0 sec."
+    ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "Hide ""Mark as Opened"""
+    ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "Show ""Mark as Opened"""
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER       "Show ""Transfer"""
+    ID_MISSING_PROXY_CONFIG "[Internet connection]\n[Internet connection]-""Manual settings"" requires any proxy server or PAC file. It cannot be blank."
+END
+
+STRINGTABLE
+BEGIN
+    ID_AUTH_ALERT_EMPTY_USER "Please input the username."
+    ID_AUTH_REQUIRED "Authentication required."
+    ID_AUTH_ALERT_MISMATCHED_PASSWORD "Confimation failed: mismatched password. Please retype."
+    ID_AUTH_CHANGE_PASSWORD "Change password"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DEBUG_ITEMS_COUNT "%d items"
+    ID_DEBUG_LINES_COUNT "%d lines"
+    ID_DEBUG_CONFIRM_SAVE_RESULT "Do you want it to be saved?"
+    ID_DEBUG_ALERT_SAVE_FAILED "Failed to save the file.\n\nIt may be held by some other applications, or missing writing permission.\nCould not complete the operation. Please retry after closing the file."
 END
 
 #endif    // English resources
