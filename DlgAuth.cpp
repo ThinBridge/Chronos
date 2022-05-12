@@ -35,7 +35,9 @@ void CDlgAuth::OnBnClickedOk()
 	GetDlgItemText(IDC_EDIT_PW, m_strPW);
 	if (m_strID.IsEmpty())
 	{
-		::MessageBox(this->m_hWnd, _T("ユーザー名を入力して下さい。"), theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+		CString alertMsg;
+		alertMsg.LoadString(ID_AUTH_ALERT_EMPTY_USER);
+		::MessageBox(this->m_hWnd, alertMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 		((CButton*)GetDlgItem(IDC_EDIT_ID))->SetFocus();
 	}
 	CDialogEx::OnOK();
@@ -50,7 +52,7 @@ BOOL CDlgAuth::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	if (m_strMsgTxt.IsEmpty())
-		m_strMsgTxt = _T("認証が必要です。");
+		m_strMsgTxt.LoadString(ID_AUTH_REQUIRED);
 	if (m_strCaption.IsEmpty())
 	{
 		CString strCaption;
@@ -286,7 +288,9 @@ void CDlgAuthPWC::OnBnClickedOk()
 	GetDlgItemText(IDC_EDIT_PW_NEW2, m_strPW_NEW2);
 	if (m_strPW_NEW != m_strPW_NEW2)
 	{
-		::MessageBox(this->m_hWnd, _T("新しいパスワードとパスワードの確認が一致していません。再度入力して下さい。"), theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+		CString alertMsg;
+		alertMsg.LoadString(ID_AUTH_ALERT_MISMATCHED_PASSWORD);
+		::MessageBox(this->m_hWnd, alertMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 		SetDlgItemText(IDC_EDIT_PW_NEW2, _T(""));
 		((CButton*)GetDlgItem(IDC_EDIT_PW_NEW2))->SetFocus();
 		return;
@@ -303,7 +307,7 @@ BOOL CDlgAuthPWC::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 	if (m_strMsgTxt.IsEmpty())
-		m_strMsgTxt = _T("パスワード変更");
+		m_strMsgTxt.LoadString(ID_AUTH_CHANGE_PASSWORD);
 	if (m_strCaption.IsEmpty())
 	{
 		CString strCaption;

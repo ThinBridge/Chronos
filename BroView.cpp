@@ -1247,7 +1247,9 @@ void CChildView::OnNewSession()
 	try
 	{
 		FRM->Init_MsgDlg();
-		FRM->SetMessage_MsgDlg(_T("新規セッション起動中..."));
+		CString startingMsg;
+		startingMsg.LoadString(IDS_STRING_STARTING_NEW_SESSION);
+		FRM->SetMessage_MsgDlg(startingMsg);
 		CString logmsg;
 		logmsg.Format(_T("CV_WND:0x%08x OnNew"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
@@ -1280,8 +1282,11 @@ void CChildView::OnPrintPDF()
 		//Download禁止
 		if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 		{
-			if (theApp.IsWnd(m_pwndFrame))
-				theApp.SB_MessageBox(m_pwndFrame->m_hWnd, _T("ファイル ダウンロードは、システム管理者により制限されています。"), NULL, MB_OK | MB_ICONWARNING, TRUE);
+			if (theApp.IsWnd(m_pwndFrame)) {
+				CString restrictedMsg;
+				restrictedMsg.LoadString(ID_MSG_FILE_DOWNLOAD_RESTRICTED);
+				theApp.SB_MessageBox(m_pwndFrame->m_hWnd, restrictedMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
+			}
 			return;
 		}
 
@@ -1289,8 +1294,9 @@ void CChildView::OnPrintPDF()
 		strFileName = m_strTitle;
 		strFileName.TrimLeft();
 		strFileName.TrimRight();
-		if (strFileName.IsEmpty())
-			strFileName = _T("無題");
+		if (strFileName.IsEmpty()) {
+			strFileName.LoadString(ID_DEFAULT_FILE_BASENAME);
+		}
 
 		//ファイル名に使えない文字を置き換える。
 		strFileName = SBUtil::GetValidFileName(strFileName);
@@ -1318,11 +1324,11 @@ void CChildView::OnPrintPDF()
 		}
 
 		CString szFilter;
-		szFilter = _T("PDF ドキュメント (*.pdf)|*.pdf||");
+		szFilter.LoadString(ID_FILE_TYPE_PDF);
 		CString strFullPath;
 		strFullPath.Format(_T("%s%s"), strPath, strFileName);
 		CString strTitle;
-		strTitle = _T("名前を付けてPDF ドキュメントを保存");
+		strTitle.LoadString(ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE);
 		CStringW strCaption(theApp.m_strThisAppName);
 		CStringW strRootDrive(theApp.m_AppSettings.GetRootPath());
 		CStringW strMsg;
@@ -1384,7 +1390,10 @@ void CChildView::OnPrintPDF()
 			CefRefPtr<CefPdfPrintCallback> callback;
 
 			m_cefBrowser->GetHost()->PrintToPDF(strPDFPath, stPDFSetting, callback);
-			theApp.SB_MessageBox(m_pwndFrame->m_hWnd, _T("PDFドキュメントの作成が完了しました。"), NULL, MB_ICONINFORMATION | MB_OK, TRUE, 5000);
+
+			CString finishMsg;
+			finishMsg.LoadString(ID_PRINT_TO_PDF_FINISH_MSG);
+			theApp.SB_MessageBox(m_pwndFrame->m_hWnd, finishMsg, NULL, MB_ICONINFORMATION | MB_OK, TRUE, 5000);
 		}
 		if (pFileDlg)
 		{
@@ -2458,7 +2467,9 @@ LRESULT CChildView::OnAuthenticate(WPARAM wParam, LPARAM lParam)
 	CEFAuthenticationValues *lpValues = (CEFAuthenticationValues *)wParam;
 	CString strHost(lpValues->lpszHost);
 	CDlgAuth Dlg(this);
-	Dlg.m_strMsgTxt.Format(_T("認証が必要です。\n接続先ホスト[%s]には、ユーザー名とパスワードが必要です。"), strHost);
+	CString authRequiredMsg;
+	authRequiredMsg.LoadString(IDS_STRING_HOST_AUTH_REQUIRED);
+	Dlg.m_strMsgTxt.Format(authRequiredMsg, strHost);
 
 	Dlg.Create(IDD_DLG_AUTH, this);
 	Dlg.CenterWindow(this);

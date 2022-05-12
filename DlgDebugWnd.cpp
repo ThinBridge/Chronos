@@ -102,8 +102,10 @@ BOOL CDlgDebugWnd::OnInitDialog()
 	ListView_SetItemState(m_List.m_hWnd, -1, 0, LVIS_SELECTED);
 
 	((CButton*)GetDlgItem(IDC_CHECK1))->SetCheck(m_bAutoScFlg);
+	CString strCount;
+	strCount.LoadString(ID_DEBUG_ITEMS_COUNT);
 	CString strDataLineCnt;
-	strDataLineCnt.Format(_T("%d件"), m_pOwnerData.GetCount());
+	strDataLineCnt.Format(strCount, m_pOwnerData.GetCount());
 	SetDlgItemText(IDC_STATIC_LINE, strDataLineCnt);
 
 	int iRet = 0;
@@ -194,8 +196,10 @@ void CDlgDebugWnd::OnBnClickedOk()
 {
 	ClearData();
 	ListView_SetItemCountEx(m_List.m_hWnd, m_pOwnerData.GetCount(), LVSICF_NOINVALIDATEALL);
+	CString strCount;
+	strCount.LoadString(ID_DEBUG_ITEMS_COUNT);
 	CString strDataLineCnt;
-	strDataLineCnt.Format(_T("%d件"), m_pOwnerData.GetCount());
+	strDataLineCnt.Format(strCount, m_pOwnerData.GetCount());
 	SetDlgItemText(IDC_STATIC_LINE, strDataLineCnt);
 	m_List.InvalidateRect(NULL, TRUE);
 }
@@ -439,8 +443,10 @@ void CDlgDebugWnd::SetLogMsg(
 				pData->mMESSAGE6 = pMESSAGE6;
 			m_pOwnerData.Add(pData);
 			::SendMessageTimeout(m_List.m_hWnd, LVM_SETITEMCOUNT, (WPARAM)m_pOwnerData.GetCount(), (LPARAM)LVSICF_NOSCROLL | LVSICF_NOINVALIDATEALL, SMTO_NORMAL, 250, NULL);
+			CString strCount;
+			strCount.LoadString(ID_DEBUG_ITEMS_COUNT);
 			CString strDataLineCnt;
-			strDataLineCnt.Format(_T("%d件"), m_pOwnerData.GetCount());
+			strDataLineCnt.Format(strCount, m_pOwnerData.GetCount());
 			SetDlgItemText(IDC_STATIC_LINE, strDataLineCnt);
 			if (m_bAutoScFlg)
 			{
@@ -657,7 +663,9 @@ BOOL CDlgSCEditor::PreTranslateMessage(MSG* pMsg)
 			lr = CDialogEx::PreTranslateMessage(pMsg);
 
 			dwLineIndex = (DWORD)m_Edit.SendMessage(EM_LINEFROMCHAR, -1, 0);
-			strLine.Format(_T("%d行"), dwLineIndex + 1);
+			CString strLineCount;
+			strLineCount.LoadString(ID_DEBUG_ITEMS_COUNT);
+			strLine.Format(strLineCount, dwLineIndex + 1);
 			SetDlgItemText(IDC_STATIC_LINE, strLine);
 			return lr;
 		}
@@ -744,67 +752,7 @@ void CDlgSCEditor::OnBnClickedButton1()
 	int nPos = LOWORD(m_Edit.CharFromPos(m_Edit.GetCaretPos()));
 	m_Edit.SetSel(nPos, nPos);
 	CString strHelpString;
-	strHelpString = _T("'##################################################################################\r\n");
-	strHelpString += _T("'URLリダイレクト スクリプト ヘルプ\r\n");
-	strHelpString += _T("'ファンクション　OnRedirectにリダイレクト処理を記述します。\r\n");
-	strHelpString += _T("'スクリプト言語は、VBScriptベースになります。\r\n");
-	strHelpString += _T("'戻り値として、起動したいブラウザーを記述します。\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'  既定のブラウザーで表示する場合\r\n'    OnRedirect=\"Default\"\r\n");
-	strHelpString += _T("'  Microsoft Internet Explorerにリダイレクトする場合\r\n'    OnRedirect=\"IE\"\r\n");
-	strHelpString += _T("'  Mozilla Firefoxにリダイレクトする場合\r\n'    OnRedirect=\"Firefox\"\r\n");
-	strHelpString += _T("'  Google Chromeにリダイレクトする場合\r\n'    OnRedirect=\"Chrome\"\r\n");
-	strHelpString += _T("'  Microsoft Edgeにリダイレクトする場合\r\n'    OnRedirect=\"Edge\"\r\n");
-	strHelpString += _T("'  指定ブラウザー1にリダイレクトする場合\r\n'    OnRedirect=\"Custom1\"\r\n");
-	strHelpString += _T("'  指定ブラウザー2にリダイレクトする場合\r\n'    OnRedirect=\"Custom2\"\r\n");
-	strHelpString += _T("'  指定ブラウザー3にリダイレクトする場合\r\n'    OnRedirect=\"Custom3\"\r\n");
-	strHelpString += _T("'  指定ブラウザー4にリダイレクトする場合\r\n'    OnRedirect=\"Custom4\"\r\n");
-	strHelpString += _T("'  指定ブラウザー5にリダイレクトする場合\r\n'    OnRedirect=\"Custom5\"\r\n");
-	strHelpString += _T("'  表示を禁止する場合\r\n'    OnRedirect=\"Block\"\r\n");
-	strHelpString += _T("'------------------------------------------------------------\r\n");
-	strHelpString += _T("'グローバル変数(予約語)：\r\n");
-	strHelpString += _T("'以下のグローバル変数を利用することが可能です。\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'TB_Global_URL\t(文字列値)\r\n");
-	strHelpString += _T("'  画面遷移先のURL情報\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'TB_Global_SCHME\t(文字列値)\r\n");
-	strHelpString += _T("'  画面遷移先のURLスキーマ情報 http/https\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'TB_Global_HOSTNAME\t(文字列値)\r\n");
-	strHelpString += _T("'  画面遷移先のURLホスト情報\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'TB_Global_PORT\t(文字列値)\r\n");
-	strHelpString += _T("'  画面遷移先のURLポート情報\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'TB_Global_URL_PATH\t(文字列値)\r\n");
-	strHelpString += _T("'  画面遷移先のURLパス情報\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'例)「https://www.google.co.jp/search?q=Chronos」を開く場合\r\n");
-	strHelpString += _T("'TB_Global_URL           :https://www.google.co.jp/search\r\n");
-	strHelpString += _T("'TB_Global_SCHME         :https\r\n");
-	strHelpString += _T("'TB_Global_HOSTNAME      :www.google.co.jp\r\n");
-	strHelpString += _T("'TB_Global_PORT          :443\r\n");
-	strHelpString += _T("'TB_Global_URL_PATH      :/search\r\n");
-	strHelpString += _T("'TB_TRACE_LOG(\"TB_Global_URL：\"&TB_Global_URL)\r\n");
-	strHelpString += _T("'TB_TRACE_LOG(\"TB_Global_SCHME：\"&TB_Global_SCHME)\r\n");
-	strHelpString += _T("'TB_TRACE_LOG(\"TB_Global_HOSTNAME：\"&TB_Global_HOSTNAME)\r\n");
-	strHelpString += _T("'TB_TRACE_LOG(\"TB_Global_PORT：\"&TB_Global_PORT)\r\n");
-	strHelpString += _T("'TB_TRACE_LOG(\"TB_Global_URL_PATH：\"&TB_Global_URL_PATH)\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'TB_Global_TOP_PAGE\t(真偽値)\r\n");
-	strHelpString += _T("'  トップURLかサブURL(Frame/iFrame)かの情報：True(トップURL)　False(サブURL)\r\n");
-	strHelpString += _T("\r\n");
-	strHelpString += _T("'TB_TRACE_LOG(文字列値)\r\n");
-	strHelpString += _T("'  Debug TRACE Windowにログ出力を行います。\r\n");
-	strHelpString += _T("'------------------------------------------------------------\r\n");
-	strHelpString += _T("'例)https://www.yahoo.co.jpの場合は、IEにリダイレクトする。\r\n");
-	strHelpString += _T("'Function OnRedirect()\r\n");
-	strHelpString += _T("'  IF TB_Global_URL=\"https://www.yahoo.co.jp/\" Then\r\n");
-	strHelpString += _T("'    OnRedirect=\"IE\"\r\n");
-	strHelpString += _T("'  End IF\r\n");
-	strHelpString += _T("'End Function\r\n");
-	strHelpString += _T("'##################################################################################\r\n");
+	strHelpString.LoadString(ID_URL_REDIRECT_SCRIPT_HELP);
 	m_Edit.ReplaceSel(strHelpString, TRUE);
 	this->m_Edit.SetFocus();
 }
@@ -821,7 +769,14 @@ void CDlgSCEditor::OnBnClickedButtonTraceLog()
 {
 	int nPos = LOWORD(m_Edit.CharFromPos(m_Edit.GetCaretPos()));
 	m_Edit.SetSel(nPos, nPos);
-	m_Edit.ReplaceSel(_T("TB_TRACE_LOG(\"ログ出力：\")\r\n"), TRUE);
+	CString defaultLog;
+	defaultLog.LoadString(ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT);
+	CString templateStr;
+	templateStr = _T("TB_TRACE_LOG(\"");
+	templateStr +=defaultLog;
+	templateStr += _T("\")\r\n");
+	defaultLog.LoadString(ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT);
+	m_Edit.ReplaceSel(templateStr, TRUE);
 	this->m_Edit.SetFocus();
 }
 void CDlgSCEditor::OnBnClickedButtonUrl()
@@ -835,7 +790,9 @@ void CDlgSCEditor::OnBnClickedButtonUrl()
 void CDlgSCEditor::OnBnClickedOk()
 {
 	int iRet = 0;
-	iRet = ::MessageBox(this->m_hWnd, _T("保存しますか？"), theApp.m_strThisAppName, MB_ICONQUESTION | MB_YESNO);
+	CString confirmMsg;
+	confirmMsg.LoadString(ID_DEBUG_CONFIRM_SAVE_RESULT);
+	iRet = ::MessageBox(this->m_hWnd, confirmMsg, theApp.m_strThisAppName, MB_ICONQUESTION | MB_YESNO);
 	if (iRet != IDYES)
 		return;
 	WriteText();
@@ -900,8 +857,10 @@ void CDlgSCEditor::WriteText()
 	}
 	else
 	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_DEBUG_ALERT_SAVE_FAILED);
 		CString strSaveMsg;
-		strSaveMsg.Format(_T("ファイルの保存に失敗しました。\n\n別のプログラムがファイルを開いているか、書込権限が不足しています。操作を完了できません。ファイルを閉じてから再実行してください。\n\n%s"), m_strFilePath);
+		strSaveMsg.Format(alertMsg, m_strFilePath);
 		::MessageBox(this->m_hWnd, strSaveMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 	}
 }

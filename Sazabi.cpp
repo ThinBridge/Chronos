@@ -132,8 +132,10 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 #ifdef _DEBUG
 			return TRUE;
 #endif
+			CString alertMsg;
+			alertMsg.LoadString(IDS_STRING_ALERT_MISSING_FILES);
 			CString strMsg;
-			strMsg.Format(_T("%s\n起動に必要なファイルが見つかりません。[%s]"), _T("起動できません。再セットアップを行ってください。"), strChronosVirtAppPath);
+			strMsg.Format(alertMsg, strChronosVirtAppPath);
 			::MessageBox(NULL, strMsg, m_strThisAppName, MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 			//Debugで困るのでShitキーを押している場合は、続行。
 			if (::GetKeyState(VK_SHIFT) < 0)
@@ -1600,8 +1602,10 @@ int CSazabi::ExitInstance()
 			ProgressDlg DlgMsgP(NULL);
 			DlgMsgP.Create(MAKEINTRESOURCE(IDD_DIALOG1), NULL);
 			DlgMsgP.ShowWindow(SW_SHOW);
+			CString statusMsg;
+			statusMsg.LoadString(IDS_STRING_CLEARING_CACHE);
 			CString strDlgMsg;
-			strDlgMsg.Format(_T("ブラウザーキャッシュ クリア中..."));
+			strDlgMsg.Format(statusMsg);
 			DlgMsgP.SetMsg(strDlgMsg);
 
 			this->UnInitializeCef();
@@ -1623,8 +1627,10 @@ int CSazabi::ExitInstance()
 					hMutex = ::CreateMutex(NULL, FALSE, _T("tfgszb_close"));
 					if (::GetLastError() != ERROR_ALREADY_EXISTS)
 					{
+						CString confirmMsg;
+						confirmMsg.LoadString(IDS_STRING_CONFIRM_CLOSE_APPLICATION);
 						CString strMsg;
-						strMsg.Format(_T("%s%s"), m_strThisAppName, _T("を終了してもよろしいですか？"));
+						strMsg.Format(confirmMsg, m_strThisAppName);
 						int iRt = 0;
 						//シャットダウン処理中は、メッセージボックスを表示しない。
 						if (m_bShutdownFlg)
@@ -2088,8 +2094,10 @@ BOOL CSazabi::CloseVOSProc()
 	strString.Replace(_T("\r\n"), _T("\n"));
 	if (!strString.IsEmpty())
 	{
+		CString confirmMsg;
+		confirmMsg.LoadString(IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS);
 		CString strMsg;
-		strMsg.Format(_T("%s\n%s"), _T("VOSで実行中のプロセスを強制終了してもよろしいですか？"), strString);
+		strMsg.Format(_T("%s\n%s"), confirmMsg, strString);
 		int iRet = AfxMessageBox(strMsg, MB_ICONQUESTION | MB_YESNO);
 		if (iRet != IDYES)
 			return FALSE;
@@ -3395,29 +3403,49 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 	this->m_pSettingDlg->SetTitle(strTitle);
 
 	//全般設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetGen), _T("全般設定"), IDD_SETTINGS_DLG_GEN, _T("全般設定"));
+	CString titleGen;
+	titleGen.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_GEN);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetGen), titleGen, IDD_SETTINGS_DLG_GEN, titleGen);
 	//画面表示設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDSP), _T("画面表示設定"), IDD_SETTINGS_DLG_DSP, _T("画面表示設定"));
+	CString titleDSP;
+	titleDSP.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_DSP);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDSP), titleDSP, IDD_SETTINGS_DLG_DSP, titleDSP);
 	//起動関連設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetINIT), _T("起動関連設定"), IDD_SETTINGS_DLG_INIT, _T("起動関連設定"));
+	CString titleINIT;
+	titleINIT.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_DSP);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetINIT), titleINIT, IDD_SETTINGS_DLG_INIT, titleINIT);
 	//インターネット接続設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetConnectionSetting), _T("インターネット接続設定"), IDD_SETTINGS_DLG_CONNECTION, _T("インターネット接続設定"));
+	CString titleConnection;
+	titleConnection.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetConnectionSetting), titleConnection, IDD_SETTINGS_DLG_CONNECTION, titleConnection);
 	//リソース制限設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCAP), _T("機能制限設定"), IDD_SETTINGS_DLG_CAP, _T("機能制限設定"));
+	CString titleCAP;
+	titleCAP.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CAP);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCAP), titleCAP, IDD_SETTINGS_DLG_CAP, titleCAP);
 	//リダイレクト設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetSEC), _T("リダイレクト設定"), IDD_SETTINGS_DLG_SEC, _T("リダイレクト設定"));
+	CString titleSEC;
+	titleSEC.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_SEC);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetSEC), titleSEC, IDD_SETTINGS_DLG_SEC, titleSEC);
 	//URLフィルター設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDomainFilter), _T("URLフィルター設定"), IDD_SETTINGS_DLG_URL_FILTER, _T("URLフィルター設定"));
+	CString titleURLFilter;
+	titleURLFilter.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDomainFilter), titleURLFilter, IDD_SETTINGS_DLG_URL_FILTER, titleURLFilter);
 	//CustomScript設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCustomScript), _T("カスタムスクリプト設定"), IDD_SETTINGS_DLG_CUSTOM_SCRIPT, _T("カスタムスクリプト設定"));
+	CString titleCustomScript;
+	titleCustomScript.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCustomScript), titleCustomScript, IDD_SETTINGS_DLG_CUSTOM_SCRIPT, titleCustomScript);
 
 	//ログ出力設定
-	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetLog), _T("ログ出力設定"), IDD_SETTINGS_DLG_LOG, _T("ログ出力設定"));
+	CString titleLog;
+	titleLog.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_LOG);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetLog), titleLog, IDD_SETTINGS_DLG_LOG, titleLog);
 
 	if (this->IsSGMode())
 	{
 		//ファイルマネージャ設定
-		this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetFileMgr), _T("ファイルマネージャ設定"), IDD_SETTINGS_DLG_FILEMGR, _T("ファイルマネージャ設定"));
+		CString titleFileMgr;
+		titleFileMgr.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR);
+		this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetFileMgr), titleFileMgr, IDD_SETTINGS_DLG_FILEMGR, titleFileMgr);
 	}
 
 	this->m_pSettingDlg->DoModal();
@@ -4066,13 +4094,16 @@ void CSazabi::InitializeCef()
 		CefString(&settings.user_agent) = strUA.GetString();
 	}
 
-	// 日本語ロケールのみ対応
+	CString strLocale;
+	strLocale.LoadString(IDS_STRING_CEF_LOCALE);
 	CefString strCefLocale;
-	strCefLocale = _T("ja");
+	strCefLocale = strLocale;
 	CefString(&settings.locale) = strCefLocale;
 
+	CString strLAcceptLanguageList;
+	strLAcceptLanguageList.LoadString(IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST);
 	CefString strCefAcceptLanguageList;
-	strCefAcceptLanguageList = _T("ja-JP");
+	strCefAcceptLanguageList = strLAcceptLanguageList;
 	CefString(&settings.accept_language_list) = strCefAcceptLanguageList;
 
 	// キャッシュフォルダのパスを取得する。
@@ -4262,7 +4293,9 @@ BOOL CSazabi::IsLimitChkEx()
 		//Window Count Limits
 		if (iWindowCnt + 1 > iWindowL)
 		{
-			logmsg.Format(_T("ウィンドウの数が上限値(%d)に達しています。\n他の不要なウィンドウを閉じてから再度実行して下さい。(%s)\n SYSTEM Resource allocation failuer.Please close window or restart the application."), iWindowL, m_strThisAppName);
+			CString alertMsg;
+			alertMsg.LoadString(IDS_STRING_TOO_MANY_WINDOWS_MSG);
+			logmsg.Format(alertMsg, iWindowL, m_strThisAppName);
 			WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 			::MessageBox(m_pMainWnd->m_hWnd, logmsg, m_strThisAppName, MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
 			bRet = TRUE;
@@ -4275,7 +4308,9 @@ BOOL CSazabi::IsLimitChkEx()
 		//GDI/ User /Mamory Limits
 		if (iMemSize > iMemL * 1024 * 1024)
 		{
-			logmsg.Format(_T("システムリソースが不足しています。\nアプリケーション(%s)を終了します。\n SYSTEM Resource allocation failuer.Please close window or restart the application."), m_strThisAppName);
+			CString alertMsg;
+			alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN);
+			logmsg.Format(alertMsg, m_strThisAppName);
 			WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 			m_bAbortFlg = TRUE;
 			::MessageBox(m_pMainWnd->m_hWnd, logmsg, m_strThisAppName, MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
@@ -4297,7 +4332,9 @@ BOOL CSazabi::IsLimitChkEx()
 			iMemSize = GetMemoryUsageSize();
 			if (iMemSize > (iMemL - 250) * 1024 * 1024)
 			{
-				logmsg.Format(_T("警告:システムリソースが不足しています。\n他のウィンドウを閉じるか、アプリケーション(%s)を再起動して下さい。\n SYSTEM Resource allocation failuer.Please close window or restart the application."), m_strThisAppName);
+				CString alertMsg;
+				alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST);
+				logmsg.Format(alertMsg, m_strThisAppName);
 				WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 				::MessageBox(m_pMainWnd->m_hWnd, logmsg, m_strThisAppName, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
 				bRet = TRUE;
@@ -4636,8 +4673,10 @@ void CAboutDlg::OnDetailShow()
 {
 	if (theApp.m_AppSettings.GetKeyCombination() != 0)
 	{
+		CString welcomeMsg;
+		welcomeMsg.LoadString(IDS_STRING_WELCOME_MSG);
 		CString strMsg;
-		strMsg.Format(_T("%s Version %sを御利用頂きありがとうございます。"), theApp.m_strThisAppName, theApp.m_strThisAppVersionString);
+		strMsg.Format(welcomeMsg, theApp.m_strThisAppName, theApp.m_strThisAppVersionString);
 		::MessageBox(this->GetSafeHwnd(), strMsg, theApp.m_strThisAppName, MB_ICONINFORMATION | MB_OK);
 		if (theApp.bValidKeyCombi())
 		{

@@ -2199,7 +2199,9 @@ BOOL CBrowserFrame::OnShowPopupMenu(CMFCPopupMenu* pMenuPopup)
 				CMenu Menu;
 				Menu.CreatePopupMenu();
 
-				Menu.AppendMenu(MF_STRING | MF_ENABLED, ID_SETTINGS, _T("設定(&P)..."));
+				CString settingsMenuLabel;
+				settingsMenuLabel.LoadString(ID_SETTINGS_MENU_LABEL);
+				Menu.AppendMenu(MF_STRING | MF_ENABLED, ID_SETTINGS, settingsMenuLabel);
 				pMenuBar->ImportFromMenu(Menu);
 				return CFrameWndBase::OnShowPopupMenu(pMenuPopup);
 			}
@@ -2690,7 +2692,9 @@ void CBrowserFrame::OnCloseDelay()
 	//ダウンロード中の場合は、警告を表示する。
 	if (m_bDownloadProgress)
 	{
-		int iRet = theApp.SB_MessageBox(this->m_hWnd, _T("ダウンロード中のウインドウを閉じてもよろしいですか？\n\nウインドウを閉じるとダウンロードがキャンセルされます。\nダウンロードを続行する場合は、「いいえ」をクリックして下さい。"), NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
+		CString confirmMsg;
+		confirmMsg.LoadString(IDS_STRING_CONFIRM_CANCEL_DOWNLOAD);
+		int iRet = theApp.SB_MessageBox(this->m_hWnd, confirmMsg, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
 		if (iRet != IDYES)
 		{
 			return;
@@ -3013,7 +3017,9 @@ void CBrowserFrame::OpenThinFiler()
 	else
 	{
 		Init_MsgDlg();
-		SetMessage_MsgDlg(_T("ファイルマネージャ起動中..."));
+		CString startingMsg;
+		startingMsg.LoadString(IDS_STRING_STARTING_FILEMGR);
+		SetMessage_MsgDlg(startingMsg);
 		theApp.OpenChFiler(NULL);
 		Release_MsgDlg();
 	}
@@ -3188,9 +3194,9 @@ void CBrowserFrame::OnAppDeleteCache()
 	if (theApp.IsWnd(theApp.m_pMainWnd))
 	{
 		int iRet = 0;
-		CString strMsg;
-		strMsg = _T("ブラウザーキャッシュを削除しますか？ \n「はい」を押すとブラウザーを再起動します。");
-		iRet = theApp.SB_MessageBox(this->m_hWnd, strMsg, NULL, MB_ICONQUESTION | MB_YESNO, TRUE);
+		CString confirmMsg;
+		confirmMsg.LoadString(IDS_STRING_WELCOME_MSG);
+		iRet = theApp.SB_MessageBox(this->m_hWnd, confirmMsg, NULL, MB_ICONQUESTION | MB_YESNO, TRUE);
 		if (iRet != IDYES)
 			return;
 		theApp.m_pMainWnd->PostMessage(WM_COMMAND, WM_APP_EXIT, NULL);

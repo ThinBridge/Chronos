@@ -43,9 +43,13 @@ public:
 			GetDlgItem(IDC_BUTTON_FO)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_BUTTON_DIRO)->EnableWindow(TRUE);
 			GetDlgItem(IDC_BUTTON_DIRO)->ShowWindow(SW_SHOW);
-			GetDlgItem(IDC_BUTTON1)->SetWindowText(_T("閉じる"));
-			this->SetWindowText(_T("ダウンロードの完了"));
-			m_Msg.SetWindowText(_T("ダウンロードの完了"));
+			CString closeButtonLabel;
+			closeButtonLabel.LoadString(ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE);
+			GetDlgItem(IDC_BUTTON1)->SetWindowText(closeButtonLabel);
+			CString windowTitle;
+			windowTitle.LoadString(ID_DOWNLOAD_COMPLETE_DIALOG_TITLE);
+			this->SetWindowText(windowTitle);
+			m_Msg.SetWindowText(windowTitle);
 			if (!this->IsWindowVisible())
 			{
 				this->ShowWindow(SW_SHOW);
