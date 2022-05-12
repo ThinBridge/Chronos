@@ -1160,11 +1160,11 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_FAILED "一般的なネットワークエラー");
+    ID_ERROR_MSG_FAILED "一般的なネットワークエラー"
     ID_ERROR_MSG_NONE "N/A"
     ID_ERROR_MSG_ABORTED "キャンセルされました。"
     ID_ERROR_MSG_INVALID_ARGUMENT "引数が不正です。"
-    ID_ERROR_MSG_INVALID_HANDLE "ハンドルが不正です。");
+    ID_ERROR_MSG_INVALID_HANDLE "ハンドルが不正です。"
     ID_ERROR_MSG_FILE_NOT_FOUND "ファイルが見つかりません。"
     ID_ERROR_MSG_TIMED_OUT "タイムアウトしました。"
     ID_ERROR_MSG_FILE_TOO_BIG "ファイルサイズが大きすぎます。"
@@ -2508,11 +2508,11 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_FAILED "Common network error");
+    ID_ERROR_MSG_FAILED "Common network error"
     ID_ERROR_MSG_NONE "N/A"
     ID_ERROR_MSG_ABORTED "Aborted."
     ID_ERROR_MSG_INVALID_ARGUMENT "Invalid arguments."
-    ID_ERROR_MSG_INVALID_HANDLE "Invalid handle.");
+    ID_ERROR_MSG_INVALID_HANDLE "Invalid handle."
     ID_ERROR_MSG_FILE_NOT_FOUND "File not found."
     ID_ERROR_MSG_TIMED_OUT "Timed out."
     ID_ERROR_MSG_FILE_TOO_BIG "File size is too large."
