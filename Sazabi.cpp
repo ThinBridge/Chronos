@@ -4094,13 +4094,16 @@ void CSazabi::InitializeCef()
 		CefString(&settings.user_agent) = strUA.GetString();
 	}
 
-	// 日本語ロケールのみ対応
+	CString strLocale;
+	strLocale.LoadString(IDS_STRING_CEF_LOCALE);
 	CefString strCefLocale;
-	strCefLocale = _T("ja");
+	strCefLocale = strLocale;
 	CefString(&settings.locale) = strCefLocale;
 
+	CString strLAcceptLanguageList;
+	strLAcceptLanguageList.LoadString(IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST);
 	CefString strCefAcceptLanguageList;
-	strCefAcceptLanguageList = _T("ja-JP");
+	strCefAcceptLanguageList = strLAcceptLanguageList;
 	CefString(&settings.accept_language_list) = strCefAcceptLanguageList;
 
 	// キャッシュフォルダのパスを取得する。
