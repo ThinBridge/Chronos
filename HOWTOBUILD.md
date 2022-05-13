@@ -23,7 +23,7 @@ Chronosの開発の手引き
 
  1. `setup-cef.bat`に記載されている`CEFVER`を更新する。
     * https://cef-builds.spotifycdn.com/index.html#windows32 に掲載されている「Windows 32」且つ「minimal」のものを使用する。
- 2. `setup-cef.bat`を再実行する。
+ 2. スタートメニューから開発者コマンドプロンプト（Developer Command Prompt for VS 2019）を開き`setup-cef.bat`を再実行する。
  3. Chronosのバージョンを上げる。
     * CEF（Chromium）のメジャーバージョンをChronosのバージョンの3桁目に反映する。
       たとえば、Chromium 96ベースのCEFであれば、Chronosのバージョンは x.x.96.x となる。
