@@ -55,7 +55,7 @@ static TCHAR sgSZB_UA_START[] = _T("Mozilla/5.0 (");
 //調査結果、FirefoxにすればOK, Edge/87.0.0.0をつけてもOK
 //デフォルトのUAをEdgeに変更する対応にする。
 //2021-11-30 ↑の対策がNGになっていることに気がついた。UAにEdgeをつけてもNG
-static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/96.0.4664.55 Safari/537.36 Chronos/SystemGuard");
+static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/95.0.4638.69 Safari/537.36 Chronos/SystemGuard");
 typedef HRESULT(WINAPI* pfnDwmIsCompositionEnabled)(BOOL* pfEnabled);
 typedef HRESULT(WINAPI* pfnDwmGetWindowAttribute)(HWND hwnd, DWORD dwAttribute, LPCVOID pvAttribute, DWORD cbAttribute);
 typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
