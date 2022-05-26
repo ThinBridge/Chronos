@@ -2338,35 +2338,35 @@ public:
 	}
 };
 
-static LPCTSTR gInfoDlgList[] = {
-	_T("ï\é¶ÇµÇ»Ç¢"),
-	_T("0.5ïb"),
-	_T("1.0ïb"),
-	_T("1.5ïb"),
-	_T("2.0ïb"),
-	_T("2.5ïb"),
-	_T("3.0ïb"),
-	_T("3.5ïb"),
-	_T("4.0ïb"),
-	_T("4.5ïb"),
-	_T("5.0ïb"),
-	_T("5.5ïb"),
-	_T("6.0ïb"),
-	_T("6.5ïb"),
-	_T("7.0ïb"),
-	_T("7.5ïb"),
-	_T("8.0ïb"),
-	_T("8.5ïb"),
-	_T("9.0ïb"),
-	_T("9.5ïb"),
-	_T("10.0ïb"),
+static int gInfoDlgList[] = {
+	ID_INFO_DLG_LIST_HIDE,
+	ID_INFO_DLG_LIST_0_5,
+	ID_INFO_DLG_LIST_1_0,
+	ID_INFO_DLG_LIST_1_5,
+	ID_INFO_DLG_LIST_2_0,
+	ID_INFO_DLG_LIST_2_5,
+	ID_INFO_DLG_LIST_3_0,
+	ID_INFO_DLG_LIST_3_5,
+	ID_INFO_DLG_LIST_4_0,
+	ID_INFO_DLG_LIST_4_5,
+	ID_INFO_DLG_LIST_5_0,
+	ID_INFO_DLG_LIST_5_5,
+	ID_INFO_DLG_LIST_6_0,
+	ID_INFO_DLG_LIST_6_5,
+	ID_INFO_DLG_LIST_7_0,
+	ID_INFO_DLG_LIST_7_5,
+	ID_INFO_DLG_LIST_8_0,
+	ID_INFO_DLG_LIST_8_5,
+	ID_INFO_DLG_LIST_9_0,
+	ID_INFO_DLG_LIST_9_5,
+	ID_INFO_DLG_LIST_10_0,
 };
 #define InfoDlgListMaxCnt 21
 
-static LPCTSTR gInfoOpenOp[] = {
-	_T("ÅuäJïïçœÇ›Ç…Ç∑ÇÈÅvÇï\é¶ÇµÇ»Ç¢"),
-	_T("ÅuäJïïçœÇ›Ç…Ç∑ÇÈÅvÇï\é¶Ç∑ÇÈ"),
-	_T("Åuì]ëóÇ∑ÇÈÅvÇï\é¶Ç∑ÇÈ"),
+static int gInfoOpenOp[] = {
+	ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED,
+	ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED,
+	ID_INFO_OPEN_OPTION_SHOW_TRANSFER,
 };
 #define InfoOpenOpMaxCnt 3
 
@@ -2379,7 +2379,7 @@ static inline int GetIDInfoFromStr(LPCTSTR str)
 	CString strTemp;
 	for (int i = 0; i < InfoDlgListMaxCnt; i++)
 	{
-		strTemp = gInfoDlgList[i];
+		strTemp.LoadString(gInfoDlgList[i]);
 		if (strTemp == str2)
 		{
 			iRet = i;
@@ -2394,7 +2394,7 @@ static inline CString GetStrInfoFromID(int iID)
 
 	if (iID < 0 || iID >= InfoDlgListMaxCnt)
 		iID = 0;
-	strRet = gInfoDlgList[iID];
+	strRet.LoadString(gInfoDlgList[iID]);
 	return strRet;
 }
 
@@ -3892,8 +3892,10 @@ public:
 				{
 					if (!strFileName.IsEmpty() && nProgress > 1)
 					{
+						CString progressTitleTemplate;
+						progressTitleTemplate.LoadString(ID_DOWNLOAD_PROGRESS_DIALOG_TITLE);
 						CString strTitle;
-						strTitle.Format(_T("É_ÉEÉìÉçÅ[Éh(%d%%) %s"), nProgress, strFileName);
+						strTitle.Format(progressTitleTemplate, nProgress, strFileName);
 						pDLDlg->SetWindowText(strTitle);
 					}
 

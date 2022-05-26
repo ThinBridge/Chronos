@@ -479,8 +479,10 @@ void CSettingsDialog::OnOK()
 	theApp.m_AppSettingsDlgCurrent.CopyData(theApp.m_AppSettings);
 	if (!theApp.m_AppSettings.SaveDataToFileEx(theApp.m_strSettingFileFullPath))
 	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_ALERT_CANNOT_SAVE_CONFIGS);
 		CString strErrMsg;
-		strErrMsg.Format(_T("設定ファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。"));
+		strErrMsg.Format(alertMsg);
 		::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 	}
 	else
@@ -1054,10 +1056,14 @@ void CDlgSetGen::OnKeyCombiTest()
 	}
 	if (strSettingKey.IsEmpty())
 	{
-		::MessageBox(this->m_hWnd, _T("キーコンビネーションを設定して下さい。"), theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
+		CString emptyKeyCombinationMsg;
+		emptyKeyCombinationMsg.LoadString(ID_KEY_COMBINATION_EMPTY);
+		::MessageBox(this->m_hWnd, emptyKeyCombinationMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 		return;
 	}
-	strMsg.Format(_T("キーコンビネーションの確認画面\n設定したキーコンビネーションを押したまま、\nEnterキーを押すかOKボタンをクリックして下さい。\n設定値：%s"), strSettingKey);
+	CString confirmKeyCombinationMsg;
+	confirmKeyCombinationMsg.LoadString(ID_KEY_COMBINATION_CONFIRM);
+	strMsg.Format(confirmKeyCombinationMsg, strSettingKey);
 	::MessageBox(this->m_hWnd, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONINFORMATION);
 	{
 		DWORD dwKC = theApp.GetKeyCombi();
@@ -1082,14 +1088,17 @@ void CDlgSetGen::OnKeyCombiTest()
 			return;
 		}
 
+		CString resultKeyCombinationMsg;
 		if (dSetting == dwKC)
 		{
-			strMsg.Format(_T("成功\nキーコンビネーションを確認しました。\n設定値：%s\n入力値：%s"), strSettingKey, strResult);
+			resultKeyCombinationMsg.LoadString(ID_KEY_COMBINATION_SUCCEEDED);
+			strMsg.Format(resultKeyCombinationMsg, strSettingKey, strResult);
 			::MessageBox(this->m_hWnd, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONINFORMATION);
 		}
 		else
 		{
-			strMsg.Format(_T("失敗\nキーコンビネーションの確認に失敗しました。\n設定値：%s\n入力値：%s"), strSettingKey, strResult);
+			resultKeyCombinationMsg.LoadString(ID_KEY_COMBINATION_FAILED);
+			strMsg.Format(resultKeyCombinationMsg, strSettingKey, strResult);
 			::MessageBox(this->m_hWnd, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 		}
 	}
@@ -1245,10 +1254,10 @@ void CDlgSetSEC::OnBnClickedBrowse5()
 void CDlgSetSEC::FolderBrowse(UINT nID)
 {
 	CString szFilter;
-	szFilter = _T("実行ファイル(*.exe)|*.exe||");
+	szFilter.LoadString(ID_FILE_TYPE_EXE);
 	CFileDialog fileDlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter, this);
 	CString strTitle;
-	strTitle = _T("開く");
+	strTitle.LoadString(ID_OPEN_FILE_CHOOSER_TITLE);
 	fileDlg.m_ofn.lpstrTitle = strTitle.GetString();
 	if (fileDlg.DoModal() == IDOK)
 	{
@@ -1306,7 +1315,9 @@ BOOL CDlgSetSEC::OnInitDialog()
 
 	for (int i = 0; i < InfoDlgListMaxCnt; i++)
 	{
-		m_ComboEmu.AddString(gInfoDlgList[i]);
+		CString intoDlgListLabel;
+		intoDlgListLabel.LoadString(gInfoDlgList[i]);
+		m_ComboEmu.AddString(intoDlgListLabel);
 	}
 	int iInfoTime = 0;
 	iInfoTime = theApp.m_AppSettingsDlgCurrent.GetRedirectMsgTimeout();
@@ -1725,7 +1736,9 @@ LRESULT CDlgSetConnectionSetting::Set_OK(WPARAM wParam, LPARAM lParam)
 		theApp.m_AppSettingsDlgCurrent.SetProxyType(CSG_PROXY_TF);
 		if (strProxyAddress.IsEmpty())
 		{
-			::MessageBox(this->m_hWnd, _T("[インターネット接続設定]\n[インターネット接続設定]-「マニュアル設定」を選択した場合\nプロキシ サーバー/自動構成スクリプトを登録して下さい。(空白不可)"), theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
+			CString alertMsg;
+			alertMsg.LoadString(ID_ALERT_EMPTY_DOMAIN);
+			::MessageBox(this->m_hWnd, alertMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 			return 1;
 		}
 	}
@@ -1837,7 +1850,7 @@ void CDlgSetDomainFilter::InsertDlgShow(LPCTSTR sURL)
 			int iItem = m_List.InsertItem(index, _T(""));
 			m_List.SetItemText(iItem, URL, Dlg.m_strDomainName);
 			CString strMode;
-			strMode = Dlg.m_ActionType == TF_ALLOW ? _T("○ 許可") : _T("x 拒否");
+			strMode.LoadString(Dlg.m_ActionType == TF_ALLOW ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
 			m_List.SetItemText(iItem, ACTION, strMode);
 
 			CString strTemp;
@@ -1848,8 +1861,10 @@ void CDlgSetDomainFilter::InsertDlgShow(LPCTSTR sURL)
 		{
 			m_List.SetFocus();
 			m_List.SetItemState(iRet, LVIS_SELECTED, LVIS_SELECTED);
+			CString alertMsg;
+			alertMsg.LoadString(ID_ALERT_ALREADY_ADDED_DOMAIN);
 			CString strErrMsg;
-			strErrMsg.Format(_T("このドメイン名は、既に登録されています。\n%d行目\n%s\n"), iRet + 1, Dlg.m_strDomainName);
+			strErrMsg.Format(alertMsg, iRet + 1, Dlg.m_strDomainName);
 			::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 		}
 	}
@@ -1893,7 +1908,9 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 		strTemp = m_List.GetItemText(iSelCount, ENABLE);
 		bEnable = strTemp == _T("○") ? TRUE : FALSE;
 		Dlg.m_strDomainName = strURL;
-		Dlg.m_ActionType = strMode == _T("○ 許可") ? TF_ALLOW : TF_DENY;
+		CString allowLabel;
+		allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
+		Dlg.m_ActionType = strMode == allowLabel ? TF_ALLOW : TF_DENY;
 		Dlg.m_bEnable = bEnable;
 		if (Dlg.DoModal() == IDOK)
 		{
@@ -1906,7 +1923,7 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 			{
 				m_List.SetItemText(iSelCount, URL, Dlg.m_strDomainName);
 				CString strMode;
-				strMode = Dlg.m_ActionType == TF_ALLOW ? _T("○ 許可") : _T("x 拒否");
+				strMode.LoadString(Dlg.m_ActionType == TF_ALLOW ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
 				m_List.SetItemText(iSelCount, ACTION, strMode);
 
 				CString strTemp;
@@ -1917,8 +1934,10 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 			{
 				m_List.SetFocus();
 				m_List.SetItemState(iRet, LVIS_SELECTED, LVIS_SELECTED);
+				CString alertMsg;
+				alertMsg.LoadString(ID_ALERT_ALREADY_ADDED_DOMAIN);
 				CString strErrMsg;
-				strErrMsg.Format(_T("このドメイン名は、既に登録されています。\n%d行目\n%s\n"), iRet + 1, Dlg.m_strDomainName);
+				strErrMsg.Format(alertMsg, iRet + 1, Dlg.m_strDomainName);
 				::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 			}
 		}
@@ -1997,9 +2016,15 @@ void CDlgSetDomainFilter::OnPaint()
 BOOL CDlgSetDomainFilter::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
-	m_List.InsertColumn(URL, _T("ドメイン名"), LVCFMT_LEFT, 480);
-	m_List.InsertColumn(ACTION, _T("アクション"), LVCFMT_LEFT, 120);
-	m_List.InsertColumn(ENABLE, _T("有効"), LVCFMT_CENTER, 50);
+	CString columnLabelDomain;
+	CString columnLabelAction;
+	CString columnLabelEnable;
+	columnLabelDomain.LoadString(ID_SETTINGS_COLUMN_HEADER_DOMAIN);
+	columnLabelAction.LoadString(ID_SETTINGS_COLUMN_HEADER_ACTION);
+	columnLabelEnable.LoadString(ID_SETTINGS_COLUMN_HEADER_ENABLED);
+	m_List.InsertColumn(URL, columnLabelDomain, LVCFMT_LEFT, 480);
+	m_List.InsertColumn(ACTION, columnLabelAction, LVCFMT_LEFT, 120);
+	m_List.InsertColumn(ENABLE, columnLabelEnable, LVCFMT_CENTER, 50);
 	ListView_SetExtendedListViewStyle(m_List.m_hWnd, LVS_EX_FULLROWSELECT);
 
 	if (theApp.m_AppSettingsDlgCurrent.IsEnableURLFilter())
@@ -2063,7 +2088,7 @@ BOOL CDlgSetDomainFilter::OnInitDialog()
 					m_List.SetItemText(iItem, URL, strTemp2);
 
 					CString strMode;
-					strMode = strTemp3 == _T("A") ? _T("○ 許可") : _T("x 拒否");
+					strMode.LoadString(strTemp3 == _T("A") ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
 					m_List.SetItemText(iItem, ACTION, strMode);
 
 					strLowString = bEnable ? _T("○") : _T("－");
@@ -2075,8 +2100,10 @@ BOOL CDlgSetDomainFilter::OnInitDialog()
 	}
 	else
 	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_CANNOT_SAVE_URL_FILTER);
 		CString strErrMsg;
-		strErrMsg.Format(_T("[URLフィルター設定]\nファイルの読込に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"), strPath);
+		strErrMsg.Format(alertMsg, strPath);
 		::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 	}
 	OnEnableCtrl();
@@ -2121,10 +2148,12 @@ LRESULT CDlgSetDomainFilter::Set_OK(WPARAM wParam, LPARAM lParam)
 				strMode = m_List.GetItemText(iSelCount, ACTION);
 				strEnable = m_List.GetItemText(iSelCount, ENABLE);
 				bEnable = strEnable == _T("○") ? TRUE : FALSE;
+				CString allowLabel;
+				allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
 				if (bEnable)
-					strLineData.Format(_T("%s\t%s\n"), strURL, strMode == _T("○ 許可") ? _T("A") : _T("D"));
+					strLineData.Format(_T("%s\t%s\n"), strURL, strMode == allowLabel ? _T("A") : _T("D"));
 				else
-					strLineData.Format(_T(";%s\t%s\n"), strURL, strMode == _T("○ 許可") ? _T("A") : _T("D"));
+					strLineData.Format(_T(";%s\t%s\n"), strURL, strMode == allowLabel ? _T("A") : _T("D"));
 				out.WriteString(strLineData);
 			}
 		}
@@ -2144,8 +2173,10 @@ LRESULT CDlgSetDomainFilter::Set_OK(WPARAM wParam, LPARAM lParam)
 	}
 	else
 	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_CANNOT_SAVE_URL_FILTER);
 		CString strErrMsg;
-		strErrMsg.Format(_T("[URLフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"), strPath);
+		strErrMsg.Format(alertMsg, strPath);
 		::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 		return 1;
 	}
@@ -2244,7 +2275,9 @@ BOOL CDlgSetFileMgr::OnInitDialog()
 
 	for (int i = 0; i < InfoOpenOpMaxCnt; i++)
 	{
-		m_Combo.AddString(gInfoOpenOp[i]);
+		CString intoOpenOpLabel;
+		intoOpenOpLabel.LoadString(gInfoOpenOp[i]);
+		m_Combo.AddString(intoOpenOpLabel);
 	}
 	int iEnableOpendOp = 0;
 	iEnableOpendOp = theApp.m_AppSettingsDlgCurrent.GetEnableOpendOp();
@@ -2465,8 +2498,10 @@ void CDlgSetCustomScript::InsertDlgShow()
 		{
 			m_List.SetFocus();
 			m_List.SetItemState(iRet, LVIS_SELECTED, LVIS_SELECTED);
+			CString alreadyAddedMsg;
+			alreadyAddedMsg.LoadString(ID_ALERT_ALREADY_ADDED_URL_OR_FILE);
 			CString strErrMsg;
-			strErrMsg.Format(_T("このURL・File名は、既に登録されています。\n%d行目\n%s\n%s\n"), iRet + 1, Dlg.m_strURL, Dlg.m_strFileName);
+			strErrMsg.Format(alreadyAddedMsg, iRet + 1, Dlg.m_strURL, Dlg.m_strFileName);
 			::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 		}
 	}
@@ -2534,8 +2569,10 @@ void CDlgSetCustomScript::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 			{
 				m_List.SetFocus();
 				m_List.SetItemState(iRet, LVIS_SELECTED, LVIS_SELECTED);
+				CString alreadyAddedMsg;
+				alreadyAddedMsg.LoadString(ID_ALERT_ALREADY_ADDED_URL_OR_FILE);
 				CString strErrMsg;
-				strErrMsg.Format(_T("このURL・File名は、既に登録されています。\n%d行目\n%s\n%s\n"), iRet + 1, Dlg.m_strURL, Dlg.m_strFileName);
+				strErrMsg.Format(alreadyAddedMsg, iRet + 1, Dlg.m_strURL, Dlg.m_strFileName);
 				::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 			}
 		}
@@ -2614,9 +2651,15 @@ void CDlgSetCustomScript::OnPaint()
 BOOL CDlgSetCustomScript::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
-	m_List.InsertColumn(URL, _T("URL"), LVCFMT_LEFT, 480);
-	m_List.InsertColumn(FILENAME, _T("ファイル名"), LVCFMT_LEFT, 150);
-	m_List.InsertColumn(ENABLE, _T("有効"), LVCFMT_CENTER, 50);
+	CString columnLabelURL;
+	CString columnLabelFile;
+	CString columnLabelEnable;
+	columnLabelURL.LoadString(ID_SETTINGS_COLUMN_HEADER_URL);
+	columnLabelFile.LoadString(ID_SETTINGS_COLUMN_HEADER_FILE);
+	columnLabelEnable.LoadString(ID_SETTINGS_COLUMN_HEADER_ENABLED);
+	m_List.InsertColumn(URL, columnLabelURL, LVCFMT_LEFT, 480);
+	m_List.InsertColumn(FILENAME, columnLabelFile, LVCFMT_LEFT, 150);
+	m_List.InsertColumn(ENABLE, columnLabelEnable, LVCFMT_CENTER, 50);
 	ListView_SetExtendedListViewStyle(m_List.m_hWnd, LVS_EX_FULLROWSELECT);
 
 	if (theApp.m_AppSettingsDlgCurrent.IsEnableCustomScript())
@@ -2698,8 +2741,10 @@ BOOL CDlgSetCustomScript::OnInitDialog()
 	}
 	else
 	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_CANNOT_LOAD_CUSTOM_SCRIPT);
 		CString strErrMsg;
-		strErrMsg.Format(_T("[カスタムスクリプト設定]\nファイルの読込に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"), strPath);
+		strErrMsg.Format(alertMsg, strPath);
 		::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 	}
 	OnEnableCtrl();
@@ -2770,8 +2815,10 @@ LRESULT CDlgSetCustomScript::Set_OK(WPARAM wParam, LPARAM lParam)
 	}
 	else
 	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_CANNOT_SAVE_CUSTOM_SCRIPT);
 		CString strErrMsg;
-		strErrMsg.Format(_T("[カスタムスクリプト設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"), strPath);
+		strErrMsg.Format(alertMsg, strPath);
 		::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
 		return 1;
 	}

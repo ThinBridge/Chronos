@@ -933,14 +933,49 @@ BEGIN
     IDS_STRING_FRM3         "開く"
     IDS_STRING_CEF_LIC      "\n====Copyright License Texts====\nChromium Embedded Framework\nCopyright (c) 2008-2020 Marshall A. Greenblatt. Portions Copyright (c)\n2006-2009 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the name Chromium Embedded\nFramework nor the names of its contributors may be used to endorse\nor promote products derived from this software without specific prior\nwritten permission.\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n""AS IS"" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
     IDS_STRING_FAV_NANE     "なし"
+    IDS_STRING_CEF_LOCALE   "ja"
+    IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST "ja-JP"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_SETTINGS_DLG_TITLE_GEN           "全般設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_DSP           "画面表示設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_INIT          "起動関連設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION    "インターネット接続設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_CAP           "機能制限設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_SEC           "リダイレクト設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER    "URLフィルター設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "カスタムスクリプト設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_LOG           "ログ出力設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       "ファイルマネージャ設定"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_STARTING_BROWSER "%s 起動中..."
     IDS_STRING_CLOSE_ALL_WINDOW "全てのウィンドウを閉じますか?"
     IDS_STRING_ADMIN_LOCK_FEATURE "この機能へのアクセスは、システム管理者により制限されています。 "
     IDS_STRING_ZONE_MSG_DBL "要求されたページを既定のブラウザで表示します。"
     IDS_STRING_ZONE_MSG_NG  "要求されたページは許可されていないため表示できません。"
+    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD  "ダウンロード中のウインドウを閉じてもよろしいですか？\n\nウインドウを閉じるとダウンロードがキャンセルされます。\nダウンロードを続行する場合は、「いいえ」をクリックして下さい。"
+    IDS_STRING_WELCOME_MSG "%s Version %sを御利用頂きありがとうございます。"
+    IDS_STRING_STARTING_FILEMGR "ファイルマネージャ起動中..."
+    IDS_STRING_CONFIRM_CLEAR_CACHE "ブラウザーキャッシュを削除しますか？ \n「はい」を押すとブラウザーを再起動します。"
+    IDS_STRING_STARTING_NEW_SESSION "新規セッション起動中..."
+    IDS_STRING_HOST_AUTH_REQUIRED "認証が必要です。\n接続先ホスト[%s]には、ユーザー名とパスワードが必要です。"
+    IDS_STRING_PROXY_AUTH_REQUIRED "認証が必要です。\nプロキシ[%s]には、ユーザー名とパスワードを指定する必要があります。"
+    IDS_STRING_CONFIRM_INSECURE_CONNECTION "安全な接続ではありません。\n危険性を認識したうえで、接続を続行する場合は、「はい」をクリックして下さい。\n\n ""%s""の所有者によるウェブサイトの設定が不適切です。\n\nあなたの情報が盗まれることを防ぐため、このウェブサイトへの接続は確立されません。\n不正なセキュリティ証明書を使用しています。 \n発行者の証明書が不明であるためこの証明書は信頼されません。 \nサーバーが適正な中間証明書を送信しない可能性があります。 \n\n「いいえ」をクリックすると接続をキャンセルします。"
+    IDS_STRING_CONFIRM_LEAVE_PAGE "このサイトを離れますか？\n行った変更が保存されない可能性があります。"
+    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT "起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"
+    IDS_STRING_ALERT_MISSING_FILES "起動できません。再セットアップを行ってください。\n起動に必要なファイルが見つかりません。[%s]"
+    IDS_STRING_CLEARING_CACHE "ブラウザーキャッシュ クリア中..."
+    IDS_STRING_CONFIRM_CLOSE_APPLICATION "%sを終了してもよろしいですか？"
+    IDS_STRING_TOO_MANY_WINDOWS_MSG "ウィンドウの数が上限値(%d)に達しています。\n他の不要なウィンドウを閉じてから再度実行して下さい。(%s)"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT     "ご迷惑をおかけして申し訳ありません。\nシステムリソースが不足しているため\nアプリケーション(%s)を終了します。"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN "システムリソースが不足しています。\nアプリケーション(%s)を終了します。"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST "警告:システムリソースが不足しています。\n他のウィンドウを閉じるか、アプリケーション(%s)を再起動して下さい。"
+    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "VOSで実行中のプロセスを強制終了してもよろしいですか？"
 END
 
 STRINGTABLE
@@ -974,6 +1009,27 @@ BEGIN
     IDS_STRING_SEL_SEARCH   "「%s」を検索"
     IDS_STRING_OPEN_NOACTIVE "新しいウィンドウで開く(非アクティブ)"
     IDS_STRING_SETTINGS     "設定(&P)..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_CONTEXT_MENU_OPEN_LINK_TAB             "新しいタブで開く"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE    "新しいタブで開く(非アクティブ)"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW          "新しいウィンドウで開く"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "新しいウィンドウで開く(非アクティブ)"
+    ID_CONTEXT_MENU_COPY_LINK                 "リンクのアドレスをコピー"
+    ID_CONTEXT_MENU_SAVE_LINK                 "名前を付けてリンク先を保存"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB              "新しいタブで画像を開く"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE     "新しいタブで画像を開く(非アクティブ)"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW           "新しいウィンドウで画像を開く"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE  "新しいウィンドウで画像を開く(非アクティブ)"
+    ID_CONTEXT_MENU_SAVE_IMG                  "名前を付けて画像を保存"
+    ID_CONTEXT_MENU_COPY_IMG                  "画像をコピー"
+    ID_CONTEXT_MENU_COPY_IMG_LINK             "画像アドレスをコピー"
+    ID_CONTEXT_MENU_SEARCH                    "Googleで検索：""%s"""
+    ID_CONTEXT_MENU_RELOAD                    "再読み込み"
+    ID_CONTEXT_MENU_PRINT_PDF                 "印刷(PDF出力)"
+    ID_CONTEXT_MENU_PRINT                     "印刷"
 END
 
 STRINGTABLE
@@ -1049,7 +1105,1600 @@ BEGIN
     ID_TAB_LIST             "タブウインドウ一覧"
 END
 
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_COLUMN_HEADER_URL     "URL"
+    ID_SETTINGS_COLUMN_HEADER_DOMAIN  "ドメイン名"
+    ID_SETTINGS_COLUMN_HEADER_FILE    "ファイル名"
+    ID_SETTINGS_COLUMN_HEADER_ACTION  "アクション"
+    ID_SETTINGS_COLUMN_HEADER_ENABLED "有効"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_MENU_LABEL "設定(&P)..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_OPEN_FILE_CHOOSER_TITLE "開く"
+    ID_MSG_FILE_DOWNLOAD_RESTRICTED "ファイル ダウンロードは、システム管理者により制限されています。"
+    ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS "別のダウンロード処理を実行中です。\n終了するまで次のファイルのダウンロードは出来ません。"
+    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "ファイルダウンロード"
+    ID_DEFAULT_FILE_BASENAME "無題"
+    ID_FILE_TYPE_ALL "すべてのファイル(*.*)|*.*||"
+    ID_FILE_TYPE_PDF "PDF ドキュメント (*.pdf)|*.pdf||"
+    ID_FILE_TYPE_EXE "Executables (*.exe)|*.exe||"
+    ID_FILE_TYPE_JS  "JavaScriptファイル (*.js)|*.js||"
+    ID_DOWNLOAD_FILE_CHOOSER_TITLE "ダウンロードファイルを保存"
+    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "名前を付けてPDF ドキュメントを保存"
+    ID_PRINT_TO_PDF_FINISH_MSG "PDFドキュメントの作成が完了しました。"
+    ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "ダウンロード(%d%%) %s"
+    ID_TRANSFER_SPEED_B "%I64u B / 秒"
+    ID_TRANSFER_SPEED_KB "%0.1f KB / 秒"
+    ID_TRANSFER_SPEED_MB "%0.2f MB / 秒"
+    ID_TRANSFER_SIZE_UNDEFERMINED "不明"
+    ID_TRANSFER_PROGRESS_MSG "受信済サイズ %s / 全体サイズ %s ( %d %%)"
+    ID_CONFIRM_CANCEL_DOWNLOAD             "ダウンロードをキャンセルしますか？"
+    ID_DL_START_APP_IN_PROGRESS            "起動中"
+    ID_DL_START_APP_FAILED_BASE            "アプリケーションを起動できません。\n%s"
+    ID_DL_START_APP_FAILED_LOW_RESOURCE    "メモリまたはリソースが不足している恐れがあります。"
+    ID_DL_START_APP_FAILED_FILE_NOT_FOUND  "指定されたファイルが見つかりませんでした。"
+    ID_DL_START_APP_FAILED_PATH_NOT_FOUND  "指定されたパスが見つかりませんでした。"
+    ID_DL_START_APP_FAILED_BAD_FORMAT      ".exeファイルが無効です。Win32の.exeではないか、.exeイメージ内にエラーがあります。"
+    ID_DL_START_APP_FAILED_ACCESSDENIED    "オペレーティングシステムが、指定されたファイルへのアクセスを拒否しました。"
+    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "ファイル名の関連付けが不完全または無効です。"
+    ID_DL_START_APP_FAILED_DDEBUSY         "ほかのDDEトランザクションが現在処理中なので、DDEトランザクションを完了できませんでした。"
+    ID_DL_START_APP_FAILED_DDEFAIL         "DDEトランザクションが失敗しました。"
+    ID_DL_START_APP_FAILED_DDETIMEOUT      "要求がタイムアウトしたので、DDEトランザクションを完了できませんでした。"
+    ID_DL_START_APP_FAILED_DLLNOTFOUND     "指定されたダイナミックリンクライブラリ（DLL）が見つかりませんでした。"
+    ID_DL_START_APP_FAILED_NOASSOC         "指定されたファイル拡張子に関連付けられたアプリケーションがありません。"
+    ID_DL_START_APP_FAILED_OOM             "操作を完了するのに十分なメモリがありません。"
+    ID_DL_START_APP_FAILED_SHARE           "共有違反が発生しました。"
+    ID_DL_START_APP_FAILED_DEFAULT         "例外が発生しました。"
+    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "閉じる"
+    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "ダウンロードの完了"
+END
+
+STRINGTABLE
+BEGIN
+    ID_ERROR_MSG_FAILED "一般的なネットワークエラー"
+    ID_ERROR_MSG_NONE "N/A"
+    ID_ERROR_MSG_ABORTED "キャンセルされました。"
+    ID_ERROR_MSG_INVALID_ARGUMENT "引数が不正です。"
+    ID_ERROR_MSG_INVALID_HANDLE "ハンドルが不正です。"
+    ID_ERROR_MSG_FILE_NOT_FOUND "ファイルが見つかりません。"
+    ID_ERROR_MSG_TIMED_OUT "タイムアウトしました。"
+    ID_ERROR_MSG_FILE_TOO_BIG "ファイルサイズが大きすぎます。"
+    ID_ERROR_MSG_UNEXPECTED "予期せぬ例外が発生しました。"
+    ID_ERROR_MSG_ACCESS_DENIED "アクセスが拒否されました。"
+    ID_ERROR_MSG_NOT_IMPLEMENTED "実装されていません。"
+    ID_ERROR_MSG_CONNECTION_CLOSED "接続が閉じられました (TCP FIN)"
+    ID_ERROR_MSG_CONNECTION_RESET "接続がリセットされました (TCP RST)"
+    ID_ERROR_MSG_CONNECTION_REFUSED "サーバーに接続を拒否されました。"
+    ID_ERROR_MSG_CONNECTION_ABORTED "接続が中断されました (no ACK received)"
+    ID_ERROR_MSG_CONNECTION_FAILED "接続に失敗しました。"
+    ID_ERROR_MSG_NAME_NOT_RESOLVED "ホスト名が解決できません。"
+    ID_ERROR_MSG_INTERNET_DISCONNECTED "インターネット接続が失われました。"
+    ID_ERROR_MSG_SSL_PROTOCOL_ERROR "SSL プロトコルエラー"
+    ID_ERROR_MSG_ADDRESS_INVALID "不正な IP アドレス または ポート番号です。"
+    ID_ERROR_MSG_ADDRESS_UNREACHABLE "到達不能な IP アドレスです。"
+    ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED "サーバーがSSLクライアント認証用の証明書を要求しました。"
+    ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED "トンネル接続に失敗しました。"
+    ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED "利用可能なSSLプロトコルバージョンがありません。"
+    ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH "クライアントとサーバーは、一般的なSSLプロトコルのバージョンまたは Cipher Suite をサポートしていません。"
+    ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED "サーバーが再ネゴシエーションを要求しました。 (再ハンドシェイク)"
+    ID_ERROR_MSG_CERT_COMMON_NAME_INVALID "サーバーは、証明書の共通名とホスト名が一致しない証明書であると返しました。"
+    ID_ERROR_MSG_CERT_DATE_INVALID "サーバーは、証明書の期限が不正であると返しました。"
+    ID_ERROR_MSG_CERT_AUTHORITY_INVALID "サーバーは、信頼されていない機関によって署名された証明書であると返しました。"
+    ID_ERROR_MSG_CERT_CONTAINS_ERRORS "サーバーは、エラーを含む証明書であると返しました。"
+    ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM "この証明書には、失効したかを判断する仕組みがありません。"
+    ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION "このサイトのセキュリティ証明書の失効情報は利用できません。"
+    ID_ERROR_MSG_CERT_REVOKED "サーバーは、証明書が失効していると返しました。"
+    ID_ERROR_MSG_CERT_INVALID "サーバーは、証明書が無効であると返しました。"
+    ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM "サーバーは、脆弱な署名アルゴリズムを使用して署名された証明書であると返しました。"
+    ID_ERROR_MSG_CERT_NON_UNIQUE_NAME "証明書に指定されたホスト名はユニークでありません。"
+    ID_ERROR_MSG_CERT_WEAK_KEY "サーバーは、証明書が脆弱なキーを含んでいると返しました。"
+    ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION "サーバーは、証明書のDNS名が命名規約に違反していると返しました。"
+    ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG "証明書の有効期間が長すぎます"
+    ID_ERROR_MSG_INVALID_URL "URLが不正です。"
+    ID_ERROR_MSG_DISALLOWED_URL_SCHEME "許可されていないURLスキーマです。"
+    ID_ERROR_MSG_UNKNOWN_URL_SCHEME "未定義のURLスキーマです。"
+    ID_ERROR_MSG_TOO_MANY_REDIRECTS "このウェブページにはリダイレクトループが含まれています。"
+    ID_ERROR_MSG_UNSAFE_REDIRECT "安全でないリダイレクトを要求しました。"
+    ID_ERROR_MSG_UNSAFE_PORT "安全でないポートを要求しました。"
+    ID_ERROR_MSG_INVALID_RESPONSE "レスポンスが不正です。"
+    ID_ERROR_MSG_INVALID_CHUNKED_ENCODING "不正なチャンクエンコードです。"
+    ID_ERROR_MSG_METHOD_NOT_SUPPORTED "メソッドがサポートされていません。"
+    ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH "Proxyサーバー認証エラー"
+    ID_ERROR_MSG_EMPTY_RESPONSE "レスポンスが空白です。"
+    ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG ("レスポンスヘッダーが大きすぎます。"
+    ID_ERROR_MSG_CACHE_MISS "キャッシュ ミスが発生しました。"
+    ID_ERROR_MSG_INSECURE_RESPONSE "安全でないレスポンスが発生しました。"
+    ID_ERROR_MSG_PROXY_CONNECTION_FAILED "Proxyサーバーに接続できません。"
+    ID_ERROR_PAGE_TITLE "読込エラー"
+    ID_ERROR_PAGE_HEADING "アクセスしようとしたページが表示できませんでした。"
+    ID_ERROR_PAGE_HEADING_DETAILS "詳細"
+    ID_ERROR_PAGE_HEADING_URL "URL："
+    ID_ERROR_PAGE_HEADING_CODE "エラーコード："
+    ID_ERROR_PAGE_HEADING_MSG "エラー内容："
+    ID_ERROR_PAGE_HEADING_NAME "エラー名称："
+    ID_ERROR_MISMATCHED_PARAMTER "パラメータが不一致です。"
+END
+
+STRINGTABLE
+BEGIN
+    ID_ALERT_CANNOT_SAVE_CONFIGS "設定ファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。"
+    ID_KEY_COMBINATION_EMPTY     "キーコンビネーションを設定して下さい。"
+    ID_KEY_COMBINATION_CONFIRM   "キーコンビネーションの確認画面\n設定したキーコンビネーションを押したまま、\nEnterキーを押すかOKボタンをクリックして下さい。\n設定値：%s"
+    ID_KEY_COMBINATION_SUCCEEDED "成功\nキーコンビネーションを確認しました。\n設定値：%s\n入力値：%s"
+    ID_KEY_COMBINATION_FAILED    "失敗\nキーコンビネーションの確認に失敗しました。\n設定値：%s\n入力値：%s"
+    ID_ACTION_LABEL_ALLOW "○ 許可"
+    ID_ACTION_LABEL_DENY  "x 拒否"
+    ID_CANNOT_SAVE_URL_FILTER "[URLフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+    ID_CANNOT_LOAD_CUSTOM_SCRIPT "[カスタムスクリプト設定]\nファイルの読込に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+    ID_CANNOT_SAVE_CUSTOM_SCRIPT "[カスタムスクリプト設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+    ID_ALERT_ALREADY_ADDED_DOMAIN "このドメイン名は、既に登録されています。\n%d行目\n%s\n"
+    ID_ALERT_ALREADY_ADDED_URL_OR_FILE "このURL・File名は、既に登録されています。\n%d行目\n%s\n%s\n"
+    ID_ALERT_EMPTY_URL "URLを入力して下さい。"
+    ID_ALERT_EMPTY_FILENAME "ファイル名を入力して下さい。"
+    ID_ALERT_EMPTY_DOMAIN "ドメインを入力して下さい。"
+    ID_INFO_DLG_LIST_HIDE "表示しない"
+    ID_INFO_DLG_LIST_0_5  "0.5秒"
+    ID_INFO_DLG_LIST_1_0  "1.0秒"
+    ID_INFO_DLG_LIST_1_5  "1.5秒"
+    ID_INFO_DLG_LIST_2_0  "2.0秒"
+    ID_INFO_DLG_LIST_2_5  "2.5秒"
+    ID_INFO_DLG_LIST_3_0  "3.0秒"
+    ID_INFO_DLG_LIST_3_5  "3.5秒"
+    ID_INFO_DLG_LIST_4_0  "4.0秒"
+    ID_INFO_DLG_LIST_4_5  "4.5秒"
+    ID_INFO_DLG_LIST_5_0  "5.0秒"
+    ID_INFO_DLG_LIST_5_5  "5.5秒"
+    ID_INFO_DLG_LIST_6_0  "6.0秒"
+    ID_INFO_DLG_LIST_6_5  "6.5秒"
+    ID_INFO_DLG_LIST_7_0  "7.0秒"
+    ID_INFO_DLG_LIST_7_5  "7.5秒"
+    ID_INFO_DLG_LIST_8_0  "8.0秒"
+    ID_INFO_DLG_LIST_8_5  "8.5秒"
+    ID_INFO_DLG_LIST_9_0  "9.0秒"
+    ID_INFO_DLG_LIST_9_5  "9.5秒"
+    ID_INFO_DLG_LIST_10_0 "10.0秒"
+    ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "「開封済みにする」を表示しない"
+    ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "「開封済みにする」を表示する"
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER       "「転送する」を表示する"
+    ID_MISSING_PROXY_CONFIG "[インターネット接続設定]\n[インターネット接続設定]-「マニュアル設定」を選択した場合\nプロキシ サーバー/自動構成スクリプトを登録して下さい。(空白不可)"
+    ID_URL_REDIRECT_SCRIPT_HELP "'##################################################################################\r\n\
+'URLリダイレクト スクリプト ヘルプ\r\n\
+'ファンクション　OnRedirectにリダイレクト処理を記述します。\r\n\
+'スクリプト言語は、VBScriptベースになります。\r\n\
+'戻り値として、起動したいブラウザーを記述します。\r\n\
+\r\n\
+'  既定のブラウザーで表示する場合\r\n'    OnRedirect=""Default""\r\n\
+'  Microsoft Internet Explorerにリダイレクトする場合\r\n'    OnRedirect=""IE""\r\n\
+'  Mozilla Firefoxにリダイレクトする場合\r\n'    OnRedirect=""Firefox""\r\n\
+'  Google Chromeにリダイレクトする場合\r\n'    OnRedirect=""Chrome""\r\n\
+'  Microsoft Edgeにリダイレクトする場合\r\n'    OnRedirect=""Edge""\r\n\
+'  指定ブラウザー1にリダイレクトする場合\r\n'    OnRedirect=""Custom1""\r\n\
+'  指定ブラウザー2にリダイレクトする場合\r\n'    OnRedirect=""Custom2""\r\n\
+'  指定ブラウザー3にリダイレクトする場合\r\n'    OnRedirect=""Custom3""\r\n\
+'  指定ブラウザー4にリダイレクトする場合\r\n'    OnRedirect=""Custom4""\r\n\
+'  指定ブラウザー5にリダイレクトする場合\r\n'    OnRedirect=""Custom5""\r\n\
+'  表示を禁止する場合\r\n'    OnRedirect=""Block""\r\n\
+'------------------------------------------------------------\r\n\
+'グローバル変数(予約語)：\r\n\
+'以下のグローバル変数を利用することが可能です。\r\n\
+\r\n\
+'TB_Global_URL\t(文字列値)\r\n\
+'  画面遷移先のURL情報\r\n\
+\r\n\
+'TB_Global_SCHME\t(文字列値)\r\n\
+'  画面遷移先のURLスキーマ情報 http/https\r\n\
+\r\n\
+'TB_Global_HOSTNAME\t(文字列値)\r\n\
+'  画面遷移先のURLホスト情報\r\n\
+\r\n\
+'TB_Global_PORT\t(文字列値)\r\n\
+'  画面遷移先のURLポート情報\r\n\
+\r\n\
+'TB_Global_URL_PATH\t(文字列値)\r\n\
+'  画面遷移先のURLパス情報\r\n\
+\r\n\
+'例)「https://www.google.co.jp/search?q=Chronos」を開く場合\r\n\
+'TB_Global_URL           :https://www.google.co.jp/search\r\n\
+'TB_Global_SCHME         :https\r\n\
+'TB_Global_HOSTNAME      :www.google.co.jp\r\n\
+'TB_Global_PORT          :443\r\n\
+'TB_Global_URL_PATH      :/search\r\n\
+'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n\
+'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n\
+'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n\
+'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n\
+'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\
+\r\n\
+'TB_Global_TOP_PAGE\t(真偽値)\r\n\
+'  トップURLかサブURL(Frame/iFrame)かの情報：True(トップURL)　False(サブURL)\r\n\
+\r\n\
+'TB_TRACE_LOG(文字列値)\r\n\
+'  Debug TRACE Windowにログ出力を行います。\r\n\
+'------------------------------------------------------------\r\n\
+'例)https://www.yahoo.co.jpの場合は、IEにリダイレクトする。\r\n\
+'Function OnRedirect()\r\n\
+'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n\
+'    OnRedirect=""IE""\r\n\
+'  End IF\r\n\
+'End Function\r\n\
+'##################################################################################\r\n"
+    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "ログ出力："
+END
+
+STRINGTABLE
+BEGIN
+    ID_AUTH_ALERT_EMPTY_USER "ユーザー名を入力して下さい。"
+    ID_AUTH_REQUIRED "認証が必要です。"
+    ID_AUTH_ALERT_MISMATCHED_PASSWORD "新しいパスワードとパスワードの確認が一致していません。再度入力して下さい。"
+    ID_AUTH_CHANGE_PASSWORD "パスワード変更"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DEBUG_ITEMS_COUNT "%d件"
+    ID_DEBUG_LINES_COUNT "%d行"
+    ID_DEBUG_CONFIRM_SAVE_RESULT "保存しますか？"
+    ID_DEBUG_ALERT_SAVE_FAILED "ファイルの保存に失敗しました。\n\n別のプログラムがファイルを開いているか、書込権限が不足しています。操作を完了できません。ファイルを閉じてから再実行してください。\n\n%s"
+END
+
 #endif    // 日本語 (日本) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+// English resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New Window\tCtrl+N",         ID_NEW_BLANK
+        MENUITEM "New Window (with Current Page)", ID_NEW
+        MENUITEM "New Session",                 ID_NEW_SESSION
+        MENUITEM SEPARATOR
+        MENUITEM "Restore Window",              ID_RESTORE_WND
+        MENUITEM "Save Window",                 ID_SAVE_WND
+        MENUITEM SEPARATOR
+        MENUITEM "Print to PDF",                ID_PRINT_PDF
+        MENUITEM "&Print...\tCtrl+P",            ID_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Close",                      ID_W_CLOSE
+        MENUITEM SEPARATOR
+        POPUP "Recently Closed Windows"
+        BEGIN
+            MENUITEM "No Item",                     ID_CLOSE_WND_HISTORY_DUMMY
+        END
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Cu&t\tCtrl+X",                ID_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Select &All\tCtrl+A",         ID_SEL_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Find on this Page...\tCtrl+F", ID_FIND_PAGE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Back\t Alt+←",               ID_GO_BACK
+        MENUITEM "Forward\t Alt+→",            ID_GO_FORWARD
+        MENUITEM "Stop\tEsc",                   ID_VIEW_STOP
+        MENUITEM "Refresh\t F5",                ID_VIEW_REFRESH
+        MENUITEM "Home Page\tAlt+Home",         ID_GO_START_PAGE
+        MENUITEM SEPARATOR
+        MENUITEM "&Full Screen\tF11",           ID_FULL_SCREEN
+    END
+    POPUP "F&avorites"
+    BEGIN
+        MENUITEM "&Add to favorites...",         ID_ADD_FAVORITE
+        MENUITEM "&Organize favorites...",       ID_ORGANIZE_FAVORITE
+        MENUITEM SEPARATOR
+        MENUITEM "DUMMY",                       ID_FAVORITE_DUMMY
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "&File Manager",               ID_OPEN_THIN_FILER
+        MENUITEM SEPARATOR
+        MENUITEM "&Preferences...",              ID_SETTINGS
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&Close",                      ID_W_CLOSE
+        MENUITEM "Close All Winodws (&X)",      IDC_APP_EXIT
+        MENUITEM "Close All Windows But this",  IDC_APP_EXIT_BUT_THIS
+        MENUITEM "Next Window\tCtrl+Tab",       ID_NEXT_WND
+        MENUITEM "Previous Window\tShift+Ctrl+Tab", ID_PREV_WND
+        MENUITEM SEPARATOR
+        MENUITEM "DUMMY",                       ID_WINDOW_DUMMY
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                    ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Cleanup Browser Cache (&X)",  IDC_APP_DELETE_CACHE
+    END
+END
+
+#endif    // English resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_BACK MENU
+BEGIN
+    POPUP "BACK"
+    BEGIN
+        MENUITEM "Go Back 1 entry",             ID_BF_BACK1
+        MENUITEM "Go Back 2 entries",           ID_BF_BACK2
+        MENUITEM "Go Back 3 entries",           ID_BF_BACK3
+        MENUITEM "Go Back 4 entries",           ID_BF_BACK4
+        MENUITEM "Go Back 5 entries",           ID_BF_BACK5
+    END
+END
+
+IDR_MENU_FORWARD MENU
+BEGIN
+    POPUP "FORWARD"
+    BEGIN
+        MENUITEM "Go Forward 1 entry",          ID_BF_FORWARD1
+        MENUITEM "Go Forward 2 entries",        ID_BF_FORWARD2
+        MENUITEM "Go Forward 3 entries",        ID_BF_FORWARD3
+        MENUITEM "Go Forward 4 entries",        ID_BF_FORWARD4
+        MENUITEM "Go Forward 5 entries",        ID_BF_FORWARD5
+    END
+END
+
+IDR_MENU_TAB MENU
+BEGIN
+    POPUP "TAB_MENU"
+    BEGIN
+        MENUITEM "New Tab",                     ID_NEW_BLANK
+        MENUITEM "Suplicate Tab",               ID_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "Close Tab",                   ID_W_CLOSE
+        MENUITEM "Close All Windows But this (&X)", IDC_APP_EXIT
+        MENUITEM "Close All Tabs But this",     IDC_APP_EXIT_BUT_THIS
+        MENUITEM "Close Tabs to Right",         ID_TAB_CLOSE_RIGHT
+        MENUITEM "Close Tabs to Left",          ID_TAB_CLOSE_LEFT
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Sazabi.rc2""  // Microsoft Visual C++ ????????????????\r\n"
+    "#include ""l.jpn\\afxres.rc""          // ??????????\r\n"
+    "#ifndef _AFXDLL\r\n"
+    "#include ""afxribbon.rc"" // ribbon and control bar resources\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Sazabi.ico"
+
+IDI_ICON2               ICON                    "res\\small.ico"
+
+IDI_ICON3               ICON                    "res\\warn.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 467, 306
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 9, "MS UI Gothic", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,407,282,50,14,WS_GROUP
+    EDITTEXT        IDC_EDIT1,7,15,450,240,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL
+    ICON            IDR_MAINFRAME,IDC_STATIC_LOGO_ABOUT,12,261,20,20,SS_NOTIFY
+    PUSHBUTTON      "Close All VOS Process",IDC_VOS_CLOSE_PROCESS,37,263,86,14
+    PUSHBUTTON      "Show Developer Tools",IDC_SHOW_DEV_TOOLS,37,282,86,14
+    PUSHBUTTON      "CEF Version Information",IDC_CEF_VERSION,305,282,86,14
+END
+
+IDD_SETTINGS_DLG DIALOGEX 0, 0, 480, 335
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Advanced Settings"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREE_CTRL,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_DISABLEDRAGDROP | TVS_SHOWSELALWAYS | WS_BORDER | WS_HSCROLL | WS_TABSTOP,3,3,100,306
+    CONTROL         "",IDC_PAGE_FRAME,"Static",SS_GRAYFRAME,105,19,365,290
+    DEFPUSHBUTTON   "&OK",IDOK,365,315,51,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,420,315,51,14
+    LTEXT           "",IDC_CAPTION_BAR,108,4,365,11,SS_CENTERIMAGE
+END
+
+IDD_SETTINGS_DLG_LOG DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Logging"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "DebugLog",IDC_STATIC,10,7,350,66,WS_GROUP
+    CONTROL         "Enable DebugLog output",IDC_CHECK_ENABLE_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,20,105,10
+    CONTROL         "0:Output all logs",IDC_RADIO_LOG_ALL,"Button",BS_AUTORADIOBUTTON,27,34,93,10
+    CONTROL         "1:Output to OutputDebugString only (no file output)",IDC_RADIO_LOG_NOFILE,
+                    "Button",BS_AUTORADIOBUTTON,27,46,171,10
+    CONTROL         "2:Output only general information [GE] and URL [URL] to a log file",IDC_RADIO_LOG_GE_URL,
+                    "Button",BS_AUTORADIOBUTTON,27,58,173,10
+    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,8,76,100,14
+    GROUPBOX        "Audit log options",IDC_STATIC,10,97,350,185,WS_GROUP
+    CONTROL         "Enable audit logs output",IDC_CHECK_EnableLogging,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
+    LTEXT           "Log server URL",IDC_STATIC,26,125,283,8
+    EDITTEXT        IDC_EDIT_LogServerURL,26,136,328,14,ES_AUTOHSCROLL
+    LTEXT           "Additional request headers",IDC_STATIC,26,154,283,8
+    EDITTEXT        IDC_EDIT_RequestHeader,26,165,328,14,ES_AUTOHSCROLL
+    LTEXT           "Log-method-format",IDC_STATIC,27,186,283,8
+    CONTROL         "GET:as URL query parameters",IDC_RADIO_LOG_GET,"Button",BS_AUTORADIOBUTTON,27,198,193,10
+    CONTROL         "POST:as JSON",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
+    CONTROL         "Log downloads",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
+    CONTROL         "Log uploads",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
+    CONTROL         "Log browsing histories",IDC_CHECK_EnableBrowsingLogging,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
+    CONTROL         "Log detailed browsing histories",IDC_CHECK_EnableAccessAllLogging,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
+END
+
+IDD_SETTINGS_DLG_DSP DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Appearance"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Show tabs",IDC_CHECK_TAB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,161,10
+    CONTROL         "Enable GPU rendering",IDC_CHECK_GPU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,161,10
+    CONTROL         "Show Rebar (menubar, toolbar and address bar)",IDC_CHECK_DISABLE_REBAR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,55,238,10
+    CONTROL         "Show logo on the Rebar",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,161,10
+    CONTROL         "Show status bar",IDC_CHECK_DISABLE_STATUSBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,85,153,10
+    GROUPBOX        "Popup windows",IDC_STATIC,8,133,265,45
+    LTEXT           "Horizontal margin",IDC_STATIC,15,145,45,8
+    EDITTEXT        IDC_EDIT_W,62,143,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Vertical margin",IDC_STATIC,15,163,45,8
+    EDITTEXT        IDC_EDIT_H,62,162,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "Zoom",IDC_STATIC,8,188,265,33
+    LTEXT           "Zoom percentage",IDC_STATIC,15,202,43,8
+    EDITTEXT        IDC_EDIT_ZOOM,61,200,28,13,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
+    LTEXT           "%",IDC_STATIC,93,202,16,8
+    PUSHBUTTON      "Choose",IDC_BUTTON1,100,200,42,13
+    CONTROL         "Enable PDF viewer",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,161,10
+END
+
+IDD_SETTINGS_DLG_SEC DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable URL redirection",IDC_CHECK_EnableZoneFilterScript,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,100,10
+    PUSHBUTTON      "Open Script Editor Window...",IDC_BUTTON_SCRIPT_EDIT,8,25,121,14
+    LTEXT           "Duration of information messages to be shown",IDC_STATIC,8,50,74,8
+    COMBOBOX        IDC_COMBO1,87,46,68,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Custom browser 1",IDC_STATIC,8,70,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser1,65,68,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE1,303,67,30,14
+    LTEXT           "Custom browser 2",IDC_STATIC,8,92,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser2,65,88,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE2,303,87,30,14
+    LTEXT           "Custom browser 3",IDC_STATIC,8,114,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser3,65,112,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE3,303,111,30,14
+    LTEXT           "Custom browser 4",IDC_STATIC,8,136,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser4,65,134,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE4,303,133,30,14
+    LTEXT           "Custom browser 5",IDC_STATIC,8,158,48,8
+    EDITTEXT        IDC_EDIT_CustomBrowser5,65,156,234,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Choose...",IDC_BUTTON_BROWSE5,303,155,30,14
+END
+
+IDD_SETTINGS_DLG_CONNECTION DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Internet connection",IDC_STATIC,3,9,353,28,WS_GROUP
+    CONTROL         "Use system network settings",IDC_RAD_PX_IE,"Button",BS_AUTORADIOBUTTON,10,21,81,10
+    CONTROL         "Direct connection (no proxy)",IDC_RAD_PX_NA,"Button",BS_AUTORADIOBUTTON,103,21,94,10
+    CONTROL         "Manual settings",IDC_RAD_PX_EF,"Button",BS_AUTORADIOBUTTON,206,21,66,10
+    GROUPBOX        "Manual setting items",IDC_STATIC,3,43,353,227,WS_GROUP
+    LTEXT           "Proxy server / PAC file (please set one of any.)",IDC_STATIC,14,60,334,8
+    EDITTEXT        IDC_EDIT_ProxyAddress,14,71,340,14,ES_AUTOHSCROLL
+    LTEXT           "Direct connection websites",IDC_STATIC,14,103,41,8
+    EDITTEXT        IDC_EDIT_ProxyBypassAddress,14,115,340,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "Listed websites will be connected directly without proxy.\nPlease list entries separated with semicolons ;\nPut <local> if local addresses to be connected directly.",IDC_STATIC,14,170,340,32,0,WS_EX_STATICEDGE
+    LTEXT           "Extra UserAgent string",IDC_STATIC,14,241,82,8
+    EDITTEXT        IDC_UserAgentAppendStr,107,239,168,13,ES_AUTOHSCROLL
+END
+
+IDD_SETTINGS_DLG_FILEMGR DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "General options",IDC_STATIC,8,6,343,79
+    LTEXT           "Default path of downloaded and uploaded items",IDC_STATIC,12,18,132,8
+    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL
+    LTEXT           "File extensions for visible items",IDC_STATIC,12,37,79,8
+    EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
+    LTEXT           "File extensions to forbid running, opening and transferring",IDC_STATIC,12,56,111,8
+    EDITTEXT        IDC_DisallowExt,160,56,179,14,ES_AUTOHSCROLL
+    GROUPBOX        "Downlaod options",IDC_STATIC,8,90,343,67
+    LTEXT           "Transfer path for downloaded items",IDC_STATIC,12,105,80,8
+    EDITTEXT        IDC_TransferPath,99,103,246,14,ES_AUTOHSCROLL
+    LTEXT           "Sub folders \n Environment variables and time format are available.\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,162,27
+    EDITTEXT        IDC_TransferSubFolder,183,122,162,14,ES_AUTOHSCROLL
+    GROUPBOX        "Upload options",IDC_STATIC,8,161,343,74
+    LTEXT           "Accepted path for upload items",IDC_STATIC,12,174,79,8
+    EDITTEXT        IDC_UploadPath,99,171,246,14,ES_AUTOHSCROLL
+    CONTROL         "Show upload items",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,189,104,10
+    GROUPBOX        "Feature options",IDC_STATIC,8,238,343,42
+    LTEXT           "Context menu options",IDC_STATIC,12,251,64,8
+    COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpendOpAlert,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
+    LTEXT           "*Separate multiple file extensions with a pipe |. For example: |.elf|.lnk|",IDC_STATIC,12,74,187,8
+    CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
+    CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
+    LTEXT           "Interval of auto-sync (in milliseconds)",IDC_STATIC,17,220,68,8
+    EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
+END
+
+IDD_DLG_SC_EDITOR DIALOGEX 0, 0, 544, 376
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Script Editor Window"
+FONT 10, "MS Gothic", 400, 0, 0x80
+BEGIN
+    EDITTEXT        IDC_EDIT1,2,33,538,337,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    PUSHBUTTON      "Save",IDOK,4,13,50,14
+    PUSHBUTTON      "Close",IDCANCEL,56,13,50,14
+    GROUPBOX        "Insert template:",IDC_STATIC,110,3,386,28
+    PUSHBUTTON      "Function OnRedirect",IDC_BUTTON_FUNC,115,13,81,14
+    PUSHBUTTON      "TB_Global_URL",IDC_BUTTON_URL,197,13,57,14
+    PUSHBUTTON      "TB_Global_TOP_PAGE",IDC_BUTTON_TOP,255,13,77,14
+    PUSHBUTTON      "TB_TRACE_LOG",IDC_BUTTON_TB_TRACE_LOG,333,13,65,14
+    PUSHBUTTON      "Help",IDC_BUTTON1,399,13,42,14
+    LTEXT           "1 line",IDC_STATIC_LINE,499,13,42,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+END
+
+IDD_SETTINGS_DLG_INIT DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    LTEXT           "Home page URL",IDC_STATIC,8,12,149,8
+    EDITTEXT        IDC_EDIT_INIT_URL_PARAM,8,27,315,13,ES_AUTOHSCROLL
+    LTEXT           "Command line parameters for visual options",IDC_STATIC,8,55,195,8
+    COMBOBOX        IDC_EDIT_INIT_OP_PARAM,8,70,90,20,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Startup message",IDC_STATIC,8,95,149,8
+    EDITTEXT        IDC_EDIT_INIT_MSG,8,110,315,101,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+END
+
+IDD_DLG_DEBUG_WND DIALOGEX 0, 0, 630, 380
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "TRACE Log Monitor Window"
+FONT 10, "MS Gothic", 400, 0, 0x80
+BEGIN
+    PUSHBUTTON      "Copy to the clipboard",IDC_BUTTON1,5,5,93,14
+    PUSHBUTTON      "Cler",IDOK,103,5,50,14
+    PUSHBUTTON      "Close",IDCANCEL,155,5,50,14
+    CONTROL         "Auto scroll",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,230,7,60,10
+    LTEXT           "No item",IDC_STATIC_LINE,299,5,57,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,3,21,622,358
+END
+
+IDD_DLG_AUTH DIALOGEX 0, 0, 250, 108
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Authentication"
+FONT 10, "Meiryo", 400, 0, 0x80
+BEGIN
+    LTEXT           "Authentication required.",IDC_STATIC_MSG,34,7,209,33
+    LTEXT           "User:",IDC_STATIC,7,44,42,8
+    EDITTEXT        IDC_EDIT_ID,53,44,183,14,ES_AUTOHSCROLL
+    LTEXT           "Password:",IDC_STATIC,7,66,42,8
+    EDITTEXT        IDC_EDIT_PW,53,66,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Login",IDOK,133,87,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,187,87,50,14
+    CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
+END
+
+IDD_SETTINGS_DLG_URL_FILTER DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "URL Filtering"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable URL filters",IDC_CHECK_ENABLE_URL_FILTER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "Restricted domains to be loaded (default=allowed) / Wildcards (* and ?) are available in patterns",IDC_STATIC,8,25,339,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 170, 30
+STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_BORDER
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 8, "Meiryo UI", 400, 0, 0x80
+BEGIN
+    LTEXT           "loading...",IDC_STATIC_MSG,31,9,134,11
+    ICON            IDR_MAINFRAME,IDC_STATIC_LOGO_ABOUT,5,5,20,20,SS_NOTIFY
+END
+
+IDD_DIALOG4 DIALOGEX 0, 0, 325, 84
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Download"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         IDD_DLG_DEBUG_WND,IDC_STATIC,"Static",SS_BITMAP,7,3,16,14
+    LTEXT           "File",IDC_STATIC_FN,35,5,283,12
+    CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,6,20,312,15
+    LTEXT           "MSG",IDC_STATIC_DL_MSG,6,39,308,8
+    LTEXT           "transfer",IDC_STATIC_TL,6,50,308,8
+    PUSHBUTTON      "Open file",IDC_BUTTON_FO,75,66,77,14
+    PUSHBUTTON      "Open folder",IDC_BUTTON_DIRO,157,66,77,14
+    PUSHBUTTON      "Cancel",IDC_BUTTON1,239,66,77,14
+END
+
+IDD_SETTINGS_DLG_GEN DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "General"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Allow to run multiple instances",IDC_CHECK_DISABLE_MULTIPLE_INSTANCE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,217,10
+    CONTROL         "Enable memory cache",IDC_ENABLE_MEMCACHE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,232,10
+    CONTROL         "Enable crash recovery",IDC_CHECK_ENABLECRASHRECOVERY,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,224,10
+    GROUPBOX        "Restrict access to options",IDC_STATIC,8,71,304,85
+    GROUPBOX        "Key combination to bypass restriction",IDC_STATIC,12,85,294,62
+    CONTROL         "Shift",IDC_CHK_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,101,30,10
+    CONTROL         "Ctrl",IDC_CHK_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,56,101,27,10
+    CONTROL         "Alt",IDC_CHK_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,90,101,25,10
+    CONTROL         "←",IDC_CHK_LEFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,101,23,10
+    CONTROL         "↑",IDC_CHK_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,101,23,10
+    CONTROL         "→",IDC_CHK_RIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,182,101,23,10
+    CONTROL         "↓",IDC_CHK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,101,23,10
+    PUSHBUTTON      "Test key combination",IDC_BUTTON1,18,122,105,14
+END
+
+IDD_SETTINGS_DLG_CAP DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Restriction"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Forbid to download files",IDC_EnableDownloadRestriction,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
+    CONTROL         "Forbid to upload files",IDC_EnableUploadRestriction,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
+    CONTROL         "Clear browser caches (internet temporary files) on every startup and shutdown",IDC_EnableDeleteCache,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,44,277,10
+    GROUPBOX        "Resource restrictions",IDC_STATIC,5,60,355,111
+    CONTROL         "Restrict running time",IDC_Enable_ProcessRunTime,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,76,90,10
+    EDITTEXT        IDC_EDIT_LIMIT_TIME,18,91,52,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "min. (8 hours = 480 min. / 12 hours = 720 min. / 24 hours = 1440 min.)",IDC_STATIC,76,93,232,8
+    LTEXT           "Maximum allocated RAM (MB)",IDC_STATIC,11,121,64,8
+    EDITTEXT        IDC_MemoryUsageLimit,83,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Maximum count of windows",IDC_STATIC,11,142,64,8
+    EDITTEXT        IDC_WindowCountLimit,84,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_DIALOG5 DIALOGEX 0, 0, 297, 109
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Domain filters"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Enable",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "Domain",IDC_STATIC,18,33,33,8
+    EDITTEXT        IDC_EDIT1,56,32,233,14,ES_AUTOHSCROLL
+    GROUPBOX        "Action",IDC_STATIC,18,52,271,24,WS_GROUP
+    CONTROL         "Deny",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,63,32,10
+    CONTROL         " Allow",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,63,34,10
+    DEFPUSHBUTTON   "OK",IDOK,187,86,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,240,86,50,14
+END
+
+IDD_SETTINGS_DLG_CUSTOM_SCRIPT DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Custom scripts"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable custom scripts",IDC_CHECK_ENABLE_CUSTOM_SCRIPT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "Custom scripts will run when specified URLs are completely loaded. *Wildcards (* and ?) are available in patterns ",IDC_STATIC,8,25,349,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,142,271,100,14
+    PUSHBUTTON      "Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
+END
+
+IDD_DIALOG6 DIALOGEX 0, 0, 415, 89
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Custom script"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Enable",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "Target URL",IDC_STATIC,11,33,52,8
+    EDITTEXT        IDC_EDIT1,70,32,338,14,ES_AUTOHSCROLL
+    LTEXT           "File name",IDC_STATIC,11,51,39,8
+    EDITTEXT        IDC_EDIT2,70,50,169,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON1,242,50,20,14
+    DEFPUSHBUTTON   "OK",IDOK,304,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,358,66,50,14
+END
+
+IDD_DLG_AUTH_PWC DIALOGEX 0, 0, 261, 157
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Change password"
+FONT 10, "Meiryo", 400, 0, 0x80
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
+    LTEXT           "Change password",IDC_STATIC_MSG,34,7,220,33
+    LTEXT           "User:",IDC_STATIC,7,48,42,8
+    EDITTEXT        IDC_EDIT_ID,71,45,183,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Current password:",IDC_STATIC,7,68,62,8
+    EDITTEXT        IDC_EDIT_PW_CURRENT,71,65,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "New password:",IDC_STATIC,7,93,62,8
+    EDITTEXT        IDC_EDIT_PW_NEW,71,90,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Retype new password:",IDC_STATIC,7,113,62,8
+    EDITTEXT        IDC_EDIT_PW_NEW2,71,110,183,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,144,136,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,202,136,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 12,111,96,1
+ PRODUCTVERSION 12,111,96,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "FileDescription", "Chronos"
+            VALUE "FileVersion", "12.111.96.1"
+            VALUE "InternalName", "Chronos"
+            VALUE "LegalCopyright", " "
+            VALUE "OriginalFilename", "Chronos.EXE"
+            VALUE "ProductName", "Chronos"
+            VALUE "ProductVersion", "12.111.96.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 457
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 296
+    END
+
+    IDD_SETTINGS_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_LOG, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_DSP, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_SEC, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_CONNECTION, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_FILEMGR, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_SC_EDITOR, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_INIT, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_DEBUG_WND, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_AUTH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_SETTINGS_DLG_URL_FILTER, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG4, DIALOG
+    BEGIN
+        RIGHTMARGIN, 323
+        BOTTOMMARGIN, 68
+    END
+
+    IDD_SETTINGS_DLG_GEN, DIALOG
+    BEGIN
+    END
+
+    IDD_SETTINGS_DLG_CAP, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG5, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 102
+    END
+
+    IDD_SETTINGS_DLG_CUSTOM_SCRIPT, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG6, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 408
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 81
+    END
+
+    IDD_DLG_AUTH_PWC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 254
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 150
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "F",            ID_FIND_PAGE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F11,         ID_FULL_SCREEN,         VIRTKEY, NOINVERT
+    VK_LEFT,        ID_GO_BACK,             VIRTKEY, ALT, NOINVERT
+    VK_RIGHT,       ID_GO_FORWARD,          VIRTKEY, ALT, NOINVERT
+    VK_HOME,        ID_GO_START_PAGE,       VIRTKEY, ALT, NOINVERT
+    "N",            ID_NEW_BLANK,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_NEW_BLANK_TAB,       VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         ID_NEXT_WND,            VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         ID_PREV_WND,            VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "P",            ID_PRINT,               VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_REOPEN_CLOSE_TAB,    VIRTKEY, SHIFT, CONTROL, NOINVERT
+    "1",            ID_SEL_TAB_1,           VIRTKEY, CONTROL, NOINVERT
+    "2",            ID_SEL_TAB_2,           VIRTKEY, CONTROL, NOINVERT
+    "3",            ID_SEL_TAB_3,           VIRTKEY, CONTROL, NOINVERT
+    "4",            ID_SEL_TAB_4,           VIRTKEY, CONTROL, NOINVERT
+    "5",            ID_SEL_TAB_5,           VIRTKEY, CONTROL, NOINVERT
+    "6",            ID_SEL_TAB_6,           VIRTKEY, CONTROL, NOINVERT
+    "7",            ID_SEL_TAB_7,           VIRTKEY, CONTROL, NOINVERT
+    "8",            ID_SEL_TAB_8,           VIRTKEY, CONTROL, NOINVERT
+    "9",            ID_SEL_TAB_LAST,        VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_SET_ADDRESSBAR,      VIRTKEY, ALT, NOINVERT
+    "L",            ID_SET_ADDRESSBAR,      VIRTKEY, CONTROL, NOINVERT
+    "K",            ID_SET_SEARCHBAR,       VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, CONTROL, NOINVERT
+    VK_ESCAPE,      ID_VIEW_STOP,           VIRTKEY, NOINVERT
+    VK_F4,          ID_W_CLOSE,             VIRTKEY, CONTROL, NOINVERT
+    "W",            ID_W_CLOSE,             VIRTKEY, CONTROL, NOINVERT
+    VK_OEM_MINUS,   ID_ZOOM_DOWN,           VIRTKEY, CONTROL, NOINVERT
+    "0",            ID_ZOOM_RESET,          VIRTKEY, CONTROL, NOINVERT
+    VK_OEM_PLUS,    ID_ZOOM_UP,             VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_VIEW_REFRESH,        VIRTKEY, SHIFT, NOINVERT
+    "R",            ID_VIEW_REFRESH,        VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_SET_ADDRESSBAR,      VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_COLDTOOLBAR         BITMAP                  "res\\coldtool.bmp"
+
+IDB_HOTTOOLBAR          BITMAP                  "res\\hottoolb.bmp"
+
+IDR_MAINFRAME           BITMAP                  "res\\toolbar.bmp"
+
+IDB_BITMAP4             BITMAP                  "res\\mjr.bmp"
+
+IDB_CLOSE               BITMAP                  "res\\closeup.bmp"
+
+IDB_MAX                 BITMAP                  "res\\maximizeup.bmp"
+
+IDB_MIN                 BITMAP                  "res\\minimizeup.bmp"
+
+IDB_BMP_KEY             BITMAP                  "res\\key.bmp"
+
+IDB_BITMAP5             BITMAP                  "res\\close_button.bmp"
+
+IDB_BITMAP6             BITMAP                  "res\\bg.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 23, 23
+BEGIN
+    BUTTON      ID_GO_BACK
+    BUTTON      ID_GO_FORWARD
+    BUTTON      ID_VIEW_STOP
+    BUTTON      ID_VIEW_REFRESH
+    BUTTON      ID_GO_START_PAGE
+    SEPARATOR
+    BUTTON      ID_PRINT
+    SEPARATOR
+    BUTTON      ID_OPEN_THIN_FILER
+    SEPARATOR
+    BUTTON      ID_TAB_LIST
+    BUTTON      ID_NEW_BLANK
+    SEPARATOR
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_AUTH AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_DSP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_INIT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_LOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_SEC AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CONNECTION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_URL_FILTER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_SC_EDITOR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG4 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_GEN AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CAP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG5 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_FILEMGR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_CUSTOM_SCRIPT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG6 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_AUTH_PWC AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_DEBUG_WND AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "Chronos"
+    IDS_STRING_FRM1         "Address(&D)"
+    IDS_STRING_FRM2         "HTML files(*.htm;*.html;*.shtml)|*.htm;*.html;*.shtml|Text files(*.txt)|*.txt|GIF images(*.gif)|*.gif|JPEG images(*.jpg;*.jpeg)|*.jpg;*.jpeg|PNG images(*.png)|*.png|All files(*.*)|*.*||"
+    IDS_STRING_FRM3         "Open"
+    IDS_STRING_CEF_LIC      "\n====Copyright License Texts====\nChromium Embedded Framework\nCopyright (c) 2008-2020 Marshall A. Greenblatt. Portions Copyright (c)\n2006-2009 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the name Chromium Embedded\nFramework nor the names of its contributors may be used to endorse\nor promote products derived from this software without specific prior\nwritten permission.\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n""AS IS"" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    IDS_STRING_FAV_NANE     "Nothing"
+    IDS_STRING_CEF_LOCALE   "en"
+    IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST "en-US"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_SETTINGS_DLG_TITLE_GEN           "General"
+    IDS_STRING_SETTINGS_DLG_TITLE_DSP           "Appearance"
+    IDS_STRING_SETTINGS_DLG_TITLE_INIT          "Startup"
+    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION    "Internet Connection"
+    IDS_STRING_SETTINGS_DLG_TITLE_CAP           "Restriction"
+    IDS_STRING_SETTINGS_DLG_TITLE_SEC           "Redirection"
+    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER    "URL Filtering"
+    IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "Custom Scripts"
+    IDS_STRING_SETTINGS_DLG_TITLE_LOG           "Logging"
+    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       "File Manager"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_STARTING_BROWSER "Starting %s..."
+    IDS_STRING_CLOSE_ALL_WINDOW "Are you sure to close all windows?"
+    IDS_STRING_ADMIN_LOCK_FEATURE 
+                            "System administrator restricted access to this feature. "
+    IDS_STRING_ZONE_MSG_DBL "The requested page is opened by the default browser."
+    IDS_STRING_ZONE_MSG_NG  "The requested page is not allowed to access."
+    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD  "Do you want the window with a download in progress to be closed?\n\nThe download will be canceled if you close the window.\nPlease choose ""No"" to continue downloading."
+    IDS_STRING_WELCOME_MSG "Thank you for using %s Version %s."
+    IDS_STRING_STARTING_FILEMGR "Starting file manager..."
+    IDS_STRING_CONFIRM_CLEAR_CACHE "Do you want the browser cache to be cleared?\nClick ""Yes"" to restart the bwoser with cleared cache."
+    IDS_STRING_STARTING_NEW_SESSION "Starting New Session..."
+    IDS_STRING_HOST_AUTH_REQUIRED "Authentication required.\nThe connecting host [%s] requries username and password."
+    IDS_STRING_PROXY_AUTH_REQUIRED "Authentication required.\nThe proxy [%s] requries username and password."
+    IDS_STRING_CONFIRM_INSECURE_CONNECTION "Insecure connection.\nClick ""Yes"" to contine connection if you have understanding about the risk.\n\n The owner of ""%s"" did not configure the website.\n\nWe blocked the connection to the website to guard your information to be stolen.\nIt uses an invalid security certificate.\nThe certificate is not trusted due to its unknown certificator.\nThe web server might send an invalid intermediate certificate.\n\nClick ""No"" to cancel the connection."
+    IDS_STRING_CONFIRM_LEAVE_PAGE "Are you sure to leave this webpage?\nUnsaved changes may be lost."
+    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT "Closing application due to max out the limit of the running time (maximum = %d min.)\nPlease restart the application."
+    IDS_STRING_ALERT_MISSING_FILES "Cannot start application. Please setup again.\nSomme required files are missing. [%s]"
+    IDS_STRING_CLEARING_CACHE "Clearing browser caches..."
+    IDS_STRING_CONFIRM_CLOSE_APPLICATION "Do you want %s to be closed?"
+    IDS_STRING_TOO_MANY_WINDOWS_MSG "Too many windows (maximum count = %d): Please close obsolete windows. (%s)"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT     "We are sorry for causing you trouble.\nClosing application (%s) due to low system resource."
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN "SYSTEM Resource allocation failuer. Closing the application (%s)."
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST "SYSTEM Resource allocation failuer. Please close window or restart the application (%s)."
+    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "Do you want the process running on VOS to be terminated?"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_ZONE_MSG_IE  "The requested page is opened by Internet Explorer."
+    IDS_STRING_ZONE_MSG_FF  "The requested page is opened by Mozilla Firefox."
+    IDS_STRING_ZONE_MSG_CHR "The requested page is opened by Google Chrome."
+    IDS_STRING_ZONE_MSG_EDG "The requested page is opened by Microsoft Edge."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_ZONE_MSG_CUSTOM 
+                            "The requested page is opened by a custom browser."
+    IDS_STRING_DISABLE_EXEC "System administrator restricted the requested program to run."
+    IDS_STRING_AUTO_RECOVERY 
+                            "Do you want the previous browsing session to be restored as best it can be?\n\nThe program might crashed by something trouble.\n\nWe are sorry for causing you trouble.\nDate: %s\nNumber of browser windows: %d"
+    IDS_STRING_UNDO         "&Undo"
+    IDS_STRING_CUT          "Cu&t"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_COPY         "&Copy"
+    IDS_STRING_PASTE        "&Paste"
+    IDS_STRING_DELETE       "&Delete"
+    IDS_STRING_SELECTALL    "Select &All"
+    IDS_STRING_PASTE_GO     "Paste and Go"
+    IDS_STRING_PASTE_SEARCH "Paste and Search"
+    IDS_STRING_GO           "Go to a location"
+    IDS_STRING_SEARCH       "Search"
+    IDS_STRING_SEL_SEARCH   "Search ""%s"""
+    IDS_STRING_OPEN_NOACTIVE "Open in new inactive window"
+    IDS_STRING_SETTINGS     "&Preferences..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_CONTEXT_MENU_OPEN_LINK_TAB             "Open in New Tab"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE    "Open in New Background Tab"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW          "Open in New Window"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "Open in New Background Window"
+    ID_CONTEXT_MENU_COPY_LINK                 "Copy Link URL"
+    ID_CONTEXT_MENU_SAVE_LINK                 "Save Link as ..."
+    ID_CONTEXT_MENU_OPEN_IMG_TAB              "Open Image in New Tab"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE     "Open Image in New Background Tab"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW           "Open Image in New Window"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE  "Open Image in New Background Window"
+    ID_CONTEXT_MENU_SAVE_IMG                  "Save Image as ..."
+    ID_CONTEXT_MENU_COPY_IMG                  "Copy Image"
+    ID_CONTEXT_MENU_COPY_IMG_LINK             "Copy Image URL"
+    ID_CONTEXT_MENU_SEARCH                    "Search by Google: ""%s"""
+    ID_CONTEXT_MENU_RELOAD                    "Reload"
+    ID_CONTEXT_MENU_PRINT_PDF                 "Print as PDF"
+    ID_CONTEXT_MENU_PRINT                     "Print"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_ICON       " "
+    ID_INDICATOR_PROCESS    " "
+    ID_INDICATOR_SSL        " "
+    ID_INDICATOR_ZONE       " "
+    ID_INDICATOR_COMPAT     " "
+    ID_INDICATOR_ZOOM       " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "Chronos"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            " "
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        " "
+    ID_INDICATOR_CAPS       " "
+    ID_INDICATOR_NUM        " "
+    ID_INDICATOR_SCRL       " "
+    ID_INDICATOR_OVR        " "
+    ID_INDICATOR_REC        " "
+    ID_INDICATOR_KANA       " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          " "
+    AFX_IDS_SCMOVE          " "
+    AFX_IDS_SCMINIMIZE      " "
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       " "
+END
+
+STRINGTABLE
+BEGIN
+    ID_ADD_FAVORITE         "&Add to Favorites..."
+    ID_ORGANIZE_FAVORITE    "&Organize Favorites..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_PRINT                "&Print..."
+    ID_PRINT_PDF            "Print to PDF"
+END
+
+STRINGTABLE
+BEGIN
+    ID_W_CLOSE              "Close"
+    ID_PREV_WND             "Previous Window\tShift+Ctrl+Tab"
+    ID_NEXT_WND             "Next Window\tCtrl+Tab"
+    IDC_APP_EXIT            "Close All Windows"
+    IDC_APP_EXIT_BUT_THIS   "Close Other Windows"
+END
+
+STRINGTABLE
+BEGIN
+    ID_RESTORE_WND          "Do you want a window become restored?"
+    ID_SAVE_WND             "Do you want a window become saved?"
+    ID_OPEN_THIN_FILER      "Start File Manager"
+    ID_NEW_BLANK            "Open New Tab or Window"
+    ID_TAB_LIST             "List of Tabs and Windows"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_COLUMN_HEADER_URL     "URL"
+    ID_SETTINGS_COLUMN_HEADER_DOMAIN  "Domain"
+    ID_SETTINGS_COLUMN_HEADER_FILE    "Filename"
+    ID_SETTINGS_COLUMN_HEADER_ACTION  "Action"
+    ID_SETTINGS_COLUMN_HEADER_ENABLED "Enabled"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_MENU_LABEL "&Preferences..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_OPEN_FILE_CHOOSER_TITLE "Open"
+    ID_MSG_FILE_DOWNLOAD_RESTRICTED "System administrator restricted file downloads."
+    ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS "There is an in-progress download.\nYou cannot start next download until it is finished."
+    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "File Download"
+    ID_DEFAULT_FILE_BASENAME "No Title"
+    ID_FILE_TYPE_ALL "All (*.*)|*.*||"
+    ID_FILE_TYPE_PDF "PDF Documents (*.pdf)|*.pdf||"
+    ID_FILE_TYPE_EXE "Executables (*.exe)|*.exe||"
+    ID_FILE_TYPE_JS  "JavaScript files (*.js)|*.js||"
+    ID_DOWNLOAD_FILE_CHOOSER_TITLE "Choose a file to be downloaded"
+    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "Choose a PDF document to be saved"
+    ID_PRINT_TO_PDF_FINISH_MSG "Printing as a PDF document finished."
+    ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "Download (%d%%) %s"
+    ID_TRANSFER_SPEED_B "%I64u B / Sec."
+    ID_TRANSFER_SPEED_KB "%0.1f KB / Sec."
+    ID_TRANSFER_SPEED_MB "%0.2f MB / Sec."
+    ID_TRANSFER_SIZE_UNDEFERMINED "Undefermined"
+    ID_TRANSFER_PROGRESS_MSG "%s received / %s total ( %d %%)"
+    ID_CONFIRM_CANCEL_DOWNLOAD             "Do you want the download to be canceled?"
+    ID_DL_START_APP_IN_PROGRESS            "Starting"
+    ID_DL_START_APP_FAILED_BASE            "Failed to start application.\n%s"
+    ID_DL_START_APP_FAILED_LOW_RESOURCE    "Low memory or system resource."
+    ID_DL_START_APP_FAILED_FILE_NOT_FOUND  "Specified file not found."
+    ID_DL_START_APP_FAILED_PATH_NOT_FOUND  "Specified path not found."
+    ID_DL_START_APP_FAILED_BAD_FORMAT      "Invalid executable file. It may be a non-Win32 executable or broken."
+    ID_DL_START_APP_FAILED_ACCESSDENIED    "File access denied by the operating system."
+    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "Incomplete or invalid file association."
+    ID_DL_START_APP_FAILED_DDEBUSY         "Failed to complete DDE transaction, due to in-progress transaction by other application."
+    ID_DL_START_APP_FAILED_DDEFAIL         "Failed to complete DDE transaction."
+    ID_DL_START_APP_FAILED_DDETIMEOUT      "Failed to complete DDE transaction, due to timed out."
+    ID_DL_START_APP_FAILED_DLLNOTFOUND     "Missing DLL (dynamic link library)."
+    ID_DL_START_APP_FAILED_NOASSOC         "No associated applitaion for the file type."
+    ID_DL_START_APP_FAILED_OOM             "Low memory to complete the operation."
+    ID_DL_START_APP_FAILED_SHARE           "Sharing violation is reported."
+    ID_DL_START_APP_FAILED_DEFAULT         "Unknown exception is reported."
+    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "Close"
+    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "Completely Downloaded"
+END
+
+STRINGTABLE
+BEGIN
+    ID_ERROR_MSG_FAILED "Common network error"
+    ID_ERROR_MSG_NONE "N/A"
+    ID_ERROR_MSG_ABORTED "Aborted."
+    ID_ERROR_MSG_INVALID_ARGUMENT "Invalid arguments."
+    ID_ERROR_MSG_INVALID_HANDLE "Invalid handle."
+    ID_ERROR_MSG_FILE_NOT_FOUND "File not found."
+    ID_ERROR_MSG_TIMED_OUT "Timed out."
+    ID_ERROR_MSG_FILE_TOO_BIG "File size is too large."
+    ID_ERROR_MSG_UNEXPECTED "Unexpected error raised."
+    ID_ERROR_MSG_ACCESS_DENIED "Access denied."
+    ID_ERROR_MSG_NOT_IMPLEMENTED "Not implemented."
+    ID_ERROR_MSG_CONNECTION_CLOSED "Connection closed. (TCP FIN)"
+    ID_ERROR_MSG_CONNECTION_RESET "Connection reset. (TCP RST)"
+    ID_ERROR_MSG_CONNECTION_REFUSED "Connection refused by the server."
+    ID_ERROR_MSG_CONNECTION_ABORTED "Connection aborted. (no ACK received)"
+    ID_ERROR_MSG_CONNECTION_FAILED "Connection failed."
+    ID_ERROR_MSG_NAME_NOT_RESOLVED "Failed to resolve the hostname."
+    ID_ERROR_MSG_INTERNET_DISCONNECTED "Disconnected from the internet."
+    ID_ERROR_MSG_SSL_PROTOCOL_ERROR "SSL protocol error."
+    ID_ERROR_MSG_ADDRESS_INVALID "Invalid IP address or port number."
+    ID_ERROR_MSG_ADDRESS_UNREACHABLE "Unreachable IP address."
+    ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED "The server requested a certificate for SSL client authentication."
+    ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED "Failed to connect with a tunnel."
+    ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED "No compatible SSL versions."
+    ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH "Mismatched SSL protocol version or cipher suite."
+    ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED "Re-negotiation requested by the server. (re-handshaking)"
+    ID_ERROR_MSG_CERT_COMMON_NAME_INVALID "The server responded that the hostname does not match to the common name of the certificate."
+    ID_ERROR_MSG_CERT_DATE_INVALID "The server responded that the expiration date of the certificate is invalid."
+    ID_ERROR_MSG_CERT_AUTHORITY_INVALID "The server responded that the certificate is signed by an untrusted authority."
+    ID_ERROR_MSG_CERT_CONTAINS_ERRORS "The server responded that the certificate contains some errors."
+    ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM "The certificate has no revocation mechanism."
+    ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION "Unable to check the revocation information of the security ceritificate of this website."
+    ID_ERROR_MSG_CERT_REVOKED "The server responded that the ceriticate has been revoked."
+    ID_ERROR_MSG_CERT_INVALID "The server responded that the certificate is invalid."
+    ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM "The server responded that the certificate is signed with a weak signature algorithm."
+    ID_ERROR_MSG_CERT_NON_UNIQUE_NAME "The hostname specified by the certificate is not unique."
+    ID_ERROR_MSG_CERT_WEAK_KEY "The server responded that the certificate contains some weak keys."
+    ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION "The server responded that the DNS name of the certificate violates the name constraint."
+    ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG "Too long validity of the certificate."
+    ID_ERROR_MSG_INVALID_URL "Invalid URL."
+    ID_ERROR_MSG_DISALLOWED_URL_SCHEME "Disallowed URL scheme."
+    ID_ERROR_MSG_UNKNOWN_URL_SCHEME "Unknown URL scheme."
+    ID_ERROR_MSG_TOO_MANY_REDIRECTS "Detected looped redirects."
+    ID_ERROR_MSG_UNSAFE_REDIRECT "Requested unsafe redirect."
+    ID_ERROR_MSG_UNSAFE_PORT "Requested unsafe port."
+    ID_ERROR_MSG_INVALID_RESPONSE "Invalid response."
+    ID_ERROR_MSG_INVALID_CHUNKED_ENCODING "Invalid chunked encoding."
+    ID_ERROR_MSG_METHOD_NOT_SUPPORTED "Method not supported."
+    ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH "Failed to authenticate the proxy server."
+    ID_ERROR_MSG_EMPTY_RESPONSE "Empty response."
+    ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG "Too large response headers."
+    ID_ERROR_MSG_CACHE_MISS "Cache missed."
+    ID_ERROR_MSG_INSECURE_RESPONSE "Insecure response."
+    ID_ERROR_MSG_PROXY_CONNECTION_FAILED "Failed to connect to the proxy server."
+    ID_ERROR_PAGE_TITLE "Loading error"
+    ID_ERROR_PAGE_HEADING "Failed to render the requested webpage."
+    ID_ERROR_PAGE_HEADING_DETAILS "Details"
+    ID_ERROR_PAGE_HEADING_URL "URL: "
+    ID_ERROR_PAGE_HEADING_CODE "Error Code: "
+    ID_ERROR_PAGE_HEADING_MSG "Error Message: "
+    ID_ERROR_PAGE_HEADING_NAME "Error Name: "
+    ID_ERROR_MISMATCHED_PARAMTER "Mismatched parameters."
+END
+
+STRINGTABLE
+BEGIN
+    ID_ALERT_CANNOT_SAVE_CONFIGS "Failed to save configurations to the file.\nIt may be held by some other applications.\nPlease retry after closing other applications."
+    ID_KEY_COMBINATION_EMPTY     "Please set any key combination."
+    ID_KEY_COMBINATION_CONFIRM   "Confirming the key combination.\nPress Enter key or click the OK button, with pressed key combination.\nConfig: %s"
+    ID_KEY_COMBINATION_SUCCEEDED "Success\nConfimed the key combination.\nConfig: %s\nInput: %s"
+    ID_KEY_COMBINATION_FAILED    "Failure\nFailed to confirm the key combination.\nConfig: %s\nInput: %s"
+    ID_ACTION_LABEL_ALLOW "Allow"
+    ID_ACTION_LABEL_DENY  "Deny"
+    ID_CANNOT_SAVE_URL_FILTER "[URL filter]\nCould not save the file.\nIt may be held by some other applications.\nPlease retry after closing other applications.\n%s"
+    ID_CANNOT_LOAD_CUSTOM_SCRIPT "[Custom scripts]\nCould not load the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
+    ID_CANNOT_SAVE_CUSTOM_SCRIPT "[Custom scripts]\nCould not save the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
+    ID_ALERT_ALREADY_ADDED_DOMAIN "Already added domain.\nLine at %d\n%s\n"
+    ID_ALERT_ALREADY_ADDED_URL_OR_FILE "Already added URL or filename.\nLine at %d\n%s\n%s\n"
+    ID_ALERT_EMPTY_URL "Please input any URL."
+    ID_ALERT_EMPTY_FILENAME "Please input any filename."
+    ID_ALERT_EMPTY_DOMAIN "Please input any domain."
+    ID_INFO_DLG_LIST_HIDE "Hide"
+    ID_INFO_DLG_LIST_0_5  "0.5 sec."
+    ID_INFO_DLG_LIST_1_0  "1.0 sec."
+    ID_INFO_DLG_LIST_1_5  "1.5 sec."
+    ID_INFO_DLG_LIST_2_0  "2.0 sec."
+    ID_INFO_DLG_LIST_2_5  "2.5 sec."
+    ID_INFO_DLG_LIST_3_0  "3.0 sec."
+    ID_INFO_DLG_LIST_3_5  "3.5 sec."
+    ID_INFO_DLG_LIST_4_0  "4.0 sec."
+    ID_INFO_DLG_LIST_4_5  "4.5 sec."
+    ID_INFO_DLG_LIST_5_0  "5.0 sec."
+    ID_INFO_DLG_LIST_5_5  "5.5 sec."
+    ID_INFO_DLG_LIST_6_0  "6.0 sec."
+    ID_INFO_DLG_LIST_6_5  "6.5 sec."
+    ID_INFO_DLG_LIST_7_0  "7.0 sec."
+    ID_INFO_DLG_LIST_7_5  "7.5 sec."
+    ID_INFO_DLG_LIST_8_0  "8.0 sec."
+    ID_INFO_DLG_LIST_8_5  "8.5 sec."
+    ID_INFO_DLG_LIST_9_0  "9.0 sec."
+    ID_INFO_DLG_LIST_9_5  "9.5 sec."
+    ID_INFO_DLG_LIST_10_0 "10.0 sec."
+    ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "Hide ""Mark as Opened"""
+    ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "Show ""Mark as Opened"""
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER       "Show ""Transfer"""
+    ID_MISSING_PROXY_CONFIG "[Internet connection]\n[Internet connection]-""Manual settings"" requires any proxy server or PAC file. It cannot be blank."
+    ID_URL_REDIRECT_SCRIPT_HELP "'##################################################################################\r\n\
+'Help for URL Redirection Scripts\r\n\
+'The script needs to be written in the VBScript syntax.\r\n\
+'You should put codes to define redirection logic into the function OnRedirect,\r\n\
+'and it needs to return the browser name which you want the URL to be loaded by.\r\n\
+\r\n\
+'  To load the URL by the system default browser:\r\n'    OnRedirect=""Default""\r\n\
+'  For the case by Microsoft Internet Explorer:\r\n'    OnRedirect=""IE""\r\n\
+'  For the case by Mozilla Firefox:\r\n'    OnRedirect=""Firefox""\r\n\
+'  For the case by Google Chrome:\r\n'    OnRedirect=""Chrome""\r\n\
+'  For the case by Microsoft Edge:\r\n'    OnRedirect=""Edge""\r\n\
+'  For the case by the custom browser 1:\r\n'    OnRedirect=""Custom1""\r\n\
+'  For the case by the custom browser 2:\r\n'    OnRedirect=""Custom2""\r\n\
+'  For the case by the custom browser 3:\r\n'    OnRedirect=""Custom3""\r\n\
+'  For the case by the custom browser 4:\r\n'    OnRedirect=""Custom4""\r\n\
+'  For the case by the custom browser 5:\r\n'    OnRedirect=""Custom5""\r\n\
+'  To block loading of the URL:\r\n'    OnRedirect=""Block""\r\n\
+'------------------------------------------------------------\r\n\
+'Global variables (reserved):\r\n\
+'Here is a list of available global variables.\r\n\
+\r\n\
+'TB_Global_URL\t(String)\r\n\
+'  The loading URL.\r\n\
+\r\n\
+'TB_Global_SCHME\t(String)\r\n\
+'  The scheme of the loading URL (http or https)\r\n\
+\r\n\
+'TB_Global_HOSTNAME\t(String)\r\n\
+'  The hostname of the loading URL.\r\n\
+\r\n\
+'TB_Global_PORT\t(String)\r\n\
+'  The port number of the loading URL.\r\n\
+\r\n\
+'TB_Global_URL_PATH\t(String)\r\n\
+'  The path of the loading URL.\r\n\
+\r\n\
+'For example: if the loading URL is https://www.google.co.jp/search?q=Chronos ,\r\n\
+'TB_Global_URL           :https://www.google.co.jp/search\r\n\
+'TB_Global_SCHME         :https\r\n\
+'TB_Global_HOSTNAME      :www.google.co.jp\r\n\
+'TB_Global_PORT          :443\r\n\
+'TB_Global_URL_PATH      :/search\r\n\
+'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n\
+'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n\
+'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n\
+'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n\
+'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\
+\r\n\
+'TB_Global_TOP_PAGE\t(Boolean)\r\n\
+'  Which the URL is the one of the top frame or a sub frame. True = top frame, False = sub frame.\r\n\
+\r\n\
+'TB_TRACE_LOG(String)\r\n\
+'  Prints a log line to the Debug TRACE Window.\r\n\
+'------------------------------------------------------------\r\n\
+'For example: setting https://www.yahoo.co.jp to be loaded by IE.\r\n\
+'Function OnRedirect()\r\n\
+'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n\
+'    OnRedirect=""IE""\r\n\
+'  End IF\r\n\
+'End Function\r\n\
+'##################################################################################\r\n"
+    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "Log: "
+END
+
+STRINGTABLE
+BEGIN
+    ID_AUTH_ALERT_EMPTY_USER "Please input the username."
+    ID_AUTH_REQUIRED "Authentication required."
+    ID_AUTH_ALERT_MISMATCHED_PASSWORD "Confimation failed: mismatched password. Please retype."
+    ID_AUTH_CHANGE_PASSWORD "Change password"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DEBUG_ITEMS_COUNT "%d items"
+    ID_DEBUG_LINES_COUNT "%d lines"
+    ID_DEBUG_CONFIRM_SAVE_RESULT "Do you want it to be saved?"
+    ID_DEBUG_ALERT_SAVE_FAILED "Failed to save the file.\n\nIt may be held by some other applications, or missing writing permission.\nCould not complete the operation. Please retry after closing the file."
+END
+
+#endif    // English resources
 /////////////////////////////////////////////////////////////////////////////
 
 

@@ -40,7 +40,9 @@ void CDlgDomainDetail::OnBnClickedOk()
 
 	if (m_strDomainName.IsEmpty() && m_bEnable)
 	{
-		::MessageBox(this->m_hWnd, _T("ドメインを入力して下さい。"), theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+		CString alertMsg;
+		alertMsg.LoadString(ID_ALERT_EMPTY_DOMAIN);
+		::MessageBox(this->m_hWnd, alertMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 		((CButton*)GetDlgItem(IDC_EDIT1))->SetFocus();
 		return;
 	}
@@ -126,13 +128,17 @@ void CDlgCustomScriptDetail::OnBnClickedOk()
 
 	if (m_strURL.IsEmpty() && m_bEnable)
 	{
-		::MessageBox(this->m_hWnd, _T("URLを入力して下さい。"), theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+		CString alertMsg;
+		alertMsg.LoadString(ID_ALERT_EMPTY_URL);
+		::MessageBox(this->m_hWnd, alertMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 		((CButton*)GetDlgItem(IDC_EDIT1))->SetFocus();
 		return;
 	}
 	if (m_strFileName.IsEmpty() && m_bEnable)
 	{
-		::MessageBox(this->m_hWnd, _T("ファイル名を入力して下さい。"), theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+		CString alertMsg;
+		alertMsg.LoadString(ID_ALERT_EMPTY_FILENAME);
+		::MessageBox(this->m_hWnd, alertMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 		((CButton*)GetDlgItem(IDC_EDIT2))->SetFocus();
 		return;
 	}
@@ -156,10 +162,10 @@ void CDlgCustomScriptDetail::OnBnClickedCheck1()
 void CDlgCustomScriptDetail::OnBnClickedButton1()
 {
 	CString szFilter;
-	szFilter = _T("Javascriptファイル(*.js)|*.js||");
+	szFilter.LoadString(ID_FILE_TYPE_JS);
 	CFileDialog fileDlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter, this);
 	CString strTitle;
-	strTitle = _T("開く");
+	strTitle.LoadString(ID_OPEN_FILE_CHOOSER_TITLE);
 	fileDlg.m_ofn.lpstrTitle = strTitle.GetString();
 	fileDlg.m_ofn.lpstrInitialDir = theApp.m_strExeFolderPath.GetString();
 	if (fileDlg.DoModal() == IDOK)

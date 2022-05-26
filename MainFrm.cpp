@@ -130,8 +130,10 @@ void CMainFrame::View_InitOK()
 		ProgressDlg DlgMsgP(this);
 		DlgMsgP.Create(MAKEINTRESOURCE(IDD_DIALOG1), this);
 		DlgMsgP.ShowWindow(SW_SHOW);
+		CString startingMsg;
+		startingMsg.LoadString(IDS_STRING_STARTING_BROWSER);
 		CString strDlgMsg;
-		strDlgMsg.Format(_T("%s 起動中..."), theApp.m_strThisAppName);
+		strDlgMsg.Format(startingMsg, theApp.m_strThisAppName);
 		DlgMsgP.SetMsg(strDlgMsg);
 
 		BOOL bTraceLog = FALSE;
@@ -1169,7 +1171,7 @@ void CMainFrame::Get_TabWindowInfoArray(CStringArray& strATitle, CPtrArray& ptrA
 				if (strTitle.IsEmpty())
 				{
 					if (ptd->m_bDownloadBlankPage)
-						strTitle = _T("ファイルダウンロード");
+						strTitle.LoadString(ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE);
 					else
 						strTitle = _T("New Tab");
 				}
@@ -1206,7 +1208,7 @@ CString CMainFrame::Get_TabWindowInfo_Title(HWND hWnd)
 					if (strRet.IsEmpty())
 					{
 						if (ptd->m_bDownloadBlankPage)
-							strRet = _T("ファイルダウンロード");
+							strRet.LoadString(ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE);
 						else
 							strRet = _T("New Tab");
 					}
@@ -2600,7 +2602,9 @@ void CMainFrame::OnAppExitTimeLimit()
 		ptd = NULL;
 		m_colBrowserWindows.GetNext(pos1);
 	}
-	logmsg.Format(_T("起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"), iLimitTimeBase);
+	CString alertMsg;
+	alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT);
+	logmsg.Format(alertMsg, iLimitTimeBase);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 	if (::IsWindow(ptdFirst->m_hWnd))
 	{
@@ -2656,7 +2660,9 @@ void CMainFrame::OnAppExitMaxMem()
 		ptd = NULL;
 		m_colBrowserWindows.GetNext(pos1);
 	}
-	logmsg.Format(_T("ご迷惑をおかけして申し訳ありません。\nシステムリソースが不足しているため\nアプリケーション(%s)を終了します。\n SYSTEM Resource allocation failuer.Please close window or restart the application."), theApp.m_strThisAppName);
+	CString alertMsg;
+	alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT);
+	logmsg.Format(alertMsg, theApp.m_strThisAppName);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 
 	if (::IsWindow(ptdFirst->m_hWnd))
@@ -2790,7 +2796,7 @@ void CMainFrame::Get_WindowInfoArrayWithPID(CStringArray& strATitle, CPtrArray& 
 				if (strTitle.IsEmpty())
 				{
 					if (ptd->m_bDownloadBlankPage)
-						strTitle = _T("ファイルダウンロード");
+						strTitle.LoadString(ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE);
 					else
 						strTitle = _T("New Tab");
 				}
