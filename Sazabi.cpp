@@ -1589,7 +1589,6 @@ int CSazabi::ExitInstance()
 			DeleteFileFix(m_strRecoveryFileFullPath);
 		}
 	}
-	DeleteDirectoryTempFolder(m_strDBL_EXE_FolderPath);
 
 	PROC_TIME_E(ExitInstance_p1)
 
@@ -1619,6 +1618,8 @@ int CSazabi::ExitInstance()
 			//他のプロセスがいない、最後の処理
 			if (!IsExistsAnotherInstance())
 			{
+				DeleteDirectoryTempFolder(m_strDBL_EXE_FolderPath);
+
 				if (InVirtualEnvironment() != VE_NA && this->IsSGMode())
 				{
 					//CloseAllで複数のプロセスでこの部分を通ってしまうのでBlockする。
@@ -2669,7 +2670,17 @@ void CSazabi::CopyDBLEXEToTempInit()
 	CString strTempPathDir;
 
 	strTempPath = szTemp;
-	strTempPath += _T("ChronosSG");
+
+	CString strTempUpper;
+	strTempUpper = strTempPath;
+	strTempUpper.MakeUpper();
+	if(strTempUpper.Find(_T("\\CHRONOSSG\\")) >= 0)
+	{
+		strTempPath.TrimRight('\\');
+	}
+	else
+		strTempPath += _T("ChronosSG");
+
 	MakeDirectoryPath(strTempPath);
 	strTempPathDir = strTempPath;
 	strTempPath += _T("\\DBLC.exe");
@@ -2677,7 +2688,7 @@ void CSazabi::CopyDBLEXEToTempInit()
 	CString strFileName;
 	CString strFindFilePath = strTempPathDir;
 
-	DeleteDirectoryTempFolder(strFindFilePath);
+	//DeleteDirectoryTempFolder(strFindFilePath);
 
 	if (InVirtualEnvironment() == VE_NA)
 	{

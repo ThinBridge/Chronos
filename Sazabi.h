@@ -865,7 +865,15 @@ public:
 				CString strTempPathDir;
 
 				strTempPath = szTemp;
-				strTempPath += _T("ChronosSG");
+				CString strTempUpper;
+				strTempUpper = strTempPath;
+				strTempUpper.MakeUpper();
+				if (strTempUpper.Find(_T("\\CHRONOSSG\\")) >= 0)
+				{
+					strTempPath.TrimRight('\\');
+				}
+				else
+					strTempPath += _T("ChronosSG");
 				strTempPath += _T("\\DBLC.exe");
 				if (::PathFileExists(strTempPath))
 				{

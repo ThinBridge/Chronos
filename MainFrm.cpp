@@ -892,7 +892,7 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 	else if (m_iRecoveryTimerID == nIDEvent)
 	{
 		SaveWindowList(theApp.m_strRecoveryFileFullPath);
-		theApp.DeleteDirectoryTempFolder(theApp.m_strDBL_EXE_FolderPath);
+		//theApp.DeleteDirectoryTempFolder(theApp.m_strDBL_EXE_FolderPath);
 	}
 	else if (m_iTabTimerID == nIDEvent)
 	{

@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 resources
+// 日本語 (ニュートラル) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
@@ -96,7 +96,7 @@ BEGIN
     END
 END
 
-#endif    // 日本語 resources
+#endif    // 日本語 (ニュートラル) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -576,8 +576,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 12,111,96,1
- PRODUCTVERSION 12,111,96,1
+ FILEVERSION 12,111,96,2
+ PRODUCTVERSION 12,111,96,2
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -593,12 +593,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "12.111.96.1"
+            VALUE "FileVersion", "12.111.96.2"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "12.111.96.1"
+            VALUE "ProductVersion", "12.111.96.2"
         END
     END
     BLOCK "VarFileInfo"
@@ -939,43 +939,120 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_SETTINGS_DLG_TITLE_GEN           "全般設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_DSP           "画面表示設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_INIT          "起動関連設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION    "インターネット接続設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_CAP           "機能制限設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_SEC           "リダイレクト設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER    "URLフィルター設定"
+    IDS_STRING_STARTING_BROWSER "%s 起動中..."
+    IDS_STRING_SETTINGS_DLG_TITLE_GEN "全般設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_DSP "画面表示設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_INIT "起動関連設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION "インターネット接続設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_CAP "機能制限設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_SEC "リダイレクト設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER "URLフィルター設定"
     IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "カスタムスクリプト設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_LOG           "ログ出力設定"
-    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       "ファイルマネージャ設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_LOG "ログ出力設定"
+    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR "ファイルマネージャ設定"
+    ID_SETTINGS_COLUMN_HEADER_URL "URL"
+    ID_SETTINGS_COLUMN_HEADER_DOMAIN "ドメイン名"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_STARTING_BROWSER "%s 起動中..."
     IDS_STRING_CLOSE_ALL_WINDOW "全てのウィンドウを閉じますか?"
     IDS_STRING_ADMIN_LOCK_FEATURE "この機能へのアクセスは、システム管理者により制限されています。 "
     IDS_STRING_ZONE_MSG_DBL "要求されたページを既定のブラウザで表示します。"
     IDS_STRING_ZONE_MSG_NG  "要求されたページは許可されていないため表示できません。"
-    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD  "ダウンロード中のウインドウを閉じてもよろしいですか？\n\nウインドウを閉じるとダウンロードがキャンセルされます。\nダウンロードを続行する場合は、「いいえ」をクリックして下さい。"
-    IDS_STRING_WELCOME_MSG "%s Version %sを御利用頂きありがとうございます。"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_COLUMN_HEADER_FILE "ファイル名"
+    ID_SETTINGS_COLUMN_HEADER_ACTION "アクション"
+    ID_SETTINGS_COLUMN_HEADER_ENABLED "有効"
+    ID_SETTINGS_MENU_LABEL  "設定(&P)..."
+    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD 
+                            "ダウンロード中のウインドウを閉じてもよろしいですか？\n\nウインドウを閉じるとダウンロードがキャンセルされます。\nダウンロードを続行する場合は、「いいえ」をクリックして下さい。"
+    IDS_STRING_WELCOME_MSG  "%s Version %sを御利用頂きありがとうございます。"
     IDS_STRING_STARTING_FILEMGR "ファイルマネージャ起動中..."
-    IDS_STRING_CONFIRM_CLEAR_CACHE "ブラウザーキャッシュを削除しますか？ \n「はい」を押すとブラウザーを再起動します。"
+    IDS_STRING_CONFIRM_CLEAR_CACHE 
+                            "ブラウザーキャッシュを削除しますか？ \n「はい」を押すとブラウザーを再起動します。"
     IDS_STRING_STARTING_NEW_SESSION "新規セッション起動中..."
+    ID_OPEN_FILE_CHOOSER_TITLE "開く"
+    ID_MSG_FILE_DOWNLOAD_RESTRICTED "ファイル ダウンロードは、システム管理者により制限されています。"
+    ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS 
+                            "別のダウンロード処理を実行中です。\n終了するまで次のファイルのダウンロードは出来ません。"
+    ID_DEFAULT_FILE_BASENAME "無題"
+    ID_FILE_TYPE_ALL        "すべてのファイル(*.*)|*.*||"
+    ID_FILE_TYPE_PDF        "PDF ドキュメント (*.pdf)|*.pdf||"
+    ID_FILE_TYPE_EXE        "Executables (*.exe)|*.exe||"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DL_START_APP_FAILED_FILE_NOT_FOUND "指定されたファイルが見つかりませんでした。"
+    ID_DL_START_APP_FAILED_PATH_NOT_FOUND "指定されたパスが見つかりませんでした。"
+    ID_DL_START_APP_FAILED_BAD_FORMAT 
+                            ".exeファイルが無効です。Win32の.exeではないか、.exeイメージ内にエラーがあります。"
+    ID_DL_START_APP_FAILED_ACCESSDENIED 
+                            "オペレーティングシステムが、指定されたファイルへのアクセスを拒否しました。"
+    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "ファイル名の関連付けが不完全または無効です。"
+    ID_DL_START_APP_FAILED_DDEBUSY 
+                            "ほかのDDEトランザクションが現在処理中なので、DDEトランザクションを完了できませんでした。"
+    ID_DL_START_APP_FAILED_DDEFAIL "DDEトランザクションが失敗しました。"
+    ID_DL_START_APP_FAILED_DDETIMEOUT "要求がタイムアウトしたので、DDEトランザクションを完了できませんでした。"
+    ID_DL_START_APP_FAILED_DLLNOTFOUND "指定されたダイナミックリンクライブラリ（DLL）が見つかりませんでした。"
+    ID_DL_START_APP_FAILED_NOASSOC "指定されたファイル拡張子に関連付けられたアプリケーションがありません。"
+    ID_DL_START_APP_FAILED_OOM "操作を完了するのに十分なメモリがありません。"
+    ID_DL_START_APP_FAILED_SHARE "共有違反が発生しました。"
+    ID_DL_START_APP_FAILED_DEFAULT "例外が発生しました。"
+    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "閉じる"
+    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "ダウンロードの完了"
     IDS_STRING_HOST_AUTH_REQUIRED "認証が必要です。\n接続先ホスト[%s]には、ユーザー名とパスワードが必要です。"
-    IDS_STRING_PROXY_AUTH_REQUIRED "認証が必要です。\nプロキシ[%s]には、ユーザー名とパスワードを指定する必要があります。"
-    IDS_STRING_CONFIRM_INSECURE_CONNECTION "安全な接続ではありません。\n危険性を認識したうえで、接続を続行する場合は、「はい」をクリックして下さい。\n\n ""%s""の所有者によるウェブサイトの設定が不適切です。\n\nあなたの情報が盗まれることを防ぐため、このウェブサイトへの接続は確立されません。\n不正なセキュリティ証明書を使用しています。 \n発行者の証明書が不明であるためこの証明書は信頼されません。 \nサーバーが適正な中間証明書を送信しない可能性があります。 \n\n「いいえ」をクリックすると接続をキャンセルします。"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_PROXY_AUTH_REQUIRED 
+                            "認証が必要です。\nプロキシ[%s]には、ユーザー名とパスワードを指定する必要があります。"
+    IDS_STRING_CONFIRM_INSECURE_CONNECTION 
+                            "安全な接続ではありません。\n危険性を認識したうえで、接続を続行する場合は、「はい」をクリックして下さい。\n\n ""%s""の所有者によるウェブサイトの設定が不適切です。\n\nあなたの情報が盗まれることを防ぐため、このウェブサイトへの接続は確立されません。\n不正なセキュリティ証明書を使用しています。 \n発行者の証明書が不明であるためこの証明書は信頼されません。 \nサーバーが適正な中間証明書を送信しない可能性があります。 \n\n「いいえ」をクリックすると接続をキャンセルします。"
     IDS_STRING_CONFIRM_LEAVE_PAGE "このサイトを離れますか？\n行った変更が保存されない可能性があります。"
-    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT "起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"
-    IDS_STRING_ALERT_MISSING_FILES "起動できません。再セットアップを行ってください。\n起動に必要なファイルが見つかりません。[%s]"
+    IDS_STRING_ALERT_MISSING_FILES 
+                            "起動できません。再セットアップを行ってください。\n起動に必要なファイルが見つかりません。[%s]"
     IDS_STRING_CLEARING_CACHE "ブラウザーキャッシュ クリア中..."
     IDS_STRING_CONFIRM_CLOSE_APPLICATION "%sを終了してもよろしいですか？"
-    IDS_STRING_TOO_MANY_WINDOWS_MSG "ウィンドウの数が上限値(%d)に達しています。\n他の不要なウィンドウを閉じてから再度実行して下さい。(%s)"
-    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT     "ご迷惑をおかけして申し訳ありません。\nシステムリソースが不足しているため\nアプリケーション(%s)を終了します。"
-    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN "システムリソースが不足しています。\nアプリケーション(%s)を終了します。"
-    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST "警告:システムリソースが不足しています。\n他のウィンドウを閉じるか、アプリケーション(%s)を再起動して下さい。"
+    IDS_STRING_TOO_MANY_WINDOWS_MSG 
+                            "ウィンドウの数が上限値(%d)に達しています。\n他の不要なウィンドウを閉じてから再度実行して下さい。(%s)"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT 
+                            "ご迷惑をおかけして申し訳ありません。\nシステムリソースが不足しているため\nアプリケーション(%s)を終了します。"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN 
+                            "システムリソースが不足しています。\nアプリケーション(%s)を終了します。"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST 
+                            "警告:システムリソースが不足しています。\n他のウィンドウを閉じるか、アプリケーション(%s)を再起動して下さい。"
     IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "VOSで実行中のプロセスを強制終了してもよろしいですか？"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB "新しいタブで開く"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "新しいタブで開く(非アクティブ)"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW "新しいウィンドウで開く"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "新しいウィンドウで開く(非アクティブ)"
+    ID_CONTEXT_MENU_COPY_LINK "リンクのアドレスをコピー"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER "「転送する」を表示する"
+    ID_MISSING_PROXY_CONFIG "[インターネット接続設定]\n[インターネット接続設定]-「マニュアル設定」を選択した場合\nプロキシ サーバー/自動構成スクリプトを登録して下さい。(空白不可)"
+    ID_URL_REDIRECT_SCRIPT_HELP 
+                            "'##################################################################################\r\n'URLリダイレクト スクリプト ヘルプ\r\n'ファンクション　OnRedirectにリダイレクト処理を記述します。\r\n'スクリプト言語は、VBScriptベースになります。\r\n'戻り値として、起動したいブラウザーを記述します。\r\n\r\n'  既定のブラウザーで表示する場合\r\n'    OnRedirect=""Default""\r\n'  Microsoft Internet Explorerにリダイレクトする場合\r\n'    OnRedirect=""IE""\r\n'  Mozilla Firefoxにリダイレクトする場合\r\n'    OnRedirect=""Firefox""\r\n'  Google Chromeにリダイレクトする場合\r\n'    OnRedirect=""Chrome""\r\n'  Microsoft Edgeにリダイレクトする場合\r\n'    OnRedirect=""Edge""\r\n'  指定ブラウザー1にリダイレクトする場合\r\n'    OnRedirect=""Custom1""\r\n'  指定ブラウザー2にリダイレクトする場合\r\n'    OnRedirect=""Custom2""\r\n'  指定ブラウザー3にリダイレクトする場合\r\n'    OnRedirect=""Custom3""\r\n'  指定ブラウザー4にリダイレクトする場合\r\n'    OnRedirect=""Custom4""\r\n'  指定ブラウザー5にリダイレクトする場合\r\n'    OnRedirect=""Custom5""\r\n'  表示を禁止する場合\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'グローバル変数(予約語)：\r\n'以下のグローバル変数を利用することが可能です。\r\n\r\n'TB_Global_URL\t(文字列値)\r\n'  画面遷移先のURL情報\r\n\r\n'TB_Global_SCHME\t(文字列値)\r\n'  画面遷移先のURLスキーマ情報 http/https\r\n\r\n'TB_Global_HOSTNAME\t(文字列値)\r\n'  画面遷移先のURLホスト情報\r\n\r\n'TB_Global_PORT\t(文字列値)\r\n'  画面遷移先のURLポート情報\r\n\r\n'TB_Global_URL_PATH\t(文字列値)\r\n'  画面遷移先のURLパス情報\r\n\r\n'例)「https://www.google.co.jp/search?q=Chronos」を開く場合\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(真偽値)\r\n'  トップURLかサブURL(Frame/iFrame)かの情報：True(トップURL)　False(サブURL)\r\n\r\n'TB_TRACE_LOG(文字列値)\r\n'  Debug TRACE Windowにログ出力を行います。\r\n'------------------------------------------------------------\r\n'例)https://www.yahoo.co.jpの場合は、IEにリダイレクトする。\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
+    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "ログ出力："
+    ID_AUTH_ALERT_EMPTY_USER "ユーザー名を入力して下さい。"
+    ID_AUTH_REQUIRED        "認証が必要です。"
+    ID_AUTH_ALERT_MISMATCHED_PASSWORD "新しいパスワードとパスワードの確認が一致していません。再度入力して下さい。"
+    ID_AUTH_CHANGE_PASSWORD "パスワード変更"
+    ID_DEBUG_ITEMS_COUNT    "%d件"
+    ID_DEBUG_LINES_COUNT    "%d行"
+    ID_DEBUG_CONFIRM_SAVE_RESULT "保存しますか？"
+    ID_DEBUG_ALERT_SAVE_FAILED 
+                            "ファイルの保存に失敗しました。\n\n別のプログラムがファイルを開いているか、書込権限が不足しています。操作を完了できません。ファイルを閉じてから再実行してください。\n\n%s"
+    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
+                            "起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"
 END
 
 STRINGTABLE
@@ -983,21 +1060,21 @@ BEGIN
     IDS_STRING_ZONE_MSG_IE  "要求されたページをInternet Explorerで表示します。"
     IDS_STRING_ZONE_MSG_FF  "要求されたページをMozilla Firefoxで表示します。"
     IDS_STRING_ZONE_MSG_CHR "要求されたページをGoogle Chromeで表示します。"
-    IDS_STRING_ZONE_MSG_EDG "要求されたページをMicrosoft Edgeで表示します。"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_ZONE_MSG_EDG "要求されたページをMicrosoft Edgeで表示します。"
     IDS_STRING_ZONE_MSG_CUSTOM "要求されたページを指定のブラウザで表示します。"
     IDS_STRING_DISABLE_EXEC "外部プログラムの実行は、システム管理者により制限されています。"
     IDS_STRING_AUTO_RECOVERY 
                             "以前表示していたウィンドウを可能な限り復元しますか？\n\n動作に問題が発生し不正終了した可能性があります。\n\nご迷惑をおかけして申し訳ありません。\n日時：%s\nウィンドウ枚数：%d"
     IDS_STRING_UNDO         "元に戻す(&U)"
-    IDS_STRING_CUT          "切り取り(&T)"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_CUT          "切り取り(&T)"
     IDS_STRING_COPY         "コピー(&C)"
     IDS_STRING_PASTE        "貼り付け(&P)"
     IDS_STRING_DELETE       "削除(&D)"
@@ -1013,23 +1090,22 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_CONTEXT_MENU_OPEN_LINK_TAB             "新しいタブで開く"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE    "新しいタブで開く(非アクティブ)"
-    ID_CONTEXT_MENU_OPEN_LINK_WINDOW          "新しいウィンドウで開く"
-    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "新しいウィンドウで開く(非アクティブ)"
-    ID_CONTEXT_MENU_COPY_LINK                 "リンクのアドレスをコピー"
-    ID_CONTEXT_MENU_SAVE_LINK                 "名前を付けてリンク先を保存"
-    ID_CONTEXT_MENU_OPEN_IMG_TAB              "新しいタブで画像を開く"
-    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE     "新しいタブで画像を開く(非アクティブ)"
-    ID_CONTEXT_MENU_OPEN_IMG_WINDOW           "新しいウィンドウで画像を開く"
-    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE  "新しいウィンドウで画像を開く(非アクティブ)"
-    ID_CONTEXT_MENU_SAVE_IMG                  "名前を付けて画像を保存"
-    ID_CONTEXT_MENU_COPY_IMG                  "画像をコピー"
-    ID_CONTEXT_MENU_COPY_IMG_LINK             "画像アドレスをコピー"
-    ID_CONTEXT_MENU_SEARCH                    "Googleで検索：""%s"""
-    ID_CONTEXT_MENU_RELOAD                    "再読み込み"
-    ID_CONTEXT_MENU_PRINT_PDF                 "印刷(PDF出力)"
-    ID_CONTEXT_MENU_PRINT                     "印刷"
+    ID_CONTEXT_MENU_SAVE_LINK "名前を付けてリンク先を保存"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB "新しいタブで画像を開く"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE "新しいタブで画像を開く(非アクティブ)"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW "新しいウィンドウで画像を開く"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE "新しいウィンドウで画像を開く(非アクティブ)"
+    ID_CONTEXT_MENU_SAVE_IMG "名前を付けて画像を保存"
+    ID_CONTEXT_MENU_COPY_IMG "画像をコピー"
+    ID_CONTEXT_MENU_COPY_IMG_LINK "画像アドレスをコピー"
+    ID_CONTEXT_MENU_SEARCH  "Googleで検索：""%s"""
+    ID_CONTEXT_MENU_RELOAD  "再読み込み"
+    ID_CONTEXT_MENU_PRINT_PDF "印刷(PDF出力)"
+    ID_CONTEXT_MENU_PRINT   "印刷"
+    ID_ERROR_MSG_FAILED     "一般的なネットワークエラー"
+    ID_ERROR_MSG_NONE       "N/A"
+    ID_ERROR_MSG_ABORTED    "キャンセルされました。"
+    ID_ERROR_MSG_INVALID_ARGUMENT "引数が不正です。"
 END
 
 STRINGTABLE
@@ -1107,68 +1183,28 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_SETTINGS_COLUMN_HEADER_URL     "URL"
-    ID_SETTINGS_COLUMN_HEADER_DOMAIN  "ドメイン名"
-    ID_SETTINGS_COLUMN_HEADER_FILE    "ファイル名"
-    ID_SETTINGS_COLUMN_HEADER_ACTION  "アクション"
-    ID_SETTINGS_COLUMN_HEADER_ENABLED "有効"
-END
-
-STRINGTABLE
-BEGIN
-    ID_SETTINGS_MENU_LABEL "設定(&P)..."
-END
-
-STRINGTABLE
-BEGIN
-    ID_OPEN_FILE_CHOOSER_TITLE "開く"
-    ID_MSG_FILE_DOWNLOAD_RESTRICTED "ファイル ダウンロードは、システム管理者により制限されています。"
-    ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS "別のダウンロード処理を実行中です。\n終了するまで次のファイルのダウンロードは出来ません。"
-    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "ファイルダウンロード"
-    ID_DEFAULT_FILE_BASENAME "無題"
-    ID_FILE_TYPE_ALL "すべてのファイル(*.*)|*.*||"
-    ID_FILE_TYPE_PDF "PDF ドキュメント (*.pdf)|*.pdf||"
-    ID_FILE_TYPE_EXE "Executables (*.exe)|*.exe||"
-    ID_FILE_TYPE_JS  "JavaScriptファイル (*.js)|*.js||"
+    ID_FILE_TYPE_JS         "JavaScriptファイル (*.js)|*.js||"
     ID_DOWNLOAD_FILE_CHOOSER_TITLE "ダウンロードファイルを保存"
     ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "名前を付けてPDF ドキュメントを保存"
+    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "ファイルダウンロード"
     ID_PRINT_TO_PDF_FINISH_MSG "PDFドキュメントの作成が完了しました。"
     ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "ダウンロード(%d%%) %s"
-    ID_TRANSFER_SPEED_B "%I64u B / 秒"
-    ID_TRANSFER_SPEED_KB "%0.1f KB / 秒"
-    ID_TRANSFER_SPEED_MB "%0.2f MB / 秒"
+    ID_TRANSFER_SPEED_B     "%I64u B / 秒"
+    ID_TRANSFER_SPEED_KB    "%0.1f KB / 秒"
+    ID_TRANSFER_SPEED_MB    "%0.2f MB / 秒"
     ID_TRANSFER_SIZE_UNDEFERMINED "不明"
     ID_TRANSFER_PROGRESS_MSG "受信済サイズ %s / 全体サイズ %s ( %d %%)"
-    ID_CONFIRM_CANCEL_DOWNLOAD             "ダウンロードをキャンセルしますか？"
-    ID_DL_START_APP_IN_PROGRESS            "起動中"
-    ID_DL_START_APP_FAILED_BASE            "アプリケーションを起動できません。\n%s"
-    ID_DL_START_APP_FAILED_LOW_RESOURCE    "メモリまたはリソースが不足している恐れがあります。"
-    ID_DL_START_APP_FAILED_FILE_NOT_FOUND  "指定されたファイルが見つかりませんでした。"
-    ID_DL_START_APP_FAILED_PATH_NOT_FOUND  "指定されたパスが見つかりませんでした。"
-    ID_DL_START_APP_FAILED_BAD_FORMAT      ".exeファイルが無効です。Win32の.exeではないか、.exeイメージ内にエラーがあります。"
-    ID_DL_START_APP_FAILED_ACCESSDENIED    "オペレーティングシステムが、指定されたファイルへのアクセスを拒否しました。"
-    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "ファイル名の関連付けが不完全または無効です。"
-    ID_DL_START_APP_FAILED_DDEBUSY         "ほかのDDEトランザクションが現在処理中なので、DDEトランザクションを完了できませんでした。"
-    ID_DL_START_APP_FAILED_DDEFAIL         "DDEトランザクションが失敗しました。"
-    ID_DL_START_APP_FAILED_DDETIMEOUT      "要求がタイムアウトしたので、DDEトランザクションを完了できませんでした。"
-    ID_DL_START_APP_FAILED_DLLNOTFOUND     "指定されたダイナミックリンクライブラリ（DLL）が見つかりませんでした。"
-    ID_DL_START_APP_FAILED_NOASSOC         "指定されたファイル拡張子に関連付けられたアプリケーションがありません。"
-    ID_DL_START_APP_FAILED_OOM             "操作を完了するのに十分なメモリがありません。"
-    ID_DL_START_APP_FAILED_SHARE           "共有違反が発生しました。"
-    ID_DL_START_APP_FAILED_DEFAULT         "例外が発生しました。"
-    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "閉じる"
-    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "ダウンロードの完了"
+    ID_CONFIRM_CANCEL_DOWNLOAD "ダウンロードをキャンセルしますか？"
+    ID_DL_START_APP_IN_PROGRESS "起動中"
+    ID_DL_START_APP_FAILED_BASE "アプリケーションを起動できません。\n%s"
+    ID_DL_START_APP_FAILED_LOW_RESOURCE "メモリまたはリソースが不足している恐れがあります。"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_FAILED "一般的なネットワークエラー"
-    ID_ERROR_MSG_NONE "N/A"
-    ID_ERROR_MSG_ABORTED "キャンセルされました。"
-    ID_ERROR_MSG_INVALID_ARGUMENT "引数が不正です。"
     ID_ERROR_MSG_INVALID_HANDLE "ハンドルが不正です。"
     ID_ERROR_MSG_FILE_NOT_FOUND "ファイルが見つかりません。"
-    ID_ERROR_MSG_TIMED_OUT "タイムアウトしました。"
+    ID_ERROR_MSG_TIMED_OUT  "タイムアウトしました。"
     ID_ERROR_MSG_FILE_TOO_BIG "ファイルサイズが大きすぎます。"
     ID_ERROR_MSG_UNEXPECTED "予期せぬ例外が発生しました。"
     ID_ERROR_MSG_ACCESS_DENIED "アクセスが拒否されました。"
@@ -1182,24 +1218,39 @@ BEGIN
     ID_ERROR_MSG_INTERNET_DISCONNECTED "インターネット接続が失われました。"
     ID_ERROR_MSG_SSL_PROTOCOL_ERROR "SSL プロトコルエラー"
     ID_ERROR_MSG_ADDRESS_INVALID "不正な IP アドレス または ポート番号です。"
+END
+
+STRINGTABLE
+BEGIN
     ID_ERROR_MSG_ADDRESS_UNREACHABLE "到達不能な IP アドレスです。"
     ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED "サーバーがSSLクライアント認証用の証明書を要求しました。"
     ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED "トンネル接続に失敗しました。"
     ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED "利用可能なSSLプロトコルバージョンがありません。"
-    ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH "クライアントとサーバーは、一般的なSSLプロトコルのバージョンまたは Cipher Suite をサポートしていません。"
-    ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED "サーバーが再ネゴシエーションを要求しました。 (再ハンドシェイク)"
-    ID_ERROR_MSG_CERT_COMMON_NAME_INVALID "サーバーは、証明書の共通名とホスト名が一致しない証明書であると返しました。"
+    ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH 
+                            "クライアントとサーバーは、一般的なSSLプロトコルのバージョンまたは Cipher Suite をサポートしていません。"
+    ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED 
+                            "サーバーが再ネゴシエーションを要求しました。 (再ハンドシェイク)"
+    ID_ERROR_MSG_CERT_COMMON_NAME_INVALID 
+                            "サーバーは、証明書の共通名とホスト名が一致しない証明書であると返しました。"
     ID_ERROR_MSG_CERT_DATE_INVALID "サーバーは、証明書の期限が不正であると返しました。"
-    ID_ERROR_MSG_CERT_AUTHORITY_INVALID "サーバーは、信頼されていない機関によって署名された証明書であると返しました。"
+    ID_ERROR_MSG_CERT_AUTHORITY_INVALID 
+                            "サーバーは、信頼されていない機関によって署名された証明書であると返しました。"
     ID_ERROR_MSG_CERT_CONTAINS_ERRORS "サーバーは、エラーを含む証明書であると返しました。"
     ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM "この証明書には、失効したかを判断する仕組みがありません。"
-    ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION "このサイトのセキュリティ証明書の失効情報は利用できません。"
+    ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION 
+                            "このサイトのセキュリティ証明書の失効情報は利用できません。"
     ID_ERROR_MSG_CERT_REVOKED "サーバーは、証明書が失効していると返しました。"
     ID_ERROR_MSG_CERT_INVALID "サーバーは、証明書が無効であると返しました。"
-    ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM "サーバーは、脆弱な署名アルゴリズムを使用して署名された証明書であると返しました。"
+    ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM 
+                            "サーバーは、脆弱な署名アルゴリズムを使用して署名された証明書であると返しました。"
     ID_ERROR_MSG_CERT_NON_UNIQUE_NAME "証明書に指定されたホスト名はユニークでありません。"
+END
+
+STRINGTABLE
+BEGIN
     ID_ERROR_MSG_CERT_WEAK_KEY "サーバーは、証明書が脆弱なキーを含んでいると返しました。"
-    ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION "サーバーは、証明書のDNS名が命名規約に違反していると返しました。"
+    ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION 
+                            "サーバーは、証明書のDNS名が命名規約に違反していると返しました。"
     ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG "証明書の有効期間が長すぎます"
     ID_ERROR_MSG_INVALID_URL "URLが不正です。"
     ID_ERROR_MSG_DISALLOWED_URL_SCHEME "許可されていないURLスキーマです。"
@@ -1212,148 +1263,82 @@ BEGIN
     ID_ERROR_MSG_METHOD_NOT_SUPPORTED "メソッドがサポートされていません。"
     ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH "Proxyサーバー認証エラー"
     ID_ERROR_MSG_EMPTY_RESPONSE "レスポンスが空白です。"
-    ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG ("レスポンスヘッダーが大きすぎます。"
+    ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG "レスポンスヘッダーが大きすぎます。"
     ID_ERROR_MSG_CACHE_MISS "キャッシュ ミスが発生しました。"
+END
+
+STRINGTABLE
+BEGIN
     ID_ERROR_MSG_INSECURE_RESPONSE "安全でないレスポンスが発生しました。"
     ID_ERROR_MSG_PROXY_CONNECTION_FAILED "Proxyサーバーに接続できません。"
-    ID_ERROR_PAGE_TITLE "読込エラー"
-    ID_ERROR_PAGE_HEADING "アクセスしようとしたページが表示できませんでした。"
+    ID_ERROR_PAGE_TITLE     "読込エラー"
+    ID_ERROR_PAGE_HEADING   "アクセスしようとしたページが表示できませんでした。"
     ID_ERROR_PAGE_HEADING_DETAILS "詳細"
     ID_ERROR_PAGE_HEADING_URL "URL："
     ID_ERROR_PAGE_HEADING_CODE "エラーコード："
     ID_ERROR_PAGE_HEADING_MSG "エラー内容："
     ID_ERROR_PAGE_HEADING_NAME "エラー名称："
     ID_ERROR_MISMATCHED_PARAMTER "パラメータが不一致です。"
+    ID_ALERT_CANNOT_SAVE_CONFIGS 
+                            "設定ファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。"
+    ID_KEY_COMBINATION_EMPTY "キーコンビネーションを設定して下さい。"
+    ID_KEY_COMBINATION_CONFIRM 
+                            "キーコンビネーションの確認画面\n設定したキーコンビネーションを押したまま、\nEnterキーを押すかOKボタンをクリックして下さい。\n設定値：%s"
+    ID_KEY_COMBINATION_SUCCEEDED "成功\nキーコンビネーションを確認しました。\n設定値：%s\n入力値：%s"
+    ID_KEY_COMBINATION_FAILED "失敗\nキーコンビネーションの確認に失敗しました。\n設定値：%s\n入力値：%s"
+    ID_ACTION_LABEL_ALLOW   "○ 許可"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ALERT_CANNOT_SAVE_CONFIGS "設定ファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。"
-    ID_KEY_COMBINATION_EMPTY     "キーコンビネーションを設定して下さい。"
-    ID_KEY_COMBINATION_CONFIRM   "キーコンビネーションの確認画面\n設定したキーコンビネーションを押したまま、\nEnterキーを押すかOKボタンをクリックして下さい。\n設定値：%s"
-    ID_KEY_COMBINATION_SUCCEEDED "成功\nキーコンビネーションを確認しました。\n設定値：%s\n入力値：%s"
-    ID_KEY_COMBINATION_FAILED    "失敗\nキーコンビネーションの確認に失敗しました。\n設定値：%s\n入力値：%s"
-    ID_ACTION_LABEL_ALLOW "○ 許可"
-    ID_ACTION_LABEL_DENY  "x 拒否"
-    ID_CANNOT_SAVE_URL_FILTER "[URLフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
-    ID_CANNOT_LOAD_CUSTOM_SCRIPT "[カスタムスクリプト設定]\nファイルの読込に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
-    ID_CANNOT_SAVE_CUSTOM_SCRIPT "[カスタムスクリプト設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+    ID_ACTION_LABEL_DENY    "x 拒否"
+    ID_CANNOT_SAVE_URL_FILTER 
+                            "[URLフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+    ID_CANNOT_LOAD_CUSTOM_SCRIPT 
+                            "[カスタムスクリプト設定]\nファイルの読込に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+    ID_CANNOT_SAVE_CUSTOM_SCRIPT 
+                            "[カスタムスクリプト設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
     ID_ALERT_ALREADY_ADDED_DOMAIN "このドメイン名は、既に登録されています。\n%d行目\n%s\n"
-    ID_ALERT_ALREADY_ADDED_URL_OR_FILE "このURL・File名は、既に登録されています。\n%d行目\n%s\n%s\n"
-    ID_ALERT_EMPTY_URL "URLを入力して下さい。"
+    ID_ALERT_ALREADY_ADDED_URL_OR_FILE 
+                            "このURL・File名は、既に登録されています。\n%d行目\n%s\n%s\n"
+    ID_ALERT_EMPTY_URL      "URLを入力して下さい。"
     ID_ALERT_EMPTY_FILENAME "ファイル名を入力して下さい。"
-    ID_ALERT_EMPTY_DOMAIN "ドメインを入力して下さい。"
-    ID_INFO_DLG_LIST_HIDE "表示しない"
-    ID_INFO_DLG_LIST_0_5  "0.5秒"
-    ID_INFO_DLG_LIST_1_0  "1.0秒"
-    ID_INFO_DLG_LIST_1_5  "1.5秒"
-    ID_INFO_DLG_LIST_2_0  "2.0秒"
-    ID_INFO_DLG_LIST_2_5  "2.5秒"
-    ID_INFO_DLG_LIST_3_0  "3.0秒"
-    ID_INFO_DLG_LIST_3_5  "3.5秒"
-    ID_INFO_DLG_LIST_4_0  "4.0秒"
-    ID_INFO_DLG_LIST_4_5  "4.5秒"
-    ID_INFO_DLG_LIST_5_0  "5.0秒"
-    ID_INFO_DLG_LIST_5_5  "5.5秒"
-    ID_INFO_DLG_LIST_6_0  "6.0秒"
-    ID_INFO_DLG_LIST_6_5  "6.5秒"
-    ID_INFO_DLG_LIST_7_0  "7.0秒"
-    ID_INFO_DLG_LIST_7_5  "7.5秒"
-    ID_INFO_DLG_LIST_8_0  "8.0秒"
-    ID_INFO_DLG_LIST_8_5  "8.5秒"
-    ID_INFO_DLG_LIST_9_0  "9.0秒"
-    ID_INFO_DLG_LIST_9_5  "9.5秒"
-    ID_INFO_DLG_LIST_10_0 "10.0秒"
+    ID_ALERT_EMPTY_DOMAIN   "ドメインを入力して下さい。"
+    ID_INFO_DLG_LIST_HIDE   "表示しない"
+    ID_INFO_DLG_LIST_0_5    "0.5秒"
+    ID_INFO_DLG_LIST_1_0    "1.0秒"
+    ID_INFO_DLG_LIST_1_5    "1.5秒"
+    ID_INFO_DLG_LIST_2_0    "2.0秒"
+    ID_INFO_DLG_LIST_2_5    "2.5秒"
+    ID_INFO_DLG_LIST_3_0    "3.0秒"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INFO_DLG_LIST_3_5    "3.5秒"
+    ID_INFO_DLG_LIST_4_0    "4.0秒"
+    ID_INFO_DLG_LIST_4_5    "4.5秒"
+    ID_INFO_DLG_LIST_5_0    "5.0秒"
+    ID_INFO_DLG_LIST_5_5    "5.5秒"
+    ID_INFO_DLG_LIST_6_0    "6.0秒"
+    ID_INFO_DLG_LIST_6_5    "6.5秒"
+    ID_INFO_DLG_LIST_7_0    "7.0秒"
+    ID_INFO_DLG_LIST_7_5    "7.5秒"
+    ID_INFO_DLG_LIST_8_0    "8.0秒"
+    ID_INFO_DLG_LIST_8_5    "8.5秒"
+    ID_INFO_DLG_LIST_9_0    "9.0秒"
+    ID_INFO_DLG_LIST_9_5    "9.5秒"
+    ID_INFO_DLG_LIST_10_0   "10.0秒"
     ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "「開封済みにする」を表示しない"
     ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "「開封済みにする」を表示する"
-    ID_INFO_OPEN_OPTION_SHOW_TRANSFER       "「転送する」を表示する"
-    ID_MISSING_PROXY_CONFIG "[インターネット接続設定]\n[インターネット接続設定]-「マニュアル設定」を選択した場合\nプロキシ サーバー/自動構成スクリプトを登録して下さい。(空白不可)"
-    ID_URL_REDIRECT_SCRIPT_HELP "'##################################################################################\r\n\
-'URLリダイレクト スクリプト ヘルプ\r\n\
-'ファンクション　OnRedirectにリダイレクト処理を記述します。\r\n\
-'スクリプト言語は、VBScriptベースになります。\r\n\
-'戻り値として、起動したいブラウザーを記述します。\r\n\
-\r\n\
-'  既定のブラウザーで表示する場合\r\n'    OnRedirect=""Default""\r\n\
-'  Microsoft Internet Explorerにリダイレクトする場合\r\n'    OnRedirect=""IE""\r\n\
-'  Mozilla Firefoxにリダイレクトする場合\r\n'    OnRedirect=""Firefox""\r\n\
-'  Google Chromeにリダイレクトする場合\r\n'    OnRedirect=""Chrome""\r\n\
-'  Microsoft Edgeにリダイレクトする場合\r\n'    OnRedirect=""Edge""\r\n\
-'  指定ブラウザー1にリダイレクトする場合\r\n'    OnRedirect=""Custom1""\r\n\
-'  指定ブラウザー2にリダイレクトする場合\r\n'    OnRedirect=""Custom2""\r\n\
-'  指定ブラウザー3にリダイレクトする場合\r\n'    OnRedirect=""Custom3""\r\n\
-'  指定ブラウザー4にリダイレクトする場合\r\n'    OnRedirect=""Custom4""\r\n\
-'  指定ブラウザー5にリダイレクトする場合\r\n'    OnRedirect=""Custom5""\r\n\
-'  表示を禁止する場合\r\n'    OnRedirect=""Block""\r\n\
-'------------------------------------------------------------\r\n\
-'グローバル変数(予約語)：\r\n\
-'以下のグローバル変数を利用することが可能です。\r\n\
-\r\n\
-'TB_Global_URL\t(文字列値)\r\n\
-'  画面遷移先のURL情報\r\n\
-\r\n\
-'TB_Global_SCHME\t(文字列値)\r\n\
-'  画面遷移先のURLスキーマ情報 http/https\r\n\
-\r\n\
-'TB_Global_HOSTNAME\t(文字列値)\r\n\
-'  画面遷移先のURLホスト情報\r\n\
-\r\n\
-'TB_Global_PORT\t(文字列値)\r\n\
-'  画面遷移先のURLポート情報\r\n\
-\r\n\
-'TB_Global_URL_PATH\t(文字列値)\r\n\
-'  画面遷移先のURLパス情報\r\n\
-\r\n\
-'例)「https://www.google.co.jp/search?q=Chronos」を開く場合\r\n\
-'TB_Global_URL           :https://www.google.co.jp/search\r\n\
-'TB_Global_SCHME         :https\r\n\
-'TB_Global_HOSTNAME      :www.google.co.jp\r\n\
-'TB_Global_PORT          :443\r\n\
-'TB_Global_URL_PATH      :/search\r\n\
-'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n\
-'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n\
-'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n\
-'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n\
-'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\
-\r\n\
-'TB_Global_TOP_PAGE\t(真偽値)\r\n\
-'  トップURLかサブURL(Frame/iFrame)かの情報：True(トップURL)　False(サブURL)\r\n\
-\r\n\
-'TB_TRACE_LOG(文字列値)\r\n\
-'  Debug TRACE Windowにログ出力を行います。\r\n\
-'------------------------------------------------------------\r\n\
-'例)https://www.yahoo.co.jpの場合は、IEにリダイレクトする。\r\n\
-'Function OnRedirect()\r\n\
-'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n\
-'    OnRedirect=""IE""\r\n\
-'  End IF\r\n\
-'End Function\r\n\
-'##################################################################################\r\n"
-    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "ログ出力："
-END
-
-STRINGTABLE
-BEGIN
-    ID_AUTH_ALERT_EMPTY_USER "ユーザー名を入力して下さい。"
-    ID_AUTH_REQUIRED "認証が必要です。"
-    ID_AUTH_ALERT_MISMATCHED_PASSWORD "新しいパスワードとパスワードの確認が一致していません。再度入力して下さい。"
-    ID_AUTH_CHANGE_PASSWORD "パスワード変更"
-END
-
-STRINGTABLE
-BEGIN
-    ID_DEBUG_ITEMS_COUNT "%d件"
-    ID_DEBUG_LINES_COUNT "%d行"
-    ID_DEBUG_CONFIRM_SAVE_RESULT "保存しますか？"
-    ID_DEBUG_ALERT_SAVE_FAILED "ファイルの保存に失敗しました。\n\n別のプログラムがファイルを開いているか、書込権限が不足しています。操作を完了できません。ファイルを閉じてから再実行してください。\n\n%s"
 END
 
 #endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
-
-// English resources
+/////////////////////////////////////////////////////////////////////////////
+// 英語 (ニュートラル) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
@@ -1376,7 +1361,7 @@ BEGIN
         MENUITEM "Save Window",                 ID_SAVE_WND
         MENUITEM SEPARATOR
         MENUITEM "Print to PDF",                ID_PRINT_PDF
-        MENUITEM "&Print...\tCtrl+P",            ID_PRINT
+        MENUITEM "&Print...\tCtrl+P",           ID_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Close",                      ID_W_CLOSE
         MENUITEM SEPARATOR
@@ -1407,8 +1392,8 @@ BEGIN
     END
     POPUP "F&avorites"
     BEGIN
-        MENUITEM "&Add to favorites...",         ID_ADD_FAVORITE
-        MENUITEM "&Organize favorites...",       ID_ORGANIZE_FAVORITE
+        MENUITEM "&Add to favorites...",        ID_ADD_FAVORITE
+        MENUITEM "&Organize favorites...",      ID_ORGANIZE_FAVORITE
         MENUITEM SEPARATOR
         MENUITEM "DUMMY",                       ID_FAVORITE_DUMMY
     END
@@ -1416,7 +1401,7 @@ BEGIN
     BEGIN
         MENUITEM "&File Manager",               ID_OPEN_THIN_FILER
         MENUITEM SEPARATOR
-        MENUITEM "&Preferences...",              ID_SETTINGS
+        MENUITEM "&Preferences...",             ID_SETTINGS
     END
     POPUP "&Window"
     BEGIN
@@ -1430,27 +1415,11 @@ BEGIN
     END
     POPUP "&Help"
     BEGIN
-        MENUITEM "&About...",                    ID_APP_ABOUT
+        MENUITEM "&About...",                   ID_APP_ABOUT
         MENUITEM SEPARATOR
         MENUITEM "Cleanup Browser Cache (&X)",  IDC_APP_DELETE_CACHE
     END
 END
-
-#endif    // English resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// English resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
-#pragma code_page(1252)
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Menu
-//
 
 IDR_MENU_BACK MENU
 BEGIN
@@ -1924,8 +1893,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 12,111,96,1
- PRODUCTVERSION 12,111,96,1
+ FILEVERSION 12,111,96,2
+ PRODUCTVERSION 12,111,96,2
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -1941,12 +1910,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "12.111.96.1"
+            VALUE "FileVersion", "12.111.96.2"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "12.111.96.1"
+            VALUE "ProductVersion", "12.111.96.2"
         END
     END
     BLOCK "VarFileInfo"
@@ -2287,44 +2256,129 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_SETTINGS_DLG_TITLE_GEN           "General"
-    IDS_STRING_SETTINGS_DLG_TITLE_DSP           "Appearance"
-    IDS_STRING_SETTINGS_DLG_TITLE_INIT          "Startup"
-    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION    "Internet Connection"
-    IDS_STRING_SETTINGS_DLG_TITLE_CAP           "Restriction"
-    IDS_STRING_SETTINGS_DLG_TITLE_SEC           "Redirection"
-    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER    "URL Filtering"
+    IDS_STRING_STARTING_BROWSER "Starting %s..."
+    IDS_STRING_SETTINGS_DLG_TITLE_GEN "General"
+    IDS_STRING_SETTINGS_DLG_TITLE_DSP "Appearance"
+    IDS_STRING_SETTINGS_DLG_TITLE_INIT "Startup"
+    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION "Internet Connection"
+    IDS_STRING_SETTINGS_DLG_TITLE_CAP "Restriction"
+    IDS_STRING_SETTINGS_DLG_TITLE_SEC "Redirection"
+    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER "URL Filtering"
     IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "Custom Scripts"
-    IDS_STRING_SETTINGS_DLG_TITLE_LOG           "Logging"
-    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR       "File Manager"
+    IDS_STRING_SETTINGS_DLG_TITLE_LOG "Logging"
+    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR "File Manager"
+    ID_SETTINGS_COLUMN_HEADER_URL "URL"
+    ID_SETTINGS_COLUMN_HEADER_DOMAIN "Domain"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_STARTING_BROWSER "Starting %s..."
     IDS_STRING_CLOSE_ALL_WINDOW "Are you sure to close all windows?"
     IDS_STRING_ADMIN_LOCK_FEATURE 
                             "System administrator restricted access to this feature. "
     IDS_STRING_ZONE_MSG_DBL "The requested page is opened by the default browser."
     IDS_STRING_ZONE_MSG_NG  "The requested page is not allowed to access."
-    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD  "Do you want the window with a download in progress to be closed?\n\nThe download will be canceled if you close the window.\nPlease choose ""No"" to continue downloading."
-    IDS_STRING_WELCOME_MSG "Thank you for using %s Version %s."
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_COLUMN_HEADER_FILE "Filename"
+    ID_SETTINGS_COLUMN_HEADER_ACTION "Action"
+    ID_SETTINGS_COLUMN_HEADER_ENABLED "Enabled"
+    ID_SETTINGS_MENU_LABEL  "&Preferences..."
+    IDS_STRING_CONFIRM_CANCEL_DOWNLOAD 
+                            "Do you want the window with a download in progress to be closed?\n\nThe download will be canceled if you close the window.\nPlease choose ""No"" to continue downloading."
+    IDS_STRING_WELCOME_MSG  "Thank you for using %s Version %s."
     IDS_STRING_STARTING_FILEMGR "Starting file manager..."
-    IDS_STRING_CONFIRM_CLEAR_CACHE "Do you want the browser cache to be cleared?\nClick ""Yes"" to restart the bwoser with cleared cache."
+    IDS_STRING_CONFIRM_CLEAR_CACHE 
+                            "Do you want the browser cache to be cleared?\nClick ""Yes"" to restart the bwoser with cleared cache."
     IDS_STRING_STARTING_NEW_SESSION "Starting New Session..."
-    IDS_STRING_HOST_AUTH_REQUIRED "Authentication required.\nThe connecting host [%s] requries username and password."
-    IDS_STRING_PROXY_AUTH_REQUIRED "Authentication required.\nThe proxy [%s] requries username and password."
-    IDS_STRING_CONFIRM_INSECURE_CONNECTION "Insecure connection.\nClick ""Yes"" to contine connection if you have understanding about the risk.\n\n The owner of ""%s"" did not configure the website.\n\nWe blocked the connection to the website to guard your information to be stolen.\nIt uses an invalid security certificate.\nThe certificate is not trusted due to its unknown certificator.\nThe web server might send an invalid intermediate certificate.\n\nClick ""No"" to cancel the connection."
-    IDS_STRING_CONFIRM_LEAVE_PAGE "Are you sure to leave this webpage?\nUnsaved changes may be lost."
-    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT "Closing application due to max out the limit of the running time (maximum = %d min.)\nPlease restart the application."
-    IDS_STRING_ALERT_MISSING_FILES "Cannot start application. Please setup again.\nSomme required files are missing. [%s]"
+    ID_OPEN_FILE_CHOOSER_TITLE "Open"
+    ID_MSG_FILE_DOWNLOAD_RESTRICTED 
+                            "System administrator restricted file downloads."
+    ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS 
+                            "There is an in-progress download.\nYou cannot start next download until it is finished."
+    ID_DEFAULT_FILE_BASENAME "No Title"
+    ID_FILE_TYPE_ALL        "All (*.*)|*.*||"
+    ID_FILE_TYPE_PDF        "PDF Documents (*.pdf)|*.pdf||"
+    ID_FILE_TYPE_EXE        "Executables (*.exe)|*.exe||"
+END
+
+STRINGTABLE
+BEGIN
+    ID_DL_START_APP_FAILED_FILE_NOT_FOUND "Specified file not found."
+    ID_DL_START_APP_FAILED_PATH_NOT_FOUND "Specified path not found."
+    ID_DL_START_APP_FAILED_BAD_FORMAT 
+                            "Invalid executable file. It may be a non-Win32 executable or broken."
+    ID_DL_START_APP_FAILED_ACCESSDENIED 
+                            "File access denied by the operating system."
+    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE 
+                            "Incomplete or invalid file association."
+    ID_DL_START_APP_FAILED_DDEBUSY 
+                            "Failed to complete DDE transaction, due to in-progress transaction by other application."
+    ID_DL_START_APP_FAILED_DDEFAIL "Failed to complete DDE transaction."
+    ID_DL_START_APP_FAILED_DDETIMEOUT 
+                            "Failed to complete DDE transaction, due to timed out."
+    ID_DL_START_APP_FAILED_DLLNOTFOUND "Missing DLL (dynamic link library)."
+    ID_DL_START_APP_FAILED_NOASSOC 
+                            "No associated applitaion for the file type."
+    ID_DL_START_APP_FAILED_OOM "Low memory to complete the operation."
+    ID_DL_START_APP_FAILED_SHARE "Sharing violation is reported."
+    ID_DL_START_APP_FAILED_DEFAULT "Unknown exception is reported."
+    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "Close"
+    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "Completely Downloaded"
+    IDS_STRING_HOST_AUTH_REQUIRED 
+                            "Authentication required.\nThe connecting host [%s] requries username and password."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STRING_PROXY_AUTH_REQUIRED 
+                            "Authentication required.\nThe proxy [%s] requries username and password."
+    IDS_STRING_CONFIRM_INSECURE_CONNECTION 
+                            "Insecure connection.\nClick ""Yes"" to contine connection if you have understanding about the risk.\n\n The owner of ""%s"" did not configure the website.\n\nWe blocked the connection to the website to guard your information to be stolen.\nIt uses an invalid security certificate.\nThe certificate is not trusted due to its unknown certificator.\nThe web server might send an invalid intermediate certificate.\n\nClick ""No"" to cancel the connection."
+    IDS_STRING_CONFIRM_LEAVE_PAGE 
+                            "Are you sure to leave this webpage?\nUnsaved changes may be lost."
+    IDS_STRING_ALERT_MISSING_FILES 
+                            "Cannot start application. Please setup again.\nSomme required files are missing. [%s]"
     IDS_STRING_CLEARING_CACHE "Clearing browser caches..."
     IDS_STRING_CONFIRM_CLOSE_APPLICATION "Do you want %s to be closed?"
-    IDS_STRING_TOO_MANY_WINDOWS_MSG "Too many windows (maximum count = %d): Please close obsolete windows. (%s)"
-    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT     "We are sorry for causing you trouble.\nClosing application (%s) due to low system resource."
-    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN "SYSTEM Resource allocation failuer. Closing the application (%s)."
-    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST "SYSTEM Resource allocation failuer. Please close window or restart the application (%s)."
-    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "Do you want the process running on VOS to be terminated?"
+    IDS_STRING_TOO_MANY_WINDOWS_MSG 
+                            "Too many windows (maximum count = %d): Please close obsolete windows. (%s)"
+    IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT 
+                            "We are sorry for causing you trouble.\nClosing application (%s) due to low system resource."
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN 
+                            "SYSTEM Resource allocation failuer. Closing the application (%s)."
+    IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST 
+                            "SYSTEM Resource allocation failuer. Please close window or restart the application (%s)."
+    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS 
+                            "Do you want the process running on VOS to be terminated?"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB "Open in New Tab"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "Open in New Background Tab"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW "Open in New Window"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "Open in New Background Window"
+    ID_CONTEXT_MENU_COPY_LINK "Copy Link URL"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER "Show ""Transfer"""
+    ID_MISSING_PROXY_CONFIG "[Internet connection]\n[Internet connection]-""Manual settings"" requires any proxy server or PAC file. It cannot be blank."
+    ID_URL_REDIRECT_SCRIPT_HELP 
+                            "'##################################################################################\r\n'Help for URL Redirection Scripts\r\n'The script needs to be written in the VBScript syntax.\r\n'You should put codes to define redirection logic into the function OnRedirect,\r\n'and it needs to return the browser name which you want the URL to be loaded by.\r\n\r\n'  To load the URL by the system default browser:\r\n'    OnRedirect=""Default""\r\n'  For the case by Microsoft Internet Explorer:\r\n'    OnRedirect=""IE""\r\n'  For the case by Mozilla Firefox:\r\n'    OnRedirect=""Firefox""\r\n'  For the case by Google Chrome:\r\n'    OnRedirect=""Chrome""\r\n'  For the case by Microsoft Edge:\r\n'    OnRedirect=""Edge""\r\n'  For the case by the custom browser 1:\r\n'    OnRedirect=""Custom1""\r\n'  For the case by the custom browser 2:\r\n'    OnRedirect=""Custom2""\r\n'  For the case by the custom browser 3:\r\n'    OnRedirect=""Custom3""\r\n'  For the case by the custom browser 4:\r\n'    OnRedirect=""Custom4""\r\n'  For the case by the custom browser 5:\r\n'    OnRedirect=""Custom5""\r\n'  To block loading of the URL:\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'Global variables (reserved):\r\n'Here is a list of available global variables.\r\n\r\n'TB_Global_URL\t(String)\r\n'  The loading URL.\r\n\r\n'TB_Global_SCHME\t(String)\r\n'  The scheme of the loading URL (http or https)\r\n\r\n'TB_Global_HOSTNAME\t(String)\r\n'  The hostname of the loading URL.\r\n\r\n'TB_Global_PORT\t(String)\r\n'  The port number of the loading URL.\r\n\r\n'TB_Global_URL_PATH\t(String)\r\n'  The path of the loading URL.\r\n\r\n'For example: if the loading URL is https://www.google.co.jp/search?q=Chronos ,\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(Boolean)\r\n'  Which the URL is the one of the top frame or a sub frame. True = top frame, False = sub frame.\r\n\r\n'TB_TRACE_LOG(String)\r\n'  Prints a log line to the Debug TRACE Window.\r\n'------------------------------------------------------------\r\n'For example: setting https://www.yahoo.co.jp to be loaded by IE.\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
+    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "Log: "
+    ID_AUTH_ALERT_EMPTY_USER "Please input the username."
+    ID_AUTH_REQUIRED        "Authentication required."
+    ID_AUTH_ALERT_MISMATCHED_PASSWORD 
+                            "Confimation failed: mismatched password. Please retype."
+    ID_AUTH_CHANGE_PASSWORD "Change password"
+    ID_DEBUG_ITEMS_COUNT    "%d items"
+    ID_DEBUG_LINES_COUNT    "%d lines"
+    ID_DEBUG_CONFIRM_SAVE_RESULT "Do you want it to be saved?"
+    ID_DEBUG_ALERT_SAVE_FAILED 
+                            "Failed to save the file.\n\nIt may be held by some other applications, or missing writing permission.\nCould not complete the operation. Please retry after closing the file."
+    IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
+                            "Closing application due to max out the limit of the running time (maximum = %d min.)\nPlease restart the application."
 END
 
 STRINGTABLE
@@ -2332,22 +2386,22 @@ BEGIN
     IDS_STRING_ZONE_MSG_IE  "The requested page is opened by Internet Explorer."
     IDS_STRING_ZONE_MSG_FF  "The requested page is opened by Mozilla Firefox."
     IDS_STRING_ZONE_MSG_CHR "The requested page is opened by Google Chrome."
-    IDS_STRING_ZONE_MSG_EDG "The requested page is opened by Microsoft Edge."
 END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_ZONE_MSG_EDG "The requested page is opened by Microsoft Edge."
     IDS_STRING_ZONE_MSG_CUSTOM 
                             "The requested page is opened by a custom browser."
     IDS_STRING_DISABLE_EXEC "System administrator restricted the requested program to run."
     IDS_STRING_AUTO_RECOVERY 
                             "Do you want the previous browsing session to be restored as best it can be?\n\nThe program might crashed by something trouble.\n\nWe are sorry for causing you trouble.\nDate: %s\nNumber of browser windows: %d"
     IDS_STRING_UNDO         "&Undo"
-    IDS_STRING_CUT          "Cu&t"
 END
 
 STRINGTABLE
 BEGIN
+    IDS_STRING_CUT          "Cu&t"
     IDS_STRING_COPY         "&Copy"
     IDS_STRING_PASTE        "&Paste"
     IDS_STRING_DELETE       "&Delete"
@@ -2363,23 +2417,23 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_CONTEXT_MENU_OPEN_LINK_TAB             "Open in New Tab"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE    "Open in New Background Tab"
-    ID_CONTEXT_MENU_OPEN_LINK_WINDOW          "Open in New Window"
-    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "Open in New Background Window"
-    ID_CONTEXT_MENU_COPY_LINK                 "Copy Link URL"
-    ID_CONTEXT_MENU_SAVE_LINK                 "Save Link as ..."
-    ID_CONTEXT_MENU_OPEN_IMG_TAB              "Open Image in New Tab"
-    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE     "Open Image in New Background Tab"
-    ID_CONTEXT_MENU_OPEN_IMG_WINDOW           "Open Image in New Window"
-    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE  "Open Image in New Background Window"
-    ID_CONTEXT_MENU_SAVE_IMG                  "Save Image as ..."
-    ID_CONTEXT_MENU_COPY_IMG                  "Copy Image"
-    ID_CONTEXT_MENU_COPY_IMG_LINK             "Copy Image URL"
-    ID_CONTEXT_MENU_SEARCH                    "Search by Google: ""%s"""
-    ID_CONTEXT_MENU_RELOAD                    "Reload"
-    ID_CONTEXT_MENU_PRINT_PDF                 "Print as PDF"
-    ID_CONTEXT_MENU_PRINT                     "Print"
+    ID_CONTEXT_MENU_SAVE_LINK "Save Link as ..."
+    ID_CONTEXT_MENU_OPEN_IMG_TAB "Open Image in New Tab"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE "Open Image in New Background Tab"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW "Open Image in New Window"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE 
+                            "Open Image in New Background Window"
+    ID_CONTEXT_MENU_SAVE_IMG "Save Image as ..."
+    ID_CONTEXT_MENU_COPY_IMG "Copy Image"
+    ID_CONTEXT_MENU_COPY_IMG_LINK "Copy Image URL"
+    ID_CONTEXT_MENU_SEARCH  "Search by Google: ""%s"""
+    ID_CONTEXT_MENU_RELOAD  "Reload"
+    ID_CONTEXT_MENU_PRINT_PDF "Print as PDF"
+    ID_CONTEXT_MENU_PRINT   "Print"
+    ID_ERROR_MSG_FAILED     "Common network error"
+    ID_ERROR_MSG_NONE       "N/A"
+    ID_ERROR_MSG_ABORTED    "Aborted."
+    ID_ERROR_MSG_INVALID_ARGUMENT "Invalid arguments."
 END
 
 STRINGTABLE
@@ -2457,68 +2511,28 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_SETTINGS_COLUMN_HEADER_URL     "URL"
-    ID_SETTINGS_COLUMN_HEADER_DOMAIN  "Domain"
-    ID_SETTINGS_COLUMN_HEADER_FILE    "Filename"
-    ID_SETTINGS_COLUMN_HEADER_ACTION  "Action"
-    ID_SETTINGS_COLUMN_HEADER_ENABLED "Enabled"
-END
-
-STRINGTABLE
-BEGIN
-    ID_SETTINGS_MENU_LABEL "&Preferences..."
-END
-
-STRINGTABLE
-BEGIN
-    ID_OPEN_FILE_CHOOSER_TITLE "Open"
-    ID_MSG_FILE_DOWNLOAD_RESTRICTED "System administrator restricted file downloads."
-    ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS "There is an in-progress download.\nYou cannot start next download until it is finished."
-    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "File Download"
-    ID_DEFAULT_FILE_BASENAME "No Title"
-    ID_FILE_TYPE_ALL "All (*.*)|*.*||"
-    ID_FILE_TYPE_PDF "PDF Documents (*.pdf)|*.pdf||"
-    ID_FILE_TYPE_EXE "Executables (*.exe)|*.exe||"
-    ID_FILE_TYPE_JS  "JavaScript files (*.js)|*.js||"
+    ID_FILE_TYPE_JS         "JavaScript files (*.js)|*.js||"
     ID_DOWNLOAD_FILE_CHOOSER_TITLE "Choose a file to be downloaded"
     ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "Choose a PDF document to be saved"
+    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "File Download"
     ID_PRINT_TO_PDF_FINISH_MSG "Printing as a PDF document finished."
     ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "Download (%d%%) %s"
-    ID_TRANSFER_SPEED_B "%I64u B / Sec."
-    ID_TRANSFER_SPEED_KB "%0.1f KB / Sec."
-    ID_TRANSFER_SPEED_MB "%0.2f MB / Sec."
+    ID_TRANSFER_SPEED_B     "%I64u B / Sec."
+    ID_TRANSFER_SPEED_KB    "%0.1f KB / Sec."
+    ID_TRANSFER_SPEED_MB    "%0.2f MB / Sec."
     ID_TRANSFER_SIZE_UNDEFERMINED "Undefermined"
     ID_TRANSFER_PROGRESS_MSG "%s received / %s total ( %d %%)"
-    ID_CONFIRM_CANCEL_DOWNLOAD             "Do you want the download to be canceled?"
-    ID_DL_START_APP_IN_PROGRESS            "Starting"
-    ID_DL_START_APP_FAILED_BASE            "Failed to start application.\n%s"
-    ID_DL_START_APP_FAILED_LOW_RESOURCE    "Low memory or system resource."
-    ID_DL_START_APP_FAILED_FILE_NOT_FOUND  "Specified file not found."
-    ID_DL_START_APP_FAILED_PATH_NOT_FOUND  "Specified path not found."
-    ID_DL_START_APP_FAILED_BAD_FORMAT      "Invalid executable file. It may be a non-Win32 executable or broken."
-    ID_DL_START_APP_FAILED_ACCESSDENIED    "File access denied by the operating system."
-    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "Incomplete or invalid file association."
-    ID_DL_START_APP_FAILED_DDEBUSY         "Failed to complete DDE transaction, due to in-progress transaction by other application."
-    ID_DL_START_APP_FAILED_DDEFAIL         "Failed to complete DDE transaction."
-    ID_DL_START_APP_FAILED_DDETIMEOUT      "Failed to complete DDE transaction, due to timed out."
-    ID_DL_START_APP_FAILED_DLLNOTFOUND     "Missing DLL (dynamic link library)."
-    ID_DL_START_APP_FAILED_NOASSOC         "No associated applitaion for the file type."
-    ID_DL_START_APP_FAILED_OOM             "Low memory to complete the operation."
-    ID_DL_START_APP_FAILED_SHARE           "Sharing violation is reported."
-    ID_DL_START_APP_FAILED_DEFAULT         "Unknown exception is reported."
-    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "Close"
-    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "Completely Downloaded"
+    ID_CONFIRM_CANCEL_DOWNLOAD "Do you want the download to be canceled?"
+    ID_DL_START_APP_IN_PROGRESS "Starting"
+    ID_DL_START_APP_FAILED_BASE "Failed to start application.\n%s"
+    ID_DL_START_APP_FAILED_LOW_RESOURCE "Low memory or system resource."
 END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_FAILED "Common network error"
-    ID_ERROR_MSG_NONE "N/A"
-    ID_ERROR_MSG_ABORTED "Aborted."
-    ID_ERROR_MSG_INVALID_ARGUMENT "Invalid arguments."
     ID_ERROR_MSG_INVALID_HANDLE "Invalid handle."
     ID_ERROR_MSG_FILE_NOT_FOUND "File not found."
-    ID_ERROR_MSG_TIMED_OUT "Timed out."
+    ID_ERROR_MSG_TIMED_OUT  "Timed out."
     ID_ERROR_MSG_FILE_TOO_BIG "File size is too large."
     ID_ERROR_MSG_UNEXPECTED "Unexpected error raised."
     ID_ERROR_MSG_ACCESS_DENIED "Access denied."
@@ -2532,25 +2546,49 @@ BEGIN
     ID_ERROR_MSG_INTERNET_DISCONNECTED "Disconnected from the internet."
     ID_ERROR_MSG_SSL_PROTOCOL_ERROR "SSL protocol error."
     ID_ERROR_MSG_ADDRESS_INVALID "Invalid IP address or port number."
+END
+
+STRINGTABLE
+BEGIN
     ID_ERROR_MSG_ADDRESS_UNREACHABLE "Unreachable IP address."
-    ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED "The server requested a certificate for SSL client authentication."
+    ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED 
+                            "The server requested a certificate for SSL client authentication."
     ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED "Failed to connect with a tunnel."
     ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED "No compatible SSL versions."
-    ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH "Mismatched SSL protocol version or cipher suite."
-    ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED "Re-negotiation requested by the server. (re-handshaking)"
-    ID_ERROR_MSG_CERT_COMMON_NAME_INVALID "The server responded that the hostname does not match to the common name of the certificate."
-    ID_ERROR_MSG_CERT_DATE_INVALID "The server responded that the expiration date of the certificate is invalid."
-    ID_ERROR_MSG_CERT_AUTHORITY_INVALID "The server responded that the certificate is signed by an untrusted authority."
-    ID_ERROR_MSG_CERT_CONTAINS_ERRORS "The server responded that the certificate contains some errors."
-    ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM "The certificate has no revocation mechanism."
-    ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION "Unable to check the revocation information of the security ceritificate of this website."
-    ID_ERROR_MSG_CERT_REVOKED "The server responded that the ceriticate has been revoked."
-    ID_ERROR_MSG_CERT_INVALID "The server responded that the certificate is invalid."
-    ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM "The server responded that the certificate is signed with a weak signature algorithm."
-    ID_ERROR_MSG_CERT_NON_UNIQUE_NAME "The hostname specified by the certificate is not unique."
-    ID_ERROR_MSG_CERT_WEAK_KEY "The server responded that the certificate contains some weak keys."
-    ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION "The server responded that the DNS name of the certificate violates the name constraint."
-    ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG "Too long validity of the certificate."
+    ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH 
+                            "Mismatched SSL protocol version or cipher suite."
+    ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED 
+                            "Re-negotiation requested by the server. (re-handshaking)"
+    ID_ERROR_MSG_CERT_COMMON_NAME_INVALID 
+                            "The server responded that the hostname does not match to the common name of the certificate."
+    ID_ERROR_MSG_CERT_DATE_INVALID 
+                            "The server responded that the expiration date of the certificate is invalid."
+    ID_ERROR_MSG_CERT_AUTHORITY_INVALID 
+                            "The server responded that the certificate is signed by an untrusted authority."
+    ID_ERROR_MSG_CERT_CONTAINS_ERRORS 
+                            "The server responded that the certificate contains some errors."
+    ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM 
+                            "The certificate has no revocation mechanism."
+    ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION 
+                            "Unable to check the revocation information of the security ceritificate of this website."
+    ID_ERROR_MSG_CERT_REVOKED 
+                            "The server responded that the ceriticate has been revoked."
+    ID_ERROR_MSG_CERT_INVALID 
+                            "The server responded that the certificate is invalid."
+    ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM 
+                            "The server responded that the certificate is signed with a weak signature algorithm."
+    ID_ERROR_MSG_CERT_NON_UNIQUE_NAME 
+                            "The hostname specified by the certificate is not unique."
+END
+
+STRINGTABLE
+BEGIN
+    ID_ERROR_MSG_CERT_WEAK_KEY 
+                            "The server responded that the certificate contains some weak keys."
+    ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION 
+                            "The server responded that the DNS name of the certificate violates the name constraint."
+    ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG 
+                            "Too long validity of the certificate."
     ID_ERROR_MSG_INVALID_URL "Invalid URL."
     ID_ERROR_MSG_DISALLOWED_URL_SCHEME "Disallowed URL scheme."
     ID_ERROR_MSG_UNKNOWN_URL_SCHEME "Unknown URL scheme."
@@ -2560,145 +2598,83 @@ BEGIN
     ID_ERROR_MSG_INVALID_RESPONSE "Invalid response."
     ID_ERROR_MSG_INVALID_CHUNKED_ENCODING "Invalid chunked encoding."
     ID_ERROR_MSG_METHOD_NOT_SUPPORTED "Method not supported."
-    ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH "Failed to authenticate the proxy server."
+    ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH 
+                            "Failed to authenticate the proxy server."
     ID_ERROR_MSG_EMPTY_RESPONSE "Empty response."
     ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG "Too large response headers."
     ID_ERROR_MSG_CACHE_MISS "Cache missed."
+END
+
+STRINGTABLE
+BEGIN
     ID_ERROR_MSG_INSECURE_RESPONSE "Insecure response."
-    ID_ERROR_MSG_PROXY_CONNECTION_FAILED "Failed to connect to the proxy server."
-    ID_ERROR_PAGE_TITLE "Loading error"
-    ID_ERROR_PAGE_HEADING "Failed to render the requested webpage."
+    ID_ERROR_MSG_PROXY_CONNECTION_FAILED 
+                            "Failed to connect to the proxy server."
+    ID_ERROR_PAGE_TITLE     "Loading error"
+    ID_ERROR_PAGE_HEADING   "Failed to render the requested webpage."
     ID_ERROR_PAGE_HEADING_DETAILS "Details"
     ID_ERROR_PAGE_HEADING_URL "URL: "
     ID_ERROR_PAGE_HEADING_CODE "Error Code: "
     ID_ERROR_PAGE_HEADING_MSG "Error Message: "
     ID_ERROR_PAGE_HEADING_NAME "Error Name: "
     ID_ERROR_MISMATCHED_PARAMTER "Mismatched parameters."
+    ID_ALERT_CANNOT_SAVE_CONFIGS 
+                            "Failed to save configurations to the file.\nIt may be held by some other applications.\nPlease retry after closing other applications."
+    ID_KEY_COMBINATION_EMPTY "Please set any key combination."
+    ID_KEY_COMBINATION_CONFIRM 
+                            "Confirming the key combination.\nPress Enter key or click the OK button, with pressed key combination.\nConfig: %s"
+    ID_KEY_COMBINATION_SUCCEEDED 
+                            "Success\nConfimed the key combination.\nConfig: %s\nInput: %s"
+    ID_KEY_COMBINATION_FAILED 
+                            "Failure\nFailed to confirm the key combination.\nConfig: %s\nInput: %s"
+    ID_ACTION_LABEL_ALLOW   "Allow"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ALERT_CANNOT_SAVE_CONFIGS "Failed to save configurations to the file.\nIt may be held by some other applications.\nPlease retry after closing other applications."
-    ID_KEY_COMBINATION_EMPTY     "Please set any key combination."
-    ID_KEY_COMBINATION_CONFIRM   "Confirming the key combination.\nPress Enter key or click the OK button, with pressed key combination.\nConfig: %s"
-    ID_KEY_COMBINATION_SUCCEEDED "Success\nConfimed the key combination.\nConfig: %s\nInput: %s"
-    ID_KEY_COMBINATION_FAILED    "Failure\nFailed to confirm the key combination.\nConfig: %s\nInput: %s"
-    ID_ACTION_LABEL_ALLOW "Allow"
-    ID_ACTION_LABEL_DENY  "Deny"
-    ID_CANNOT_SAVE_URL_FILTER "[URL filter]\nCould not save the file.\nIt may be held by some other applications.\nPlease retry after closing other applications.\n%s"
-    ID_CANNOT_LOAD_CUSTOM_SCRIPT "[Custom scripts]\nCould not load the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
-    ID_CANNOT_SAVE_CUSTOM_SCRIPT "[Custom scripts]\nCould not save the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
+    ID_ACTION_LABEL_DENY    "Deny"
+    ID_CANNOT_SAVE_URL_FILTER 
+                            "[URL filter]\nCould not save the file.\nIt may be held by some other applications.\nPlease retry after closing other applications.\n%s"
+    ID_CANNOT_LOAD_CUSTOM_SCRIPT 
+                            "[Custom scripts]\nCould not load the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
+    ID_CANNOT_SAVE_CUSTOM_SCRIPT 
+                            "[Custom scripts]\nCould not save the file.\nIt may be held by some other application.\nPlease retry after closing other applications.\n%s"
     ID_ALERT_ALREADY_ADDED_DOMAIN "Already added domain.\nLine at %d\n%s\n"
-    ID_ALERT_ALREADY_ADDED_URL_OR_FILE "Already added URL or filename.\nLine at %d\n%s\n%s\n"
-    ID_ALERT_EMPTY_URL "Please input any URL."
+    ID_ALERT_ALREADY_ADDED_URL_OR_FILE 
+                            "Already added URL or filename.\nLine at %d\n%s\n%s\n"
+    ID_ALERT_EMPTY_URL      "Please input any URL."
     ID_ALERT_EMPTY_FILENAME "Please input any filename."
-    ID_ALERT_EMPTY_DOMAIN "Please input any domain."
-    ID_INFO_DLG_LIST_HIDE "Hide"
-    ID_INFO_DLG_LIST_0_5  "0.5 sec."
-    ID_INFO_DLG_LIST_1_0  "1.0 sec."
-    ID_INFO_DLG_LIST_1_5  "1.5 sec."
-    ID_INFO_DLG_LIST_2_0  "2.0 sec."
-    ID_INFO_DLG_LIST_2_5  "2.5 sec."
-    ID_INFO_DLG_LIST_3_0  "3.0 sec."
-    ID_INFO_DLG_LIST_3_5  "3.5 sec."
-    ID_INFO_DLG_LIST_4_0  "4.0 sec."
-    ID_INFO_DLG_LIST_4_5  "4.5 sec."
-    ID_INFO_DLG_LIST_5_0  "5.0 sec."
-    ID_INFO_DLG_LIST_5_5  "5.5 sec."
-    ID_INFO_DLG_LIST_6_0  "6.0 sec."
-    ID_INFO_DLG_LIST_6_5  "6.5 sec."
-    ID_INFO_DLG_LIST_7_0  "7.0 sec."
-    ID_INFO_DLG_LIST_7_5  "7.5 sec."
-    ID_INFO_DLG_LIST_8_0  "8.0 sec."
-    ID_INFO_DLG_LIST_8_5  "8.5 sec."
-    ID_INFO_DLG_LIST_9_0  "9.0 sec."
-    ID_INFO_DLG_LIST_9_5  "9.5 sec."
-    ID_INFO_DLG_LIST_10_0 "10.0 sec."
+    ID_ALERT_EMPTY_DOMAIN   "Please input any domain."
+    ID_INFO_DLG_LIST_HIDE   "Hide"
+    ID_INFO_DLG_LIST_0_5    "0.5 sec."
+    ID_INFO_DLG_LIST_1_0    "1.0 sec."
+    ID_INFO_DLG_LIST_1_5    "1.5 sec."
+    ID_INFO_DLG_LIST_2_0    "2.0 sec."
+    ID_INFO_DLG_LIST_2_5    "2.5 sec."
+    ID_INFO_DLG_LIST_3_0    "3.0 sec."
+END
+
+STRINGTABLE
+BEGIN
+    ID_INFO_DLG_LIST_3_5    "3.5 sec."
+    ID_INFO_DLG_LIST_4_0    "4.0 sec."
+    ID_INFO_DLG_LIST_4_5    "4.5 sec."
+    ID_INFO_DLG_LIST_5_0    "5.0 sec."
+    ID_INFO_DLG_LIST_5_5    "5.5 sec."
+    ID_INFO_DLG_LIST_6_0    "6.0 sec."
+    ID_INFO_DLG_LIST_6_5    "6.5 sec."
+    ID_INFO_DLG_LIST_7_0    "7.0 sec."
+    ID_INFO_DLG_LIST_7_5    "7.5 sec."
+    ID_INFO_DLG_LIST_8_0    "8.0 sec."
+    ID_INFO_DLG_LIST_8_5    "8.5 sec."
+    ID_INFO_DLG_LIST_9_0    "9.0 sec."
+    ID_INFO_DLG_LIST_9_5    "9.5 sec."
+    ID_INFO_DLG_LIST_10_0   "10.0 sec."
     ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "Hide ""Mark as Opened"""
     ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "Show ""Mark as Opened"""
-    ID_INFO_OPEN_OPTION_SHOW_TRANSFER       "Show ""Transfer"""
-    ID_MISSING_PROXY_CONFIG "[Internet connection]\n[Internet connection]-""Manual settings"" requires any proxy server or PAC file. It cannot be blank."
-    ID_URL_REDIRECT_SCRIPT_HELP "'##################################################################################\r\n\
-'Help for URL Redirection Scripts\r\n\
-'The script needs to be written in the VBScript syntax.\r\n\
-'You should put codes to define redirection logic into the function OnRedirect,\r\n\
-'and it needs to return the browser name which you want the URL to be loaded by.\r\n\
-\r\n\
-'  To load the URL by the system default browser:\r\n'    OnRedirect=""Default""\r\n\
-'  For the case by Microsoft Internet Explorer:\r\n'    OnRedirect=""IE""\r\n\
-'  For the case by Mozilla Firefox:\r\n'    OnRedirect=""Firefox""\r\n\
-'  For the case by Google Chrome:\r\n'    OnRedirect=""Chrome""\r\n\
-'  For the case by Microsoft Edge:\r\n'    OnRedirect=""Edge""\r\n\
-'  For the case by the custom browser 1:\r\n'    OnRedirect=""Custom1""\r\n\
-'  For the case by the custom browser 2:\r\n'    OnRedirect=""Custom2""\r\n\
-'  For the case by the custom browser 3:\r\n'    OnRedirect=""Custom3""\r\n\
-'  For the case by the custom browser 4:\r\n'    OnRedirect=""Custom4""\r\n\
-'  For the case by the custom browser 5:\r\n'    OnRedirect=""Custom5""\r\n\
-'  To block loading of the URL:\r\n'    OnRedirect=""Block""\r\n\
-'------------------------------------------------------------\r\n\
-'Global variables (reserved):\r\n\
-'Here is a list of available global variables.\r\n\
-\r\n\
-'TB_Global_URL\t(String)\r\n\
-'  The loading URL.\r\n\
-\r\n\
-'TB_Global_SCHME\t(String)\r\n\
-'  The scheme of the loading URL (http or https)\r\n\
-\r\n\
-'TB_Global_HOSTNAME\t(String)\r\n\
-'  The hostname of the loading URL.\r\n\
-\r\n\
-'TB_Global_PORT\t(String)\r\n\
-'  The port number of the loading URL.\r\n\
-\r\n\
-'TB_Global_URL_PATH\t(String)\r\n\
-'  The path of the loading URL.\r\n\
-\r\n\
-'For example: if the loading URL is https://www.google.co.jp/search?q=Chronos ,\r\n\
-'TB_Global_URL           :https://www.google.co.jp/search\r\n\
-'TB_Global_SCHME         :https\r\n\
-'TB_Global_HOSTNAME      :www.google.co.jp\r\n\
-'TB_Global_PORT          :443\r\n\
-'TB_Global_URL_PATH      :/search\r\n\
-'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n\
-'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n\
-'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n\
-'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n\
-'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\
-\r\n\
-'TB_Global_TOP_PAGE\t(Boolean)\r\n\
-'  Which the URL is the one of the top frame or a sub frame. True = top frame, False = sub frame.\r\n\
-\r\n\
-'TB_TRACE_LOG(String)\r\n\
-'  Prints a log line to the Debug TRACE Window.\r\n\
-'------------------------------------------------------------\r\n\
-'For example: setting https://www.yahoo.co.jp to be loaded by IE.\r\n\
-'Function OnRedirect()\r\n\
-'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n\
-'    OnRedirect=""IE""\r\n\
-'  End IF\r\n\
-'End Function\r\n\
-'##################################################################################\r\n"
-    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "Log: "
 END
 
-STRINGTABLE
-BEGIN
-    ID_AUTH_ALERT_EMPTY_USER "Please input the username."
-    ID_AUTH_REQUIRED "Authentication required."
-    ID_AUTH_ALERT_MISMATCHED_PASSWORD "Confimation failed: mismatched password. Please retype."
-    ID_AUTH_CHANGE_PASSWORD "Change password"
-END
-
-STRINGTABLE
-BEGIN
-    ID_DEBUG_ITEMS_COUNT "%d items"
-    ID_DEBUG_LINES_COUNT "%d lines"
-    ID_DEBUG_CONFIRM_SAVE_RESULT "Do you want it to be saved?"
-    ID_DEBUG_ALERT_SAVE_FAILED "Failed to save the file.\n\nIt may be held by some other applications, or missing writing permission.\nCould not complete the operation. Please retry after closing the file."
-END
-
-#endif    // English resources
+#endif    // 英語 (ニュートラル) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
