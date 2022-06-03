@@ -3195,7 +3195,7 @@ void CBrowserFrame::OnAppDeleteCache()
 	{
 		int iRet = 0;
 		CString confirmMsg;
-		confirmMsg.LoadString(IDS_STRING_WELCOME_MSG);
+		confirmMsg.LoadString(IDS_STRING_CONFIRM_CLEAR_CACHE);
 		iRet = theApp.SB_MessageBox(this->m_hWnd, confirmMsg, NULL, MB_ICONQUESTION | MB_YESNO, TRUE);
 		if (iRet != IDYES)
 			return;

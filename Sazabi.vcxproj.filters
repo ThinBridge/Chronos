@@ -187,9 +187,6 @@
     <None Include="res\mjr.bmp">
       <Filter>res</Filter>
     </None>
-    <None Include="res\SGThinforie.ico">
-      <Filter>res</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="minhook">
@@ -226,13 +223,8 @@
     <Image Include="res\key.bmp">
       <Filter>res</Filter>
     </Image>
-    <Image Include="res\DL.bmp">
-      <Filter>res</Filter>
-    </Image>
     <Image Include="res\close_button.bmp" />
     <Image Include="res\bg.bmp" />
-    <Image Include="res\blank.png" />
-    <Image Include="res\blank.bmp" />
     <Image Include="res\small.ico" />
     <Image Include="res\warn.ico" />
   </ItemGroup>
