@@ -3423,7 +3423,7 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDSP), titleDSP, IDD_SETTINGS_DLG_DSP, titleDSP);
 	//起動関連設定
 	CString titleINIT;
-	titleINIT.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_DSP);
+	titleINIT.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_INIT);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetINIT), titleINIT, IDD_SETTINGS_DLG_INIT, titleINIT);
 	//インターネット接続設定
 	CString titleConnection;
