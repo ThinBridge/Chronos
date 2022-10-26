@@ -17,7 +17,7 @@ ThinAppと組み合わせずChronosを使用する場合、`ChronosN.exe` を `C
 
 ## CEFのデバッグログ採取手順
 
-`ChroonosDefault.conf` で以下の通り設定する。
+`ChronosDefault.conf` で以下の通り設定する。
 
 ```
 EnableAdvancedLogMode=1
