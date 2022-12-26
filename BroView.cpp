@@ -2384,21 +2384,22 @@ LRESULT CChildView::OnProgressChange(WPARAM wParam, LPARAM lParam)
 LRESULT CChildView::OnStateChange(WPARAM wParam, LPARAM lParam)
 {
 	FRM->m_nBrowserState = (INT)wParam;
-	if (lParam)
-	{
-		CString strURL((LPCTSTR)lParam);
-		if (!strURL.IsEmpty())
-		{
-			DebugWndLogData dwLogData;
-			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
-			dwLogData.mFUNCTION_NAME = _T("OnStateChange");
-			dwLogData.mMESSAGE1 = strURL;
-			dwLogData.mMESSAGE2.Format(_T("Loading:%s"), FRM->m_nBrowserState & CEF_BIT_IS_LOADING ? _T("TRUE") : _T("FALSE"));
-			theApp.AppendDebugViewLog(dwLogData);
-			CString logmsg = dwLogData.GetString();
-			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
-		}
-	}
+	if (!lParam)
+		return S_OK;
+
+	CString strURL((LPCTSTR)lParam);
+	if (strURL.IsEmpty())
+		return S_OK;
+
+	DebugWndLogData dwLogData;
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+	dwLogData.mFUNCTION_NAME = _T("OnStateChange");
+	dwLogData.mMESSAGE1 = strURL;
+	dwLogData.mMESSAGE2.Format(_T("Loading:%s"), FRM->m_nBrowserState & CEF_BIT_IS_LOADING ? _T("TRUE") : _T("FALSE"));
+	theApp.AppendDebugViewLog(dwLogData);
+	CString logmsg = dwLogData.GetString();
+	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
+
 	return S_OK;
 }
 
