@@ -122,13 +122,13 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 
 			memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
 			lstrcpynW(szSelPath, lpofn->lpstrFile, MAX_PATH);
-			CStringW strRoot(strPath);
 			CStringW strSelPath(szSelPath);
-			strRoot.MakeUpper();
 			strSelPath.MakeUpper();
 			if (strSelPath.IsEmpty())
 				return bRet;
 
+			CStringW strRoot(strPath);
+			strRoot.MakeUpper();
 			if (strSelPath.Find(strRoot) != 0)
 			{
 				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, szSelPath);
