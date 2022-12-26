@@ -157,7 +157,6 @@ BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwS
 {
 	PROC_TIME(Create)
 
-	CString logmsg;
 	BOOL bRet = CWnd::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext);
 	try
 	{
@@ -196,6 +195,7 @@ BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwS
 			}
 			m_dbZoomSizeDefault = dZoom;
 		}
+		CString logmsg;
 		logmsg.Format(_T("ChildView::Create BF_WND:0x%08x CV_WND:0x%08x")
 			,theApp.SafeWnd(m_pwndFrame)
 			,theApp.SafeWnd(this->m_hWnd)
@@ -342,7 +342,6 @@ BOOL CChildView::IsFileURINavigation(const CString &strURL)
 	//Trueの場合は、ヒットしたので、そのまま開いてはダメ
 	//Falseの場合は、そのまま開く。
 	BOOL bRet = FALSE;
-	CString logmsg;
 	if (strURL.IsEmpty())
 		return FALSE;
 
@@ -352,6 +351,7 @@ BOOL CChildView::IsFileURINavigation(const CString &strURL)
 	if (FRM->m_bOLEViewer)
 		return FALSE;
 
+	CString logmsg;
 	logmsg.Format(_T("CV_WND:0x%08x IsFileURINavigation:%s"), theApp.SafeWnd(this->m_hWnd), strURL);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 	LockSetForegroundWindow(LSFW_UNLOCK);
@@ -1902,11 +1902,11 @@ void CChildView::OnVisible(BOOL bFlg)
 }
 void CChildView::OnWindowSetResizable(BOOL bFlg)
 {
-	CString logmsg;
 	if (theApp.IsWnd(m_pwndFrame))
 	{
 		LONG nOldStyle = ::GetWindowLong(m_pwndFrame->m_hWnd, GWL_STYLE);
 		LONG nNewStyle = 0;
+		CString logmsg;
 		//サイズ変更可能
 		if (bFlg)
 		{
