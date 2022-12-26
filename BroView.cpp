@@ -671,7 +671,6 @@ void CChildView::ResizeFrmWindow(RECT &rectClient)
 
 	try
 	{
-		CString logmsg;
 		BOOL bResizeAndCenter = FALSE;
 		if (theApp.IsWnd(FRM))
 		{
@@ -935,7 +934,6 @@ void CChildView::OnTitleChange(LPCWSTR lpwszText)
 
 BOOL CChildView::ZoomTo(double lFactor)
 {
-	CString logmsg;
 	BOOL bRet = FALSE;
 	try
 	{
