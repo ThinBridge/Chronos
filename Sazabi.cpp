@@ -70,6 +70,9 @@ CSazabi theApp;
  */
 BOOL CSazabi::InitFunc_ExecOnVOS()
 {
+#ifdef _DEBUG
+	return TRUE;
+#else
 	PROC_TIME(InitFunc_ExecOnVOS)
 	if (InVirtualEnvironment() == VE_NA && m_strExeFileName.CompareNoCase(_T("ChronosN.exe")) == 0)
 	{
@@ -129,9 +132,6 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 		}
 		else
 		{
-#ifdef _DEBUG
-			return TRUE;
-#endif
 			CString alertMsg;
 			alertMsg.LoadString(IDS_STRING_ALERT_MISSING_FILES);
 			CString strMsg;
@@ -144,6 +144,7 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 		}
 	}
 	return TRUE;
+#endif
 }
 
 /*
