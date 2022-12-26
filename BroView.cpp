@@ -2386,8 +2386,7 @@ LRESULT CChildView::OnStateChange(WPARAM wParam, LPARAM lParam)
 	FRM->m_nBrowserState = (INT)wParam;
 	if (lParam)
 	{
-		LPCTSTR pszURL = (LPCTSTR)lParam;
-		CString strURL(pszURL);
+		CString strURL((LPCTSTR)lParam);
 		if (!strURL.IsEmpty())
 		{
 			DebugWndLogData dwLogData;
