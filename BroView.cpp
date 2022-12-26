@@ -2210,20 +2210,21 @@ LRESULT CChildView::OnDownloadUpdate(WPARAM wParam, LPARAM lParam)
 }
 LRESULT CChildView::OnBeforeResourceLoad(WPARAM wParam, LPARAM lParam)
 {
-	if (lParam)
-	{
-		CString strURL((LPCTSTR)lParam);
-		if (!strURL.IsEmpty())
-		{
-			DebugWndLogData dwLogData;
-			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
-			dwLogData.mFUNCTION_NAME = _T("OnBeforeResourceLoad");
-			dwLogData.mMESSAGE1 = strURL;
-			theApp.AppendDebugViewLog(dwLogData);
-			CString logmsg = dwLogData.GetString();
-			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
-		}
-	}
+	if (!lParam)
+		return S_OK;
+
+	CString strURL((LPCTSTR)lParam);
+	if (strURL.IsEmpty())
+		return S_OK;
+
+	DebugWndLogData dwLogData;
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+	dwLogData.mFUNCTION_NAME = _T("OnBeforeResourceLoad");
+	dwLogData.mMESSAGE1 = strURL;
+	theApp.AppendDebugViewLog(dwLogData);
+	CString logmsg = dwLogData.GetString();
+	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
+
 	return S_OK;
 }
 
