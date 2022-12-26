@@ -136,8 +136,7 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 				continue;
 			}
 
-			CStringW strTSG_Upload;
-			strTSG_Upload = strRoot + L"UPLOAD\\";
+			CStringW strTSG_Upload = strRoot + L"UPLOAD\\";
 			if (strSelPath.Find(strTSG_Upload) == 0)
 			{
 				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, szSelPath);
@@ -269,16 +268,7 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				strRoot.MakeUpper();
 				if (strSelPath.Find(strRoot) != 0)
 				{
-					strMsg.Format(L"%sドライブ以外は指定できません。\n\nファイルの場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, szSelFolderPath);
-					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
-					continue;
-				}
-
-				CStringW strTSG_Upload;
-				strTSG_Upload = strRoot + L"UPLOAD\\";
-				if (strSelPath.Find(strTSG_Upload) != 0)
-				{
-					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, szSelFolderPath);
+					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strRoot, szSelFolderPath);
 					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
