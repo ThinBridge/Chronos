@@ -129,24 +129,22 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 			if (strSelPath.IsEmpty())
 				return bRet;
 
-			if (strSelPath.Find(strRoot) == 0)
-			{
-				CStringW strTSG_Upload;
-				strTSG_Upload = strRoot + L"UPLOAD\\";
-				if (strSelPath.Find(strTSG_Upload) == 0)
-				{
-					strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, szSelPath);
-					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
-					continue;
-				}
-				return bRet;
-			}
-			else
+			if (strSelPath.Find(strRoot) != 0)
 			{
 				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, szSelPath);
 				::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 				continue;
 			}
+
+			CStringW strTSG_Upload;
+			strTSG_Upload = strRoot + L"UPLOAD\\";
+			if (strSelPath.Find(strTSG_Upload) == 0)
+			{
+				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, szSelPath);
+				::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
+				continue;
+			}
+			return bRet;
 		}
 	}
 	catch (...)
