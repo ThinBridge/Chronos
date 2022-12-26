@@ -2213,8 +2213,7 @@ LRESULT CChildView::OnBeforeResourceLoad(WPARAM wParam, LPARAM lParam)
 {
 	if (lParam)
 	{
-		LPCTSTR pszURL = (LPCTSTR)lParam;
-		CString strURL(pszURL);
+		CString strURL((LPCTSTR)lParam);
 		if (!strURL.IsEmpty())
 		{
 			DebugWndLogData dwLogData;
