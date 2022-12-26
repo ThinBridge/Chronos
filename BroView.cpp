@@ -2232,20 +2232,20 @@ LRESULT CChildView::OnLoadStart(WPARAM wParam, LPARAM lParam)
 {
 	PROC_TIME(OnLoadStart)
 	m_strTitle.Empty();
-	if (theApp.IsWnd(FRM))
-	{
-		if (theApp.IsWnd(FRM->m_pwndStatusBar))
-		{
-			FRM->m_pwndStatusBar->EnablePaneProgressBar(nStatusProgress, 100);
+	if (!theApp.IsWnd(FRM))
+		return S_OK;
 
-			DebugWndLogData dwLogData;
-			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
-			dwLogData.mFUNCTION_NAME = _T("OnLoadStart");
-			theApp.AppendDebugViewLog(dwLogData);
-			CString logmsg = dwLogData.GetString();
-			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
-		}
-	}
+	if (!theApp.IsWnd(FRM->m_pwndStatusBar))
+		return S_OK;
+
+	FRM->m_pwndStatusBar->EnablePaneProgressBar(nStatusProgress, 100);
+
+	DebugWndLogData dwLogData;
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+	dwLogData.mFUNCTION_NAME = _T("OnLoadStart");
+	theApp.AppendDebugViewLog(dwLogData);
+	CString logmsg = dwLogData.GetString();
+	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 
 	return S_OK;
 }
