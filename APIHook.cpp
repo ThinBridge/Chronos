@@ -117,36 +117,36 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 		{
 			WCHAR szSelPath[MAX_PATH + 1] = {0};
 			bRet = pORG_GetSaveFileNameW(lpofn);
-			if (bRet)
+			if (!bRet)
+				return bRet;
+
+			memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
+			lstrcpynW(szSelPath, lpofn->lpstrFile, MAX_PATH);
+			CStringW strRoot(strPath);
+			CStringW strSelPath(szSelPath);
+			strRoot.MakeUpper();
+			strSelPath.MakeUpper();
+			if (strSelPath.IsEmpty())
+				return bRet;
+
+			if (strSelPath.Find(strRoot) == 0)
 			{
-				memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
-				lstrcpynW(szSelPath, lpofn->lpstrFile, MAX_PATH);
-				CStringW strRoot(strPath);
-				CStringW strSelPath(szSelPath);
-				strRoot.MakeUpper();
-				strSelPath.MakeUpper();
-				if (strSelPath.IsEmpty()) return bRet;
-				if (strSelPath.Find(strRoot) == 0)
+				CStringW strTSG_Upload;
+				strTSG_Upload = strRoot + L"UPLOAD\\";
+				if (strSelPath.Find(strTSG_Upload) == 0)
 				{
-					CStringW strTSG_Upload;
-					strTSG_Upload = strRoot + L"UPLOAD\\";
-					if (strSelPath.Find(strTSG_Upload) == 0)
-					{
-						strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, szSelPath);
-						::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
-						continue;
-					}
-					return bRet;
-				}
-				else
-				{
-					strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, szSelPath);
+					strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, szSelPath);
 					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
+				return bRet;
 			}
 			else
-				return bRet;
+			{
+				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, szSelPath);
+				::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
+				continue;
+			}
 		}
 	}
 	catch (...)
