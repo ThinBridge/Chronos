@@ -173,11 +173,12 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 			return bRet;
 		}
 
+		CStringW strCaption(theApp.m_strThisAppName);
+		CStringW strMsg;
+
 		//Upload禁止
 		if (theApp.m_AppSettings.IsEnableUploadRestriction())
 		{
-			CStringW strCaption(theApp.m_strThisAppName);
-			CStringW strMsg;
 			strMsg = (L"ファイル アップロードは、システム管理者により制限されています。");
 			if (hWindowParent)
 				theApp.SB_MessageBox(hWindowParent, strMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
@@ -193,25 +194,28 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 			theApp.WriteDebugTraceDateTime(strLogmsg, DEBUG_LOG_TYPE_DE);
 		}
 		CString strPath;
+		CString strRootPath;
 		if (theApp.IsSGMode())
 		{
 			//UploadTabを使う場合は、B:\\Uploadにする
 			if (theApp.m_AppSettings.IsShowUploadTab())
 			{
-				strPath = theApp.m_AppSettings.GetRootPath();
-				if (strPath.IsEmpty())
-					strPath = _T("B:\\");
-				strPath += _T("UpLoad");
-				if (!theApp.IsFolderExists(strPath))
-					strPath = _T("B:\\");
+				strRootPath = theApp.m_AppSettings.GetRootPath();
+				if (strRootPath.IsEmpty())
+					strRootPath = _T("B:\\");
+				strRootPath += _T("UpLoad");
+				if (!theApp.IsFolderExists(strRootPath))
+					strRootPath = _T("B:\\");
 			}
 			//UploadTabを使わない場合は、O:\\にする
 			else
 			{
-				strPath = theApp.m_AppSettings.GetUploadBasePath();
-				if (strPath.IsEmpty())
-					strPath = _T("B:\\");
+				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
+				if (strRootPath.IsEmpty())
+					strRootPath = _T("B:\\");
 			}
+			strPath = strRootPath;
+
 			//フック関数を無効
 			lpofn->Flags &= ~OFN_ENABLEHOOK;
 			//ダイアログテンプレート無効
@@ -244,12 +248,42 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				strPath = theApp.m_strLastSelectUploadFolderPath;
 			}
 		}
+
 		lpofn->lpstrInitialDir = strPath.GetString();
-		bRet = pORG_GetOpenFileNameW(lpofn);
-		if (bRet)
+		for (;;)
 		{
 			WCHAR szSelFolderPath[MAX_PATH + 1] = {0};
+			bRet = pORG_GetOpenFileNameW(lpofn);
+			if (!bRet)
+				return bRet;
+
+			memset(szSelFolderPath, 0x00, sizeof(WCHAR) * MAX_PATH);
 			lstrcpynW(szSelFolderPath, lpofn->lpstrFile, MAX_PATH);
+			CStringW strSelPath(szSelFolderPath);
+			strSelPath.MakeUpper();
+			if (strSelPath.IsEmpty())
+				return bRet;
+
+			if (theApp.IsSGMode()) {
+				CStringW strRoot(strRootPath);
+				strRoot.MakeUpper();
+				if (strSelPath.Find(strRoot) != 0)
+				{
+					strMsg.Format(L"%sドライブ以外は指定できません。\n\nファイルの場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, szSelFolderPath);
+					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
+					continue;
+				}
+
+				CStringW strTSG_Upload;
+				strTSG_Upload = strRoot + L"UPLOAD\\";
+				if (strSelPath.Find(strTSG_Upload) != 0)
+				{
+					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, szSelFolderPath);
+					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
+					continue;
+				}
+			}
+
 			PathRemoveFileSpec(szSelFolderPath);
 			theApp.m_strLastSelectUploadFolderPath = szSelFolderPath;
 
@@ -266,8 +300,8 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				}
 				theApp.SendLoggingMsg(LOG_UPLOAD, strFileName, lpofn->hwndOwner);
 			}
+			return bRet;
 		}
-		return bRet;
 	}
 	catch (...)
 	{
