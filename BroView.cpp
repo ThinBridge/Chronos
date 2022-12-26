@@ -869,6 +869,15 @@ void CChildView::OnStatusTextChange(LPCTSTR lpszText)
 		{
 			FRM->m_pwndStatusBar->SetWindowText(strTemp);
 		}
+
+		CString logmsg;
+		DebugWndLogData dwLogData;
+		dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+		dwLogData.mFUNCTION_NAME = _T("OnStatusTextChange");
+		dwLogData.mMESSAGE1 = strTemp;
+		theApp.AppendDebugViewLog(dwLogData);
+		logmsg = dwLogData.GetString();
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 	}
 	catch (...)
 	{
@@ -2235,6 +2244,14 @@ LRESULT CChildView::OnLoadStart(WPARAM wParam, LPARAM lParam)
 		if (theApp.IsWnd(FRM->m_pwndStatusBar))
 		{
 			FRM->m_pwndStatusBar->EnablePaneProgressBar(nStatusProgress, 100);
+
+			CString logmsg;
+			DebugWndLogData dwLogData;
+			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+			dwLogData.mFUNCTION_NAME = _T("OnLoadStart");
+			theApp.AppendDebugViewLog(dwLogData);
+			logmsg = dwLogData.GetString();
+			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 		}
 	}
 
@@ -2249,6 +2266,14 @@ LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 		if (theApp.IsWnd(FRM->m_pwndStatusBar))
 		{
 			FRM->SetProgress(0, -1);
+
+			CString logmsg;
+			DebugWndLogData dwLogData;
+			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+			dwLogData.mFUNCTION_NAME = _T("OnLoadEnd");
+			theApp.AppendDebugViewLog(dwLogData);
+			logmsg = dwLogData.GetString();
+			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 		}
 	}
 	if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableBrowsingLogging())
@@ -2346,6 +2371,15 @@ LRESULT CChildView::OnProgressChange(WPARAM wParam, LPARAM lParam)
 					return S_OK;
 				}
 				FRM->m_pwndStatusBar->SetPaneProgress(nStatusProgress, min(100, max(0, dwProgress)));
+
+				CString logmsg;
+				DebugWndLogData dwLogData;
+				dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+				dwLogData.mFUNCTION_NAME = _T("OnProgressChange");
+				dwLogData.mMESSAGE1.Format(_T("%d"), dwProgress);
+				theApp.AppendDebugViewLog(dwLogData);
+				logmsg = dwLogData.GetString();
+				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 			}
 		}
 	}
@@ -2359,6 +2393,23 @@ LRESULT CChildView::OnProgressChange(WPARAM wParam, LPARAM lParam)
 LRESULT CChildView::OnStateChange(WPARAM wParam, LPARAM lParam)
 {
 	FRM->m_nBrowserState = (INT)wParam;
+	if (lParam)
+	{
+		LPCTSTR pszURL = (LPCTSTR)lParam;
+		CString strURL(pszURL);
+		if (!strURL.IsEmpty())
+		{
+			CString logmsg;
+			DebugWndLogData dwLogData;
+			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+			dwLogData.mFUNCTION_NAME = _T("OnStateChange");
+			dwLogData.mMESSAGE1 = strURL;
+			dwLogData.mMESSAGE2.Format(_T("Loading:%s"), FRM->m_nBrowserState & CEF_BIT_IS_LOADING ? _T("TRUE") : _T("FALSE"));
+			theApp.AppendDebugViewLog(dwLogData);
+			logmsg = dwLogData.GetString();
+			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
+		}
+	}
 	return S_OK;
 }
 
