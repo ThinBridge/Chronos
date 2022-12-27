@@ -120,7 +120,6 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 			if (!bRet)
 				return bRet;
 
-			memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
 			lstrcpynW(szSelPath, lpofn->lpstrFile, MAX_PATH);
 			CStringW strSelPath(szSelPath);
 			strSelPath.MakeUpper();
@@ -256,7 +255,6 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 			if (!bRet)
 				return bRet;
 
-			memset(szSelFolderPath, 0x00, sizeof(WCHAR) * MAX_PATH);
 			lstrcpynW(szSelFolderPath, lpofn->lpstrFile, MAX_PATH);
 			CStringW strSelPath(szSelFolderPath);
 			strSelPath.MakeUpper();
