@@ -2042,7 +2042,20 @@ LRESULT CChildView::OnNewWindow(WPARAM wParam, LPARAM lParam)
 	if (popupFeatures)
 	{
 		pCreateView->m_popupFeatures = new CefPopupFeatures;
+#if CHROME_VERSION_MAJOR >= 105
+		// Since CEF105, inheritance is changed to cef_popup_features_t,
+		// so CefPopupFeaturesTraits->Set is not available anymore.
+		pCreateView->m_popupFeatures->x = popupFeatures->x;
+		pCreateView->m_popupFeatures->xSet = popupFeatures->xSet;
+		pCreateView->m_popupFeatures->y = popupFeatures->y;
+		pCreateView->m_popupFeatures->ySet = popupFeatures->ySet;
+		pCreateView->m_popupFeatures->width = popupFeatures->width;
+		pCreateView->m_popupFeatures->widthSet = popupFeatures->widthSet;
+		pCreateView->m_popupFeatures->height = popupFeatures->height;
+		pCreateView->m_popupFeatures->heightSet = popupFeatures->heightSet;
+#else
 		pCreateView->m_popupFeatures->Set(*popupFeatures, true);
+#endif
 		pCreateView->ResizeWindowPopup();
 	}
 	HWND hWnd = pCreateView->GetSafeHwnd();
