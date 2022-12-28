@@ -1628,8 +1628,13 @@ LRESULT CChildView::OnFindDialogMessage(WPARAM wParam, LPARAM lParam)
 			CefString csFind = FindName;
 			if (m_cefBrowser)
 			{
+#if CHROME_VERSION_MAJOR >= 99
+				// Since CEF99, no need to specify identifier for Find API
+				m_cefBrowser->GetHost()->Find(csFind, bSearchDown, bMatchCase, m_bFindNext);
+#else
 				INT nBrowserId = m_cefBrowser->GetIdentifier();
 				m_cefBrowser->GetHost()->Find(nBrowserId, csFind, bSearchDown, bMatchCase, m_bFindNext);
+#endif
 			}
 			if (!m_bFindNext)
 				m_bFindNext = TRUE;
