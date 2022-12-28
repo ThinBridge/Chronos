@@ -48,7 +48,10 @@ public:
 	virtual ~ClientHandler();
 
 	typedef cef_window_open_disposition_t WindowOpenDisposition;
-	typedef cef_plugin_policy_t PluginPolicy;
+#if CHROME_VERSION_MAJOR <= 98
+	// Since CEF99, cef_plugin_policy_t is not available anymore.
+	typedef cef_plugin_policy_t PluginPolicy;
+#endif
 
 	// CefClient methods
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler() override { return this; }
