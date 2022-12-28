@@ -1673,6 +1673,8 @@ CefRefPtr<CefResourceHandler> ClientHandler::GetResourceHandler(CefRefPtr<CefBro
 	return nullptr;
 }
 
+#if CHROME_VERSION_MAJOR < 109
+// Since CEF109, OnQuotaRequest is not available anymore.
 bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefCallback> callback)
 {
 	static const int64 max_size = 1024 * 1024 * 20; // 20mb.
@@ -1683,6 +1685,7 @@ bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefStrin
 	// call parent
 	return CefRequestHandler::OnQuotaRequest(browser, origin_url, new_size, callback);
 }
+#endif
 
 bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 				       ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefCallback> callback)
