@@ -1380,19 +1380,34 @@ void CChildView::OnPrintPDF()
 				theApp.m_pLogDisp->SendLog(LOG_DOWNLOAD, strFileName, m_strURL);
 			}
 
+#if CHROME_VERSION_MAJOR >= 108
+			// Since CEF108, cef_pdf_print_settings_t is refactored.
+			CefString(&stPDFSetting.header_template) = CefString(this->m_strTitle);
+			CefString(&stPDFSetting.footer_template) = CefString(this->m_strURL);
+			stPDFSetting.paper_width = 0;
+			stPDFSetting.paper_height = 0;
+#else
 			CefString(&stPDFSetting.header_footer_title) = CefString(this->m_strTitle);
 			CefString(&stPDFSetting.header_footer_url) = CefString(this->m_strURL);
 			stPDFSetting.page_width = 0;
 			stPDFSetting.page_height = 0;
+#endif
 			stPDFSetting.margin_top = 0;
 			stPDFSetting.margin_right = 0;
 			stPDFSetting.margin_bottom = 0;
 			stPDFSetting.margin_left = 0;
 			stPDFSetting.margin_type = PDF_PRINT_MARGIN_DEFAULT;
+#if CHROME_VERSION_MAJOR >= 108
+			stPDFSetting.display_header_footer = 1;
+			CefString(&stPDFSetting.page_ranges) = CefString("");
+			stPDFSetting.landscape = 0;
+			stPDFSetting.print_background = 1;
+#else
 			stPDFSetting.header_footer_enabled = 1;
 			stPDFSetting.selection_only = 0;
 			stPDFSetting.landscape = 0;
 			stPDFSetting.backgrounds_enabled = 1;
+#endif
 			CefRefPtr<CefPdfPrintCallback> callback;
 
 			m_cefBrowser->GetHost()->PrintToPDF(strPDFPath, stPDFSetting, callback);
