@@ -2,10 +2,21 @@ on: [push]
 name: Build Chronos
 jobs:
   build:
+    strategy:
+      matrix:
+        version: [current, stable, beta]
     runs-on: [ windows-2019 ]
     steps:
       - uses: actions/checkout@v3
       - uses: microsoft/setup-msbuild@v1
+      - if: matrix.version == 'stable'
+        name: Use stable version of CEF
+        run: |
+          bash .github/rewrite-cef-version.sh ${{ matrix.version }}
+      - if: matrix.version == 'beta'
+        name: Use beta version of CEF
+        run: |
+          bash .github/rewrite-cef-version.sh ${{ matrix.version }}
       - name: Setup cache for CEF
         uses: actions/cache@v3
         with:
@@ -17,62 +28,21 @@ jobs:
         run: msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG
       - name: Prepare upload
         run: move R32 Chronos
-      - name: Upload Build
+      - if: matrix.version == 'current'
+        name: Upload Build
         uses: actions/upload-artifact@v3
         with:
           name: Chronos
           path: Chronos
-
-  stable:
-    runs-on: [ windows-2019 ]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: microsoft/setup-msbuild@v1
-      - name: Use stable version of CEF
-        run: |
-          bash .github/rewrite-cef-version.sh stable
-      - name: Setup cache for CEF
-        uses: actions/cache@v3
+      - if: matrix.version == 'stable'
+        name: Upload Build (stable)
+        uses: actions/upload-artifact@v3
         with:
-          path: cef-cache/*/
-          key: cef-${{ runner.os }}-${{ hashFiles('setup-cef.bat') }}
-      - name: Setup CEF
-        run: .\setup-cef.bat
-      - name: Compile Chronos
-        run: msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG
-        # Aimed to watch build error, and not to bother build: job, ignore error here.
-        continue-on-error: true
-      # - name: Prepare upload
-      #   run: move R32 Chronos
-      # - name: Upload Build
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Chronos-stable
-      #     path: Chronos-stable
-
-  beta:
-    runs-on: [ windows-2019 ]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: microsoft/setup-msbuild@v1
-      - name: Use beta version of CEF
-        run: |
-          bash .github/rewrite-cef-version.sh beta
-      - name: Setup cache for CEF
-        uses: actions/cache@v3
+          name: Chronos-stable
+          path: Chronos
+      - if: matrix.version == 'beta'
+        name: Upload Build (beta)
+        uses: actions/upload-artifact@v3
         with:
-          path: cef-cache/*/
-          key: cef-${{ runner.os }}-${{ hashFiles('setup-cef.bat') }}
-      - name: Setup CEF
-        run: .\setup-cef.bat
-      - name: Compile Chronos
-        run: msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG
-        # Aimed to watch build error, and not to bother build: job, ignore error here.
-        continue-on-error: true
-      # - name: Prepare upload
-      #   run: move R32 Chronos
-      # - name: Upload Build
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Chronos-beta
-      #     path: Chronos-beta
+          name: Chronos-beta
+          path: Chronos
