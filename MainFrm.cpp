@@ -2603,7 +2603,7 @@ void CMainFrame::OnAppExitTimeLimit()
 		m_colBrowserWindows.GetNext(pos1);
 	}
 	CString alertMsg;
-	alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT);
+	alertMsg.LoadString(IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT);
 	logmsg.Format(alertMsg, iLimitTimeBase);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 	if (::IsWindow(ptdFirst->m_hWnd))
