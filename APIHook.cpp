@@ -269,6 +269,7 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 			}
 
 			PathRemoveFileSpec(strSelPath.GetBuffer());
+			strSelPath.ReleaseBuffer();
 			theApp.m_strLastSelectUploadFolderPath = strSelPath;
 
 			if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableUploadLogging())
