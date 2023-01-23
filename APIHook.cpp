@@ -274,13 +274,10 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 
 			if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableUploadLogging())
 			{
-				CString strFileName(lpofn->lpstrFile);
+				CString strPath(lpofn->lpstrFile);
 				WCHAR* ptrFile = NULL;
-				ptrFile = PathFindFileNameW(strFileName);
-				if (ptrFile)
-				{
-					strFileName = ptrFile;
-				}
+				ptrFile = PathFindFileNameW(strPath);
+				CString strFileName(ptrFile ? ptrFile : strPath);
 				theApp.SendLoggingMsg(LOG_UPLOAD, strFileName, lpofn->hwndOwner);
 			}
 			return bRet;
