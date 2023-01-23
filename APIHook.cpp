@@ -128,7 +128,7 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 			strRoot.MakeUpper();
 			if (strSelPath.Find(strRoot) != 0)
 			{
-				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, strSelPath.GetBuffer());
+				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, (PCWSTR)strSelPath);
 				::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 				continue;
 			}
@@ -136,7 +136,7 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 			CStringW strTSG_Upload = strRoot + L"UPLOAD\\";
 			if (strSelPath.Find(strTSG_Upload) == 0)
 			{
-				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, strSelPath.GetBuffer());
+				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, (PCWSTR)strSelPath);
 				::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 				continue;
 			}
@@ -262,20 +262,20 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				strRoot.MakeUpper();
 				if (strSelPath.Find(strRoot) != 0)
 				{
-					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strRoot, strSelPath.GetBuffer());
+					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strRoot, (PCWSTR)strSelPath);
 					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
 			}
 
 			PathRemoveFileSpec(strSelPath.GetBuffer());
-			theApp.m_strLastSelectUploadFolderPath = strSelPath.GetBuffer();
+			theApp.m_strLastSelectUploadFolderPath = strSelPath;
 
 			if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableUploadLogging())
 			{
 				CString strFileName(lpofn->lpstrFile);
 				WCHAR* ptrFile = NULL;
-				ptrFile = PathFindFileNameW(strFileName.GetBuffer());
+				ptrFile = PathFindFileNameW(strFileName);
 				if (ptrFile)
 				{
 					strFileName = ptrFile;
