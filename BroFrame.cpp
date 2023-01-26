@@ -1172,7 +1172,7 @@ LRESULT CBrowserFrame::OnNewAddressEnter(WPARAM wParam, LPARAM lParam)
 		SearchAndNavigate(str);
 		m_pwndAddress->AppendString(str.GetBuffer(0));
 		CString logmsg;
-		logmsg.Format(_T("BF_WND:0x%08x OnNewAddressEnter:%s"), theApp.SafeWnd(this->m_hWnd), str);
+		logmsg.Format(_T("BF_WND:0x%08x\tOnNewAddressEnter\t%s"), theApp.SafeWnd(this->m_hWnd), str);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	}
 	return 0;
@@ -1187,7 +1187,7 @@ LRESULT CBrowserFrame::OnNewAddress(WPARAM wParam, LPARAM lParam)
 		if (ExP == m_pwndAddress)
 		{
 			CString logmsg;
-			logmsg.Format(_T("BF_WND:0x%08x OnNewAddress:%s"), theApp.SafeWnd(this->m_hWnd), str);
+			logmsg.Format(_T("BF_WND:0x%08x\tOnNewAddress\t%s"), theApp.SafeWnd(this->m_hWnd), str);
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			m_pwndAddress->GetLBText(m_pwndAddress->GetCurSel(), str);
 			SearchAndNavigate(str);
