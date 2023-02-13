@@ -31,6 +31,8 @@ jobs:
         run: msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG
       - name: Prepare upload
         run: move R32 Chronos
+      - name: Prepare Chronos.exe to launch easily
+        run: echo F | xcopy /V /F /Y Chronos\ChronosN.exe Chronos\Chronos.exe
       - if: matrix.version == 'current'
         name: Upload Build
         uses: actions/upload-artifact@v3
