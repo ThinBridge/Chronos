@@ -2321,8 +2321,12 @@ void CSazabi::WriteDebugTraceDateTime(LPCTSTR msg, int iLogType)
 	if (_tcslen(msg) == 0) return;
 
 	CString strWriteLine;
-	CTime time = CTime::GetCurrentTime();
-	strWriteLine.Format(_T("%s\t%s\t%s\n"), time.Format(_T("%Y-%m-%d %H:%M:%S")), sDEBUG_LOG_TYPE[iLogType], msg);
+	SYSTEMTIME time;
+	GetLocalTime(&time);
+	strWriteLine.Format(_T("%u-%02u-%02u %02u:%02u:%02u.%03u\t%s\t%s\n"),
+			    time.wYear, time.wMonth, time.wDay,
+			    time.wHour, time.wMinute, time.wSecond,
+			    time.wMilliseconds, sDEBUG_LOG_TYPE[iLogType], msg);
 
 	_wsetlocale(LC_ALL, _T("jpn"));
 	CStdioFile stdFile;
