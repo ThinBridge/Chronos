@@ -190,6 +190,16 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 			}
 			case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
 			{
+#if CHROME_VERSION_MAJOR >= 110
+				if (popupFeatures.isPopup)
+				{
+					// Since CEF110, toolBarVisible and menuBarVisible was removed.
+					// When isPopup is true, browser interface elements is hidden,
+					// then create new browser window.
+					lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)&popupFeatures, (LPARAM)&windowInfo);
+					return false;
+				}
+#else
 				if (popupFeatures.toolBarVisible)
 				{
 					if (//popupFeatures.locationBarVisible==false
@@ -200,6 +210,7 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 						return false;
 					}
 				}
+#endif
 				lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
 				return false;
 			}
