@@ -4087,7 +4087,9 @@ void CSazabi::InitializeCef()
 	PROC_TIME(InitializeCef)
 
 	m_cefApp = new ClientApp();
+#if CHROME_VERSION_MAJOR < 112
 	CefEnableHighDPISupport();
+#endif
 
 	CefMainArgs mainargs(m_hInstance);
 	void* sandbox_info = NULL;
@@ -5064,7 +5066,9 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 	strCommandLineData = ::GetCommandLine();
 	if (strCommandLineData.Find(_T("--type=")) > 0)
 	{
+#if CHROME_VERSION_MAJOR < 112
 		CefEnableHighDPISupport();
+#endif
 		CefMainArgs mainargs(hInstance);
 		void* sandbox_info = NULL;
 		if (strCommandLineData.Find(_T("--type=renderer")) > 0)
