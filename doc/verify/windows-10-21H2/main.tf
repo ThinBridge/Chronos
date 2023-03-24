@@ -267,6 +267,7 @@ resource "local_file" "playbook" {
   content  = <<EOL
 - hosts: windows
   become_method: runas
+  gather_facts: no
   vars:
     ansible_become_password: "${var.windows-password}"
   tasks:
