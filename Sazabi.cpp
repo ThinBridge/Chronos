@@ -2250,7 +2250,7 @@ BOOL CSazabi::PumpMessage()
 	}
 	__except (EXCEPTION_EXECUTE_HANDLER)
 	{
-		return TRUE;
+		return FALSE;
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////
