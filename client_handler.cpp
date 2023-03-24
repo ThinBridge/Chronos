@@ -190,6 +190,16 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 			}
 			case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
 			{
+#if CHROME_VERSION_MAJOR >= 110
+				if (popupFeatures.isPopup)
+				{
+					// Since CEF110, toolBarVisible and menuBarVisible was removed.
+					// When isPopup is true, browser interface elements is hidden,
+					// then create new browser window.
+					lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)&popupFeatures, (LPARAM)&windowInfo);
+					return false;
+				}
+#else
 				if (popupFeatures.toolBarVisible)
 				{
 					if (//popupFeatures.locationBarVisible==false
@@ -200,6 +210,7 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 						return false;
 					}
 				}
+#endif
 				lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
 				return false;
 			}
@@ -1673,6 +1684,8 @@ CefRefPtr<CefResourceHandler> ClientHandler::GetResourceHandler(CefRefPtr<CefBro
 	return nullptr;
 }
 
+#if CHROME_VERSION_MAJOR < 109
+// Since CEF109, OnQuotaRequest is not available anymore.
 bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefCallback> callback)
 {
 	static const int64 max_size = 1024 * 1024 * 20; // 20mb.
@@ -1683,6 +1696,7 @@ bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefStrin
 	// call parent
 	return CefRequestHandler::OnQuotaRequest(browser, origin_url, new_size, callback);
 }
+#endif
 
 bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 				       ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefCallback> callback)

@@ -1380,19 +1380,34 @@ void CChildView::OnPrintPDF()
 				theApp.m_pLogDisp->SendLog(LOG_DOWNLOAD, strFileName, m_strURL);
 			}
 
+#if CHROME_VERSION_MAJOR >= 108
+			// Since CEF108, cef_pdf_print_settings_t is refactored.
+			CefString(&stPDFSetting.header_template) = CefString(this->m_strTitle);
+			CefString(&stPDFSetting.footer_template) = CefString(this->m_strURL);
+			stPDFSetting.paper_width = 0;
+			stPDFSetting.paper_height = 0;
+#else
 			CefString(&stPDFSetting.header_footer_title) = CefString(this->m_strTitle);
 			CefString(&stPDFSetting.header_footer_url) = CefString(this->m_strURL);
 			stPDFSetting.page_width = 0;
 			stPDFSetting.page_height = 0;
+#endif
 			stPDFSetting.margin_top = 0;
 			stPDFSetting.margin_right = 0;
 			stPDFSetting.margin_bottom = 0;
 			stPDFSetting.margin_left = 0;
 			stPDFSetting.margin_type = PDF_PRINT_MARGIN_DEFAULT;
+#if CHROME_VERSION_MAJOR >= 108
+			stPDFSetting.display_header_footer = 1;
+			CefString(&stPDFSetting.page_ranges) = CefString("");
+			stPDFSetting.landscape = 0;
+			stPDFSetting.print_background = 1;
+#else
 			stPDFSetting.header_footer_enabled = 1;
 			stPDFSetting.selection_only = 0;
 			stPDFSetting.landscape = 0;
 			stPDFSetting.backgrounds_enabled = 1;
+#endif
 			CefRefPtr<CefPdfPrintCallback> callback;
 
 			m_cefBrowser->GetHost()->PrintToPDF(strPDFPath, stPDFSetting, callback);
@@ -1613,8 +1628,13 @@ LRESULT CChildView::OnFindDialogMessage(WPARAM wParam, LPARAM lParam)
 			CefString csFind = FindName;
 			if (m_cefBrowser)
 			{
+#if CHROME_VERSION_MAJOR >= 99
+				// Since CEF99, no need to specify identifier for Find API
+				m_cefBrowser->GetHost()->Find(csFind, bSearchDown, bMatchCase, m_bFindNext);
+#else
 				INT nBrowserId = m_cefBrowser->GetIdentifier();
 				m_cefBrowser->GetHost()->Find(nBrowserId, csFind, bSearchDown, bMatchCase, m_bFindNext);
+#endif
 			}
 			if (!m_bFindNext)
 				m_bFindNext = TRUE;
@@ -2022,7 +2042,20 @@ LRESULT CChildView::OnNewWindow(WPARAM wParam, LPARAM lParam)
 	if (popupFeatures)
 	{
 		pCreateView->m_popupFeatures = new CefPopupFeatures;
+#if CHROME_VERSION_MAJOR >= 105
+		// Since CEF105, inheritance is changed to cef_popup_features_t,
+		// so CefPopupFeaturesTraits->Set is not available anymore.
+		pCreateView->m_popupFeatures->x = popupFeatures->x;
+		pCreateView->m_popupFeatures->xSet = popupFeatures->xSet;
+		pCreateView->m_popupFeatures->y = popupFeatures->y;
+		pCreateView->m_popupFeatures->ySet = popupFeatures->ySet;
+		pCreateView->m_popupFeatures->width = popupFeatures->width;
+		pCreateView->m_popupFeatures->widthSet = popupFeatures->widthSet;
+		pCreateView->m_popupFeatures->height = popupFeatures->height;
+		pCreateView->m_popupFeatures->heightSet = popupFeatures->heightSet;
+#else
 		pCreateView->m_popupFeatures->Set(*popupFeatures, true);
+#endif
 		pCreateView->ResizeWindowPopup();
 	}
 	HWND hWnd = pCreateView->GetSafeHwnd();
