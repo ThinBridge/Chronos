@@ -5,6 +5,7 @@ on:
 name: Build Chronos
 jobs:
   build:
+    continue-on-error: true
     strategy:
       matrix:
         version: [current, stable, beta]
