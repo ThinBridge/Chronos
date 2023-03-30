@@ -23,38 +23,8 @@ static ORG_CoCreateInstance pORG_CoCreateInstance = NULL;
 
 ////////////////////////////////////////////////////////////////
 //HookFunction
-static HRESULT WINAPI Hook_CoCreateInstance(
-	_In_  REFCLSID  rclsid,
-	_In_  LPUNKNOWN pUnkOuter,
-	_In_  DWORD     dwClsContext,
-	_In_  REFIID    riid,
-	_Out_ LPVOID    *ppv
-)
-{
-	PROC_TIME(Hook_CoCreateInstance)
-	API_H_TRY
-	if (theApp.IsSGMode())
-	{
-		if (rclsid == CLSID_FileOpenDialog || rclsid == CLSID_FileSaveDialog)
-		{
-			::SetLastError(ERROR_ACCESS_DENIED);
-			return REGDB_E_CLASSNOTREG;
-		}
-	}
-	API_H_CATCH
-	HRESULT hRet = {0};
-	hRet = pORG_CoCreateInstance(
-		rclsid,
-		pUnkOuter,
-		dwClsContext,
-		riid,
-		ppv
-	);
-	return hRet;
-}
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //@@ComDlg32
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -373,15 +343,6 @@ void APIHookC::DoHookComDlgAPI()
 
 		if (pTargetW == NULL) return;
 		if (MH_EnableHook(pTargetW) != MH_OK)
-			return;
-	}
-	if (!pORG_CoCreateInstance)
-	{
-		if (MH_CreateHookApiEx(
-			L"ole32.dll", "CoCreateInstance", &Hook_CoCreateInstance, &pORG_CoCreateInstance) != MH_OK)
-			return;
-
-		if (MH_EnableHook(&CoCreateInstance) != MH_OK)
 			return;
 	}
 }
