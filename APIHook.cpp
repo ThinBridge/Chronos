@@ -21,29 +21,22 @@ typedef HRESULT(WINAPI* ORG_CoCreateInstance)(
 	);
 static ORG_CoCreateInstance pORG_CoCreateInstance = NULL;
 
-class ChronosFileOpenDialog : public IFileOpenDialog
+class ChronosFileDialog : public IFileDialog
 {
 public:
-	ChronosFileOpenDialog(IFileOpenDialog* originalDialog)
+	ChronosFileDialog() { }
+
+	ChronosFileDialog(IFileDialog* originalDialog)
 	{
 		originalDialog_ = originalDialog;
 	}
 
-	~ChronosFileOpenDialog() {
+	~ChronosFileDialog()
+	{
 		if (originalDialog_)
 		{
 			delete originalDialog_;
 		}
-	}
-
-	HRESULT STDMETHODCALLTYPE GetResults(/* [out] */  __RPC__deref_out_opt IShellItemArray** ppenum)
-	{
-		return originalDialog_->GetResults(ppenum);
-	}
-
-	HRESULT STDMETHODCALLTYPE GetSelectedItems(/* [out] */ __RPC__deref_out_opt IShellItemArray** ppsai)
-	{
-		return originalDialog_->GetSelectedItems(ppsai);
 	}
 
 	HRESULT STDMETHODCALLTYPE SetFileTypes(
@@ -67,7 +60,8 @@ public:
 
 	HRESULT STDMETHODCALLTYPE Advise(
 	    /* [in] */ __RPC__in_opt IFileDialogEvents* pfde,
-	    /* [out] */ __RPC__out DWORD* pdwCookie){
+	    /* [out] */ __RPC__out DWORD* pdwCookie)
+	{
 		return originalDialog_->Advise(pfde, pdwCookie);
 	}
 
@@ -89,7 +83,7 @@ public:
 		return originalDialog_->GetOptions(pfos);
 	}
 
-    HRESULT STDMETHODCALLTYPE SetDefaultFolder(
+	HRESULT STDMETHODCALLTYPE SetDefaultFolder(
 	    /* [in] */ __RPC__in_opt IShellItem* psi)
 	{
 		return originalDialog_->SetDefaultFolder(psi);
@@ -114,7 +108,8 @@ public:
 	}
 
 	HRESULT STDMETHODCALLTYPE SetFileName(
-	    /* [string][in] */ __RPC__in_string LPCWSTR pszName){
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszName)
+	{
 		return originalDialog_->SetFileName(pszName);
 	}
 
@@ -203,12 +198,42 @@ public:
 		return originalDialog_->AddRef();
 	}
 
-	ULONG STDMETHODCALLTYPE Release(){
+	ULONG STDMETHODCALLTYPE Release()
+	{
 		return originalDialog_->Release();
 	};
 
 private:
-	IFileOpenDialog* originalDialog_ = NULL;
+	IFileDialog* originalDialog_ = nullptr;
+};
+
+class ChronosFileOpenDialog : public ChronosFileDialog, public IFileOpenDialog
+{
+public:
+	ChronosFileOpenDialog(IFileOpenDialog* originalDialog) : ChronosFileDialog(originalDialog)
+	{
+		originalDialog_ = originalDialog;
+	}
+
+	~ChronosFileOpenDialog() {
+		if (originalDialog_)
+		{
+			delete originalDialog_;
+		}
+	}
+
+	HRESULT STDMETHODCALLTYPE GetResults(/* [out] */  __RPC__deref_out_opt IShellItemArray** ppenum)
+	{
+		return originalDialog_->GetResults(ppenum);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetSelectedItems(/* [out] */ __RPC__deref_out_opt IShellItemArray** ppsai)
+	{
+		return originalDialog_->GetSelectedItems(ppsai);
+	}
+
+private:
+	IFileOpenDialog* originalDialog_ = nullptr;
 };
 
 ////////////////////////////////////////////////////////////////
@@ -230,9 +255,10 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 		riid,
 		ppv
 	);
+
 	if (rclsid == CLSID_FileOpenDialog)// || rclsid == CLSID_FileSaveDialog)
 	{
-		ChronosFileOpenDialog *chronosFileOpenDialog = new ChronosFileOpenDialog((IFileOpenDialog *)(*ppv));
+		ChronosFileOpenDialog *chronosFileOpenDialog = new ChronosFileOpenDialog(static_cast<IFileOpenDialog *>(*ppv));
 		*ppv = (LPVOID)chronosFileOpenDialog;
 	}
 	
