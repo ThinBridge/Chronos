@@ -21,10 +21,225 @@ typedef HRESULT(WINAPI* ORG_CoCreateInstance)(
 	);
 static ORG_CoCreateInstance pORG_CoCreateInstance = NULL;
 
+class ChronosFileOpenDialog : public IFileOpenDialog
+{
+public:
+	ChronosFileOpenDialog(IFileOpenDialog* originalDialog)
+	{
+		originalDialog_ = originalDialog;
+	}
+
+	~ChronosFileOpenDialog() {
+		if (originalDialog_)
+		{
+			delete originalDialog_;
+		}
+	}
+
+	HRESULT STDMETHODCALLTYPE GetResults(/* [out] */  __RPC__deref_out_opt IShellItemArray** ppenum)
+	{
+		return originalDialog_->GetResults(ppenum);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetSelectedItems(/* [out] */ __RPC__deref_out_opt IShellItemArray** ppsai)
+	{
+		return originalDialog_->GetSelectedItems(ppsai);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileTypes(
+	    /* [in] */ UINT cFileTypes,
+	    /* [size_is][in] */ __RPC__in_ecount_full(cFileTypes) const COMDLG_FILTERSPEC* rgFilterSpec)
+	{
+		return originalDialog_->SetFileTypes(cFileTypes, rgFilterSpec);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileTypeIndex(
+	    /* [in] */ UINT iFileType)
+	{
+		return originalDialog_->SetFileTypeIndex(iFileType);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetFileTypeIndex(
+	    /* [out] */ __RPC__out UINT* piFileType)
+	{
+		return originalDialog_->GetFileTypeIndex(piFileType);
+	}
+
+	HRESULT STDMETHODCALLTYPE Advise(
+	    /* [in] */ __RPC__in_opt IFileDialogEvents* pfde,
+	    /* [out] */ __RPC__out DWORD* pdwCookie){
+		return originalDialog_->Advise(pfde, pdwCookie);
+	}
+
+	HRESULT STDMETHODCALLTYPE Unadvise(
+	    /* [in] */ DWORD dwCookie)
+	{
+		return originalDialog_->Unadvise(dwCookie);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetOptions(
+	    /* [in] */ FILEOPENDIALOGOPTIONS fos)
+	{
+		return originalDialog_->SetOptions(fos);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetOptions(
+	    /* [out] */ __RPC__out FILEOPENDIALOGOPTIONS* pfos)
+	{
+		return originalDialog_->GetOptions(pfos);
+	}
+
+    HRESULT STDMETHODCALLTYPE SetDefaultFolder(
+	    /* [in] */ __RPC__in_opt IShellItem* psi)
+	{
+		return originalDialog_->SetDefaultFolder(psi);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFolder(
+	    /* [in] */ __RPC__in_opt IShellItem* psi)
+	{
+		return originalDialog_->SetFolder(psi);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetFolder(
+	    /* [out] */ __RPC__deref_out_opt IShellItem** ppsi)
+	{
+		return originalDialog_->GetFolder(ppsi);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetCurrentSelection(
+	    /* [out] */ __RPC__deref_out_opt IShellItem** ppsi)
+	{
+		return originalDialog_->GetCurrentSelection(ppsi);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileName(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszName){
+		return originalDialog_->SetFileName(pszName);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetFileName(
+	    /* [string][out] */ __RPC__deref_out_opt_string LPWSTR* pszName)
+	{
+		return originalDialog_->GetFileName(pszName);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetTitle(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszTitle)
+	{
+		return originalDialog_->SetTitle(pszTitle);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetOkButtonLabel(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszText)
+	{
+		return originalDialog_->SetOkButtonLabel(pszText);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileNameLabel(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszLabel)
+	{
+		return originalDialog_->SetFileNameLabel(pszLabel);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetResult(
+	    /* [out] */ __RPC__deref_out_opt IShellItem** ppsi)
+	{
+		return originalDialog_->GetResult(ppsi);
+	}
+
+	HRESULT STDMETHODCALLTYPE AddPlace(
+	    /* [in] */ __RPC__in_opt IShellItem* psi, /* [in] */ FDAP fdap)
+	{
+		return originalDialog_->AddPlace(psi, fdap);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetDefaultExtension(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszDefaultExtension)
+	{
+		return originalDialog_->SetDefaultExtension(pszDefaultExtension);
+	}
+
+	HRESULT STDMETHODCALLTYPE Close(
+	    /* [in] */ HRESULT hr)
+	{
+		return originalDialog_->Close(hr);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetClientGuid(
+	    /* [in] */ __RPC__in REFGUID guid)
+	{
+		return originalDialog_->SetClientGuid(guid);
+	}
+
+	HRESULT STDMETHODCALLTYPE ClearClientData(
+	    void)
+	{
+		return originalDialog_->ClearClientData();
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFilter(
+	    /* [in] */ __RPC__in_opt IShellItemFilter* pFilter)
+	{
+		return originalDialog_->SetFilter(pFilter);
+	}
+
+	/* [local] */ HRESULT STDMETHODCALLTYPE Show(
+	    /* [annotation][unique][in] */
+	    _In_opt_ HWND hwndOwner)
+	{
+		return originalDialog_->Show(hwndOwner);
+	}
+
+	HRESULT STDMETHODCALLTYPE QueryInterface(
+	    /* [in] */ REFIID riid,
+	    /* [iid_is][out] */ _COM_Outptr_ void __RPC_FAR* __RPC_FAR* ppvObject)
+	{
+		return originalDialog_->QueryInterface(riid, ppvObject);
+	}
+
+	ULONG STDMETHODCALLTYPE AddRef(void)
+	{
+		return originalDialog_->AddRef();
+	}
+
+	ULONG STDMETHODCALLTYPE Release(){
+		return originalDialog_->Release();
+	};
+
+private:
+	IFileOpenDialog* originalDialog_ = NULL;
+};
+
 ////////////////////////////////////////////////////////////////
 //HookFunction
-///////////////////////////////////////////////////////////////////////////////////////////
+static HRESULT WINAPI Hook_CoCreateInstance(
+	_In_  REFCLSID  rclsid,
+	_In_  LPUNKNOWN pUnkOuter,
+	_In_  DWORD     dwClsContext,
+	_In_  REFIID    riid,
+	_Out_ LPVOID    *ppv
+)
+{
+	PROC_TIME(Hook_CoCreateInstance)
+	HRESULT hRet = {0};
+	hRet = pORG_CoCreateInstance(
+		rclsid,
+		pUnkOuter,
+		dwClsContext,
+		riid,
+		ppv
+	);
+	if (rclsid == CLSID_FileOpenDialog)// || rclsid == CLSID_FileSaveDialog)
+	{
+		ChronosFileOpenDialog *chronosFileOpenDialog = new ChronosFileOpenDialog((IFileOpenDialog *)(*ppv));
+		*ppv = (LPVOID)chronosFileOpenDialog;
+	}
+	
+	return hRet;
+}
 
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 //@@ComDlg32
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -343,6 +558,15 @@ void APIHookC::DoHookComDlgAPI()
 
 		if (pTargetW == NULL) return;
 		if (MH_EnableHook(pTargetW) != MH_OK)
+			return;
+	}
+	if (!pORG_CoCreateInstance)
+	{
+		if (MH_CreateHookApiEx(
+			L"ole32.dll", "CoCreateInstance", &Hook_CoCreateInstance, &pORG_CoCreateInstance) != MH_OK)
+			return;
+
+		if (MH_EnableHook(&CoCreateInstance) != MH_OK)
 			return;
 	}
 }
