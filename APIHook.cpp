@@ -32,16 +32,6 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 )
 {
 	PROC_TIME(Hook_CoCreateInstance)
-	API_H_TRY
-	if (theApp.IsSGMode())
-	{
-		if (rclsid == CLSID_FileOpenDialog || rclsid == CLSID_FileSaveDialog)
-		{
-			::SetLastError(ERROR_ACCESS_DENIED);
-			return REGDB_E_CLASSNOTREG;
-		}
-	}
-	API_H_CATCH
 	HRESULT hRet = {0};
 	hRet = pORG_CoCreateInstance(
 		rclsid,
