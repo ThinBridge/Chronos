@@ -13,11 +13,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 //TypeDef
 typedef HRESULT(WINAPI* ORG_CoCreateInstance)(
-      _In_ REFCLSID rclsid,
-      _In_ LPUNKNOWN pUnkOuter,
-      _In_ DWORD dwClsContext,
-      _In_ REFIID riid,
-      _Out_ LPVOID* ppv);
+		_In_ REFCLSID rclsid,
+		_In_ LPUNKNOWN pUnkOuter,
+		_In_ DWORD dwClsContext,
+		_In_ REFIID riid,
+		_Out_ LPVOID* ppv);
 static ORG_CoCreateInstance pORG_CoCreateInstance = NULL;
 
 class ChronosFileOpenDialog : public IFileOpenDialog
@@ -709,11 +709,12 @@ private:
 ////////////////////////////////////////////////////////////////
 //HookFunction
 static HRESULT WINAPI Hook_CoCreateInstance(
-    _In_ REFCLSID rclsid,
-    _In_ LPUNKNOWN pUnkOuter,
-    _In_ DWORD dwClsContext,
-    _In_ REFIID riid,
-    _Out_ LPVOID* ppv)
+		_In_ REFCLSID rclsid,
+		_In_ LPUNKNOWN pUnkOuter,
+		_In_ DWORD dwClsContext,
+		_In_ REFIID riid,
+		_Out_ LPVOID* ppv
+)
 {
 	PROC_TIME(Hook_CoCreateInstance)
 	HRESULT hRet = {0};
@@ -742,6 +743,7 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 
 	return hRet;
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
