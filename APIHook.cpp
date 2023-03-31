@@ -304,11 +304,9 @@ public:
 			}
 			else
 			{
-				CString strCaption(theApp.m_strThisAppName);
-				::MessageBoxW(hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
+				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 			}
-
-				return E_ACCESSDENIED;
+			return E_ACCESSDENIED;
 		}
 		
 		for (;;)
@@ -337,7 +335,7 @@ public:
 
 			if (theApp.IsSGMode())
 			{
-				CStringW strRoot(m_strRootPath);
+				CString strRoot(m_strRootPath);
 				strRoot.MakeUpper();
 				if (strSelPath.Find(strRoot) != 0)
 				{
@@ -387,6 +385,320 @@ private:
 	CString m_strRootPath;
 };
 
+class ChronosFileSaveDialog : public IFileSaveDialog
+{
+public:
+	ChronosFileSaveDialog(IFileSaveDialog* originalDialog)
+	{
+		if (theApp.m_AppSettings.IsAdvancedLogMode())
+		{
+			theApp.WriteDebugTraceDateTime(_T("ChronosFileSaveDialog"), DEBUG_LOG_TYPE_DE);
+		}
+
+		m_originalDialog = originalDialog;
+	}
+
+	~ChronosFileSaveDialog()
+	{
+		if (m_originalDialog)
+		{
+			delete m_originalDialog;
+		}
+	}
+
+	HRESULT Initialize()
+	{
+		if (!theApp.IsSGMode())
+		{
+			return S_OK;
+		}
+
+		FILEOPENDIALOGOPTIONS option = 0;
+
+		//フック関数を無効
+		option &= ~OFN_ENABLEHOOK;
+		//ダイアログテンプレート無効
+		option &= ~OFN_ENABLETEMPLATE;
+		//Longファイル名を強制
+		option |= OFN_LONGNAMES;
+		//ネットワークボタンを隠す
+		option |= OFN_NONETWORKBUTTON;
+		//最近使ったファイルを追加しない
+		option |= OFN_DONTADDTORECENT;
+		//プレースバーを無効
+		option |= OFN_EX_NOPLACESBAR;
+		//ファイルを上書きするかどうか確認するプロンプトを表示
+		option |= OFN_OVERWRITEPROMPT;
+
+		return this->SetOptions(option);
+	}
+
+    HRESULT STDMETHODCALLTYPE SetSaveAsItem(
+	    /* [in] */ __RPC__in_opt IShellItem* psi)
+	{
+	    return m_originalDialog->SetSaveAsItem(psi);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetProperties(
+	    /* [in] */ __RPC__in_opt IPropertyStore* pStore)
+	{
+		return m_originalDialog->SetProperties(pStore);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetCollectedProperties(
+	    /* [in] */ __RPC__in_opt IPropertyDescriptionList* pList,
+	    /* [in] */ BOOL fAppendDefault)
+	{
+		return m_originalDialog->SetCollectedProperties(pList, fAppendDefault);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetProperties(
+	    /* [out] */ __RPC__deref_out_opt IPropertyStore** ppStore)
+	{
+		return m_originalDialog->GetProperties(ppStore);
+	}
+
+	HRESULT STDMETHODCALLTYPE ApplyProperties(
+	    /* [in] */ __RPC__in_opt IShellItem* psi,
+	    /* [in] */ __RPC__in_opt IPropertyStore* pStore,
+	    /* [unique][in] */ __RPC__in_opt HWND hwnd,
+	    /* [unique][in] */ __RPC__in_opt IFileOperationProgressSink* pSink)
+	{
+		return m_originalDialog->ApplyProperties(psi, pStore, hwnd, pSink);
+
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileTypes(
+	    /* [in] */ UINT cFileTypes,
+	    /* [size_is][in] */ __RPC__in_ecount_full(cFileTypes) const COMDLG_FILTERSPEC* rgFilterSpec)
+	{
+		return m_originalDialog->SetFileTypes(cFileTypes, rgFilterSpec);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileTypeIndex(
+	    /* [in] */ UINT iFileType)
+	{
+		return m_originalDialog->SetFileTypeIndex(iFileType);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetFileTypeIndex(
+	    /* [out] */ __RPC__out UINT* piFileType)
+	{
+		return m_originalDialog->GetFileTypeIndex(piFileType);
+	}
+
+	HRESULT STDMETHODCALLTYPE Advise(
+	    /* [in] */ __RPC__in_opt IFileDialogEvents* pfde,
+	    /* [out] */ __RPC__out DWORD* pdwCookie)
+	{
+		return m_originalDialog->Advise(pfde, pdwCookie);
+	}
+
+	HRESULT STDMETHODCALLTYPE Unadvise(
+	    /* [in] */ DWORD dwCookie)
+	{
+		return m_originalDialog->Unadvise(dwCookie);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetOptions(
+	    /* [in] */ FILEOPENDIALOGOPTIONS fos)
+	{
+		return m_originalDialog->SetOptions(fos);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetOptions(
+	    /* [out] */ __RPC__out FILEOPENDIALOGOPTIONS* pfos)
+	{
+		return m_originalDialog->GetOptions(pfos);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetDefaultFolder(
+	    /* [in] */ __RPC__in_opt IShellItem* psi)
+	{
+		return m_originalDialog->SetDefaultFolder(psi);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFolder(
+	    /* [in] */ __RPC__in_opt IShellItem* psi)
+	{
+		return m_originalDialog->SetFolder(psi);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetFolder(
+	    /* [out] */ __RPC__deref_out_opt IShellItem** ppsi)
+	{
+		return m_originalDialog->GetFolder(ppsi);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetCurrentSelection(
+	    /* [out] */ __RPC__deref_out_opt IShellItem** ppsi)
+	{
+		return m_originalDialog->GetCurrentSelection(ppsi);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileName(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszName)
+	{
+		return m_originalDialog->SetFileName(pszName);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetFileName(
+	    /* [string][out] */ __RPC__deref_out_opt_string LPWSTR* pszName)
+	{
+		return m_originalDialog->GetFileName(pszName);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetTitle(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszTitle)
+	{
+		return m_originalDialog->SetTitle(pszTitle);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetOkButtonLabel(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszText)
+	{
+		return m_originalDialog->SetOkButtonLabel(pszText);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFileNameLabel(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszLabel)
+	{
+		return m_originalDialog->SetFileNameLabel(pszLabel);
+	}
+
+	HRESULT STDMETHODCALLTYPE GetResult(
+	    /* [out] */ __RPC__deref_out_opt IShellItem** ppsi)
+	{
+		return m_originalDialog->GetResult(ppsi);
+	}
+
+	HRESULT STDMETHODCALLTYPE AddPlace(
+	    /* [in] */ __RPC__in_opt IShellItem* psi, /* [in] */ FDAP fdap)
+	{
+		return m_originalDialog->AddPlace(psi, fdap);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetDefaultExtension(
+	    /* [string][in] */ __RPC__in_string LPCWSTR pszDefaultExtension)
+	{
+		return m_originalDialog->SetDefaultExtension(pszDefaultExtension);
+	}
+
+	HRESULT STDMETHODCALLTYPE Close(
+	    /* [in] */ HRESULT hr)
+	{
+		return m_originalDialog->Close(hr);
+	}
+
+	HRESULT STDMETHODCALLTYPE SetClientGuid(
+	    /* [in] */ __RPC__in REFGUID guid)
+	{
+		return m_originalDialog->SetClientGuid(guid);
+	}
+
+	HRESULT STDMETHODCALLTYPE ClearClientData(
+	    void)
+	{
+		return m_originalDialog->ClearClientData();
+	}
+
+	HRESULT STDMETHODCALLTYPE SetFilter(
+	    /* [in] */ __RPC__in_opt IShellItemFilter* pFilter)
+	{
+		return m_originalDialog->SetFilter(pFilter);
+	}
+
+	/* [local] */ 
+	HRESULT STDMETHODCALLTYPE Show(
+	    /* [annotation][unique][in] */ _In_opt_ HWND hwndOwner)
+	{
+		if (theApp.m_AppSettings.IsEnableDownloadRestriction())
+		{
+			return E_ACCESSDENIED;
+		}
+
+		if (!theApp.IsSGMode())
+		{
+			return m_originalDialog->Show(hwndOwner);
+		}
+
+		CString strRootPath(theApp.m_AppSettings.GetRootPath());
+		if (strRootPath.IsEmpty())
+		{
+			strRootPath = _T("B:\\");
+		}
+		strRootPath = strRootPath.TrimRight('\\');
+		strRootPath += _T("\\");
+
+		for (;;)
+		{
+			HRESULT hresult = m_originalDialog->Show(hwndOwner);
+			if (FAILED(hresult))
+			{
+				return hresult;
+			}
+
+			LPWSTR wstrSelPath;
+			IShellItem* psi;
+			hresult = this->GetResult(&psi);
+
+			if (FAILED(hresult))
+			{
+				return hresult;
+			}
+
+			psi->GetDisplayName(SIGDN_DESKTOPABSOLUTEEDITING, &wstrSelPath);
+
+			CString strSelPath(wstrSelPath);
+			strSelPath.MakeUpper();
+			if (strSelPath.IsEmpty())
+				return hresult;
+
+			CString strRoot(strRootPath);
+			strRoot.MakeUpper();
+			if (strSelPath.Find(strRoot) != 0)
+			{
+				CString strMsg;
+				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", strRoot, strRoot, (PCWSTR)strSelPath);
+				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+				continue;
+			}
+
+			CString strTSG_Upload = strRoot + L"UPLOAD\\";
+			if (strSelPath.Find(strTSG_Upload) == 0)
+			{
+				CString strMsg;
+				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", strTSG_Upload, (PCWSTR)strSelPath);
+				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+				continue;
+			}
+			return hresult;
+		}
+
+		return S_OK;
+	}
+
+	HRESULT STDMETHODCALLTYPE QueryInterface(
+	    /* [in] */ REFIID riid,
+	    /* [iid_is][out] */ _COM_Outptr_ void __RPC_FAR* __RPC_FAR* ppvObject)
+	{
+		return m_originalDialog->QueryInterface(riid, ppvObject);
+	}
+
+	ULONG STDMETHODCALLTYPE AddRef(void)
+	{
+		return m_originalDialog->AddRef();
+	}
+
+	ULONG STDMETHODCALLTYPE Release()
+	{
+		return m_originalDialog->Release();
+	};
+
+private:
+	IFileSaveDialog* m_originalDialog = nullptr;
+};
+
 ////////////////////////////////////////////////////////////////
 //HookFunction
 static HRESULT WINAPI Hook_CoCreateInstance(
@@ -407,11 +719,17 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 
 	if (SUCCEEDED(hRet))
 	{
-		if (rclsid == CLSID_FileOpenDialog) // || rclsid == CLSID_FileSaveDialog)
+		if (rclsid == CLSID_FileOpenDialog)
 		{
 			ChronosFileOpenDialog* chronosFileOpenDialog = new ChronosFileOpenDialog(static_cast<IFileOpenDialog*>(*ppv));
 			chronosFileOpenDialog->Initialize();
 			*ppv = (LPVOID)chronosFileOpenDialog;
+		}
+		else if (rclsid == CLSID_FileSaveDialog)
+		{
+			ChronosFileSaveDialog* chronosFileSaveDialog = new ChronosFileSaveDialog(static_cast<IFileSaveDialog*>(*ppv));
+			chronosFileSaveDialog->Initialize();
+			*ppv = (LPVOID)chronosFileSaveDialog;
 		}
 	}
 
