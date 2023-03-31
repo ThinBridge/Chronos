@@ -3,23 +3,21 @@
 #include "minhook\hook.hh"
 #include "Windows.h"
 
-#define API_H_TRY \
-	try       \
-	{
-#define API_H_CATCH \
-	}           \
-	catch (...) { ATLASSERT(0); }
+#define API_H_TRY try{
+#define API_H_CATCH }catch(...){ATLASSERT(0);}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //@@COM
 ///////////////////////////////////////////////////////////////////////////////////////////
 //TypeDef
 typedef HRESULT(WINAPI* ORG_CoCreateInstance)(
-    _In_ REFCLSID rclsid,
-    _In_ LPUNKNOWN pUnkOuter,
-    _In_ DWORD dwClsContext,
-    _In_ REFIID riid,
-    _Out_ LPVOID* ppv);
+      _In_ REFCLSID rclsid,
+      _In_ LPUNKNOWN pUnkOuter,
+      _In_ DWORD dwClsContext,
+      _In_ REFIID riid,
+      _Out_ LPVOID* ppv);
 static ORG_CoCreateInstance pORG_CoCreateInstance = NULL;
 
 class ChronosFileOpenDialog : public IFileOpenDialog
@@ -751,18 +749,19 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 ///////////////////////////////////////////////////////////////////////////////////////////
 //TypeDef
 typedef BOOL(WINAPI* FuncGetSaveFileNameW)(LPOPENFILENAMEW lpofn);
-static FuncGetSaveFileNameW pORG_GetSaveFileNameW = NULL;
+static FuncGetSaveFileNameW	pORG_GetSaveFileNameW = NULL;
 
 typedef BOOL(WINAPI* FuncGetOpenFileNameW)(LPOPENFILENAMEW lpofn);
-static FuncGetSaveFileNameW pORG_GetOpenFileNameW = NULL;
+static FuncGetSaveFileNameW	pORG_GetOpenFileNameW = NULL;
 
 typedef PIDLIST_ABSOLUTE(WINAPI* FuncSHBrowseForFolderW)(LPBROWSEINFOW lpbi);
-static FuncSHBrowseForFolderW pORG_SHBrowseForFolderW = NULL;
+static FuncSHBrowseForFolderW	pORG_SHBrowseForFolderW = NULL;
 
 ////////////////////////////////////////////////////////////////
 //HookFunction
 static BOOL WINAPI Hook_GetSaveFileNameW(
-    LPOPENFILENAMEW lpofn)
+	LPOPENFILENAMEW lpofn
+)
 {
 	BOOL bRet = FALSE;
 	try
@@ -841,7 +840,8 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 }
 
 static BOOL WINAPI Hook_GetOpenFileNameW(
-    LPOPENFILENAMEW lpofn)
+	LPOPENFILENAMEW lpofn
+)
 {
 	BOOL bRet = FALSE;
 	try
@@ -946,8 +946,7 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 			if (strSelPath.IsEmpty())
 				return bRet;
 
-			if (theApp.IsSGMode())
-			{
+			if (theApp.IsSGMode()) {
 				CStringW strRoot(strRootPath);
 				strRoot.MakeUpper();
 				if (strSelPath.Find(strRoot) != 0)
@@ -980,7 +979,8 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 	return bRet;
 }
 static PIDLIST_ABSOLUTE WINAPI Hook_SHBrowseForFolderW(
-    LPBROWSEINFOW lpbi)
+	LPBROWSEINFOW lpbi
+)
 {
 	CStringW strCaption(theApp.m_strThisAppName);
 	CStringW strMsg;
