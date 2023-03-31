@@ -25,11 +25,11 @@ static ORG_CoCreateInstance pORG_CoCreateInstance = NULL;
 class ChronosFileOpenDialog : public IFileOpenDialog
 {
 public:
-	ChronosFileOpenDialog(IFileOpenDialog* originalDialog)
+	ChronosFileOpenDialog(CComPtr<IFileOpenDialog> originalDialog)
 	{
 		if (theApp.m_AppSettings.IsAdvancedLogMode())
 		{
-			theApp.WriteDebugTraceDateTime(_T("ChronosFileOpenDialog"), DEBUG_LOG_TYPE_DE);
+			theApp.WriteDebugTraceDateTime(_T("Construct ChronosFileOpenDialog"), DEBUG_LOG_TYPE_DE);
 		}
 
 		m_originalDialog = originalDialog;
@@ -37,9 +37,9 @@ public:
 
 	~ChronosFileOpenDialog()
 	{
-		if (m_originalDialog)
+		if (theApp.m_AppSettings.IsAdvancedLogMode())
 		{
-			delete m_originalDialog;
+			theApp.WriteDebugTraceDateTime(_T("Destruct ChronosFileOpenDialog"), DEBUG_LOG_TYPE_DE);
 		}
 	}
 
@@ -372,37 +372,43 @@ public:
 
 	ULONG STDMETHODCALLTYPE AddRef(void)
 	{
-		return m_originalDialog->AddRef();
+		return ++m_referenceCount;
 	}
 
-	ULONG STDMETHODCALLTYPE Release()
+	ULONG STDMETHODCALLTYPE Release(void)
 	{
-		return m_originalDialog->Release();
-	};
+		ULONG referenceCount = --m_referenceCount;
+		if (referenceCount <= 0)
+		{
+			delete this;
+		}
+		return referenceCount;
+	}
 
 private:
-	IFileOpenDialog* m_originalDialog = nullptr;
+	CComPtr<IFileOpenDialog> m_originalDialog = nullptr;
 	CString m_strRootPath;
+	ULONG m_referenceCount = 0;
 };
 
 class ChronosFileSaveDialog : public IFileSaveDialog
 {
 public:
-	ChronosFileSaveDialog(IFileSaveDialog* originalDialog)
+	ChronosFileSaveDialog(CComPtr<IFileSaveDialog> originalDialog)
 	{
 		if (theApp.m_AppSettings.IsAdvancedLogMode())
 		{
-			theApp.WriteDebugTraceDateTime(_T("ChronosFileSaveDialog"), DEBUG_LOG_TYPE_DE);
+			theApp.WriteDebugTraceDateTime(_T("Construct ChronosFileSaveDialog"), DEBUG_LOG_TYPE_DE);
 		}
-
 		m_originalDialog = originalDialog;
+		this->AddRef();
 	}
 
 	~ChronosFileSaveDialog()
 	{
-		if (m_originalDialog)
+		if (theApp.m_AppSettings.IsAdvancedLogMode())
 		{
-			delete m_originalDialog;
+			theApp.WriteDebugTraceDateTime(_T("Destruct ChronosFileSaveDialog"), DEBUG_LOG_TYPE_DE);
 		}
 	}
 
@@ -685,18 +691,22 @@ public:
 		return m_originalDialog->QueryInterface(riid, ppvObject);
 	}
 
-	ULONG STDMETHODCALLTYPE AddRef(void)
-	{
-		return m_originalDialog->AddRef();
+	ULONG STDMETHODCALLTYPE AddRef(void){
+		return ++m_referenceCount;
 	}
 
-	ULONG STDMETHODCALLTYPE Release()
-	{
-		return m_originalDialog->Release();
-	};
+	ULONG STDMETHODCALLTYPE Release(void){
+		ULONG referenceCount = --m_referenceCount;
+		if (referenceCount <= 0)
+		{
+			delete this;
+		}
+		return referenceCount;
+	}
 
 private:
-	IFileSaveDialog* m_originalDialog = nullptr;
+	CComPtr<IFileSaveDialog> m_originalDialog = nullptr;
+	ULONG m_referenceCount = 0;
 };
 
 ////////////////////////////////////////////////////////////////
