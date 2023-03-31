@@ -401,7 +401,6 @@ public:
 			theApp.WriteDebugTraceDateTime(_T("Construct ChronosFileSaveDialog"), DEBUG_LOG_TYPE_DE);
 		}
 		m_originalDialog = originalDialog;
-		this->AddRef();
 	}
 
 	~ChronosFileSaveDialog()
