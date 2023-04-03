@@ -378,17 +378,12 @@ public:
 
 	ULONG STDMETHODCALLTYPE AddRef(void)
 	{
-		InterlockedIncrement(&m_referenceCount);
-		return m_referenceCount;
+		return InterlockedIncrement(&m_referenceCount);
 	}
 
 	ULONG STDMETHODCALLTYPE Release(void)
 	{
-		if (m_referenceCount > 0)
-		{
-			InterlockedDecrement(&m_referenceCount);
-		}
-		ULONG referenceCount = m_referenceCount;
+		ULONG referenceCount = InterlockedDecrement(&m_referenceCount);
 		if (referenceCount == 0)
 		{
 			delete this;
@@ -703,17 +698,14 @@ public:
 		return m_originalDialog->QueryInterface(riid, ppvObject);
 	}
 
-	ULONG STDMETHODCALLTYPE AddRef(void){
-		InterlockedIncrement(&m_referenceCount);
-		return m_referenceCount;
+	ULONG STDMETHODCALLTYPE AddRef(void)
+	{
+		return InterlockedIncrement(&m_referenceCount);
 	}
 
-	ULONG STDMETHODCALLTYPE Release(void){
-		if (m_referenceCount > 0)
-		{
-			InterlockedDecrement(&m_referenceCount);
-		}
-		ULONG referenceCount = m_referenceCount;
+	ULONG STDMETHODCALLTYPE Release(void)
+	{
+		ULONG referenceCount = InterlockedDecrement(&m_referenceCount);
 		if (referenceCount == 0)
 		{
 			delete this;
@@ -738,26 +730,49 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 {
 	PROC_TIME(Hook_CoCreateInstance)
 	HRESULT hRet = {0};
-	hRet = pORG_CoCreateInstance(
-	    rclsid,
-	    pUnkOuter,
-	    dwClsContext,
-	    riid,
-	    ppv);
 
-	if (SUCCEEDED(hRet))
+	if (!(rclsid == CLSID_FileOpenDialog || rclsid == CLSID_FileSaveDialog))
 	{
-		if (rclsid == CLSID_FileOpenDialog)
+		return pORG_CoCreateInstance(
+		    rclsid,
+		    pUnkOuter,
+		    dwClsContext,
+		    riid,
+		    ppv);
+	}
+
+	if (rclsid == CLSID_FileOpenDialog)
+	{
+		CComPtr<IFileOpenDialog> local_ppv;
+		hRet = pORG_CoCreateInstance(
+		    rclsid,
+		    pUnkOuter,
+		    dwClsContext,
+		    riid,
+		    (LPVOID *)&local_ppv);
+		if (SUCCEEDED(hRet))
 		{
-			ChronosFileOpenDialog *chronosFileOpenDialog = new ChronosFileOpenDialog(static_cast<IFileOpenDialog*>(*ppv));
+			ChronosFileOpenDialog *chronosFileOpenDialog = new ChronosFileOpenDialog(local_ppv);
+			chronosFileOpenDialog->AddRef();
 			chronosFileOpenDialog->Initialize();
-			*ppv = (LPVOID)chronosFileOpenDialog;
+			*ppv = chronosFileOpenDialog;
 		}
-		else if (rclsid == CLSID_FileSaveDialog)
+	}
+	else if (rclsid == CLSID_FileSaveDialog)
+	{
+		CComPtr<IFileSaveDialog> local_ppv;
+		hRet = pORG_CoCreateInstance(
+		    rclsid,
+		    pUnkOuter,
+		    dwClsContext,
+		    riid,
+		    (LPVOID*)&local_ppv);
+		if (SUCCEEDED(hRet))
 		{
-			ChronosFileSaveDialog *chronosFileSaveDialog = new ChronosFileSaveDialog(static_cast<IFileSaveDialog*>(*ppv));
+			ChronosFileSaveDialog* chronosFileSaveDialog = new ChronosFileSaveDialog(local_ppv);
+			chronosFileSaveDialog->AddRef();
 			chronosFileSaveDialog->Initialize();
-			*ppv = (LPVOID)chronosFileSaveDialog;
+			*ppv = chronosFileSaveDialog;
 		}
 	}
 	return hRet;
