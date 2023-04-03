@@ -13,11 +13,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 //TypeDef
 typedef HRESULT(WINAPI* ORG_CoCreateInstance)(
-		_In_ REFCLSID rclsid,
-		_In_ LPUNKNOWN pUnkOuter,
-		_In_ DWORD dwClsContext,
-		_In_ REFIID riid,
-		_Out_ LPVOID* ppv);
+	_In_  REFCLSID  rclsid,
+	_In_  LPUNKNOWN pUnkOuter,
+	_In_  DWORD     dwClsContext,
+	_In_  REFIID    riid,
+	_Out_ LPVOID    *ppv
+	);
 static ORG_CoCreateInstance pORG_CoCreateInstance = NULL;
 
 class ChronosFileOpenDialog : public IFileOpenDialog
@@ -29,7 +30,6 @@ public:
 		{
 			theApp.WriteDebugTraceDateTime(_T("Construct ChronosFileOpenDialog"), DEBUG_LOG_TYPE_DE);
 		}
-
 		m_originalDialog = originalDialog;
 	}
 
@@ -52,17 +52,23 @@ public:
 			{
 				strRootPath = theApp.m_AppSettings.GetRootPath();
 				if (strRootPath.IsEmpty())
+				{
 					strRootPath = _T("B:\\");
+				}
 				strRootPath += _T("UpLoad");
 				if (!theApp.IsFolderExists(strRootPath))
+				{
 					strRootPath = _T("B:\\");
+				}
 			}
 			//UploadTabÇégÇÌÇ»Ç¢èÍçáÇÕÅAO:\\Ç…Ç∑ÇÈ
 			else
 			{
 				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
 				if (strRootPath.IsEmpty())
+				{
 					strRootPath = _T("B:\\");
+				}
 			}
 			m_strRootPath = strRootPath;
 			strPath = strRootPath;
@@ -329,7 +335,9 @@ public:
 			CString strSelPath(wstrSelPath);
 			strSelPath.MakeUpper();
 			if (strSelPath.IsEmpty())
+			{
 				return hresult;
+			}
 
 			if (theApp.IsSGMode())
 			{
@@ -660,7 +668,9 @@ public:
 			CString strSelPath(wstrSelPath);
 			strSelPath.MakeUpper();
 			if (strSelPath.IsEmpty())
+			{
 				return hresult;
+			}
 
 			CString strRoot(strRootPath);
 			strRoot.MakeUpper();
@@ -719,11 +729,11 @@ private:
 ////////////////////////////////////////////////////////////////
 //HookFunction
 static HRESULT WINAPI Hook_CoCreateInstance(
-		_In_ REFCLSID rclsid,
-		_In_ LPUNKNOWN pUnkOuter,
-		_In_ DWORD dwClsContext,
-		_In_ REFIID riid,
-		_Out_ LPVOID* ppv
+	_In_  REFCLSID  rclsid,
+	_In_  LPUNKNOWN pUnkOuter,
+	_In_  DWORD     dwClsContext,
+	_In_  REFIID    riid,
+	_Out_ LPVOID    *ppv
 )
 {
 	PROC_TIME(Hook_CoCreateInstance)
@@ -739,18 +749,17 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 	{
 		if (rclsid == CLSID_FileOpenDialog)
 		{
-			ChronosFileOpenDialog* chronosFileOpenDialog = new ChronosFileOpenDialog(static_cast<IFileOpenDialog*>(*ppv));
+			ChronosFileOpenDialog *chronosFileOpenDialog = new ChronosFileOpenDialog(static_cast<IFileOpenDialog*>(*ppv));
 			chronosFileOpenDialog->Initialize();
 			*ppv = (LPVOID)chronosFileOpenDialog;
 		}
 		else if (rclsid == CLSID_FileSaveDialog)
 		{
-			ChronosFileSaveDialog* chronosFileSaveDialog = new ChronosFileSaveDialog(static_cast<IFileSaveDialog*>(*ppv));
+			ChronosFileSaveDialog *chronosFileSaveDialog = new ChronosFileSaveDialog(static_cast<IFileSaveDialog*>(*ppv));
 			chronosFileSaveDialog->Initialize();
 			*ppv = (LPVOID)chronosFileSaveDialog;
 		}
 	}
-
 	return hRet;
 }
 
