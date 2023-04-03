@@ -743,16 +743,16 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 
 	if (rclsid == CLSID_FileOpenDialog)
 	{
-		CComPtr<IFileOpenDialog> local_ppv;
+		CComPtr<IFileOpenDialog> fileOpenDialog;
 		hRet = pORG_CoCreateInstance(
 		    rclsid,
 		    pUnkOuter,
 		    dwClsContext,
 		    riid,
-		    (LPVOID *)&local_ppv);
+		    (LPVOID*)&fileOpenDialog);
 		if (SUCCEEDED(hRet))
 		{
-			ChronosFileOpenDialog *chronosFileOpenDialog = new ChronosFileOpenDialog(local_ppv);
+			ChronosFileOpenDialog* chronosFileOpenDialog = new ChronosFileOpenDialog(fileOpenDialog);
 			chronosFileOpenDialog->AddRef();
 			chronosFileOpenDialog->Initialize();
 			*ppv = chronosFileOpenDialog;
@@ -760,16 +760,16 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 	}
 	else if (rclsid == CLSID_FileSaveDialog)
 	{
-		CComPtr<IFileSaveDialog> local_ppv;
+		CComPtr<IFileSaveDialog> fileSaveDialog;
 		hRet = pORG_CoCreateInstance(
 		    rclsid,
 		    pUnkOuter,
 		    dwClsContext,
 		    riid,
-		    (LPVOID*)&local_ppv);
+		    (LPVOID*)&fileSaveDialog);
 		if (SUCCEEDED(hRet))
 		{
-			ChronosFileSaveDialog* chronosFileSaveDialog = new ChronosFileSaveDialog(local_ppv);
+			ChronosFileSaveDialog* chronosFileSaveDialog = new ChronosFileSaveDialog(fileSaveDialog);
 			chronosFileSaveDialog->AddRef();
 			chronosFileSaveDialog->Initialize();
 			*ppv = chronosFileSaveDialog;
