@@ -370,13 +370,18 @@ public:
 
 	ULONG STDMETHODCALLTYPE AddRef(void)
 	{
-		return ++m_referenceCount;
+		InterlockedIncrement(&m_referenceCount);
+		return m_referenceCount;
 	}
 
 	ULONG STDMETHODCALLTYPE Release(void)
 	{
-		ULONG referenceCount = --m_referenceCount;
-		if (referenceCount <= 0)
+		if (m_referenceCount > 0)
+		{
+			InterlockedDecrement(&m_referenceCount);
+		}
+		ULONG referenceCount = m_referenceCount;
+		if (referenceCount == 0)
 		{
 			delete this;
 		}
@@ -384,7 +389,7 @@ public:
 	}
 
 private:
-	CComPtr<IFileOpenDialog> m_originalDialog = nullptr;
+	CComPtr<IFileOpenDialog> m_originalDialog;
 	CString m_strRootPath;
 	ULONG m_referenceCount = 0;
 };
@@ -689,12 +694,17 @@ public:
 	}
 
 	ULONG STDMETHODCALLTYPE AddRef(void){
-		return ++m_referenceCount;
+		InterlockedIncrement(&m_referenceCount);
+		return m_referenceCount;
 	}
 
 	ULONG STDMETHODCALLTYPE Release(void){
-		ULONG referenceCount = --m_referenceCount;
-		if (referenceCount <= 0)
+		if (m_referenceCount > 0)
+		{
+			InterlockedDecrement(&m_referenceCount);
+		}
+		ULONG referenceCount = m_referenceCount;
+		if (referenceCount == 0)
 		{
 			delete this;
 		}
@@ -702,7 +712,7 @@ public:
 	}
 
 private:
-	CComPtr<IFileSaveDialog> m_originalDialog = nullptr;
+	CComPtr<IFileSaveDialog> m_originalDialog;
 	ULONG m_referenceCount = 0;
 };
 
