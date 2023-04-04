@@ -109,7 +109,7 @@ public:
 			return hresult;
 		}
 
-		IShellItem* psi;
+		CComPtr<IShellItem> psi;
 		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
 		if (SUCCEEDED(hresult))
 		{
@@ -315,7 +315,7 @@ public:
 			}
 
 			LPWSTR wstrSelPath;
-			IShellItem *psi;
+			CComPtr<IShellItem> psi;
 			hresult = this->GetResult(&psi);
 
 			if (FAILED(hresult))
