@@ -330,6 +330,7 @@ public:
 			}
 
 			CString strSelPath(wstrSelPath);
+			CoTaskMemFree(wstrSelPath);
 			if (strSelPath.IsEmpty())
 			{
 				return hresult;
@@ -643,15 +644,19 @@ public:
 			LPWSTR wstrSelPath;
 			IShellItem* psi;
 			hresult = this->GetResult(&psi);
-
 			if (FAILED(hresult))
 			{
 				return hresult;
 			}
 
-			psi->GetDisplayName(SIGDN_DESKTOPABSOLUTEEDITING, &wstrSelPath);
+			hresult = psi->GetDisplayName(SIGDN_DESKTOPABSOLUTEEDITING, &wstrSelPath);
+			if (FAILED(hresult))
+			{
+				return hresult;
+			}
 
 			CString strSelPath(wstrSelPath);
+			CoTaskMemFree(wstrSelPath);
 			strSelPath.MakeUpper();
 			if (strSelPath.IsEmpty())
 			{
