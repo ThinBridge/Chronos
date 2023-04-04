@@ -315,7 +315,7 @@ public:
 			}
 
 			LPWSTR wstrSelPath;
-			IShellItem* psi;
+			IShellItem *psi;
 			hresult = this->GetResult(&psi);
 
 			if (FAILED(hresult))
@@ -323,10 +323,13 @@ public:
 				return hresult;
 			}
 
-			psi->GetDisplayName(SIGDN_DESKTOPABSOLUTEEDITING, &wstrSelPath);
+			hresult = psi->GetDisplayName(SIGDN_DESKTOPABSOLUTEEDITING, &wstrSelPath);
+			if (FAILED(hresult))
+			{
+				return hresult;
+			}
 
 			CString strSelPath(wstrSelPath);
-			strSelPath.MakeUpper();
 			if (strSelPath.IsEmpty())
 			{
 				return hresult;
@@ -334,21 +337,19 @@ public:
 
 			if (theApp.IsSGMode())
 			{
-				CString strRoot(m_strRootPath);
-				strRoot.MakeUpper();
-				if (strSelPath.Find(strRoot) != 0)
+				CString strRootUpper(m_strRootPath);
+				CString strSelPathUpper = strSelPath;
+				strSelPathUpper.MakeUpper();
+				strRootUpper.MakeUpper();
+				if (strSelPathUpper.Find(strRootUpper) != 0)
 				{
 					CString strCaption(theApp.m_strThisAppName);
 					CString strMsg;
-					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
+					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)m_strRootPath, (LPCWSTR)strSelPath);
 					::MessageBoxW(hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
 			}
-
-			PathRemoveFileSpec(strSelPath.GetBuffer());
-			strSelPath.ReleaseBuffer();
-			theApp.m_strLastSelectUploadFolderPath = strSelPath;
 
 			if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableUploadLogging())
 			{
@@ -357,6 +358,11 @@ public:
 				CString strFileName(ptrFile ? ptrFile : strSelPath);
 				theApp.SendLoggingMsg(LOG_UPLOAD, strFileName, hwndOwner);
 			}
+
+			PathRemoveFileSpec(strSelPath.GetBuffer());
+			strSelPath.ReleaseBuffer();
+			theApp.m_strLastSelectUploadFolderPath = strSelPath;
+
 			return hresult;
 		}
 		return S_OK;
