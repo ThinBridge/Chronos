@@ -307,8 +307,8 @@ public:
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
-							 //}}AFX_VIRTUAL
+	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV supportk
+	//}}AFX_VIRTUAL
 
 	// Implementation
 protected:
@@ -348,7 +348,7 @@ public:
 	//{{AFX_VIRTUAL(CDlgSetTab1)
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV サポート
-							 //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 	// インプリメンテーション
 protected:

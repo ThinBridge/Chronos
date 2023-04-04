@@ -1518,7 +1518,10 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 				return pFrmActiveNow;
 		}
 
-		if (theApp.IsWnd(m_pPrevActiveWindow) && !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd) && !m_pPrevActiveWindow->m_bDownloadBlankPage && m_pPrevActiveWindow != pTarget)
+		if (theApp.IsWnd(m_pPrevActiveWindow) &&
+		    !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd) &&
+		    !m_pPrevActiveWindow->m_bDownloadBlankPage &&
+		    m_pPrevActiveWindow != pTarget)
 		{
 			return m_pPrevActiveWindow;
 		}
@@ -1704,13 +1707,17 @@ void CMainFrame::TabWindowChk()
 		pFrmActiveNow = theApp.GetActiveBFramePtr();
 
 		//ActiveWndが表示されている。即抜ける
-		if (theApp.IsWnd(pFrmActiveNow) && theApp.IsWndVisible(pFrmActiveNow->m_hWnd) && pFrmActiveNow->m_cTabWnd)
+		if (theApp.IsWnd(pFrmActiveNow) &&
+		    theApp.IsWndVisible(pFrmActiveNow->m_hWnd) &&
+		    pFrmActiveNow->m_cTabWnd)
 		{
 			return;
 		}
 
 		//ActiveWndが表示されている。即抜ける
-		if (theApp.IsWnd(m_pActiveWindow) && theApp.IsWndVisible(m_pActiveWindow->m_hWnd) && m_pActiveWindow->m_cTabWnd)
+		if (theApp.IsWnd(m_pActiveWindow) &&
+		    theApp.IsWndVisible(m_pActiveWindow->m_hWnd) &&
+		    m_pActiveWindow->m_cTabWnd)
 		{
 			return;
 		}
@@ -1755,18 +1762,27 @@ void CMainFrame::TabWindowChk()
 		{
 			for (;;)
 			{
-				if (theApp.IsWnd(m_pActiveWindow) && !theApp.IsWndVisible(m_pActiveWindow->m_hWnd) && m_pActiveWindow->m_cTabWnd && !m_pActiveWindow->m_bDownloadBlankPage)
+				if (theApp.IsWnd(m_pActiveWindow) &&
+				    !theApp.IsWndVisible(m_pActiveWindow->m_hWnd) &&
+				    m_pActiveWindow->m_cTabWnd &&
+				    !m_pActiveWindow->m_bDownloadBlankPage)
 				{
 					pFrmVisible = m_pActiveWindow;
 					break;
 				}
 
-				if (theApp.IsWnd(m_pPrevActiveWindow) && !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd) && m_pPrevActiveWindow->m_cTabWnd && !m_pPrevActiveWindow->m_bDownloadBlankPage)
+				if (theApp.IsWnd(m_pPrevActiveWindow) &&
+				    !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd) &&
+				    m_pPrevActiveWindow->m_cTabWnd &&
+				    !m_pPrevActiveWindow->m_bDownloadBlankPage)
 				{
 					pFrmVisible = m_pPrevActiveWindow;
 					break;
 				}
-				if (theApp.IsWnd(pFrmHead) && !theApp.IsWndVisible(pFrmHead->m_hWnd) && pFrmHead->m_cTabWnd && !pFrmHead->m_bDownloadBlankPage)
+				if (theApp.IsWnd(pFrmHead) &&
+				    !theApp.IsWndVisible(pFrmHead->m_hWnd) &&
+				    pFrmHead->m_cTabWnd &&
+				    !pFrmHead->m_bDownloadBlankPage)
 				{
 					pFrmVisible = pFrmHead;
 					break;

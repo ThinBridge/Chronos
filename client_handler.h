@@ -267,7 +267,7 @@ protected:
 	IMPLEMENT_REFCOUNTING(ClientHandler);
 
 	// Include the default locking implementation.
-	//	IMPLEMENT_LOCKING(ClientHandler);
+	//IMPLEMENT_LOCKING(ClientHandler);
 };
 class AppRenderer : public CefApp, public CefRenderProcessHandler
 {
