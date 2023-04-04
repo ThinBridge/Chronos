@@ -73,7 +73,6 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 
 	// get browser ID
 	INT nBrowserId = browser->GetIdentifier();
-	
 
 	// The frame window will be the parent of the browser window
 	HWND hWindow = GetSafeParentWnd(browser);
@@ -132,39 +131,40 @@ bool ClientHandler::OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
 		pszURL = target_url.c_str();
 		switch (target_disposition)
 		{
-			case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
-			{
-				::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
-				return true;
-			}
-			case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
-			{
-				::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
-				return true;
-			}
-			case cef_window_open_disposition_t::WOD_NEW_WINDOW:
-			{
-				::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
-				return true;
-			}
-			default:break;
+		case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
+		{
+			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
+			return true;
+		}
+		case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
+		{
+			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
+			return true;
+		}
+		case cef_window_open_disposition_t::WOD_NEW_WINDOW:
+		{
+			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
+			return true;
+		}
+		default:
+			break;
 		}
 	}
 	return false;
 }
 
 bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
-		CefRefPtr<CefFrame> frame,
-		const CefString& target_url,
-		const CefString& target_frame_name,
-		WindowOpenDisposition target_disposition,
-		bool user_gesture,
-		const CefPopupFeatures& popupFeatures,
-		CefWindowInfo& windowInfo,
-		CefRefPtr<CefClient>& client,
-		CefBrowserSettings& settings,
-		CefRefPtr<CefDictionaryValue>& extra_info,
-		bool* no_javascript_access)
+				  CefRefPtr<CefFrame> frame,
+				  const CefString& target_url,
+				  const CefString& target_frame_name,
+				  WindowOpenDisposition target_disposition,
+				  bool user_gesture,
+				  const CefPopupFeatures& popupFeatures,
+				  CefWindowInfo& windowInfo,
+				  CefRefPtr<CefClient>& client,
+				  CefBrowserSettings& settings,
+				  CefRefPtr<CefDictionaryValue>& extra_info,
+				  bool* no_javascript_access)
 {
 	PROC_TIME(OnBeforePopup)
 
@@ -183,50 +183,50 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 		LRESULT lRet = 0;
 		switch (target_disposition)
 		{
-			case cef_window_open_disposition_t::WOD_NEW_POPUP:
+		case cef_window_open_disposition_t::WOD_NEW_POPUP:
+		{
+			lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)&popupFeatures, (LPARAM)&windowInfo);
+			return false;
+		}
+		case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
+		{
+#if CHROME_VERSION_MAJOR >= 110
+			if (popupFeatures.isPopup)
 			{
+				// Since CEF110, toolBarVisible and menuBarVisible was removed.
+				// When isPopup is true, browser interface elements is hidden,
+				// then create new browser window.
 				lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)&popupFeatures, (LPARAM)&windowInfo);
 				return false;
 			}
-			case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
+#else
+			if (popupFeatures.toolBarVisible)
 			{
-#if CHROME_VERSION_MAJOR >= 110
-				if (popupFeatures.isPopup)
+				if ( //popupFeatures.locationBarVisible==false
+				    popupFeatures.menuBarVisible == false)
 				{
-					// Since CEF110, toolBarVisible and menuBarVisible was removed.
-					// When isPopup is true, browser interface elements is hidden,
-					// then create new browser window.
 					lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)&popupFeatures, (LPARAM)&windowInfo);
 					return false;
 				}
-#else
-				if (popupFeatures.toolBarVisible)
-				{
-					if (//popupFeatures.locationBarVisible==false
-						popupFeatures.menuBarVisible == false
-					)
-					{
-						lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)&popupFeatures, (LPARAM)&windowInfo);
-						return false;
-					}
-				}
+			}
 #endif
-				lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
-				return false;
-			}
-			case cef_window_open_disposition_t::WOD_CURRENT_TAB:
-			case cef_window_open_disposition_t::WOD_SINGLETON_TAB:
-			case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
-			case cef_window_open_disposition_t::WOD_NEW_WINDOW:
-			case cef_window_open_disposition_t::WOD_SAVE_TO_DISK:
-			case cef_window_open_disposition_t::WOD_OFF_THE_RECORD:
-			case cef_window_open_disposition_t::WOD_IGNORE_ACTION:
-			{
-				lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
-				return false;;
-			}
-			default:
-				break;
+			lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
+			return false;
+		}
+		case cef_window_open_disposition_t::WOD_CURRENT_TAB:
+		case cef_window_open_disposition_t::WOD_SINGLETON_TAB:
+		case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
+		case cef_window_open_disposition_t::WOD_NEW_WINDOW:
+		case cef_window_open_disposition_t::WOD_SAVE_TO_DISK:
+		case cef_window_open_disposition_t::WOD_OFF_THE_RECORD:
+		case cef_window_open_disposition_t::WOD_IGNORE_ACTION:
+		{
+			lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
+			return false;
+			;
+		}
+		default:
+			break;
 		}
 		if (lRet == 0)
 			return false;
@@ -669,31 +669,31 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 		CString strLogLevel;
 		switch (level)
 		{
-			case LOGSEVERITY_DEFAULT:
-				strLogLevel = _T("DEFAULT");
-				break;
-			case LOGSEVERITY_VERBOSE:
-				strLogLevel = _T("VERBOSE");
-				break;
+		case LOGSEVERITY_DEFAULT:
+			strLogLevel = _T("DEFAULT");
+			break;
+		case LOGSEVERITY_VERBOSE:
+			strLogLevel = _T("VERBOSE");
+			break;
 
-			case LOGSEVERITY_INFO:
-				strLogLevel = _T("INFO");
-				break;
+		case LOGSEVERITY_INFO:
+			strLogLevel = _T("INFO");
+			break;
 
-			case LOGSEVERITY_WARNING:
-				strLogLevel = _T("WARNING");
-				break;
+		case LOGSEVERITY_WARNING:
+			strLogLevel = _T("WARNING");
+			break;
 
-			case LOGSEVERITY_ERROR:
-				strLogLevel = _T("ERROR");
-				break;
+		case LOGSEVERITY_ERROR:
+			strLogLevel = _T("ERROR");
+			break;
 
-			case LOGSEVERITY_FATAL:
-				strLogLevel = _T("FATAL");
-				break;
-			default:
-				strLogLevel = _T("N/A");
-				break;
+		case LOGSEVERITY_FATAL:
+			strLogLevel = _T("FATAL");
+			break;
+		default:
+			strLogLevel = _T("N/A");
+			break;
 		}
 		HWND hWindow = GetSafeParentWnd(browser);
 		if (SafeWnd(hWindow))
@@ -906,7 +906,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 		return;
 	}
 
-	CEFDownloadItemValues values={0};
+	CEFDownloadItemValues values = {0};
 
 	values.bIsValid = download_item->IsValid();
 	values.bIsInProgress = download_item->IsInProgress();
@@ -920,7 +920,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 	if (download_item->IsValid())
 	{
 		CefString cefFulPath = download_item->GetFullPath();
-		if(cefFulPath.c_str())
+		if (cefFulPath.c_str())
 			lstrcpyn(values.szFullPath, cefFulPath.c_str(), 512);
 	}
 	HWND hWindow = GetSafeParentWnd(browser);
@@ -1037,10 +1037,10 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 	}
 }
 cef_return_value_t ClientHandler::OnBeforeResourceLoad(
-	CefRefPtr<CefBrowser> browser,
-	CefRefPtr<CefFrame> frame,
-	CefRefPtr<CefRequest> request,
-	CefRefPtr<CefCallback> callback)
+    CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame,
+    CefRefPtr<CefRequest> request,
+    CefRefPtr<CefCallback> callback)
 {
 	PROC_TIME(OnBeforeResourceLoad)
 
@@ -1086,7 +1086,6 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		}
 	}
 
-
 	// get URL requested
 	CefString newURL = request->GetURL();
 	CefURLParts cfURLparts;
@@ -1111,14 +1110,14 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 
 		if (strPath.IsEmpty())
 			strPath = _T("/");
-//2019-05-14 GoogleDrive側が変更されたようなので、正常に動作する。対処コードをコメントアウト
-//		if(strHost==_T("drive.google.com"))
-//		{
-//			request->GetHeaderMap(cefHeaders);
-//			cefHeaders.erase("User-Agent");
-//			cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0"));
-//			request->SetHeaderMap(cefHeaders);
-//		}
+		//2019-05-14 GoogleDrive側が変更されたようなので、正常に動作する。対処コードをコメントアウト
+		//		if(strHost==_T("drive.google.com"))
+		//		{
+		//			request->GetHeaderMap(cefHeaders);
+		//			cefHeaders.erase("User-Agent");
+		//			cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0"));
+		//			request->SetHeaderMap(cefHeaders);
+		//		}
 
 		//2021-01-07Googleにログインできない。。。
 		//調査結果、FirefoxにすればOK, Edge/87.0.0.0をつけてもOK
@@ -1126,7 +1125,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		//2021-11-30 ↑の対策がNGになっていることに気がついた。UAにEdgeをつけてもNG
 		//↓のコード復活
 		//accounts.google.comへのアクセス時は、FirefoxのUAにしてしまう。
-		if(strHost==_T("accounts.google.com"))
+		if (strHost == _T("accounts.google.com"))
 		{
 			request->GetHeaderMap(cefHeaders);
 			cefHeaders.erase("User-Agent");
@@ -1272,278 +1271,278 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	strErrorMsg.LoadString(ID_ERROR_MSG_FAILED);
 	switch (errorCode)
 	{
-		case ERR_NONE:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_NONE);
-			break;
-		}
-		case ERR_FAILED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_FAILED);
-			break;
-		}
-		case ERR_ABORTED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_ABORTED);
-			 break;
-		}
-		case ERR_INVALID_ARGUMENT:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_ARGUMENT);
-			break;
-		}
-		case ERR_INVALID_HANDLE:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_HANDLE);
-			break;
-		}
-		case ERR_FILE_NOT_FOUND:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_FILE_NOT_FOUND);
-			break;
-		}
-		case ERR_TIMED_OUT:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_TIMED_OUT);
-			break;
-		}
-		case ERR_FILE_TOO_BIG:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_FILE_TOO_BIG);
-			break;
-		}
-		case ERR_UNEXPECTED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_UNEXPECTED);
-			break;
-		}
-		case ERR_ACCESS_DENIED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_ACCESS_DENIED);
-			break;
-		}
-		case ERR_NOT_IMPLEMENTED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_NOT_IMPLEMENTED);
-			break;
-		}
-		case ERR_CONNECTION_CLOSED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_CLOSED);
-			break;
-		}
-		case ERR_CONNECTION_RESET:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_RESET);
-			break;
-		}
-		case ERR_CONNECTION_REFUSED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_REFUSED);
-			break;
-		}
-		case ERR_CONNECTION_ABORTED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_ABORTED);
-			break;
-		}
-		case ERR_CONNECTION_FAILED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_FAILED);
-			break;
-		}
-		case ERR_NAME_NOT_RESOLVED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_NAME_NOT_RESOLVED);
-			break;
-		}
-		case ERR_INTERNET_DISCONNECTED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_INTERNET_DISCONNECTED);
-			break;
-		}
-		case ERR_SSL_PROTOCOL_ERROR:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_PROTOCOL_ERROR);
-			break;
-		}
-		case ERR_ADDRESS_INVALID:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_ADDRESS_INVALID);
-			break;
-		}
-		case ERR_ADDRESS_UNREACHABLE:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_ADDRESS_UNREACHABLE);
-			break;
-		}
-		case ERR_SSL_CLIENT_AUTH_CERT_NEEDED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED);
-			break;
-		}
-		case ERR_TUNNEL_CONNECTION_FAILED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED);
-			break;
-		}
-		case ERR_NO_SSL_VERSIONS_ENABLED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED);
-			break;
-		}
-		case ERR_SSL_VERSION_OR_CIPHER_MISMATCH:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH);
-			break;
-		}
-		case ERR_SSL_RENEGOTIATION_REQUESTED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED);
-			break;
-		}
-		case ERR_CERT_COMMON_NAME_INVALID:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_COMMON_NAME_INVALID);
-			break;
-		}
-		case ERR_CERT_DATE_INVALID:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_DATE_INVALID);
-			break;
-		}
-		case ERR_CERT_AUTHORITY_INVALID:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_AUTHORITY_INVALID);
-			break;
-		}
-		case ERR_CERT_CONTAINS_ERRORS:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_CONTAINS_ERRORS);
-			break;
-		}
-		case ERR_CERT_NO_REVOCATION_MECHANISM:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM);
-			break;
-		}
-		case ERR_CERT_UNABLE_TO_CHECK_REVOCATION:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION);
-			break;
-		}
-		case ERR_CERT_REVOKED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_REVOKED);
-			break;
-		}
-		case ERR_CERT_INVALID:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_INVALID);
-			break;
-		}
-		case ERR_CERT_WEAK_SIGNATURE_ALGORITHM:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM);
-			break;
-		}
-		case ERR_CERT_NON_UNIQUE_NAME:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NON_UNIQUE_NAME);
-			break;
-		}
-		case ERR_CERT_WEAK_KEY:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_WEAK_KEY);
-			break;
-		}
-		case ERR_CERT_NAME_CONSTRAINT_VIOLATION:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION);
-			break;
-		}
-		case ERR_CERT_VALIDITY_TOO_LONG:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG);
-			break;
-		}
-		case ERR_INVALID_URL:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_URL);
-			break;
-		}
-		case ERR_DISALLOWED_URL_SCHEME:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_DISALLOWED_URL_SCHEME);
-			break;
-		}
-		case ERR_UNKNOWN_URL_SCHEME:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_UNKNOWN_URL_SCHEME);
-			break;
-		}
-		case ERR_TOO_MANY_REDIRECTS:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_TOO_MANY_REDIRECTS);
-			break;
-		}
-		case ERR_UNSAFE_REDIRECT:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_UNSAFE_REDIRECT);
-			break;
-		}
-		case ERR_UNSAFE_PORT:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_UNSAFE_PORT);
-			break;
-		}
-		case ERR_INVALID_RESPONSE:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_RESPONSE);
-			break;
-		}
-		case ERR_INVALID_CHUNKED_ENCODING:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_CHUNKED_ENCODING);
-			break;
-		}
-		case ERR_METHOD_NOT_SUPPORTED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_METHOD_NOT_SUPPORTED);
-			break;
-		}
-		case ERR_UNEXPECTED_PROXY_AUTH:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH);
-			break;
-		}
-		case ERR_EMPTY_RESPONSE:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_EMPTY_RESPONSE);
-			break;
-		}
-		case ERR_RESPONSE_HEADERS_TOO_BIG:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG);
-			break;
-		}
-		case ERR_CACHE_MISS:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_CACHE_MISS);
-			break;
-		}
-		case ERR_INSECURE_RESPONSE:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_INSECURE_RESPONSE);
-			break;
-		}
-		case ERR_PROXY_CONNECTION_FAILED:
-		{
-			strErrorMsg.LoadString(ID_ERROR_MSG_PROXY_CONNECTION_FAILED);
-			break;
-		}
-		default:
-			break;
+	case ERR_NONE:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_NONE);
+		break;
+	}
+	case ERR_FAILED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_FAILED);
+		break;
+	}
+	case ERR_ABORTED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_ABORTED);
+		break;
+	}
+	case ERR_INVALID_ARGUMENT:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_ARGUMENT);
+		break;
+	}
+	case ERR_INVALID_HANDLE:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_HANDLE);
+		break;
+	}
+	case ERR_FILE_NOT_FOUND:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_FILE_NOT_FOUND);
+		break;
+	}
+	case ERR_TIMED_OUT:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_TIMED_OUT);
+		break;
+	}
+	case ERR_FILE_TOO_BIG:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_FILE_TOO_BIG);
+		break;
+	}
+	case ERR_UNEXPECTED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_UNEXPECTED);
+		break;
+	}
+	case ERR_ACCESS_DENIED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_ACCESS_DENIED);
+		break;
+	}
+	case ERR_NOT_IMPLEMENTED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_NOT_IMPLEMENTED);
+		break;
+	}
+	case ERR_CONNECTION_CLOSED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_CLOSED);
+		break;
+	}
+	case ERR_CONNECTION_RESET:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_RESET);
+		break;
+	}
+	case ERR_CONNECTION_REFUSED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_REFUSED);
+		break;
+	}
+	case ERR_CONNECTION_ABORTED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_ABORTED);
+		break;
+	}
+	case ERR_CONNECTION_FAILED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CONNECTION_FAILED);
+		break;
+	}
+	case ERR_NAME_NOT_RESOLVED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_NAME_NOT_RESOLVED);
+		break;
+	}
+	case ERR_INTERNET_DISCONNECTED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_INTERNET_DISCONNECTED);
+		break;
+	}
+	case ERR_SSL_PROTOCOL_ERROR:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_SSL_PROTOCOL_ERROR);
+		break;
+	}
+	case ERR_ADDRESS_INVALID:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_ADDRESS_INVALID);
+		break;
+	}
+	case ERR_ADDRESS_UNREACHABLE:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_ADDRESS_UNREACHABLE);
+		break;
+	}
+	case ERR_SSL_CLIENT_AUTH_CERT_NEEDED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED);
+		break;
+	}
+	case ERR_TUNNEL_CONNECTION_FAILED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED);
+		break;
+	}
+	case ERR_NO_SSL_VERSIONS_ENABLED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED);
+		break;
+	}
+	case ERR_SSL_VERSION_OR_CIPHER_MISMATCH:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH);
+		break;
+	}
+	case ERR_SSL_RENEGOTIATION_REQUESTED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED);
+		break;
+	}
+	case ERR_CERT_COMMON_NAME_INVALID:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_COMMON_NAME_INVALID);
+		break;
+	}
+	case ERR_CERT_DATE_INVALID:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_DATE_INVALID);
+		break;
+	}
+	case ERR_CERT_AUTHORITY_INVALID:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_AUTHORITY_INVALID);
+		break;
+	}
+	case ERR_CERT_CONTAINS_ERRORS:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_CONTAINS_ERRORS);
+		break;
+	}
+	case ERR_CERT_NO_REVOCATION_MECHANISM:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM);
+		break;
+	}
+	case ERR_CERT_UNABLE_TO_CHECK_REVOCATION:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION);
+		break;
+	}
+	case ERR_CERT_REVOKED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_REVOKED);
+		break;
+	}
+	case ERR_CERT_INVALID:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_INVALID);
+		break;
+	}
+	case ERR_CERT_WEAK_SIGNATURE_ALGORITHM:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM);
+		break;
+	}
+	case ERR_CERT_NON_UNIQUE_NAME:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NON_UNIQUE_NAME);
+		break;
+	}
+	case ERR_CERT_WEAK_KEY:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_WEAK_KEY);
+		break;
+	}
+	case ERR_CERT_NAME_CONSTRAINT_VIOLATION:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION);
+		break;
+	}
+	case ERR_CERT_VALIDITY_TOO_LONG:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG);
+		break;
+	}
+	case ERR_INVALID_URL:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_URL);
+		break;
+	}
+	case ERR_DISALLOWED_URL_SCHEME:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_DISALLOWED_URL_SCHEME);
+		break;
+	}
+	case ERR_UNKNOWN_URL_SCHEME:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_UNKNOWN_URL_SCHEME);
+		break;
+	}
+	case ERR_TOO_MANY_REDIRECTS:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_TOO_MANY_REDIRECTS);
+		break;
+	}
+	case ERR_UNSAFE_REDIRECT:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_UNSAFE_REDIRECT);
+		break;
+	}
+	case ERR_UNSAFE_PORT:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_UNSAFE_PORT);
+		break;
+	}
+	case ERR_INVALID_RESPONSE:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_RESPONSE);
+		break;
+	}
+	case ERR_INVALID_CHUNKED_ENCODING:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_INVALID_CHUNKED_ENCODING);
+		break;
+	}
+	case ERR_METHOD_NOT_SUPPORTED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_METHOD_NOT_SUPPORTED);
+		break;
+	}
+	case ERR_UNEXPECTED_PROXY_AUTH:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH);
+		break;
+	}
+	case ERR_EMPTY_RESPONSE:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_EMPTY_RESPONSE);
+		break;
+	}
+	case ERR_RESPONSE_HEADERS_TOO_BIG:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG);
+		break;
+	}
+	case ERR_CACHE_MISS:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_CACHE_MISS);
+		break;
+	}
+	case ERR_INSECURE_RESPONSE:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_INSECURE_RESPONSE);
+		break;
+	}
+	case ERR_PROXY_CONNECTION_FAILED:
+	{
+		strErrorMsg.LoadString(ID_ERROR_MSG_PROXY_CONNECTION_FAILED);
+		break;
+	}
+	default:
+		break;
 	}
 
 	CString errorPageTitle;
@@ -1629,7 +1628,7 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	strJsStr += _T("    document.getElementsByTagName('body')[0].appendChild(msgDiv); \n");
 	strJsStr += _T("}\n");
 	//	strJsStr += _T("    alert('appended');\n}\n");
-//	strJsStr += _T("else alert('no body to append!!');");
+	//	strJsStr += _T("else alert('no body to append!!');");
 
 	CefString strCefJsStr(strJsStr);
 	frame->ExecuteJavaScript(strCefJsStr, failedUrl, 0);
@@ -1691,7 +1690,7 @@ bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefStrin
 	static const int64 max_size = 1024 * 1024 * 20; // 20mb.
 	// Grant the quota request if the size is reasonable.
 	//callback->Continue(new_size <= max_size);
-	if(new_size > max_size)
+	if (new_size > max_size)
 		callback->Cancel();
 	// call parent
 	return CefRequestHandler::OnQuotaRequest(browser, origin_url, new_size, callback);
@@ -1727,8 +1726,8 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution)
 {
 	// do default
-//	CefResourceRequestHandler::OnProtocolExecution(browser,frame, request,allow_os_execution);
-//	return;
+	//	CefResourceRequestHandler::OnProtocolExecution(browser,frame, request,allow_os_execution);
+	//	return;
 	allow_os_execution = true;
 	browser->StopLoad();
 }
@@ -1940,7 +1939,7 @@ bool ClientHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
 			HWND hWindow = GetSafeParentWnd(browser);
 			if (SafeWnd(hWindow))
 			{
-				::SendMessageTimeout(hWindow, WM_APP_CEF_SET_RENDERER_PID, (WPARAM)m_RendererPID,0, SMTO_NORMAL, 1000, NULL);
+				::SendMessageTimeout(hWindow, WM_APP_CEF_SET_RENDERER_PID, (WPARAM)m_RendererPID, 0, SMTO_NORMAL, 1000, NULL);
 			}
 		}
 		return true;

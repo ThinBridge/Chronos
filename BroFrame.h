@@ -13,11 +13,11 @@
 
 #define CFrameWndBase CFrameWndEx
 #define nStatusIcon 0
-#define nStatusInfo  1
+#define nStatusInfo 1
 #define nStatusProgress 2
 #define nStatusSSL 3
 #define nStatusCompat 4
-#define nStatusZoom  5
+#define nStatusZoom 5
 #define SBW_SHOW_MENU_BAR 0x1
 #define SBW_SHOW_TOOL_BAR 0x2
 #define SBW_SHOW_ADDRESS_BAR 0x4

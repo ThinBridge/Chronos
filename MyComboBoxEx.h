@@ -80,7 +80,7 @@ public:
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CComboEditXP)
 public:
-//	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	//	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	//}}AFX_VIRTUAL
 
 protected:

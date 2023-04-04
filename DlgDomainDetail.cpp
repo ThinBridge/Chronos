@@ -4,7 +4,7 @@
 #include "afxdialogex.h"
 IMPLEMENT_DYNAMIC(CDlgDomainDetail, CDialogEx)
 CDlgDomainDetail::CDlgDomainDetail(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DIALOG5, pParent)
+    : CDialogEx(IDD_DIALOG5, pParent)
 {
 }
 
@@ -18,9 +18,9 @@ void CDlgDomainDetail::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgDomainDetail, CDialogEx)
-	ON_BN_CLICKED(IDOK, &CDlgDomainDetail::OnBnClickedOk)
-	ON_BN_CLICKED(IDCANCEL, &CDlgDomainDetail::OnBnClickedCancel)
-	ON_BN_CLICKED(IDC_CHECK1, &CDlgDomainDetail::OnBnClickedCheck1)
+ON_BN_CLICKED(IDOK, &CDlgDomainDetail::OnBnClickedOk)
+ON_BN_CLICKED(IDCANCEL, &CDlgDomainDetail::OnBnClickedCancel)
+ON_BN_CLICKED(IDC_CHECK1, &CDlgDomainDetail::OnBnClickedCheck1)
 END_MESSAGE_MAP()
 
 void CDlgDomainDetail::OnBnClickedOk()
@@ -92,7 +92,7 @@ BOOL CDlgDomainDetail::OnInitDialog()
 ////////////////////////////////////////////////////////////////////////////////////////////
 IMPLEMENT_DYNAMIC(CDlgCustomScriptDetail, CDialogEx)
 CDlgCustomScriptDetail::CDlgCustomScriptDetail(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DIALOG6, pParent)
+    : CDialogEx(IDD_DIALOG6, pParent)
 {
 }
 
@@ -106,10 +106,10 @@ void CDlgCustomScriptDetail::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgCustomScriptDetail, CDialogEx)
-	ON_BN_CLICKED(IDOK, &CDlgCustomScriptDetail::OnBnClickedOk)
-	ON_BN_CLICKED(IDCANCEL, &CDlgCustomScriptDetail::OnBnClickedCancel)
-	ON_BN_CLICKED(IDC_CHECK1, &CDlgCustomScriptDetail::OnBnClickedCheck1)
-	ON_BN_CLICKED(IDC_BUTTON1, &CDlgCustomScriptDetail::OnBnClickedButton1)
+ON_BN_CLICKED(IDOK, &CDlgCustomScriptDetail::OnBnClickedOk)
+ON_BN_CLICKED(IDCANCEL, &CDlgCustomScriptDetail::OnBnClickedCancel)
+ON_BN_CLICKED(IDC_CHECK1, &CDlgCustomScriptDetail::OnBnClickedCheck1)
+ON_BN_CLICKED(IDC_BUTTON1, &CDlgCustomScriptDetail::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 void CDlgCustomScriptDetail::OnBnClickedOk()

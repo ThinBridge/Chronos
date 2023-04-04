@@ -4,7 +4,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-
 #include <afxtempl.h>
 #include "BroFrame.h"
 #include "MyComboBoxEx.h"

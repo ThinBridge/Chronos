@@ -205,7 +205,6 @@ public:
 	//ChildViewのポインタをリストから返す。
 	CChildView* GetChildViewPtr(HWND hWnd);
 
-
 	DWORD m_dwProcessId;
 	CHandle m_hProcess;
 	int m_iWinOSVersion;

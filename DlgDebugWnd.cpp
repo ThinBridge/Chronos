@@ -6,13 +6,12 @@
 #include "DlgDebugWnd.h"
 #include "afxdialogex.h"
 
-
 // CDlgDebugWnd ダイアログ
 
 IMPLEMENT_DYNAMIC(CDlgDebugWnd, CDialogEx)
 
 CDlgDebugWnd::CDlgDebugWnd(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CDlgDebugWnd::IDD, pParent)
+    : CDialogEx(CDlgDebugWnd::IDD, pParent)
 {
 	m_hEventLogDebugWnd = NULL;
 	m_bAutoScFlg = TRUE;
@@ -72,15 +71,15 @@ void CDlgDebugWnd::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgDebugWnd, CDialogEx)
-	ON_BN_CLICKED(IDOK, &CDlgDebugWnd::OnBnClickedOk)
-	ON_BN_CLICKED(IDCANCEL, &CDlgDebugWnd::OnBnClickedCancel)
-	ON_WM_ACTIVATE()
-	ON_WM_NCACTIVATE()
-	ON_WM_PAINT()
-	ON_BN_CLICKED(IDC_BUTTON1, &CDlgDebugWnd::OnBnClickedButton1)
-	ON_WM_SIZE()
-	ON_NOTIFY(LVN_GETDISPINFO, IDC_LIST1, &CDlgDebugWnd::OnGetdispinfoList1)
-	ON_BN_CLICKED(IDC_CHECK1, &CDlgDebugWnd::OnBnClickedCheck1)
+ON_BN_CLICKED(IDOK, &CDlgDebugWnd::OnBnClickedOk)
+ON_BN_CLICKED(IDCANCEL, &CDlgDebugWnd::OnBnClickedCancel)
+ON_WM_ACTIVATE()
+ON_WM_NCACTIVATE()
+ON_WM_PAINT()
+ON_BN_CLICKED(IDC_BUTTON1, &CDlgDebugWnd::OnBnClickedButton1)
+ON_WM_SIZE()
+ON_NOTIFY(LVN_GETDISPINFO, IDC_LIST1, &CDlgDebugWnd::OnGetdispinfoList1)
+ON_BN_CLICKED(IDC_CHECK1, &CDlgDebugWnd::OnBnClickedCheck1)
 END_MESSAGE_MAP()
 
 BOOL CDlgDebugWnd::OnInitDialog()
@@ -322,18 +321,7 @@ void CDlgDebugWnd::OnBnClickedButton1()
 	CString strCopyData;
 	CString strCopyDataALL;
 	CString strFmt;
-	strHeader.Format(_T("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n")
-			, _T("#")
-			, _T("Time")
-			, _T("WndType")
-			, _T("Function")
-			, _T("Message1")
-			, _T("Message2")
-			, _T("Message3")
-			, _T("Message4")
-			, _T("Message5")
-			, _T("Message6")
-		);
+	strHeader.Format(_T("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n"), _T("#"), _T("Time"), _T("WndType"), _T("Function"), _T("Message1"), _T("Message2"), _T("Message3"), _T("Message4"), _T("Message5"), _T("Message6"));
 	for (int iii = 0; iii < iSelCnt; iii++)
 	{
 		if (iii == 0)
@@ -397,17 +385,9 @@ void CDlgDebugWnd::OnSize(UINT nType, int cx, int cy)
 }
 
 void CDlgDebugWnd::SetLogMsg(
-	LPCTSTR	pDATE_TIME
-	, LPCTSTR	pHWND
-	, LPCTSTR	pFUNCTION_NAME
-	, LPCTSTR	pMESSAGE1
-	, LPCTSTR	pMESSAGE2
-	, LPCTSTR	pMESSAGE3
-	, LPCTSTR	pMESSAGE4
-	, LPCTSTR	pMESSAGE5
-	, LPCTSTR	pMESSAGE6)
+    LPCTSTR pDATE_TIME, LPCTSTR pHWND, LPCTSTR pFUNCTION_NAME, LPCTSTR pMESSAGE1, LPCTSTR pMESSAGE2, LPCTSTR pMESSAGE3, LPCTSTR pMESSAGE4, LPCTSTR pMESSAGE5, LPCTSTR pMESSAGE6)
 {
-	HANDLE hEvent = { 0 };
+	HANDLE hEvent = {0};
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventLogDebugWnd);
@@ -478,58 +458,59 @@ void CDlgDebugWnd::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 		{
 			switch (item->iSubItem)
 			{
-				case LIST_INDEX:
-				{
-					this->DWToString(pData->iIndex, m_strTemp);
-					lstrcpy(item->pszText, m_strTemp);
-					break;
-				}
-				case LIST_DATE_TIME:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mDATE_TIME;
-					break;
-				}
-				case LIST_HWND:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mHWND;
-					break;
-				}
-				case LIST_FUNCTION_NAME:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mFUNCTION_NAME;
-					break;
-				}
-				case LIST_MESSAGE1:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE1;
-					break;
-				}
-				case LIST_MESSAGE2:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE2;
-					break;
-				}
-				case LIST_MESSAGE3:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE3;
-					break;
-				}
-				case LIST_MESSAGE4:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE4;
-					break;
-				}
-				case LIST_MESSAGE5:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE5;
-					break;
-				}
-				case LIST_MESSAGE6:
-				{
-					item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE6;
-					break;
-				}
-				default:break;
+			case LIST_INDEX:
+			{
+				this->DWToString(pData->iIndex, m_strTemp);
+				lstrcpy(item->pszText, m_strTemp);
+				break;
+			}
+			case LIST_DATE_TIME:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mDATE_TIME;
+				break;
+			}
+			case LIST_HWND:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mHWND;
+				break;
+			}
+			case LIST_FUNCTION_NAME:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mFUNCTION_NAME;
+				break;
+			}
+			case LIST_MESSAGE1:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE1;
+				break;
+			}
+			case LIST_MESSAGE2:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE2;
+				break;
+			}
+			case LIST_MESSAGE3:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE3;
+				break;
+			}
+			case LIST_MESSAGE4:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE4;
+				break;
+			}
+			case LIST_MESSAGE5:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE5;
+				break;
+			}
+			case LIST_MESSAGE6:
+			{
+				item->pszText = (LPTSTR)(LPCTSTR)pData->mMESSAGE6;
+				break;
+			}
+			default:
+				break;
 			}
 		}
 		*pResult = 0;
@@ -542,7 +523,7 @@ void CDlgDebugWnd::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 IMPLEMENT_DYNAMIC(CDlgSCEditor, CDialogEx)
 
 CDlgSCEditor::CDlgSCEditor(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CDlgSCEditor::IDD, pParent)
+    : CDialogEx(CDlgSCEditor::IDD, pParent)
 {
 }
 
@@ -557,20 +538,19 @@ void CDlgSCEditor::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSCEditor, CDialogEx)
-	ON_BN_CLICKED(IDCANCEL, &CDlgSCEditor::OnBnClickedCancel)
-	ON_BN_CLICKED(IDC_BUTTON_FUNC, &CDlgSCEditor::OnBnClickedButtonFunc)
-	ON_BN_CLICKED(IDC_BUTTON_TOP, &CDlgSCEditor::OnBnClickedButtonTop)
-	ON_BN_CLICKED(IDC_BUTTON_URL, &CDlgSCEditor::OnBnClickedButtonUrl)
-	ON_BN_CLICKED(IDC_BUTTON_TB_TRACE_LOG, &CDlgSCEditor::OnBnClickedButtonTraceLog)
-	ON_BN_CLICKED(IDC_BUTTON1, &CDlgSCEditor::OnBnClickedButton1)
+ON_BN_CLICKED(IDCANCEL, &CDlgSCEditor::OnBnClickedCancel)
+ON_BN_CLICKED(IDC_BUTTON_FUNC, &CDlgSCEditor::OnBnClickedButtonFunc)
+ON_BN_CLICKED(IDC_BUTTON_TOP, &CDlgSCEditor::OnBnClickedButtonTop)
+ON_BN_CLICKED(IDC_BUTTON_URL, &CDlgSCEditor::OnBnClickedButtonUrl)
+ON_BN_CLICKED(IDC_BUTTON_TB_TRACE_LOG, &CDlgSCEditor::OnBnClickedButtonTraceLog)
+ON_BN_CLICKED(IDC_BUTTON1, &CDlgSCEditor::OnBnClickedButton1)
 
-	ON_BN_CLICKED(IDOK, &CDlgSCEditor::OnBnClickedOk)
-	ON_WM_ACTIVATE()
-	ON_WM_NCACTIVATE()
-	ON_WM_PAINT()
-	ON_WM_SIZE()
+ON_BN_CLICKED(IDOK, &CDlgSCEditor::OnBnClickedOk)
+ON_WM_ACTIVATE()
+ON_WM_NCACTIVATE()
+ON_WM_PAINT()
+ON_WM_SIZE()
 END_MESSAGE_MAP()
-
 
 // CDlgSCEditor メッセージ ハンドラー
 BOOL CDlgSCEditor::OnInitDialog()
@@ -647,12 +627,7 @@ BOOL CDlgSCEditor::PreTranslateMessage(MSG* pMsg)
 				}
 			}
 		}
-		if (pMsg->message == WM_MOUSEMOVE
-		||pMsg->message  == WM_LBUTTONDOWN
-		||pMsg->message  == WM_KEYDOWN
-		||pMsg->message  == WM_KEYUP
-		||pMsg->message  == WM_LBUTTONDOWN
-		)
+		if (pMsg->message == WM_MOUSEMOVE || pMsg->message == WM_LBUTTONDOWN || pMsg->message == WM_KEYDOWN || pMsg->message == WM_KEYUP || pMsg->message == WM_LBUTTONDOWN)
 		{
 			DWORD dwStart = 0, dwEnd = 0;
 			DWORD dwLineIndex = 0;
@@ -773,7 +748,7 @@ void CDlgSCEditor::OnBnClickedButtonTraceLog()
 	defaultLog.LoadString(ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT);
 	CString templateStr;
 	templateStr = _T("TB_TRACE_LOG(\"");
-	templateStr +=defaultLog;
+	templateStr += defaultLog;
 	templateStr += _T("\")\r\n");
 	defaultLog.LoadString(ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT);
 	m_Edit.ReplaceSel(templateStr, TRUE);

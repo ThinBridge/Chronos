@@ -5,7 +5,7 @@
 
 IMPLEMENT_DYNAMIC(CDlgDL, CDialogEx)
 CDlgDL::CDlgDL(CWnd* pParent, UINT nBrowserId)
-	: CDialogEx(IDD_DIALOG4, pParent)
+    : CDialogEx(IDD_DIALOG4, pParent)
 {
 	m_pParent = pParent;
 	m_bDLCancel = FALSE;
@@ -39,13 +39,13 @@ void CDlgDL::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgDL, CDialogEx)
-	ON_WM_DESTROY()
-	ON_WM_TIMER()
-	ON_BN_CLICKED(IDOK, &CDlgDL::OnBnClickedOk)
-	ON_BN_CLICKED(IDCANCEL, &CDlgDL::OnBnClickedCancel)
-	ON_BN_CLICKED(IDC_BUTTON1, &CDlgDL::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON_FO, &CDlgDL::OnBnClickedButtonFo)
-	ON_BN_CLICKED(IDC_BUTTON_DIRO, &CDlgDL::OnBnClickedButtonDiro)
+ON_WM_DESTROY()
+ON_WM_TIMER()
+ON_BN_CLICKED(IDOK, &CDlgDL::OnBnClickedOk)
+ON_BN_CLICKED(IDCANCEL, &CDlgDL::OnBnClickedCancel)
+ON_BN_CLICKED(IDC_BUTTON1, &CDlgDL::OnBnClickedButton1)
+ON_BN_CLICKED(IDC_BUTTON_FO, &CDlgDL::OnBnClickedButtonFo)
+ON_BN_CLICKED(IDC_BUTTON_DIRO, &CDlgDL::OnBnClickedButtonDiro)
 END_MESSAGE_MAP()
 
 void CDlgDL::OnBnClickedOk()
@@ -141,7 +141,7 @@ void CDlgDL::OnBnClickedButton1()
 IMPLEMENT_DYNAMIC(ProgressDlg, CDialogEx)
 
 ProgressDlg::ProgressDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(ProgressDlg::IDD, pParent)
+    : CDialogEx(ProgressDlg::IDD, pParent)
 {
 	m_iCntg = 0;
 	m_pParent = pParent;
@@ -175,8 +175,8 @@ void ProgressDlg::SetMsgExec(const CString& str)
 	m_iCntg++;
 }
 BEGIN_MESSAGE_MAP(ProgressDlg, CDialogEx)
-	ON_BN_CLICKED(IDOK, &ProgressDlg::OnBnClickedOk)
-	ON_BN_CLICKED(IDCANCEL, &ProgressDlg::OnBnClickedCancel)
+ON_BN_CLICKED(IDOK, &ProgressDlg::OnBnClickedOk)
+ON_BN_CLICKED(IDCANCEL, &ProgressDlg::OnBnClickedCancel)
 END_MESSAGE_MAP()
 
 void ProgressDlg::OnBnClickedOk()

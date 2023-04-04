@@ -5,12 +5,12 @@
 #endif // _MSC_VER > 1000
 #include "Sazabi.h"
 #define ViewBaseClass CWnd
-#define FRM ((CBrowserFrame *)m_pwndFrame)
+#define FRM ((CBrowserFrame*)m_pwndFrame)
 class CChildView : public ViewBaseClass
 {
 public:
 	CChildView();
-	CWnd *m_pwndFrame;
+	CWnd* m_pwndFrame;
 
 	CString m_UpDateAddressBarURL_Cache;
 	CString m_NavigateCompleteURL_Cache;
@@ -18,7 +18,7 @@ public:
 	CString m_strTitle;
 	void ResizeWindowPopup();
 	void ResizeWindowPopupInpl();
-	void ResizeFrmWindow(RECT &rectClient);
+	void ResizeFrmWindow(RECT& rectClient);
 	BOOL ZoomTo(double lFactor);
 	double GetZoomSizeEx();
 	void SetWheelZoom(int iDel);
@@ -31,7 +31,7 @@ protected:
 	CefRefPtr<CefBrowser> m_cefBrowser;
 	INT m_nBrowserID;
 	CefRefPtr<ClientHandler> m_clientHandler;
-	CefPopupFeatures *m_popupFeatures;
+	CefPopupFeatures* m_popupFeatures;
 	BOOL m_bDevToolsWnd;
 	afx_msg LRESULT OnBeforeBrowse(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnDownloadUpdate(WPARAM wParam, LPARAM lParam);
@@ -82,12 +82,14 @@ public:
 		INT nBrowserId = m_cefBrowser->GetIdentifier();
 		return nBrowserId;
 	}
+
 protected:
 	static const UINT m_pFindDialogMessage;
-	CFindReplaceDialog *m_pFindDialog;
+	CFindReplaceDialog* m_pFindDialog;
 	bool m_bFindNext;
 
 	BOOL m_bWndCloseFlg;
+
 public:
 	void Navigate(LPCTSTR pszURL);
 
@@ -95,21 +97,21 @@ public:
 
 	//{{AFX_VIRTUAL(CChildView)
 public:
-	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT &rect, CWnd *pParentWnd, UINT nID, CCreateContext *pContext = NULL);
-	virtual BOOL PreTranslateMessage(MSG *pMsg);
+	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
-      protected:
-	virtual BOOL PreCreateWindow(CREATESTRUCT &cs);
+protected:
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	//}}AFX_VIRTUAL
 
 public:
-	virtual void OnDraw(CDC *pDC){}; // overridden to draw this view
+	virtual void OnDraw(CDC* pDC){}; // overridden to draw this view
 
 	virtual ~CChildView();
 
 	void UpDateAddressBar();
 
-	void GetTravelLog(CStringArray &strArrayRet, BOOL bBack = true)
+	void GetTravelLog(CStringArray& strArrayRet, BOOL bBack = true)
 	{
 		try
 		{
@@ -283,9 +285,9 @@ public:
 	void ShowTimeoutMessageBox(LPCTSTR strMsg, int iType, int iTimeOut);
 
 	void IsRedirectWndAutoCloseChk();
-	BOOL IsRedirectURLChk(const CString &strURL, BOOL bTop);
+	BOOL IsRedirectURLChk(const CString& strURL, BOOL bTop);
 	BOOL IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL bTop);
-	BOOL IsFileURINavigation(const CString &strURL);
+	BOOL IsFileURINavigation(const CString& strURL);
 
 	void CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive = true);
 	LRESULT OnCreateNewBrowserWindow(WPARAM wParam, LPARAM lParam);
@@ -325,7 +327,7 @@ public:
 		try
 		{
 			EnableWinEx(TRUE);
-			if(bSetCefBrowserFocus())
+			if (bSetCefBrowserFocus())
 			{
 				bRet = TRUE;
 			}
@@ -336,7 +338,6 @@ public:
 		}
 		return bRet;
 	}
-
 
 protected:
 	//{{AFX_MSG(CChildView)
@@ -382,11 +383,10 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	afx_msg void OnUpdateCut(CCmdUI *pCmdUI);
-	afx_msg void OnUpdatePaste(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateCut(CCmdUI* pCmdUI);
+	afx_msg void OnUpdatePaste(CCmdUI* pCmdUI);
 	afx_msg void OnSettings();
 	afx_msg void OnAppAbout();
 	afx_msg void OnKillFocus(CWnd* pNewWnd);
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 };
-

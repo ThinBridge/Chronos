@@ -246,66 +246,66 @@ LRESULT CALLBACK CTitleBar::WndProc(HWND hwnd, UINT iMsg,
 		break;
 
 	case WM_TIMER:
+	{
+		UINT TimerID = (UINT)wParam;
+
+		if (TimerID == TitleBarThis->ScrollTimerID)
 		{
-			UINT TimerID = (UINT)wParam;
+			RECT lpRect = {0};
+			::GetWindowRect(TitleBarThis->m_hWnd, &lpRect);
 
-			if (TimerID == TitleBarThis->ScrollTimerID)
+			if (((lpRect.top == 0) && (TitleBarThis->SlideDown)) ||
+			    ((lpRect.top == -tbHeigth + 1) && (TitleBarThis->SlideDown == FALSE)))
 			{
-				RECT lpRect = {0};
-				::GetWindowRect(TitleBarThis->m_hWnd, &lpRect);
+				KillTimer(TitleBarThis->m_hWnd, TitleBarThis->ScrollTimerID);
 
-				if (((lpRect.top == 0) && (TitleBarThis->SlideDown)) ||
-				    ((lpRect.top == -tbHeigth + 1) && (TitleBarThis->SlideDown == FALSE)))
+				if (TitleBarThis->HideAfterSlide)
 				{
-					KillTimer(TitleBarThis->m_hWnd, TitleBarThis->ScrollTimerID);
-
-					if (TitleBarThis->HideAfterSlide)
-					{
-						TitleBarThis->HideAfterSlide = FALSE;
-						ShowWindow(TitleBarThis->GetSafeHwnd(), SW_HIDE);
-					}
-					return 0;
+					TitleBarThis->HideAfterSlide = FALSE;
+					ShowWindow(TitleBarThis->GetSafeHwnd(), SW_HIDE);
 				}
-
-				if (TitleBarThis->SlideDown)
-				{
-					lpRect.top++;
-					lpRect.bottom++;
-				}
-				else
-				{
-					lpRect.top--;
-					lpRect.bottom--;
-				}
-
-				::MoveWindow(TitleBarThis->m_hWnd, lpRect.left, lpRect.top, lpRect.right - lpRect.left, lpRect.bottom - lpRect.top, TRUE);
+				return 0;
 			}
 
-			if (TimerID == TitleBarThis->AutoScrollTimer)
+			if (TitleBarThis->SlideDown)
 			{
-				RECT lpRect = {0};
-				POINT pt = {0};
-				::GetWindowRect(TitleBarThis->m_hWnd, &lpRect);
-				::GetCursorPos(&pt);
-
-				if (PtInRect(&lpRect, pt) == FALSE)
-				{
-					TitleBarThis->IntAutoHideCounter++;
-
-					if (TitleBarThis->IntAutoHideCounter == tbAutoScrollTime)
-					{
-						TitleBarThis->SlideDown = FALSE;
-						TitleBarThis->ScrollTimerID = ::SetTimer(TitleBarThis->m_hWnd, tbScrollTimerID, tbScrollDelay, NULL);
-					}
-				}
-				else
-				{
-					TitleBarThis->IntAutoHideCounter = 0;
-				}
+				lpRect.top++;
+				lpRect.bottom++;
+			}
+			else
+			{
+				lpRect.top--;
+				lpRect.bottom--;
 			}
 
-			break;
+			::MoveWindow(TitleBarThis->m_hWnd, lpRect.left, lpRect.top, lpRect.right - lpRect.left, lpRect.bottom - lpRect.top, TRUE);
 		}
+
+		if (TimerID == TitleBarThis->AutoScrollTimer)
+		{
+			RECT lpRect = {0};
+			POINT pt = {0};
+			::GetWindowRect(TitleBarThis->m_hWnd, &lpRect);
+			::GetCursorPos(&pt);
+
+			if (PtInRect(&lpRect, pt) == FALSE)
+			{
+				TitleBarThis->IntAutoHideCounter++;
+
+				if (TitleBarThis->IntAutoHideCounter == tbAutoScrollTime)
+				{
+					TitleBarThis->SlideDown = FALSE;
+					TitleBarThis->ScrollTimerID = ::SetTimer(TitleBarThis->m_hWnd, tbScrollTimerID, tbScrollDelay, NULL);
+				}
+			}
+			else
+			{
+				TitleBarThis->IntAutoHideCounter = 0;
+			}
+		}
+
+		break;
+	}
 	}
 	return DefWindowProc(hwnd, iMsg, wParam, lParam);
 }

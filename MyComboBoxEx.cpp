@@ -21,9 +21,9 @@ CMyComboBoxEx::~CMyComboBoxEx()
 }
 
 BEGIN_MESSAGE_MAP(CMyComboBoxEx, CComboBoxEx)
-	//{{AFX_MSG_MAP(CMyComboBoxEx)
-	ON_CONTROL_REFLECT(CBN_SELENDOK, OnSelendok)
-	//}}AFX_MSG_MAP
+//{{AFX_MSG_MAP(CMyComboBoxEx)
+ON_CONTROL_REFLECT(CBN_SELENDOK, OnSelendok)
+//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 void CMyComboBoxEx::OnSelendok()
@@ -85,17 +85,17 @@ BOOL CMyComboBoxEx::PreTranslateMessage(MSG* pMsg)
 
 IMPLEMENT_DYNCREATE(CMyComboEdit, CEdit)
 BEGIN_MESSAGE_MAP(CMyComboEdit, CEdit)
-	//{{AFX_MSG_MAP(CMyComboEdit)
-	ON_WM_KILLFOCUS()
-	ON_WM_SETFOCUS()
-	ON_WM_CONTEXTMENU()
-	//}}AFX_MSG_MAP
+//{{AFX_MSG_MAP(CMyComboEdit)
+ON_WM_KILLFOCUS()
+ON_WM_SETFOCUS()
+ON_WM_CONTEXTMENU()
+//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-#define ME_SELECTALL    WM_USER + 0x7000
-#define ME_PASTE_GO     WM_USER + 0x7001
+#define ME_SELECTALL WM_USER + 0x7000
+#define ME_PASTE_GO WM_USER + 0x7001
 #define ME_PASTE_SEARCH WM_USER + 0x7002
-#define ME_GO			WM_USER + 0x7004
-#define ME_SEARCH		WM_USER + 0x7008
+#define ME_GO WM_USER + 0x7004
+#define ME_SEARCH WM_USER + 0x7008
 
 ///////////////////////////////////////////////////////////////////////////////
 void CMyComboEdit::OnContextMenu(CWnd* pWnd, CPoint point)
@@ -217,9 +217,9 @@ CIconEdit::~CIconEdit()
 }
 
 BEGIN_MESSAGE_MAP(CIconEdit, CEdit)
-	ON_MESSAGE(WM_SETFONT, OnSetFont)
-	ON_WM_SIZE()
-	ON_WM_CONTEXTMENU()
+ON_MESSAGE(WM_SETFONT, OnSetFont)
+ON_WM_SIZE()
+ON_WM_CONTEXTMENU()
 END_MESSAGE_MAP()
 
 void CIconEdit::PreSubclassWindow()
@@ -421,8 +421,8 @@ CIconWnd::~CIconWnd()
 IMPLEMENT_DYNCREATE(CIconWnd, CStatic)
 
 BEGIN_MESSAGE_MAP(CIconWnd, CStatic)
-	ON_WM_PAINT()
-	ON_WM_ERASEBKGND()
+ON_WM_PAINT()
+ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

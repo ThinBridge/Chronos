@@ -551,9 +551,7 @@ public:
 			{
 				strFileNameTemp = wfd.cFileName;
 				FileExt = strFileNameTemp.Mid(strFileNameTemp.ReverseFind('.'));
-				if (FileExt.CompareNoCase(_T(".url")) == 0
-				|| FileExt.CompareNoCase(_T(".html")) == 0
-				|| FileExt.CompareNoCase(_T(".htm")) ==0)
+				if (FileExt.CompareNoCase(_T(".url")) == 0 || FileExt.CompareNoCase(_T(".html")) == 0 || FileExt.CompareNoCase(_T(".htm")) == 0)
 				{
 					URLPATH = strPath + wfd.cFileName;
 					GetInternetShortcutUrl(URLPATH, URLString);

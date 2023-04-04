@@ -32,15 +32,17 @@ private:
 	CString strFmt;
 };
 #define PROC_TIME(name) CProcessingTimeMon CPTM##name(_T(#name));
-#define PROC_TIME_S(name){CProcessingTimeMon CPTM##name(_T(#name));
-#define PROC_TIME_E(name)}
+#define PROC_TIME_S(name) \
+	{                 \
+		CProcessingTimeMon CPTM##name(_T(#name));
+#define PROC_TIME_E(name) }
 
-#pragma warning( disable: 4996 )
+#pragma warning(disable : 4996)
 
 #define WM_NEWINSTANCE WM_USER + 16
 #define WM_ACTIVE_HEAD WM_USER + 40
 #define WM_ACTIVE_TAIL WM_USER + 44
-#define WM_SAVE_WND_M  WM_USER + 48
+#define WM_SAVE_WND_M WM_USER + 48
 #define WM_AUTH_DBL WM_USER + 56
 #define WM_ACTIVE_FRM WM_USER + 60
 
@@ -83,38 +85,38 @@ typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
 #define DEBUG_LOG_LEVEL_OUTPUT_NO_FILE 1
 #define DEBUG_LOG_LEVEL_OUTPUT_URL 2
 
-#define DEBUG_LOG_TYPE_GE	 0 //一般情報
-#define DEBUG_LOG_TYPE_DE	 1 //詳細情報
-#define DEBUG_LOG_TYPE_URL	 2 //URL情報
-#define DEBUG_LOG_TYPE_TR	 3 //Browser動作情報
-#define DEBUG_LOG_TYPE_CL	 4 //Close処理関連情報
-#define DEBUG_LOG_TYPE_JS	 5 //Javascript関連情報
-#define DEBUG_LOG_TYPE_EX	 6 //例外処理関連情報
-#define DEBUG_LOG_TYPE_AC	 7 //操作アクション情報
+#define DEBUG_LOG_TYPE_GE 0  //一般情報
+#define DEBUG_LOG_TYPE_DE 1  //詳細情報
+#define DEBUG_LOG_TYPE_URL 2 //URL情報
+#define DEBUG_LOG_TYPE_TR 3  //Browser動作情報
+#define DEBUG_LOG_TYPE_CL 4  //Close処理関連情報
+#define DEBUG_LOG_TYPE_JS 5  //Javascript関連情報
+#define DEBUG_LOG_TYPE_EX 6  //例外処理関連情報
+#define DEBUG_LOG_TYPE_AC 7  //操作アクション情報
 
 //IE設定:0
 //プロキシ無し(直接):1
 //手動設定:2
-#define CSG_PROXY_IE			0
-#define CSG_PROXY_NA			1
-#define CSG_PROXY_TF			2
+#define CSG_PROXY_IE 0
+#define CSG_PROXY_NA 1
+#define CSG_PROXY_TF 2
 
 //VirtualEnv
-#define VE_NA               0
-#define VE_THINAPP          1
-#define VE_TURBO            2
+#define VE_NA 0
+#define VE_THINAPP 1
+#define VE_TURBO 2
 
 //RDS
-#define RDS_NA               0
-#define RDS_RDP              1
-#define RDS_VMWARE           2
-#define RDS_CITRIX           3
+#define RDS_NA 0
+#define RDS_RDP 1
+#define RDS_VMWARE 2
+#define RDS_CITRIX 3
 
 #define TF_ALLOW 0
 #define TF_DENY 1
 
 static TCHAR sDEBUG_LOG_TYPE[][4] =
-{
+    {
 	_T("GE"),
 	_T("DE"),
 	_T("URL"),
@@ -127,7 +129,7 @@ static TCHAR sDEBUG_LOG_TYPE[][4] =
 
 ///////////////////////////////////////////////////////////////////
 static TCHAR DEF_URLS[][9] =
-{
+    {
 	_T("http://"),
 	_T("https://"),
 	_T("about:"),
@@ -136,31 +138,31 @@ static TCHAR DEF_URLS[][9] =
 	_T("chrome:"),
 };
 static TCHAR DEF_FILE[][8] =
-{
+    {
 	_T("file://"),
 	_T("\\\\"),
 };
 
 static TCHAR DEF_SCRIPT[][11] =
-{
+    {
 	_T("javascript"),
 	_T("script"),
 };
 
 static TCHAR DEF_ETC_PROTOCOLS[][13] =
-{
+    {
 	_T("mailto:"),
 	_T("vmware-view:"),
 	_T("notes:"),
 };
 
-#define KEY_COMB_SHIFT		0x00000001
-#define KEY_COMB_CTRL		0x00000010
-#define KEY_COMB_ALT		0x00000100
-#define KEY_COMB_LEFT		0x00001000
-#define KEY_COMB_UP			0x00010000
-#define KEY_COMB_RIGHT		0x00100000
-#define KEY_COMB_DOWN		0x01000000
+#define KEY_COMB_SHIFT 0x00000001
+#define KEY_COMB_CTRL 0x00000010
+#define KEY_COMB_ALT 0x00000100
+#define KEY_COMB_LEFT 0x00001000
+#define KEY_COMB_UP 0x00010000
+#define KEY_COMB_RIGHT 0x00100000
+#define KEY_COMB_DOWN 0x01000000
 
 // ファイル時間から64ビット整数に変換
 static ULONGLONG getTimeInt64(LPFILETIME ftTime)
@@ -288,7 +290,7 @@ namespace SBUtil
 
 	};
 
-	static inline void Split(CStringArray *pstrArray, LPCTSTR szTarget, LPCTSTR szDelimiter)
+	static inline void Split(CStringArray* pstrArray, LPCTSTR szTarget, LPCTSTR szDelimiter)
 	{
 		if (!szTarget)
 			return;
@@ -453,7 +455,7 @@ namespace SBUtil
 		return strRet;
 	}
 
-	static void GetDivChar(LPCTSTR str, int size, CString &strRet, BOOL bAppend = TRUE)
+	static void GetDivChar(LPCTSTR str, int size, CString& strRet, BOOL bAppend = TRUE)
 	{
 		strRet = str;
 		CString str1 = str;
@@ -749,7 +751,7 @@ namespace SBUtil
 		PROCESS_BASIC_INFORMATION pbi = {0};
 		ULONG len = 0;
 		NTSTATUS status = NtQueryInformationProcess(
-			hProcess, ProcessBasicInformation, &pbi, sizeof(pbi), &len);
+		    hProcess, ProcessBasicInformation, &pbi, sizeof(pbi), &len);
 		SetLastError(RtlNtStatusToDosError(status));
 
 		if (NT_ERROR(status) || !pbi.PebBaseAddress)
@@ -1850,71 +1852,71 @@ public:
 
 		//全般設定
 		strRet += EXTVAL(EnableMultipleInstance)
-		strRet += EXTVAL(EnableMemcache)
-		strRet += EXTVAL(EnableCrashRecovery)
-		strRet += EXTVAL(KeyCombination)
+		    strRet += EXTVAL(EnableMemcache)
+			strRet += EXTVAL(EnableCrashRecovery)
+			    strRet += EXTVAL(KeyCombination)
 
-		//画面表示設定
-		strRet += EXTVAL(EnableTab)
-		strRet += EXTVAL(EnablePDFExtension)
-		strRet += EXTVAL(EnableGPURendering)
-		strRet += EXTVAL(EnableRebar)
-		strRet += EXTVAL(ShowLogo)
-		strRet += EXTVAL(EnableStatusbar)
-		strRet += EXTVAL(WideMargin)
-		strRet += EXTVAL(HeightMargin)
-		strRet += EXTVAL(DefaultZoomSize)
+		    //画面表示設定
+		    strRet += EXTVAL(EnableTab)
+			strRet += EXTVAL(EnablePDFExtension)
+			    strRet += EXTVAL(EnableGPURendering)
+				strRet += EXTVAL(EnableRebar)
+				    strRet += EXTVAL(ShowLogo)
+					strRet += EXTVAL(EnableStatusbar)
+					    strRet += EXTVAL(WideMargin)
+						strRet += EXTVAL(HeightMargin)
+						    strRet += EXTVAL(DefaultZoomSize)
 
-		//起動関連設定
-		strRet += EXTVAL(StartURL)
-		strRet += EXTVAL(EnforceInitParam)
-		strRet += EXTVAL(InitMessage);
+		    //起動関連設定
+		    strRet += EXTVAL(StartURL)
+			strRet += EXTVAL(EnforceInitParam)
+			    strRet += EXTVAL(InitMessage);
 
 		//インターネット接続設定
 		strRet += EXTVAL(ProxyType)
-		strRet += EXTVAL(ProxyAddress)
-		strRet += EXTVAL(ProxyBypassAddress)
-		strRet += EXTVAL(UserAgentAppendStr)
+		    strRet += EXTVAL(ProxyAddress)
+			strRet += EXTVAL(ProxyBypassAddress)
+			    strRet += EXTVAL(UserAgentAppendStr)
 
-		//制限設定
-		strRet += EXTVAL(EnableDownloadRestriction)
-		strRet += EXTVAL(EnableUploadRestriction)
-		strRet += EXTVAL(EnableDeleteCache)
-		strRet += EXTVAL(EnableRunningTime)
-		strRet += EXTVAL(RunningLimitTime)
-		strRet += EXTVAL(MemoryUsageLimit)
-		strRet += EXTVAL(WindowCountLimit)
+		    //制限設定
+		    strRet += EXTVAL(EnableDownloadRestriction)
+			strRet += EXTVAL(EnableUploadRestriction)
+			    strRet += EXTVAL(EnableDeleteCache)
+				strRet += EXTVAL(EnableRunningTime)
+				    strRet += EXTVAL(RunningLimitTime)
+					strRet += EXTVAL(MemoryUsageLimit)
+					    strRet += EXTVAL(WindowCountLimit)
 
-		//リダイレクト設定
-		strRet += EXTVAL(EnableURLRedirect)
-		strRet += EXTVAL(RedirectMsgTimeout)
-		strRet += EXTVAL(CustomBrowser)
-		strRet += EXTVAL(CustomBrowser2)
-		strRet += EXTVAL(CustomBrowser3)
-		strRet += EXTVAL(CustomBrowser4)
-		strRet += EXTVAL(CustomBrowser5)
+		    //リダイレクト設定
+		    strRet += EXTVAL(EnableURLRedirect)
+			strRet += EXTVAL(RedirectMsgTimeout)
+			    strRet += EXTVAL(CustomBrowser)
+				strRet += EXTVAL(CustomBrowser2)
+				    strRet += EXTVAL(CustomBrowser3)
+					strRet += EXTVAL(CustomBrowser4)
+					    strRet += EXTVAL(CustomBrowser5)
 
-		//URLフィルター設定
-		strRet += EXTVAL(EnableURLFilter)
+		    //URLフィルター設定
+		    strRet += EXTVAL(EnableURLFilter)
 
-		//CustomScript設定
-		strRet += EXTVAL(EnableCustomScript)
+		    //CustomScript設定
+		    strRet += EXTVAL(EnableCustomScript)
 
-		//ログ出力設定
-		strRet += EXTVAL(EnableAdvancedLogMode)
-		strRet += EXTVAL(EnableAdvancedLogVerboseMode)
-		strRet += EXTVAL(AdvancedLogLevel)
-		strRet += EXTVAL(EnableLogging)
-		strRet += EXTVAL(EnableUploadLogging)
-		strRet += EXTVAL(EnableDownloadLogging)
-		strRet += EXTVAL(EnableBrowsingLogging)
-		strRet += EXTVAL(EnableAccessAllLogging)
-		strRet += EXTVAL(LogServerURL)
-		strRet += EXTVAL(RequestHeader)
-		strRet += EXTVAL(LogMethod)
+		    //ログ出力設定
+		    strRet += EXTVAL(EnableAdvancedLogMode)
+			strRet += EXTVAL(EnableAdvancedLogVerboseMode)
+			    strRet += EXTVAL(AdvancedLogLevel)
+				strRet += EXTVAL(EnableLogging)
+				    strRet += EXTVAL(EnableUploadLogging)
+					strRet += EXTVAL(EnableDownloadLogging)
+					    strRet += EXTVAL(EnableBrowsingLogging)
+						strRet += EXTVAL(EnableAccessAllLogging)
+						    strRet += EXTVAL(LogServerURL)
+							strRet += EXTVAL(RequestHeader)
+							    strRet += EXTVAL(LogMethod)
 
-		//ChFiler---------------------------------
-		strRet += EXTVAL(RootPath);
+		    //ChFiler---------------------------------
+		    strRet += EXTVAL(RootPath);
 		strRet += EXTVAL(UploadBasePath);
 		strRet += EXTVAL(ExtFilter);
 		strRet += EXTVAL(EnableOpendOp);
@@ -1944,49 +1946,55 @@ public:
 
 public:
 	//Is Functions Getter##########################################################
-	inline BOOL IsAdvancedLogMode()				{return EnableAdvancedLogMode;}
-	inline BOOL IsAdvancedLogVerboseMode()				{return EnableAdvancedLogVerboseMode;}
-	inline BOOL IsShowLogo()					{return ShowLogo;}
-	inline BOOL IsEnableTab()					{return EnableTab; }
-	inline BOOL IsEnablePDFExtension()			{return EnablePDFExtension; }
-	inline BOOL IsEnableMemcache()				{return EnableMemcache; }
-	inline BOOL IsGPURendering()				{return EnableGPURendering;}
-	inline BOOL IsCrashRecovery()				{return EnableCrashRecovery;}
-	inline BOOL IsMultipleInstance()			{return EnableMultipleInstance;}
-	inline int GetProxyType()					{return ProxyType;}
-	inline CString GetProxyAddress()			{return ProxyAddress;}
-	inline CString GetProxyBypassAddress()		{return ProxyBypassAddress;}
-	inline CString GetUserAgentAppendStr()		{return UserAgentAppendStr;}
-	inline BOOL IsRebar()						{return EnableRebar;}
-	inline BOOL IsStatusbar()					{return EnableStatusbar;}
-	inline int GetAdvancedLogLevel()			{return AdvancedLogLevel;}
-	inline int GetWideMargin()					{return WideMargin;}
-	inline int GetHeightMargin()				{return HeightMargin;}
-	inline int GetZoomSize()					{return DefaultZoomSize;}
-	inline int GetRedirectMsgTimeout()			{return RedirectMsgTimeout;}
-	inline int GetKeyCombination()				{return KeyCombination;}
+	inline BOOL IsAdvancedLogMode() { return EnableAdvancedLogMode; }
+	inline BOOL IsAdvancedLogVerboseMode() { return EnableAdvancedLogVerboseMode; }
+	inline BOOL IsShowLogo() { return ShowLogo; }
+	inline BOOL IsEnableTab() { return EnableTab; }
+	inline BOOL IsEnablePDFExtension() { return EnablePDFExtension; }
+	inline BOOL IsEnableMemcache() { return EnableMemcache; }
+	inline BOOL IsGPURendering() { return EnableGPURendering; }
+	inline BOOL IsCrashRecovery() { return EnableCrashRecovery; }
+	inline BOOL IsMultipleInstance() { return EnableMultipleInstance; }
+	inline int GetProxyType() { return ProxyType; }
+	inline CString GetProxyAddress() { return ProxyAddress; }
+	inline CString GetProxyBypassAddress() { return ProxyBypassAddress; }
+	inline CString GetUserAgentAppendStr() { return UserAgentAppendStr; }
+	inline BOOL IsRebar() { return EnableRebar; }
+	inline BOOL IsStatusbar() { return EnableStatusbar; }
+	inline int GetAdvancedLogLevel() { return AdvancedLogLevel; }
+	inline int GetWideMargin() { return WideMargin; }
+	inline int GetHeightMargin() { return HeightMargin; }
+	inline int GetZoomSize() { return DefaultZoomSize; }
+	inline int GetRedirectMsgTimeout() { return RedirectMsgTimeout; }
+	inline int GetKeyCombination() { return KeyCombination; }
 
-	inline CString GetStartURL()				{if(StartURL.IsEmpty()) return _T("about:blank");else return StartURL;}
-	inline CString GetEnforceInitParam()		{return EnforceInitParam;}
-	inline CString GetCustomBrowser()			{return CustomBrowser;}
-	inline CString GetCustomBrowser2()			{return CustomBrowser2;}
-	inline CString GetCustomBrowser3()			{return CustomBrowser3;}
-	inline CString GetCustomBrowser4()			{return CustomBrowser4;}
-	inline CString GetCustomBrowser5()			{return CustomBrowser5;}
-	inline CString GetInitMessage()				{return InitMessage;}
+	inline CString GetStartURL()
+	{
+		if (StartURL.IsEmpty())
+			return _T("about:blank");
+		else
+			return StartURL;
+	}
+	inline CString GetEnforceInitParam() { return EnforceInitParam; }
+	inline CString GetCustomBrowser() { return CustomBrowser; }
+	inline CString GetCustomBrowser2() { return CustomBrowser2; }
+	inline CString GetCustomBrowser3() { return CustomBrowser3; }
+	inline CString GetCustomBrowser4() { return CustomBrowser4; }
+	inline CString GetCustomBrowser5() { return CustomBrowser5; }
+	inline CString GetInitMessage() { return InitMessage; }
 
-	inline int GetMemoryUsageLimit()			{return MemoryUsageLimit;}
-	inline int GetWindowCountLimit()			{return WindowCountLimit;}
+	inline int GetMemoryUsageLimit() { return MemoryUsageLimit; }
+	inline int GetWindowCountLimit() { return WindowCountLimit; }
 
-	inline BOOL IsEnableDownloadRestriction()	{return EnableDownloadRestriction;}
-	inline BOOL IsEnableUploadRestriction()		{return EnableUploadRestriction;}
-	inline BOOL IsEnableDeleteCache()			{return EnableDeleteCache; }
-	inline BOOL IsEnableRunningTime()			{return EnableRunningTime;}
-	inline int GetRunningLimitTime()			{return RunningLimitTime;}
+	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
+	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
+	inline BOOL IsEnableDeleteCache() { return EnableDeleteCache; }
+	inline BOOL IsEnableRunningTime() { return EnableRunningTime; }
+	inline int GetRunningLimitTime() { return RunningLimitTime; }
 
-	inline BOOL IsEnableURLRedirect()			{return EnableURLRedirect;}
-	inline BOOL IsEnableURLFilter()				{return EnableURLFilter;}
-	inline BOOL IsEnableCustomScript()          {return EnableCustomScript;}
+	inline BOOL IsEnableURLRedirect() { return EnableURLRedirect; }
+	inline BOOL IsEnableURLFilter() { return EnableURLFilter; }
+	inline BOOL IsEnableCustomScript() { return EnableCustomScript; }
 
 	inline BOOL IsEnableLogging() { return EnableLogging; }
 	inline BOOL IsEnableUploadLogging() { return EnableUploadLogging; }
@@ -2027,29 +2035,29 @@ public:
 	inline int GetTASK_LIST_MODE_DETAIL() { return TASK_LIST_MODE_DETAIL; }
 
 	//Set Functions Setter##########################################################
-	inline void SetAdvancedLogMode(DWORD dVal)				{ EnableAdvancedLogMode = dVal ? 1 : 0; }
-	inline void SetAdvancedLogVerboseMode(DWORD dVal)				{ EnableAdvancedLogVerboseMode = dVal ? 1 : 0; }
-	inline void SetShowLogo(DWORD dVal)						{ ShowLogo = dVal ? 1 : 0; }
-	inline void SetEnableTab(DWORD dVal)					{ EnableTab = dVal ? 1 : 0; }
-	inline void SetEnablePDFExtension(DWORD dVal)			{ EnablePDFExtension = dVal ? 1 : 0; }
-	inline void SetEnableMemcache(DWORD dVal)				{ EnableMemcache = dVal ? 1 : 0; }
-	inline void SetGPURendering(DWORD dVal)					{ EnableGPURendering = dVal ? 1 : 0; }
-	inline void SetCrashRecovery(DWORD dVal)				{ EnableCrashRecovery = dVal ? 1 : 0; }
-	inline void SetMultipleInstance(DWORD dVal)				{ EnableMultipleInstance = dVal ? 1 : 0; }
-	inline void SetProxyType(DWORD dVal)					{ ProxyType = dVal; }
-	inline void SetProxyAddress(LPCTSTR str)				{ ProxyAddress = str; }
-	inline void SetProxyBypassAddress(LPCTSTR str)			{ ProxyBypassAddress = str; }
-	inline void SetUserAgentAppendStr(LPCTSTR str)			{ UserAgentAppendStr = str; }
-	inline void SetRebar(DWORD dVal)						{ EnableRebar = dVal ? 1 : 0; }
-	inline void SetStatusbar(DWORD dVal)					{ EnableStatusbar = dVal ? 1 : 0; }
-	inline void SetAdvancedLogLevel(DWORD dVal)				{ AdvancedLogLevel = dVal; }
-	inline void SetWideMargin(DWORD dVal)					{ WideMargin = dVal; }
-	inline void SetHeightMargin(DWORD dVal)					{ HeightMargin = dVal; }
-	inline void SetZoomSize(DWORD dVal)						{ DefaultZoomSize = dVal; }
-	inline void SetRedirectMsgTimeout(DWORD dVal)			{ RedirectMsgTimeout = dVal; }
+	inline void SetAdvancedLogMode(DWORD dVal) { EnableAdvancedLogMode = dVal ? 1 : 0; }
+	inline void SetAdvancedLogVerboseMode(DWORD dVal) { EnableAdvancedLogVerboseMode = dVal ? 1 : 0; }
+	inline void SetShowLogo(DWORD dVal) { ShowLogo = dVal ? 1 : 0; }
+	inline void SetEnableTab(DWORD dVal) { EnableTab = dVal ? 1 : 0; }
+	inline void SetEnablePDFExtension(DWORD dVal) { EnablePDFExtension = dVal ? 1 : 0; }
+	inline void SetEnableMemcache(DWORD dVal) { EnableMemcache = dVal ? 1 : 0; }
+	inline void SetGPURendering(DWORD dVal) { EnableGPURendering = dVal ? 1 : 0; }
+	inline void SetCrashRecovery(DWORD dVal) { EnableCrashRecovery = dVal ? 1 : 0; }
+	inline void SetMultipleInstance(DWORD dVal) { EnableMultipleInstance = dVal ? 1 : 0; }
+	inline void SetProxyType(DWORD dVal) { ProxyType = dVal; }
+	inline void SetProxyAddress(LPCTSTR str) { ProxyAddress = str; }
+	inline void SetProxyBypassAddress(LPCTSTR str) { ProxyBypassAddress = str; }
+	inline void SetUserAgentAppendStr(LPCTSTR str) { UserAgentAppendStr = str; }
+	inline void SetRebar(DWORD dVal) { EnableRebar = dVal ? 1 : 0; }
+	inline void SetStatusbar(DWORD dVal) { EnableStatusbar = dVal ? 1 : 0; }
+	inline void SetAdvancedLogLevel(DWORD dVal) { AdvancedLogLevel = dVal; }
+	inline void SetWideMargin(DWORD dVal) { WideMargin = dVal; }
+	inline void SetHeightMargin(DWORD dVal) { HeightMargin = dVal; }
+	inline void SetZoomSize(DWORD dVal) { DefaultZoomSize = dVal; }
+	inline void SetRedirectMsgTimeout(DWORD dVal) { RedirectMsgTimeout = dVal; }
 	inline void SetKeyCombination(DWORD dVal)
 	{
-		KeyCombination=dVal;
+		KeyCombination = dVal;
 		//制限時は、TaskMgrの詳細表示は無効
 		if (KeyCombination != 0)
 		{
@@ -2057,27 +2065,27 @@ public:
 		}
 	}
 
-	inline void SetMemoryUsageLimit(DWORD dVal)				{MemoryUsageLimit=dVal;}
-	inline void SetWindowCountLimit(DWORD dVal)				{WindowCountLimit=dVal;}
+	inline void SetMemoryUsageLimit(DWORD dVal) { MemoryUsageLimit = dVal; }
+	inline void SetWindowCountLimit(DWORD dVal) { WindowCountLimit = dVal; }
 
-	inline void SetStartURL(LPCTSTR str)					{ StartURL =str;}
-	inline void SetEnforceInitParam(LPCTSTR str)			{EnforceInitParam=str;}
-	inline void SetCustomBrowser(LPCTSTR str)				{CustomBrowser=str;}
-	inline void SetCustomBrowser2(LPCTSTR str)				{CustomBrowser2=str;}
-	inline void SetCustomBrowser3(LPCTSTR str)				{CustomBrowser3=str;}
-	inline void SetCustomBrowser4(LPCTSTR str)				{CustomBrowser4=str;}
-	inline void SetCustomBrowser5(LPCTSTR str)				{CustomBrowser5=str;}
-	inline void SetInitMessage(LPCTSTR str)					{InitMessage=str;}
+	inline void SetStartURL(LPCTSTR str) { StartURL = str; }
+	inline void SetEnforceInitParam(LPCTSTR str) { EnforceInitParam = str; }
+	inline void SetCustomBrowser(LPCTSTR str) { CustomBrowser = str; }
+	inline void SetCustomBrowser2(LPCTSTR str) { CustomBrowser2 = str; }
+	inline void SetCustomBrowser3(LPCTSTR str) { CustomBrowser3 = str; }
+	inline void SetCustomBrowser4(LPCTSTR str) { CustomBrowser4 = str; }
+	inline void SetCustomBrowser5(LPCTSTR str) { CustomBrowser5 = str; }
+	inline void SetInitMessage(LPCTSTR str) { InitMessage = str; }
 
-	inline void SetEnableDownloadRestriction(DWORD dVal)	{EnableDownloadRestriction=dVal?1:0;}
-	inline void SetEnableUploadRestriction(DWORD dVal)		{EnableUploadRestriction=dVal?1:0;}
-	inline void SetEnableDeleteCache(DWORD dVal)			{EnableDeleteCache=dVal?1:0;}
-	inline void SetEnableRunningTime(DWORD dVal)			{EnableRunningTime=dVal?1:0;}
-	inline void SetRunningLimitTime(DWORD dVal)				{RunningLimitTime=dVal;}
+	inline void SetEnableDownloadRestriction(DWORD dVal) { EnableDownloadRestriction = dVal ? 1 : 0; }
+	inline void SetEnableUploadRestriction(DWORD dVal) { EnableUploadRestriction = dVal ? 1 : 0; }
+	inline void SetEnableDeleteCache(DWORD dVal) { EnableDeleteCache = dVal ? 1 : 0; }
+	inline void SetEnableRunningTime(DWORD dVal) { EnableRunningTime = dVal ? 1 : 0; }
+	inline void SetRunningLimitTime(DWORD dVal) { RunningLimitTime = dVal; }
 
-	inline void SetEnableURLRedirect(DWORD dVal)			{EnableURLRedirect=dVal?1:0;}
-	inline void SetEnableURLFilter(DWORD dVal)				{EnableURLFilter=dVal?1:0;}
-	inline void SetEnableCustomScript(DWORD dVal)           {EnableCustomScript=dVal?1:0;}
+	inline void SetEnableURLRedirect(DWORD dVal) { EnableURLRedirect = dVal ? 1 : 0; }
+	inline void SetEnableURLFilter(DWORD dVal) { EnableURLFilter = dVal ? 1 : 0; }
+	inline void SetEnableCustomScript(DWORD dVal) { EnableCustomScript = dVal ? 1 : 0; }
 
 	inline void SetEnableLogging(DWORD dVal)
 	{
@@ -2334,34 +2342,34 @@ public:
 };
 
 static int gInfoDlgList[] = {
-	ID_INFO_DLG_LIST_HIDE,
-	ID_INFO_DLG_LIST_0_5,
-	ID_INFO_DLG_LIST_1_0,
-	ID_INFO_DLG_LIST_1_5,
-	ID_INFO_DLG_LIST_2_0,
-	ID_INFO_DLG_LIST_2_5,
-	ID_INFO_DLG_LIST_3_0,
-	ID_INFO_DLG_LIST_3_5,
-	ID_INFO_DLG_LIST_4_0,
-	ID_INFO_DLG_LIST_4_5,
-	ID_INFO_DLG_LIST_5_0,
-	ID_INFO_DLG_LIST_5_5,
-	ID_INFO_DLG_LIST_6_0,
-	ID_INFO_DLG_LIST_6_5,
-	ID_INFO_DLG_LIST_7_0,
-	ID_INFO_DLG_LIST_7_5,
-	ID_INFO_DLG_LIST_8_0,
-	ID_INFO_DLG_LIST_8_5,
-	ID_INFO_DLG_LIST_9_0,
-	ID_INFO_DLG_LIST_9_5,
-	ID_INFO_DLG_LIST_10_0,
+    ID_INFO_DLG_LIST_HIDE,
+    ID_INFO_DLG_LIST_0_5,
+    ID_INFO_DLG_LIST_1_0,
+    ID_INFO_DLG_LIST_1_5,
+    ID_INFO_DLG_LIST_2_0,
+    ID_INFO_DLG_LIST_2_5,
+    ID_INFO_DLG_LIST_3_0,
+    ID_INFO_DLG_LIST_3_5,
+    ID_INFO_DLG_LIST_4_0,
+    ID_INFO_DLG_LIST_4_5,
+    ID_INFO_DLG_LIST_5_0,
+    ID_INFO_DLG_LIST_5_5,
+    ID_INFO_DLG_LIST_6_0,
+    ID_INFO_DLG_LIST_6_5,
+    ID_INFO_DLG_LIST_7_0,
+    ID_INFO_DLG_LIST_7_5,
+    ID_INFO_DLG_LIST_8_0,
+    ID_INFO_DLG_LIST_8_5,
+    ID_INFO_DLG_LIST_9_0,
+    ID_INFO_DLG_LIST_9_5,
+    ID_INFO_DLG_LIST_10_0,
 };
 #define InfoDlgListMaxCnt 21
 
 static int gInfoOpenOp[] = {
-	ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED,
-	ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED,
-	ID_INFO_OPEN_OPTION_SHOW_TRANSFER,
+    ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED,
+    ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED,
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER,
 };
 #define InfoOpenOpMaxCnt 3
 
@@ -2860,14 +2868,9 @@ public:
 			for (int i = 0; i < nLen; ++i)
 			{
 				cText = m_pstrData_UTF8[i];
-				if((cText >= '0' && cText <= '9')
-				 ||(cText >= 'a' && cText <= 'z')
-				 ||(cText >= 'A' && cText <= 'Z')
-				 ||	cText == '-' || cText == '_'  || cText == '.' || cText == '!' || cText == '~'
-				 || cText == '*' || cText == '\'' || cText == '(' || cText == ')'
-				)
+				if ((cText >= '0' && cText <= '9') || (cText >= 'a' && cText <= 'z') || (cText >= 'A' && cText <= 'Z') || cText == '-' || cText == '_' || cText == '.' || cText == '!' || cText == '~' || cText == '*' || cText == '\'' || cText == '(' || cText == ')')
 				{
-					memcpy(m_ptrDataURLEncode+iPos,&cText,1);
+					memcpy(m_ptrDataURLEncode + iPos, &cText, 1);
 					iPos++;
 				}
 				else if (cText == ' ')
@@ -3028,16 +3031,18 @@ private:
 
 public:
 	CMyObject()
-		: m_uRef(1){};
+	    : m_uRef(1){};
 	~CMyObject(){};
 
 	//IUnknown
-	STDMETHODIMP_(ULONG) AddRef()
+	STDMETHODIMP_(ULONG)
+	AddRef()
 	{
 		return InterlockedIncrement(&m_uRef);
 	};
 
-	STDMETHODIMP_(ULONG) Release()
+	STDMETHODIMP_(ULONG)
+	Release()
 	{
 		ULONG ulVal = InterlockedDecrement(&m_uRef);
 		if (ulVal > 0)
@@ -3136,11 +3141,13 @@ public:
 	virtual ~CActiveScriptSite(){};
 
 	//IUnknown
-	STDMETHODIMP_(ULONG) AddRef()
+	STDMETHODIMP_(ULONG)
+	AddRef()
 	{
 		return InterlockedIncrement(&m_uRef);
 	};
-	STDMETHODIMP_(ULONG) Release()
+	STDMETHODIMP_(ULONG)
+	Release()
 	{
 		ULONG ulVal = InterlockedDecrement(&m_uRef);
 		if (ulVal > 0)
@@ -3223,8 +3230,8 @@ public:
 	}
 };
 //マクロ定義
-#define CREATEINSTANCE(C,I,P) (SUCCEEDED(CoCreateInstance((C),NULL,CLSCTX_INPROC_SERVER,(I),(reinterpret_cast<LPVOID*>(P)))))
-#define QI(X,Y,Z) ((X)->QueryInterface((Y),(reinterpret_cast<LPVOID*>(Z))))
+#define CREATEINSTANCE(C, I, P) (SUCCEEDED(CoCreateInstance((C), NULL, CLSCTX_INPROC_SERVER, (I), (reinterpret_cast<LPVOID*>(P)))))
+#define QI(X, Y, Z) ((X)->QueryInterface((Y), (reinterpret_cast<LPVOID*>(Z))))
 #define URLBUFFER_SIZE 4096
 
 class CScriptHost
@@ -3330,13 +3337,7 @@ public:
 				TB_Global_URL_EXTRAINFO = urlcomponents.lpszExtraInfo;
 				TB_Global_URL_EXTRAINFO.Replace(_T("\""), _T("\"\""));
 
-				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n")
-					, TB_Global_SCHME
-					, TB_Global_HOSTNAME
-					, TB_Global_PORT
-					, TB_Global_URL_PATH
-					, TB_Global_URL_EXTRAINFO
-				);
+				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"), TB_Global_SCHME, TB_Global_HOSTNAME, TB_Global_PORT, TB_Global_URL_PATH, TB_Global_URL_EXTRAINFO);
 
 				CStringW vbGlobalSettings;
 				vbGlobalSettings = vbGlobalURL;
