@@ -41,14 +41,13 @@ public:
 		}
 	}
 
-	HRESULT Initialize() 
+	HRESULT Initialize()
 	{
 		HRESULT hresult = S_OK;
 		CString strPath;
 		if (theApp.IsSGMode())
 		{
 			CString strRootPath;
-			//UploadTabを使う場合は、B:\\Uploadにする
 			if (theApp.m_AppSettings.IsShowUploadTab())
 			{
 				strRootPath = theApp.m_AppSettings.GetRootPath();
@@ -62,7 +61,6 @@ public:
 					strRootPath = _T("B:\\");
 				}
 			}
-			//UploadTabを使わない場合は、O:\\にする
 			else
 			{
 				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
@@ -75,19 +73,12 @@ public:
 			strPath = strRootPath;
 
 			FILEOPENDIALOGOPTIONS option = 0;
-			// フック関数を無効
 			option &= ~OFN_ENABLEHOOK;
-			//ダイアログテンプレート無効
 			option &= ~OFN_ENABLETEMPLATE;
-			//Longファイル名を強制
 			option |= OFN_LONGNAMES;
-			//ネットワークボタンを隠す
 			option |= OFN_NONETWORKBUTTON;
-			//最近使ったファイルを追加しない
 			option |= OFN_DONTADDTORECENT;
-			//プレースバーを無効
 			option |= OFN_EX_NOPLACESBAR;
-			//ファイルを上書きするかどうか確認するプロンプトを表示
 			option |= OFN_OVERWRITEPROMPT;
 
 			hresult = this->SetOptions(option);
@@ -126,7 +117,7 @@ public:
 			this->SetDefaultFolder(psi);
 		}
 		ILFree(pidl);
-		
+
 		return hresult;
 	}
 
@@ -283,18 +274,19 @@ public:
 	/* [local] */ HRESULT STDMETHODCALLTYPE Show(
 	    /* [annotation][unique][in] */ _In_opt_ HWND hwndOwner)
 	{
-		//呼び出しもとを確認、親の親がNULLだったらChronosの設定画面から
+		//呼び出しもとを確認。親の親がNULLだったらChronosの設定画面からなので無条件で開いて良い。
 		if (!hwndOwner)
 		{
 			return m_originalDialog->Show(hwndOwner);
 		}
+
 		HWND hWindowOwner = GetParent(hwndOwner);
 		HWND hWindowParent = {0};
 		if (hWindowOwner)
 		{
 			hWindowParent = GetParent(hWindowOwner);
 		}
-		//hWindowParentがNULLの場合は、そのまま
+
 		if (!hWindowParent)
 		{
 			return m_originalDialog->Show(hwndOwner);
@@ -313,7 +305,7 @@ public:
 			}
 			return E_ACCESSDENIED;
 		}
-		
+
 		for (;;)
 		{
 			HRESULT hresult = m_originalDialog->Show(hwndOwner);
@@ -323,9 +315,9 @@ public:
 			}
 
 			LPWSTR wstrSelPath;
-			IShellItem *psi;
+			IShellItem* psi;
 			hresult = this->GetResult(&psi);
-			
+
 			if (FAILED(hresult))
 			{
 				return hresult;
@@ -427,28 +419,21 @@ public:
 
 		FILEOPENDIALOGOPTIONS option = 0;
 
-		//フック関数を無効
 		option &= ~OFN_ENABLEHOOK;
-		//ダイアログテンプレート無効
 		option &= ~OFN_ENABLETEMPLATE;
-		//Longファイル名を強制
 		option |= OFN_LONGNAMES;
-		//ネットワークボタンを隠す
 		option |= OFN_NONETWORKBUTTON;
-		//最近使ったファイルを追加しない
 		option |= OFN_DONTADDTORECENT;
-		//プレースバーを無効
 		option |= OFN_EX_NOPLACESBAR;
-		//ファイルを上書きするかどうか確認するプロンプトを表示
 		option |= OFN_OVERWRITEPROMPT;
 
 		return this->SetOptions(option);
 	}
 
-    HRESULT STDMETHODCALLTYPE SetSaveAsItem(
+	HRESULT STDMETHODCALLTYPE SetSaveAsItem(
 	    /* [in] */ __RPC__in_opt IShellItem* psi)
 	{
-	    return m_originalDialog->SetSaveAsItem(psi);
+		return m_originalDialog->SetSaveAsItem(psi);
 	}
 
 	HRESULT STDMETHODCALLTYPE SetProperties(
@@ -477,7 +462,6 @@ public:
 	    /* [unique][in] */ __RPC__in_opt IFileOperationProgressSink* pSink)
 	{
 		return m_originalDialog->ApplyProperties(psi, pStore, hwnd, pSink);
-
 	}
 
 	HRESULT STDMETHODCALLTYPE SetFileTypes(
@@ -620,7 +604,7 @@ public:
 		return m_originalDialog->SetFilter(pFilter);
 	}
 
-	/* [local] */ 
+	/* [local] */
 	HRESULT STDMETHODCALLTYPE Show(
 	    /* [annotation][unique][in] */ _In_opt_ HWND hwndOwner)
 	{
@@ -759,7 +743,7 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 			*ppv = chronosFileOpenDialog;
 		}
 	}
-	else if (rclsid == CLSID_FileSaveDialog)
+	else
 	{
 		CComPtr<IFileSaveDialog> fileSaveDialog;
 		hRet = pORG_CoCreateInstance(
