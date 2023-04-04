@@ -641,7 +641,7 @@ public:
 			}
 
 			LPWSTR wstrSelPath;
-			IShellItem* psi;
+			CComPtr<IShellItem> psi;
 			hresult = this->GetResult(&psi);
 			if (FAILED(hresult))
 			{
