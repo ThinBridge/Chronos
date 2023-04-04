@@ -4,10 +4,10 @@
 #include "afxdialogex.h"
 IMPLEMENT_DYNAMIC(CPrefsStatic, CStatic)
 BEGIN_MESSAGE_MAP(CPrefsStatic, CStatic)
-//{{AFX_MSG_MAP(CPrefsStatic)
-ON_WM_PAINT()
-ON_WM_ERASEBKGND()
-ON_MESSAGE(WM_SETTEXT, OnSetText)
+	//{{AFX_MSG_MAP(CPrefsStatic)
+	ON_WM_PAINT()
+	ON_WM_ERASEBKGND()
+	ON_MESSAGE(WM_SETTEXT, OnSetText)
 //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 void CPrefsStatic::OnPaint()
@@ -183,10 +183,10 @@ void CSettingsDialog::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
-//{{AFX_MSG_MAP(CSettingsDialog)
-ON_NOTIFY(TVN_GETDISPINFO, IDC_TREE_CTRL, OnGetDispInfoTreeCtrl)
-ON_NOTIFY(TVN_SELCHANGED, IDC_TREE_CTRL, OnTreeSelChanged)
-ON_WM_SIZE()
+	//{{AFX_MSG_MAP(CSettingsDialog)
+	ON_NOTIFY(TVN_GETDISPINFO, IDC_TREE_CTRL, OnGetDispInfoTreeCtrl)
+	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE_CTRL, OnTreeSelChanged)
+	ON_WM_SIZE()
 //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -648,13 +648,13 @@ void CDlgSetLog::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetLog, CPropertyPage)
-//{{AFX_MSG_MAP(CDlgSetLog)
-ON_WM_DESTROY()
-ON_BN_CLICKED(IDC_CHECK_ENABLE_LOG, OnEnableLog)
-ON_BN_CLICKED(IDC_BUTTON1, OnBnClickedButton1)
-ON_BN_CLICKED(IDC_CHECK_EnableLogging, OnEnableLogging)
-//}}AFX_MSG_MAP
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	//{{AFX_MSG_MAP(CDlgSetLog)
+	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_CHECK_ENABLE_LOG, OnEnableLog)
+	ON_BN_CLICKED(IDC_BUTTON1, OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_CHECK_EnableLogging, OnEnableLogging)
+	//}}AFX_MSG_MAP
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -866,9 +866,9 @@ void CDlgSetDSP::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetDSP, CPropertyPage)
-ON_WM_DESTROY()
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
-ON_BN_CLICKED(IDC_BUTTON1, &CDlgSetDSP::OnBnClickedButton1)
+	ON_WM_DESTROY()
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_BN_CLICKED(IDC_BUTTON1, &CDlgSetDSP::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 BOOL CDlgSetDSP::OnInitDialog()
@@ -1009,9 +1009,9 @@ void CDlgSetGen::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetGen, CPropertyPage)
-ON_WM_DESTROY()
-ON_BN_CLICKED(IDC_BUTTON1, OnKeyCombiTest)
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_BUTTON1, OnKeyCombiTest)
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 void CDlgSetGen::OnKeyCombiTest()
 {
@@ -1213,15 +1213,15 @@ void CDlgSetSEC::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetSEC, CPropertyPage)
-ON_WM_DESTROY()
-ON_BN_CLICKED(IDC_BUTTON_BROWSE1, &CDlgSetSEC::OnBnClickedBrowse1)
-ON_BN_CLICKED(IDC_BUTTON_BROWSE2, &CDlgSetSEC::OnBnClickedBrowse2)
-ON_BN_CLICKED(IDC_BUTTON_BROWSE3, &CDlgSetSEC::OnBnClickedBrowse3)
-ON_BN_CLICKED(IDC_BUTTON_BROWSE4, &CDlgSetSEC::OnBnClickedBrowse4)
-ON_BN_CLICKED(IDC_BUTTON_BROWSE5, &CDlgSetSEC::OnBnClickedBrowse5)
-ON_BN_CLICKED(IDC_CHECK_EnableZoneFilterScript, &CDlgSetSEC::OnBnClickedScript)
-ON_BN_CLICKED(IDC_BUTTON_SCRIPT_EDIT, &CDlgSetSEC::OnBnClickedScriptEdit)
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_BUTTON_BROWSE1, &CDlgSetSEC::OnBnClickedBrowse1)
+	ON_BN_CLICKED(IDC_BUTTON_BROWSE2, &CDlgSetSEC::OnBnClickedBrowse2)
+	ON_BN_CLICKED(IDC_BUTTON_BROWSE3, &CDlgSetSEC::OnBnClickedBrowse3)
+	ON_BN_CLICKED(IDC_BUTTON_BROWSE4, &CDlgSetSEC::OnBnClickedBrowse4)
+	ON_BN_CLICKED(IDC_BUTTON_BROWSE5, &CDlgSetSEC::OnBnClickedBrowse5)
+	ON_BN_CLICKED(IDC_CHECK_EnableZoneFilterScript, &CDlgSetSEC::OnBnClickedScript)
+	ON_BN_CLICKED(IDC_BUTTON_SCRIPT_EDIT, &CDlgSetSEC::OnBnClickedScriptEdit)
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 void CDlgSetSEC::OnBnClickedScriptEdit()
 {
@@ -1390,8 +1390,8 @@ void CDlgSetINIT::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetINIT, CPropertyPage)
-ON_WM_DESTROY()
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_WM_DESTROY()
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 
 BOOL CDlgSetINIT::OnInitDialog()
@@ -1478,9 +1478,9 @@ void CDlgSetCAP::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetCAP, CPropertyPage)
-ON_WM_DESTROY()
-ON_BN_CLICKED(IDC_Enable_ProcessRunTime, &CDlgSetCAP::OnBnClickedPRT)
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_Enable_ProcessRunTime, &CDlgSetCAP::OnBnClickedPRT)
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 
 void CDlgSetCAP::OnBnClickedPRT()
@@ -1630,11 +1630,11 @@ void CDlgSetConnectionSetting::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetConnectionSetting, CPropertyPage)
-ON_WM_DESTROY()
-ON_BN_CLICKED(IDC_RAD_PX_IE, &CDlgSetConnectionSetting::OnBnClickedPxIE)
-ON_BN_CLICKED(IDC_RAD_PX_NA, &CDlgSetConnectionSetting::OnBnClickedPxNA)
-ON_BN_CLICKED(IDC_RAD_PX_EF, &CDlgSetConnectionSetting::OnBnClickedPxEF)
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_RAD_PX_IE, &CDlgSetConnectionSetting::OnBnClickedPxIE)
+	ON_BN_CLICKED(IDC_RAD_PX_NA, &CDlgSetConnectionSetting::OnBnClickedPxNA)
+	ON_BN_CLICKED(IDC_RAD_PX_EF, &CDlgSetConnectionSetting::OnBnClickedPxEF)
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 
 void CDlgSetConnectionSetting::OnBnClickedPxIE()
@@ -1773,18 +1773,18 @@ void CDlgSetDomainFilter::DoDataExchange(CDataExchange* pDX)
 	//}}AFX_DATA_MAP
 }
 BEGIN_MESSAGE_MAP(CDlgSetDomainFilter, CPropertyPage)
-//{{AFX_MSG_MAP(CDlgSetDomainFilter)
-ON_BN_CLICKED(IDC_BUTTON_INS, OnButtonPopIns)
-ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonPopDel)
-ON_WM_DESTROY()
-ON_NOTIFY(NM_DBLCLK, IDC_LIST1, OnDblclkList1)
-ON_BN_CLICKED(IDC_BUTTON_UP, OnButtonUp)
-ON_BN_CLICKED(IDC_BUTTON_DOWN, OnButtonDown)
-ON_WM_SIZE()
-ON_WM_PAINT()
-ON_BN_CLICKED(IDC_CHECK_ENABLE_URL_FILTER, OnEnableCtrl)
-//}}AFX_MSG_MAP
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	//{{AFX_MSG_MAP(CDlgSetDomainFilter)
+	ON_BN_CLICKED(IDC_BUTTON_INS, OnButtonPopIns)
+	ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonPopDel)
+	ON_WM_DESTROY()
+	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, OnDblclkList1)
+	ON_BN_CLICKED(IDC_BUTTON_UP, OnButtonUp)
+	ON_BN_CLICKED(IDC_BUTTON_DOWN, OnButtonDown)
+	ON_WM_SIZE()
+	ON_WM_PAINT()
+	ON_BN_CLICKED(IDC_CHECK_ENABLE_URL_FILTER, OnEnableCtrl)
+	//}}AFX_MSG_MAP
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -2256,9 +2256,9 @@ void CDlgSetFileMgr::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetFileMgr, CPropertyPage)
-ON_WM_DESTROY()
-ON_BN_CLICKED(IDC_EnableUploadSync, &CDlgSetFileMgr::OnBnClickedULS)
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_EnableUploadSync, &CDlgSetFileMgr::OnBnClickedULS)
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 
 BOOL CDlgSetFileMgr::OnInitDialog()
@@ -2406,20 +2406,20 @@ void CDlgSetCustomScript::DoDataExchange(CDataExchange* pDX)
 	//}}AFX_DATA_MAP
 }
 BEGIN_MESSAGE_MAP(CDlgSetCustomScript, CPropertyPage)
-//{{AFX_MSG_MAP(CDlgSetCustomScript)
-ON_BN_CLICKED(IDC_BUTTON_INS, OnButtonPopIns)
-ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonPopDel)
-ON_WM_DESTROY()
-ON_NOTIFY(NM_DBLCLK, IDC_LIST1, OnDblclkList1)
-ON_BN_CLICKED(IDC_BUTTON_UP, OnButtonUp)
-ON_BN_CLICKED(IDC_BUTTON_DOWN, OnButtonDown)
-ON_WM_SIZE()
-ON_WM_PAINT()
-ON_BN_CLICKED(IDC_CHECK_ENABLE_CUSTOM_SCRIPT, OnEnableCtrl)
-//}}AFX_MSG_MAP
-ON_MESSAGE(ID_SETTING_OK, Set_OK)
-ON_BN_CLICKED(IDC_BUTTON1, &CDlgSetCustomScript::OnBnClickedButton1)
-ON_BN_CLICKED(IDC_SHOW_DEV_TOOLS, &CDlgSetCustomScript::OnBnClickedShowDevTools)
+	//{{AFX_MSG_MAP(CDlgSetCustomScript)
+	ON_BN_CLICKED(IDC_BUTTON_INS, OnButtonPopIns)
+	ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonPopDel)
+	ON_WM_DESTROY()
+	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, OnDblclkList1)
+	ON_BN_CLICKED(IDC_BUTTON_UP, OnButtonUp)
+	ON_BN_CLICKED(IDC_BUTTON_DOWN, OnButtonDown)
+	ON_WM_SIZE()
+	ON_WM_PAINT()
+	ON_BN_CLICKED(IDC_CHECK_ENABLE_CUSTOM_SCRIPT, OnEnableCtrl)
+	//}}AFX_MSG_MAP
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
+	ON_BN_CLICKED(IDC_BUTTON1, &CDlgSetCustomScript::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_SHOW_DEV_TOOLS, &CDlgSetCustomScript::OnBnClickedShowDevTools)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

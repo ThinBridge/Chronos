@@ -18,9 +18,9 @@ void CDlgDomainDetail::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgDomainDetail, CDialogEx)
-ON_BN_CLICKED(IDOK, &CDlgDomainDetail::OnBnClickedOk)
-ON_BN_CLICKED(IDCANCEL, &CDlgDomainDetail::OnBnClickedCancel)
-ON_BN_CLICKED(IDC_CHECK1, &CDlgDomainDetail::OnBnClickedCheck1)
+	ON_BN_CLICKED(IDOK, &CDlgDomainDetail::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &CDlgDomainDetail::OnBnClickedCancel)
+	ON_BN_CLICKED(IDC_CHECK1, &CDlgDomainDetail::OnBnClickedCheck1)
 END_MESSAGE_MAP()
 
 void CDlgDomainDetail::OnBnClickedOk()
@@ -106,10 +106,10 @@ void CDlgCustomScriptDetail::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgCustomScriptDetail, CDialogEx)
-ON_BN_CLICKED(IDOK, &CDlgCustomScriptDetail::OnBnClickedOk)
-ON_BN_CLICKED(IDCANCEL, &CDlgCustomScriptDetail::OnBnClickedCancel)
-ON_BN_CLICKED(IDC_CHECK1, &CDlgCustomScriptDetail::OnBnClickedCheck1)
-ON_BN_CLICKED(IDC_BUTTON1, &CDlgCustomScriptDetail::OnBnClickedButton1)
+	ON_BN_CLICKED(IDOK, &CDlgCustomScriptDetail::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &CDlgCustomScriptDetail::OnBnClickedCancel)
+	ON_BN_CLICKED(IDC_CHECK1, &CDlgCustomScriptDetail::OnBnClickedCheck1)
+	ON_BN_CLICKED(IDC_BUTTON1, &CDlgCustomScriptDetail::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 void CDlgCustomScriptDetail::OnBnClickedOk()

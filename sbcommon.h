@@ -42,9 +42,9 @@ private:
 #define WM_NEWINSTANCE WM_USER + 16
 #define WM_ACTIVE_HEAD WM_USER + 40
 #define WM_ACTIVE_TAIL WM_USER + 44
-#define WM_SAVE_WND_M WM_USER + 48
-#define WM_AUTH_DBL WM_USER + 56
-#define WM_ACTIVE_FRM WM_USER + 60
+#define WM_SAVE_WND_M  WM_USER + 48
+#define WM_AUTH_DBL    WM_USER + 56
+#define WM_ACTIVE_FRM  WM_USER + 60
 
 #define WND_TYPE_DEV_TOOLS 324929
 
@@ -62,37 +62,37 @@ typedef HRESULT(WINAPI* pfnDwmIsCompositionEnabled)(BOOL* pfEnabled);
 typedef HRESULT(WINAPI* pfnDwmGetWindowAttribute)(HWND hwnd, DWORD dwAttribute, LPCVOID pvAttribute, DWORD cbAttribute);
 typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
 
-#define WM_VIEW_INIT_OK 36002
+#define WM_VIEW_INIT_OK	      36002
 #define WM_DELETE_WINDOW_LIST 36004
 //#define WM_CLOSE_DELAY 36009
-#define WM_NEW_WINDOW_URL 36011
-#define WM_CLOSE_TIME_LIMIT 36014
-#define WM_CLOSE_MAX_MEM 36015
-#define WM_CLOSE_WAR_MEM 36016
-#define WM_ADD_FAVORITE 36017
-#define WM_APP_EXIT 36019
-#define WM_SEL_SEARCH 36020
-#define WM_COPY_IMAGE 36021
-#define ID_MYCOMBO_OK 33801
-#define ID_FAV_START 40000
-#define ID_FAV_END 45000
-#define ID_WINDOW_START 50000
-#define ID_WINDOW_END 55000
+#define WM_NEW_WINDOW_URL     36011
+#define WM_CLOSE_TIME_LIMIT   36014
+#define WM_CLOSE_MAX_MEM      36015
+#define WM_CLOSE_WAR_MEM      36016
+#define WM_ADD_FAVORITE	      36017
+#define WM_APP_EXIT	      36019
+#define WM_SEL_SEARCH	      36020
+#define WM_COPY_IMAGE	      36021
+#define ID_MYCOMBO_OK	      33801
+#define ID_FAV_START	      40000
+#define ID_FAV_END	      45000
+#define ID_WINDOW_START	      50000
+#define ID_WINDOW_END	      55000
 #define ID_CLOSE_WINDOW_START 45001
-#define ID_CLOSE_WINDOW_END 45016
+#define ID_CLOSE_WINDOW_END   45016
 
-#define DEBUG_LOG_LEVEL_OUTPUT_ALL 0
+#define DEBUG_LOG_LEVEL_OUTPUT_ALL     0
 #define DEBUG_LOG_LEVEL_OUTPUT_NO_FILE 1
-#define DEBUG_LOG_LEVEL_OUTPUT_URL 2
+#define DEBUG_LOG_LEVEL_OUTPUT_URL     2
 
-#define DEBUG_LOG_TYPE_GE 0  //一般情報
-#define DEBUG_LOG_TYPE_DE 1  //詳細情報
+#define DEBUG_LOG_TYPE_GE  0 //一般情報
+#define DEBUG_LOG_TYPE_DE  1 //詳細情報
 #define DEBUG_LOG_TYPE_URL 2 //URL情報
-#define DEBUG_LOG_TYPE_TR 3  //Browser動作情報
-#define DEBUG_LOG_TYPE_CL 4  //Close処理関連情報
-#define DEBUG_LOG_TYPE_JS 5  //Javascript関連情報
-#define DEBUG_LOG_TYPE_EX 6  //例外処理関連情報
-#define DEBUG_LOG_TYPE_AC 7  //操作アクション情報
+#define DEBUG_LOG_TYPE_TR  3 //Browser動作情報
+#define DEBUG_LOG_TYPE_CL  4 //Close処理関連情報
+#define DEBUG_LOG_TYPE_JS  5 //Javascript関連情報
+#define DEBUG_LOG_TYPE_EX  6 //例外処理関連情報
+#define DEBUG_LOG_TYPE_AC  7 //操作アクション情報
 
 //IE設定:0
 //プロキシ無し(直接):1
@@ -102,18 +102,18 @@ typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
 #define CSG_PROXY_TF 2
 
 //VirtualEnv
-#define VE_NA 0
+#define VE_NA	   0
 #define VE_THINAPP 1
-#define VE_TURBO 2
+#define VE_TURBO   2
 
 //RDS
-#define RDS_NA 0
-#define RDS_RDP 1
+#define RDS_NA	   0
+#define RDS_RDP	   1
 #define RDS_VMWARE 2
 #define RDS_CITRIX 3
 
 #define TF_ALLOW 0
-#define TF_DENY 1
+#define TF_DENY	 1
 
 static TCHAR sDEBUG_LOG_TYPE[][4] =
     {
@@ -157,12 +157,12 @@ static TCHAR DEF_ETC_PROTOCOLS[][13] =
 };
 
 #define KEY_COMB_SHIFT 0x00000001
-#define KEY_COMB_CTRL 0x00000010
-#define KEY_COMB_ALT 0x00000100
-#define KEY_COMB_LEFT 0x00001000
-#define KEY_COMB_UP 0x00010000
+#define KEY_COMB_CTRL  0x00000010
+#define KEY_COMB_ALT   0x00000100
+#define KEY_COMB_LEFT  0x00001000
+#define KEY_COMB_UP    0x00010000
 #define KEY_COMB_RIGHT 0x00100000
-#define KEY_COMB_DOWN 0x01000000
+#define KEY_COMB_DOWN  0x01000000
 
 // ファイル時間から64ビット整数に変換
 static ULONGLONG getTimeInt64(LPFILETIME ftTime)
@@ -1851,72 +1851,72 @@ public:
 		CString strRet;
 
 		//全般設定
-		strRet += EXTVAL(EnableMultipleInstance)
-		    strRet += EXTVAL(EnableMemcache)
-			strRet += EXTVAL(EnableCrashRecovery)
-			    strRet += EXTVAL(KeyCombination)
+		strRet += EXTVAL(EnableMultipleInstance);
+		strRet += EXTVAL(EnableMemcache);
+		strRet += EXTVAL(EnableCrashRecovery);
+		strRet += EXTVAL(KeyCombination);
 
-		    //画面表示設定
-		    strRet += EXTVAL(EnableTab)
-			strRet += EXTVAL(EnablePDFExtension)
-			    strRet += EXTVAL(EnableGPURendering)
-				strRet += EXTVAL(EnableRebar)
-				    strRet += EXTVAL(ShowLogo)
-					strRet += EXTVAL(EnableStatusbar)
-					    strRet += EXTVAL(WideMargin)
-						strRet += EXTVAL(HeightMargin)
-						    strRet += EXTVAL(DefaultZoomSize)
+		//画面表示設定
+		strRet += EXTVAL(EnableTab);
+		strRet += EXTVAL(EnablePDFExtension);
+		strRet += EXTVAL(EnableGPURendering);
+		strRet += EXTVAL(EnableRebar);
+		strRet += EXTVAL(ShowLogo);
+		strRet += EXTVAL(EnableStatusbar);
+		strRet += EXTVAL(WideMargin);
+		strRet += EXTVAL(HeightMargin);
+		strRet += EXTVAL(DefaultZoomSize);
 
-		    //起動関連設定
-		    strRet += EXTVAL(StartURL)
-			strRet += EXTVAL(EnforceInitParam)
-			    strRet += EXTVAL(InitMessage);
+		//起動関連設定
+		strRet += EXTVAL(StartURL);
+		strRet += EXTVAL(EnforceInitParam);
+		strRet += EXTVAL(InitMessage);
 
 		//インターネット接続設定
-		strRet += EXTVAL(ProxyType)
-		    strRet += EXTVAL(ProxyAddress)
-			strRet += EXTVAL(ProxyBypassAddress)
-			    strRet += EXTVAL(UserAgentAppendStr)
+		strRet += EXTVAL(ProxyType);
+		strRet += EXTVAL(ProxyAddress);
+		strRet += EXTVAL(ProxyBypassAddress);
+		strRet += EXTVAL(UserAgentAppendStr);
 
-		    //制限設定
-		    strRet += EXTVAL(EnableDownloadRestriction)
-			strRet += EXTVAL(EnableUploadRestriction)
-			    strRet += EXTVAL(EnableDeleteCache)
-				strRet += EXTVAL(EnableRunningTime)
-				    strRet += EXTVAL(RunningLimitTime)
-					strRet += EXTVAL(MemoryUsageLimit)
-					    strRet += EXTVAL(WindowCountLimit)
+		//制限設定
+		strRet += EXTVAL(EnableDownloadRestriction);
+		strRet += EXTVAL(EnableUploadRestriction);
+		strRet += EXTVAL(EnableDeleteCache);
+		strRet += EXTVAL(EnableRunningTime);
+		strRet += EXTVAL(RunningLimitTime);
+		strRet += EXTVAL(MemoryUsageLimit);
+		strRet += EXTVAL(WindowCountLimit);
 
-		    //リダイレクト設定
-		    strRet += EXTVAL(EnableURLRedirect)
-			strRet += EXTVAL(RedirectMsgTimeout)
-			    strRet += EXTVAL(CustomBrowser)
-				strRet += EXTVAL(CustomBrowser2)
-				    strRet += EXTVAL(CustomBrowser3)
-					strRet += EXTVAL(CustomBrowser4)
-					    strRet += EXTVAL(CustomBrowser5)
+		//リダイレクト設定
+		strRet += EXTVAL(EnableURLRedirect);
+		strRet += EXTVAL(RedirectMsgTimeout);
+		strRet += EXTVAL(CustomBrowser);
+		strRet += EXTVAL(CustomBrowser2);
+		strRet += EXTVAL(CustomBrowser3);
+		strRet += EXTVAL(CustomBrowser4);
+		strRet += EXTVAL(CustomBrowser5);
 
-		    //URLフィルター設定
-		    strRet += EXTVAL(EnableURLFilter)
+		//URLフィルター設定
+		strRet += EXTVAL(EnableURLFilter);
 
-		    //CustomScript設定
-		    strRet += EXTVAL(EnableCustomScript)
+		//CustomScript設定
+		strRet += EXTVAL(EnableCustomScript);
 
-		    //ログ出力設定
-		    strRet += EXTVAL(EnableAdvancedLogMode)
-			strRet += EXTVAL(EnableAdvancedLogVerboseMode)
-			    strRet += EXTVAL(AdvancedLogLevel)
-				strRet += EXTVAL(EnableLogging)
-				    strRet += EXTVAL(EnableUploadLogging)
-					strRet += EXTVAL(EnableDownloadLogging)
-					    strRet += EXTVAL(EnableBrowsingLogging)
-						strRet += EXTVAL(EnableAccessAllLogging)
-						    strRet += EXTVAL(LogServerURL)
-							strRet += EXTVAL(RequestHeader)
-							    strRet += EXTVAL(LogMethod)
+		//ログ出力設定
+		strRet += EXTVAL(EnableAdvancedLogMode);
+		strRet += EXTVAL(EnableAdvancedLogVerboseMode);
+		strRet += EXTVAL(AdvancedLogLevel);
+		strRet += EXTVAL(EnableLogging);
+		strRet += EXTVAL(EnableUploadLogging);
+		strRet += EXTVAL(EnableDownloadLogging);
+		strRet += EXTVAL(EnableBrowsingLogging);
+		strRet += EXTVAL(EnableAccessAllLogging);
+		strRet += EXTVAL(LogServerURL);
+		strRet += EXTVAL(RequestHeader);
+		strRet += EXTVAL(LogMethod);
 
-		    //ChFiler---------------------------------
-		    strRet += EXTVAL(RootPath);
+		//ChFiler---------------------------------
+		strRet += EXTVAL(RootPath);
 		strRet += EXTVAL(UploadBasePath);
 		strRet += EXTVAL(ExtFilter);
 		strRet += EXTVAL(EnableOpendOp);
@@ -2745,12 +2745,12 @@ public:
 #include "secext.h"
 #pragma comment(lib, "secur32.lib")
 
-#define LOG_UPLOAD 0
-#define LOG_DOWNLOAD 1
-#define LOG_BROWSING 2
+#define LOG_UPLOAD     0
+#define LOG_DOWNLOAD   1
+#define LOG_BROWSING   2
 #define LOG_ACCESS_ALL 3
-#define LOG_M_GET 0
-#define LOG_M_POST 1
+#define LOG_M_GET      0
+#define LOG_M_POST     1
 class SendLogDataUtil
 {
 public:
@@ -2868,7 +2868,18 @@ public:
 			for (int i = 0; i < nLen; ++i)
 			{
 				cText = m_pstrData_UTF8[i];
-				if ((cText >= '0' && cText <= '9') || (cText >= 'a' && cText <= 'z') || (cText >= 'A' && cText <= 'Z') || cText == '-' || cText == '_' || cText == '.' || cText == '!' || cText == '~' || cText == '*' || cText == '\'' || cText == '(' || cText == ')')
+				if ((cText >= '0' && cText <= '9') ||
+				    (cText >= 'a' && cText <= 'z') ||
+				    (cText >= 'A' && cText <= 'Z') ||
+				    cText == '-' ||
+				    cText == '_' ||
+				    cText == '.' ||
+				    cText == '!' ||
+				    cText == '~' ||
+				    cText == '*' ||
+				    cText == '\'' ||
+				    cText == '(' ||
+				    cText == ')')
 				{
 					memcpy(m_ptrDataURLEncode + iPos, &cText, 1);
 					iPos++;
@@ -3231,8 +3242,8 @@ public:
 };
 //マクロ定義
 #define CREATEINSTANCE(C, I, P) (SUCCEEDED(CoCreateInstance((C), NULL, CLSCTX_INPROC_SERVER, (I), (reinterpret_cast<LPVOID*>(P)))))
-#define QI(X, Y, Z) ((X)->QueryInterface((Y), (reinterpret_cast<LPVOID*>(Z))))
-#define URLBUFFER_SIZE 4096
+#define QI(X, Y, Z)		((X)->QueryInterface((Y), (reinterpret_cast<LPVOID*>(Z))))
+#define URLBUFFER_SIZE		4096
 
 class CScriptHost
 {
@@ -3337,7 +3348,12 @@ public:
 				TB_Global_URL_EXTRAINFO = urlcomponents.lpszExtraInfo;
 				TB_Global_URL_EXTRAINFO.Replace(_T("\""), _T("\"\""));
 
-				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"), TB_Global_SCHME, TB_Global_HOSTNAME, TB_Global_PORT, TB_Global_URL_PATH, TB_Global_URL_EXTRAINFO);
+				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"),
+						 TB_Global_SCHME,
+						 TB_Global_HOSTNAME,
+						 TB_Global_PORT,
+						 TB_Global_URL_PATH,
+						 TB_Global_URL_EXTRAINFO);
 
 				CStringW vbGlobalSettings;
 				vbGlobalSettings = vbGlobalURL;

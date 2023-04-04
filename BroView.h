@@ -5,7 +5,7 @@
 #endif // _MSC_VER > 1000
 #include "Sazabi.h"
 #define ViewBaseClass CWnd
-#define FRM ((CBrowserFrame*)m_pwndFrame)
+#define FRM	      ((CBrowserFrame*)m_pwndFrame)
 class CChildView : public ViewBaseClass
 {
 public:

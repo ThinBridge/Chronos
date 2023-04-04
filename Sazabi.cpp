@@ -2210,23 +2210,32 @@ BOOL CSazabi::PumpMessage()
 					{
 						::GetClassName(msg.hwnd, classname, 31);
 						TRACE(_T("PumpMessage[0x%08x] %s (0x%x)\n"), msg.hwnd, classname, msg.message);
-						if (_tcscmp(classname, WC_EDIT) == 0 || _tcscmp(classname, WC_COMBOBOXEX) == 0 || _tcscmp(classname, WC_COMBOBOX) == 0 || _tcscmp(classname, WC_BUTTON) == 0 || _tcscmp(classname, WC_STATIC) == 0 || _tcscmp(classname, _T("#32770")) == 0 || _tcscmp(classname, REBARCLASSNAME) == 0 || _tcscmp(classname, WC_TABCONTROL) == 0 || _tcscmp(classname, WC_TREEVIEW) == 0 || _tcscmp(classname, WC_LISTVIEW) == 0 || _tcscmp(classname, WC_LISTBOX) == 0
-
-						    //							|| _tcscmp(classname, WC_HEADER) == 0
-						    //							|| _tcscmp(classname, TOOLBARCLASSNAME) == 0
-						    //							|| _tcscmp(classname, TOOLTIPS_CLASS) == 0
-						    //							|| _tcscmp(classname, STATUSCLASSNAME) == 0
-						    //							|| _tcscmp(classname, TRACKBAR_CLASS) == 0
-						    //							|| _tcscmp(classname, UPDOWN_CLASS) == 0
-						    //							|| _tcscmp(classname, PROGRESS_CLASS) == 0
-						    //							|| _tcscmp(classname, HOTKEY_CLASS) == 0
-						    //							|| _tcscmp(classname, ANIMATE_CLASS) == 0
-						    //							|| _tcscmp(classname, MONTHCAL_CLASS) == 0
-						    //							|| _tcscmp(classname, DATETIMEPICK_CLASS) == 0
-						    //							|| _tcscmp(classname, WC_IPADDRESS) == 0
-						    //							|| _tcscmp(classname, WC_PAGESCROLLER) == 0
-						    //							|| _tcscmp(classname, WC_NATIVEFONTCTL) == 0
-						    //							|| _tcscmp(classname, WC_SCROLLBAR) == 0
+						if (_tcscmp(classname, WC_EDIT) == 0 ||
+						    _tcscmp(classname, WC_COMBOBOXEX) == 0 ||
+						    _tcscmp(classname, WC_COMBOBOX) == 0 ||
+						    _tcscmp(classname, WC_BUTTON) == 0 ||
+						    _tcscmp(classname, WC_STATIC) == 0 ||
+						    _tcscmp(classname, _T("#32770")) == 0 ||
+						    _tcscmp(classname, REBARCLASSNAME) == 0 ||
+						    _tcscmp(classname, WC_TABCONTROL) == 0 ||
+						    _tcscmp(classname, WC_TREEVIEW) == 0 ||
+						    _tcscmp(classname, WC_LISTVIEW) == 0 ||
+						    _tcscmp(classname, WC_LISTBOX) == 0
+						    //|| _tcscmp(classname, WC_HEADER) == 0
+						    //|| _tcscmp(classname, TOOLBARCLASSNAME) == 0
+						    //|| _tcscmp(classname, TOOLTIPS_CLASS) == 0
+						    //|| _tcscmp(classname, STATUSCLASSNAME) == 0
+						    //|| _tcscmp(classname, TRACKBAR_CLASS) == 0
+						    //|| _tcscmp(classname, UPDOWN_CLASS) == 0
+						    //|| _tcscmp(classname, PROGRESS_CLASS) == 0
+						    //|| _tcscmp(classname, HOTKEY_CLASS) == 0
+						    //|| _tcscmp(classname, ANIMATE_CLASS) == 0
+						    //|| _tcscmp(classname, MONTHCAL_CLASS) == 0
+						    //|| _tcscmp(classname, DATETIMEPICK_CLASS) == 0
+						    //|| _tcscmp(classname, WC_IPADDRESS) == 0
+						    //|| _tcscmp(classname, WC_PAGESCROLLER) == 0
+						    //|| _tcscmp(classname, WC_NATIVEFONTCTL) == 0
+						    //|| _tcscmp(classname, WC_SCROLLBAR) == 0
 						)
 						{
 							return CWinApp::PumpMessage();
@@ -2403,7 +2412,72 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 			strPathUpper = _T("\\");
 			strPathUpper += strPath;
 			strPathUpper.MakeUpper();
-			if (strPathUpper.Find(_T("\\CMD.EXE")) >= 0 || strPathUpper.Find(_T("\\ARP.EXE")) >= 0 || strPathUpper.Find(_T("\\AT.EXE")) >= 0 || strPathUpper.Find(_T("\\BCDEDIT.EXE")) >= 0 || strPathUpper.Find(_T("\\CACLS.EXE")) >= 0 || strPathUpper.Find(_T("\\CERTREQ.EXE")) >= 0 || strPathUpper.Find(_T("\\CIPHER.EXE")) >= 0 || strPathUpper.Find(_T("\\CMD.EXE")) >= 0 || strPathUpper.Find(_T("\\CONTROL.EXE")) >= 0 || strPathUpper.Find(_T("\\CSCRIPT.EXE")) >= 0 || strPathUpper.Find(_T("\\DLLHOST.EXE")) >= 0 || strPathUpper.Find(_T("\\DOSX.EXE")) >= 0 || strPathUpper.Find(_T("\\EXPLORER.EXE")) >= 0 || strPathUpper.Find(_T("\\FORMAT.EXE")) >= 0 || strPathUpper.Find(_T("\\FSUTIL.EXE")) >= 0 || strPathUpper.Find(_T("\\FTP.EXE")) >= 0 || strPathUpper.Find(_T("\\IPCONFIG.EXE")) >= 0 || strPathUpper.Find(_T("\\ISCSICLI.EXE")) >= 0 || strPathUpper.Find(_T("\\MSCDEXNT.EXE")) >= 0 || strPathUpper.Find(_T("\\MSHTA.EXE")) >= 0 || strPathUpper.Find(_T("\\NBTSTAT.EXE")) >= 0 || strPathUpper.Find(_T("\\NET.EXE")) >= 0 || strPathUpper.Find(_T("\\NET1.EXE")) >= 0 || strPathUpper.Find(_T("\\NETSH.EXE")) >= 0 || strPathUpper.Find(_T("\\NETSTAT.EXE")) >= 0 || strPathUpper.Find(_T("\\NSLOOKUP.EXE")) >= 0 || strPathUpper.Find(_T("\\PING.EXE")) >= 0 || strPathUpper.Find(_T("\\POWERSHELL.EXE")) >= 0 || strPathUpper.Find(_T("\\QPROCESS.EXE")) >= 0 || strPathUpper.Find(_T("\\QUERY.EXE")) >= 0 || strPathUpper.Find(_T("\\REDIR.EXE")) >= 0 || strPathUpper.Find(_T("\\REG.EXE")) >= 0 || strPathUpper.Find(_T("\\REGEDIT.EXE")) >= 0 || strPathUpper.Find(_T("\\REGEDT32.EXE")) >= 0 || strPathUpper.Find(_T("\\ROUTE.EXE")) >= 0 || strPathUpper.Find(_T("\\RUNDLL32.EXE")) >= 0 || strPathUpper.Find(_T("\\SC.EXE")) >= 0 || strPathUpper.Find(_T("\\SCHTASKS.EXE")) >= 0 || strPathUpper.Find(_T("\\SDBINST.EXE")) >= 0 || strPathUpper.Find(_T("\\SUBST.EXE")) >= 0 || strPathUpper.Find(_T("\\SVCHOST.EXE")) >= 0 || strPathUpper.Find(_T("\\SYSPREP.EXE")) >= 0 || strPathUpper.Find(_T("\\SYSTEMINFO.EXE")) >= 0 || strPathUpper.Find(_T("\\TASKKILL.EXE")) >= 0 || strPathUpper.Find(_T("\\TASKLIST.EXE")) >= 0 || strPathUpper.Find(_T("\\TRACERT.EXE")) >= 0 || strPathUpper.Find(_T("\\VER.EXE")) >= 0 || strPathUpper.Find(_T("\\VSSADMIN.EXE")) >= 0 || strPathUpper.Find(_T("\\WHOAMI.EXE")) >= 0 || strPathUpper.Find(_T("\\WINRS.EXE")) >= 0 || strPathUpper.Find(_T("\\WMIC.EXE")) >= 0 || strPathUpper.Find(_T("\\WSCRIPT.EXE")) >= 0 || strPathUpper.Find(_T("\\WUSA.EXE")) >= 0 || strPathUpper.Find(_T("\\COMMAND.COM")) >= 0 || strPathUpper.Find(_T("\\EVENTVWR.EXE")) >= 0 || strPathUpper.Find(_T("\\PSEXEC.EXE")) >= 0 || strPathUpper.Find(_T("\\CMDKEY.EXE")) >= 0 || strPathUpper.Find(_T("\\MSIEXEC.EXE")) >= 0 || strPathUpper.Find(_T("\\TASKHOSTW.EXE")) >= 0 || strPathUpper.Find(_T("\\TASKHOST.EXE")) >= 0 || strPathUpper.Find(_T("\\BACKGROUNDTASKHOST.EXE")) >= 0 || strPathUpper.Find(_T("\\ATTRIB.EXE")) >= 0 || strPathUpper.Find(_T("\\ICACLS.EXE")) >= 0 || strPathUpper.Find(_T("\\ROBOCOPY.EXE")) >= 0 || strPathUpper.Find(_T("\\XCOPY.EXE")) >= 0 || strPathUpper.Find(_T("\\QWINSTA.EXE")) >= 0)
+			if (strPathUpper.Find(_T("\\CMD.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ARP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\AT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\BCDEDIT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CACLS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CERTREQ.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CIPHER.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CMD.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CONTROL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CSCRIPT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\DLLHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\DOSX.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\EXPLORER.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\FORMAT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\FSUTIL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\FTP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\IPCONFIG.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ISCSICLI.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\MSCDEXNT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\MSHTA.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NBTSTAT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NET.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NET1.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NETSH.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NETSTAT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NSLOOKUP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\PING.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\POWERSHELL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\QPROCESS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\QUERY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REDIR.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REG.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REGEDIT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REGEDT32.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ROUTE.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\RUNDLL32.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SCHTASKS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SDBINST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SUBST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SVCHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SYSPREP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SYSTEMINFO.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKKILL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKLIST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TRACERT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\VER.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\VSSADMIN.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WHOAMI.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WINRS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WMIC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WSCRIPT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WUSA.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\COMMAND.COM")) >= 0 ||
+			    strPathUpper.Find(_T("\\EVENTVWR.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\PSEXEC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CMDKEY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\MSIEXEC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKHOSTW.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\BACKGROUNDTASKHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ATTRIB.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ICACLS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ROBOCOPY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\XCOPY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\QWINSTA.EXE")) >= 0)
 			{
 				DebugWndLogData dwLogData;
 				dwLogData.mHWND.Format(_T("APP_WND:0x%08x"), 0);
@@ -2433,7 +2507,7 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 			lstrcpyn(FrmWndClassName, strFrmWndClass, 255);
 
 			HWND hWndCap = FindWindow(FrmWndClassName, NULL); //APのハンドル取得
-			    //起動している。
+			//起動している。
 			if (hWndCap != NULL)
 			{
 				TCHAR szTitleMultipleInstance[260] = {0};
@@ -4593,13 +4667,13 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
-//{{AFX_MSG_MAP(CAboutDlg)
-ON_BN_CLICKED(IDOK, &CAboutDlg::OnBnClickedOk)
-ON_BN_CLICKED(IDC_VOS_CLOSE_PROCESS, OnCloseVOSProc)
-ON_COMMAND(IDC_STATIC_LOGO_ABOUT, &CAboutDlg::OnDetailShow)
-//}}AFX_MSG_MAP
-ON_BN_CLICKED(IDC_SHOW_DEV_TOOLS, &CAboutDlg::OnBnClickedShowDevTools)
-ON_BN_CLICKED(IDC_CEF_VERSION, &CAboutDlg::OnBnClickedCefVersion)
+	//{{AFX_MSG_MAP(CAboutDlg)
+	ON_BN_CLICKED(IDOK, &CAboutDlg::OnBnClickedOk)
+	ON_BN_CLICKED(IDC_VOS_CLOSE_PROCESS, OnCloseVOSProc)
+	ON_COMMAND(IDC_STATIC_LOGO_ABOUT, &CAboutDlg::OnDetailShow)
+	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDC_SHOW_DEV_TOOLS, &CAboutDlg::OnBnClickedShowDevTools)
+	ON_BN_CLICKED(IDC_CEF_VERSION, &CAboutDlg::OnBnClickedCefVersion)
 END_MESSAGE_MAP()
 
 void CAboutDlg::OnCloseVOSProc()

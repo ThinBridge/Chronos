@@ -71,15 +71,15 @@ void CDlgDebugWnd::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgDebugWnd, CDialogEx)
-ON_BN_CLICKED(IDOK, &CDlgDebugWnd::OnBnClickedOk)
-ON_BN_CLICKED(IDCANCEL, &CDlgDebugWnd::OnBnClickedCancel)
-ON_WM_ACTIVATE()
-ON_WM_NCACTIVATE()
-ON_WM_PAINT()
-ON_BN_CLICKED(IDC_BUTTON1, &CDlgDebugWnd::OnBnClickedButton1)
-ON_WM_SIZE()
-ON_NOTIFY(LVN_GETDISPINFO, IDC_LIST1, &CDlgDebugWnd::OnGetdispinfoList1)
-ON_BN_CLICKED(IDC_CHECK1, &CDlgDebugWnd::OnBnClickedCheck1)
+	ON_BN_CLICKED(IDOK, &CDlgDebugWnd::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &CDlgDebugWnd::OnBnClickedCancel)
+	ON_WM_ACTIVATE()
+	ON_WM_NCACTIVATE()
+	ON_WM_PAINT()
+	ON_BN_CLICKED(IDC_BUTTON1, &CDlgDebugWnd::OnBnClickedButton1)
+	ON_WM_SIZE()
+	ON_NOTIFY(LVN_GETDISPINFO, IDC_LIST1, &CDlgDebugWnd::OnGetdispinfoList1)
+	ON_BN_CLICKED(IDC_CHECK1, &CDlgDebugWnd::OnBnClickedCheck1)
 END_MESSAGE_MAP()
 
 BOOL CDlgDebugWnd::OnInitDialog()
@@ -430,7 +430,13 @@ void CDlgDebugWnd::SetLogMsg(
 			SetDlgItemText(IDC_STATIC_LINE, strDataLineCnt);
 			if (m_bAutoScFlg)
 			{
-				::SendMessageTimeout(m_List.m_hWnd, LVM_ENSUREVISIBLE, (int)iCount, MAKELPARAM(0, 0), SMTO_NORMAL, 250, NULL);
+				::SendMessageTimeout(m_List.m_hWnd,
+						     LVM_ENSUREVISIBLE,
+						     (int)iCount,
+						     MAKELPARAM(0, 0),
+						     SMTO_NORMAL,
+						     250,
+						     NULL);
 			}
 			SetEvent(hEvent);
 		}
@@ -538,18 +544,18 @@ void CDlgSCEditor::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CDlgSCEditor, CDialogEx)
-ON_BN_CLICKED(IDCANCEL, &CDlgSCEditor::OnBnClickedCancel)
-ON_BN_CLICKED(IDC_BUTTON_FUNC, &CDlgSCEditor::OnBnClickedButtonFunc)
-ON_BN_CLICKED(IDC_BUTTON_TOP, &CDlgSCEditor::OnBnClickedButtonTop)
-ON_BN_CLICKED(IDC_BUTTON_URL, &CDlgSCEditor::OnBnClickedButtonUrl)
-ON_BN_CLICKED(IDC_BUTTON_TB_TRACE_LOG, &CDlgSCEditor::OnBnClickedButtonTraceLog)
-ON_BN_CLICKED(IDC_BUTTON1, &CDlgSCEditor::OnBnClickedButton1)
+	ON_BN_CLICKED(IDCANCEL, &CDlgSCEditor::OnBnClickedCancel)
+	ON_BN_CLICKED(IDC_BUTTON_FUNC, &CDlgSCEditor::OnBnClickedButtonFunc)
+	ON_BN_CLICKED(IDC_BUTTON_TOP, &CDlgSCEditor::OnBnClickedButtonTop)
+	ON_BN_CLICKED(IDC_BUTTON_URL, &CDlgSCEditor::OnBnClickedButtonUrl)
+	ON_BN_CLICKED(IDC_BUTTON_TB_TRACE_LOG, &CDlgSCEditor::OnBnClickedButtonTraceLog)
+	ON_BN_CLICKED(IDC_BUTTON1, &CDlgSCEditor::OnBnClickedButton1)
 
-ON_BN_CLICKED(IDOK, &CDlgSCEditor::OnBnClickedOk)
-ON_WM_ACTIVATE()
-ON_WM_NCACTIVATE()
-ON_WM_PAINT()
-ON_WM_SIZE()
+	ON_BN_CLICKED(IDOK, &CDlgSCEditor::OnBnClickedOk)
+	ON_WM_ACTIVATE()
+	ON_WM_NCACTIVATE()
+	ON_WM_PAINT()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 // CDlgSCEditor メッセージ ハンドラー
@@ -627,7 +633,10 @@ BOOL CDlgSCEditor::PreTranslateMessage(MSG* pMsg)
 				}
 			}
 		}
-		if (pMsg->message == WM_MOUSEMOVE || pMsg->message == WM_LBUTTONDOWN || pMsg->message == WM_KEYDOWN || pMsg->message == WM_KEYUP || pMsg->message == WM_LBUTTONDOWN)
+		if (pMsg->message == WM_MOUSEMOVE ||
+		    pMsg->message == WM_LBUTTONDOWN ||
+		    pMsg->message == WM_KEYDOWN ||
+		    pMsg->message == WM_KEYUP || pMsg->message == WM_LBUTTONDOWN)
 		{
 			DWORD dwStart = 0, dwEnd = 0;
 			DWORD dwLineIndex = 0;
