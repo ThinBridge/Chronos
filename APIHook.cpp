@@ -331,6 +331,7 @@ public:
 
 			CString strSelPath(wstrSelPath);
 			CoTaskMemFree(wstrSelPath);
+			strSelPath.MakeUpper();
 			if (strSelPath.IsEmpty())
 			{
 				return hresult;
@@ -338,15 +339,13 @@ public:
 
 			if (theApp.IsSGMode())
 			{
-				CString strRootUpper(m_strRootPath);
-				CString strSelPathUpper = strSelPath;
-				strSelPathUpper.MakeUpper();
-				strRootUpper.MakeUpper();
-				if (strSelPathUpper.Find(strRootUpper) != 0)
+				CString strRoot(m_strRootPath);
+				strRoot.MakeUpper();
+				if (strSelPath.Find(strRoot) != 0)
 				{
 					CString strCaption(theApp.m_strThisAppName);
 					CString strMsg;
-					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)m_strRootPath, (LPCWSTR)strSelPath);
+					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
 					::MessageBoxW(hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
