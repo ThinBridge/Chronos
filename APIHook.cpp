@@ -41,7 +41,8 @@ public:
 		}
 	}
 
-	HRESULT Initialize() {
+	HRESULT Initialize() 
+	{
 		HRESULT hresult = S_OK;
 		CString strPath;
 		if (theApp.IsSGMode())
