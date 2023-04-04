@@ -340,7 +340,7 @@ public:
 				{
 					CString strCaption(theApp.m_strThisAppName);
 					CString strMsg;
-					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCTSTR)strRoot, (LPCTSTR)strSelPath);
+					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
 					::MessageBoxW(hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
@@ -657,7 +657,7 @@ public:
 			if (strSelPath.Find(strRoot) != 0)
 			{
 				CString strMsg;
-				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", (LPCTSTR)strRoot, (LPCTSTR)strRoot, (LPCTSTR)strSelPath);
+				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strRoot, (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
 				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 				continue;
 			}
@@ -666,7 +666,7 @@ public:
 			if (strSelPath.Find(strTSG_Upload) == 0)
 			{
 				CString strMsg;
-				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCTSTR)strTSG_Upload, (LPCTSTR)strSelPath);
+				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
 				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 				continue;
 			}
