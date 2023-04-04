@@ -321,7 +321,17 @@ void CDlgDebugWnd::OnBnClickedButton1()
 	CString strCopyData;
 	CString strCopyDataALL;
 	CString strFmt;
-	strHeader.Format(_T("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n"), _T("#"), _T("Time"), _T("WndType"), _T("Function"), _T("Message1"), _T("Message2"), _T("Message3"), _T("Message4"), _T("Message5"), _T("Message6"));
+	strHeader.Format(_T("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\r\n"),
+			 _T("#"),
+			 _T("Time"),
+			 _T("WndType"),
+			 _T("Function"),
+			 _T("Message1"),
+			 _T("Message2"),
+			 _T("Message3"),
+			 _T("Message4"),
+			 _T("Message5"),
+			 _T("Message6"));
 	for (int iii = 0; iii < iSelCnt; iii++)
 	{
 		if (iii == 0)
@@ -384,8 +394,15 @@ void CDlgDebugWnd::OnSize(UINT nType, int cx, int cy)
 	m_autoResize.Resize(this);
 }
 
-void CDlgDebugWnd::SetLogMsg(
-    LPCTSTR pDATE_TIME, LPCTSTR pHWND, LPCTSTR pFUNCTION_NAME, LPCTSTR pMESSAGE1, LPCTSTR pMESSAGE2, LPCTSTR pMESSAGE3, LPCTSTR pMESSAGE4, LPCTSTR pMESSAGE5, LPCTSTR pMESSAGE6)
+void CDlgDebugWnd::SetLogMsg(LPCTSTR pDATE_TIME,
+			     LPCTSTR pHWND,
+			     LPCTSTR pFUNCTION_NAME,
+			     LPCTSTR pMESSAGE1,
+			     LPCTSTR pMESSAGE2,
+			     LPCTSTR pMESSAGE3,
+			     LPCTSTR pMESSAGE4,
+			     LPCTSTR pMESSAGE5,
+			     LPCTSTR pMESSAGE6)
 {
 	HANDLE hEvent = {0};
 	try
