@@ -1146,7 +1146,10 @@ void CBrowserFrame::SearchAndNavigate(CString strIn)
 	strIn.TrimRight();
 	if (strIn.IsEmpty()) return;
 
-	if (SBUtil::IsURL(strIn) || strIn.Find(_T(":")) == 1 || strIn.Find(_T("about:")) == 0 || strIn.Find(_T("chrome:")) == 0)
+	if (SBUtil::IsURL(strIn) ||
+	    strIn.Find(_T(":")) == 1 ||
+	    strIn.Find(_T("about:")) == 0 ||
+	    strIn.Find(_T("chrome:")) == 0)
 	{
 		if (this->m_wndView)
 			m_wndView.Navigate(strIn);
@@ -1597,7 +1600,8 @@ void CBrowserFrame::CrateFavoriteMenu(CMenu* pMenu, CFavoriteItem* parentItem)
 	if (!parentItem) return;
 	CString strTitle;
 
-	if (parentItem->GetType() == IEFavDIR || parentItem->GetType() == IEFavROOT)
+	if (parentItem->GetType() == IEFavDIR ||
+	    parentItem->GetType() == IEFavROOT)
 	{
 		INT_PTR iMax = parentItem->GetSize();
 		for (INT_PTR i = 0; i < iMax; i++)

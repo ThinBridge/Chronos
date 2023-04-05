@@ -653,7 +653,8 @@ BOOL CDlgSCEditor::PreTranslateMessage(MSG* pMsg)
 		if (pMsg->message == WM_MOUSEMOVE ||
 		    pMsg->message == WM_LBUTTONDOWN ||
 		    pMsg->message == WM_KEYDOWN ||
-		    pMsg->message == WM_KEYUP || pMsg->message == WM_LBUTTONDOWN)
+		    pMsg->message == WM_KEYUP ||
+		    pMsg->message == WM_LBUTTONDOWN)
 		{
 			DWORD dwStart = 0, dwEnd = 0;
 			DWORD dwLineIndex = 0;

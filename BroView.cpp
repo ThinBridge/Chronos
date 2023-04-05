@@ -1612,7 +1612,9 @@ void CChildView::OnViewRefresh()
 	CString logmsg;
 	logmsg.Format(_T("CV_WND:0x%08x OnViewRefresh"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
-	if (::GetAsyncKeyState(VK_CONTROL) < 0 && ::GetKeyState(VK_SHIFT) >= 0 && ::GetKeyState(VK_MENU) >= 0)
+	if (::GetAsyncKeyState(VK_CONTROL) < 0 &&
+	    ::GetKeyState(VK_SHIFT) >= 0 &&
+	    ::GetKeyState(VK_MENU) >= 0)
 
 		Refresh2(REFRESH_COMPLETELY);
 	else
