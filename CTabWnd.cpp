@@ -451,7 +451,12 @@ BOOL CTabWnd::ReorderTab(int nSrcTab, int nDstTab)
 }
 
 CTabWnd::CTabWnd()
-    : CWndSkr(_T("::CTabWnd")), m_eDragState(DRAG_NONE), m_bHovering(FALSE), m_eCaptureSrc(CAPT_NONE), m_nTabBorderArray(NULL), m_nSrcTab(0)
+    : CWndSkr(_T("::CTabWnd")),
+      m_eDragState(DRAG_NONE),
+      m_bHovering(FALSE),
+      m_eCaptureSrc(CAPT_NONE),
+      m_nTabBorderArray(NULL),
+      m_nSrcTab(0)
 {
 	m_hwndTab = NULL;
 	gm_pOldWndProc = NULL;

@@ -3598,7 +3598,7 @@ BEGIN_MESSAGE_MAP(CNilButton, CStatic)
 	ON_WM_PAINT()
 	ON_WM_ERASEBKGND()
 	ON_WM_SETCURSOR()
-//}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 BOOL CNilButton::Init(int i, CWnd* pParent, CWnd* pView)

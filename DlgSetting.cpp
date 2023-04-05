@@ -8,7 +8,7 @@ BEGIN_MESSAGE_MAP(CPrefsStatic, CStatic)
 	ON_WM_PAINT()
 	ON_WM_ERASEBKGND()
 	ON_MESSAGE(WM_SETTEXT, OnSetText)
-//}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 void CPrefsStatic::OnPaint()
 {
@@ -187,7 +187,7 @@ BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
 	ON_NOTIFY(TVN_GETDISPINFO, IDC_TREE_CTRL, OnGetDispInfoTreeCtrl)
 	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE_CTRL, OnTreeSelChanged)
 	ON_WM_SIZE()
-//}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1627,8 +1627,8 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	strJsStr += _T("if (document.getElementsByTagName('body').length){ \n");
 	strJsStr += _T("    document.getElementsByTagName('body')[0].appendChild(msgDiv); \n");
 	strJsStr += _T("}\n");
-	//	strJsStr += _T("    alert('appended');\n}\n");
-	//	strJsStr += _T("else alert('no body to append!!');");
+	//strJsStr += _T("    alert('appended');\n}\n");
+	//strJsStr += _T("else alert('no body to append!!');");
 
 	CefString strCefJsStr(strJsStr);
 	frame->ExecuteJavaScript(strCefJsStr, failedUrl, 0);
@@ -1726,8 +1726,8 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution)
 {
 	// do default
-	//	CefResourceRequestHandler::OnProtocolExecution(browser,frame, request,allow_os_execution);
-	//	return;
+	//CefResourceRequestHandler::OnProtocolExecution(browser,frame, request,allow_os_execution);
+	//return;
 	allow_os_execution = true;
 	browser->StopLoad();
 }

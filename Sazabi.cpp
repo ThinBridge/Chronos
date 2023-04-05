@@ -9,8 +9,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 BEGIN_MESSAGE_MAP(CSazabi, CWinApp)
-//{{AFX_MSG_MAP(CSazabi)
-//}}AFX_MSG_MAP
+	//{{AFX_MSG_MAP(CSazabi)
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 CSazabi::CSazabi()

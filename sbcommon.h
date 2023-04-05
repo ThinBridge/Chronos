@@ -115,45 +115,40 @@ typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
 #define TF_ALLOW 0
 #define TF_DENY	 1
 
-static TCHAR sDEBUG_LOG_TYPE[][4] =
-    {
-	_T("GE"),
-	_T("DE"),
-	_T("URL"),
-	_T("TR"),
-	_T("CL"),
-	_T("JS"),
-	_T("EX"),
-	_T("AC"),
+static TCHAR sDEBUG_LOG_TYPE[][4] = {
+    _T("GE"),
+    _T("DE"),
+    _T("URL"),
+    _T("TR"),
+    _T("CL"),
+    _T("JS"),
+    _T("EX"),
+    _T("AC"),
 };
 
 ///////////////////////////////////////////////////////////////////
-static TCHAR DEF_URLS[][9] =
-    {
-	_T("http://"),
-	_T("https://"),
-	_T("about:"),
-	_T("file://"),
-	_T("mailto:"),
-	_T("chrome:"),
+static TCHAR DEF_URLS[][9] = {
+    _T("http://"),
+    _T("https://"),
+    _T("about:"),
+    _T("file://"),
+    _T("mailto:"),
+    _T("chrome:"),
 };
-static TCHAR DEF_FILE[][8] =
-    {
-	_T("file://"),
-	_T("\\\\"),
+static TCHAR DEF_FILE[][8] = {
+    _T("file://"),
+    _T("\\\\"),
 };
 
-static TCHAR DEF_SCRIPT[][11] =
-    {
-	_T("javascript"),
-	_T("script"),
+static TCHAR DEF_SCRIPT[][11] = {
+    _T("javascript"),
+    _T("script"),
 };
 
-static TCHAR DEF_ETC_PROTOCOLS[][13] =
-    {
-	_T("mailto:"),
-	_T("vmware-view:"),
-	_T("notes:"),
+static TCHAR DEF_ETC_PROTOCOLS[][13] = {
+    _T("mailto:"),
+    _T("vmware-view:"),
+    _T("notes:"),
 };
 
 #define KEY_COMB_SHIFT 0x00000001
