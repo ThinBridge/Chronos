@@ -942,8 +942,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 			m_bDownLoadStartFlg = FALSE;
 			return;
 		}
-
-		if (values.bIsInProgress)
+		else if (values.bIsInProgress)
 		{
 			if (values.bIsValid)
 			{
@@ -1023,21 +1022,19 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 				//}
 				return;
 			}
-			if (values.bIsCanceled)
-			{
-				if (theApp.m_DlMgr.IsCanceld(nBrowserId))
-				{
-					theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
-					::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
+		}
+		else
+		{
+			// values.bIsCanceled ‚Ü‚½‚Í DownloadItem::INTERRUPTE
+			theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
+			::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
 
-					callback->Cancel();
-					theApp.m_DlMgr.Release_DLDlg(nBrowserId);
-					EmptyWindowClose(browser);
-					m_bDownLoadStartFlg = FALSE;
-					return;
-				}
-				return;
-			}
+			callback->Cancel();
+
+			theApp.m_DlMgr.Release_DLDlg(nBrowserId);
+			EmptyWindowClose(browser);
+			m_bDownLoadStartFlg = FALSE;
+			return;
 		}
 	}
 }
