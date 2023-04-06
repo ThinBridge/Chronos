@@ -176,7 +176,7 @@ protected:
 	afx_msg void OnAppExitExBT();
 	LRESULT OnNewAddressEnter(WPARAM wParam, LPARAM lParam);
 	LRESULT OnNewAddress(WPARAM wParam, LPARAM lParam);
-	LRESULT OnFavoliteAddSendMsg(WPARAM wParam, LPARAM lParam);
+	LRESULT OnFavoriteAddSendMsg(WPARAM wParam, LPARAM lParam);
 	LRESULT OnSearchString(WPARAM wParam, LPARAM lParam);
 	LRESULT OnPowerBroadcast(WPARAM wp, LPARAM);
 	afx_msg LRESULT OnChangeVisualManager(WPARAM wParam, LPARAM lParam);
