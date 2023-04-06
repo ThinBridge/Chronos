@@ -54,7 +54,7 @@ BEGIN_MESSAGE_MAP(CBrowserFrame, CFrameWndBase)
 	//ON_COMMAND(WM_CLOSE_DELAY,OnCloseDelay)
 	ON_COMMAND(ID_FULL_SCREEN, OnFullScreen)
 	ON_COMMAND(ID_W_CLOSE, OnWClose)
-	ON_MESSAGE(WM_ADD_FAVORITE, OnFavoliteAddSendMsg)
+	ON_MESSAGE(WM_ADD_FAVORITE, OnFavoriteAddSendMsg)
 
 	ON_COMMAND(ID_PREV_WND, OnPrevWnd)
 	ON_COMMAND(ID_NEXT_WND, OnNextWnd)
@@ -1677,9 +1677,9 @@ void CBrowserFrame::OnFavoriteRefresh()
 	theApp.bCreateFavDone = FALSE;
 }
 
-LRESULT CBrowserFrame::OnFavoliteAddSendMsg(WPARAM wParam, LPARAM lParam)
+LRESULT CBrowserFrame::OnFavoriteAddSendMsg(WPARAM wParam, LPARAM lParam)
 {
-	PROC_TIME(OnFavoliteAddSendMsg)
+	PROC_TIME(OnFavoriteAddSendMsg)
 
 	CString str1;
 	CString str2;
@@ -1712,7 +1712,7 @@ LRESULT CBrowserFrame::OnFavoliteAddSendMsg(WPARAM wParam, LPARAM lParam)
 		strParam.Format(_T("-AddFav \"%s|@@|%s\""), str1, str2);
 
 		CString logmsg;
-		logmsg.Format(_T("BF_WND:0x%08x OnFavoliteAddSendMsg %s"), theApp.SafeWnd(this->m_hWnd), strCommand);
+		logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg %s"), theApp.SafeWnd(this->m_hWnd), strCommand);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 		STARTUPINFO si = {0};
@@ -1721,18 +1721,18 @@ LRESULT CBrowserFrame::OnFavoliteAddSendMsg(WPARAM wParam, LPARAM lParam)
 		unsigned long ecode = 0;
 		if (!CreateProcess(NULL, (LPTSTR)(LPCTSTR)strCommand, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
 		{
-			logmsg.Format(_T("BF_WND:0x%08x OnFavoliteAddSendMsg CreateProcess Failed"), theApp.SafeWnd(this->m_hWnd));
+			logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg CreateProcess Failed"), theApp.SafeWnd(this->m_hWnd));
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			SetLastError(NO_ERROR);
 			//Retry
 			if (!CreateProcess(theApp.m_strDBL_EXE_FullPath, (LPTSTR)(LPCTSTR)strParam, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
 			{
-				logmsg.Format(_T("BF_WND:0x%08x OnFavoliteAddSendMsg CreateProcess Failed2"), theApp.SafeWnd(this->m_hWnd));
+				logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg CreateProcess Failed2"), theApp.SafeWnd(this->m_hWnd));
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 				SetLastError(NO_ERROR);
 				if (::ShellExecute(NULL, _T("open"), theApp.m_strDBL_EXE_FullPath, strParam, NULL, SW_SHOW) <= HINSTANCE(32))
 				{
-					logmsg.Format(_T("BF_WND:0x%08x OnFavoliteAddSendMsg ShellExecute Failed3"), theApp.SafeWnd(this->m_hWnd));
+					logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg ShellExecute Failed3"), theApp.SafeWnd(this->m_hWnd));
 					theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 					::ShellExecute(NULL, NULL, strCommand, NULL, NULL, SW_SHOW);
 				}
@@ -1759,7 +1759,7 @@ void CBrowserFrame::OnFavoriteAdd()
 	logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAdd"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (this->m_wndView)
-		OnFavoliteAddSendMsg(((WPARAM)(LPCTSTR)m_wndView.m_strTitle), ((WPARAM)(LPCTSTR)m_wndView.GetLocationURL()));
+		OnFavoriteAddSendMsg(((WPARAM)(LPCTSTR)m_wndView.m_strTitle), ((WPARAM)(LPCTSTR)m_wndView.GetLocationURL()));
 }
 
 void CBrowserFrame::OnFavoriteOrganize()
