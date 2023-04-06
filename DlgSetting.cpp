@@ -150,7 +150,7 @@ void CPrefsStatic::MakeCaptionBitmap()
 /////////////////////////////////////////////////////////////////////////////
 // CSettingsDialog dialog
 CSettingsDialog::CSettingsDialog(CWnd* pParent /*=NULL*/)
-	: CDialog(CSettingsDialog::IDD, pParent)
+    : CDialog(CSettingsDialog::IDD, pParent)
 {
 	m_pInfo.RemoveAll();
 	m_csTitle = _T("");
@@ -203,10 +203,10 @@ BOOL CSettingsDialog::OnInitDialog()
 
 	SetWindowText(m_csTitle);
 
-	m_CaptionBarCtrl.m_textClr     = ::GetSysColor(COLOR_3DFACE);
-	m_CaptionBarCtrl.m_fontWeight  = FW_BOLD;
-	m_CaptionBarCtrl.m_fontSize    = 14;
-	m_CaptionBarCtrl.m_csFontName  = _T("Verdana");
+	m_CaptionBarCtrl.m_textClr = ::GetSysColor(COLOR_3DFACE);
+	m_CaptionBarCtrl.m_fontWeight = FW_BOLD;
+	m_CaptionBarCtrl.m_fontSize = 14;
+	m_CaptionBarCtrl.m_csFontName = _T("Verdana");
 	m_CaptionBarCtrl.SetConstantText(m_csLogoText);
 
 	m_PageFrame.GetWindowRect(m_FrameRect);

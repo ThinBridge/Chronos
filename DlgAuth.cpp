@@ -6,7 +6,7 @@
 IMPLEMENT_DYNAMIC(CDlgAuth, CDialogEx)
 
 CDlgAuth::CDlgAuth(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DLG_AUTH, pParent)
+    : CDialogEx(IDD_DLG_AUTH, pParent)
 {
 	m_pWnd = NULL;
 	m_pWnd = pParent;
@@ -258,7 +258,7 @@ void CDlgAuth::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct)
 IMPLEMENT_DYNAMIC(CDlgAuthPWC, CDialogEx)
 
 CDlgAuthPWC::CDlgAuthPWC(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DLG_AUTH_PWC, pParent)
+    : CDialogEx(IDD_DLG_AUTH_PWC, pParent)
 {
 	m_pWnd = NULL;
 	m_pWnd = pParent;

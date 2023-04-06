@@ -8,3 +8,6 @@ AllowShortIfStatementsOnASingleLine: true
 IndentCaseLabels: false
 PointerAlignment: Left
 ColumnLimit: 0
+MacroBlockBegin: "^BEGIN_MESSAGE_MAP$"
+MacroBlockEnd: "^END_MESSAGE_MAP$"
+AlignConsecutiveMacros: Consecutive

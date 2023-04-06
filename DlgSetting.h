@@ -5,12 +5,12 @@ typedef class _PageInfo PAGE_INFO;
 class _PageInfo
 {
 public:
-	BOOL		bViewClass;
-	UINT		nID;
-	CWnd		*pWnd;
-	CWnd		*pWndParent;
-	CString		csCaption;
-	CString		csParentCaption;
+	BOOL bViewClass;
+	UINT nID;
+	CWnd* pWnd;
+	CWnd* pWndParent;
+	CString csCaption;
+	CString csParentCaption;
 };
 namespace autoresize
 {
@@ -283,12 +283,12 @@ public:
 	CWnd* AddPage(CRuntimeClass* pWndClass, LPCTSTR pCaption, UINT nID = 0, CWnd* pDlgParent = NULL);
 	autoresize::CAutoResize m_autoResize;
 
-	PAGE_LIST		m_pInfo;
-	CRect			m_FrameRect;
-	CString			m_csTitle;
-	CString			m_csLogoText;
-	WNDTREE_MAP		m_wndMap;
-	CWnd*			m_pParent;
+	PAGE_LIST m_pInfo;
+	CRect m_FrameRect;
+	CString m_csTitle;
+	CString m_csLogoText;
+	WNDTREE_MAP m_wndMap;
+	CWnd* m_pParent;
 	//{{AFX_DATA(CSettingsDialog)
 	enum
 	{
@@ -307,8 +307,8 @@ public:
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
-							 //}}AFX_VIRTUAL
+	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV supportk
+	//}}AFX_VIRTUAL
 
 	// Implementation
 protected:
@@ -348,7 +348,7 @@ public:
 	//{{AFX_VIRTUAL(CDlgSetTab1)
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV サポート
-							 //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 	// インプリメンテーション
 protected:

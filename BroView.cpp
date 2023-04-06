@@ -45,7 +45,7 @@ CChildView::~CChildView()
 }
 
 const UINT CChildView::m_pFindDialogMessage = RegisterWindowMessage(FINDMSGSTRING);
-BEGIN_MESSAGE_MAP(CChildView,ViewBaseClass )
+BEGIN_MESSAGE_MAP(CChildView, ViewBaseClass)
 	//{{AFX_MSG_MAP(CChildView)
 	ON_WM_DESTROY()
 	ON_WM_TIMER()
@@ -54,10 +54,10 @@ BEGIN_MESSAGE_MAP(CChildView,ViewBaseClass )
 	ON_COMMAND(ID_NEW, OnNew)
 	ON_COMMAND(ID_NEW_BLANK, OnNewBlank)
 	ON_COMMAND(ID_NEW_BLANK_TAB, OnNewBlank)
-	ON_COMMAND(ID_REOPEN_CLOSE_TAB,OnReopenCloseTab)
+	ON_COMMAND(ID_REOPEN_CLOSE_TAB, OnReopenCloseTab)
 	ON_COMMAND(ID_NEW_SESSION, OnNewSession)
 	ON_COMMAND(ID_PRINT, OnPrint)
-	ON_COMMAND(ID_PRINT_PDF,OnPrintPDF)
+	ON_COMMAND(ID_PRINT_PDF, OnPrintPDF)
 	ON_COMMAND(ID_GO_BACK, OnGoBack)
 	ON_COMMAND(ID_SHOW_DEVTOOLS, ShowDevTools)
 
@@ -77,18 +77,18 @@ BEGIN_MESSAGE_MAP(CChildView,ViewBaseClass )
 	ON_COMMAND(ID_PASTE, OnPaste)
 	ON_COMMAND(ID_SEL_ALL, OnSelAll)
 	ON_COMMAND(ID_FIND_PAGE, OnFindPage)
-	ON_COMMAND(ID_ZOOM_DOWN,OnZoomDown)
-	ON_COMMAND(ID_ZOOM_UP,OnZoomUp)
-	ON_COMMAND(ID_ZOOM_RESET,OnZoomReset)
+	ON_COMMAND(ID_ZOOM_DOWN, OnZoomDown)
+	ON_COMMAND(ID_ZOOM_UP, OnZoomUp)
+	ON_COMMAND(ID_ZOOM_RESET, OnZoomReset)
 	//}}AFX_MSG_MAP
 	ON_UPDATE_COMMAND_UI(ID_CUT, &CChildView::OnUpdateCut)
 	ON_UPDATE_COMMAND_UI(ID_PASTE, &CChildView::OnUpdatePaste)
 	ON_COMMAND(ID_SETTINGS, &CChildView::OnSettings)
-	ON_COMMAND(ID_APP_ABOUT,&CChildView::OnAppAbout)
+	ON_COMMAND(ID_APP_ABOUT, &CChildView::OnAppAbout)
 
-	ON_COMMAND_RANGE(ID_BF_BACK1,ID_BF_BACK_END,OnBroBack)
+	ON_COMMAND_RANGE(ID_BF_BACK1, ID_BF_BACK_END, OnBroBack)
 	ON_COMMAND_RANGE(ID_ZOOM_START, ID_ZOOM_END, OnZoom)
-	ON_COMMAND_RANGE(ID_BF_FORWARD1,ID_BF_FORWARD_END,OnBroForward)
+	ON_COMMAND_RANGE(ID_BF_FORWARD1, ID_BF_FORWARD_END, OnBroForward)
 	ON_WM_SETFOCUS()
 	ON_WM_KILLFOCUS()
 
@@ -106,23 +106,23 @@ BEGIN_MESSAGE_MAP(CChildView,ViewBaseClass )
 	ON_MESSAGE(WM_APP_CEF_SEARCH_URL, &CChildView::OnSearchURL)
 	ON_MESSAGE(WM_APP_CEF_CLOSE_BROWSER, &CChildView::OnCloseBrowser)
 	//ON_MESSAGE(WM_APP_CEF_NEW_BROWSER, &CChildView::OnNewBrowser)
-	ON_MESSAGE(WM_APP_CEF_DOWNLOAD_BLANK_PAGE,&CChildView::OnDownloadBlankPage)
+	ON_MESSAGE(WM_APP_CEF_DOWNLOAD_BLANK_PAGE, &CChildView::OnDownloadBlankPage)
 	ON_MESSAGE(WM_APP_CEF_NEW_WINDOW, &CChildView::OnNewWindow)
 	ON_MESSAGE(WM_NEW_WINDOW_URL, OnCreateNewBrowserWindow)
-	ON_MESSAGE(WM_COPY_IMAGE,&CChildView::OnCopyImage)
+	ON_MESSAGE(WM_COPY_IMAGE, &CChildView::OnCopyImage)
 
 	ON_MESSAGE(WM_APP_CEF_AUTHENTICATE, &CChildView::OnAuthenticate)
 	ON_MESSAGE(WM_APP_CEF_BAD_CERTIFICATE, &CChildView::OnBadCertificate)
-	ON_MESSAGE(WM_APP_CEF_BEFORE_RESOURCE_LOAD,&CChildView::OnBeforeResourceLoad)
-	ON_MESSAGE(WM_APP_CEF_FULLSCREEN_MODE_CHANGE,&CChildView::OnFullScreenModeChange)
+	ON_MESSAGE(WM_APP_CEF_BEFORE_RESOURCE_LOAD, &CChildView::OnBeforeResourceLoad)
+	ON_MESSAGE(WM_APP_CEF_FULLSCREEN_MODE_CHANGE, &CChildView::OnFullScreenModeChange)
 	ON_MESSAGE(WM_APP_CEF_PROGRESS_CHANGE, &CChildView::OnProgressChange)
 	ON_MESSAGE(WM_APP_CEF_WINDOW_ACTIVATE, &CChildView::OnWindowActivate)
-	ON_MESSAGE(WM_APP_CEF_SET_RENDERER_PID,&CChildView::OnSetRendererPID)
-	
+	ON_MESSAGE(WM_APP_CEF_SET_RENDERER_PID, &CChildView::OnSetRendererPID)
+
 	ON_REGISTERED_MESSAGE(m_pFindDialogMessage, OnFindDialogMessage)
 END_MESSAGE_MAP()
 
-BOOL CChildView::PreCreateWindow(CREATESTRUCT &cs)
+BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	PROC_TIME(PreCreateWindow)
 
@@ -136,14 +136,14 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT &cs)
 
 	WNDCLASS wc = {0};
 	wc.lpfnWndProc = AfxWndProc;
-	wc.cbClsExtra  = 0;
-	wc.cbWndExtra  = 0;
-	wc.hInstance   = theApp.m_hInstance;
-	wc.hIcon       = 0;
-	wc.hCursor     = theApp.LoadStandardCursor(IDC_ARROW);
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = theApp.m_hInstance;
+	wc.hIcon = 0;
+	wc.hCursor = theApp.LoadStandardCursor(IDC_ARROW);
 	wc.style = CS_DBLCLKS;
-	wc.hbrBackground = HBRUSH(COLOR_WINDOW+1);
-	wc.lpszMenuName  = 0;
+	wc.hbrBackground = HBRUSH(COLOR_WINDOW + 1);
+	wc.lpszMenuName = 0;
 
 	wc.lpszClassName = _T("CSGView");
 	AfxRegisterClass(&wc);
@@ -153,7 +153,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT &cs)
 	return TRUE;
 }
 
-BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
+BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext)
 {
 	PROC_TIME(Create)
 
@@ -173,34 +173,67 @@ BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwS
 			double dZoom = 0.0;
 			switch (iZoomSizeReg)
 			{
-				case 500:dZoom = 9.0; break;
-				case 400:dZoom = 8.0; break;
-				case 300:dZoom = 6.0; break;
-				case 250:dZoom = 5.0; break;
-				case 200:dZoom = 4.0; break;
-				case 175:dZoom = 3.5; break;
-				case 150:dZoom = 2.5; break;
-				case 125:dZoom = 1.5; break;
-				case 110:dZoom = 0.5; break;
-				case 100:dZoom = 0.0; break;
+			case 500:
+				dZoom = 9.0;
+				break;
+			case 400:
+				dZoom = 8.0;
+				break;
+			case 300:
+				dZoom = 6.0;
+				break;
+			case 250:
+				dZoom = 5.0;
+				break;
+			case 200:
+				dZoom = 4.0;
+				break;
+			case 175:
+				dZoom = 3.5;
+				break;
+			case 150:
+				dZoom = 2.5;
+				break;
+			case 125:
+				dZoom = 1.5;
+				break;
+			case 110:
+				dZoom = 0.5;
+				break;
+			case 100:
+				dZoom = 0.0;
+				break;
 
-				case 90:dZoom = -0.5; break;
-				case 80:dZoom = -1.0; break;
-				case 75:dZoom = -1.5; break;
-				case 67:dZoom = -2.0; break;
-				case 50:dZoom = -3.5; break;
-				case 33:dZoom = -5.0; break;
-				case 25:dZoom = -6.0; break;
-				default: dZoom = 0.0; break;
+			case 90:
+				dZoom = -0.5;
+				break;
+			case 80:
+				dZoom = -1.0;
+				break;
+			case 75:
+				dZoom = -1.5;
+				break;
+			case 67:
+				dZoom = -2.0;
+				break;
+			case 50:
+				dZoom = -3.5;
+				break;
+			case 33:
+				dZoom = -5.0;
+				break;
+			case 25:
+				dZoom = -6.0;
+				break;
+			default:
+				dZoom = 0.0;
+				break;
 			}
 			m_dbZoomSizeDefault = dZoom;
 		}
 		CString logmsg;
-		logmsg.Format(_T("ChildView::Create BF_WND:0x%08x CV_WND:0x%08x")
-			,theApp.SafeWnd(m_pwndFrame)
-			,theApp.SafeWnd(this->m_hWnd)
-			);
-		theApp.WriteDebugTraceDateTime(logmsg,DEBUG_LOG_TYPE_GE);
+		logmsg.Format(_T("ChildView::Create BF_WND:0x%08x CV_WND:0x%08x"), theApp.SafeWnd(m_pwndFrame), theApp.SafeWnd(this->m_hWnd));
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 	catch (...)
 	{
@@ -253,7 +286,7 @@ void CChildView::OnSize(UINT nType, int cx, int cy)
 	}
 }
 
-BOOL CChildView::OnEraseBkgnd(CDC *pDC)
+BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 {
 	return TRUE;
 }
@@ -337,7 +370,7 @@ void CChildView::UpDateAddressBar()
 		}
 	}
 }
-BOOL CChildView::IsFileURINavigation(const CString &strURL)
+BOOL CChildView::IsFileURINavigation(const CString& strURL)
 {
 	//Trueの場合は、ヒットしたので、そのまま開いてはダメ
 	//Falseの場合は、そのまま開く。
@@ -535,7 +568,7 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	return FALSE;
 }
 
-BOOL CChildView::IsRedirectURLChk(const CString &strURL, BOOL bTop)
+BOOL CChildView::IsRedirectURLChk(const CString& strURL, BOOL bTop)
 {
 	PROC_TIME(IsRedirectURLChk)
 
@@ -622,7 +655,7 @@ void CChildView::IsRedirectWndAutoCloseChk()
 		m_cefBrowser->GetMainFrame()->ExecuteJavaScript(strCefJsStr, "", 0);
 }
 
-typedef int(__stdcall *TMessageBoxTimeout)(HWND, LPCTSTR, LPCTSTR, UINT, WORD, DWORD);
+typedef int(__stdcall* TMessageBoxTimeout)(HWND, LPCTSTR, LPCTSTR, UINT, WORD, DWORD);
 void CChildView::ShowTimeoutMessageBox(LPCTSTR strMsg, int iType, int iTimeOut)
 {
 	try
@@ -665,7 +698,7 @@ void CChildView::ShowTimeoutMessageBox(LPCTSTR strMsg, int iType, int iTimeOut)
 	}
 }
 
-void CChildView::ResizeFrmWindow(RECT &rectClient)
+void CChildView::ResizeFrmWindow(RECT& rectClient)
 {
 	PROC_TIME(ResizeFrmWindow)
 
@@ -726,7 +759,7 @@ void CChildView::ResizeWindowPopupInpl()
 		{
 			if (FRM->m_pwndReBar)
 			{
-				CReBarCtrl &rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
+				CReBarCtrl& rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
 				REBARBANDINFO rbbi = {0};
 				REBARBANDINFO rbbiNull = {0};
 				UINT cbCompileSize = 0;
@@ -827,9 +860,9 @@ void CChildView::ResizeWindowPopupInpl()
 				rcFeature.OffsetRect(m_popupFeatures->x, 0);
 
 			//マルチモニター補正
-			CWnd *pView = NULL;
+			CWnd* pView = NULL;
 			HWND hWnd = {0};
-			pView = (CWnd *)theApp.GetActiveViewPtr();
+			pView = (CWnd*)theApp.GetActiveViewPtr();
 			if (theApp.IsWnd(pView))
 			{
 				hWnd = pView->m_hWnd;
@@ -890,7 +923,7 @@ void CChildView::ReSetRendererPID()
 {
 	try
 	{
-		if (!theApp.IsWnd(this))return;
+		if (!theApp.IsWnd(this)) return;
 		if (IsBrowserNull()) return;
 		CefRefPtr<CefFrame> frame;
 		frame = m_cefBrowser->GetMainFrame();
@@ -952,25 +985,43 @@ BOOL CChildView::ZoomTo(double lFactor)
 		{
 			double dScale = 0.0;
 
-			     if (m_dbZoomSize == 9.0)dScale= 500;
-			else if (m_dbZoomSize == 8.0)dScale = 400;
-			else if (m_dbZoomSize == 6.0)dScale = 300;
-			else if (m_dbZoomSize == 5.0)dScale = 250;
-			else if (m_dbZoomSize == 4.0)dScale = 200;
-			else if (m_dbZoomSize == 3.5)dScale = 175;
-			else if (m_dbZoomSize == 2.5)dScale = 150;
-			else if (m_dbZoomSize == 1.5)dScale = 125;
-			else if (m_dbZoomSize == 0.5)dScale = 110;
-			else if (m_dbZoomSize == 0.0)dScale = 100;
-			else if (m_dbZoomSize == -0.5)dScale = 90;
-			else if (m_dbZoomSize == -1.0)dScale = 80;
-			else if (m_dbZoomSize == -1.5)dScale = 75;
-			else if (m_dbZoomSize == -2.0)dScale = 67;
-			else if (m_dbZoomSize == -3.5)dScale = 50;
-			else if (m_dbZoomSize == -5.0)dScale = 33;
-			else if (m_dbZoomSize == -6.0)dScale = 25;
-			else dScale = 100;
-		
+			if (m_dbZoomSize == 9.0)
+				dScale = 500;
+			else if (m_dbZoomSize == 8.0)
+				dScale = 400;
+			else if (m_dbZoomSize == 6.0)
+				dScale = 300;
+			else if (m_dbZoomSize == 5.0)
+				dScale = 250;
+			else if (m_dbZoomSize == 4.0)
+				dScale = 200;
+			else if (m_dbZoomSize == 3.5)
+				dScale = 175;
+			else if (m_dbZoomSize == 2.5)
+				dScale = 150;
+			else if (m_dbZoomSize == 1.5)
+				dScale = 125;
+			else if (m_dbZoomSize == 0.5)
+				dScale = 110;
+			else if (m_dbZoomSize == 0.0)
+				dScale = 100;
+			else if (m_dbZoomSize == -0.5)
+				dScale = 90;
+			else if (m_dbZoomSize == -1.0)
+				dScale = 80;
+			else if (m_dbZoomSize == -1.5)
+				dScale = 75;
+			else if (m_dbZoomSize == -2.0)
+				dScale = 67;
+			else if (m_dbZoomSize == -3.5)
+				dScale = 50;
+			else if (m_dbZoomSize == -5.0)
+				dScale = 33;
+			else if (m_dbZoomSize == -6.0)
+				dScale = 25;
+			else
+				dScale = 100;
+
 			CString strZoomFmt;
 			strZoomFmt.Format(_T("%.0f%%"), dScale);
 			FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
@@ -1000,69 +1051,124 @@ void CChildView::SetWheelZoom(int iDel)
 	try
 	{
 		double iZoom = GetZoomSizeEx();
-		double iZoomR=0.0;
-		if(iZoom >= 9.0)iZoomR = 9.0;
-		else if (iZoom >= 8.0)iZoomR = 8.0;
-		else if (iZoom >= 6.0)iZoomR = 6.0;
-		else if (iZoom >= 5.0)iZoomR = 5.0;
-		else if (iZoom >= 4.0)iZoomR = 4.0;
-		else if (iZoom >= 3.5)iZoomR = 3.5;
-		else if (iZoom >= 2.5)iZoomR = 2.5;
-		else if (iZoom >= 1.5)iZoomR = 1.5;
-		else if (iZoom >= 0.5)iZoomR = 0.5;
-		else if (iZoom >= 0.0)iZoomR = 0.0;
-		else if (iZoom >= -0.5)iZoomR = -0.5;
-		else if (iZoom >= -1.0)iZoomR = -1.0;
-		else if (iZoom >= -1.5)iZoomR = -1.5;
-		else if (iZoom >= -2.0)iZoomR = -2.0;
-		else if (iZoom >= -3.5)iZoomR = -3.5;
-		else if (iZoom >= -5.0)iZoomR = -5.0;
-		else if (iZoom >= -6.0)iZoomR = -6.0;
-		else if (iZoom < -6.0)	iZoomR = -6.0;
-		else iZoomR = 0.0;
+		double iZoomR = 0.0;
+		if (iZoom >= 9.0)
+			iZoomR = 9.0;
+		else if (iZoom >= 8.0)
+			iZoomR = 8.0;
+		else if (iZoom >= 6.0)
+			iZoomR = 6.0;
+		else if (iZoom >= 5.0)
+			iZoomR = 5.0;
+		else if (iZoom >= 4.0)
+			iZoomR = 4.0;
+		else if (iZoom >= 3.5)
+			iZoomR = 3.5;
+		else if (iZoom >= 2.5)
+			iZoomR = 2.5;
+		else if (iZoom >= 1.5)
+			iZoomR = 1.5;
+		else if (iZoom >= 0.5)
+			iZoomR = 0.5;
+		else if (iZoom >= 0.0)
+			iZoomR = 0.0;
+		else if (iZoom >= -0.5)
+			iZoomR = -0.5;
+		else if (iZoom >= -1.0)
+			iZoomR = -1.0;
+		else if (iZoom >= -1.5)
+			iZoomR = -1.5;
+		else if (iZoom >= -2.0)
+			iZoomR = -2.0;
+		else if (iZoom >= -3.5)
+			iZoomR = -3.5;
+		else if (iZoom >= -5.0)
+			iZoomR = -5.0;
+		else if (iZoom >= -6.0)
+			iZoomR = -6.0;
+		else if (iZoom < -6.0)
+			iZoomR = -6.0;
+		else
+			iZoomR = 0.0;
 
-		if(iDel >0)
+		if (iDel > 0)
 		{
-			if(iZoomR == 9.0)return;
-			else if (iZoomR == 8.0)iZoomR =9.0;
-			else if (iZoomR == 6.0)iZoomR = 8.0;
-			else if (iZoomR == 5.0)iZoomR = 6.0;
-			else if (iZoomR == 4.0)iZoomR = 5.0;
-			else if (iZoomR == 3.5)iZoomR = 4.0;
-			else if (iZoomR == 2.5)iZoomR = 3.5;
-			else if (iZoomR == 1.5)iZoomR = 2.5;
-			else if (iZoomR == 0.5)iZoomR = 1.5;
-			else if (iZoomR == 0.0)iZoomR = 0.5;
-			else if (iZoomR == -0.5)iZoomR = 0.0;
-			else if (iZoomR == -1.0)iZoomR = -0.5;
-			else if (iZoomR == -1.5)iZoomR = -1.0;
-			else if (iZoomR == -2.0)iZoomR = -1.5;
-			else if (iZoomR == -3.5)iZoomR = -2.0;
-			else if (iZoomR == -5.0)iZoomR = -3.5;
-			else if (iZoomR == -6.0)iZoomR = -5.0;
-			else return;
+			if (iZoomR == 9.0)
+				return;
+			else if (iZoomR == 8.0)
+				iZoomR = 9.0;
+			else if (iZoomR == 6.0)
+				iZoomR = 8.0;
+			else if (iZoomR == 5.0)
+				iZoomR = 6.0;
+			else if (iZoomR == 4.0)
+				iZoomR = 5.0;
+			else if (iZoomR == 3.5)
+				iZoomR = 4.0;
+			else if (iZoomR == 2.5)
+				iZoomR = 3.5;
+			else if (iZoomR == 1.5)
+				iZoomR = 2.5;
+			else if (iZoomR == 0.5)
+				iZoomR = 1.5;
+			else if (iZoomR == 0.0)
+				iZoomR = 0.5;
+			else if (iZoomR == -0.5)
+				iZoomR = 0.0;
+			else if (iZoomR == -1.0)
+				iZoomR = -0.5;
+			else if (iZoomR == -1.5)
+				iZoomR = -1.0;
+			else if (iZoomR == -2.0)
+				iZoomR = -1.5;
+			else if (iZoomR == -3.5)
+				iZoomR = -2.0;
+			else if (iZoomR == -5.0)
+				iZoomR = -3.5;
+			else if (iZoomR == -6.0)
+				iZoomR = -5.0;
+			else
+				return;
 			ZoomTo(iZoomR);
 		}
 		else
 		{
-			if (iZoomR == 9.0)iZoomR = 8.0;
-			else if (iZoomR == 8.0)iZoomR = 6.0;
-			else if (iZoomR == 6.0)iZoomR = 5.0;
-			else if (iZoomR == 5.0)iZoomR = 4.0;
-			else if (iZoomR == 4.0)iZoomR = 3.5;
-			else if (iZoomR == 3.5)iZoomR = 2.5;
-			else if (iZoomR == 2.5)iZoomR = 1.5;
-			else if (iZoomR == 1.5)iZoomR = 0.5;
-			else if (iZoomR == 0.5)iZoomR = 0.0;
-			else if (iZoomR == 0.0)iZoomR = -0.5;
-			else if (iZoomR == -0.5)iZoomR = -1.0;
-			else if (iZoomR == -1.0)iZoomR = -1.5;
-			else if (iZoomR == -1.5)iZoomR = -2.0;
-			else if (iZoomR == -2.0)iZoomR = -3.5;
-			else if (iZoomR == -3.5)iZoomR = -5.0;
-			else if (iZoomR == -5.0)iZoomR = -6.0;
-			else if (iZoomR == -6.0)return;
-			else return;
+			if (iZoomR == 9.0)
+				iZoomR = 8.0;
+			else if (iZoomR == 8.0)
+				iZoomR = 6.0;
+			else if (iZoomR == 6.0)
+				iZoomR = 5.0;
+			else if (iZoomR == 5.0)
+				iZoomR = 4.0;
+			else if (iZoomR == 4.0)
+				iZoomR = 3.5;
+			else if (iZoomR == 3.5)
+				iZoomR = 2.5;
+			else if (iZoomR == 2.5)
+				iZoomR = 1.5;
+			else if (iZoomR == 1.5)
+				iZoomR = 0.5;
+			else if (iZoomR == 0.5)
+				iZoomR = 0.0;
+			else if (iZoomR == 0.0)
+				iZoomR = -0.5;
+			else if (iZoomR == -0.5)
+				iZoomR = -1.0;
+			else if (iZoomR == -1.0)
+				iZoomR = -1.5;
+			else if (iZoomR == -1.5)
+				iZoomR = -2.0;
+			else if (iZoomR == -2.0)
+				iZoomR = -3.5;
+			else if (iZoomR == -3.5)
+				iZoomR = -5.0;
+			else if (iZoomR == -5.0)
+				iZoomR = -6.0;
+			else if (iZoomR == -6.0)
+				return;
+			else
+				return;
 			ZoomTo(iZoomR);
 		}
 	}
@@ -1087,7 +1193,7 @@ double CChildView::GetZoomSizeEx()
 	return iRet;
 }
 
-BOOL CChildView::PreTranslateMessage(MSG *pMsg)
+BOOL CChildView::PreTranslateMessage(MSG* pMsg)
 {
 	ASSERT(pMsg != NULL);
 	ASSERT_VALID(this);
@@ -1096,66 +1202,68 @@ BOOL CChildView::PreTranslateMessage(MSG *pMsg)
 
 	switch (pMsg->message)
 	{
-		case WM_KEYDOWN:
+	case WM_KEYDOWN:
+	{
+		switch (pMsg->wParam)
 		{
-			switch (pMsg->wParam)
-			{
-		        case VK_BROWSER_BACK:
-				{
-					OnGoBack();
-					return TRUE;
-				}
-				case VK_BROWSER_FORWARD:
-				{
-					OnGoForward();
-					return TRUE;
-				}
-				case VK_BROWSER_REFRESH:
-				{
-					OnViewRefresh();
-					return TRUE;
-				}
-				case VK_BROWSER_STOP:
-				{
-					OnViewStop();
-					return TRUE;
-				}
-				case VK_BROWSER_HOME:
-				{
-					OnGoStartPage();
-					return TRUE;
-				}
-				default:break;
-			}
+		case VK_BROWSER_BACK:
+		{
+			OnGoBack();
+			return TRUE;
+		}
+		case VK_BROWSER_FORWARD:
+		{
+			OnGoForward();
+			return TRUE;
+		}
+		case VK_BROWSER_REFRESH:
+		{
+			OnViewRefresh();
+			return TRUE;
+		}
+		case VK_BROWSER_STOP:
+		{
+			OnViewStop();
+			return TRUE;
+		}
+		case VK_BROWSER_HOME:
+		{
+			OnGoStartPage();
+			return TRUE;
+		}
+		default:
 			break;
 		}
-		case WM_XBUTTONUP:
+		break;
+	}
+	case WM_XBUTTONUP:
+	{
+		int nArg = HIWORD(pMsg->wParam);
+		if (nArg == XBUTTON1)
 		{
-			int nArg = HIWORD(pMsg->wParam);
-			if(nArg==XBUTTON1)
-			{
-				OnGoBack();
-				return TRUE;				
-			}
-			else if(nArg==XBUTTON2)
-			{
-				OnGoForward();
-				return TRUE;
-			}
-			break;
+			OnGoBack();
+			return TRUE;
 		}
-		case WM_MOUSEWHEEL:
+		else if (nArg == XBUTTON2)
 		{
-			//VK_CONTROL
-			if(::GetKeyState(VK_CONTROL) < 0)
-			{
-				int zDelta = (SHORT)HIWORD(pMsg->wParam);
-				SetWheelZoom(zDelta);
-				return TRUE;
-			}
-			break;
+			OnGoForward();
+			return TRUE;
 		}
-		default:break;
+		break;
+	}
+	case WM_MOUSEWHEEL:
+	{
+		//VK_CONTROL
+		if (::GetKeyState(VK_CONTROL) < 0)
+		{
+			int zDelta = (SHORT)HIWORD(pMsg->wParam);
+			SetWheelZoom(zDelta);
+			return TRUE;
+		}
+		break;
+	}
+	default:
+		break;
 	}
 	return ViewBaseClass::PreTranslateMessage(pMsg);
 }
@@ -1288,7 +1396,8 @@ void CChildView::OnPrintPDF()
 		//Download禁止
 		if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 		{
-			if (theApp.IsWnd(m_pwndFrame)) {
+			if (theApp.IsWnd(m_pwndFrame))
+			{
 				CString restrictedMsg;
 				restrictedMsg.LoadString(ID_MSG_FILE_DOWNLOAD_RESTRICTED);
 				theApp.SB_MessageBox(m_pwndFrame->m_hWnd, restrictedMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
@@ -1300,7 +1409,8 @@ void CChildView::OnPrintPDF()
 		strFileName = m_strTitle;
 		strFileName.TrimLeft();
 		strFileName.TrimRight();
-		if (strFileName.IsEmpty()) {
+		if (strFileName.IsEmpty())
+		{
 			strFileName.LoadString(ID_DEFAULT_FILE_BASENAME);
 		}
 
@@ -1339,7 +1449,7 @@ void CChildView::OnPrintPDF()
 		CStringW strRootDrive(theApp.m_AppSettings.GetRootPath());
 		CStringW strMsg;
 
-		CFileDialog *pFileDlg = NULL;
+		CFileDialog* pFileDlg = NULL;
 		if (theApp.IsSGMode())
 		{
 			//SGModeの場合は、Classicダイアログを使用
@@ -1371,7 +1481,7 @@ void CChildView::OnPrintPDF()
 			if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableDownloadLogging())
 			{
 				CString strFileName;
-				TCHAR *ptrFile = NULL;
+				TCHAR* ptrFile = NULL;
 				ptrFile = PathFindFileName(strPath);
 				if (ptrFile)
 				{
@@ -1461,7 +1571,7 @@ void CChildView::OnGoBack()
 		GoBack();
 }
 
-void CChildView::OnUpdateGoBack(CCmdUI *pCmdUI)
+void CChildView::OnUpdateGoBack(CCmdUI* pCmdUI)
 {
 	if (m_cefBrowser)
 		pCmdUI->Enable(FRM->m_nBrowserState & CEF_BIT_CAN_GO_BACK);
@@ -1476,7 +1586,7 @@ void CChildView::OnGoForward()
 		GoForward();
 }
 
-void CChildView::OnUpdateGoForward(CCmdUI *pCmdUI)
+void CChildView::OnUpdateGoForward(CCmdUI* pCmdUI)
 {
 	if (m_cefBrowser)
 		pCmdUI->Enable(FRM->m_nBrowserState & CEF_BIT_CAN_GO_FORWARD);
@@ -1493,7 +1603,7 @@ void CChildView::OnGoStartPage()
 	}
 }
 
-void CChildView::OnUpdateGoStartPage(CCmdUI *pCmdUI)
+void CChildView::OnUpdateGoStartPage(CCmdUI* pCmdUI)
 {
 }
 
@@ -1502,16 +1612,16 @@ void CChildView::OnViewRefresh()
 	CString logmsg;
 	logmsg.Format(_T("CV_WND:0x%08x OnViewRefresh"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
-	if (::GetAsyncKeyState(VK_CONTROL) < 0
-		&&  ::GetKeyState(VK_SHIFT) >= 0
-		&&  ::GetKeyState(VK_MENU) >= 0)
+	if (::GetAsyncKeyState(VK_CONTROL) < 0 &&
+	    ::GetKeyState(VK_SHIFT) >= 0 &&
+	    ::GetKeyState(VK_MENU) >= 0)
 
 		Refresh2(REFRESH_COMPLETELY);
 	else
 		Refresh();
 }
 
-void CChildView::OnUpdateViewRefresh(CCmdUI *pCmdUI)
+void CChildView::OnUpdateViewRefresh(CCmdUI* pCmdUI)
 {
 }
 
@@ -1524,7 +1634,7 @@ void CChildView::OnViewStop()
 		Stop();
 }
 
-void CChildView::OnUpdateViewStop(CCmdUI *pCmdUI)
+void CChildView::OnUpdateViewStop(CCmdUI* pCmdUI)
 {
 	if (m_cefBrowser)
 	{
@@ -1660,7 +1770,7 @@ void CChildView::OnFindPage()
 	}
 }
 
-void CChildView::OnUpdateCut(CCmdUI *pCmdUI)
+void CChildView::OnUpdateCut(CCmdUI* pCmdUI)
 {
 	BOOL bEnable = FALSE;
 	HWND hwnd = NULL;
@@ -1678,7 +1788,7 @@ void CChildView::OnUpdateCut(CCmdUI *pCmdUI)
 	pCmdUI->Enable(bEnable);
 }
 
-void CChildView::OnUpdatePaste(CCmdUI *pCmdUI)
+void CChildView::OnUpdatePaste(CCmdUI* pCmdUI)
 {
 	BOOL bEnable = FALSE;
 	HWND hwnd = NULL;
@@ -1737,12 +1847,12 @@ void CChildView::OnBroForward(UINT nID)
 		GoForward();
 }
 
-void CChildView::OnSetFocus(CWnd *pOldWnd)
+void CChildView::OnSetFocus(CWnd* pOldWnd)
 {
 	ViewBaseClass::OnSetFocus(pOldWnd);
 }
 
-void CChildView::OnKillFocus(CWnd *pNewWnd)
+void CChildView::OnKillFocus(CWnd* pNewWnd)
 {
 	ViewBaseClass::OnKillFocus(pNewWnd);
 }
@@ -1782,7 +1892,7 @@ void CChildView::OnAddressBar(BOOL bFlg)
 			{
 				if (FRM->m_pwndReBar)
 				{
-					CReBarCtrl &rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
+					CReBarCtrl& rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
 					REBARBANDINFO rbbi = {0};
 
 					UINT cbCompileSize = 0;
@@ -1822,7 +1932,7 @@ void CChildView::OnToolBar(BOOL bFlg)
 		{
 			if (FRM->m_pwndReBar)
 			{
-				CReBarCtrl &rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
+				CReBarCtrl& rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
 				REBARBANDINFO rbbi = {0};
 				UINT cbCompileSize = 0;
 
@@ -1856,7 +1966,7 @@ void CChildView::OnMenuBar(BOOL bFlg)
 		{
 			if (FRM->m_pwndReBar)
 			{
-				CReBarCtrl &rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
+				CReBarCtrl& rbCtrl = FRM->m_pwndReBar->GetReBarCtrl();
 				REBARBANDINFO rbbi = {0};
 				UINT cbCompileSize = 0;
 				cbCompileSize = sizeof(REBARBANDINFO);
@@ -1959,7 +2069,7 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 			if (::IsWindow(theApp.m_pMainWnd->m_hWnd))
 			{
 				CString strURL = lpszUrl;
-				CChildView *pCreateView = NULL;
+				CChildView* pCreateView = NULL;
 				DWORD bFlags = bActive ? 0 : NWMF_FORCETAB;
 
 				DebugWndLogData dwLogData;
@@ -1971,7 +2081,7 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 				CString logmsg = dwLogData.GetString();
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
 
-				pCreateView = ((CMainFrame *)theApp.m_pMainWnd)->NewBrowserWindow(bFlags);
+				pCreateView = ((CMainFrame*)theApp.m_pMainWnd)->NewBrowserWindow(bFlags);
 				if (pCreateView)
 				{
 					if (strURL.IsEmpty())
@@ -1983,7 +2093,7 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 					pCreateView->GetClientRect(rect);
 					CefWindowInfo info;
 					CefRect windowBounds;
-					windowBounds.Set(rect.right,rect.top,rect.Width(),rect.Height());
+					windowBounds.Set(rect.right, rect.top, rect.Width(), rect.Height());
 					info.SetAsChild(hWnd, windowBounds);
 					CefBrowserSettings browserSettings;
 					pCreateView->m_clientHandler = new ClientHandler();
@@ -2004,7 +2114,7 @@ LRESULT CChildView::OnNewWindow(WPARAM wParam, LPARAM lParam)
 
 	BOOL bDevTools = FALSE;
 
-	CefPopupFeatures *popupFeatures = NULL;
+	CefPopupFeatures* popupFeatures = NULL;
 	if (wParam == WND_TYPE_DEV_TOOLS)
 	{
 		popupFeatures = &CefPopupFeatures();
@@ -2012,11 +2122,11 @@ LRESULT CChildView::OnNewWindow(WPARAM wParam, LPARAM lParam)
 	}
 	else
 	{
-		popupFeatures = (CefPopupFeatures *)wParam;
+		popupFeatures = (CefPopupFeatures*)wParam;
 	}
-	CefWindowInfo *windowInfo = (CefWindowInfo *)lParam;
+	CefWindowInfo* windowInfo = (CefWindowInfo*)lParam;
 
-	CChildView *pCreateView = NULL;
+	CChildView* pCreateView = NULL;
 	if (theApp.m_pMainWnd == NULL)
 	{
 		return S_OK;
@@ -2031,7 +2141,7 @@ LRESULT CChildView::OnNewWindow(WPARAM wParam, LPARAM lParam)
 	{
 		dwFlags = NWMF_SUGGESTWINDOW;
 	}
-	pCreateView = ((CMainFrame *)theApp.m_pMainWnd)->NewBrowserWindow(dwFlags);
+	pCreateView = ((CMainFrame*)theApp.m_pMainWnd)->NewBrowserWindow(dwFlags);
 
 	if (!pCreateView)
 		return S_OK;
@@ -2075,29 +2185,29 @@ LRESULT CChildView::OnCreateNewBrowserWindow(WPARAM wParam, LPARAM lParam)
 	{
 		if (lParam)
 		{
-			CString str = (TCHAR *)lParam;
+			CString str = (TCHAR*)lParam;
 			BOOL bActive = true;
 			if (wParam)
 			{
 				switch (wParam)
 				{
-					case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
-					{
-						bActive = true;
-						break;
-					}
-					case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
-					{
-						bActive = false;
-						break;
-					}
-					case cef_window_open_disposition_t::WOD_NEW_WINDOW:
-					{
-						bActive = true;
-						break;
-					}
-					default:
-						break;
+				case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
+				{
+					bActive = true;
+					break;
+				}
+				case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
+				{
+					bActive = false;
+					break;
+				}
+				case cef_window_open_disposition_t::WOD_NEW_WINDOW:
+				{
+					bActive = true;
+					break;
+				}
+				default:
+					break;
 				}
 			}
 			CreateNewBrowserWindow(str, bActive);
@@ -2159,12 +2269,12 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 		if (!strURL.IsEmpty())
 		{
 			BOOL bTopPage = FALSE;
-			UINT *pbRet = NULL;
+			UINT* pbRet = NULL;
 
 			//TOPページ(Frameなし)
 			if (lParam)
 			{
-				pbRet = (UINT *)lParam;
+				pbRet = (UINT*)lParam;
 			}
 			if (pbRet)
 			{
@@ -2214,7 +2324,7 @@ LRESULT CChildView::OnDownloadBlankPage(WPARAM wParam, LPARAM lParam)
 			{
 				if (theApp.GetActiveViewPtr() == this)
 				{
-					CBrowserFrame *pWnd = NULL;
+					CBrowserFrame* pWnd = NULL;
 					pWnd = theApp.GetNextGenerationActiveWindow(FRM);
 					if (theApp.IsWnd(pWnd))
 					{
@@ -2455,7 +2565,7 @@ LRESULT CChildView::OnWindowActivate(WPARAM wParam, LPARAM lParam)
 LRESULT CChildView::OnSetRendererPID(WPARAM wParam, LPARAM lParam)
 {
 	FRM->m_RendererPID = (UINT)wParam;
-	CBrowserFrame *pFrm = NULL;
+	CBrowserFrame* pFrm = NULL;
 	if (FRM->m_RendererPID > 0)
 	{
 		pFrm = theApp.GetActiveBFramePtr();
@@ -2526,7 +2636,7 @@ LRESULT CChildView::OnCloseBrowser(WPARAM wParam, LPARAM lParam)
 //	this->PostMessage(WM_SIZE);
 //	return S_OK;
 //}
-void CChildView::SetBrowserPtr(INT nBrowserId,CefRefPtr<CefBrowser> browser)
+void CChildView::SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser)
 {
 	ASSERT(!m_nBrowserID);
 	m_cefBrowser = browser;
@@ -2536,7 +2646,7 @@ void CChildView::SetBrowserPtr(INT nBrowserId,CefRefPtr<CefBrowser> browser)
 
 LRESULT CChildView::OnAuthenticate(WPARAM wParam, LPARAM lParam)
 {
-	CEFAuthenticationValues *lpValues = (CEFAuthenticationValues *)wParam;
+	CEFAuthenticationValues* lpValues = (CEFAuthenticationValues*)wParam;
 	CString strHost(lpValues->lpszHost);
 	CDlgAuth Dlg(this);
 	CString authRequiredMsg;
@@ -2573,7 +2683,7 @@ void CChildView::Navigate(LPCTSTR pszURL)
 
 		CefWindowInfo info;
 		CefRect windowBounds;
-		windowBounds.Set(rect.right, rect.top,rect.right-rect.left,rect.bottom-rect.top);
+		windowBounds.Set(rect.right, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 		info.SetAsChild(GetSafeHwnd(), windowBounds);
 
 		CefBrowserSettings browserSettings;

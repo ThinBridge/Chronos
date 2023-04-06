@@ -4,7 +4,7 @@
 #include "afxdialogex.h"
 IMPLEMENT_DYNAMIC(CDlgDomainDetail, CDialogEx)
 CDlgDomainDetail::CDlgDomainDetail(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DIALOG5, pParent)
+    : CDialogEx(IDD_DIALOG5, pParent)
 {
 }
 
@@ -92,7 +92,7 @@ BOOL CDlgDomainDetail::OnInitDialog()
 ////////////////////////////////////////////////////////////////////////////////////////////
 IMPLEMENT_DYNAMIC(CDlgCustomScriptDetail, CDialogEx)
 CDlgCustomScriptDetail::CDlgCustomScriptDetail(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DIALOG6, pParent)
+    : CDialogEx(IDD_DIALOG6, pParent)
 {
 }
 

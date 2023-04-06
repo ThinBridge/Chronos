@@ -79,8 +79,8 @@ STDMETHODIMP CMyObject::Invoke(DISPID dispIdMember,
 				return DISP_E_MEMBERNOTFOUND;
 			else if (pDispParams->cArgs == 2)
 			{
-				if (!(pDispParams->rgvarg[0].vt == VT_BSTR
-					&& pDispParams->rgvarg[1].vt == VT_BSTR))
+				if (!(pDispParams->rgvarg[0].vt == VT_BSTR &&
+				      pDispParams->rgvarg[1].vt == VT_BSTR))
 				{
 					_variant_t str0(pDispParams->rgvarg[0]);
 					str0.ChangeType(VT_BSTR);
@@ -169,20 +169,20 @@ STDMETHODIMP CActiveScriptSite::OnScriptError(IActiveScriptError* pscripterror)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////CLogDispatcher///////////////
 #define ERR_SERVER_SETTINGS_NOT_FOUND 1
-#define ERR_SERVER_SESSION 2
-#define ERR_SERVER_SETTINGS_INVALID 3
-#define ERR_SERVER_CONNECT	4
-#define ERR_SERVER_REQUEST	5
-#define ERR_SERVER_SEND_REQUEST	6
-#define ERR_SERVER_RECEIVE_RESPONSE	7
-#define ERR_SERVER_QUERY_HEADERS	8
-#define ERR_SERVER_HTTP_STATUS	9
-#define ERR_SERVER_RESPONSE_EMPTY	10
-#define ERR_SERVER_RESPONSE_INVALID 11
-#define ERR_SERVER_RESPONSE_STOP	12
+#define ERR_SERVER_SESSION	      2
+#define ERR_SERVER_SETTINGS_INVALID   3
+#define ERR_SERVER_CONNECT	      4
+#define ERR_SERVER_REQUEST	      5
+#define ERR_SERVER_SEND_REQUEST	      6
+#define ERR_SERVER_RECEIVE_RESPONSE   7
+#define ERR_SERVER_QUERY_HEADERS      8
+#define ERR_SERVER_HTTP_STATUS	      9
+#define ERR_SERVER_RESPONSE_EMPTY     10
+#define ERR_SERVER_RESPONSE_INVALID   11
+#define ERR_SERVER_RESPONSE_STOP      12
 
-#define ERR_SERVER_ETC	999
-#define OK_SERVER 200
+#define ERR_SERVER_ETC 999
+#define OK_SERVER      200
 
 CString CLogDispatcher::GetOpStr(int iLogType)
 {

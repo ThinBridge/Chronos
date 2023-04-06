@@ -7,11 +7,11 @@ template <typename T>
 inline MH_STATUS MH_CreateHookApiEx(
     LPCWSTR pszModule, LPCSTR pszProcName, LPVOID pDetour, T** ppOriginal)
 {
-    return MH_CreateHookApi(
-        pszModule, pszProcName, pDetour, reinterpret_cast<LPVOID*>(ppOriginal));
+	return MH_CreateHookApi(
+	    pszModule, pszProcName, pDetour, reinterpret_cast<LPVOID*>(ppOriginal));
 }
 
-#define RVA2PTR(base, rva) (((PBYTE) base) + rva)
+#define RVA2PTR(base, rva) (((PBYTE)base) + rva)
 
 class APIHookC //:public CObject
 {

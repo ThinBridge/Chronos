@@ -5,7 +5,7 @@
 
 IMPLEMENT_DYNAMIC(CDlgDL, CDialogEx)
 CDlgDL::CDlgDL(CWnd* pParent, UINT nBrowserId)
-	: CDialogEx(IDD_DIALOG4, pParent)
+    : CDialogEx(IDD_DIALOG4, pParent)
 {
 	m_pParent = pParent;
 	m_bDLCancel = FALSE;
@@ -141,7 +141,7 @@ void CDlgDL::OnBnClickedButton1()
 IMPLEMENT_DYNAMIC(ProgressDlg, CDialogEx)
 
 ProgressDlg::ProgressDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(ProgressDlg::IDD, pParent)
+    : CDialogEx(ProgressDlg::IDD, pParent)
 {
 	m_iCntg = 0;
 	m_pParent = pParent;

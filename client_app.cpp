@@ -77,21 +77,20 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 		command_line->AppendSwitch(_T("disable-gpu-compositing"));
 		command_line->AppendSwitch(_T("enable-begin-frame-scheduling"));
 	}
-//	else
-//	{
-
-//		command_line->AppendSwitchWithValue(_T("enable-gpu-rasterization"),_T("Enabled"));
-//		command_line->AppendSwitchWithValue(_T("num-raster-threads"), _T("4"));
-//		command_line->AppendSwitch(_T("disable-accelerated-2d-canvas"));
-//		command_line->AppendSwitch(_T("disable-gpu-compositing"));
-//		command_line->AppendSwitch(_T("disable-gpu-driver-bug-workarounds"));
-		//command_line->AppendSwitch(_T("disable-gpu-rasterization"));
-		//command_line->AppendSwitch(_T("disable-gpu-sandbox"));
-		//command_line->AppendSwitch(_T("disable-gpu-shader-disk-cache"));
-//		command_line->AppendSwitch(_T("disable-native-gpu-memory-buffers"));
-		//command_line->AppendSwitch(_T("disable-gpu-early-init"));
-//		command_line->AppendSwitch(_T("disable-gpu-memory-buffer-compositor-resources"));
-//	}
+	//else
+	//{
+	//	command_line->AppendSwitchWithValue(_T("enable-gpu-rasterization"),_T("Enabled"));
+	//	command_line->AppendSwitchWithValue(_T("num-raster-threads"), _T("4"));
+	//	command_line->AppendSwitch(_T("disable-accelerated-2d-canvas"));
+	//	command_line->AppendSwitch(_T("disable-gpu-compositing"));
+	//	command_line->AppendSwitch(_T("disable-gpu-driver-bug-workarounds"));
+	//	command_line->AppendSwitch(_T("disable-gpu-rasterization"));
+	//	command_line->AppendSwitch(_T("disable-gpu-sandbox"));
+	//	command_line->AppendSwitch(_T("disable-gpu-shader-disk-cache"));
+	//	command_line->AppendSwitch(_T("disable-native-gpu-memory-buffers"));
+	//	command_line->AppendSwitch(_T("disable-gpu-early-init"));
+	//	command_line->AppendSwitch(_T("disable-gpu-memory-buffer-compositor-resources"));
+	//}
 
 	//Proxy Settings
 	CString strProxyName;

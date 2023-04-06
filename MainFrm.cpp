@@ -16,16 +16,16 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_TIMER()
 	ON_WM_SETTINGCHANGE()
 	//}}AFX_MSG_MAP
-	ON_COMMAND(WM_VIEW_INIT_OK,View_InitOK)
-	ON_MESSAGE(WM_DELETE_WINDOW_LIST,DeleteWindowList)
-	ON_MESSAGE(WM_NEWINSTANCE,OnNewInstance)
-	ON_MESSAGE(WM_AUTH_DBL,OnDBLAuthChk)
-	ON_MESSAGE(WM_ACTIVE_HEAD,OnActiveHead)
-	ON_MESSAGE(WM_ACTIVE_TAIL,OnActiveTail)
-	ON_MESSAGE(WM_SAVE_WND_M,OnSaveWindowListMSG)
-	ON_COMMAND(WM_CLOSE_TIME_LIMIT,OnAppExitTimeLimit)
-	ON_COMMAND(WM_APP_EXIT,OnAppExitEx)
-	ON_COMMAND(WM_CLOSE_MAX_MEM,OnAppExitMaxMem)
+	ON_COMMAND(WM_VIEW_INIT_OK, View_InitOK)
+	ON_MESSAGE(WM_DELETE_WINDOW_LIST, DeleteWindowList)
+	ON_MESSAGE(WM_NEWINSTANCE, OnNewInstance)
+	ON_MESSAGE(WM_AUTH_DBL, OnDBLAuthChk)
+	ON_MESSAGE(WM_ACTIVE_HEAD, OnActiveHead)
+	ON_MESSAGE(WM_ACTIVE_TAIL, OnActiveTail)
+	ON_MESSAGE(WM_SAVE_WND_M, OnSaveWindowListMSG)
+	ON_COMMAND(WM_CLOSE_TIME_LIMIT, OnAppExitTimeLimit)
+	ON_COMMAND(WM_APP_EXIT, OnAppExitEx)
+	ON_COMMAND(WM_CLOSE_MAX_MEM, OnAppExitMaxMem)
 	ON_WM_QUERYENDSESSION()
 
 END_MESSAGE_MAP()
@@ -1446,12 +1446,12 @@ BOOL CMainFrame::SetActiveFramePtr(CBrowserFrame* pTarget)
 {
 	try
 	{
-		if(!theApp.IsWnd(m_pActiveWindow))
+		if (!theApp.IsWnd(m_pActiveWindow))
 		{
 			m_pActiveWindow = pTarget;
 			return TRUE;
 		}
-		if(m_pActiveWindow != pTarget)
+		if (m_pActiveWindow != pTarget)
 		{
 			if (m_pActiveWindow && m_pActiveWindow->m_cTabWnd)
 				m_pPrevActiveWindow = m_pActiveWindow;
@@ -1518,10 +1518,10 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 				return pFrmActiveNow;
 		}
 
-		if (theApp.IsWnd(m_pPrevActiveWindow)
-			&& !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd)
-			&& !m_pPrevActiveWindow->m_bDownloadBlankPage
-			&& m_pPrevActiveWindow != pTarget)
+		if (theApp.IsWnd(m_pPrevActiveWindow) &&
+		    !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd) &&
+		    !m_pPrevActiveWindow->m_bDownloadBlankPage &&
+		    m_pPrevActiveWindow != pTarget)
 		{
 			return m_pPrevActiveWindow;
 		}
@@ -1707,19 +1707,17 @@ void CMainFrame::TabWindowChk()
 		pFrmActiveNow = theApp.GetActiveBFramePtr();
 
 		//ActiveWndが表示されている。即抜ける
-		if (theApp.IsWnd(pFrmActiveNow)
-			&& theApp.IsWndVisible(pFrmActiveNow->m_hWnd)
-			&& pFrmActiveNow->m_cTabWnd
-			)
+		if (theApp.IsWnd(pFrmActiveNow) &&
+		    theApp.IsWndVisible(pFrmActiveNow->m_hWnd) &&
+		    pFrmActiveNow->m_cTabWnd)
 		{
 			return;
 		}
 
 		//ActiveWndが表示されている。即抜ける
-		if (theApp.IsWnd(m_pActiveWindow)
-			&& theApp.IsWndVisible(m_pActiveWindow->m_hWnd)
-			&& m_pActiveWindow->m_cTabWnd
-			)
+		if (theApp.IsWnd(m_pActiveWindow) &&
+		    theApp.IsWndVisible(m_pActiveWindow->m_hWnd) &&
+		    m_pActiveWindow->m_cTabWnd)
 		{
 			return;
 		}
@@ -1764,27 +1762,27 @@ void CMainFrame::TabWindowChk()
 		{
 			for (;;)
 			{
-				if(theApp.IsWnd(m_pActiveWindow)
-					&& !theApp.IsWndVisible(m_pActiveWindow->m_hWnd)
-					&& m_pActiveWindow->m_cTabWnd
-					&& !m_pActiveWindow->m_bDownloadBlankPage)
+				if (theApp.IsWnd(m_pActiveWindow) &&
+				    !theApp.IsWndVisible(m_pActiveWindow->m_hWnd) &&
+				    m_pActiveWindow->m_cTabWnd &&
+				    !m_pActiveWindow->m_bDownloadBlankPage)
 				{
 					pFrmVisible = m_pActiveWindow;
 					break;
 				}
 
-				if (theApp.IsWnd(m_pPrevActiveWindow)
-					&& !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd)
-					&& m_pPrevActiveWindow->m_cTabWnd
-					&& !m_pPrevActiveWindow->m_bDownloadBlankPage)
+				if (theApp.IsWnd(m_pPrevActiveWindow) &&
+				    !theApp.IsWndVisible(m_pPrevActiveWindow->m_hWnd) &&
+				    m_pPrevActiveWindow->m_cTabWnd &&
+				    !m_pPrevActiveWindow->m_bDownloadBlankPage)
 				{
 					pFrmVisible = m_pPrevActiveWindow;
 					break;
 				}
-				if (theApp.IsWnd(pFrmHead)
-					&& !theApp.IsWndVisible(pFrmHead->m_hWnd)
-					&& pFrmHead->m_cTabWnd
-					&& !pFrmHead->m_bDownloadBlankPage)
+				if (theApp.IsWnd(pFrmHead) &&
+				    !theApp.IsWndVisible(pFrmHead->m_hWnd) &&
+				    pFrmHead->m_cTabWnd &&
+				    !pFrmHead->m_bDownloadBlankPage)
 				{
 					pFrmVisible = pFrmHead;
 					break;

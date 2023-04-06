@@ -6,19 +6,18 @@
 
 #ifdef _DEBUG
 #undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
+static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif
 static UINT indicators[] =
-{
-	ID_INDICATOR_ICON,		// status icon
-	ID_SEPARATOR,           // status line indicator
-	ID_INDICATOR_PROCESS,	// progress bar
+    {
+	ID_INDICATOR_ICON,    // status icon
+	ID_SEPARATOR,	      // status line indicator
+	ID_INDICATOR_PROCESS, // progress bar
 	ID_INDICATOR_SSL,
 	ID_INDICATOR_COMPAT,
 	ID_INDICATOR_ZOOM,
 };
-
 
 IMPLEMENT_DYNAMIC(CBrowserFrame, CFrameWndBase)
 BEGIN_MESSAGE_MAP(CBrowserFrame, CFrameWndBase)
@@ -36,40 +35,39 @@ BEGIN_MESSAGE_MAP(CBrowserFrame, CFrameWndBase)
 	ON_WM_SETCURSOR()
 	ON_COMMAND(ID_SET_ADDRESSBAR, OnSetAddressbar)
 	ON_COMMAND(ID_SET_SEARCHBAR, OnSetSearchbar)
-	
+
 	//}}AFX_MSG_MAP
-	ON_MESSAGE(ID_MYCOMBO_OK,OnNewAddressEnter)
-	ON_MESSAGE(ID_MYCOMBO_SELENDOK,OnNewAddress)
-	ON_MESSAGE(WM_SEL_SEARCH,OnSearchString)
-	ON_COMMAND_RANGE(ID_FAV_START,ID_FAV_END,OnFavMenu)
-	ON_COMMAND_RANGE(ID_WINDOW_START,ID_WINDOW_END,OnWndMenu)
-	ON_COMMAND_RANGE(ID_CLOSE_WINDOW_START,ID_CLOSE_WINDOW_END,OnCloseWndMenu)
+	ON_MESSAGE(ID_MYCOMBO_OK, OnNewAddressEnter)
+	ON_MESSAGE(ID_MYCOMBO_SELENDOK, OnNewAddress)
+	ON_MESSAGE(WM_SEL_SEARCH, OnSearchString)
+	ON_COMMAND_RANGE(ID_FAV_START, ID_FAV_END, OnFavMenu)
+	ON_COMMAND_RANGE(ID_WINDOW_START, ID_WINDOW_END, OnWndMenu)
+	ON_COMMAND_RANGE(ID_CLOSE_WINDOW_START, ID_CLOSE_WINDOW_END, OnCloseWndMenu)
 	ON_COMMAND_RANGE(ID_SEL_TAB_1, ID_SEL_TAB_LAST, OnSelTab)
 	ON_COMMAND(ID_ADD_FAVORITE, OnFavoriteAdd)
 	ON_COMMAND(ID_ORGANIZE_FAVORITE, OnFavoriteOrganize)
 	ON_REGISTERED_MESSAGE(AFX_WM_RESETTOOLBAR, OnToolbarReset)
 	ON_WM_SYSCOMMAND()
-	ON_COMMAND(ID_INDICATOR_ICON,OnStatusBarDoubleClick)
-	ON_COMMAND(ID_INDICATOR_COMPAT,OnStatusBarCompatClick)
-	ON_COMMAND(ID_INDICATOR_ZOOM,OnStatusBarZoomClick)
+	ON_COMMAND(ID_INDICATOR_ICON, OnStatusBarDoubleClick)
+	ON_COMMAND(ID_INDICATOR_COMPAT, OnStatusBarCompatClick)
+	ON_COMMAND(ID_INDICATOR_ZOOM, OnStatusBarZoomClick)
 	//ON_COMMAND(WM_CLOSE_DELAY,OnCloseDelay)
 	ON_COMMAND(ID_FULL_SCREEN, OnFullScreen)
-	ON_COMMAND(ID_W_CLOSE,OnWClose)
-	ON_MESSAGE(WM_ADD_FAVORITE,OnFavoliteAddSendMsg)
+	ON_COMMAND(ID_W_CLOSE, OnWClose)
+	ON_MESSAGE(WM_ADD_FAVORITE, OnFavoliteAddSendMsg)
 
-	ON_COMMAND(ID_PREV_WND,OnPrevWnd)
-	ON_COMMAND(ID_NEXT_WND,OnNextWnd)
+	ON_COMMAND(ID_PREV_WND, OnPrevWnd)
+	ON_COMMAND(ID_NEXT_WND, OnNextWnd)
 	ON_COMMAND(ID_TAB_CLOSE_LEFT, OnTabCloseLeft)
 	ON_COMMAND(ID_TAB_CLOSE_RIGHT, OnTabCloseRight)
 
+	ON_COMMAND(ID_RESTORE_WND, OnRestoreWnd)
+	ON_COMMAND(ID_SAVE_WND, OnSaveWnd)
+	ON_COMMAND(ID_OPEN_THIN_FILER, OpenThinFiler)
 
-	ON_COMMAND(ID_RESTORE_WND,OnRestoreWnd)
-	ON_COMMAND(ID_SAVE_WND,OnSaveWnd)
-	ON_COMMAND(ID_OPEN_THIN_FILER,OpenThinFiler)
-
-	ON_COMMAND(IDC_APP_EXIT,OnAppExitEx)
-	ON_COMMAND(IDC_APP_EXIT_BUT_THIS,OnAppExitExBT)
-	ON_COMMAND(IDC_APP_DELETE_CACHE,&CBrowserFrame::OnAppDeleteCache)
+	ON_COMMAND(IDC_APP_EXIT, OnAppExitEx)
+	ON_COMMAND(IDC_APP_EXIT_BUT_THIS, OnAppExitExBT)
+	ON_COMMAND(IDC_APP_DELETE_CACHE, &CBrowserFrame::OnAppDeleteCache)
 
 	ON_WM_SIZING()
 	ON_WM_SIZE()
@@ -78,14 +76,14 @@ BEGIN_MESSAGE_MAP(CBrowserFrame, CFrameWndBase)
 	ON_WM_CAPTURECHANGED()
 	ON_WM_ENTERSIZEMOVE()
 	ON_WM_EXITSIZEMOVE()
-	ON_MESSAGE(MYWM_TAB_WINDOW_NOTIFY,OnTabNotify)
+	ON_MESSAGE(MYWM_TAB_WINDOW_NOTIFY, OnTabNotify)
 	ON_WM_ERASEBKGND()
-	ON_COMMAND(ID_TAB_LIST,OnTabListShow)
+	ON_COMMAND(ID_TAB_LIST, OnTabListShow)
 	ON_MESSAGE(WM_POWERBROADCAST, OnPowerBroadcast)
 	ON_REGISTERED_MESSAGE(AFX_WM_CHANGEVISUALMANAGER, &CBrowserFrame::OnChangeVisualManager)
 	ON_WM_WINDOWPOSCHANGED()
 
-	ON_COMMAND(WM_ACTIVE_FRM,OnActiveFrm)
+	ON_COMMAND(WM_ACTIVE_FRM, OnActiveFrm)
 END_MESSAGE_MAP()
 
 CBrowserFrame::CBrowserFrame()
@@ -1148,11 +1146,10 @@ void CBrowserFrame::SearchAndNavigate(CString strIn)
 	strIn.TrimRight();
 	if (strIn.IsEmpty()) return;
 
-	if (SBUtil::IsURL(strIn)
-	||strIn.Find(_T(":"))==1
-	||strIn.Find(_T("about:"))==0
-	|| strIn.Find(_T("chrome:")) == 0
-	)
+	if (SBUtil::IsURL(strIn) ||
+	    strIn.Find(_T(":")) == 1 ||
+	    strIn.Find(_T("about:")) == 0 ||
+	    strIn.Find(_T("chrome:")) == 0)
 	{
 		if (this->m_wndView)
 			m_wndView.Navigate(strIn);
@@ -1603,8 +1600,8 @@ void CBrowserFrame::CrateFavoriteMenu(CMenu* pMenu, CFavoriteItem* parentItem)
 	if (!parentItem) return;
 	CString strTitle;
 
-	if (parentItem->GetType() == IEFavDIR
-	    || parentItem->GetType() == IEFavROOT)
+	if (parentItem->GetType() == IEFavDIR ||
+	    parentItem->GetType() == IEFavROOT)
 	{
 		INT_PTR iMax = parentItem->GetSize();
 		for (INT_PTR i = 0; i < iMax; i++)
@@ -2633,26 +2630,62 @@ void CBrowserFrame::OnStatusBarZoomClick()
 				int iR = _tstoi(strRet);
 				switch (iR)
 				{
-					case 500:dZoom = 9.0;break;
-					case 400:dZoom = 8.0; break;
-					case 300:dZoom = 6.0; break;
-					case 250:dZoom = 5.0; break;
-					case 200:dZoom = 4.0; break;
-					case 175:dZoom = 3.5; break;
-					case 150:dZoom = 2.5; break;
-					case 125:dZoom = 1.5; break;
-					case 110:dZoom = 0.5; break;
+				case 500:
+					dZoom = 9.0;
+					break;
+				case 400:
+					dZoom = 8.0;
+					break;
+				case 300:
+					dZoom = 6.0;
+					break;
+				case 250:
+					dZoom = 5.0;
+					break;
+				case 200:
+					dZoom = 4.0;
+					break;
+				case 175:
+					dZoom = 3.5;
+					break;
+				case 150:
+					dZoom = 2.5;
+					break;
+				case 125:
+					dZoom = 1.5;
+					break;
+				case 110:
+					dZoom = 0.5;
+					break;
 
-					case 100:dZoom = 0.0; break;
+				case 100:
+					dZoom = 0.0;
+					break;
 
-					case 90:dZoom = -0.5; break;
-					case 80:dZoom = -1.0; break;
-					case 75:dZoom = -1.5; break;
-					case 67:dZoom = -2.0; break;
-					case 50:dZoom = -3.5; break;
-					case 33:dZoom = -5.0; break;
-					case 25:dZoom = -6.0; break;
-					default: dZoom=0.0;break;
+				case 90:
+					dZoom = -0.5;
+					break;
+				case 80:
+					dZoom = -1.0;
+					break;
+				case 75:
+					dZoom = -1.5;
+					break;
+				case 67:
+					dZoom = -2.0;
+					break;
+				case 50:
+					dZoom = -3.5;
+					break;
+				case 33:
+					dZoom = -5.0;
+					break;
+				case 25:
+					dZoom = -6.0;
+					break;
+				default:
+					dZoom = 0.0;
+					break;
 				}
 				m_wndView.ZoomTo(dZoom);
 				logmsg.Format(_T("BF_WND:0x%08x OnStatusBarZoomClick %s"), theApp.SafeWnd(this->m_hWnd), strRet);
@@ -2877,7 +2910,6 @@ BOOL CBrowserFrame::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 	}
 	return CFrameWnd::OnSetCursor(pWnd, nHitTest, message);
 }
-
 
 /*
  * メニュー > タブウィンドウの一覧

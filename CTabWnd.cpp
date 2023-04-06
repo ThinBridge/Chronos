@@ -7,24 +7,24 @@
 #include "CWnd.h"
 #include "CTabWnd.h"
 
-#ifndef	SPI_GETFOREGROUNDLOCKTIMEOUT
-#define SPI_GETFOREGROUNDLOCKTIMEOUT        0x2000
+#ifndef SPI_GETFOREGROUNDLOCKTIMEOUT
+#define SPI_GETFOREGROUNDLOCKTIMEOUT 0x2000
 #endif
-#ifndef	SPI_SETFOREGROUNDLOCKTIMEOUT
-#define SPI_SETFOREGROUNDLOCKTIMEOUT        0x2001
+#ifndef SPI_SETFOREGROUNDLOCKTIMEOUT
+#define SPI_SETFOREGROUNDLOCKTIMEOUT 0x2001
 #endif
 
-#define TAB_MARGIN_TOP		1
-#define TAB_MARGIN_LEFT		1
-#define TAB_MARGIN_RIGHT	1
+#define TAB_MARGIN_TOP	 1
+#define TAB_MARGIN_LEFT	 1
+#define TAB_MARGIN_RIGHT 1
 //#define TAB_FONT_HEIGHT		12
-#define TAB_ITEM_HEIGHT		25
-#define TAB_WINDOW_HEIGHT	35
-#define MAX_TABITEM_WIDTH	180
-#define MIN_TABITEM_WIDTH	26
+#define TAB_ITEM_HEIGHT	  25
+#define TAB_WINDOW_HEIGHT 35
+#define MAX_TABITEM_WIDTH 180
+#define MIN_TABITEM_WIDTH 26
 
-#define CX_SMICON			16
-#define CY_SMICON			16
+#define CX_SMICON 16
+#define CY_SMICON 16
 
 static const RECT rcBtnBase = {0, 0, 16, 16};
 
@@ -57,41 +57,41 @@ LRESULT CTabWnd::TabWndDispatchEvent(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 {
 	switch (uMsg)
 	{
-		case WM_LBUTTONDOWN:
-			return OnTabLButtonDown(wParam, lParam);
+	case WM_LBUTTONDOWN:
+		return OnTabLButtonDown(wParam, lParam);
 
-		case WM_LBUTTONUP:
-			return OnTabLButtonUp(wParam, lParam);
+	case WM_LBUTTONUP:
+		return OnTabLButtonUp(wParam, lParam);
 
-		case WM_MOUSEMOVE:
-			return OnTabMouseMove(wParam, lParam);
+	case WM_MOUSEMOVE:
+		return OnTabMouseMove(wParam, lParam);
 
-		case WM_TIMER:
-			return OnTabTimer(wParam, lParam);
+	case WM_TIMER:
+		return OnTabTimer(wParam, lParam);
 
-		case WM_CAPTURECHANGED:
-			return OnTabCaptureChanged(wParam, lParam);
+	case WM_CAPTURECHANGED:
+		return OnTabCaptureChanged(wParam, lParam);
 
-		case WM_RBUTTONDOWN:
-			return OnTabRButtonDown(wParam, lParam);
+	case WM_RBUTTONDOWN:
+		return OnTabRButtonDown(wParam, lParam);
 
-		case WM_RBUTTONUP:
-			return OnTabRButtonUp(wParam, lParam);
+	case WM_RBUTTONUP:
+		return OnTabRButtonUp(wParam, lParam);
 
-		case WM_MBUTTONDOWN:
-			return OnTabMButtonDown(wParam, lParam);
+	case WM_MBUTTONDOWN:
+		return OnTabMButtonDown(wParam, lParam);
 
-		case WM_MBUTTONUP:
-			return OnTabMButtonUp(wParam, lParam);
+	case WM_MBUTTONUP:
+		return OnTabMButtonUp(wParam, lParam);
 
-		case WM_NOTIFY:
-			return OnTabNotify(wParam, lParam);
+	case WM_NOTIFY:
+		return OnTabNotify(wParam, lParam);
 
-		case WM_HSCROLL:
-		{
-			::InvalidateRect(GetHwnd(), NULL, TRUE);
-			break;
-		}
+	case WM_HSCROLL:
+	{
+		::InvalidateRect(GetHwnd(), NULL, TRUE);
+		break;
+	}
 	}
 	return 1L;
 }
@@ -259,74 +259,74 @@ LRESULT CTabWnd::OnTabMouseMove(WPARAM wParam, LPARAM lParam)
 	// マウスドラッグ中の処理
 	switch (m_eDragState)
 	{
-		case DRAG_CHECK:
-			// 元のタブから離れたらドラッグ開始
-			if (m_nSrcTab == nDstTab)
-				break;
-			m_eDragState = DRAG_DRAG;
-			m_hDefaultCursor = ::GetCursor();
+	case DRAG_CHECK:
+		// 元のタブから離れたらドラッグ開始
+		if (m_nSrcTab == nDstTab)
+			break;
+		m_eDragState = DRAG_DRAG;
+		m_hDefaultCursor = ::GetCursor();
 
-			// 現在のタブ境界位置を記憶する
-			nTabCount = TabCtrl_GetItemCount(m_hwndTab);
-			if (m_nTabBorderArray)
+		// 現在のタブ境界位置を記憶する
+		nTabCount = TabCtrl_GetItemCount(m_hwndTab);
+		if (m_nTabBorderArray)
+		{
+			delete[] m_nTabBorderArray;
+		}
+		m_nTabBorderArray = new LONG[nTabCount];
+		memset(m_nTabBorderArray, 0x00, sizeof(LONG) * nTabCount);
+		for (i = 0; i < nTabCount - 1; i++)
+		{
+			RECT rc = {0};
+			TabCtrl_GetItemRect(m_hwndTab, i, &rc);
+			m_nTabBorderArray[i] = rc.right;
+		}
+		m_nTabBorderArray[i] = 0; // 最後の要素は番兵
+					  // ここに来たらドラッグ開始なので break しないでそのまま DRAG_DRAG 処理に入る
+
+	case DRAG_DRAG:
+		// ドラッグ中のマウスカーソルを表示する
+		HINSTANCE hInstance;
+		LPCTSTR lpCursorName;
+		lpCursorName = IDC_NO; // 禁止カーソル
+		if (0 <= nDstTab)      // タブの上にカーソルがある
+		{
+			lpCursorName = NULL; // 開始時カーソル指定
+
+			// ドラッグ開始時のタブ位置で移動先タブを再計算
+			for (nDstTab = 0; m_nTabBorderArray[nDstTab] != 0; nDstTab++)
 			{
-				delete[] m_nTabBorderArray;
+				if (hitinfo.pt.x < m_nTabBorderArray[nDstTab])
+				{
+					break;
+				}
 			}
-			m_nTabBorderArray = new LONG[nTabCount];
-			memset(m_nTabBorderArray, 0x00, sizeof(LONG) * nTabCount);
-			for (i = 0; i < nTabCount - 1; i++)
+			// ドラッグ中に即時移動
+			if (m_nSrcTab != nDstTab)
 			{
 				RECT rc = {0};
-				TabCtrl_GetItemRect(m_hwndTab, i, &rc);
-				m_nTabBorderArray[i] = rc.right;
-			}
-			m_nTabBorderArray[i] = 0; // 最後の要素は番兵
-						  // ここに来たらドラッグ開始なので break しないでそのまま DRAG_DRAG 処理に入る
-
-		case DRAG_DRAG:
-			// ドラッグ中のマウスカーソルを表示する
-			HINSTANCE hInstance;
-			LPCTSTR lpCursorName;
-			lpCursorName = IDC_NO; // 禁止カーソル
-			if (0 <= nDstTab)      // タブの上にカーソルがある
-			{
-				lpCursorName = NULL; // 開始時カーソル指定
-
-				// ドラッグ開始時のタブ位置で移動先タブを再計算
-				for (nDstTab = 0; m_nTabBorderArray[nDstTab] != 0; nDstTab++)
+				TabCtrl_GetItemRect(m_hwndTab, nDstTab, &rc);
+				if (rc.left > 0)
 				{
-					if (hitinfo.pt.x < m_nTabBorderArray[nDstTab])
-					{
-						break;
-					}
-				}
-				// ドラッグ中に即時移動
-				if (m_nSrcTab != nDstTab)
-				{
-					RECT rc = {0};
-					TabCtrl_GetItemRect(m_hwndTab, nDstTab, &rc);
-					if (rc.left > 0)
-					{
-						ReorderTab(m_nSrcTab, nDstTab);
-						Refresh(FALSE);
-						m_nSrcTab = nDstTab;
-						::InvalidateRect(GetHwnd(), NULL, TRUE);
-					}
+					ReorderTab(m_nSrcTab, nDstTab);
+					Refresh(FALSE);
+					m_nSrcTab = nDstTab;
+					::InvalidateRect(GetHwnd(), NULL, TRUE);
 				}
 			}
-			if (lpCursorName)
-			{
-				hInstance = (lpCursorName == IDC_NO) ? NULL : ::GetModuleHandle(NULL);
-				::SetCursor(::LoadCursor(hInstance, lpCursorName));
-			}
-			else
-			{
-				::SetCursor(m_hDefaultCursor);
-			}
-			break;
+		}
+		if (lpCursorName)
+		{
+			hInstance = (lpCursorName == IDC_NO) ? NULL : ::GetModuleHandle(NULL);
+			::SetCursor(::LoadCursor(hInstance, lpCursorName));
+		}
+		else
+		{
+			::SetCursor(m_hDefaultCursor);
+		}
+		break;
 
-		default:
-			return 1L;
+	default:
+		return 1L;
 	}
 	return 0L;
 }
@@ -451,12 +451,12 @@ BOOL CTabWnd::ReorderTab(int nSrcTab, int nDstTab)
 }
 
 CTabWnd::CTabWnd()
-: CWndSkr(_T("::CTabWnd"))
-, m_eDragState( DRAG_NONE )
-, m_bHovering( FALSE )
-, m_eCaptureSrc( CAPT_NONE )
-, m_nTabBorderArray( NULL )
-, m_nSrcTab(0)
+    : CWndSkr(_T("::CTabWnd")),
+      m_eDragState(DRAG_NONE),
+      m_bHovering(FALSE),
+      m_eCaptureSrc(CAPT_NONE),
+      m_nTabBorderArray(NULL),
+      m_nSrcTab(0)
 {
 	m_hwndTab = NULL;
 	gm_pOldWndProc = NULL;
@@ -496,13 +496,13 @@ HWND CTabWnd::CreateTab(HINSTANCE hInstance, CWnd* pFrame, CWnd* pView, HWND hwn
 	m_eCaptureSrc = CAPT_NONE;
 
 	RegisterWC(
-		hInstance,
-		NULL,                            // Handle to the class icon.
-		NULL,                            // Handle to a small icon
-		::LoadCursor( NULL, IDC_ARROW ), // Handle to the class cursor.
-		NULL,                            // Handle to the class background brush.
-		NULL,                            // Pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file.
-		pszClassName                     // Pointer to a null-terminated string or is an atom.
+	    hInstance,
+	    NULL,			   // Handle to the class icon.
+	    NULL,			   // Handle to a small icon
+	    ::LoadCursor(NULL, IDC_ARROW), // Handle to the class cursor.
+	    NULL,			   // Handle to the class background brush.
+	    NULL,			   // Pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file.
+	    pszClassName		   // Pointer to a null-terminated string or is an atom.
 	);
 
 	RECT rcParent = {0};
@@ -522,32 +522,31 @@ HWND CTabWnd::CreateTab(HINSTANCE hInstance, CWnd* pFrame, CWnd* pView, HWND hwn
 	}
 
 	CWndSkr::Create(
-		hwndParent,
-		0,                                      // extended window style
-		pszClassName,                           // Pointer to a null-terminated string or is an atom.
-		pszClassName,                           // pointer to window name
-		WS_CHILD | WS_VISIBLE| WS_CLIPCHILDREN, // window style
-		CW_USEDEFAULT,                          // horizontal position of window
-		0,                                      // vertical position of window
-		rcParent.right - rcParent.left,         // window width
-		m_TAB_WINDOW_HEIGHT,                    // window height
-		NULL                                    // handle to menu, or child-window identifier
+	    hwndParent,
+	    0,					     // extended window style
+	    pszClassName,			     // Pointer to a null-terminated string or is an atom.
+	    pszClassName,			     // pointer to window name
+	    WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, // window style
+	    CW_USEDEFAULT,			     // horizontal position of window
+	    0,					     // vertical position of window
+	    rcParent.right - rcParent.left,	     // window width
+	    m_TAB_WINDOW_HEIGHT,		     // window height
+	    NULL				     // handle to menu, or child-window identifier
 	);
 
 	//タブウインドウを作成する。
 	m_hwndTab = ::CreateWindow(
-		WC_TABCONTROL,
-		_T(""),
-		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | TCS_TOOLTIPS| TCS_SINGLELINE| TCS_TABS| TCS_FOCUSNEVER| TCS_FORCELABELLEFT| TCS_FIXEDWIDTH,
-		TAB_MARGIN_LEFT,
-		TAB_MARGIN_TOP,
-		rcParent.right - rcParent.left - (TAB_MARGIN_LEFT + TAB_MARGIN_RIGHT),
-		m_TAB_WINDOW_HEIGHT,
-		GetHwnd(),
-		(HMENU)NULL,
-		GetAppInstance(),
-		(LPVOID)NULL
-		);
+	    WC_TABCONTROL,
+	    _T(""),
+	    WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | TCS_TOOLTIPS | TCS_SINGLELINE | TCS_TABS | TCS_FOCUSNEVER | TCS_FORCELABELLEFT | TCS_FIXEDWIDTH,
+	    TAB_MARGIN_LEFT,
+	    TAB_MARGIN_TOP,
+	    rcParent.right - rcParent.left - (TAB_MARGIN_LEFT + TAB_MARGIN_RIGHT),
+	    m_TAB_WINDOW_HEIGHT,
+	    GetHwnd(),
+	    (HMENU)NULL,
+	    GetAppInstance(),
+	    (LPVOID)NULL);
 
 	if (m_hwndTab)
 	{
@@ -1111,11 +1110,11 @@ void CTabWnd::AdjustWindowPlacement(void)
 		wp = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
 		if (wp.showCmd == SW_SHOWMINIMIZED)
 			wp.showCmd = SW_RESTORE;
-//		HWND hwndInsertAfter={0};
-//		hwndInsertAfter = theApp.GetActiveBFramePtrHWND();
-//		::SetWindowPos(hwnd, hwndInsertAfter, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-		SetCarmWindowPlacement(hwnd, &wp);	// 位置を復元する
-//		::UpdateWindow(hwnd);	// 強制描画
+		//HWND hwndInsertAfter={0};
+		//hwndInsertAfter = theApp.GetActiveBFramePtrHWND();
+		//::SetWindowPos(hwnd, hwndInsertAfter, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		SetCarmWindowPlacement(hwnd, &wp); // 位置を復元する
+		//::UpdateWindow(hwnd);	// 強制描画
 	}
 }
 

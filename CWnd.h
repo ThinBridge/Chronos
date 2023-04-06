@@ -106,27 +106,27 @@ public:
 	virtual ~CWndSkr();
 	// ウィンドウクラス登録
 	ATOM RegisterWC(
-		HINSTANCE	hInstance,
-		HICON		hIcon,			// Handle to the class icon.
-		HICON		hIconSm,		// Handle to a small icon
-		HCURSOR		hCursor,		// Handle to the class cursor.
-		HBRUSH		hbrBackground,	// Handle to the class background brush.
-		LPCTSTR		lpszMenuName,	// Pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file.
-		LPCTSTR		lpszClassName	// Pointer to a null-terminated string or is an atom.
+	    HINSTANCE hInstance,
+	    HICON hIcon,	  // Handle to the class icon.
+	    HICON hIconSm,	  // Handle to a small icon
+	    HCURSOR hCursor,	  // Handle to the class cursor.
+	    HBRUSH hbrBackground, // Handle to the class background brush.
+	    LPCTSTR lpszMenuName, // Pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file.
+	    LPCTSTR lpszClassName // Pointer to a null-terminated string or is an atom.
 	);
 
 	//ウィンドウ作成
 	HWND Create(
-		HWND		hwndParent,
-		DWORD		dwExStyle,		// extended window style
-		LPCTSTR		lpszClassName,	// Pointer to a null-terminated string or is an atom.
-		LPCTSTR		lpWindowName,	// pointer to window name
-		DWORD		dwStyle,		// window style
-		int			x,				// horizontal position of window
-		int			y,				// vertical position of window
-		int			nWidth,			// window width
-		int			nHeight,		// window height
-		HMENU		hMenu			// handle to menu, or child-window identifier
+	    HWND hwndParent,
+	    DWORD dwExStyle,	   // extended window style
+	    LPCTSTR lpszClassName, // Pointer to a null-terminated string or is an atom.
+	    LPCTSTR lpWindowName,  // pointer to window name
+	    DWORD dwStyle,	   // window style
+	    int x,		   // horizontal position of window
+	    int y,		   // vertical position of window
+	    int nWidth,		   // window width
+	    int nHeight,	   // window height
+	    HMENU hMenu		   // handle to menu, or child-window identifier
 	);
 
 	virtual LRESULT DispatchEvent(HWND, UINT, WPARAM, LPARAM);
@@ -136,36 +136,37 @@ protected:
 	virtual void PreviCreateWindow(void) { return; }
 	virtual void AfterCreateWindow(void) { ::ShowWindow(m_hWnd, SW_SHOW); }
 
-	#define DECLH(method) LRESULT method( HWND hwnd, UINT msg, WPARAM wp, LPARAM lp ){return CallDefWndProc( hwnd, msg, wp, lp );}
-	virtual DECLH( OnCreate			);	// WM_CREATE
-	virtual DECLH( OnCommand		);	// WM_COMMAND
-	virtual DECLH( OnPaint			);	// WM_PAINT
-	virtual DECLH( OnEraseBkgnd      );	// WM_ERASEBKGND
-	virtual DECLH( OnLButtonDown	);	// WM_LBUTTONDOWN
-	virtual DECLH( OnLButtonUp		);	// WM_LBUTTONUP
-	virtual DECLH( OnLButtonDblClk	);	// WM_LBUTTONDBLCLK
-	virtual DECLH( OnRButtonDown	);	// WM_RBUTTONDOWN
-	virtual DECLH( OnRButtonUp		);	// WM_RBUTTONUP
-	virtual DECLH( OnRButtonDblClk	);	// WM_RBUTTONDBLCLK
-	virtual DECLH( OnMButtonDown	);	// WM_MBUTTONDOWN
-	virtual DECLH( OnMButtonUp		);	// WM_MBUTTONUP
-	virtual DECLH( OnMButtonDblClk	);	// WM_MBUTTONDBLCLK
-	virtual DECLH( OnMouseMove		);	// WM_MOUSEMOVE
-	virtual DECLH( OnMouseWheel		);	// WM_MOUSEWHEEL
-	virtual DECLH( OnMouseHWheel	);	// WM_MOUSEHWHEEL
-	virtual DECLH( OnTimer			);	// WM_TIMER
-	virtual DECLH( OnSize			);	// WM_SIZE
-	virtual DECLH( OnMove			);	// WM_MOVE
-	virtual DECLH( OnClose			);	// WM_CLOSE
-	virtual DECLH( OnDestroy		);	// WM_DSESTROY
-	virtual DECLH( OnQueryEndSession);	// WM_QUERYENDSESSION
+#define DECLH(method) \
+	LRESULT method(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) { return CallDefWndProc(hwnd, msg, wp, lp); }
+	virtual DECLH(OnCreate);	  // WM_CREATE
+	virtual DECLH(OnCommand);	  // WM_COMMAND
+	virtual DECLH(OnPaint);		  // WM_PAINT
+	virtual DECLH(OnEraseBkgnd);	  // WM_ERASEBKGND
+	virtual DECLH(OnLButtonDown);	  // WM_LBUTTONDOWN
+	virtual DECLH(OnLButtonUp);	  // WM_LBUTTONUP
+	virtual DECLH(OnLButtonDblClk);	  // WM_LBUTTONDBLCLK
+	virtual DECLH(OnRButtonDown);	  // WM_RBUTTONDOWN
+	virtual DECLH(OnRButtonUp);	  // WM_RBUTTONUP
+	virtual DECLH(OnRButtonDblClk);	  // WM_RBUTTONDBLCLK
+	virtual DECLH(OnMButtonDown);	  // WM_MBUTTONDOWN
+	virtual DECLH(OnMButtonUp);	  // WM_MBUTTONUP
+	virtual DECLH(OnMButtonDblClk);	  // WM_MBUTTONDBLCLK
+	virtual DECLH(OnMouseMove);	  // WM_MOUSEMOVE
+	virtual DECLH(OnMouseWheel);	  // WM_MOUSEWHEEL
+	virtual DECLH(OnMouseHWheel);	  // WM_MOUSEHWHEEL
+	virtual DECLH(OnTimer);		  // WM_TIMER
+	virtual DECLH(OnSize);		  // WM_SIZE
+	virtual DECLH(OnMove);		  // WM_MOVE
+	virtual DECLH(OnClose);		  // WM_CLOSE
+	virtual DECLH(OnDestroy);	  // WM_DSESTROY
+	virtual DECLH(OnQueryEndSession); // WM_QUERYENDSESSION
 
-	virtual DECLH( OnMeasureItem	);	// WM_MEASUREITEM
-	virtual DECLH( OnMenuChar		);	// WM_MENUCHAR
-	virtual DECLH( OnNotify			);	// WM_NOTIFY
-	virtual DECLH( OnDrawItem		);	// WM_DRAWITEM
-	virtual DECLH( OnCaptureChanged	);	// WM_CAPTURECHANGED
-	virtual LRESULT CallDefWndProc( HWND, UINT, WPARAM, LPARAM );
+	virtual DECLH(OnMeasureItem);	 // WM_MEASUREITEM
+	virtual DECLH(OnMenuChar);	 // WM_MENUCHAR
+	virtual DECLH(OnNotify);	 // WM_NOTIFY
+	virtual DECLH(OnDrawItem);	 // WM_DRAWITEM
+	virtual DECLH(OnCaptureChanged); // WM_CAPTURECHANGED
+	virtual LRESULT CallDefWndProc(HWND, UINT, WPARAM, LPARAM);
 
 public:
 	//インターフェース
@@ -176,8 +177,8 @@ public:
 	void DestroyWindow();
 
 private:
-	HINSTANCE	m_hInstance;
-	HWND		m_hwndParent;
-	HWND		m_hWnd;
+	HINSTANCE m_hInstance;
+	HWND m_hwndParent;
+	HWND m_hWnd;
 };
 ///////////////////////////////////////////////////////////////////////

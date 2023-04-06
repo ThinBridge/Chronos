@@ -91,11 +91,11 @@ BEGIN_MESSAGE_MAP(CMyComboEdit, CEdit)
 	ON_WM_CONTEXTMENU()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-#define ME_SELECTALL    WM_USER + 0x7000
-#define ME_PASTE_GO     WM_USER + 0x7001
+#define ME_SELECTALL	WM_USER + 0x7000
+#define ME_PASTE_GO	WM_USER + 0x7001
 #define ME_PASTE_SEARCH WM_USER + 0x7002
-#define ME_GO			WM_USER + 0x7004
-#define ME_SEARCH		WM_USER + 0x7008
+#define ME_GO		WM_USER + 0x7004
+#define ME_SEARCH	WM_USER + 0x7008
 
 ///////////////////////////////////////////////////////////////////////////////
 void CMyComboEdit::OnContextMenu(CWnd* pWnd, CPoint point)

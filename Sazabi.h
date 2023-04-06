@@ -25,10 +25,10 @@
 // CSazabi:
 //
 //////////////////////////////////////////////////////////
-#define CEF_PROC_BROWSER 0
+#define CEF_PROC_BROWSER  0
 #define CEF_PROC_RENDERER 1
-#define CEF_PROC_GPU 2
-#define CEF_PROC_OTHER 3
+#define CEF_PROC_GPU	  2
+#define CEF_PROC_OTHER	  3
 
 class CChildView;
 class CScriptHost;
@@ -204,7 +204,6 @@ public:
 
 	//ChildViewのポインタをリストから返す。
 	CChildView* GetChildViewPtr(HWND hWnd);
-
 
 	DWORD m_dwProcessId;
 	CHandle m_hProcess;

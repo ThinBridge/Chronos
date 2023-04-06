@@ -141,26 +141,25 @@ protected:
 public:
 	void SetLogMsg(const DebugWndLogData& Data)
 	{
-		SetLogMsg(Data.mDATE_TIME
-			, Data.mHWND
-			, Data.mFUNCTION_NAME
-			, Data.mMESSAGE1
-			, Data.mMESSAGE2
-			, Data.mMESSAGE3
-			, Data.mMESSAGE4
-			, Data.mMESSAGE5
-			, Data.mMESSAGE6
-		);
+		SetLogMsg(Data.mDATE_TIME,
+			  Data.mHWND,
+			  Data.mFUNCTION_NAME,
+			  Data.mMESSAGE1,
+			  Data.mMESSAGE2,
+			  Data.mMESSAGE3,
+			  Data.mMESSAGE4,
+			  Data.mMESSAGE5,
+			  Data.mMESSAGE6);
 	}
-	void SetLogMsg(LPCTSTR	pDATE_TIME
-					,LPCTSTR	pHWND
-					,LPCTSTR	pFUNCTION_NAME
-					,LPCTSTR	pMESSAGE1
-					,LPCTSTR	pMESSAGE2
-					,LPCTSTR	pMESSAGE3
-					,LPCTSTR	pMESSAGE4
-					,LPCTSTR	pMESSAGE5
-					,LPCTSTR	pMESSAGE6);
+	void SetLogMsg(LPCTSTR pDATE_TIME,
+		       LPCTSTR pHWND,
+		       LPCTSTR pFUNCTION_NAME,
+		       LPCTSTR pMESSAGE1,
+		       LPCTSTR pMESSAGE2,
+		       LPCTSTR pMESSAGE3,
+		       LPCTSTR pMESSAGE4,
+		       LPCTSTR pMESSAGE5,
+		       LPCTSTR pMESSAGE6);
 
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedOk();

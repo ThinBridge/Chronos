@@ -612,10 +612,10 @@ CChildView* CSazabi::GetChildViewPtr(HWND hWnd)
 	pChild = GetActiveViewPtr();
 	if (IsWnd(pChild))
 	{
-		if(pChild->m_hWnd==hWnd)
+		if (pChild->m_hWnd == hWnd)
 			return pChild;
 	}
-	
+
 	CBrowserFrame* pFrame = NULL;
 	pFrame = ((CMainFrame*)m_pMainWnd)->GetBrowserFrameFromChildWnd(hWnd);
 	if (IsWnd(pFrame))
@@ -2209,35 +2209,34 @@ BOOL CSazabi::PumpMessage()
 					if (msg.hwnd)
 					{
 						::GetClassName(msg.hwnd, classname, 31);
-						TRACE(_T("PumpMessage[0x%08x] %s (0x%x)\n"), msg.hwnd,classname,msg.message);
-						if (	   _tcscmp(classname, WC_EDIT) == 0
-							|| _tcscmp(classname, WC_COMBOBOXEX) == 0
-							|| _tcscmp(classname, WC_COMBOBOX) == 0
-							|| _tcscmp(classname, WC_BUTTON) == 0
-							|| _tcscmp(classname, WC_STATIC) == 0
-							|| _tcscmp(classname, _T("#32770")) == 0
-							|| _tcscmp(classname, REBARCLASSNAME) == 0
-							|| _tcscmp(classname, WC_TABCONTROL) == 0
-							|| _tcscmp(classname, WC_TREEVIEW) == 0
-							|| _tcscmp(classname, WC_LISTVIEW) == 0
-							|| _tcscmp(classname, WC_LISTBOX) == 0
-
-//							|| _tcscmp(classname, WC_HEADER) == 0
-//							|| _tcscmp(classname, TOOLBARCLASSNAME) == 0
-//							|| _tcscmp(classname, TOOLTIPS_CLASS) == 0
-//							|| _tcscmp(classname, STATUSCLASSNAME) == 0
-//							|| _tcscmp(classname, TRACKBAR_CLASS) == 0
-//							|| _tcscmp(classname, UPDOWN_CLASS) == 0
-//							|| _tcscmp(classname, PROGRESS_CLASS) == 0
-//							|| _tcscmp(classname, HOTKEY_CLASS) == 0
-//							|| _tcscmp(classname, ANIMATE_CLASS) == 0
-//							|| _tcscmp(classname, MONTHCAL_CLASS) == 0
-//							|| _tcscmp(classname, DATETIMEPICK_CLASS) == 0
-//							|| _tcscmp(classname, WC_IPADDRESS) == 0
-//							|| _tcscmp(classname, WC_PAGESCROLLER) == 0
-//							|| _tcscmp(classname, WC_NATIVEFONTCTL) == 0
-//							|| _tcscmp(classname, WC_SCROLLBAR) == 0
-							)
+						TRACE(_T("PumpMessage[0x%08x] %s (0x%x)\n"), msg.hwnd, classname, msg.message);
+						if (_tcscmp(classname, WC_EDIT) == 0 ||
+						    _tcscmp(classname, WC_COMBOBOXEX) == 0 ||
+						    _tcscmp(classname, WC_COMBOBOX) == 0 ||
+						    _tcscmp(classname, WC_BUTTON) == 0 ||
+						    _tcscmp(classname, WC_STATIC) == 0 ||
+						    _tcscmp(classname, _T("#32770")) == 0 ||
+						    _tcscmp(classname, REBARCLASSNAME) == 0 ||
+						    _tcscmp(classname, WC_TABCONTROL) == 0 ||
+						    _tcscmp(classname, WC_TREEVIEW) == 0 ||
+						    _tcscmp(classname, WC_LISTVIEW) == 0 ||
+						    _tcscmp(classname, WC_LISTBOX) == 0
+						    //|| _tcscmp(classname, WC_HEADER) == 0
+						    //|| _tcscmp(classname, TOOLBARCLASSNAME) == 0
+						    //|| _tcscmp(classname, TOOLTIPS_CLASS) == 0
+						    //|| _tcscmp(classname, STATUSCLASSNAME) == 0
+						    //|| _tcscmp(classname, TRACKBAR_CLASS) == 0
+						    //|| _tcscmp(classname, UPDOWN_CLASS) == 0
+						    //|| _tcscmp(classname, PROGRESS_CLASS) == 0
+						    //|| _tcscmp(classname, HOTKEY_CLASS) == 0
+						    //|| _tcscmp(classname, ANIMATE_CLASS) == 0
+						    //|| _tcscmp(classname, MONTHCAL_CLASS) == 0
+						    //|| _tcscmp(classname, DATETIMEPICK_CLASS) == 0
+						    //|| _tcscmp(classname, WC_IPADDRESS) == 0
+						    //|| _tcscmp(classname, WC_PAGESCROLLER) == 0
+						    //|| _tcscmp(classname, WC_NATIVEFONTCTL) == 0
+						    //|| _tcscmp(classname, WC_SCROLLBAR) == 0
+						)
 						{
 							return CWinApp::PumpMessage();
 						}
@@ -2334,30 +2333,30 @@ void CSazabi::WriteDebugTraceDateTime(LPCTSTR msg, int iLogType)
 	BOOL bFileWriteFlg = FALSE;
 	switch (m_AppSettings.GetAdvancedLogLevel())
 	{
-		//全てのログを出力
-		case DEBUG_LOG_LEVEL_OUTPUT_ALL:
+	//全てのログを出力
+	case DEBUG_LOG_LEVEL_OUTPUT_ALL:
+	{
+		bFileWriteFlg = TRUE;
+		break;
+	}
+	//ファイル書き込み無し。
+	case DEBUG_LOG_LEVEL_OUTPUT_NO_FILE:
+	{
+		bFileWriteFlg = FALSE;
+		break;
+	}
+	//URL関連のみ
+	case DEBUG_LOG_LEVEL_OUTPUT_URL:
+	{
+		//ログの種類が一般、URLの場合
+		if (iLogType == DEBUG_LOG_TYPE_GE || iLogType == DEBUG_LOG_TYPE_URL)
 		{
 			bFileWriteFlg = TRUE;
-			break;
 		}
-		//ファイル書き込み無し。
-		case DEBUG_LOG_LEVEL_OUTPUT_NO_FILE:
-		{
-			bFileWriteFlg = FALSE;
-			break;
-		}
-		//URL関連のみ
-		case DEBUG_LOG_LEVEL_OUTPUT_URL:
-		{
-			//ログの種類が一般、URLの場合
-			if (iLogType == DEBUG_LOG_TYPE_GE || iLogType == DEBUG_LOG_TYPE_URL)
-			{
-				bFileWriteFlg = TRUE;
-			}
-			break;
-		}
-		default:
-			break;
+		break;
+	}
+	default:
+		break;
 	}
 	if (bFileWriteFlg)
 	{
@@ -2413,73 +2412,72 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 			strPathUpper = _T("\\");
 			strPathUpper += strPath;
 			strPathUpper.MakeUpper();
-			if (strPathUpper.Find(_T("\\CMD.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\ARP.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\AT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\BCDEDIT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\CACLS.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\CERTREQ.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\CIPHER.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\CMD.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\CONTROL.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\CSCRIPT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\DLLHOST.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\DOSX.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\EXPLORER.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\FORMAT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\FSUTIL.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\FTP.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\IPCONFIG.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\ISCSICLI.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\MSCDEXNT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\MSHTA.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\NBTSTAT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\NET.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\NET1.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\NETSH.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\NETSTAT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\NSLOOKUP.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\PING.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\POWERSHELL.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\QPROCESS.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\QUERY.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\REDIR.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\REG.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\REGEDIT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\REGEDT32.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\ROUTE.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\RUNDLL32.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\SC.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\SCHTASKS.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\SDBINST.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\SUBST.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\SVCHOST.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\SYSPREP.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\SYSTEMINFO.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\TASKKILL.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\TASKLIST.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\TRACERT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\VER.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\VSSADMIN.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\WHOAMI.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\WINRS.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\WMIC.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\WSCRIPT.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\WUSA.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\COMMAND.COM")) >= 0
-				|| strPathUpper.Find(_T("\\EVENTVWR.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\PSEXEC.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\CMDKEY.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\MSIEXEC.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\TASKHOSTW.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\TASKHOST.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\BACKGROUNDTASKHOST.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\ATTRIB.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\ICACLS.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\ROBOCOPY.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\XCOPY.EXE")) >= 0
-				|| strPathUpper.Find(_T("\\QWINSTA.EXE")) >= 0
-				)
+			if (strPathUpper.Find(_T("\\CMD.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ARP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\AT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\BCDEDIT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CACLS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CERTREQ.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CIPHER.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CMD.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CONTROL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CSCRIPT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\DLLHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\DOSX.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\EXPLORER.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\FORMAT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\FSUTIL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\FTP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\IPCONFIG.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ISCSICLI.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\MSCDEXNT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\MSHTA.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NBTSTAT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NET.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NET1.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NETSH.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NETSTAT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\NSLOOKUP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\PING.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\POWERSHELL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\QPROCESS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\QUERY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REDIR.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REG.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REGEDIT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\REGEDT32.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ROUTE.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\RUNDLL32.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SCHTASKS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SDBINST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SUBST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SVCHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SYSPREP.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\SYSTEMINFO.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKKILL.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKLIST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TRACERT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\VER.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\VSSADMIN.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WHOAMI.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WINRS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WMIC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WSCRIPT.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\WUSA.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\COMMAND.COM")) >= 0 ||
+			    strPathUpper.Find(_T("\\EVENTVWR.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\PSEXEC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\CMDKEY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\MSIEXEC.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKHOSTW.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\TASKHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\BACKGROUNDTASKHOST.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ATTRIB.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ICACLS.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\ROBOCOPY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\XCOPY.EXE")) >= 0 ||
+			    strPathUpper.Find(_T("\\QWINSTA.EXE")) >= 0)
 			{
 				DebugWndLogData dwLogData;
 				dwLogData.mHWND.Format(_T("APP_WND:0x%08x"), 0);
@@ -2509,7 +2507,7 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 			lstrcpyn(FrmWndClassName, strFrmWndClass, 255);
 
 			HWND hWndCap = FindWindow(FrmWndClassName, NULL); //APのハンドル取得
-									  //起動している。
+			//起動している。
 			if (hWndCap != NULL)
 			{
 				TCHAR szTitleMultipleInstance[260] = {0};
@@ -2678,7 +2676,7 @@ void CSazabi::CopyDBLEXEToTempInit()
 	CString strTempUpper;
 	strTempUpper = strTempPath;
 	strTempUpper.MakeUpper();
-	if(strTempUpper.Find(_T("\\CHRONOSSG\\")) >= 0)
+	if (strTempUpper.Find(_T("\\CHRONOSSG\\")) >= 0)
 	{
 		strTempPath.TrimRight('\\');
 	}
@@ -2958,11 +2956,11 @@ typedef struct _VM_COUNTERS_EX2
 
 #include <psapi.h>
 typedef NTSTATUS(NTAPI* NtQueryInformationProcessPtr)(
-	IN HANDLE ProcessHandle,
-	IN int,//PROCESSINFOCLASS ProcessInformationClass,
-	OUT PVOID ProcessInformation,
-	IN ULONG ProcessInformationLength,
-	OUT PULONG ReturnLength OPTIONAL);
+    IN HANDLE ProcessHandle,
+    IN int, //PROCESSINFOCLASS ProcessInformationClass,
+    OUT PVOID ProcessInformation,
+    IN ULONG ProcessInformationLength,
+    OUT PULONG ReturnLength OPTIONAL);
 
 typedef ULONG(NTAPI* RtlNtStatusToDosErrorPtr)(NTSTATUS Status);
 
@@ -3545,8 +3543,8 @@ CString CSazabi::GetCefVersionStr()
 				CString name;
 
 				name.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
-					lpTranslate[i].wLanguage,
-					lpTranslate[i].wCodePage, _T("FileVersion"));
+					    lpTranslate[i].wLanguage,
+					    lpTranslate[i].wCodePage, _T("FileVersion"));
 				if (VerQueryValue(pData, name, &pvVersion, &VersionLen))
 				{
 					CString strVersionStr((LPCTSTR)pvVersion);
@@ -3766,24 +3764,24 @@ CString CSazabi::GetVOSInfo()
 			CString name;
 
 			name.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
-				lpTranslate[i].wLanguage,
-				lpTranslate[i].wCodePage, _T("ThinAppVersion"));
+				    lpTranslate[i].wLanguage,
+				    lpTranslate[i].wCodePage, _T("ThinAppVersion"));
 			if (VerQueryValue(pBlock, name, &pvVersion, &VersionLen))
 			{
 				szThinAppVersion = (LPCTSTR)pvVersion;
 			}
 
 			name.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
-				lpTranslate[i].wLanguage,
-				lpTranslate[i].wCodePage, _T("ThinAppLicense"));
+				    lpTranslate[i].wLanguage,
+				    lpTranslate[i].wCodePage, _T("ThinAppLicense"));
 			if (VerQueryValue(pBlock, name, &pvVersion, &VersionLen))
 			{
 				szThinAppLicense = (LPCTSTR)pvVersion;
 			}
 
 			name.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
-				lpTranslate[i].wLanguage,
-				lpTranslate[i].wCodePage, _T("ThinAppBuildDateTime"));
+				    lpTranslate[i].wLanguage,
+				    lpTranslate[i].wCodePage, _T("ThinAppBuildDateTime"));
 			if (VerQueryValue(pBlock, name, &pvVersion, &VersionLen))
 			{
 				szThinAppBuildDateTime = (LPCTSTR)pvVersion;
@@ -3807,17 +3805,15 @@ CString CSazabi::GetVOSInfo()
 			}
 		}
 		strRet.Format(_T("%s\r\n%s %s"),
-			GetVOSVersionFromNT0_DLLStr(),
-			_T("TS_ORIGIN"), szTargetPath
-		);
+			      GetVOSVersionFromNT0_DLLStr(),
+			      _T("TS_ORIGIN"), szTargetPath);
 		CString strTmp;
 		if (!szThinAppVersion.IsEmpty())
 		{
 			strTmp.Format(_T("\r\n%s %s\r\n%s %s\r\n%s %s"),
-				_T("ThinAppVersion"), szThinAppVersion,
-				_T("ThinAppLicense"), szThinAppLicense,
-				_T("ThinAppBuildDateTime"), strDateTime
-			);
+				      _T("ThinAppVersion"), szThinAppVersion,
+				      _T("ThinAppLicense"), szThinAppLicense,
+				      _T("ThinAppBuildDateTime"), strDateTime);
 			strRet += strTmp;
 		}
 		break;
@@ -3877,8 +3873,8 @@ CString CSazabi::GetAllModules()
 		processID = GetCurrentProcessId();
 		strRet.Format(_T("\nSA-DAO150915=============================================\nProcess ID: %d\n"), processID);
 		hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
-			PROCESS_VM_READ,
-			FALSE, processID);
+					   PROCESS_VM_READ,
+				       FALSE, processID);
 		if (NULL == hProcess)
 			return strRet;
 
@@ -3890,7 +3886,7 @@ CString CSazabi::GetAllModules()
 			{
 				memset(szModName, 0x00, sizeof(szModName));
 				if (GetModuleFileNameEx(hProcess, hMods[i], szModName,
-					sizeof(szModName) / sizeof(TCHAR)))
+							sizeof(szModName) / sizeof(TCHAR)))
 				{
 					strTemp.Format(_T("%s (0x%08x)\n"), szModName, hMods[i]);
 					strRet += strTemp;
@@ -4514,19 +4510,18 @@ int CSazabi::SB_MessageBox(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uT
 				int nHeight = rectParent.bottom - rectParent.top + 10;
 
 				hStopWnd = CreateWindowEx(
-					WS_EX_LAYERED,
-					wndClass.lpszClassName,
-					NULL,
-					WS_VISIBLE | WS_POPUP,
-					rectParent.left - 5,
-					rectParent.top - 5,
-					nWidth,
-					nHeight,
-					hWnd,
-					NULL,
-					wndClass.hInstance,
-					NULL
-				);
+				    WS_EX_LAYERED,
+				    wndClass.lpszClassName,
+				    NULL,
+				    WS_VISIBLE | WS_POPUP,
+				    rectParent.left - 5,
+				    rectParent.top - 5,
+				    nWidth,
+				    nHeight,
+				    hWnd,
+				    NULL,
+				    wndClass.hInstance,
+				    NULL);
 
 				if (hStopWnd)
 				{
