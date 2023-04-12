@@ -49,12 +49,14 @@
     <IntDir>.\ChronosRelease\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>ChronosN</TargetName>
+    <CodeAnalysisRuleSet>Sazabi.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'">
     <OutDir>.\D32\</OutDir>
     <IntDir>.\ChronosDebug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>ChronosN</TargetName>
+    <CodeAnalysisRuleSet>Sazabi.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">
     <ClCompile>
