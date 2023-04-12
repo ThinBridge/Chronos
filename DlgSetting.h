@@ -26,9 +26,9 @@ namespace autoresize
 
 	struct ResizeSpec
 	{
-		HWND m_hwnd;
-		CRect m_rc;
-		UINT m_resizeSpec;
+		HWND m_hwnd = nullptr;
+		CRect m_rc = nullptr;
+		UINT m_resizeSpec = 0;
 	};
 
 	class CAutoResize
@@ -211,6 +211,7 @@ public:
 		m_textClr = ::GetSysColor(COLOR_3DFACE);
 		m_fontWeight = FW_NORMAL;
 		m_fontSize = 12;
+		m_grayText = FALSE;
 	}
 
 public:
@@ -308,7 +309,7 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV supportk
-	//}}AFX_VIRTUAL
+							 //}}AFX_VIRTUAL
 
 	// Implementation
 protected:
@@ -348,7 +349,7 @@ public:
 	//{{AFX_VIRTUAL(CDlgSetTab1)
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV サポート
-	//}}AFX_VIRTUAL
+							 //}}AFX_VIRTUAL
 
 	// インプリメンテーション
 protected:

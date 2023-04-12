@@ -3621,7 +3621,10 @@ class CTaskbarList3
 protected:
 	ATL::CComPtr<ITaskbarList3> m_pTaskbarList3;
 	HWND m_hWnd;
-	CTaskbarList3(const CTaskbarList3& obj) {}
+	CTaskbarList3(const CTaskbarList3& obj)
+	{
+		m_hWnd = nullptr;
+	}
 
 public:
 	CTaskbarList3()
