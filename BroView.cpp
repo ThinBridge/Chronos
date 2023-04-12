@@ -1717,6 +1717,7 @@ void CChildView::OnSelAll()
 LRESULT CChildView::OnFindDialogMessage(WPARAM wParam, LPARAM lParam)
 {
 	ASSERT(m_pFindDialog != NULL);
+	__analysis_assume(m_pFindDialog != NULL);
 	try
 	{
 		if (m_pFindDialog->IsTerminating())
@@ -2294,7 +2295,10 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 
 			if (IsRedirectURLChk(strURL, bTopPage))
 			{
-				*pbRet = 2;
+				if (pbRet)
+				{
+					*pbRet = 2;
+				}
 				IsRedirectWndAutoCloseChk();
 			}
 		}

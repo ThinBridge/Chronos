@@ -2456,10 +2456,10 @@ afx_msg LRESULT CBrowserFrame::OnToolbarReset(WPARAM wp, LPARAM)
 			m_pwndToolBar->ReplaceButton(ID_GO_FORWARD,
 						     CMFCToolBarMenuButton(ID_GO_FORWARD, pmenuHistoryForwardSub->Detach(),
 									   GetCmdMgr()->GetCmdImage(ID_GO_FORWARD), str));
-		}
-		if (!theApp.IsSGMode())
-		{
-			m_pwndToolBar->RemoveButton(m_pwndToolBar->CommandToIndex(ID_OPEN_THIN_FILER));
+			if (!theApp.IsSGMode())
+			{
+				m_pwndToolBar->RemoveButton(m_pwndToolBar->CommandToIndex(ID_OPEN_THIN_FILER));
+			}
 		}
 	}
 	return 0;
@@ -2984,9 +2984,13 @@ void CBrowserFrame::OnTabListShow()
 			ptBmpArray.Add(hbmp);
 			menuSub->SetMenuItemBitmaps((int)i, MF_BYPOSITION, pBmp, pBmp);
 		}
-		int lResult = TrackPopupMenuEx(menuSub->m_hMenu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON,
-					       pt.x, pt.y,
-					       (HWND)this->GetSafeHwnd(), NULL);
+		BOOL lResult = FALSE;
+		if (menuSub)
+		{
+			lResult = TrackPopupMenuEx(menuSub->m_hMenu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON,
+						   pt.x, pt.y,
+						   (HWND)this->GetSafeHwnd(), NULL);
+		}
 		size_t iBmpCnt = ptBmpArray.GetCount();
 		for (UINT j = 0; j < iBmpCnt; j++)
 		{
