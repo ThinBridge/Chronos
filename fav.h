@@ -170,10 +170,7 @@ public:
 class CFavoriteItem
 {
 public:
-	CFavoriteItem() : CFavoriteItem(IEFavURL)
-	{
-	}
-	CFavoriteItem(int iType)
+	CFavoriteItem(int iType = IEFavURL)
 	{
 		bType = iType;
 		commandID = 0;
