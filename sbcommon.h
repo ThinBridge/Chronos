@@ -22,7 +22,7 @@ public:
 		if (timeCount > 20) //20msà»è„
 		{
 			CString strMsg;
-			strMsg.Format(_T("#\t%d ms\t%s\n"), timeCount, strFmt);
+			strMsg.Format(_T("#\t%d ms\t%s\n"), timeCount, (LPCTSTR)strFmt);
 			::OutputDebugString(strMsg);
 		}
 	}
@@ -3282,7 +3282,7 @@ public:
 				vbFormatTemp.Replace(_T("\""), _T("\"\""));
 
 				CString vbGlobalURL;
-				vbGlobalURL.Format(_T("Const TB_Global_URL=\"%s\"\r\n"), vbFormatTemp);
+				vbGlobalURL.Format(_T("Const TB_Global_URL=\"%s\"\r\n"), (LPCTSTR)vbFormatTemp);
 
 				//å›ä∑ÇÃà◊ TrueÇÉZÉbÉg
 				CString vbGlobalTopPage;
@@ -3344,11 +3344,11 @@ public:
 				TB_Global_URL_EXTRAINFO.Replace(_T("\""), _T("\"\""));
 
 				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"),
-						 TB_Global_SCHME,
-						 TB_Global_HOSTNAME,
-						 TB_Global_PORT,
-						 TB_Global_URL_PATH,
-						 TB_Global_URL_EXTRAINFO);
+						 (LPCTSTR)TB_Global_SCHME,
+						 (LPCTSTR)TB_Global_HOSTNAME,
+						 (LPCTSTR)TB_Global_PORT,
+						 (LPCTSTR)TB_Global_URL_PATH,
+						 (LPCTSTR)TB_Global_URL_EXTRAINFO);
 
 				CStringW vbGlobalSettings;
 				vbGlobalSettings = vbGlobalURL;
@@ -3507,10 +3507,10 @@ public:
 				CString vbGlobalURL;
 				//Option Explicit\r\n
 				vbGlobalURL.Format(_T("Const TB_Global_URL=\"%s\"\r\nConst TB_Global_Scheme=\"%s\"\r\nConst TB_Global_Host=\"%s\"\r\nConst TB_Global_Path=\"%s\"\r\n\r\n"),
-						   vbFormatTemp,
-						   strSchme,
-						   strHost,
-						   strPath);
+						   (LPCTSTR)vbFormatTemp,
+						   (LPCTSTR)strSchme,
+						   (LPCTSTR)strHost,
+						   (LPCTSTR)strPath);
 
 				CStringW vbGlobalSettings;
 				vbGlobalSettings = vbGlobalURL;

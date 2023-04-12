@@ -879,8 +879,8 @@ public:
 					CString strCommand;
 					CString strParam;
 
-					strCommand.Format(_T("\"%s\" -SB2PYS \"%s|@@|%s\""), strTempPath, strSBFilePath, strPYSFilePath);
-					strParam.Format(_T("-SB2PYS \"%s|@@|%s\""), strSBFilePath, strPYSFilePath);
+					strCommand.Format(_T("\"%s\" -SB2PYS \"%s|@@|%s\""), (LPCTSTR)strTempPath, (LPCTSTR)strSBFilePath, (LPCTSTR)strPYSFilePath);
+					strParam.Format(_T("-SB2PYS \"%s|@@|%s\""), (LPCTSTR)strSBFilePath, (LPCTSTR)strPYSFilePath);
 
 					STARTUPINFO si = {0};
 					PROCESS_INFORMATION pi = {0};
