@@ -39,8 +39,13 @@ class CActiveTabLine;
 class APIHookC;
 class CLogDispatcher;
 
+#pragma warning(push, 0)
+#include <codeanalysis/warnings.h>
+#pragma warning(disable \
+		: ALL_CODE_ANALYSIS_WARNINGS)
 #include "include/cef_base.h"
 #include "include/cef_app.h"
+#pragma warning(pop)
 #include "client_app.h"
 class CSazabi : public CWinApp
 {

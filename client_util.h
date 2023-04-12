@@ -6,7 +6,12 @@
 #define CEF_TESTS_CEFCLIENT_UTIL_H_
 #pragma once
 
+#pragma warning(push, 0)
+#include <codeanalysis/warnings.h>
+#pragma warning(disable \
+		: ALL_CODE_ANALYSIS_WARNINGS)
 #include "include/cef_task.h"
+#pragma warning(pop)
 
 #if defined(OS_WIN)
 

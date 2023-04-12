@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "APIHook.h"
+#pragma warning(push, 0)
+#include <codeanalysis/warnings.h>
+#pragma warning(disable \
+		: ALL_CODE_ANALYSIS_WARNINGS)
 #include "minhook\hook.hh"
+#pragma warning(pop)
 #include "Windows.h"
 
 #define API_H_TRY \
