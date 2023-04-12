@@ -4319,7 +4319,7 @@ BOOL CSazabi::IsLimitChkEx()
 		unsigned long long iMemSize = GetMemoryUsageSize();
 		size_t iMemL = m_AppSettings.GetMemoryUsageLimit();
 		//GDI/ User /Mamory Limits
-		if (iMemSize > iMemL * 1024 * 1024)
+		if (iMemSize > (unsigned long long)iMemL * 1024 * 1024)
 		{
 			CString alertMsg;
 			alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN);
@@ -4337,13 +4337,13 @@ BOOL CSazabi::IsLimitChkEx()
 		else
 		{
 			//WARNING
-			if (iMemSize > (iMemL - 250) * 1024 * 1024)
+			if (iMemSize > (unsigned long long)(iMemL - 250) * 1024 * 1024)
 			{
 				//一旦ワーキングセットをクリアして開放してしまう。
 				EmptyWorkingSetAll();
 			}
 			iMemSize = GetMemoryUsageSize();
-			if (iMemSize > (iMemL - 250) * 1024 * 1024)
+			if (iMemSize > (unsigned long long)(iMemL - 250) * 1024 * 1024)
 			{
 				CString alertMsg;
 				alertMsg.LoadString(IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST);
