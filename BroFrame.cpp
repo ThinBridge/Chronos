@@ -2951,13 +2951,15 @@ void CBrowserFrame::OnTabListShow()
 			SBUtil::GetDivChar(strTitle, 160, str);
 			strTitle = str;
 			strTitle.Replace(_T("&"), _T("&&"));
-			if (m_ptrAWnd.GetAt(i) == this->GetSafeHwnd())
+			if (menuSub)
 			{
-				menuSub->AppendMenu(MF_BYPOSITION | MF_CHECKED | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
+				if (m_ptrAWnd.GetAt(i) == this->GetSafeHwnd())
+				{
+					menuSub->AppendMenu(MF_BYPOSITION | MF_CHECKED | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
+				}
+				else
+					menuSub->AppendMenu(MF_BYPOSITION | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
 			}
-			else
-				menuSub->AppendMenu(MF_BYPOSITION | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
-
 			HBITMAP hbmp = {0};
 			CIconHelper hicon;
 			HDC hdcMem = {0};
@@ -2982,7 +2984,8 @@ void CBrowserFrame::OnTabListShow()
 			DeleteDC(hdcMem);
 			CBitmap* pBmp = CBitmap::FromHandle((HBITMAP)hbmp);
 			ptBmpArray.Add(hbmp);
-			menuSub->SetMenuItemBitmaps((int)i, MF_BYPOSITION, pBmp, pBmp);
+			if (menuSub)
+				menuSub->SetMenuItemBitmaps((int)i, MF_BYPOSITION, pBmp, pBmp);
 		}
 		BOOL lResult = FALSE;
 		if (menuSub)
