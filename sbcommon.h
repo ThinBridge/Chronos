@@ -3620,17 +3620,14 @@ class CTaskbarList3
 {
 protected:
 	ATL::CComPtr<ITaskbarList3> m_pTaskbarList3;
-	HWND m_hWnd;
-	CTaskbarList3(const CTaskbarList3& obj)
-	{
-		m_hWnd = nullptr;
-	}
+	HWND m_hWnd = nullptr;
+	CTaskbarList3(const CTaskbarList3& obj) {}
 
 public:
 	CTaskbarList3()
 	{
-		m_pTaskbarList3 = NULL;
-		m_hWnd = NULL;
+		m_pTaskbarList3 = nullptr;
+		m_hWnd = nullptr;
 	}
 	virtual ~CTaskbarList3() { Uninitialize(); }
 	BOOL Initialize(HWND hWnd)
