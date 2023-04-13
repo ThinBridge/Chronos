@@ -548,6 +548,9 @@ IMPLEMENT_DYNAMIC(CDlgSCEditor, CDialogEx)
 CDlgSCEditor::CDlgSCEditor(CWnd* pParent /*=NULL*/)
     : CDialogEx(CDlgSCEditor::IDD, pParent)
 {
+	bFirstFlg = FALSE;
+	m_SelPosE = 0;
+	m_SelPosS = 0;
 }
 
 CDlgSCEditor::~CDlgSCEditor()

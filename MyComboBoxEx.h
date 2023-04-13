@@ -73,6 +73,7 @@ public:
 	CMyComboEdit()
 	{
 		m_pParentFrmWnd = NULL;
+		m_bIME = FALSE;
 	};
 	virtual ~CMyComboEdit(){};
 	CWnd* m_pParentFrmWnd;

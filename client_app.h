@@ -96,7 +96,7 @@ public:
 					     CefRefPtr<CefImage> image);
 
 public:
-	CBrowserFrame* m_pwndFrame;
+	CBrowserFrame* m_pwndFrame = nullptr;
 	void SetFramePtr(CBrowserFrame* pwndFrame) { m_pwndFrame = pwndFrame; }
 	void AddRef() const override
 	{

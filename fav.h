@@ -170,14 +170,10 @@ public:
 class CFavoriteItem
 {
 public:
-	CFavoriteItem()
-	{
-		bType = IEFavURL;
-		commandID = 0;
-	}
-	CFavoriteItem(int iType)
+	CFavoriteItem(int iType = IEFavURL)
 	{
 		bType = iType;
+		commandID = 0;
 	}
 	virtual ~CFavoriteItem()
 	{
@@ -426,6 +422,9 @@ public:
 	{
 		m_FavRootItem = NULL;
 		m_iRet = 0;
+		iindex = 0;
+		iLinkCnt = 0;
+		bIEOrder = FALSE;
 	}
 	virtual ~CFavoriteItemManager()
 	{

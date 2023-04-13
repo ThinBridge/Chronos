@@ -5,10 +5,10 @@ typedef class _PageInfo PAGE_INFO;
 class _PageInfo
 {
 public:
-	BOOL bViewClass;
-	UINT nID;
-	CWnd* pWnd;
-	CWnd* pWndParent;
+	BOOL bViewClass = FALSE;
+	UINT nID = 0;
+	CWnd* pWnd = nullptr;
+	CWnd* pWndParent = nullptr;
 	CString csCaption;
 	CString csParentCaption;
 };
@@ -26,9 +26,9 @@ namespace autoresize
 
 	struct ResizeSpec
 	{
-		HWND m_hwnd;
+		HWND m_hwnd = nullptr;
 		CRect m_rc;
-		UINT m_resizeSpec;
+		UINT m_resizeSpec = 0;
 	};
 
 	class CAutoResize
@@ -211,6 +211,7 @@ public:
 		m_textClr = ::GetSysColor(COLOR_3DFACE);
 		m_fontWeight = FW_NORMAL;
 		m_fontSize = 12;
+		m_grayText = FALSE;
 	}
 
 public:

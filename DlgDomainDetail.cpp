@@ -6,6 +6,8 @@ IMPLEMENT_DYNAMIC(CDlgDomainDetail, CDialogEx)
 CDlgDomainDetail::CDlgDomainDetail(CWnd* pParent /*=NULL*/)
     : CDialogEx(IDD_DIALOG5, pParent)
 {
+	m_ActionType = 0;
+	m_bEnable = FALSE;
 }
 
 CDlgDomainDetail::~CDlgDomainDetail()
@@ -94,6 +96,7 @@ IMPLEMENT_DYNAMIC(CDlgCustomScriptDetail, CDialogEx)
 CDlgCustomScriptDetail::CDlgCustomScriptDetail(CWnd* pParent /*=NULL*/)
     : CDialogEx(IDD_DIALOG6, pParent)
 {
+	m_bEnable = FALSE;
 }
 
 CDlgCustomScriptDetail::~CDlgCustomScriptDetail()
