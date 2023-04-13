@@ -588,11 +588,12 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 		URL_COMPONENTS urlcomponents = {0};
 		ZeroMemory(&urlcomponents, sizeof(URL_COMPONENTS));
 		urlcomponents.dwStructSize = sizeof(URL_COMPONENTS);
-		TCHAR szHostName[URLBUFFER_SIZE] = {0};
-		TCHAR szUrlPath[URLBUFFER_SIZE] = {0};
 
-		urlcomponents.lpszHostName = szHostName;
-		urlcomponents.lpszUrlPath = szUrlPath;
+		std::unique_ptr<TCHAR> szHostName(new TCHAR[URLBUFFER_SIZE]());
+		std::unique_ptr<TCHAR> szUrlPath(new TCHAR[URLBUFFER_SIZE]());
+
+		urlcomponents.lpszHostName = szHostName.get();
+		urlcomponents.lpszUrlPath = szUrlPath.get();
 		urlcomponents.dwHostNameLength = URLBUFFER_SIZE;
 		urlcomponents.dwUrlPathLength = URLBUFFER_SIZE;
 
