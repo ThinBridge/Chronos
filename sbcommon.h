@@ -791,17 +791,20 @@ namespace SBUtil
 	static CString GetCommandLineData(DWORD dwPID)
 	{
 		CString strRet;
-		WCHAR szCommandLine[8192] = {0};
+
 		if (dwPID == 0) return strRet;
 		try
 		{
 			HANDLE processHandle = {0};
+			std::unique_ptr<WCHAR> szCommandLine(new WCHAR[8192]());
+
 			processHandle = OpenProcess(PROCESS_VM_READ | PROCESS_QUERY_INFORMATION, FALSE, dwPID);
 			if (processHandle)
 			{
-				GetRemoteCommandLineW(processHandle, szCommandLine, 8192);
+				LPWSTR rawSzCommandLine = szCommandLine.get();
+				GetRemoteCommandLineW(processHandle, rawSzCommandLine, 8192);
 				CloseHandle(processHandle);
-				CStringW strW(szCommandLine);
+				CStringW strW(rawSzCommandLine);
 				strW.TrimLeft();
 				strW.TrimRight();
 				if (!strW.IsEmpty())
@@ -3314,21 +3317,21 @@ public:
 				ZeroMemory(&urlcomponents, sizeof(URL_COMPONENTS));
 				urlcomponents.dwStructSize = sizeof(URL_COMPONENTS);
 
-				TCHAR szSchme[64] = {0};
-				TCHAR szHostName[URLBUFFER_SIZE] = {0};
-				TCHAR szUrlPath[URLBUFFER_SIZE] = {0};
-				TCHAR szUrlExtra[URLBUFFER_SIZE] = {0};
+				std::unique_ptr<TCHAR> szSchme(new TCHAR[64]());
+				std::unique_ptr<TCHAR> szHostName(new TCHAR[URLBUFFER_SIZE]());
+				std::unique_ptr<TCHAR> szUrlPath(new TCHAR[URLBUFFER_SIZE]());
+				std::unique_ptr<TCHAR> szUrlExtra(new TCHAR[URLBUFFER_SIZE]());
 
-				urlcomponents.lpszScheme = szSchme;
+				urlcomponents.lpszScheme = szSchme.get();
 				urlcomponents.dwSchemeLength = 64;
 
-				urlcomponents.lpszHostName = szHostName;
+				urlcomponents.lpszHostName = szHostName.get();
 				urlcomponents.dwHostNameLength = URLBUFFER_SIZE;
 
-				urlcomponents.lpszUrlPath = szUrlPath;
+				urlcomponents.lpszUrlPath = szUrlPath.get();
 				urlcomponents.dwUrlPathLength = URLBUFFER_SIZE;
 
-				urlcomponents.lpszExtraInfo = szUrlExtra;
+				urlcomponents.lpszExtraInfo = szUrlExtra.get();
 				urlcomponents.dwExtraInfoLength = URLBUFFER_SIZE;
 
 				InternetCrackUrl(strURL, 0, 0, &urlcomponents);
