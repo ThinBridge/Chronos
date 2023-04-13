@@ -232,7 +232,7 @@ BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwS
 			m_dbZoomSizeDefault = dZoom;
 		}
 		CString logmsg;
-		logmsg.Format(_T("ChildView::Create BF_WND:0x%08x CV_WND:0x%08x"), theApp.SafeWnd(m_pwndFrame), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("ChildView::Create BF_WND:0x%08p CV_WND:0x%08p"), theApp.SafeWnd(m_pwndFrame), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 	catch (...)
@@ -385,7 +385,7 @@ BOOL CChildView::IsFileURINavigation(const CString& strURL)
 		return FALSE;
 
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x IsFileURINavigation:%s"), theApp.SafeWnd(this->m_hWnd), strURL);
+	logmsg.Format(_T("CV_WND:0x%08p IsFileURINavigation:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strURL);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 	LockSetForegroundWindow(LSFW_UNLOCK);
 	theApp.OpenFileExplorer(strURL);
@@ -429,8 +429,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 
 	if (strRet.CompareNoCase(_T("IE")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageIE, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageIE, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -442,8 +442,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 
 	if (strRet.CompareNoCase(_T("Custom")) == 0 || strRet.CompareNoCase(_T("Custom1")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageCustom, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -454,8 +454,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	}
 	if (strRet.CompareNoCase(_T("Custom2")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageCustom, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -466,8 +466,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	}
 	if (strRet.CompareNoCase(_T("Custom3")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageCustom, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -478,8 +478,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	}
 	if (strRet.CompareNoCase(_T("Custom4")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageCustom, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -490,8 +490,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	}
 	if (strRet.CompareNoCase(_T("Custom5")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageCustom, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -503,8 +503,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 
 	if (strRet.CompareNoCase(_T("Block")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageNG, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:<BLOCK> %s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageNG, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:<BLOCK> %s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -515,8 +515,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 
 	if (strRet.CompareNoCase(_T("Default")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageDBL, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageDBL, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -528,8 +528,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 
 	if (strRet.CompareNoCase(_T("Firefox")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageFF, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageFF, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -541,8 +541,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 
 	if (strRet.CompareNoCase(_T("Chrome")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageCHR, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCHR, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -554,8 +554,8 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 
 	if (strRet.CompareNoCase(_T("Edge")) == 0)
 	{
-		strTimeoutMessage.Format(_T("%s\n%s"), theApp.m_strZoneMessageEDG, strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), strTimeoutMessage);
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageEDG, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
 
 		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
@@ -602,7 +602,7 @@ BOOL CChildView::IsRedirectURLChk(const CString& strURL, BOOL bTop)
 			strPath = _T("/");
 
 		CString strURLChk; //Queryを除く。無駄な情報を省く。
-		strURLChk.Format(_T("%s://%s%s"), strScheme, strHost, strPath);
+		strURLChk.Format(_T("%s://%s%s"), (LPCTSTR)strScheme, (LPCTSTR)strHost, (LPCTSTR)strPath);
 
 		//除外にHitした。
 		if (theApp.IsCacheRedirectFilterNone(strURLChk))
@@ -634,7 +634,7 @@ void CChildView::IsRedirectWndAutoCloseChk()
 	//Shiftキー / ESCが押されている場合は、閉じない。
 	if (::GetKeyState(VK_SHIFT) < 0 || ::GetKeyState(VK_ESCAPE) < 0)
 	{
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectWndAutoCloseChk :AutoClose Shift Key Skip"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectWndAutoCloseChk :AutoClose Shift Key Skip"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 		return;
 	}
@@ -642,7 +642,7 @@ void CChildView::IsRedirectWndAutoCloseChk()
 	if (m_bFirstCallDontClose)
 	{
 		m_bFirstCallDontClose = FALSE;
-		logmsg.Format(_T("CV_WND:0x%08x IsRedirectWndAutoCloseChk :AutoClose First Call GoHome Skip"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectWndAutoCloseChk :AutoClose First Call GoHome Skip"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 		return;
 	}
@@ -749,7 +749,7 @@ void CChildView::ResizeWindowPopupInpl()
 	try
 	{
 		CString logmsg;
-		logmsg.Format(_T("CV_WND:0x%08x ResizeWindowPopupInpl"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p ResizeWindowPopupInpl"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 		if (!theApp.IsWnd(m_pwndFrame))
 			return;
@@ -903,7 +903,7 @@ void CChildView::OnStatusTextChange(LPCTSTR lpszText)
 		}
 
 		DebugWndLogData dwLogData;
-		dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+		dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 		dwLogData.mFUNCTION_NAME = _T("OnStatusTextChange");
 		dwLogData.mMESSAGE1 = strTemp;
 		theApp.AppendDebugViewLog(dwLogData);
@@ -1274,7 +1274,7 @@ void CChildView::OnNew()
 	try
 	{
 		CString logmsg;
-		logmsg.Format(_T("CV_WND:0x%08x OnNew"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnNew"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 		if (!IsBrowserNull())
@@ -1300,7 +1300,7 @@ void CChildView::OnReopenCloseTab()
 	try
 	{
 		CString logmsg;
-		logmsg.Format(_T("CV_WND:0x%08x OnReopenCloseTab"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnReopenCloseTab"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 		if (!IsBrowserNull())
@@ -1334,7 +1334,7 @@ void CChildView::OnNewBlank()
 	try
 	{
 		CString logmsg;
-		logmsg.Format(_T("CV_WND:0x%08x OnNewBlank"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnNewBlank"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 		if (!IsBrowserNull())
@@ -1365,7 +1365,7 @@ void CChildView::OnNewSession()
 		startingMsg.LoadString(IDS_STRING_STARTING_NEW_SESSION);
 		FRM->SetMessage_MsgDlg(startingMsg);
 		CString logmsg;
-		logmsg.Format(_T("CV_WND:0x%08x OnNew"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnNew"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 		if (!IsBrowserNull())
 		{
@@ -1389,7 +1389,7 @@ void CChildView::OnNewSession()
 void CChildView::OnPrintPDF()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnPrintPDF"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnPrintPDF"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
@@ -1442,7 +1442,7 @@ void CChildView::OnPrintPDF()
 		CString szFilter;
 		szFilter.LoadString(ID_FILE_TYPE_PDF);
 		CString strFullPath;
-		strFullPath.Format(_T("%s%s"), strPath, strFileName);
+		strFullPath.Format(_T("%s%s"), (LPCTSTR)strPath, (LPCTSTR)strFileName);
 		CString strTitle;
 		strTitle.LoadString(ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE);
 		CStringW strCaption(theApp.m_strThisAppName);
@@ -1536,7 +1536,7 @@ void CChildView::OnPrintPDF()
 void CChildView::ShowDevTools()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x ShowDevTools"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p ShowDevTools"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
@@ -1555,7 +1555,7 @@ void CChildView::ShowDevTools()
 void CChildView::OnPrint()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnPrint"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnPrint"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
@@ -1565,7 +1565,7 @@ void CChildView::OnPrint()
 void CChildView::OnGoBack()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnGoBack"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnGoBack"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (!IsBrowserNull())
 		GoBack();
@@ -1580,7 +1580,7 @@ void CChildView::OnUpdateGoBack(CCmdUI* pCmdUI)
 void CChildView::OnGoForward()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnGoForward"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnGoForward"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (!IsBrowserNull())
 		GoForward();
@@ -1597,7 +1597,7 @@ void CChildView::OnGoStartPage()
 	if (!IsBrowserNull())
 	{
 		CString logmsg;
-		logmsg.Format(_T("CV_WND:0x%08x OnGoStartPage"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnGoStartPage"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 		this->GoHome();
 	}
@@ -1610,7 +1610,7 @@ void CChildView::OnUpdateGoStartPage(CCmdUI* pCmdUI)
 void CChildView::OnViewRefresh()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnViewRefresh"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnViewRefresh"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (::GetAsyncKeyState(VK_CONTROL) < 0 &&
 	    ::GetKeyState(VK_SHIFT) >= 0 &&
@@ -1628,7 +1628,7 @@ void CChildView::OnUpdateViewRefresh(CCmdUI* pCmdUI)
 void CChildView::OnViewStop()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnViewStop"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnViewStop"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (!IsBrowserNull())
 		Stop();
@@ -1760,7 +1760,7 @@ LRESULT CChildView::OnFindDialogMessage(WPARAM wParam, LPARAM lParam)
 void CChildView::OnFindPage()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnFindPage"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnFindPage"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
@@ -1816,7 +1816,7 @@ void CChildView::OnAppAbout()
 void CChildView::OnSettings()
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnSettings"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnSettings"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	theApp.m_strCurrentURL4DlgSetting = m_strURL;
 	theApp.ShowSettingDlg(m_pwndFrame);
@@ -1824,7 +1824,7 @@ void CChildView::OnSettings()
 void CChildView::OnBroBack(UINT nID)
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnBroBack"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnBroBack"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	int max = nID - ID_BF_BACK1 + 1;
 	for (int i = 0; i < max; i++)
@@ -1833,14 +1833,14 @@ void CChildView::OnBroBack(UINT nID)
 void CChildView::OnZoom(UINT nID)
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnZoom"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnZoom"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	int max = nID - ID_ZOOM_START + 1;
 }
 void CChildView::OnBroForward(UINT nID)
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnBroForward"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnBroForward"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	int max = nID - ID_BF_FORWARD1 + 1;
 	for (int i = 0; i < max; i++)
@@ -1860,7 +1860,7 @@ void CChildView::OnKillFocus(CWnd* pNewWnd)
 void CChildView::OnFullScreen(BOOL bFlg)
 {
 	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08x OnFullScreen"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("CV_WND:0x%08p OnFullScreen"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (bFlg)
 	{
@@ -1886,7 +1886,7 @@ void CChildView::OnAddressBar(BOOL bFlg)
 		//非表示
 		if (!bFlg)
 		{
-			logmsg.Format(_T("CV_WND:0x%08x OnAddressBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
+			logmsg.Format(_T("CV_WND:0x%08p OnAddressBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 			if (theApp.IsWnd(m_pwndFrame))
 			{
@@ -1910,7 +1910,7 @@ void CChildView::OnAddressBar(BOOL bFlg)
 		}
 		else
 		{
-			logmsg.Format(_T("CV_WND:0x%08x OnAddressBar"), theApp.SafeWnd(this->m_hWnd));
+			logmsg.Format(_T("CV_WND:0x%08p OnAddressBar"), theApp.SafeWnd(this->m_hWnd));
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 		}
 	}
@@ -1926,7 +1926,7 @@ void CChildView::OnToolBar(BOOL bFlg)
 	//非表示
 	if (!bFlg)
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnToolBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnToolBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 		if (theApp.IsWnd(m_pwndFrame))
 		{
@@ -1949,7 +1949,7 @@ void CChildView::OnToolBar(BOOL bFlg)
 	}
 	else
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnToolBar"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnToolBar"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 	}
 }
@@ -1960,7 +1960,7 @@ void CChildView::OnMenuBar(BOOL bFlg)
 	//非表示
 	if (!bFlg)
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnMenuBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnMenuBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 		if (theApp.IsWnd(m_pwndFrame))
 		{
@@ -1982,7 +1982,7 @@ void CChildView::OnMenuBar(BOOL bFlg)
 	}
 	else
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnMenuBar"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnMenuBar"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 	}
 }
@@ -1993,7 +1993,7 @@ void CChildView::OnStatusBar(BOOL bFlg)
 	//非表示
 	if (!bFlg)
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnStatusBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnStatusBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 		if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
 		{
@@ -2002,7 +2002,7 @@ void CChildView::OnStatusBar(BOOL bFlg)
 	}
 	else
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnStatusBar"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnStatusBar"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 	}
 }
@@ -2013,13 +2013,13 @@ void CChildView::OnVisible(BOOL bFlg)
 	//表示
 	if (bFlg)
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnVisible"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnVisible"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 	}
 	//非表示
 	else
 	{
-		logmsg.Format(_T("CV_WND:0x%08x OnVisible_HIDE"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p OnVisible_HIDE"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 		this->EnableWindow(FALSE);
 		if (theApp.IsWnd(m_pwndFrame))
@@ -2038,7 +2038,7 @@ void CChildView::OnWindowSetResizable(BOOL bFlg)
 		//サイズ変更可能
 		if (bFlg)
 		{
-			logmsg.Format(_T("CV_WND:0x%08x OnWindowSetResizable_TRUE"), theApp.SafeWnd(this->m_hWnd));
+			logmsg.Format(_T("CV_WND:0x%08p OnWindowSetResizable_TRUE"), theApp.SafeWnd(this->m_hWnd));
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 
 			nNewStyle = nOldStyle | WS_THICKFRAME | WS_MAXIMIZEBOX;
@@ -2048,7 +2048,7 @@ void CChildView::OnWindowSetResizable(BOOL bFlg)
 		//サイズ変更不可
 		else
 		{
-			logmsg.Format(_T("CV_WND:0x%08x OnWindowSetResizable_FALSE"), theApp.SafeWnd(this->m_hWnd));
+			logmsg.Format(_T("CV_WND:0x%08p OnWindowSetResizable_FALSE"), theApp.SafeWnd(this->m_hWnd));
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 
 			nNewStyle = nOldStyle & ~WS_THICKFRAME & ~WS_MAXIMIZEBOX;
@@ -2073,7 +2073,7 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 				DWORD bFlags = bActive ? 0 : NWMF_FORCETAB;
 
 				DebugWndLogData dwLogData;
-				dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+				dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 				dwLogData.mFUNCTION_NAME = _T("CreateNewBrowserWindow");
 				dwLogData.mMESSAGE1 = strURL;
 				dwLogData.mMESSAGE2.Format(_T("bActive:%s"), bActive ? _T("TRUE") : _T("FALSE"));
@@ -2241,7 +2241,7 @@ void CChildView::OnDestroy()
 			this->SafeWindowCloseFunction();
 		}
 		CString logmsg;
-		logmsg.Format(_T("CV_WND:0x%08x CChildView::OnDestroy"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("CV_WND:0x%08p CChildView::OnDestroy"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_CL);
 		ViewBaseClass::OnDestroy();
 	}
@@ -2284,7 +2284,7 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 				}
 			}
 			DebugWndLogData dwLogData;
-			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+			dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 			dwLogData.mFUNCTION_NAME = _T("OnBeforeBrowse");
 			dwLogData.mMESSAGE1 = strURL;
 			dwLogData.mMESSAGE2.Format(_T("TopPage:%s"), bTopPage ? _T("TRUE") : _T("FALSE"));
@@ -2361,7 +2361,7 @@ LRESULT CChildView::OnBeforeResourceLoad(WPARAM wParam, LPARAM lParam)
 		return S_OK;
 
 	DebugWndLogData dwLogData;
-	dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 	dwLogData.mFUNCTION_NAME = _T("OnBeforeResourceLoad");
 	dwLogData.mMESSAGE1 = strURL;
 	theApp.AppendDebugViewLog(dwLogData);
@@ -2384,7 +2384,7 @@ LRESULT CChildView::OnLoadStart(WPARAM wParam, LPARAM lParam)
 	FRM->m_pwndStatusBar->EnablePaneProgressBar(nStatusProgress, 100);
 
 	DebugWndLogData dwLogData;
-	dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 	dwLogData.mFUNCTION_NAME = _T("OnLoadStart");
 	theApp.AppendDebugViewLog(dwLogData);
 	CString logmsg = dwLogData.GetString();
@@ -2403,7 +2403,7 @@ LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 			FRM->SetProgress(0, -1);
 
 			DebugWndLogData dwLogData;
-			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+			dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 			dwLogData.mFUNCTION_NAME = _T("OnLoadEnd");
 			theApp.AppendDebugViewLog(dwLogData);
 			CString logmsg = dwLogData.GetString();
@@ -2507,7 +2507,7 @@ LRESULT CChildView::OnProgressChange(WPARAM wParam, LPARAM lParam)
 				FRM->m_pwndStatusBar->SetPaneProgress(nStatusProgress, min(100, max(0, dwProgress)));
 
 				DebugWndLogData dwLogData;
-				dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+				dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 				dwLogData.mFUNCTION_NAME = _T("OnProgressChange");
 				dwLogData.mMESSAGE1.Format(_T("%d"), dwProgress);
 				theApp.AppendDebugViewLog(dwLogData);
@@ -2534,7 +2534,7 @@ LRESULT CChildView::OnStateChange(WPARAM wParam, LPARAM lParam)
 		return S_OK;
 
 	DebugWndLogData dwLogData;
-	dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 	dwLogData.mFUNCTION_NAME = _T("OnStateChange");
 	dwLogData.mMESSAGE1 = strURL;
 	dwLogData.mMESSAGE2.Format(_T("Loading:%s"), FRM->m_nBrowserState & CEF_BIT_IS_LOADING ? _T("TRUE") : _T("FALSE"));

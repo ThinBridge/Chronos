@@ -83,20 +83,20 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 			CString strCommandParam;
 			if (!m_strCommandParam.IsEmpty() && !m_strOptionParam.IsEmpty())
 			{
-				strCommandParam.Format(_T("\"%s\" %s"), m_strCommandParam, m_strOptionParam);
+				strCommandParam.Format(_T("\"%s\" %s"), (LPCTSTR)m_strCommandParam, (LPCTSTR)m_strOptionParam);
 			}
 			else
 			{
 				if (!m_strCommandParam.IsEmpty())
-					strCommandParam.Format(_T("\"%s\""), m_strCommandParam);
+					strCommandParam.Format(_T("\"%s\""), (LPCTSTR)m_strCommandParam);
 				if (!m_strOptionParam.IsEmpty())
-					strCommandParam.Format(_T("%s"), m_strOptionParam);
+					strCommandParam.Format(_T("%s"), (LPCTSTR)m_strOptionParam);
 			}
 			CString strCommandC;
 			if (strCommandParam.IsEmpty())
-				strCommandC.Format(_T("\"%s\""), strChronosVirtAppPath);
+				strCommandC.Format(_T("\"%s\""), (LPCTSTR)strChronosVirtAppPath);
 			else
-				strCommandC.Format(_T("\"%s\" %s"), strChronosVirtAppPath, strCommandParam);
+				strCommandC.Format(_T("\"%s\" %s"), (LPCTSTR)strChronosVirtAppPath, (LPCTSTR)strCommandParam);
 
 			STARTUPINFO siC = {0};
 			PROCESS_INFORMATION piC = {0};
@@ -341,7 +341,7 @@ BOOL CSazabi::InitFunc_SGMode()
 
 	CString strRegKeyBase;
 	strRegKeyBase = _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer\\NameSpace\\");
-	strRegKey.Format(_T("%s%s"), strRegKeyBase, _T("{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}"));
+	strRegKey.Format(_T("%s%s"), (LPCTSTR)strRegKeyBase, _T("{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}"));
 	SHDeleteKey(HKEY_LOCAL_MACHINE, strRegKey);
 	lResult = RegCreateKeyEx(HKEY_LOCAL_MACHINE, strRegKey,
 				 0, _T(""), REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &hKey, &dwDisposition);
@@ -362,8 +362,8 @@ BOOL CSazabi::InitFunc_SGMode()
 		CString strCommandC;
 		CString strParam;
 
-		strCommandC.Format(_T("\"%s\" \"%s\""), strSpCAppPath, m_AppSettings.GetRootPath());
-		strParam.Format(_T("\"%s\""), m_AppSettings.GetRootPath());
+		strCommandC.Format(_T("\"%s\" \"%s\""), (LPCTSTR)strSpCAppPath, (LPCTSTR)m_AppSettings.GetRootPath());
+		strParam.Format(_T("\"%s\""), (LPCTSTR)m_AppSettings.GetRootPath());
 		STARTUPINFO siC = {0};
 		PROCESS_INFORMATION piC = {0};
 		siC.cb = sizeof(siC);
@@ -574,9 +574,9 @@ BOOL CSazabi::InitInstance()
 	{
 		if (IsFirstInstance())
 		{
-			logmsg.Format(_T("CommandParam:[%s]"), m_lpCmdLine);
+			logmsg.Format(_T("CommandParam:[%s]"), (LPCTSTR)m_lpCmdLine);
 			WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
-			logmsg.Format(_T("AtomParam:[%s]"), m_strAtomParam);
+			logmsg.Format(_T("AtomParam:[%s]"), (LPCTSTR)m_strAtomParam);
 			WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 		}
 	}
@@ -1154,7 +1154,7 @@ void CSazabi::InitParseCommandLine()
 	//両方セットされている場合
 	if (!m_strCommandParam.IsEmpty() && !m_strOptionParam.IsEmpty())
 	{
-		m_strAtomParam.Format(_T("%s|@@|%s"), m_strCommandParam, m_strOptionParam);
+		m_strAtomParam.Format(_T("%s|@@|%s"), (LPCTSTR)m_strCommandParam, (LPCTSTR)m_strOptionParam);
 	}
 	else
 	{
@@ -1177,7 +1177,7 @@ void CSazabi::ExitKillZombieProcess()
 		CString strCommand;
 		CString strParam;
 		CopyDBLEXEToTempEx();
-		strCommand.Format(_T("\"%s\" -ClosePWait"), m_strDBL_EXE_FullPath);
+		strCommand.Format(_T("\"%s\" -ClosePWait"), (LPCTSTR)m_strDBL_EXE_FullPath);
 		strParam = _T("-ClosePWait");
 		SetLastError(NO_ERROR);
 		if (::ShellExecute(NULL, _T("open"), m_strDBL_EXE_FullPath, strParam, NULL, SW_SHOW) <= HINSTANCE(32))
@@ -1200,14 +1200,14 @@ void CSazabi::OpenChFiler(LPCTSTR lpOpenPath)
 		if (lpOpenPath)
 		{
 			strOpenPath = lpOpenPath;
-			strCommand.Format(_T("\"%sChFiler.exe\""), m_strExeFolderPath);
-			strExecCommand.Format(_T("\"%sChFiler.exe\" \"%s\""), m_strExeFolderPath, strOpenPath);
-			strParam.Format(_T("\"%s\""), strOpenPath);
+			strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
+			strExecCommand.Format(_T("\"%sChFiler.exe\" \"%s\""), (LPCTSTR)m_strExeFolderPath, (LPCTSTR)strOpenPath);
+			strParam.Format(_T("\"%s\""), (LPCTSTR)strOpenPath);
 		}
 		else
 		{
-			strCommand.Format(_T("\"%sChFiler.exe\""), m_strExeFolderPath);
-			strExecCommand.Format(_T("\"%sChFiler.exe\""), m_strExeFolderPath);
+			strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
+			strExecCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
 			strParam = _T("");
 		}
 
@@ -1399,7 +1399,7 @@ void CSazabi::OpenChTaskMgr()
 	}
 	CString strCommand;
 	CString strParam;
-	strCommand.Format(_T("\"%s\" /RESIDENT"), strtSGPathResult);
+	strCommand.Format(_T("\"%s\" /RESIDENT"), (LPCTSTR)strtSGPathResult);
 	strParam = _T("/RESIDENT");
 	STARTUPINFO si = {0};
 	PROCESS_INFORMATION pi = {0};
@@ -1435,9 +1435,9 @@ void CSazabi::InitLogWrite()
 	WriteDebugTraceDateTime(_T("===================================================================================================="), DEBUG_LOG_TYPE_GE);
 	WriteDebugTraceDateTime(_T("InitInstance"), DEBUG_LOG_TYPE_GE);
 	WriteDebugTraceDateTime(m_strThisAppVersionString, DEBUG_LOG_TYPE_GE);
-	logmsg.Format(_T("ThisAppName:%s"), m_strThisAppName);
+	logmsg.Format(_T("ThisAppName:%s"), (LPCTSTR)m_strThisAppName);
 	WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
-	logmsg.Format(_T("ExeName:%s"), m_strExeFileName);
+	logmsg.Format(_T("ExeName:%s"), (LPCTSTR)m_strExeFileName);
 	WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 
 #ifndef _WIN64
@@ -1446,26 +1446,26 @@ void CSazabi::InitLogWrite()
 	WriteDebugTraceDateTime(_T("WIN64 App"), DEBUG_LOG_TYPE_GE);
 #endif //WIN64
 
-	logmsg.Format(_T("OS:%s"), GetOSInfo());
+	logmsg.Format(_T("OS:%s"), (LPCTSTR)GetOSInfo());
 	WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 
-	logmsg.Format(_T("Kernel:%s"), GetOSKernelVersion());
+	logmsg.Format(_T("Kernel:%s"), (LPCTSTR)GetOSKernelVersion());
 	WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 
-	logmsg.Format(_T("%s"), GetCefVersionStr());
+	logmsg.Format(_T("%s"), (LPCTSTR)GetCefVersionStr());
 	WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 
-	logmsg.Format(_T("%s"), GetChromiumVersionStr());
+	logmsg.Format(_T("%s"), (LPCTSTR)GetChromiumVersionStr());
 	WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
-		logmsg.Format(_T("VOSInfo:%s"), GetVOSInfo());
+		logmsg.Format(_T("VOSInfo:%s"), (LPCTSTR)GetVOSInfo());
 		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 	else if (InVirtualEnvironment() == VE_TURBO)
 	{
-		logmsg.Format(_T("TurboVMInfo:%s"), GetTurboVMInfo());
+		logmsg.Format(_T("TurboVMInfo:%s"), (LPCTSTR)GetTurboVMInfo());
 		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 	//設定値を出力
@@ -1871,13 +1871,13 @@ CString CSazabi::GetVOSProcessString(BOOL bCurrent, DWORD* pdwCnt, BOOL bNeedCmd
 						//自身のプロセスも含める
 						if (bCurrent)
 						{
-							strTemp.Format(_T("PID[*]:%s \"%s\" %s\r\n"), strValueName, strValue, strCommandLine);
+							strTemp.Format(_T("PID[*]:%s \"%s\" %s\r\n"), (LPCTSTR)strValueName, (LPCTSTR)strValue, (LPCTSTR)strCommandLine);
 							strRet += strTemp;
 						}
 					}
 					else
 					{
-						strTemp.Format(_T("PID:%s \"%s\" %s\r\n"), strValueName, strValue, strCommandLine);
+						strTemp.Format(_T("PID:%s \"%s\" %s\r\n"), (LPCTSTR)strValueName, (LPCTSTR)strValue, (LPCTSTR)strCommandLine);
 						strRet += strTemp;
 					}
 					dwCount++;
@@ -1912,7 +1912,7 @@ void CSazabi::CloseVOSProcessOther()
 		return;
 	CString strThinFilerPath;
 
-	strThinFilerPath.Format(_T("%sChFiler.exe"), m_strExeFolderPath);
+	strThinFilerPath.Format(_T("%sChFiler.exe"), (LPCTSTR)m_strExeFolderPath);
 
 	DWORD dwValueNameSize = 256;
 	TCHAR szValueName[256] = {0};
@@ -2098,7 +2098,7 @@ BOOL CSazabi::CloseVOSProc()
 		CString confirmMsg;
 		confirmMsg.LoadString(IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS);
 		CString strMsg;
-		strMsg.Format(_T("%s\n%s"), confirmMsg, strString);
+		strMsg.Format(_T("%s\n%s"), (LPCTSTR)confirmMsg, (LPCTSTR)strString);
 		int iRet = AfxMessageBox(strMsg, MB_ICONQUESTION | MB_YESNO);
 		if (iRet != IDYES)
 			return FALSE;
@@ -2388,23 +2388,23 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 		CopyDBLEXEToTempEx();
 		if (iType == 1)
 		{
-			strCommand.Format(_T("\"%s\" \"%s\" -IE"), m_strDBL_EXE_FullPath, strURL);
-			strParam.Format(_T("\"%s\" -IE"), strURL);
+			strCommand.Format(_T("\"%s\" \"%s\" -IE"), (LPCTSTR)m_strDBL_EXE_FullPath, (LPCTSTR)strURL);
+			strParam.Format(_T("\"%s\" -IE"), (LPCTSTR)strURL);
 		}
 		else if (iType == 2)
 		{
-			strCommand.Format(_T("\"%s\" \"%s\" -Firefox"), m_strDBL_EXE_FullPath, strURL);
-			strParam.Format(_T("\"%s\" -Firefox"), strURL);
+			strCommand.Format(_T("\"%s\" \"%s\" -Firefox"), (LPCTSTR)m_strDBL_EXE_FullPath, (LPCTSTR)strURL);
+			strParam.Format(_T("\"%s\" -Firefox"), (LPCTSTR)strURL);
 		}
 		else if (iType == 3)
 		{
-			strCommand.Format(_T("\"%s\" \"%s\" -Chrome"), m_strDBL_EXE_FullPath, strURL);
-			strParam.Format(_T("\"%s\" -Chrome"), strURL);
+			strCommand.Format(_T("\"%s\" \"%s\" -Chrome"), (LPCTSTR)m_strDBL_EXE_FullPath, (LPCTSTR)strURL);
+			strParam.Format(_T("\"%s\" -Chrome"), (LPCTSTR)strURL);
 		}
 		else if (iType == 4)
 		{
-			strCommand.Format(_T("\"%s\" \"%s\" -Edge"), m_strDBL_EXE_FullPath, strURL);
-			strParam.Format(_T("\"%s\" -Edge"), strURL);
+			strCommand.Format(_T("\"%s\" \"%s\" -Edge"), (LPCTSTR)m_strDBL_EXE_FullPath, (LPCTSTR)strURL);
+			strParam.Format(_T("\"%s\" -Edge"), (LPCTSTR)strURL);
 		}
 		else if (iType == 5)
 		{
@@ -2491,8 +2491,8 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 				return;
 			}
 
-			strCommand.Format(_T("\"%s\" -Custom /Path:\"%s\" \"%s\""), m_strDBL_EXE_FullPath, strPath, strURL);
-			strParam.Format(_T("-Custom /Path:\"%s\" \"%s\""), strPath, strURL);
+			strCommand.Format(_T("\"%s\" -Custom /Path:\"%s\" \"%s\""), (LPCTSTR)m_strDBL_EXE_FullPath, (LPCTSTR)strPath, (LPCTSTR)strURL);
+			strParam.Format(_T("-Custom /Path:\"%s\" \"%s\""), (LPCTSTR)strPath, (LPCTSTR)strURL);
 
 			TCHAR FrmWndClassName[256] = {0};
 			CString strFrmWndClass = strPath;
@@ -2527,8 +2527,8 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 		}
 		else
 		{
-			strCommand.Format(_T("\"%s\" \"%s\""), m_strDBL_EXE_FullPath, strURL);
-			strParam.Format(_T("\"%s\""), strURL);
+			strCommand.Format(_T("\"%s\" \"%s\""), (LPCTSTR)m_strDBL_EXE_FullPath, (LPCTSTR)strURL);
+			strParam.Format(_T("\"%s\""), (LPCTSTR)strURL);
 		}
 		DebugWndLogData dwLogData;
 		dwLogData.mHWND.Format(_T("APP_WND:0x%08x"), 0);
@@ -2588,12 +2588,12 @@ void CSazabi::ExecNewInstance(const CString strURL)
 
 	if (!strURL.IsEmpty())
 	{
-		strCommand.Format(_T("\"%s\" \"%s\" -NEW"), m_strExeFullPath, strURL);
-		strParam.Format(_T("\"%s\" -NEW"), strURL);
+		strCommand.Format(_T("\"%s\" \"%s\" -NEW"), (LPCTSTR)m_strExeFullPath, (LPCTSTR)strURL);
+		strParam.Format(_T("\"%s\" -NEW"), (LPCTSTR)strURL);
 	}
 	else
 	{
-		strCommand.Format(_T("\"%s\" -NEW"), m_strExeFullPath);
+		strCommand.Format(_T("\"%s\" -NEW"), (LPCTSTR)m_strExeFullPath);
 		strParam = _T("-NEW");
 	}
 	STARTUPINFO si = {0};
@@ -2632,8 +2632,8 @@ void CSazabi::OpenFileExplorer(const CString& strURL)
 	CString strCommand;
 	CString strParam;
 	CopyDBLEXEToTempEx();
-	strCommand.Format(_T("\"%s\" \"%s\""), m_strDBL_EXE_FullPath, strURL);
-	strParam.Format(_T("\"%s\""), strURL);
+	strCommand.Format(_T("\"%s\" \"%s\""), (LPCTSTR)m_strDBL_EXE_FullPath, (LPCTSTR)strURL);
+	strParam.Format(_T("\"%s\""), (LPCTSTR)strURL);
 	STARTUPINFO si = {0};
 	PROCESS_INFORMATION pi = {0};
 	si.cb = sizeof(si);
@@ -2740,7 +2740,7 @@ void CSazabi::SetRecoveryFilePath()
 	strPrx.Replace(_T(".exe"), _T(""));
 
 	m_strRestoreFileFullPath.Format(_T("%s\\CSG_SaveWnd_%s.dat"),
-					m_strDBL_EXE_FolderPath, strPrx);
+					(LPCTSTR)m_strDBL_EXE_FolderPath, (LPCTSTR)strPrx);
 }
 
 BOOL CSazabi::DeleteDirectory(LPCTSTR lpPathName, LPCTSTR lpPat)
@@ -3548,7 +3548,7 @@ CString CSazabi::GetCefVersionStr()
 				if (VerQueryValue(pData, name, &pvVersion, &VersionLen))
 				{
 					CString strVersionStr((LPCTSTR)pvVersion);
-					strRet.Format(_T("Chromium Embedded Framework Version %s"), strVersionStr);
+					strRet.Format(_T("Chromium Embedded Framework Version %s"), (LPCTSTR)strVersionStr);
 					break;
 				}
 			}
@@ -3597,7 +3597,7 @@ CString CSazabi::GetChromiumVersionStr()
 				if (VerQueryValue(pData, name, &pvVersion, &VersionLen))
 				{
 					CString strVersionStr((LPCTSTR)pvVersion);
-					strRet.Format(_T("Chromium(Blink) Version %s"), strVersionStr);
+					strRet.Format(_T("Chromium(Blink) Version %s"), (LPCTSTR)strVersionStr);
 					break;
 				}
 			}
@@ -3799,21 +3799,24 @@ CString CSazabi::GetVOSInfo()
 						szHH = strDateTimeTmp.Mid(4 + 2 + 2 + 1, 2);
 						sz24M = strDateTimeTmp.Mid(4 + 2 + 2 + 1 + 2, 2);
 						szSS = strDateTimeTmp.Mid(4 + 2 + 2 + 1 + 2 + 2, 2);
-						strDateTime.Format(_T("%s-%s-%s %s:%s:%s"), szYYYY, szMM, szDD, szHH, sz24M, szSS);
+						strDateTime.Format(_T("%s-%s-%s %s:%s:%s"), 
+							(LPCTSTR)szYYYY, (LPCTSTR)szMM, 
+							(LPCTSTR)szDD, (LPCTSTR)szHH, 
+							(LPCTSTR)sz24M, (LPCTSTR)szSS);
 					}
 				}
 			}
 		}
 		strRet.Format(_T("%s\r\n%s %s"),
-			      GetVOSVersionFromNT0_DLLStr(),
-			      _T("TS_ORIGIN"), szTargetPath);
+			      (LPCTSTR)GetVOSVersionFromNT0_DLLStr(),
+			      _T("TS_ORIGIN"), (LPCTSTR)szTargetPath);
 		CString strTmp;
 		if (!szThinAppVersion.IsEmpty())
 		{
 			strTmp.Format(_T("\r\n%s %s\r\n%s %s\r\n%s %s"),
-				      _T("ThinAppVersion"), szThinAppVersion,
-				      _T("ThinAppLicense"), szThinAppLicense,
-				      _T("ThinAppBuildDateTime"), strDateTime);
+				      _T("ThinAppVersion"), (LPCTSTR)szThinAppVersion,
+				      _T("ThinAppLicense"), (LPCTSTR)szThinAppLicense,
+				      _T("ThinAppBuildDateTime"), (LPCTSTR)strDateTime);
 			strRet += strTmp;
 		}
 		break;
@@ -3841,11 +3844,11 @@ CString CSazabi::GetOSInfo(void)
 
 	if (SBUtil::Is64BitWindows())
 	{
-		strBuff.Format(_T("%s x64"), strOS);
+		strBuff.Format(_T("%s x64"), (LPCTSTR)strOS);
 	}
 	else
 	{
-		strBuff.Format(_T("%s x86"), strOS);
+		strBuff.Format(_T("%s x86"), (LPCTSTR)strOS);
 	}
 
 	if ((ovi.wSuiteMask & VER_SUITE_TERMINAL) == VER_SUITE_TERMINAL)
@@ -3888,7 +3891,7 @@ CString CSazabi::GetAllModules()
 				if (GetModuleFileNameEx(hProcess, hMods[i], szModName,
 							sizeof(szModName) / sizeof(TCHAR)))
 				{
-					strTemp.Format(_T("%s (0x%08x)\n"), szModName, hMods[i]);
+					strTemp.Format(_T("%s (0x%08p)\n"), (LPCTSTR)szModName, hMods[i]);
 					strRet += strTemp;
 				}
 			}
@@ -4710,10 +4713,10 @@ void CAboutDlg::SetDetailString(BOOL bEnableDetail)
 	strEditValue = theApp.m_strThisAppName + _T("\r\n");
 
 	CString verstr;
-	verstr.Format(_T("Version %s  "), theApp.m_strThisAppVersionString);
+	verstr.Format(_T("Version %s  "), (LPCTSTR)theApp.m_strThisAppVersionString);
 
 	CString strTitle;
-	strTitle.Format(_T("%s %s"), theApp.m_strThisAppName, verstr);
+	strTitle.Format(_T("%s %s"), (LPCTSTR)theApp.m_strThisAppName, (LPCTSTR)verstr);
 	this->SetWindowText(strTitle);
 	strEditValue += verstr;
 
@@ -4780,7 +4783,7 @@ void CAboutDlg::SetDetailString(BOOL bEnableDetail)
 	GetProcessTimes(hProcess, &ftMakeTime, &ftExitTime, &ftKernTime, &ftUserTime);
 	CString strTimeFmt;
 	getTimeString(&ftMakeTime, TRUE, strTimeFmt);
-	verstr.Format(_T("ProcessStart:%s\r\n"), strTimeFmt);
+	verstr.Format(_T("ProcessStart:%s\r\n"), (LPCTSTR)strTimeFmt);
 	strEditValue += verstr;
 
 	int iMinute = theApp.GetProcessRunningTime();
@@ -4848,7 +4851,7 @@ void CAboutDlg::SetDetailString(BOOL bEnableDetail)
 		RenPID = ptrAPID.GetAt(ii);
 		iMemRen = theApp.GetMemoryUsageSizeFromPID(RenPID);
 		::StrFormatByteSize(iMemRen, memorysize, 24);
-		strPIDTitleTemp.Format(_T("[PID:%d] [%s] [%s]\r\n"), RenPID, memorysize, strATitle.GetAt(ii));
+		strPIDTitleTemp.Format(_T("[PID:%d] [%s] [%s]\r\n"), RenPID, memorysize, (LPCTSTR)strATitle.GetAt(ii));
 		strPIDTitle += strPIDTitleTemp;
 	}
 	if (!strPIDTitle.IsEmpty())

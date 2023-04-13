@@ -699,7 +699,7 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 		if (SafeWnd(hWindow))
 		{
 			DebugWndLogData dwLogData;
-			dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), hWindow);
+			dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 			dwLogData.mFUNCTION_NAME = _T("ConsoleMessage");
 			dwLogData.mMESSAGE1 = message.c_str();
 			dwLogData.mMESSAGE2 = strLogLevel;
@@ -1058,7 +1058,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 	if (SafeWnd(hWindow))
 	{
 		DebugWndLogData dwLogData;
-		dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), hWindow);
+		dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 		dwLogData.mFUNCTION_NAME = _T("OnBeforeResourceLoad");
 		dwLogData.mMESSAGE1 = strTranURL;
 		dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), frame->GetName().c_str());
@@ -1140,7 +1140,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 
 		CString strURLChk; //QueryÇèúÇ≠ÅBñ≥ë Ç»èÓïÒÇè»Ç≠ÅB
 		//strURLChk.Format(_T("%s://%s%s"), strScheme, strHost, strPath);
-		strURLChk.Format(_T("%s://%s"), strScheme, strHost);
+		strURLChk.Format(_T("%s://%s"), (LPCTSTR)strScheme, (LPCTSTR)strHost);
 
 		if (theApp.IsURLFilterAllow(strURLChk, strScheme, strHost, strPath))
 		{
@@ -1216,23 +1216,23 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame>
 									HWND hWindowFrm = GetParent(hWindow);
 									if (SafeWnd(hWindowFrm))
 									{
-										dwLogData.mHWND.Format(_T("BF_WND:0x%08x"), hWindowFrm);
+										dwLogData.mHWND.Format(_T("BF_WND:0x%08p"), hWindowFrm);
 										hWindow = hWindowFrm;
 									}
 									else
 									{
-										dwLogData.mHWND.Format(_T("CV_WND:0x%08x"), hWindow);
+										dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 									}
 									dwLogData.mFUNCTION_NAME = _T("ExcuteCustomJS");
 									dwLogData.mMESSAGE1 = strURL;
-									dwLogData.mMESSAGE2.Format(_T("FileName:%s"), strRetFileName);
+									dwLogData.mMESSAGE2.Format(_T("FileName:%s"), (LPCTSTR)strRetFileName);
 									theApp.AppendDebugViewLog(dwLogData);
 									logmsg = dwLogData.GetString();
 									theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
 
 									//ç≈èâÇæÇØ
 									if (i == 0)
-										strJSsrc.Format(_T("const ChronosExtParentWnd=\"%d\";\r\ntry{ChronosExt_AppActive(ChronosExtParentWnd);console.log('##CSG_Script:ChronosExtParentWnd:'+ChronosExtParentWnd);}catch(e){}\r\n"), hWindow);
+										strJSsrc.Format(_T("const ChronosExtParentWnd=\"%d\";\r\ntry{ChronosExt_AppActive(ChronosExtParentWnd);console.log('##CSG_Script:ChronosExtParentWnd:'+ChronosExtParentWnd);}catch(e){}\r\n"), (long)hWindow);
 
 									strJSsrc += cScriptSrc.m_strSrc;
 									CefString strCefJsStr(strJSsrc);
@@ -1993,7 +1993,7 @@ bool MyV8Handler::Execute(const CefString& name,
 				strPW.Replace(_T("\""), _T("\\\""));
 				strPW.Replace(_T("/"), _T("\\/"));
 
-				strFmt.Format(_T("{\"username\": \"%s\",\"password\": \"%s\"}"), strID, strPW);
+				strFmt.Format(_T("{\"username\": \"%s\",\"password\": \"%s\"}"), (LPCTSTR)strID, (LPCTSTR)strPW);
 				retval = CefV8Value::CreateString(strFmt.GetString());
 				if (pWnd)
 				{
@@ -2064,7 +2064,7 @@ bool MyV8Handler::Execute(const CefString& name,
 				//strPW_New2.Replace(_T("\""), _T("\\\""));
 				//strPW_New2.Replace(_T("/"), _T("\\/"));
 
-				strFmt.Format(_T("{\"username\": \"%s\",\"current_password\": \"%s\",\"new_password\": \"%s\"}"), strID, strPW_Current, strPW_New);
+				strFmt.Format(_T("{\"username\": \"%s\",\"current_password\": \"%s\",\"new_password\": \"%s\"}"), (LPCTSTR)strID, (LPCTSTR)strPW_Current, (LPCTSTR)strPW_New);
 				retval = CefV8Value::CreateString(strFmt.GetString());
 				if (pWnd)
 				{

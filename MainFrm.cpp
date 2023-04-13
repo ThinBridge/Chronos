@@ -78,7 +78,7 @@ LRESULT CMainFrame::OnNewInstance(WPARAM nAtom, LPARAM lParam)
 		if (theApp.m_AppSettings.IsAdvancedLogMode())
 		{
 			CString logmsg;
-			logmsg.Format(_T("MAIN_WND:0x%08x OnNewInstance"), theApp.SafeWnd(this));
+			logmsg.Format(_T("MAIN_WND:0x%08p OnNewInstance"), theApp.SafeWnd(this));
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 		}
 		CString strCommandLine;
@@ -208,7 +208,7 @@ BOOL CMainFrame::CheckRecovery()
 		CString logmsg;
 		if (bTraceLog)
 		{
-			logmsg.Format(_T("MAIN_WND:0x%08x CheckRecovery %s"), theApp.SafeWnd(this), strPathName);
+			logmsg.Format(_T("MAIN_WND:0x%08p CheckRecovery %s"), theApp.SafeWnd(this), (LPCTSTR)strPathName);
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_CL);
 		}
 
@@ -273,7 +273,7 @@ BOOL CMainFrame::CheckRecovery()
 								{
 									if (bTraceLog)
 									{
-										logmsg.Format(_T("MAIN_WND:0x%08x CheckRecovery_FIND %s"), theApp.SafeWnd(this), strChkFile);
+										logmsg.Format(_T("MAIN_WND:0x%08p CheckRecovery_FIND %s"), theApp.SafeWnd(this), (LPCTSTR)strChkFile);
 										theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_CL);
 									}
 
@@ -356,7 +356,7 @@ BOOL CMainFrame::CheckRecovery()
 				if (bTraceLog)
 				{
 					//restore
-					logmsg.Format(_T("MAIN_WND:0x%08x CheckRecovery_RESTORE %s"), theApp.SafeWnd(this), strChkFile);
+					logmsg.Format(_T("MAIN_WND:0x%08p CheckRecovery_RESTORE %s"), theApp.SafeWnd(this), (LPCTSTR)strChkFile);
 					theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_CL);
 				}
 				CString strTemp;
@@ -521,7 +521,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 
 	if (bTraceLog)
 	{
-		logmsg.Format(_T("MAIN_WND:0x%08x ParseCommandLineAndNewWnd [%s]"), theApp.SafeWnd(this), strCommandLine);
+		logmsg.Format(_T("MAIN_WND:0x%08p ParseCommandLineAndNewWnd [%s]"), theApp.SafeWnd(this), (LPCTSTR)strCommandLine);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
@@ -588,7 +588,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 	}
 	if (bTraceLog)
 	{
-		logmsg.Format(_T("MAIN_WND:0x%08x ParseCommandLineAndNewWnd CommandParam[%s] OptionParam[%s]"), theApp.SafeWnd(this), CommandParam, OptionParam);
+		logmsg.Format(_T("MAIN_WND:0x%08p ParseCommandLineAndNewWnd CommandParam[%s] OptionParam[%s]"), theApp.SafeWnd(this), (LPCTSTR)CommandParam, (LPCTSTR)OptionParam);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
@@ -2717,7 +2717,7 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 
 			CString strWriteTime;
 			CTime time = CTime::GetCurrentTime();
-			strWriteTime.Format(_T("%s\n"), time.Format(_T("%Y-%m-%d %H:%M:%S")));
+			strWriteTime.Format(_T("%s\n"), (LPCTSTR)time.Format(_T("%Y-%m-%d %H:%M:%S")));
 			int iCnt = 0;
 			if (bAppendMode)
 			{
@@ -2754,7 +2754,7 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 						//ì˙éûÇèâÇﬂÇÃçsÇ…èoóÕÇ∑ÇÈÅB
 						out.WriteString(strWriteTime);
 					}
-					strData.Format(_T("%s\t%s\n"), strTitle, strURL);
+					strData.Format(_T("%s\t%s\n"), (LPCTSTR)strTitle, (LPCTSTR)strURL);
 					out.WriteString(strData);
 					iCnt++;
 				}
