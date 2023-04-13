@@ -39,8 +39,6 @@ class CActiveTabLine;
 class APIHookC;
 class CLogDispatcher;
 
-#include "include/cef_base.h"
-#include "include/cef_app.h"
 #include "client_app.h"
 class CSazabi : public CWinApp
 {

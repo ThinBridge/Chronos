@@ -7,9 +7,14 @@
 #include <map>
 #include <set>
 #include <string>
+#pragma warning(push, 0)
+#include <codeanalysis/warnings.h>
+#pragma warning(disable \
+		: ALL_CODE_ANALYSIS_WARNINGS)
 #include "include/cef_client.h"
 #include "include/cef_version.h"
 #include "include/base/cef_lock.h"
+#pragma warning(pop)
 #include "resource.h"
 class MyV8Handler : public CefV8Handler
 {

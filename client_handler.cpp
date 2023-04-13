@@ -14,12 +14,17 @@
 #include <string>
 #include <vector>
 
+#pragma warning(push, 0)
+#include <codeanalysis/warnings.h>
+#pragma warning(disable \
+		: ALL_CODE_ANALYSIS_WARNINGS)
 #include "include/cef_browser.h"
 #include "include/cef_frame.h"
 #include "include/cef_path_util.h"
 #include "include/cef_process_util.h"
 #include "include/cef_trace.h"
 #include "include/wrapper/cef_helpers.h"
+#pragma warning(pop)
 #include "client_util.h"
 #include "DlgAuth.h"
 #include "sbcommon.h"

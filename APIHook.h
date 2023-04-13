@@ -1,7 +1,12 @@
 #pragma once
 #include "sbcommon.h"
 #include "Sazabi.h"
+#pragma warning(push, 0)
+#include <codeanalysis/warnings.h>
+#pragma warning(disable \
+		: ALL_CODE_ANALYSIS_WARNINGS)
 #include "minhook\MinHook.h"
+#pragma warning(pop)
 
 template <typename T>
 inline MH_STATUS MH_CreateHookApiEx(
