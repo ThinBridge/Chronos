@@ -143,12 +143,17 @@ public:
 		if (lRet != ERROR_SUCCESS || dwSize < s_unknownOffset)
 			return;
 
-		BYTE* pByte = (BYTE*)_alloca((dwSize + 10) * sizeof(BYTE));
+		BYTE* pByte = (BYTE*)_malloca((dwSize + 10) * sizeof(BYTE));
+		if (!pByte)
+			return;
 		::memset(pByte, 0, dwSize + 10);
 
 		lRet = ::RegQueryValueEx(rkOrder, _T("Order"), NULL, &dwType, pByte, &dwSize);
 		if (lRet != ERROR_SUCCESS)
+		{
+			_freea(pByte);
 			return;
+		}
 
 		BYTE* pBegin = pByte + ((_CFavoritesOrderData*)pByte)->size + s_unknownOffset;
 		BYTE* pEnd = pByte + dwSize;
@@ -165,6 +170,7 @@ public:
 
 			pBegin += pData->size;
 		}
+		_freea(pByte);
 	}
 };
 class CFavoriteItem
