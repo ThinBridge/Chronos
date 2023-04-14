@@ -143,8 +143,10 @@ public:
 		if (lRet != ERROR_SUCCESS || dwSize < s_unknownOffset)
 			return;
 
-		BYTE* pByte = (BYTE*)_alloca((dwSize + 10) * sizeof(BYTE));
-		::memset(pByte, 0, dwSize + 10);
+		std::unique_ptr<BYTE> upByte(new BYTE[dwSize + 10]());
+		BYTE* pByte = upByte.get();
+		if (!pByte)
+			return;
 
 		lRet = ::RegQueryValueEx(rkOrder, _T("Order"), NULL, &dwType, pByte, &dwSize);
 		if (lRet != ERROR_SUCCESS)
