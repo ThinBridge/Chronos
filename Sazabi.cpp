@@ -1486,7 +1486,7 @@ void CSazabi::SetThisAppVersionString()
 {
 	TCHAR path[MAX_PATH] = {0};
 	DWORD handle = 0;
-	::GetModuleFileName(AfxGetInstanceHandle(), path, sizeof(path));
+	::GetModuleFileName(AfxGetInstanceHandle(), path, MAX_PATH);
 	DWORD size = ::GetFileVersionInfoSize(path, &handle);
 	CByteArray buf;
 	buf.SetSize(size);
