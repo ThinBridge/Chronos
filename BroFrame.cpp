@@ -2931,11 +2931,11 @@ void CBrowserFrame::OnTabListShow()
 		menu.LoadMenu(IDR_MENU_TAB);
 		CMenu* menuSub = NULL;
 		menuSub = menu.GetSubMenu(0);
-		if (menuSub != NULL)
-		{
-			while (menuSub->DeleteMenu(0, MF_BYPOSITION))
-				;
-		}
+		if (!menuSub)
+			return;
+
+		while (menuSub->DeleteMenu(0, MF_BYPOSITION))
+			;
 
 		CString strTitle;
 		CStringArray strATitle;
@@ -2953,16 +2953,13 @@ void CBrowserFrame::OnTabListShow()
 			SBUtil::GetDivChar(strTitle, 160, str);
 			strTitle = str;
 			strTitle.Replace(_T("&"), _T("&&"));
-			if (menuSub)
+			if (m_ptrAWnd.GetAt(i) == this->GetSafeHwnd())
 			{
-				if (m_ptrAWnd.GetAt(i) == this->GetSafeHwnd())
-				{
-					menuSub->AppendMenu(MF_BYPOSITION | MF_CHECKED | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
-				}
-				else
-				{
-					menuSub->AppendMenu(MF_BYPOSITION | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
-				}
+				menuSub->AppendMenu(MF_BYPOSITION | MF_CHECKED | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
+			}
+			else
+			{
+				menuSub->AppendMenu(MF_BYPOSITION | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
 			}
 			HBITMAP hbmp = {0};
 			CIconHelper hicon;
@@ -2988,18 +2985,11 @@ void CBrowserFrame::OnTabListShow()
 			DeleteDC(hdcMem);
 			CBitmap* pBmp = CBitmap::FromHandle((HBITMAP)hbmp);
 			ptBmpArray.Add(hbmp);
-			if (menuSub)
-			{
-				menuSub->SetMenuItemBitmaps((int)i, MF_BYPOSITION, pBmp, pBmp);
-			}
+			menuSub->SetMenuItemBitmaps((int)i, MF_BYPOSITION, pBmp, pBmp);
 		}
-		BOOL lResult = FALSE;
-		if (menuSub)
-		{
-			lResult = TrackPopupMenuEx(menuSub->m_hMenu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON,
-						   pt.x, pt.y,
-						   (HWND)this->GetSafeHwnd(), NULL);
-		}
+		BOOL lResult = TrackPopupMenuEx(menuSub->m_hMenu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON,
+						pt.x, pt.y,
+						(HWND)this->GetSafeHwnd(), NULL);
 		size_t iBmpCnt = ptBmpArray.GetCount();
 		for (UINT j = 0; j < iBmpCnt; j++)
 		{
