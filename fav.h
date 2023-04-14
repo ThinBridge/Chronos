@@ -150,9 +150,7 @@ public:
 
 		lRet = ::RegQueryValueEx(rkOrder, _T("Order"), NULL, &dwType, pByte, &dwSize);
 		if (lRet != ERROR_SUCCESS)
-		{
 			return;
-		}
 
 		BYTE* pBegin = pByte + ((_CFavoritesOrderData*)pByte)->size + s_unknownOffset;
 		BYTE* pEnd = pByte + dwSize;
