@@ -2989,7 +2989,9 @@ void CBrowserFrame::OnTabListShow()
 			CBitmap* pBmp = CBitmap::FromHandle((HBITMAP)hbmp);
 			ptBmpArray.Add(hbmp);
 			if (menuSub)
+			{
 				menuSub->SetMenuItemBitmaps((int)i, MF_BYPOSITION, pBmp, pBmp);
+			}
 		}
 		BOOL lResult = FALSE;
 		if (menuSub)
