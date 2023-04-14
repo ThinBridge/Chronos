@@ -2932,8 +2932,7 @@ void CBrowserFrame::OnTabListShow()
 		CMenu* menuSub = NULL;
 		menuSub = menu.GetSubMenu(0);
 		if (menuSub != NULL)
-			while (menuSub->DeleteMenu(0, MF_BYPOSITION))
-				;
+			while (menuSub->DeleteMenu(0, MF_BYPOSITION));
 
 		CString strTitle;
 		CStringArray strATitle;
@@ -2954,9 +2953,7 @@ void CBrowserFrame::OnTabListShow()
 			if (menuSub)
 			{
 				if (m_ptrAWnd.GetAt(i) == this->GetSafeHwnd())
-				{
 					menuSub->AppendMenu(MF_BYPOSITION | MF_CHECKED | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
-				}
 				else
 					menuSub->AppendMenu(MF_BYPOSITION | MF_STRING | MF_ENABLED, ID_WINDOW_START + i, strTitle);
 			}
@@ -3009,9 +3006,7 @@ void CBrowserFrame::OnTabListShow()
 		}
 
 		if (lResult > 0)
-		{
 			SendMessage(WM_COMMAND, MAKEWPARAM(LOWORD(lResult), 0x0), 0);
-		}
 	}
 }
 
