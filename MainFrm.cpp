@@ -1779,7 +1779,8 @@ void CMainFrame::TabWindowChk()
 					pFrmVisible = m_pPrevActiveWindow;
 					break;
 				}
-				if (theApp.IsWnd(pFrmHead) &&
+				if (pFrmHead &&
+				    theApp.IsWnd(pFrmHead) &&
 				    !theApp.IsWndVisible(pFrmHead->m_hWnd) &&
 				    pFrmHead->m_cTabWnd &&
 				    !pFrmHead->m_bDownloadBlankPage)
@@ -2604,7 +2605,7 @@ void CMainFrame::OnAppExitTimeLimit()
 	alertMsg.LoadString(IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT);
 	logmsg.Format(alertMsg, iLimitTimeBase);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
-	if (::IsWindow(ptdFirst->m_hWnd))
+	if (ptdFirst && ::IsWindow(ptdFirst->m_hWnd))
 	{
 		m_bGlobalMsgFlg = TRUE;
 		theApp.SB_MessageBox(ptdFirst->m_hWnd, logmsg, NULL, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL, TRUE);
@@ -2663,7 +2664,7 @@ void CMainFrame::OnAppExitMaxMem()
 	logmsg.Format(alertMsg, theApp.m_strThisAppName);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_EX);
 
-	if (::IsWindow(ptdFirst->m_hWnd))
+	if (ptdFirst && ::IsWindow(ptdFirst->m_hWnd))
 	{
 		m_bGlobalMsgFlgMem = TRUE;
 		theApp.m_bAbortFlg = TRUE;
