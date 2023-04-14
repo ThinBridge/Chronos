@@ -143,15 +143,14 @@ public:
 		if (lRet != ERROR_SUCCESS || dwSize < s_unknownOffset)
 			return;
 
-		BYTE* pByte = (BYTE*)_malloca((dwSize + 10) * sizeof(BYTE));
+		std::unique_ptr<BYTE> upByte(new BYTE[dwSize + 10]());
+		BYTE* pByte = upByte.get();
 		if (!pByte)
 			return;
-		::memset(pByte, 0, dwSize + 10);
 
 		lRet = ::RegQueryValueEx(rkOrder, _T("Order"), NULL, &dwType, pByte, &dwSize);
 		if (lRet != ERROR_SUCCESS)
 		{
-			_freea(pByte);
 			return;
 		}
 
@@ -170,7 +169,6 @@ public:
 
 			pBegin += pData->size;
 		}
-		_freea(pByte);
 	}
 };
 class CFavoriteItem
