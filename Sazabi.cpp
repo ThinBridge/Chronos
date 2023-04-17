@@ -2699,22 +2699,85 @@ void CSazabi::CopyDBLEXEToTempInit()
 	//仮想で実行された場合はTEMPにコピー
 	else
 	{
-		::CopyFile(m_strDBL_EXE_FullPath, strTempPath, FALSE);
 		m_strDBL_EXE_FullPath = strTempPath;
+		CopyDBLEXEToTempEx();
 	}
 	m_strDBL_EXE_FolderPath = strTempPathDir;
-
-	SetLastError(NO_ERROR);
 }
 
+static void LogErrNo(LPCWSTR prefix, int errNum)
+{
+	wchar_t errBuf[256] = {0};
+	_wcserror_s(errBuf, 256, errNum);
+	CString strMessage;
+	strMessage.Format(L"%ls: %ls", prefix, errBuf);
+	theApp.WriteDebugTraceDateTime(strMessage, DEBUG_LOG_TYPE_GE);
+}
+
+// 2023-04-07
+// Windows 11 22H2において、CopyFile()を使用してDBLC.exeをThinApp内からホストの
+// Tempにコピーするとファイルが破損する事象が起こっているため、CopyFile()を独自
+// 実装に置き換える。
+// 現時点では以下条件でのみ発生すると考えられ、これを満たすのはDBLC.exeのコピー
+// 時のみと考えられるため、同処理にのみ適用する。
+// * Windows 22H2
+//   * Windows 11 21H2以前では発生していない
+// * CopyFile()を使用する
+// * ThinApp上でDirectoryIsolationMode=Mergedのフォルダに書き出す
 void CSazabi::CopyDBLEXEToTempEx()
 {
 	//ネイティブ版は、DBLCは不要
-	if (InVirtualEnvironment() != VE_NA)
+	if (InVirtualEnvironment() == VE_NA)
+		return;
+
+	FILE* src = _wfopen(m_strDBL_EXE_Default_FullPath, L"rb");
+	if (!src)
 	{
-		::CopyFile(m_strDBL_EXE_Default_FullPath, m_strDBL_EXE_FullPath, FALSE);
-		SetLastError(NO_ERROR);
+		CString strMessage;
+		strMessage.Format(L"CopyDBLEXEToTempEx: Failed to open %ls:", (LPCWSTR)m_strDBL_EXE_Default_FullPath);
+		LogErrNo(strMessage, errno);
+		return;
 	}
+
+	FILE* dest = _wfopen(m_strDBL_EXE_FullPath, L"wb");
+	if (!dest)
+	{
+		CString strMessage;
+		strMessage.Format(L"CopyDBLEXEToTempEx: Failed to open %ls:", (LPCWSTR)m_strDBL_EXE_FullPath);
+		LogErrNo(strMessage, errno);
+		fclose(src);
+		return;
+	}
+
+	do
+	{
+		char buf[4096];
+		int errNum;
+		size_t readBytes = fread(buf, 1, sizeof(buf), src);
+		errNum = ferror(src);
+		if (errNum)
+		{
+			CString strMessage;
+			strMessage.Format(L"CopyDBLEXEToTempEx: Failed to read %ls:", (LPCWSTR)m_strDBL_EXE_Default_FullPath);
+			LogErrNo(strMessage, errNum);
+			break;
+		}
+
+		size_t writeBytes = fwrite(buf, 1, readBytes, dest);
+		errNum = ferror(dest);
+		if (errNum)
+		{
+			CString strMessage;
+			strMessage.Format(L"CopyDBLEXEToTempEx: Failed to write %ls:", (LPCWSTR)m_strDBL_EXE_FullPath);
+			LogErrNo(strMessage, errNum);
+			break;
+		}
+	} while (!feof(src));
+
+	fclose(dest);
+	fclose(src);
+
+	SetLastError(NO_ERROR);
 }
 
 /*
