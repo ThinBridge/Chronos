@@ -1232,7 +1232,7 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame>
 
 									//ç≈èâÇæÇØ
 									if (i == 0)
-										strJSsrc.Format(_T("const ChronosExtParentWnd=\"%d\";\r\ntry{ChronosExt_AppActive(ChronosExtParentWnd);console.log('##CSG_Script:ChronosExtParentWnd:'+ChronosExtParentWnd);}catch(e){}\r\n"), (long)hWindow);
+										strJSsrc.Format(_T("const ChronosExtParentWnd=\"%ld\";\r\ntry{ChronosExt_AppActive(ChronosExtParentWnd);console.log('##CSG_Script:ChronosExtParentWnd:'+ChronosExtParentWnd);}catch(e){}\r\n"), (long)hWindow);
 
 									strJSsrc += cScriptSrc.m_strSrc;
 									CefString strCefJsStr(strJSsrc);
