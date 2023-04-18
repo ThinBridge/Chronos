@@ -2151,9 +2151,9 @@ LRESULT CDlgSetDomainFilter::Set_OK(WPARAM wParam, LPARAM lParam)
 				CString allowLabel;
 				allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
 				if (bEnable)
-					strLineData.Format(_T("%s\t%s\n"), strURL, strMode == allowLabel ? _T("A") : _T("D"));
+					strLineData.Format(_T("%s\t%s\n"), (LPCTSTR)strURL, strMode == allowLabel ? _T("A") : _T("D"));
 				else
-					strLineData.Format(_T(";%s\t%s\n"), strURL, strMode == allowLabel ? _T("A") : _T("D"));
+					strLineData.Format(_T(";%s\t%s\n"), (LPCTSTR)strURL, strMode == allowLabel ? _T("A") : _T("D"));
 				out.WriteString(strLineData);
 			}
 		}
@@ -2793,9 +2793,9 @@ LRESULT CDlgSetCustomScript::Set_OK(WPARAM wParam, LPARAM lParam)
 				strEnable = m_List.GetItemText(iSelCount, ENABLE);
 				bEnable = strEnable == _T("Åõ") ? TRUE : FALSE;
 				if (bEnable)
-					strLineData.Format(_T("%s\t%s\n"), strURL, strFileName);
+					strLineData.Format(_T("%s\t%s\n"), (LPCTSTR)strURL, (LPCTSTR)strFileName);
 				else
-					strLineData.Format(_T(";%s\t%s\n"), strURL, strFileName);
+					strLineData.Format(_T(";%s\t%s\n"), (LPCTSTR)strURL, (LPCTSTR)strFileName);
 				out.WriteString(strLineData);
 			}
 		}

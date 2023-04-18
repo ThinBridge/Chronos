@@ -533,7 +533,7 @@ int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	{
 		CString strAppendMenu;
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		strAppendMenu.Format(_T("About %s ..."), theApp.m_strThisAppName);
+		strAppendMenu.Format(_T("About %s ..."), (LPCTSTR)theApp.m_strThisAppName);
 		pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAppendMenu);
 
 		if (theApp.InVirtualEnvironment() != VE_NA && theApp.IsSGMode())
@@ -1169,7 +1169,7 @@ LRESULT CBrowserFrame::OnNewAddressEnter(WPARAM wParam, LPARAM lParam)
 		SearchAndNavigate(str);
 		m_pwndAddress->AppendString(str.GetBuffer(0));
 		CString logmsg;
-		logmsg.Format(_T("BF_WND:0x%08x OnNewAddressEnter:%s"), theApp.SafeWnd(this->m_hWnd), str);
+		logmsg.Format(_T("BF_WND:0x%08p OnNewAddressEnter:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)str);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	}
 	return 0;
@@ -1184,7 +1184,7 @@ LRESULT CBrowserFrame::OnNewAddress(WPARAM wParam, LPARAM lParam)
 		if (ExP == m_pwndAddress)
 		{
 			CString logmsg;
-			logmsg.Format(_T("BF_WND:0x%08x OnNewAddress:%s"), theApp.SafeWnd(this->m_hWnd), str);
+			logmsg.Format(_T("BF_WND:0x%08p OnNewAddress:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)str);
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			m_pwndAddress->GetLBText(m_pwndAddress->GetCurSel(), str);
 			SearchAndNavigate(str);
@@ -1345,7 +1345,7 @@ BOOL CBrowserFrame::OnSetUrlString(LPCTSTR lParam)
 	strURL = (LPCTSTR)lParam;
 	CString logmsg;
 	DebugWndLogData dwLogData;
-	dwLogData.mHWND.Format(_T("BF_WND:0x%08x"), theApp.SafeWnd(this->m_hWnd));
+	dwLogData.mHWND.Format(_T("BF_WND:0x%08p"), theApp.SafeWnd(this->m_hWnd));
 	dwLogData.mFUNCTION_NAME = _T("OnSetUrlString");
 	dwLogData.mMESSAGE1 = strURL;
 	theApp.AppendDebugViewLog(dwLogData);
@@ -1708,11 +1708,11 @@ LRESULT CBrowserFrame::OnFavoriteAddSendMsg(WPARAM wParam, LPARAM lParam)
 		if (iLen > INTERNET_MAX_URL_LENGTH)
 			return 0;
 
-		strCommand.Format(_T("\"%s\" -AddFav \"%s|@@|%s\""), theApp.m_strDBL_EXE_FullPath, str1, str2);
-		strParam.Format(_T("-AddFav \"%s|@@|%s\""), str1, str2);
+		strCommand.Format(_T("\"%s\" -AddFav \"%s|@@|%s\""), (LPCTSTR)theApp.m_strDBL_EXE_FullPath, (LPCTSTR)str1, (LPCTSTR)str2);
+		strParam.Format(_T("-AddFav \"%s|@@|%s\""), (LPCTSTR)str1, (LPCTSTR)str2);
 
 		CString logmsg;
-		logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg %s"), theApp.SafeWnd(this->m_hWnd), strCommand);
+		logmsg.Format(_T("BF_WND:0x%08p OnFavoriteAddSendMsg %s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strCommand);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 		STARTUPINFO si = {0};
@@ -1721,18 +1721,18 @@ LRESULT CBrowserFrame::OnFavoriteAddSendMsg(WPARAM wParam, LPARAM lParam)
 		unsigned long ecode = 0;
 		if (!CreateProcess(NULL, (LPTSTR)(LPCTSTR)strCommand, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
 		{
-			logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg CreateProcess Failed"), theApp.SafeWnd(this->m_hWnd));
+			logmsg.Format(_T("BF_WND:0x%08p OnFavoriteAddSendMsg CreateProcess Failed"), theApp.SafeWnd(this->m_hWnd));
 			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			SetLastError(NO_ERROR);
 			//Retry
 			if (!CreateProcess(theApp.m_strDBL_EXE_FullPath, (LPTSTR)(LPCTSTR)strParam, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
 			{
-				logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg CreateProcess Failed2"), theApp.SafeWnd(this->m_hWnd));
+				logmsg.Format(_T("BF_WND:0x%08p OnFavoriteAddSendMsg CreateProcess Failed2"), theApp.SafeWnd(this->m_hWnd));
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 				SetLastError(NO_ERROR);
 				if (::ShellExecute(NULL, _T("open"), theApp.m_strDBL_EXE_FullPath, strParam, NULL, SW_SHOW) <= HINSTANCE(32))
 				{
-					logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAddSendMsg ShellExecute Failed3"), theApp.SafeWnd(this->m_hWnd));
+					logmsg.Format(_T("BF_WND:0x%08p OnFavoriteAddSendMsg ShellExecute Failed3"), theApp.SafeWnd(this->m_hWnd));
 					theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 					::ShellExecute(NULL, NULL, strCommand, NULL, NULL, SW_SHOW);
 				}
@@ -1756,7 +1756,7 @@ void CBrowserFrame::OnFavoriteAdd()
 {
 	OnFavoriteRefresh();
 	CString logmsg;
-	logmsg.Format(_T("BF_WND:0x%08x OnFavoriteAdd"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("BF_WND:0x%08p OnFavoriteAdd"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (this->m_wndView)
 		OnFavoriteAddSendMsg(((WPARAM)(LPCTSTR)m_wndView.m_strTitle), ((WPARAM)(LPCTSTR)m_wndView.GetLocationURL()));
@@ -1766,7 +1766,7 @@ void CBrowserFrame::OnFavoriteOrganize()
 {
 	OnFavoriteRefresh();
 	CString logmsg;
-	logmsg.Format(_T("BF_WND:0x%08x OnFavoriteOrganize"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("BF_WND:0x%08p OnFavoriteOrganize"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	BOOL retval = FALSE;
 	TCHAR szFolder[MAX_PATH] = {0};
@@ -1776,7 +1776,7 @@ void CBrowserFrame::OnFavoriteOrganize()
 	CString strParam;
 	theApp.CopyDBLEXEToTempEx();
 
-	strCommand.Format(_T("\"%s\" -FavOrganize"), theApp.m_strDBL_EXE_FullPath);
+	strCommand.Format(_T("\"%s\" -FavOrganize"), (LPCTSTR)theApp.m_strDBL_EXE_FullPath);
 	strParam.Format(_T("-FavOrganize"));
 	STARTUPINFO si = {0};
 	PROCESS_INFORMATION pi = {0};
@@ -1814,7 +1814,7 @@ void CBrowserFrame::OnFullScreen()
 	if (m_bFullScreen)
 	{
 		ChangeNomalWindow();
-		logmsg.Format(_T("BF_WND:0x%08x OnFullScreen_OFF"), theApp.SafeWnd(this->m_hWnd));
+		logmsg.Format(_T("BF_WND:0x%08p OnFullScreen_OFF"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	}
 	//fullscreen mode に変更
@@ -1826,7 +1826,7 @@ void CBrowserFrame::OnFullScreen()
 			if (!m_wndView.IsPopupWindow())
 			{
 				ChangeFullScreenWindow();
-				logmsg.Format(_T("BF_WND:0x%08x OnFullScreen_ON"), theApp.SafeWnd(this->m_hWnd));
+				logmsg.Format(_T("BF_WND:0x%08p OnFullScreen_ON"), theApp.SafeWnd(this->m_hWnd));
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			}
 		}
@@ -1979,7 +1979,7 @@ UINT CBrowserFrame::GetWindowStyleSB()
 	if (!theApp.IsWnd(this))
 		return iRet;
 	CString logmsg;
-	logmsg.Format(_T("BF_WND:0x%08x GetWindowStyleSB"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("BF_WND:0x%08p GetWindowStyleSB"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 	if (m_pwndReBar)
@@ -2039,7 +2039,7 @@ void CBrowserFrame::SetWindowStyleSB(UINT iParam)
 		return;
 
 	CString logmsg;
-	logmsg.Format(_T("BF_WND:0x%08x SetWindowStyleSB(%d)"), theApp.SafeWnd(this->m_hWnd), iParam);
+	logmsg.Format(_T("BF_WND:0x%08p SetWindowStyleSB(%d)"), theApp.SafeWnd(this->m_hWnd), iParam);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 	if (m_pwndReBar)
@@ -2175,7 +2175,7 @@ BOOL CBrowserFrame::OnShowPopupMenu(CMFCPopupMenu* pMenuPopup)
 				// 文字のカット
 				SBUtil::GetDivChar(strTempStr, 80, strTempStr2);
 				strTempStr2.Replace(_T("&"), _T("&&"));
-				strTitle.Format(_T("&%X  %s"), iCnt, strTempStr2);
+				strTitle.Format(_T("&%X  %s"), iCnt, (LPCTSTR)strTempStr2);
 				Menu.AppendMenu(MF_BYPOSITION | MF_STRING | MF_ENABLED, ID_CLOSE_WINDOW_START + iCnt, strTitle);
 				iCnt++;
 			}
@@ -2216,13 +2216,13 @@ BOOL CBrowserFrame::OnShowPopupMenu(CMFCPopupMenu* pMenuPopup)
 			if (bBack)
 			{
 				menu2.LoadMenu(IDR_MENU_BACK);
-				logmsg.Format(_T("BF_WND:0x%08x TravelLog_Back"), theApp.SafeWnd(this->m_hWnd));
+				logmsg.Format(_T("BF_WND:0x%08p TravelLog_Back"), theApp.SafeWnd(this->m_hWnd));
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			}
 			else
 			{
 				menu2.LoadMenu(IDR_MENU_FORWARD);
-				logmsg.Format(_T("BF_WND:0x%08x TravelLog_Forward"), theApp.SafeWnd(this->m_hWnd));
+				logmsg.Format(_T("BF_WND:0x%08p TravelLog_Forward"), theApp.SafeWnd(this->m_hWnd));
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			}
 			CMenu* pPopup;
@@ -2559,7 +2559,7 @@ void CBrowserFrame::OnStatusBarZoomClick()
 		return;
 
 	CString logmsg;
-	logmsg.Format(_T("BF_WND:0x%08x OnStatusBarZoomClick"), theApp.SafeWnd(this->m_hWnd));
+	logmsg.Format(_T("BF_WND:0x%08p OnStatusBarZoomClick"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 	long lResult = 0;
@@ -2593,7 +2593,7 @@ void CBrowserFrame::OnStatusBarZoomClick()
 	CString strNowZoom;
 	strNowZoom = m_pwndStatusBar->GetPaneText(nStatusZoom);
 
-	logmsg.Format(_T("BF_WND:0x%08x OnStatusBarZoomClick Now_%s"), theApp.SafeWnd(this->m_hWnd), strNowZoom);
+	logmsg.Format(_T("BF_WND:0x%08p OnStatusBarZoomClick Now_%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strNowZoom);
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 
 	CString strName;
@@ -2688,7 +2688,7 @@ void CBrowserFrame::OnStatusBarZoomClick()
 					break;
 				}
 				m_wndView.ZoomTo(dZoom);
-				logmsg.Format(_T("BF_WND:0x%08x OnStatusBarZoomClick %s"), theApp.SafeWnd(this->m_hWnd), strRet);
+				logmsg.Format(_T("BF_WND:0x%08p OnStatusBarZoomClick %s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strRet);
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 			}
 		}

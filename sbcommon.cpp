@@ -152,7 +152,7 @@ STDMETHODIMP CActiveScriptSite::OnScriptError(IActiveScriptError* pscripterror)
 		dwLogData.mHWND.Format(_T("APP_WND:0x%08x"), 0);
 		dwLogData.mFUNCTION_NAME = _T("CSG_Script");
 		dwLogData.mMESSAGE1 = desc;
-		dwLogData.mMESSAGE2.Format(_T("Src:%s"), src);
+		dwLogData.mMESSAGE2.Format(_T("Src:%s"), (LPCTSTR)src);
 		dwLogData.mMESSAGE3.Format(_T("Line:%d"), ulLine);
 		dwLogData.mMESSAGE4.Format(_T("Error:%d"), (int)ei.wCode);
 		dwLogData.mMESSAGE5.Format(_T("Scode:%x"), ei.scode);
