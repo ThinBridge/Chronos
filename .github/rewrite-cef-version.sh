@@ -5,7 +5,7 @@ set -xe
 TOP_DIR=$(dirname $0)/..
 CEF_BAT=$TOP_DIR/setup-cef.bat
 
-VERSION=112.2.10+gd000e45+chromium-112.0.5615.121
+VERSION=112.3.0+gb09c4ca+chromium-112.0.5615.165
 case $1 in
     stable)
 	TARGET_VERSION=$(curl --silent https://cef-builds.spotifycdn.com/index.json | jq --raw-output '.windows32.versions[] | select(.channel == "stable").cef_version' | head -n 1)
