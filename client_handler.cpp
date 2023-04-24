@@ -1797,6 +1797,35 @@ void ClientHandler::OnResetDialogState(CefRefPtr<CefBrowser> browser)
 {
 }
 
+bool ClientHandler::OnRequestMediaAccessPermission(
+    CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame,
+    const CefString& requesting_origin,
+    uint32 requested_permissions,
+    CefRefPtr<CefMediaAccessCallback> callback)
+{
+	callback->Continue(true);
+	return true;
+}
+
+bool ClientHandler::OnShowPermissionPrompt(
+    CefRefPtr<CefBrowser> browser,
+    uint64 prompt_id,
+    const CefString& requesting_origin,
+    uint32 requested_permissions,
+    CefRefPtr<CefPermissionPromptCallback> callback)
+{
+	callback->Continue(CEF_PERMISSION_RESULT_ACCEPT);
+	return true;
+}
+
+void ClientHandler::OnDismissPermissionPrompt(
+    CefRefPtr<CefBrowser> browser,
+    uint64 prompt_id,
+    cef_permission_request_result_t result)
+{
+}
+
 bool ClientHandler::OnJSDialog(CefRefPtr<CefBrowser> browser,
 			       const CefString& origin_url,
 			       JSDialogType dialog_type,

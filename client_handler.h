@@ -42,7 +42,8 @@ class ClientHandler : public CefClient,
 		      public CefRequestHandler,
 		      public CefResourceRequestHandler,
 		      public CefJSDialogHandler,
-		      public CefDragHandler
+		      public CefDragHandler,
+		      public CefPermissionHandler
 {
 public:
 	// Interface implemented to handle off-screen rendering.
@@ -71,6 +72,7 @@ public:
 	virtual CefRefPtr<CefRequestHandler> GetRequestHandler() override { return this; }
 	virtual CefRefPtr<CefJSDialogHandler> GetJSDialogHandler() override { return this; }
 	virtual CefRefPtr<CefDragHandler> GetDragHandler() override { return this; }
+	virtual CefRefPtr<CefPermissionHandler> GetPermissionHandler() override { return this; }
 
 	// CefLifeSpanHandler methods
 	virtual bool DoClose(CefRefPtr<CefBrowser> browser) override;
@@ -159,6 +161,25 @@ public:
 				 DragOperationsMask mask) override;
 
 	virtual void OnResetDialogState(CefRefPtr<CefBrowser> browser) override;
+
+	virtual bool OnRequestMediaAccessPermission(
+	    CefRefPtr<CefBrowser> browser,
+	    CefRefPtr<CefFrame> frame,
+	    const CefString& requesting_origin,
+	    uint32 requested_permissions,
+	    CefRefPtr<CefMediaAccessCallback> callback) override;
+
+	virtual bool OnShowPermissionPrompt(
+	    CefRefPtr<CefBrowser> browser,
+	    uint64 prompt_id,
+	    const CefString& requesting_origin,
+	    uint32 requested_permissions,
+	    CefRefPtr<CefPermissionPromptCallback> callback) override;
+
+	virtual void OnDismissPermissionPrompt(
+	    CefRefPtr<CefBrowser> browser,
+	    uint64 prompt_id,
+	    cef_permission_request_result_t result) override;
 
 	void EmptyWindowClose(CefRefPtr<CefBrowser> browser)
 	{
