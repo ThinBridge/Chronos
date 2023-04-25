@@ -1804,7 +1804,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
     uint32 requested_permissions,
     CefRefPtr<CefMediaAccessCallback> callback)
 {
-	callback->Continue(true);
+	callback->Continue(requested_permissions);
 	return true;
 }
 
