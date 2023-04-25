@@ -1804,26 +1804,38 @@ bool ClientHandler::OnRequestMediaAccessPermission(
     uint32 requested_permissions,
     CefRefPtr<CefMediaAccessCallback> callback)
 {
+	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
+		return false;
+
+	LPCTSTR pszMessage = NULL;
+	pszMessage = requesting_origin.c_str();
+	CString confirmMessage;
+	confirmMessage = pszMessage;
+	confirmMessage += _T(" は次の許可を求めています。許可しますか？\n");
+
+	if (requested_permissions & CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE)
+	{
+		confirmMessage += _T("\nマイクの使用");
+	}
+	if (requested_permissions & CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE)
+	{
+		confirmMessage += _T("\nビデオの使用");
+	}
+	if (requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE)
+	{
+		confirmMessage += _T("\nデスクトップオーディオの取り込み");
+	}
+	if (requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE)
+	{
+		confirmMessage += _T("\nデスクトップの画面の取り込み");
+	}
+
+	HWND hWindow = GetSafeParentWnd(browser);
+	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
+	if (iRet == IDNO)
+		return false;
 	callback->Continue(requested_permissions);
 	return true;
-}
-
-bool ClientHandler::OnShowPermissionPrompt(
-    CefRefPtr<CefBrowser> browser,
-    uint64 prompt_id,
-    const CefString& requesting_origin,
-    uint32 requested_permissions,
-    CefRefPtr<CefPermissionPromptCallback> callback)
-{
-	callback->Continue(CEF_PERMISSION_RESULT_ACCEPT);
-	return true;
-}
-
-void ClientHandler::OnDismissPermissionPrompt(
-    CefRefPtr<CefBrowser> browser,
-    uint64 prompt_id,
-    cef_permission_request_result_t result)
-{
 }
 
 bool ClientHandler::OnJSDialog(CefRefPtr<CefBrowser> browser,

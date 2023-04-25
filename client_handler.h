@@ -162,24 +162,11 @@ public:
 
 	virtual void OnResetDialogState(CefRefPtr<CefBrowser> browser) override;
 
-	virtual bool OnRequestMediaAccessPermission(
-	    CefRefPtr<CefBrowser> browser,
-	    CefRefPtr<CefFrame> frame,
-	    const CefString& requesting_origin,
-	    uint32 requested_permissions,
-	    CefRefPtr<CefMediaAccessCallback> callback) override;
-
-	virtual bool OnShowPermissionPrompt(
-	    CefRefPtr<CefBrowser> browser,
-	    uint64 prompt_id,
-	    const CefString& requesting_origin,
-	    uint32 requested_permissions,
-	    CefRefPtr<CefPermissionPromptCallback> callback) override;
-
-	virtual void OnDismissPermissionPrompt(
-	    CefRefPtr<CefBrowser> browser,
-	    uint64 prompt_id,
-	    cef_permission_request_result_t result) override;
+	virtual bool OnRequestMediaAccessPermission(CefRefPtr<CefBrowser> browser,
+						    CefRefPtr<CefFrame> frame,
+						    const CefString& requesting_origin,
+						    uint32 requested_permissions,
+						    CefRefPtr<CefMediaAccessCallback> callback) override;
 
 	void EmptyWindowClose(CefRefPtr<CefBrowser> browser)
 	{
