@@ -1729,6 +1729,22 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 	return TRUE;
 }
 
+bool ClientHandler::OnSelectClientCertificate(
+	CefRefPtr<CefBrowser> browser,
+	bool isProxy,
+	const CefString& host,
+	int port,
+	const X509CertificateList& certificates,
+	CefRefPtr<CefSelectClientCertificateCallback> callback)
+{
+	if (!certificates.empty() && certificates[0] != nullptr)
+	{
+		callback->Select(certificates[0]);
+		return true;
+	}
+	return false;
+}
+
 void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution)
 {
 	// do default

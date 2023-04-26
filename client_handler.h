@@ -132,6 +132,14 @@ public:
 		return this;
 	}
 
+	virtual bool OnSelectClientCertificate(
+	    CefRefPtr<CefBrowser> browser,
+	    bool isProxy,
+	    const CefString& host,
+	    int port,
+	    const X509CertificateList& certificates,
+	    CefRefPtr<CefSelectClientCertificateCallback> callback) override;
+
 	virtual bool OnCertificateError(CefRefPtr<CefBrowser> browser, ErrorCode cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefCallback> callback) override;
 	virtual bool OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
 				      CefRefPtr<CefFrame> frame,
