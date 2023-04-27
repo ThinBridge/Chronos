@@ -4305,7 +4305,8 @@ void CSazabi::UnInitializeCef()
 		m_bCEFInitialized = FALSE;
 		m_cefApp = nullptr;
 		if (!m_bMultiThreadedMessageLoop)
-			CefDoMessageLoopWork();
+			// Wait until all tabs are closed.
+			CefRunMessageLoop();
 		// shutdown CEF
 		CefShutdown();
 	}

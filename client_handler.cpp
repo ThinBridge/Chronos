@@ -33,6 +33,7 @@ ClientHandler::ClientHandler()
 {
 	m_bDownLoadStartFlg = FALSE;
 	m_RendererPID = 0;
+	m_nBrowser = 0;
 }
 
 ClientHandler::~ClientHandler()
@@ -104,6 +105,7 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	//}
 	// call parent
 	CefLifeSpanHandler::OnAfterCreated(browser);
+	++m_nBrowser;
 }
 
 void ClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
@@ -112,6 +114,10 @@ void ClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 	PROC_TIME(OnBeforeClose)
 	// call parent
 	CefLifeSpanHandler::OnBeforeClose(browser);
+	if (--m_nBrowser == 0)
+	{
+		CefQuitMessageLoop();
+	}
 }
 
 bool ClientHandler::OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
