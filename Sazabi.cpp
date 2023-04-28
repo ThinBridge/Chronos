@@ -33,6 +33,7 @@ CSazabi::CSazabi()
 	m_pScHost = NULL;
 	//SZB
 	m_bCEFInitialized = FALSE;
+	m_bToBeShutdown = FALSE;
 
 	m_hEventURLFilterAllow = NULL;
 	m_hEventURLFilterDeny = NULL;
@@ -2194,6 +2195,12 @@ BOOL CSazabi::PumpMessage()
 	TCHAR classname[32] = {0};
 	__try
 	{
+		if (m_bToBeShutdown)
+		{
+			UnInitializeCef();
+			return FALSE;
+		}
+
 		//SZB
 		if (m_bCEFInitialized)
 		{
