@@ -774,7 +774,7 @@ void CMainFrame::OnDestroy()
 		theApp.WriteDebugTraceDateTime(_T("MainFrame::OnDestroy"), DEBUG_LOG_TYPE_CL);
 	}
 	CFrameWnd::OnDestroy();
-	theApp.UnInitializeCef();
+	theApp.m_bToBeShutdown = TRUE;
 }
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)

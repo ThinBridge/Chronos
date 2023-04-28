@@ -51,6 +51,7 @@ public:
 
 	//SZB
 	BOOL m_bCEFInitialized;
+	BOOL m_bToBeShutdown;
 	BOOL m_bMultiThreadedMessageLoop;
 
 	CefRefPtr<ClientApp> m_cefApp;
