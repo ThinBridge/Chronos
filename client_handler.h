@@ -267,7 +267,6 @@ public:
 protected:
 	BOOL m_bDownLoadStartFlg;
 	UINT m_RendererPID;
-	INT  m_nBrowser;
 
 	// Include the default reference counting implementation.
 	IMPLEMENT_REFCOUNTING(ClientHandler);
