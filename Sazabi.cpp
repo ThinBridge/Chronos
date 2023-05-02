@@ -2730,7 +2730,7 @@ static void LogErrNo(LPCWSTR prefix, int errNum)
 // * Windows 22H2
 //   * Windows 11 21H2以前では発生していない
 // * CopyFile()を使用する
-// * ThinApp上でDirectoryIsolationMode=Mergedのフォルダに書き出す
+// * ThinAppで仮想化されているファイルをコピーする
 void CSazabi::CopyDBLEXEToTempEx()
 {
 	//ネイティブ版は、DBLCは不要
