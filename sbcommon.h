@@ -475,12 +475,12 @@ namespace SBUtil
 		// so must sniff
 		BOOL f64 = FALSE;
 		LPFN_ISWOW64PROCESS fnIsWow64Process = {0};
-
-		fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(GetModuleHandle(_T("kernel32.dll")), "IsWow64Process");
+		HMODULE hModule = GetModuleHandle(_T("kernel32.dll"));
+		if (!hModule)
+			return FALSE;
+		fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(hModule, "IsWow64Process");
 		if (NULL != fnIsWow64Process)
-		{
 			return fnIsWow64Process(GetCurrentProcess(), &f64) && f64;
-		}
 		return FALSE;
 #else
 		return FALSE; // Win64 does not support Win16
@@ -734,6 +734,8 @@ namespace SBUtil
 	static SIZE_T GetRemoteCommandLineW(HANDLE hProcess, LPWSTR pszBuffer, UINT bufferLength)
 	{
 		HINSTANCE hNtDll = GetModuleHandleW(L"ntdll.dll");
+		if (!hNtDll)
+			return 0;
 		NtQueryInformationProcessPtr NtQueryInformationProcess = (NtQueryInformationProcessPtr)GetProcAddress(hNtDll, "NtQueryInformationProcess");
 		RtlNtStatusToDosErrorPtr RtlNtStatusToDosError = (RtlNtStatusToDosErrorPtr)GetProcAddress(hNtDll, "RtlNtStatusToDosError");
 
@@ -3376,6 +3378,9 @@ public:
 				pSource = VBSource;
 
 				//スクリプトコードのロードと解析。
+#pragma warning(push, 0)
+//ParseScriptTextの各引数とGetScriptDispatchの第一引数はNULL許容なので、「NULLの可能性がある」警告は無視する。
+#pragma warning(disable : 6387)
 				if (FAILED(hRes = pASP->ParseScriptText(pSource,
 									NULL,
 									NULL,
@@ -3395,7 +3400,7 @@ public:
 				CComPtr<IDispatch> pScriptDisp;
 				if (FAILED(hRes = pAS->GetScriptDispatch(NULL, &pScriptDisp)))
 					goto cleanup;
-
+#pragma warning(pop)
 				// スクリプト上に定義されているtestfuncの呼び出し
 				LPOLESTR szMember[] = {L"OnRedirect", NULL};
 				DISPID dispids[1] = {0};
@@ -3534,6 +3539,9 @@ public:
 				LPCWSTR pSource = NULL;
 				pSource = VBSource;
 
+#pragma warning(push, 0)
+//ParseScriptTextの各引数とGetScriptDispatchの第一引数はNULL許容なので、「NULLの可能性がある」警告は無視する。
+#pragma warning(disable : 6387)
 				//スクリプトコードのロードと解析。
 				if (FAILED(hRes = pASP->ParseScriptText(pSource,
 									NULL,
@@ -3554,7 +3562,7 @@ public:
 				CComPtr<IDispatch> pScriptDisp;
 				if (FAILED(hRes = pAS->GetScriptDispatch(NULL, &pScriptDisp)))
 					goto cleanup;
-
+#pragma warning(pop)
 				// スクリプト上に定義されているtestfuncの呼び出し
 				LPOLESTR szMember[] = {L"URLFilter", NULL};
 				DISPID dispids[1] = {0};
