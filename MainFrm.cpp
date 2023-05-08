@@ -870,7 +870,7 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 		size_t iMemL = theApp.m_AppSettings.GetMemoryUsageLimit();
 		CString logmsg;
 
-		if (iMemSize > iMemL * 1024 * 1024)
+		if (iMemSize > (unsigned long long)iMemL * 1024 * 1024)
 		{
 			//一旦ワーキングセットをクリアして開放してしまう。
 			theApp.EmptyWorkingSetAll();
