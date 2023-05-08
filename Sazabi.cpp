@@ -2202,6 +2202,8 @@ BOOL CSazabi::SafeTerminateProcess(HANDLE hProcess, INT_PTR uExitCode)
 	HANDLE hProcessDup = INVALID_HANDLE_VALUE;
 	HANDLE hRT = NULL;
 	HINSTANCE hKernel = GetModuleHandle(_T("Kernel32"));
+	if (!hKernel)
+		return FALSE;
 	BOOL bSuccess = FALSE;
 	BOOL bDup = DuplicateHandle(GetCurrentProcess(), hProcess, GetCurrentProcess(), &hProcessDup, PROCESS_ALL_ACCESS, FALSE, 0);
 	if (GetExitCodeProcess((bDup) ? hProcessDup : hProcess, &dwCode) && (dwCode == STILL_ACTIVE))
@@ -2979,6 +2981,8 @@ unsigned long long CSazabi::GetMemoryUsageSizeFromPID(DWORD dwPID)
 			VM_COUNTERS_EX2 vm = {0};
 			// Locating functions
 			HINSTANCE hNtDll = GetModuleHandleW(L"ntdll.dll");
+			if (!hNtDll)
+				throw std::runtime_error("Failed to execute GetModuleHandleW");
 			NtQueryInformationProcessPtr NtQueryInformationProcess = (NtQueryInformationProcessPtr)GetProcAddress(hNtDll, "NtQueryInformationProcess");
 			RtlNtStatusToDosErrorPtr RtlNtStatusToDosError = (RtlNtStatusToDosErrorPtr)GetProcAddress(hNtDll, "RtlNtStatusToDosError");
 			if (!NtQueryInformationProcess || !RtlNtStatusToDosError)
