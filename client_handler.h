@@ -16,6 +16,10 @@
 #include "include/base/cef_lock.h"
 #pragma warning(pop)
 #include "resource.h"
+
+#pragma warning(push, 0)
+#pragma warning(disable : 26812)
+
 class MyV8Handler : public CefV8Handler
 {
 public:
@@ -352,3 +356,5 @@ private:
 	IMPLEMENT_REFCOUNTING(AppRenderer);
 	DISALLOW_COPY_AND_ASSIGN(AppRenderer);
 };
+//#pragma warning(disable : 26812)
+#pragma warning(pop)

@@ -123,18 +123,18 @@ protected:
 	void BreakDrag(void)
 	{
 		if (::GetCapture() == m_hwndTab) ::ReleaseCapture();
-		m_eDragState = DRAG_NONE;
+		m_eDragState = DragState::DRAG_NONE;
 	}
 	BOOL ReorderTab(int nSrcTab, int nDstTab);
 
 protected:
-	enum DragState
+	enum class DragState
 	{
 		DRAG_NONE,
 		DRAG_CHECK,
 		DRAG_DRAG
 	};
-	enum CaptureSrc
+	enum class CaptureSrc
 	{
 		CAPT_NONE
 	};

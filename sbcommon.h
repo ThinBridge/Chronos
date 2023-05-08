@@ -241,7 +241,7 @@ static void getTimeStringEx(LPFILETIME ftTime, CString& str)
 #include <psapi.h>
 namespace SBUtil
 {
-	enum ICON_INDEX
+	enum class ICON_INDEX
 	{
 		ICON_FOLDER,
 		ICON_IE_FILE,
