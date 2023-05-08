@@ -2775,6 +2775,9 @@ void CBrowserFrame::OnCloseDelay()
 			if (!m_wndView.IsPopupWindow())
 			{
 				hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, theApp.m_strEventLogName);
+				if (!hEvent)
+					throw std::runtime_error("Failed to execute OpenEvent");
+
 				DWORD waitRes = WaitForSingleObject(hEvent, 100);
 				if (waitRes == WAIT_TIMEOUT)
 				{

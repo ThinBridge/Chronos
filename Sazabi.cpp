@@ -3175,6 +3175,9 @@ BOOL CSazabi::IsCacheRedirectFilterNone(LPCTSTR pURL)
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventLogScriptName);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+		
 		DWORD waitRes = WaitForSingleObject(hEvent, 50);
 		if (waitRes == WAIT_TIMEOUT)
 		{
@@ -3207,6 +3210,9 @@ void CSazabi::AddCacheRedirectFilterNone(LPCTSTR pURL)
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventLogScriptName);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 100);
 		if (waitRes == WAIT_TIMEOUT)
 		{
@@ -3248,6 +3254,9 @@ BOOL CSazabi::IsCacheURLFilterAllow(LPCTSTR pURL)
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterAllow);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 50);
 		if (waitRes == WAIT_TIMEOUT)
 		{
@@ -3280,6 +3289,9 @@ BOOL CSazabi::IsCacheURLFilterDeny(LPCTSTR pURL)
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterDeny);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 50);
 		if (waitRes == WAIT_TIMEOUT)
 		{
@@ -3313,6 +3325,9 @@ void CSazabi::AddCacheURLFilterAllow(LPCTSTR pURL)
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterAllow);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 100);
 		if (waitRes == WAIT_TIMEOUT)
 		{
@@ -3353,6 +3368,9 @@ void CSazabi::AddCacheURLFilterDeny(LPCTSTR pURL)
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterDeny);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 100);
 		if (waitRes == WAIT_TIMEOUT)
 		{
