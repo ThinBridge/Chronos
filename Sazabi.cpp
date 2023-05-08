@@ -1491,7 +1491,7 @@ void CSazabi::SetThisAppVersionString()
 	DWORD size = ::GetFileVersionInfoSize(path, &handle);
 	CByteArray buf;
 	buf.SetSize(size);
-	::GetFileVersionInfo(path, handle, (DWORD)buf.GetSize(), buf.GetData());
+	::GetFileVersionInfo(path, 0, (DWORD)buf.GetSize(), buf.GetData());
 	LPVOID item = {0};
 	UINT itemsize = 0;
 	::VerQueryValue(buf.GetData(), _T("\\VarFileInfo\\Translation"), &item, &itemsize);
@@ -3823,7 +3823,7 @@ CString CSazabi::GetVOSInfo()
 		if (pBlock == NULL)
 			break;
 		memset(pBlock, 0x00, dwVerInfoSize * sizeof(UCHAR));
-		GetFileVersionInfo(szTargetPath, dwZero, dwVerInfoSize, pBlock);
+		GetFileVersionInfo(szTargetPath, 0, dwVerInfoSize, pBlock);
 
 		VerQueryValue(pBlock, _T("\\VarFileInfo\\Translation"),
 			      (LPVOID*)&lpTranslate, &TranslateLen);
