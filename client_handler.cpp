@@ -29,6 +29,9 @@
 #include "DlgAuth.h"
 #include "sbcommon.h"
 
+#pragma warning(push, 0)
+#pragma warning(disable : 26812)
+
 ClientHandler::ClientHandler()
 {
 	m_bDownLoadStartFlg = FALSE;
@@ -2113,3 +2116,5 @@ bool MyV8Handler::Execute(const CefString& name,
 	// Function does not exist.
 	return false;
 }
+//#pragma warning(disable : 26812)
+#pragma warning(pop)

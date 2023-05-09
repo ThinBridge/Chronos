@@ -4506,6 +4506,8 @@ void CSazabi::SetWarmFavicon(HWND hwndF)
 	}
 }
 
+#pragma warning(push, 0)
+#pragma warning(disable : 26812)
 void CSazabi::CreateNewWindow(LPCTSTR lpURL, BOOL bActive)
 {
 	CChildView* pCView = NULL;
@@ -4522,6 +4524,9 @@ void CSazabi::CreateNewWindow(LPCTSTR lpURL, BOOL bActive)
 		}
 	}
 }
+//#pragma warning(disable : 26812)
+#pragma warning(pop)
+
 typedef int(__stdcall* TMessageBoxTimeout)(HWND, LPCTSTR, LPCTSTR, UINT, WORD, DWORD);
 int CSazabi::SB_MessageBox(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType, BOOL bBlackOut /*=FALSE*/, int iTimeOut /*=-1*/)
 {
