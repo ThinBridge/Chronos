@@ -312,7 +312,11 @@ void CLogDispatcher::ChkThread()
 								{
 									// ƒXƒŒƒbƒh‹­§’âŽ~
 									// (â‘Î‚É’âŽ~‚·‚é‚È‚ç WaitForSingleObject‚Å INFINITE ‚à‰Âj
+#pragma warning(push, 0)
+//•’Ê‚É’âŽ~‚Å‚«‚È‚©‚Á‚½ê‡‚É‹­§’âŽ~‚·‚é‚½‚ß‚ÉŽg‚Á‚Ä‚¢‚é‚Ì‚ÅA³‚µ‚¢Žg‚¢•û
+#pragma warning(disable : 6258)
 									::TerminateThread(pThread->m_hThread, 0xffffffff);
+#pragma warning(pop)
 									::CloseHandle(pThread->m_hThread);
 									DebugWndLogData dwLogData;
 									dwLogData.mHWND.Format(_T("SEND_LOG_WND:0x%08x"), 0);
