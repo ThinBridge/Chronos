@@ -70,6 +70,8 @@ void CDlgDebugWnd::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST1, m_List);
 }
 
+#pragma warning(push, 0)
+#pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CDlgDebugWnd, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CDlgDebugWnd::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CDlgDebugWnd::OnBnClickedCancel)
@@ -81,6 +83,7 @@ BEGIN_MESSAGE_MAP(CDlgDebugWnd, CDialogEx)
 	ON_NOTIFY(LVN_GETDISPINFO, IDC_LIST1, &CDlgDebugWnd::OnGetdispinfoList1)
 	ON_BN_CLICKED(IDC_CHECK1, &CDlgDebugWnd::OnBnClickedCheck1)
 END_MESSAGE_MAP()
+#pragma warning(pop)
 
 BOOL CDlgDebugWnd::OnInitDialog()
 {

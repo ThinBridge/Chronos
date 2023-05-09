@@ -182,6 +182,8 @@ void CSettingsDialog::DoDataExchange(CDataExchange* pDX)
 	//}}AFX_DATA_MAP
 }
 
+#pragma warning(push, 0)
+#pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
 	//{{AFX_MSG_MAP(CSettingsDialog)
 	ON_NOTIFY(TVN_GETDISPINFO, IDC_TREE_CTRL, OnGetDispInfoTreeCtrl)
@@ -189,6 +191,7 @@ BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
 	ON_WM_SIZE()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
+#pragma warning(pop)
 
 /////////////////////////////////////////////////////////////////////////////
 // CSettingsDialog message handlers
@@ -1772,6 +1775,9 @@ void CDlgSetDomainFilter::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST1, m_List);
 	//}}AFX_DATA_MAP
 }
+
+#pragma warning(push, 0)
+#pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CDlgSetDomainFilter, CPropertyPage)
 	//{{AFX_MSG_MAP(CDlgSetDomainFilter)
 	ON_BN_CLICKED(IDC_BUTTON_INS, OnButtonPopIns)
@@ -1786,6 +1792,7 @@ BEGIN_MESSAGE_MAP(CDlgSetDomainFilter, CPropertyPage)
 	//}}AFX_MSG_MAP
 	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
+#pragma warning(pop)
 
 /////////////////////////////////////////////////////////////////////////////
 // CDlgSetDomainFilter メッセージ ハンドラ
@@ -2405,6 +2412,9 @@ void CDlgSetCustomScript::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST1, m_List);
 	//}}AFX_DATA_MAP
 }
+
+#pragma warning(push, 0)
+#pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CDlgSetCustomScript, CPropertyPage)
 	//{{AFX_MSG_MAP(CDlgSetCustomScript)
 	ON_BN_CLICKED(IDC_BUTTON_INS, OnButtonPopIns)
@@ -2421,6 +2431,7 @@ BEGIN_MESSAGE_MAP(CDlgSetCustomScript, CPropertyPage)
 	ON_BN_CLICKED(IDC_BUTTON1, &CDlgSetCustomScript::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_SHOW_DEV_TOOLS, &CDlgSetCustomScript::OnBnClickedShowDevTools)
 END_MESSAGE_MAP()
+#pragma warning(pop)
 
 /////////////////////////////////////////////////////////////////////////////
 // CDlgSetCustomScript メッセージ ハンドラ
