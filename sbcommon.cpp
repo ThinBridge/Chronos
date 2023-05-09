@@ -312,7 +312,12 @@ void CLogDispatcher::ChkThread()
 								{
 									// スレッド強制停止
 									// (絶対に停止するなら WaitForSingleObjectで INFINITE も可）
+#pragma warning(push, 0)
+//警告 C6258 TerminateThread を使用すると、正しくスレッドをクリーンアップすることができません。
+// -> 普通に停止できなかった場合に強制停止するために使っている。正しい使い方なので警告を無視。
+#pragma warning(disable : 6258)
 									::TerminateThread(pThread->m_hThread, 0xffffffff);
+#pragma warning(pop)
 									::CloseHandle(pThread->m_hThread);
 									DebugWndLogData dwLogData;
 									dwLogData.mHWND.Format(_T("SEND_LOG_WND:0x%08x"), 0);
