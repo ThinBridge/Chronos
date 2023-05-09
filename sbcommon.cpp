@@ -272,7 +272,12 @@ void CLogDispatcher::ChkThread()
 							{
 								try
 								{
+#pragma warning(push, 0)
+//警告 C6001 初期化されていないメモリ '**pThread.m_hThread' を使用しています。
+// -> 通常初期化されているはず。もし本当に初期化されていないとしても、catch句に拾われるので問題ない。
+#pragma warning(disable : 6001)
 									dRet = ::WaitForSingleObject(pThread->m_hThread, 30 * 1000);
+#pragma warning(pop)
 								}
 								catch (...)
 								{
