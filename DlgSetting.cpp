@@ -183,6 +183,7 @@ void CSettingsDialog::DoDataExchange(CDataExchange* pDX)
 }
 
 #pragma warning(push, 0)
+//警告 C26454 演算のオーバーフロー : '-' の操作では、コンパイル時に負の符号なしの結果が生成されます(io .5)。
 #pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
 	//{{AFX_MSG_MAP(CSettingsDialog)
@@ -1777,6 +1778,7 @@ void CDlgSetDomainFilter::DoDataExchange(CDataExchange* pDX)
 }
 
 #pragma warning(push, 0)
+//警告 C26454 演算のオーバーフロー : '-' の操作では、コンパイル時に負の符号なしの結果が生成されます(io .5)。
 #pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CDlgSetDomainFilter, CPropertyPage)
 	//{{AFX_MSG_MAP(CDlgSetDomainFilter)
@@ -2414,6 +2416,7 @@ void CDlgSetCustomScript::DoDataExchange(CDataExchange* pDX)
 }
 
 #pragma warning(push, 0)
+//警告 C26454 演算のオーバーフロー : '-' の操作では、コンパイル時に負の符号なしの結果が生成されます(io .5)。
 #pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CDlgSetCustomScript, CPropertyPage)
 	//{{AFX_MSG_MAP(CDlgSetCustomScript)
