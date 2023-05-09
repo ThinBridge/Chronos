@@ -622,8 +622,8 @@ void CBrowserFrame::CreateRebarsPopup()
 				COMBOBOXEXITEM cbi = {0};
 				cbi.mask = CBEIF_IMAGE | CBEIF_SELECTEDIMAGE;
 				cbi.iItem = -1;
-				cbi.iImage = (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
-				cbi.iSelectedImage = (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
+				cbi.iImage = (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
+				cbi.iSelectedImage = (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
 				m_pwndAddress->SetItem(&cbi);
 			}
 		}
@@ -794,7 +794,7 @@ void CBrowserFrame::CreateRebars()
 					TRACE0("Failed to create edit-box\n");
 					return;
 				}
-				m_wndEditSearch->SetIcon(theApp.m_imgMenuIcons.ExtractIcon((int)SBUtil::ICON_INDEX::ICON_FIND_PAGE));
+				m_wndEditSearch->SetIcon(theApp.m_imgMenuIcons.ExtractIcon((int)SBUtil::ICON_INDEX::FIND_PAGE));
 			}
 
 			PROC_TIME_E(CreateRebars_TOOLBAR_LoadToolBar_STAGE3)
@@ -836,8 +836,8 @@ void CBrowserFrame::CreateRebars()
 				COMBOBOXEXITEM cbi = {0};
 				cbi.mask = CBEIF_IMAGE | CBEIF_SELECTEDIMAGE;
 				cbi.iItem = -1;
-				cbi.iImage = (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
-				cbi.iSelectedImage = (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
+				cbi.iImage = (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
+				cbi.iSelectedImage = (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
 				m_pwndAddress->SetItem(&cbi);
 			}
 		}
@@ -1004,8 +1004,8 @@ void CBrowserFrame::CreateStatusbar()
 	m_pwndStatusBar->SetPaneWidth(nStatusZoom, 70);
 
 	CIconHelper ICoHelper;
-	ICoHelper = theApp.m_imgMenuIcons.ExtractIcon((int)SBUtil::ICON_INDEX::ICON_ZOOM);
-	m_iStatusIconIndexCache_Zoom = (int)SBUtil::ICON_INDEX::ICON_ZOOM;
+	ICoHelper = theApp.m_imgMenuIcons.ExtractIcon((int)SBUtil::ICON_INDEX::ZOOM);
+	m_iStatusIconIndexCache_Zoom = (int)SBUtil::ICON_INDEX::ZOOM;
 	m_pwndStatusBar->SetPaneIcon(nStatusZoom, ICoHelper, FALSE);
 	m_pwndStatusBar->SetPaneWidth(nStatusProgress, 160);
 	m_pwndStatusBar->EnablePaneDoubleClick(TRUE);
@@ -2306,7 +2306,7 @@ BOOL CBrowserFrame::OnDrawMenuImage(CDC* pDC,
 	if (pMenuButton->m_nID >= ID_FAV_START &&
 	    pMenuButton->m_nID <= ID_FAV_END)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
+		iIcon = (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
 	}
 	else if (pMenuButton->m_nID >= ID_WINDOW_START &&
 		 pMenuButton->m_nID <= ID_WINDOW_END)
@@ -2321,101 +2321,101 @@ BOOL CBrowserFrame::OnDrawMenuImage(CDC* pDC,
 			return TRUE;
 		}
 		else
-			iIcon = (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
+			iIcon = (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
 	}
 	else if (pMenuButton->m_nID >= ID_CLOSE_WINDOW_START &&
 		 pMenuButton->m_nID <= ID_CLOSE_WINDOW_END)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
+		iIcon = (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
 	}
 	else if (pMenuButton->m_nID == ID_NEW)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_SEL_ALL;
+		iIcon = (int)SBUtil::ICON_INDEX::SEL_ALL;
 	}
 	else if (pMenuButton->m_nID == ID_NEW_BLANK)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_NEW;
+		iIcon = (int)SBUtil::ICON_INDEX::NEW;
 	}
 	else if (pMenuButton->m_nID == ID_NEW_SESSION)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_NEW_I;
+		iIcon = (int)SBUtil::ICON_INDEX::NEW_I;
 	}
 	else if (pMenuButton->m_nID == ID_RESTORE_WND)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_RESTORE;
+		iIcon = (int)SBUtil::ICON_INDEX::RESTORE;
 	}
 	else if (pMenuButton->m_nID == ID_SAVE_WND)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_SAVE_WND;
+		iIcon = (int)SBUtil::ICON_INDEX::SAVE_WND;
 	}
 	else if (pMenuButton->m_nID == ID_W_CLOSE)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_CLOSE;
+		iIcon = (int)SBUtil::ICON_INDEX::CLOSE;
 	}
 	else if (pMenuButton->m_nID == ID_CUT)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_CUT;
+		iIcon = (int)SBUtil::ICON_INDEX::CUT;
 	}
 	else if (pMenuButton->m_nID == ID_COPY)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_COPY;
+		iIcon = (int)SBUtil::ICON_INDEX::COPY;
 	}
 	else if (pMenuButton->m_nID == ID_PASTE)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_PASTE;
+		iIcon = (int)SBUtil::ICON_INDEX::PASTE;
 	}
 	else if (pMenuButton->m_nID == ID_SEL_ALL)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_SEL_ALL;
+		iIcon = (int)SBUtil::ICON_INDEX::SEL_ALL;
 	}
 	else if (pMenuButton->m_nID == ID_FIND_PAGE)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_FIND_PAGE;
+		iIcon = (int)SBUtil::ICON_INDEX::FIND_PAGE;
 	}
 	else if (pMenuButton->m_nID == ID_SETTINGS)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_SETTINGS;
+		iIcon = (int)SBUtil::ICON_INDEX::SETTINGS;
 	}
 	else if (pMenuButton->m_nID == IDC_APP_EXIT)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_CLOSE_ALL;
+		iIcon = (int)SBUtil::ICON_INDEX::CLOSE_ALL;
 	}
 	else if (pMenuButton->m_nID == IDC_APP_EXIT_BUT_THIS)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_CLOSE_BUT_THIS;
+		iIcon = (int)SBUtil::ICON_INDEX::CLOSE_BUT_THIS;
 	}
 	else if (pMenuButton->m_nID == ID_PREV_WND)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_PREV_WND;
+		iIcon = (int)SBUtil::ICON_INDEX::PREV_WND;
 	}
 	else if (pMenuButton->m_nID == ID_NEXT_WND)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_NEXT_WND;
+		iIcon = (int)SBUtil::ICON_INDEX::NEXT_WND;
 	}
 	else if (pMenuButton->m_nID == ID_FULL_SCREEN)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_FULL_SCREEN;
+		iIcon = (int)SBUtil::ICON_INDEX::FULL_SCREEN;
 	}
 	else if (pMenuButton->m_nID == ID_APP_ABOUT)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_APP_ABOUT;
+		iIcon = (int)SBUtil::ICON_INDEX::APP_ABOUT;
 	}
 	else if (pMenuButton->m_nID == ID_ADD_FAVORITE)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_ADD_FAVORITE;
+		iIcon = (int)SBUtil::ICON_INDEX::ADD_FAVORITE;
 	}
 	else if (pMenuButton->m_nID == ID_ORGANIZE_FAVORITE)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_ORGANIZE_FAVORITE;
+		iIcon = (int)SBUtil::ICON_INDEX::ORGANIZE_FAVORITE;
 	}
 	else if (pMenuButton->m_nID == IDC_APP_DELETE_CACHE)
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_IE_OPTION;
+		iIcon = (int)SBUtil::ICON_INDEX::IE_OPTION;
 	}
 
 	else if (IsFavoritesMenu(pMenuButton, FALSE))
 	{
-		iIcon = (int)SBUtil::ICON_INDEX::ICON_FOLDER;
+		iIcon = (int)SBUtil::ICON_INDEX::FOLDER;
 	}
 
 	//////////////////////////////////////////////
@@ -2505,7 +2505,7 @@ void CBrowserFrame::SetSSLStatus(BOOL bStatus)
 	if (m_pwndAddress)
 	{
 		int iconIndex = 0;
-		iconIndex = bStatus ? (int)SBUtil::ICON_INDEX::ICON_LOCK : (int)SBUtil::ICON_INDEX::ICON_IE_FILE_FAV;
+		iconIndex = bStatus ? (int)SBUtil::ICON_INDEX::LOCK : (int)SBUtil::ICON_INDEX::IE_FILE_FAV;
 		COMBOBOXEXITEM cbi = {0};
 		cbi.mask = CBEIF_IMAGE | CBEIF_SELECTEDIMAGE;
 		cbi.iItem = -1;

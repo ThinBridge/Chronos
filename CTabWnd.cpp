@@ -156,7 +156,7 @@ LRESULT CTabWnd::OnTabLButtonDown(WPARAM wParam, LPARAM lParam)
 		}
 	}
 	// マウスドラッグ開始処理
-	m_eDragState = DragState::DRAG_CHECK; // ドラッグのチェックを開始
+	m_eDragState = DragState::CHECK; // ドラッグのチェックを開始
 	// ドラッグ元タブを記憶する
 	m_nSrcTab = nSrcTab;
 	::GetCursorPos(&m_ptSrcCursor);
@@ -175,7 +175,7 @@ LRESULT CTabWnd::OnTabLButtonUp(WPARAM wParam, LPARAM lParam)
 	// マウスドロップ処理
 	switch (m_eDragState)
 	{
-	case DragState::DRAG_CHECK:
+	case DragState::CHECK:
 	{
 		int nCurSel = TabCtrl_GetCurSel(m_hwndTab);
 		if (nCurSel != nDstTab)
@@ -207,7 +207,7 @@ LRESULT CTabWnd::OnTabLButtonUp(WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	}
-	case DragState::DRAG_DRAG:
+	case DragState::DRAG:
 		m_pwndMainFrame->TabWindowMsgBSend(TWNT_REFRESH, NULL);
 
 		if (m_nTabBorderArray)
@@ -259,11 +259,11 @@ LRESULT CTabWnd::OnTabMouseMove(WPARAM wParam, LPARAM lParam)
 	// マウスドラッグ中の処理
 	switch (m_eDragState)
 	{
-	case DragState::DRAG_CHECK:
+	case DragState::CHECK:
 		// 元のタブから離れたらドラッグ開始
 		if (m_nSrcTab == nDstTab)
 			break;
-		m_eDragState = DragState::DRAG_DRAG;
+		m_eDragState = DragState::DRAG;
 		m_hDefaultCursor = ::GetCursor();
 
 		// 現在のタブ境界位置を記憶する
@@ -283,7 +283,7 @@ LRESULT CTabWnd::OnTabMouseMove(WPARAM wParam, LPARAM lParam)
 		m_nTabBorderArray[i] = 0; // 最後の要素は番兵
 					  // ここに来たらドラッグ開始なので break しないでそのまま DRAG_DRAG 処理に入る
 
-	case DragState::DRAG_DRAG:
+	case DragState::DRAG:
 		// ドラッグ中のマウスカーソルを表示する
 		HINSTANCE hInstance;
 		LPCTSTR lpCursorName;
@@ -349,8 +349,8 @@ LRESULT CTabWnd::OnTabTimer(WPARAM wParam, LPARAM lParam)
 
 LRESULT CTabWnd::OnTabCaptureChanged(WPARAM wParam, LPARAM lParam)
 {
-	if (m_eDragState != DragState::DRAG_NONE)
-		m_eDragState = DragState::DRAG_NONE;
+	if (m_eDragState != DragState::NONE)
+		m_eDragState = DragState::NONE;
 	return 0L;
 }
 
@@ -452,9 +452,9 @@ BOOL CTabWnd::ReorderTab(int nSrcTab, int nDstTab)
 
 CTabWnd::CTabWnd()
     : CWndSkr(_T("::CTabWnd")),
-      m_eDragState(DragState::DRAG_NONE),
+      m_eDragState(DragState::NONE),
       m_bHovering(FALSE),
-      m_eCaptureSrc(CaptureSrc::CAPT_NONE),
+      m_eCaptureSrc(CaptureSrc::NONE),
       m_nTabBorderArray(NULL),
       m_nSrcTab(0)
 {
@@ -491,9 +491,9 @@ HWND CTabWnd::CreateTab(HINSTANCE hInstance, CWnd* pFrame, CWnd* pView, HWND hwn
 
 	m_hwndTab = NULL;
 	gm_pOldWndProc = NULL;
-	m_eDragState = DragState::DRAG_NONE;
+	m_eDragState = DragState::NONE;
 	m_bHovering = FALSE;
-	m_eCaptureSrc = CaptureSrc::CAPT_NONE;
+	m_eCaptureSrc = CaptureSrc::NONE;
 
 	RegisterWC(
 	    hInstance,
@@ -626,8 +626,8 @@ LRESULT CTabWnd::OnLButtonDblClk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 LRESULT CTabWnd::OnCaptureChanged(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (m_eCaptureSrc != CaptureSrc::CAPT_NONE)
-		m_eCaptureSrc = CaptureSrc::CAPT_NONE;
+	if (m_eCaptureSrc != CaptureSrc::NONE)
+		m_eCaptureSrc = CaptureSrc::NONE;
 
 	return 0L;
 }
@@ -650,7 +650,7 @@ LRESULT CTabWnd::OnLButtonUp(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	if (::GetCapture() == GetHwnd()) // 自ウィンドウがマウスキャプチャーしている?
 	{
 		// キャプチャー解除
-		m_eCaptureSrc = CaptureSrc::CAPT_NONE;
+		m_eCaptureSrc = CaptureSrc::NONE;
 		::ReleaseCapture();
 	}
 
