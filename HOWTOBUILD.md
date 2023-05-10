@@ -4,7 +4,7 @@ Chronosの開発の手引き
  * 開発には Visual Studio 2019が必要です。
    * `Desktop Development with C++ > C++ CMake tools for Windows` を選択
    * `Desktop Development with C++ > C++ MFC for latest ...` を選択
- * Windows SDK 10.0.18362.0の事前インストールが必要です。
+ * Windows SDK 10.0.22000.0の事前インストールが必要です。
 
 ## ビルド手順
 
