@@ -206,7 +206,7 @@ void CLogDispatcher::ChkThread()
 		if (m_bStop)
 			return;
 
-		void* iVal = 0;
+		CWinThread* pThread = NULL;
 		CString strKey;
 
 		//終了した物を消す。
@@ -216,8 +216,8 @@ void CLogDispatcher::ChkThread()
 		{
 			try
 			{
-				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, iVal);
-				if (iVal == NULL)
+				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, (void *&)pThread);
+				if (pThread == NULL)
 				{
 					strARemoveList.Add(strKey);
 				}
@@ -236,7 +236,7 @@ void CLogDispatcher::ChkThread()
 				strKey = strARemoveList.GetAt(i);
 				if (!strKey.IsEmpty())
 				{
-					if (m_MapLogThreadMgr.Lookup(strKey, iVal))
+					if (m_MapLogThreadMgr.Lookup(strKey, (void*&)pThread))
 					{
 						m_MapLogThreadMgr.RemoveKey(strKey);
 					}
@@ -252,16 +252,14 @@ void CLogDispatcher::ChkThread()
 		{
 			try
 			{
-				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, iVal);
+				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, (void*&)pThread);
 				if (m_bStop)
 					return;
 
-				if (iVal)
+				if (pThread)
 				{
-					CWinThread* pThread = NULL;
-					if (m_MapLogThreadMgr.Lookup(strKey, iVal))
+					if (m_MapLogThreadMgr.Lookup(strKey, (void*&)pThread))
 					{
-						pThread = (CWinThread*)iVal;
 						if (pThread)
 						{
 							DWORD dRet = 0;
@@ -272,12 +270,7 @@ void CLogDispatcher::ChkThread()
 							{
 								try
 								{
-#pragma warning(push, 0)
-//警告 C6001 初期化されていないメモリ '**pThread.m_hThread' を使用しています。
-// -> 通常初期化されているはず。もし本当に初期化されていないとしても、catch句に拾われるので問題ない。
-#pragma warning(disable : 6001)
 									dRet = ::WaitForSingleObject(pThread->m_hThread, 30 * 1000);
-#pragma warning(pop)
 								}
 								catch (...)
 								{
