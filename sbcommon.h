@@ -2973,15 +2973,13 @@ public:
 		{
 			if (pThread == NULL) return;
 			if (lpIndex == NULL) return;
-			void* iVal = (void*)pThread;
-			if (m_MapLogThreadMgr.Lookup(lpIndex, iVal))
+			CWinThread* pThreadLocal = NULL;
+			if (m_MapLogThreadMgr.Lookup(lpIndex, (void*&)pThreadLocal))
 			{
-				if (iVal)
+				if (pThreadLocal)
 				{
-					CWinThread* pThread = NULL;
-					pThread = (CWinThread*)iVal;
 					// スレッド終了待ち
-					if (::WaitForSingleObject(pThread->m_hThread, 5000) == WAIT_TIMEOUT)
+					if (::WaitForSingleObject(pThreadLocal->m_hThread, 5000) == WAIT_TIMEOUT)
 					{
 						// スレッド強制停止
 						// (絶対に停止するなら WaitForSingleObjectで INFINITE も可）
@@ -2989,7 +2987,7 @@ public:
 //警告 C6258 TerminateThread を使用すると、正しくスレッドをクリーンアップすることができません。
 // -> 普通に停止できなかった場合に強制停止するために使っている。正しい使い方なので警告を無視。
 #pragma warning(disable : 6258)
-						::TerminateThread(pThread->m_hThread, 0xffffffff);
+						::TerminateThread(pThreadLocal->m_hThread, 0xffffffff);
 #pragma warning(pop)
 					}
 				}
@@ -2998,7 +2996,7 @@ public:
 			}
 			else
 			{
-				m_MapLogThreadMgr.SetAt(lpIndex, iVal);
+				m_MapLogThreadMgr.SetAt(lpIndex, pThread);
 			}
 		}
 		catch (...)

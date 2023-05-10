@@ -206,7 +206,7 @@ void CLogDispatcher::ChkThread()
 		if (m_bStop)
 			return;
 
-		void* iVal = 0;
+		CWinThread* pThread = NULL;
 		CString strKey;
 
 		//èIóπÇµÇΩï®Çè¡Ç∑ÅB
@@ -216,8 +216,8 @@ void CLogDispatcher::ChkThread()
 		{
 			try
 			{
-				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, iVal);
-				if (iVal == NULL)
+				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, (void*&)pThread);
+				if (pThread == NULL)
 				{
 					strARemoveList.Add(strKey);
 				}
@@ -236,7 +236,7 @@ void CLogDispatcher::ChkThread()
 				strKey = strARemoveList.GetAt(i);
 				if (!strKey.IsEmpty())
 				{
-					if (m_MapLogThreadMgr.Lookup(strKey, iVal))
+					if (m_MapLogThreadMgr.Lookup(strKey, (void*&)pThread))
 					{
 						m_MapLogThreadMgr.RemoveKey(strKey);
 					}
@@ -252,16 +252,14 @@ void CLogDispatcher::ChkThread()
 		{
 			try
 			{
-				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, iVal);
+				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, (void*&)pThread);
 				if (m_bStop)
 					return;
 
-				if (iVal)
+				if (pThread)
 				{
-					CWinThread* pThread = NULL;
-					if (m_MapLogThreadMgr.Lookup(strKey, iVal))
+					if (m_MapLogThreadMgr.Lookup(strKey, (void*&)pThread))
 					{
-						pThread = (CWinThread*)iVal;
 						if (pThread)
 						{
 							DWORD dRet = 0;
