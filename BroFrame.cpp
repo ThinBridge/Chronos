@@ -2978,6 +2978,8 @@ void CBrowserFrame::OnTabListShow()
 			bmi.bmiHeader.biPlanes = 1;
 			bmi.bmiHeader.biBitCount = 32;
 			hbmp = CreateDIBSection(NULL, (BITMAPINFO*)&bmi, DIB_RGB_COLORS, &lpBits, NULL, 0);
+			if (!hbmp)
+				continue;
 			hdcMem = CreateCompatibleDC(NULL);
 			hbmpPrev = (HBITMAP)SelectObject(hdcMem, hbmp);
 			DrawIconEx(hdcMem, 0, 0, hicon, uWidth, uHeight, 0, NULL, DI_NORMAL);
