@@ -3899,32 +3899,15 @@ CString CSazabi::GetVOSInfo()
 
 CString CSazabi::GetOSInfo(void)
 {
-	OSVERSIONINFOEX ovi = {0};
-	ovi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	GetVersionEx((OSVERSIONINFO*)&ovi);
-	DWORD dwBuildNumber = ovi.dwBuildNumber;
-	CString strOS = _T("Windows");
+	CString strBuff = _T("Windows");
 
-	CString strBuff;
+	strBuff += IsWindowsServer() ? _T(" Server") : _T(" Client");
 
-	if (ovi.wProductType == VER_NT_WORKSTATION)
-		strOS += _T(" Client");
-	else if (ovi.wProductType == VER_NT_DOMAIN_CONTROLLER || ovi.wProductType == VER_NT_SERVER)
-		strOS += _T(" Server");
+	strBuff += SBUtil::Is64BitWindows() ? _T(" x64") : _T(" x86");
 
-	if (SBUtil::Is64BitWindows())
+	if (GetSystemMetrics(SM_REMOTESESSION))
 	{
-		strBuff.Format(_T("%s x64"), (LPCTSTR)strOS);
-	}
-	else
-	{
-		strBuff.Format(_T("%s x86"), (LPCTSTR)strOS);
-	}
-
-	if ((ovi.wSuiteMask & VER_SUITE_TERMINAL) == VER_SUITE_TERMINAL)
-	{
-		if (!((ovi.wSuiteMask & VER_SUITE_SINGLEUSERTS) == VER_SUITE_SINGLEUSERTS))
-			strBuff += _T(" (RDS Session)");
+		strBuff += _T(" (RDS Session)");
 	}
 
 	return strBuff;
