@@ -216,7 +216,7 @@ void CLogDispatcher::ChkThread()
 		{
 			try
 			{
-				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, (void *&)pThread);
+				m_MapLogThreadMgr.GetNextAssoc(pos, strKey, (void*&)pThread);
 				if (pThread == NULL)
 				{
 					strARemoveList.Add(strKey);
