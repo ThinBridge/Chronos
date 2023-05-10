@@ -2987,7 +2987,7 @@ public:
 //警告 C6258 TerminateThread を使用すると、正しくスレッドをクリーンアップすることができません。
 // -> 普通に停止できなかった場合に強制停止するために使っている。正しい使い方なので警告を無視。
 #pragma warning(disable : 6258)
-						::TerminateThread(pThread->m_hThread, 0xffffffff);
+						::TerminateThread(pThreadLocal->m_hThread, 0xffffffff);
 #pragma warning(pop)
 					}
 				}
