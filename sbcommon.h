@@ -4,6 +4,7 @@
 #include "fav.h"
 #include "locale.h"
 #include <sddl.h>
+#include "include/cef_version.h"
 
 #include "mmsystem.h"
 #pragma comment(lib, "winmm.lib")
@@ -53,11 +54,15 @@ private:
 static TCHAR gstrThisAppNameR[] = _T("Chronos");
 static TCHAR gstrThisAppNameSG[] = _T("Chronos SystemGuard");
 static TCHAR sgSZB_UA_START[] = _T("Mozilla/5.0 (");
+
+#define SB_CHROME_VERSION MAKE_STRING(CHROME_VERSION_MAJOR) "." MAKE_STRING(CHROME_VERSION_MINOR) "." MAKE_STRING(CHROME_VERSION_BUILD) "." MAKE_STRING(CHROME_VERSION_PATCH)
 //2021-01-07Googleにログインできない CEF経由ではNGになった。
 //調査結果、FirefoxにすればOK, Edge/87.0.0.0をつけてもOK
 //デフォルトのUAをEdgeに変更する対応にする。
 //2021-11-30 ↑の対策がNGになっていることに気がついた。UAにEdgeをつけてもNG
-static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/98.0.4758.109 Safari/537.36 Chronos/SystemGuard");
+static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/" SB_CHROME_VERSION " Safari/537.36 Chronos/SystemGuard");
+#undef SB_CHROME_VERSION
+
 typedef HRESULT(WINAPI* pfnDwmIsCompositionEnabled)(BOOL* pfEnabled);
 typedef HRESULT(WINAPI* pfnDwmGetWindowAttribute)(HWND hwnd, DWORD dwAttribute, LPCVOID pvAttribute, DWORD cbAttribute);
 typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
