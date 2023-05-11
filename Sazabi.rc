@@ -1717,7 +1717,7 @@ CAPTION "TRACE Log Monitor Window"
 FONT 10, "MS Gothic", 400, 0, 0x80
 BEGIN
     PUSHBUTTON      "Copy to the clipboard",IDC_BUTTON1,5,5,93,14
-    PUSHBUTTON      "Cler",IDOK,103,5,50,14
+    PUSHBUTTON      "Clear",IDOK,103,5,50,14
     PUSHBUTTON      "Close",IDCANCEL,155,5,50,14
     CONTROL         "Auto scroll",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,230,7,60,10
     LTEXT           "No item",IDC_STATIC_LINE,299,5,57,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
