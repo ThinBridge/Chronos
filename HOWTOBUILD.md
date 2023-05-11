@@ -32,9 +32,7 @@ Chronosの開発の手引き
       「Sazabi.rc」→「Version」→「VS_VERSION_INFO」と「VS_VERSION_INFO[英語]」のそれぞれについて
       「FILEVERSION」と「PRODUCTVERSION」の箇所を変更して保存する。
       （それ以外の箇所は自動的に追従するため、特に変更の必要はない。）
- 4. sbcommon.hのユーザーエージェント文字列を更新する。
-    * `sgSZB_UA_END` に含まれるバージョンを、CEFのバージョンに合わせる。
- 5. Visual Studio上でChronosをビルドする。
+ 4. Visual Studio上でChronosをビルドする。
 
 ## Chromiumのバージョンを確認する方法
 
