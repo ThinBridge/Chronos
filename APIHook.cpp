@@ -79,14 +79,9 @@ public:
 			strPath = strRootPath;
 
 			FILEOPENDIALOGOPTIONS option = 0;
-			option &= ~OFN_ENABLEHOOK;
-			option &= ~OFN_ENABLETEMPLATE;
-			option |= OFN_LONGNAMES;
-			option |= OFN_NONETWORKBUTTON;
-			option |= OFN_DONTADDTORECENT;
-			option |= OFN_EX_NOPLACESBAR;
-			option |= OFN_OVERWRITEPROMPT;
-
+			option |= FOS_HIDEMRUPLACES;
+			option |= FOS_OVERWRITEPROMPT;
+			option |= FOS_HIDEPINNEDPLACES;
 			hresult = this->SetOptions(option);
 			if (FAILED(hresult))
 			{
@@ -430,14 +425,9 @@ public:
 		}
 
 		FILEOPENDIALOGOPTIONS option = 0;
-
-		option &= ~OFN_ENABLEHOOK;
-		option &= ~OFN_ENABLETEMPLATE;
-		option |= OFN_LONGNAMES;
-		option |= OFN_NONETWORKBUTTON;
-		option |= OFN_DONTADDTORECENT;
-		option |= OFN_EX_NOPLACESBAR;
-		option |= OFN_OVERWRITEPROMPT;
+		option |= FOS_HIDEMRUPLACES;
+		option |= FOS_OVERWRITEPROMPT;
+		option |= FOS_HIDEPINNEDPLACES;
 
 		return this->SetOptions(option);
 	}
