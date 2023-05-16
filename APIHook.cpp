@@ -623,8 +623,7 @@ public:
 			return m_originalDialog->Show(hwndOwner);
 		}
 
-		HRESULT hresult = S_OK;
-		hresult = SetUp();
+		HRESULT hresult = SetUp();
 		if (FAILED(hresult))
 			return hresult;
 
