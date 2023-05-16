@@ -47,6 +47,84 @@ public:
 		}
 	}
 
+	HRESULT SetUp() {
+
+		CString strPath;
+		HRESULT hresult = S_OK;
+
+		if (theApp.IsSGMode())
+		{
+			CString strRootPath;
+			if (theApp.m_AppSettings.IsShowUploadTab())
+			{
+				strRootPath = theApp.m_AppSettings.GetRootPath();
+				if (strRootPath.IsEmpty())
+				{
+					strRootPath = _T("B:\\");
+				}
+				strRootPath += _T("UpLoad");
+				if (!theApp.IsFolderExists(strRootPath))
+				{
+					strRootPath = _T("B:\\");
+				}
+			}
+			else
+			{
+				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
+				if (strRootPath.IsEmpty())
+				{
+					strRootPath = _T("B:\\");
+				}
+			}
+			m_strRootPath = strRootPath;
+			strPath = strRootPath;
+
+			FILEOPENDIALOGOPTIONS option = 0;
+			this->GetOptions(&option);
+			option |= FOS_HIDEMRUPLACES;
+			option |= FOS_OVERWRITEPROMPT;
+			option |= FOS_HIDEPINNEDPLACES;
+
+			hresult = this->SetOptions(option);
+			if (FAILED(hresult))
+			{
+				return hresult;
+			}
+		}
+		else
+		{
+			strPath = SBUtil::GetDownloadFolderPath();
+		}
+		strPath = strPath.TrimRight('\\');
+		strPath += _T("\\");
+
+		if (!theApp.m_strLastSelectUploadFolderPath.IsEmpty())
+		{
+			if (theApp.IsFolderExists(theApp.m_strLastSelectUploadFolderPath))
+			{
+				strPath = theApp.m_strLastSelectUploadFolderPath;
+			}
+		}
+
+		PIDLIST_ABSOLUTE pidl;
+		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+
+		CComPtr<IShellItem> psi;
+		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
+		if (SUCCEEDED(hresult))
+		{
+			this->SetFolder(psi);
+			this->SetDefaultFolder(psi);
+		}
+		ILFree(pidl);
+		return hresult;
+	}
+
+
 	HRESULT STDMETHODCALLTYPE GetResults(/* [out] */ __RPC__deref_out_opt IShellItemArray** ppenum)
 	{
 		return m_originalDialog->GetResults(ppenum);
@@ -232,82 +310,14 @@ public:
 			return E_ACCESSDENIED;
 		}
 
-		CString strPath;
 		HRESULT hresult = S_OK;
-
-		if (theApp.IsSGMode())
-		{
-			CString strRootPath;
-			if (theApp.m_AppSettings.IsShowUploadTab())
-			{
-				strRootPath = theApp.m_AppSettings.GetRootPath();
-				if (strRootPath.IsEmpty())
-				{
-					strRootPath = _T("B:\\");
-				}
-				strRootPath += _T("UpLoad");
-				if (!theApp.IsFolderExists(strRootPath))
-				{
-					strRootPath = _T("B:\\");
-				}
-			}
-			else
-			{
-				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
-				if (strRootPath.IsEmpty())
-				{
-					strRootPath = _T("B:\\");
-				}
-			}
-			m_strRootPath = strRootPath;
-			strPath = strRootPath;
-
-			FILEOPENDIALOGOPTIONS option = 0;
-			this->GetOptions(&option);
-			option |= FOS_HIDEMRUPLACES;
-			option |= FOS_OVERWRITEPROMPT;
-			option |= FOS_HIDEPINNEDPLACES;
-			
-			hresult = this->SetOptions(option);
-			if (FAILED(hresult))
-			{
-				return hresult;
-			}
-		}
-		else
-		{
-			strPath = SBUtil::GetDownloadFolderPath();
-		}
-		strPath = strPath.TrimRight('\\');
-		strPath += _T("\\");
-
-		if (!theApp.m_strLastSelectUploadFolderPath.IsEmpty())
-		{
-			if (theApp.IsFolderExists(theApp.m_strLastSelectUploadFolderPath))
-			{
-				strPath = theApp.m_strLastSelectUploadFolderPath;
-			}
-		}
-
-		PIDLIST_ABSOLUTE pidl;
-		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
+		hresult = SetUp();
 		if (FAILED(hresult))
-		{
 			return hresult;
-		}
-
-		CComPtr<IShellItem> psi;
-		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
-		if (SUCCEEDED(hresult))
-		{
-			this->SetFolder(psi);
-			this->SetDefaultFolder(psi);
-		}
-		ILFree(pidl);
 
 		for (;;)
 		{
-			HRESULT hresult = m_originalDialog->Show(hwndOwner);
+			hresult = m_originalDialog->Show(hwndOwner);
 			if (FAILED(hresult))
 			{
 				return hresult;
@@ -413,6 +423,17 @@ public:
 		{
 			theApp.WriteDebugTraceDateTime(_T("Destruct ChronosFileSaveDialog"), DEBUG_LOG_TYPE_DE);
 		}
+	}
+
+	HRESULT SetUp() {
+		FILEOPENDIALOGOPTIONS option = 0;
+
+		this->GetOptions(&option);
+		option |= FOS_HIDEMRUPLACES;
+		option |= FOS_OVERWRITEPROMPT;
+		option |= FOS_HIDEPINNEDPLACES;
+
+		return this->SetOptions(option);
 	}
 
 	HRESULT STDMETHODCALLTYPE SetSaveAsItem(
@@ -604,18 +625,9 @@ public:
 		}
 
 		HRESULT hresult = S_OK;
-		FILEOPENDIALOGOPTIONS option = 0;
-		
-		this->GetOptions(&option);
-		option |= FOS_HIDEMRUPLACES;
-		option |= FOS_OVERWRITEPROMPT;
-		option |= FOS_HIDEPINNEDPLACES;
-
-		hresult = this->SetOptions(option);
+		hresult = SetUp();
 		if (FAILED(hresult))
-		{
 			return hresult;
-		}
 
 		CString strRootPath(theApp.m_AppSettings.GetRootPath());
 		if (strRootPath.IsEmpty())
