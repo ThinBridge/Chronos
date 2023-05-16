@@ -47,81 +47,6 @@ public:
 		}
 	}
 
-	HRESULT Initialize()
-	{
-		HRESULT hresult = S_OK;
-		CString strPath;
-		if (theApp.IsSGMode())
-		{
-			CString strRootPath;
-			if (theApp.m_AppSettings.IsShowUploadTab())
-			{
-				strRootPath = theApp.m_AppSettings.GetRootPath();
-				if (strRootPath.IsEmpty())
-				{
-					strRootPath = _T("B:\\");
-				}
-				strRootPath += _T("UpLoad");
-				if (!theApp.IsFolderExists(strRootPath))
-				{
-					strRootPath = _T("B:\\");
-				}
-			}
-			else
-			{
-				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
-				if (strRootPath.IsEmpty())
-				{
-					strRootPath = _T("B:\\");
-				}
-			}
-			m_strRootPath = strRootPath;
-			strPath = strRootPath;
-
-			FILEOPENDIALOGOPTIONS option = 0;
-			option |= FOS_HIDEMRUPLACES;
-			option |= FOS_OVERWRITEPROMPT;
-			option |= FOS_HIDEPINNEDPLACES;
-			hresult = this->SetOptions(option);
-			if (FAILED(hresult))
-			{
-				return hresult;
-			}
-		}
-		else
-		{
-			strPath = SBUtil::GetDownloadFolderPath();
-		}
-		strPath = strPath.TrimRight('\\');
-		strPath += _T("\\");
-
-		if (!theApp.m_strLastSelectUploadFolderPath.IsEmpty())
-		{
-			if (theApp.IsFolderExists(theApp.m_strLastSelectUploadFolderPath))
-			{
-				strPath = theApp.m_strLastSelectUploadFolderPath;
-			}
-		}
-
-		PIDLIST_ABSOLUTE pidl;
-		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
-		if (FAILED(hresult))
-		{
-			return hresult;
-		}
-
-		CComPtr<IShellItem> psi;
-		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
-		if (SUCCEEDED(hresult))
-		{
-			this->SetFolder(psi);
-			this->SetDefaultFolder(psi);
-		}
-		ILFree(pidl);
-
-		return hresult;
-	}
-
 	HRESULT STDMETHODCALLTYPE GetResults(/* [out] */ __RPC__deref_out_opt IShellItemArray** ppenum)
 	{
 		return m_originalDialog->GetResults(ppenum);
@@ -275,20 +200,20 @@ public:
 	/* [local] */ HRESULT STDMETHODCALLTYPE Show(
 	    /* [annotation][unique][in] */ _In_opt_ HWND hwndOwner)
 	{
-		//呼び出しもとを確認。親の親がNULLだったらChronosの設定画面からなので無条件で開いて良い。
-		if (!hwndOwner)
+		//呼び出し元を確認。親を辿っていき、CSGView（BroView）が登場しないなら、設定画面からの呼び出し。
+		//設定画面からの呼び出しかつSGモードでないときは、そのまま無条件で開いて良い。
+		HWND hWindowParent = hwndOwner;
+		while (hWindowParent)
 		{
-			return m_originalDialog->Show(hwndOwner);
-		}
-
-		HWND hWindowOwner = GetParent(hwndOwner);
-		HWND hWindowParent = {0};
-		if (hWindowOwner)
-		{
-			hWindowParent = GetParent(hWindowOwner);
-		}
-
-		if (!hWindowParent)
+			TCHAR pszName[64] = {0};
+			if (!::GetClassName(hWindowParent, pszName, 64))
+				return E_FAIL;
+			if(::_tcscmp(pszName, _T("CSGView")) == 0)
+				break;
+			hWindowParent = GetParent(hWindowParent);
+		} 
+		
+		if (!hWindowParent && !theApp.IsSGMode())
 		{
 			return m_originalDialog->Show(hwndOwner);
 		}
@@ -306,6 +231,79 @@ public:
 			}
 			return E_ACCESSDENIED;
 		}
+
+		CString strPath;
+		HRESULT hresult = S_OK;
+
+		if (theApp.IsSGMode())
+		{
+			CString strRootPath;
+			if (theApp.m_AppSettings.IsShowUploadTab())
+			{
+				strRootPath = theApp.m_AppSettings.GetRootPath();
+				if (strRootPath.IsEmpty())
+				{
+					strRootPath = _T("B:\\");
+				}
+				strRootPath += _T("UpLoad");
+				if (!theApp.IsFolderExists(strRootPath))
+				{
+					strRootPath = _T("B:\\");
+				}
+			}
+			else
+			{
+				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
+				if (strRootPath.IsEmpty())
+				{
+					strRootPath = _T("B:\\");
+				}
+			}
+			m_strRootPath = strRootPath;
+			strPath = strRootPath;
+
+			FILEOPENDIALOGOPTIONS option = 0;
+			this->GetOptions(&option);
+			option |= FOS_HIDEMRUPLACES;
+			option |= FOS_OVERWRITEPROMPT;
+			option |= FOS_HIDEPINNEDPLACES;
+			
+			hresult = this->SetOptions(option);
+			if (FAILED(hresult))
+			{
+				return hresult;
+			}
+		}
+		else
+		{
+			strPath = SBUtil::GetDownloadFolderPath();
+		}
+		strPath = strPath.TrimRight('\\');
+		strPath += _T("\\");
+
+		if (!theApp.m_strLastSelectUploadFolderPath.IsEmpty())
+		{
+			if (theApp.IsFolderExists(theApp.m_strLastSelectUploadFolderPath))
+			{
+				strPath = theApp.m_strLastSelectUploadFolderPath;
+			}
+		}
+
+		PIDLIST_ABSOLUTE pidl;
+		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+
+		CComPtr<IShellItem> psi;
+		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
+		if (SUCCEEDED(hresult))
+		{
+			this->SetFolder(psi);
+			this->SetDefaultFolder(psi);
+		}
+		ILFree(pidl);
 
 		for (;;)
 		{
@@ -415,21 +413,6 @@ public:
 		{
 			theApp.WriteDebugTraceDateTime(_T("Destruct ChronosFileSaveDialog"), DEBUG_LOG_TYPE_DE);
 		}
-	}
-
-	HRESULT Initialize()
-	{
-		if (!theApp.IsSGMode())
-		{
-			return S_OK;
-		}
-
-		FILEOPENDIALOGOPTIONS option = 0;
-		option |= FOS_HIDEMRUPLACES;
-		option |= FOS_OVERWRITEPROMPT;
-		option |= FOS_HIDEPINNEDPLACES;
-
-		return this->SetOptions(option);
 	}
 
 	HRESULT STDMETHODCALLTYPE SetSaveAsItem(
@@ -620,6 +603,20 @@ public:
 			return m_originalDialog->Show(hwndOwner);
 		}
 
+		HRESULT hresult = S_OK;
+		FILEOPENDIALOGOPTIONS option = 0;
+		
+		this->GetOptions(&option);
+		option |= FOS_HIDEMRUPLACES;
+		option |= FOS_OVERWRITEPROMPT;
+		option |= FOS_HIDEPINNEDPLACES;
+
+		hresult = this->SetOptions(option);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+
 		CString strRootPath(theApp.m_AppSettings.GetRootPath());
 		if (strRootPath.IsEmpty())
 		{
@@ -630,7 +627,7 @@ public:
 
 		for (;;)
 		{
-			HRESULT hresult = m_originalDialog->Show(hwndOwner);
+			hresult = m_originalDialog->Show(hwndOwner);
 			if (FAILED(hresult))
 			{
 				return hresult;
@@ -744,7 +741,6 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 		{
 			ChronosFileOpenDialog* chronosFileOpenDialog = new ChronosFileOpenDialog(fileOpenDialog);
 			chronosFileOpenDialog->AddRef();
-			chronosFileOpenDialog->Initialize();
 			*ppv = chronosFileOpenDialog;
 		}
 	}
@@ -761,7 +757,6 @@ static HRESULT WINAPI Hook_CoCreateInstance(
 		{
 			ChronosFileSaveDialog* chronosFileSaveDialog = new ChronosFileSaveDialog(fileSaveDialog);
 			chronosFileSaveDialog->AddRef();
-			chronosFileSaveDialog->Initialize();
 			*ppv = chronosFileSaveDialog;
 		}
 	}
