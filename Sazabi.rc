@@ -1028,8 +1028,8 @@ BEGIN
     IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST 
                             "警告:システムリソースが不足しています。\n他のウィンドウを閉じるか、アプリケーション(%s)を再起動して下さい。"
     IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "VOSで実行中のプロセスを強制終了してもよろしいですか？"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB "新しいタブで開く"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "新しいタブで開く(非アクティブ)"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB "新しいタブでリンクを開く"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "新しいタブでリンクを開く(非アクティブ)"
     ID_CONTEXT_MENU_OPEN_LINK_WINDOW "新しいウィンドウで開く"
     ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "新しいウィンドウで開く(非アクティブ)"
     ID_CONTEXT_MENU_COPY_LINK "リンクのアドレスをコピー"
@@ -2353,8 +2353,8 @@ BEGIN
                             "SYSTEM Resource allocation failuer. Please close window or restart the application (%s)."
     IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS 
                             "Do you want the process running on VOS to be terminated?"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB "Open in New Tab"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "Open in New Background Tab"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB "Open Link in New Tab"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "Open Link in New Background Tab"
     ID_CONTEXT_MENU_OPEN_LINK_WINDOW "Open in New Window"
     ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "Open in New Background Window"
     ID_CONTEXT_MENU_COPY_LINK "Copy Link URL"
