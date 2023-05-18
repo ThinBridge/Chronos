@@ -47,7 +47,8 @@ public:
 		}
 	}
 
-	HRESULT SetUp() {
+	HRESULT SetUp()
+	{
 
 		CString strPath;
 		HRESULT hresult = S_OK;
@@ -123,7 +124,6 @@ public:
 		ILFree(pidl);
 		return hresult;
 	}
-
 
 	HRESULT STDMETHODCALLTYPE GetResults(/* [out] */ __RPC__deref_out_opt IShellItemArray** ppenum)
 	{
@@ -278,19 +278,19 @@ public:
 	/* [local] */ HRESULT STDMETHODCALLTYPE Show(
 	    /* [annotation][unique][in] */ _In_opt_ HWND hwndOwner)
 	{
-		//å‘¼ã³å‡ºã—å…ƒã‚’ç¢ºèªã€‚è¦ªã‚’è¾¿ã£ã¦ã„ãã€CSGViewï¼ˆBroViewï¼‰ãŒç™»å ´ã—ãªã„ãªã‚‰ã€è¨­å®šç”»é¢ã‹ã‚‰ã®å‘¼ã³å‡ºã—ã€‚
-		//è¨­å®šç”»é¢ã‹ã‚‰ã®å‘¼ã³å‡ºã—ã‹ã¤SGãƒ¢ãƒ¼ãƒ‰ã§ãªã„ã¨ãã¯ã€ãã®ã¾ã¾ç„¡æ¡ä»¶ã§é–‹ã„ã¦è‰¯ã„ã€‚
+		//ŒÄ‚Ño‚µŒ³‚ðŠm”FBe‚ð’H‚Á‚Ä‚¢‚«ACSGViewiBroViewj‚ª“oê‚µ‚È‚¢‚È‚çAÝ’è‰æ–Ê‚©‚ç‚ÌŒÄ‚Ño‚µB
+		//Ý’è‰æ–Ê‚©‚ç‚ÌŒÄ‚Ño‚µ‚©‚ÂSGƒ‚[ƒh‚Å‚È‚¢‚Æ‚«‚ÍA‚»‚Ì‚Ü‚Ü–³ðŒ‚ÅŠJ‚¢‚Ä—Ç‚¢B
 		HWND hWindowParent = hwndOwner;
 		while (hWindowParent)
 		{
 			TCHAR pszName[64] = {0};
 			if (!::GetClassName(hWindowParent, pszName, 64))
 				return E_FAIL;
-			if(::_tcscmp(pszName, _T("CSGView")) == 0)
+			if (::_tcscmp(pszName, _T("CSGView")) == 0)
 				break;
 			hWindowParent = GetParent(hWindowParent);
-		} 
-		
+		}
+
 		if (!hWindowParent && !theApp.IsSGMode())
 		{
 			return m_originalDialog->Show(hwndOwner);
@@ -298,7 +298,7 @@ public:
 
 		if (theApp.m_AppSettings.IsEnableUploadRestriction())
 		{
-			CString strMsg(L"ãƒ•ã‚¡ã‚¤ãƒ« ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã¯ã€ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã«ã‚ˆã‚Šåˆ¶é™ã•ã‚Œã¦ã„ã¾ã™ã€‚");
+			CString strMsg(L"ƒtƒ@ƒCƒ‹ ƒAƒbƒvƒ[ƒh‚ÍAƒVƒXƒeƒ€ŠÇ—ŽÒ‚É‚æ‚è§ŒÀ‚³‚ê‚Ä‚¢‚Ü‚·B");
 			if (hWindowParent)
 			{
 				theApp.SB_MessageBox(hWindowParent, strMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
@@ -353,7 +353,7 @@ public:
 				{
 					CString strCaption(theApp.m_strThisAppName);
 					CString strMsg;
-					strMsg.Format(L"ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼[%s]ä»¥å¤–ã‹ã‚‰ã¯ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã§ãã¾ã›ã‚“ã€‚\n\næŒ‡å®šã—ãªãŠã—ã¦ãã ã•ã„ã€‚\n\né¸æŠžã•ã‚ŒãŸå ´æ‰€[%s]", (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
+					strMsg.Format(L"ƒAƒbƒvƒ[ƒhƒtƒHƒ‹ƒ_[[%s]ˆÈŠO‚©‚ç‚ÍƒAƒbƒvƒ[ƒh‚Å‚«‚Ü‚¹‚ñB\n\nŽw’è‚µ‚È‚¨‚µ‚Ä‚­‚¾‚³‚¢B\n\n‘I‘ð‚³‚ê‚½êŠ[%s]", (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
 					::MessageBoxW(hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
@@ -424,7 +424,8 @@ public:
 		}
 	}
 
-	HRESULT SetUp() {
+	HRESULT SetUp()
+	{
 		FILEOPENDIALOGOPTIONS option = 0;
 
 		this->GetOptions(&option);
@@ -670,7 +671,7 @@ public:
 			if (strSelPath.Find(strRoot) != 0)
 			{
 				CString strMsg;
-				strMsg.Format(L"%sãƒ‰ãƒ©ã‚¤ãƒ–ä»¥å¤–ã¯æŒ‡å®šã§ãã¾ã›ã‚“ã€‚\n\nä¿å­˜ã™ã‚‹å ´æ‰€ã‹ã‚‰%sã‚’æŒ‡å®šã—ãªãŠã—ã¦ãã ã•ã„ã€‚\n\né¸æŠžã•ã‚ŒãŸå ´æ‰€[%s]", (LPCWSTR)strRoot, (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
+				strMsg.Format(L"%sƒhƒ‰ƒCƒuˆÈŠO‚ÍŽw’è‚Å‚«‚Ü‚¹‚ñB\n\n•Û‘¶‚·‚éêŠ‚©‚ç%s‚ðŽw’è‚µ‚È‚¨‚µ‚Ä‚­‚¾‚³‚¢B\n\n‘I‘ð‚³‚ê‚½êŠ[%s]", (LPCWSTR)strRoot, (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
 				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 				continue;
 			}
@@ -679,7 +680,7 @@ public:
 			if (strSelPath.Find(strTSG_Upload) == 0)
 			{
 				CString strMsg;
-				strMsg.Format(L"ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼[%s]ã«ã¯ä¿å­˜ã§ãã¾ã›ã‚“ã€‚\n\næŒ‡å®šã—ãªãŠã—ã¦ãã ã•ã„ã€‚\n\né¸æŠžã•ã‚ŒãŸå ´æ‰€[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
+				strMsg.Format(L"ƒAƒbƒvƒ[ƒhƒtƒHƒ‹ƒ_[[%s]‚É‚Í•Û‘¶‚Å‚«‚Ü‚¹‚ñB\n\nŽw’è‚µ‚È‚¨‚µ‚Ä‚­‚¾‚³‚¢B\n\n‘I‘ð‚³‚ê‚½êŠ[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
 				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 				continue;
 			}
@@ -795,7 +796,7 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 	BOOL bRet = FALSE;
 	try
 	{
-		//Downloadç¦æ­¢
+		//Download‹ÖŽ~
 		if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 		{
 			return FALSE;
@@ -811,22 +812,22 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 		strPath = strPath.TrimRight('\\');
 		strPath += _T("\\");
 
-		//ãƒ•ãƒƒã‚¯é–¢æ•°ã‚’ç„¡åŠ¹
+		//ƒtƒbƒNŠÖ”‚ð–³Œø
 		lpofn->Flags &= ~OFN_ENABLEHOOK;
-		//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆç„¡åŠ¹
+		//ƒ_ƒCƒAƒƒOƒeƒ“ƒvƒŒ[ƒg–³Œø
 		lpofn->Flags &= ~OFN_ENABLETEMPLATE;
 
-		//Longãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¼·åˆ¶
+		//Longƒtƒ@ƒCƒ‹–¼‚ð‹­§
 		lpofn->Flags |= OFN_LONGNAMES;
-		//ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒœã‚¿ãƒ³ã‚’éš ã™
+		//ƒlƒbƒgƒ[ƒNƒ{ƒ^ƒ“‚ð‰B‚·
 		lpofn->Flags |= OFN_NONETWORKBUTTON;
 
-		//æœ€è¿‘ä½¿ã£ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¿½åŠ ã—ãªã„
+		//Å‹ßŽg‚Á‚½ƒtƒ@ƒCƒ‹‚ð’Ç‰Á‚µ‚È‚¢
 		lpofn->Flags |= OFN_DONTADDTORECENT;
-		//ãƒ—ãƒ¬ãƒ¼ã‚¹ãƒãƒ¼ã‚’ç„¡åŠ¹
+		//ƒvƒŒ[ƒXƒo[‚ð–³Œø
 		lpofn->FlagsEx |= OFN_EX_NOPLACESBAR;
 
-		//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸Šæ›¸ãã™ã‚‹ã‹ã©ã†ã‹ç¢ºèªã™ã‚‹ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã‚’è¡¨ç¤º
+		//ƒtƒ@ƒCƒ‹‚ðã‘‚«‚·‚é‚©‚Ç‚¤‚©Šm”F‚·‚éƒvƒƒ“ƒvƒg‚ð•\Ž¦
 		lpofn->Flags |= OFN_OVERWRITEPROMPT;
 
 		CStringW strCaption(theApp.m_strThisAppName);
@@ -846,7 +847,7 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 			strRoot.MakeUpper();
 			if (strSelPath.Find(strRoot) != 0)
 			{
-				strMsg.Format(L"%sãƒ‰ãƒ©ã‚¤ãƒ–ä»¥å¤–ã¯æŒ‡å®šã§ãã¾ã›ã‚“ã€‚\n\nä¿å­˜ã™ã‚‹å ´æ‰€ã‹ã‚‰%sã‚’æŒ‡å®šã—ãªãŠã—ã¦ãã ã•ã„ã€‚\n\né¸æŠžã•ã‚ŒãŸå ´æ‰€[%s]", (LPCWSTR)strRoot, (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
+				strMsg.Format(L"%sƒhƒ‰ƒCƒuˆÈŠO‚ÍŽw’è‚Å‚«‚Ü‚¹‚ñB\n\n•Û‘¶‚·‚éêŠ‚©‚ç%s‚ðŽw’è‚µ‚È‚¨‚µ‚Ä‚­‚¾‚³‚¢B\n\n‘I‘ð‚³‚ê‚½êŠ[%s]", (LPCWSTR)strRoot, (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
 				::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 				continue;
 			}
@@ -854,7 +855,7 @@ static BOOL WINAPI Hook_GetSaveFileNameW(
 			CStringW strTSG_Upload = strRoot + L"UPLOAD\\";
 			if (strSelPath.Find(strTSG_Upload) == 0)
 			{
-				strMsg.Format(L"ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼[%s]ã«ã¯ä¿å­˜ã§ãã¾ã›ã‚“ã€‚\n\næŒ‡å®šã—ãªãŠã—ã¦ãã ã•ã„ã€‚\n\né¸æŠžã•ã‚ŒãŸå ´æ‰€[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
+				strMsg.Format(L"ƒAƒbƒvƒ[ƒhƒtƒHƒ‹ƒ_[[%s]‚É‚Í•Û‘¶‚Å‚«‚Ü‚¹‚ñB\n\nŽw’è‚µ‚È‚¨‚µ‚Ä‚­‚¾‚³‚¢B\n\n‘I‘ð‚³‚ê‚½êŠ[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
 				::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 				continue;
 			}
@@ -874,12 +875,12 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 	BOOL bRet = FALSE;
 	try
 	{
-		//å‘¼ã³å‡ºã—ã‚‚ã¨ã‚’ç¢ºèªã€è¦ªã®è¦ªãŒNULLã ã£ãŸã‚‰Chronosã®è¨­å®šç”»é¢ã‹ã‚‰
+		//ŒÄ‚Ño‚µ‚à‚Æ‚ðŠm”FAe‚Ìe‚ªNULL‚¾‚Á‚½‚çChronos‚ÌÝ’è‰æ–Ê‚©‚ç
 		HWND hWindowOwner = GetParent(lpofn->hwndOwner);
 		HWND hWindowParent = {0};
 		if (hWindowOwner)
 			hWindowParent = GetParent(hWindowOwner);
-		//hWindowParentãŒNULLã®å ´åˆã¯ã€ãã®ã¾ã¾
+		//hWindowParent‚ªNULL‚Ìê‡‚ÍA‚»‚Ì‚Ü‚Ü
 		if (!hWindowParent)
 		{
 			bRet = pORG_GetOpenFileNameW(lpofn);
@@ -889,10 +890,10 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 		CStringW strCaption(theApp.m_strThisAppName);
 		CStringW strMsg;
 
-		//Uploadç¦æ­¢
+		//Upload‹ÖŽ~
 		if (theApp.m_AppSettings.IsEnableUploadRestriction())
 		{
-			strMsg = (L"ãƒ•ã‚¡ã‚¤ãƒ« ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã¯ã€ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã«ã‚ˆã‚Šåˆ¶é™ã•ã‚Œã¦ã„ã¾ã™ã€‚");
+			strMsg = (L"ƒtƒ@ƒCƒ‹ ƒAƒbƒvƒ[ƒh‚ÍAƒVƒXƒeƒ€ŠÇ—ŽÒ‚É‚æ‚è§ŒÀ‚³‚ê‚Ä‚¢‚Ü‚·B");
 			if (hWindowParent)
 				theApp.SB_MessageBox(hWindowParent, strMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
 			else
@@ -910,7 +911,7 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 		CString strRootPath;
 		if (theApp.IsSGMode())
 		{
-			//UploadTabã‚’ä½¿ã†å ´åˆã¯ã€B:\\Uploadã«ã™ã‚‹
+			//UploadTab‚ðŽg‚¤ê‡‚ÍAB:\\Upload‚É‚·‚é
 			if (theApp.m_AppSettings.IsShowUploadTab())
 			{
 				strRootPath = theApp.m_AppSettings.GetRootPath();
@@ -920,7 +921,7 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				if (!theApp.IsFolderExists(strRootPath))
 					strRootPath = _T("B:\\");
 			}
-			//UploadTabã‚’ä½¿ã‚ãªã„å ´åˆã¯ã€O:\\ã«ã™ã‚‹
+			//UploadTab‚ðŽg‚í‚È‚¢ê‡‚ÍAO:\\‚É‚·‚é
 			else
 			{
 				strRootPath = theApp.m_AppSettings.GetUploadBasePath();
@@ -929,22 +930,22 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 			}
 			strPath = strRootPath;
 
-			//ãƒ•ãƒƒã‚¯é–¢æ•°ã‚’ç„¡åŠ¹
+			//ƒtƒbƒNŠÖ”‚ð–³Œø
 			lpofn->Flags &= ~OFN_ENABLEHOOK;
-			//ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆç„¡åŠ¹
+			//ƒ_ƒCƒAƒƒOƒeƒ“ƒvƒŒ[ƒg–³Œø
 			lpofn->Flags &= ~OFN_ENABLETEMPLATE;
 
-			//Longãƒ•ã‚¡ã‚¤ãƒ«åã‚’å¼·åˆ¶
+			//Longƒtƒ@ƒCƒ‹–¼‚ð‹­§
 			lpofn->Flags |= OFN_LONGNAMES;
-			//ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒœã‚¿ãƒ³ã‚’éš ã™
+			//ƒlƒbƒgƒ[ƒNƒ{ƒ^ƒ“‚ð‰B‚·
 			lpofn->Flags |= OFN_NONETWORKBUTTON;
 
-			//æœ€è¿‘ä½¿ã£ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¿½åŠ ã—ãªã„
+			//Å‹ßŽg‚Á‚½ƒtƒ@ƒCƒ‹‚ð’Ç‰Á‚µ‚È‚¢
 			lpofn->Flags |= OFN_DONTADDTORECENT;
-			//ãƒ—ãƒ¬ãƒ¼ã‚¹ãƒãƒ¼ã‚’ç„¡åŠ¹
+			//ƒvƒŒ[ƒXƒo[‚ð–³Œø
 			lpofn->FlagsEx |= OFN_EX_NOPLACESBAR;
 
-			//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸Šæ›¸ãã™ã‚‹ã‹ã©ã†ã‹ç¢ºèªã™ã‚‹ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã‚’è¡¨ç¤º
+			//ƒtƒ@ƒCƒ‹‚ðã‘‚«‚·‚é‚©‚Ç‚¤‚©Šm”F‚·‚éƒvƒƒ“ƒvƒg‚ð•\Ž¦
 			lpofn->Flags |= OFN_OVERWRITEPROMPT;
 		}
 		else
@@ -980,7 +981,7 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				strRoot.MakeUpper();
 				if (strSelPath.Find(strRoot) != 0)
 				{
-					strMsg.Format(L"ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼[%s]ä»¥å¤–ã‹ã‚‰ã¯ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã§ãã¾ã›ã‚“ã€‚\n\næŒ‡å®šã—ãªãŠã—ã¦ãã ã•ã„ã€‚\n\né¸æŠžã•ã‚ŒãŸå ´æ‰€[%s]", (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
+					strMsg.Format(L"ƒAƒbƒvƒ[ƒhƒtƒHƒ‹ƒ_[[%s]ˆÈŠO‚©‚ç‚ÍƒAƒbƒvƒ[ƒh‚Å‚«‚Ü‚¹‚ñB\n\nŽw’è‚µ‚È‚¨‚µ‚Ä‚­‚¾‚³‚¢B\n\n‘I‘ð‚³‚ê‚½êŠ[%s]", (LPCWSTR)strRoot, (LPCWSTR)strSelPath);
 					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
@@ -1012,7 +1013,7 @@ static PIDLIST_ABSOLUTE WINAPI Hook_SHBrowseForFolderW(
 {
 	CStringW strCaption(theApp.m_strThisAppName);
 	CStringW strMsg;
-	strMsg.Format(L"ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã®å‚ç…§æ©Ÿèƒ½ã¯åˆ©ç”¨ã§ãã¾ã›ã‚“ã€‚");
+	strMsg.Format(L"ƒtƒHƒ‹ƒ_[‚ÌŽQÆ‹@”\‚Í—˜—p‚Å‚«‚Ü‚¹‚ñB");
 	::MessageBoxW(lpbi->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 
 	return NULL;
