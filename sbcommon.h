@@ -55,7 +55,13 @@ static TCHAR gstrThisAppNameR[] = _T("Chronos");
 static TCHAR gstrThisAppNameSG[] = _T("Chronos SystemGuard");
 static TCHAR sgSZB_UA_START[] = _T("Mozilla/5.0 (");
 
-#define SB_CHROME_VERSION MAKE_STRING(CHROME_VERSION_MAJOR) "." MAKE_STRING(CHROME_VERSION_MINOR) "." MAKE_STRING(CHROME_VERSION_BUILD) "." MAKE_STRING(CHROME_VERSION_PATCH)
+// clang-format off
+#define SB_CHROME_VERSION MAKE_STRING(CHROME_VERSION_MAJOR) "." \
+                          MAKE_STRING(CHROME_VERSION_MINOR) "." \
+                          MAKE_STRING(CHROME_VERSION_BUILD) "." \
+                          MAKE_STRING(CHROME_VERSION_PATCH)
+// clang-format on
+
 //2021-01-07Googleにログインできない CEF経由ではNGになった。
 //調査結果、FirefoxにすればOK, Edge/87.0.0.0をつけてもOK
 //デフォルトのUAをEdgeに変更する対応にする。
