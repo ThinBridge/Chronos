@@ -889,6 +889,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		else
 		{
 			theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
+			theApp.m_DlMgr.Cancel(nBrowserId);
 			::SendMessageTimeout(hWindow, WM_APP_CEF_BEFORE_DOWNLOAD, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
 			EmptyWindowClose(browser);
 			callback->Continue(_T(""), false);

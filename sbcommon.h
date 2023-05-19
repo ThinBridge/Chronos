@@ -3886,6 +3886,21 @@ public:
 			}
 		}
 	}
+	void Cancel(UINT nBrowserId)
+	{
+		for (int i = 0; i < m_ptrArrDlgBrowserID.GetCount(); i++)
+		{
+			if (m_ptrArrDlgBrowserID.GetAt(i) == nBrowserId)
+			{
+				CDlgDL* pDLDlg = (CDlgDL*)m_ptrArrDlgPtr.GetAt(i);
+				if (pDLDlg)
+				{
+					pDLDlg->m_bDLCancel = TRUE;
+					break;
+				}
+			}
+		}
+	}
 	BOOL IsCanceld(UINT nBrowserId)
 	{
 		CDlgDL* pDLDlg = NULL;
