@@ -661,8 +661,10 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		m_bAtomOpen = FALSE;
 	}
 
+	BOOL minMode = FALSE;
 	if (OptionParam.CompareNoCase(_T("/MIN")) == 0)
 	{
+		minMode = TRUE;
 		pFrame->ShowWindow(SW_MINIMIZE);
 	}
 	else if (OptionParam.CompareNoCase(_T("/MAX")) == 0)
@@ -684,7 +686,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		;
 	}
 	//Newアクティブ(前面)に表示する。
-	if (theApp.m_bNewInstanceParam)
+	if (theApp.m_bNewInstanceParam && !minMode)
 		SBUtil::SetAbsoluteForegroundWindow(pFrame->m_hWnd, TRUE);
 
 	return TRUE;
