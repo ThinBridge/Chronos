@@ -20,7 +20,7 @@ public:
 	~CProcessingTimeMon()
 	{
 		DWORD timeCount = timeGetTime() - m_timeCount;
-		if (timeCount > 20) //20msä»¥ä¸Š
+		if (timeCount > 20) //20msˆÈã
 		{
 			CString strMsg;
 			strMsg.Format(_T("#\t%d ms\t%s\n"), timeCount, (LPCTSTR)strFmt);
@@ -50,7 +50,7 @@ private:
 #define WND_TYPE_DEV_TOOLS 324929
 
 ///////////////////////////////////////////////////////////////////
-//ã‚¢ãƒ—ãƒªåã‚’å¤‰æ›´ã™ã‚‹å ´åˆã¯ã€ä»¥ä¸‹ã‚’ç·¨é›†ã™ã‚‹ã€‚
+//ƒAƒvƒŠ–¼‚ğ•ÏX‚·‚éê‡‚ÍAˆÈ‰º‚ğ•ÒW‚·‚éB
 static TCHAR gstrThisAppNameR[] = _T("Chronos");
 static TCHAR gstrThisAppNameSG[] = _T("Chronos SystemGuard");
 static TCHAR sgSZB_UA_START[] = _T("Mozilla/5.0 (");
@@ -62,10 +62,10 @@ static TCHAR sgSZB_UA_START[] = _T("Mozilla/5.0 (");
                           MAKE_STRING(CHROME_VERSION_PATCH)
 // clang-format on
 
-//2021-01-07Googleã«ãƒ­ã‚°ã‚¤ãƒ³ã§ããªã„ CEFçµŒç”±ã§ã¯NGã«ãªã£ãŸã€‚
-//èª¿æŸ»çµæœã€Firefoxã«ã™ã‚Œã°OK, Edge/87.0.0.0ã‚’ã¤ã‘ã¦ã‚‚OK
-//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®UAã‚’Edgeã«å¤‰æ›´ã™ã‚‹å¯¾å¿œã«ã™ã‚‹ã€‚
-//2021-11-30 â†‘ã®å¯¾ç­–ãŒNGã«ãªã£ã¦ã„ã‚‹ã“ã¨ã«æ°—ãŒã¤ã„ãŸã€‚UAã«Edgeã‚’ã¤ã‘ã¦ã‚‚NG
+//2021-01-07Google‚ÉƒƒOƒCƒ“‚Å‚«‚È‚¢ CEFŒo—R‚Å‚ÍNG‚É‚È‚Á‚½B
+//’²¸Œ‹‰ÊAFirefox‚É‚·‚ê‚ÎOK, Edge/87.0.0.0‚ğ‚Â‚¯‚Ä‚àOK
+//ƒfƒtƒHƒ‹ƒg‚ÌUA‚ğEdge‚É•ÏX‚·‚é‘Î‰‚É‚·‚éB
+//2021-11-30 ª‚Ì‘Îô‚ªNG‚É‚È‚Á‚Ä‚¢‚é‚±‚Æ‚É‹C‚ª‚Â‚¢‚½BUA‚ÉEdge‚ğ‚Â‚¯‚Ä‚àNG
 static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/" SB_CHROME_VERSION " Safari/537.36 Chronos/SystemGuard");
 #undef SB_CHROME_VERSION
 
@@ -96,18 +96,18 @@ typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
 #define DEBUG_LOG_LEVEL_OUTPUT_NO_FILE 1
 #define DEBUG_LOG_LEVEL_OUTPUT_URL     2
 
-#define DEBUG_LOG_TYPE_GE  0 //ä¸€èˆ¬æƒ…å ±
-#define DEBUG_LOG_TYPE_DE  1 //è©³ç´°æƒ…å ±
-#define DEBUG_LOG_TYPE_URL 2 //URLæƒ…å ±
-#define DEBUG_LOG_TYPE_TR  3 //Browserå‹•ä½œæƒ…å ±
-#define DEBUG_LOG_TYPE_CL  4 //Closeå‡¦ç†é–¢é€£æƒ…å ±
-#define DEBUG_LOG_TYPE_JS  5 //Javascripté–¢é€£æƒ…å ±
-#define DEBUG_LOG_TYPE_EX  6 //ä¾‹å¤–å‡¦ç†é–¢é€£æƒ…å ±
-#define DEBUG_LOG_TYPE_AC  7 //æ“ä½œã‚¢ã‚¯ã‚·ãƒ§ãƒ³æƒ…å ±
+#define DEBUG_LOG_TYPE_GE  0 //ˆê”Êî•ñ
+#define DEBUG_LOG_TYPE_DE  1 //Ú×î•ñ
+#define DEBUG_LOG_TYPE_URL 2 //URLî•ñ
+#define DEBUG_LOG_TYPE_TR  3 //Browser“®ìî•ñ
+#define DEBUG_LOG_TYPE_CL  4 //Closeˆ—ŠÖ˜Aî•ñ
+#define DEBUG_LOG_TYPE_JS  5 //JavascriptŠÖ˜Aî•ñ
+#define DEBUG_LOG_TYPE_EX  6 //—áŠOˆ—ŠÖ˜Aî•ñ
+#define DEBUG_LOG_TYPE_AC  7 //‘€ìƒAƒNƒVƒ‡ƒ“î•ñ
 
-//IEè¨­å®š:0
-//ãƒ—ãƒ­ã‚­ã‚·ç„¡ã—(ç›´æ¥):1
-//æ‰‹å‹•è¨­å®š:2
+//IEİ’è:0
+//ƒvƒƒLƒV–³‚µ(’¼Ú):1
+//è“®İ’è:2
 #define CSG_PROXY_IE 0
 #define CSG_PROXY_NA 1
 #define CSG_PROXY_TF 2
@@ -170,7 +170,7 @@ static TCHAR DEF_ETC_PROTOCOLS[][13] = {
 #define KEY_COMB_RIGHT 0x00100000
 #define KEY_COMB_DOWN  0x01000000
 
-// ãƒ•ã‚¡ã‚¤ãƒ«æ™‚é–“ã‹ã‚‰64ãƒ“ãƒƒãƒˆæ•´æ•°ã«å¤‰æ›
+// ƒtƒ@ƒCƒ‹ŠÔ‚©‚ç64ƒrƒbƒg®”‚É•ÏŠ·
 static ULONGLONG getTimeInt64(LPFILETIME ftTime)
 {
 	ULARGE_INTEGER u64Time = {0};
@@ -179,28 +179,28 @@ static ULONGLONG getTimeInt64(LPFILETIME ftTime)
 	return u64Time.QuadPart;
 }
 
-// ãƒ•ã‚¡ã‚¤ãƒ«æ™‚é–“ã®åŠ ç®—
+// ƒtƒ@ƒCƒ‹ŠÔ‚Ì‰ÁZ
 static LPFILETIME addFileTime(LPFILETIME ftTime1, LPFILETIME ftTime2)
 {
 	static FILETIME ftTime = {0};
 	ULARGE_INTEGER u64Time1 = {0};
 	ULARGE_INTEGER u64Time2 = {0};
 
-	// 1ã‚»ãƒƒãƒˆ
+	// 1ƒZƒbƒg
 	u64Time1.u.LowPart = ftTime1->dwLowDateTime;
 	u64Time1.u.HighPart = ftTime1->dwHighDateTime;
-	// 2ã‚»ãƒƒãƒˆ
+	// 2ƒZƒbƒg
 	u64Time2.u.LowPart = ftTime2->dwLowDateTime;
 	u64Time2.u.HighPart = ftTime2->dwHighDateTime;
-	// åŠ ç®—
+	// ‰ÁZ
 	u64Time1.QuadPart += u64Time2.QuadPart;
-	// å¤‰æ›
+	// •ÏŠ·
 	ftTime.dwLowDateTime = u64Time1.u.LowPart;
 	ftTime.dwHighDateTime = u64Time1.u.HighPart;
 	return &ftTime;
 }
 
-// ãƒ•ã‚¡ã‚¤ãƒ«æ™‚é–“ã‹ã‚‰æ™‚é–“æ–‡å­—åˆ—ã«å¤‰æ›
+// ƒtƒ@ƒCƒ‹ŠÔ‚©‚çŠÔ•¶š—ñ‚É•ÏŠ·
 static void getTimeString(LPFILETIME ftTime, BOOL bLocalTime, CString& str)
 {
 	str.Empty();
@@ -389,7 +389,7 @@ namespace SBUtil
 		}
 		else
 		{
-			//2æ–‡å­—ç›®ãŒ:ã¯ã€ãƒ‘ã‚¹(c:)
+			//2•¶š–Ú‚ª:‚ÍAƒpƒX(c:)
 			if (strCheckStr.Find(_T(":")) == 1)
 				bRet = TRUE;
 		}
@@ -570,16 +570,16 @@ namespace SBUtil
 		strRet.TrimLeft();
 		if (!strRet.IsEmpty())
 		{
-			//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
-			strRet.Replace(_T("<"), _T("ï¼œ"));
-			strRet.Replace(_T(">"), _T("ï¼"));
-			strRet.Replace(_T(":"), _T("ï¼š"));
-			strRet.Replace(_T("\""), _T("â€"));
+			//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
+			strRet.Replace(_T("<"), _T("ƒ"));
+			strRet.Replace(_T(">"), _T("„"));
+			strRet.Replace(_T(":"), _T("F"));
+			strRet.Replace(_T("\""), _T("h"));
 			strRet.Replace(_T("/"), _T("-"));
-			strRet.Replace(_T("\\"), _T("ï¿¥"));
-			strRet.Replace(_T("|"), _T("ï½œ"));
-			strRet.Replace(_T("?"), _T("ï¼Ÿ"));
-			strRet.Replace(_T("*"), _T("ï¼Š"));
+			strRet.Replace(_T("\\"), _T(""));
+			strRet.Replace(_T("|"), _T("b"));
+			strRet.Replace(_T("?"), _T("H"));
+			strRet.Replace(_T("*"), _T("–"));
 		}
 		return strRet;
 	}
@@ -629,7 +629,7 @@ namespace SBUtil
 		::CloseHandle(hToken);
 		return strResult;
 	}
-	// ç¾åœ¨ã®(ãƒ—ãƒ­ã‚»ã‚¹ã®)ãƒ¦ãƒ¼ã‚¶ã®SIDã®å–å¾—
+	// Œ»İ‚Ì(ƒvƒƒZƒX‚Ì)ƒ†[ƒU‚ÌSID‚Ìæ“¾
 	static CString GetCurrentProcessStringSid()
 	{
 		HANDLE hProcess = ::GetCurrentProcess();
@@ -670,22 +670,22 @@ namespace SBUtil
 		int nTargetID, nForegroundID = 0;
 		INT_PTR sp_time = 0;
 
-		// ãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ãŸã‚¹ãƒ¬ãƒƒãƒ‰ã®IDã‚’å–å¾—
+		// ƒtƒHƒAƒOƒ‰ƒEƒ“ƒhƒEƒBƒ“ƒhƒE‚ğì¬‚µ‚½ƒXƒŒƒbƒh‚ÌID‚ğæ“¾
 		nForegroundID = GetWindowThreadProcessId(GetForegroundWindow(), NULL);
-		// ç›®çš„ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ãŸã‚¹ãƒ¬ãƒƒãƒ‰ã®IDã‚’å–å¾—
+		// –Ú“I‚ÌƒEƒBƒ“ƒhƒE‚ğì¬‚µ‚½ƒXƒŒƒbƒh‚ÌID‚ğæ“¾
 		nTargetID = GetWindowThreadProcessId(hWnd, NULL);
 
-		// ã‚¹ãƒ¬ãƒƒãƒ‰ã®ã‚¤ãƒ³ãƒ—ãƒƒãƒˆçŠ¶æ…‹ã‚’çµã³ä»˜ã‘ã‚‹
-		AttachThreadInput(nTargetID, nForegroundID, TRUE); // TRUE ã§çµã³ä»˜ã‘
+		// ƒXƒŒƒbƒh‚ÌƒCƒ“ƒvƒbƒgó‘Ô‚ğŒ‹‚Ñ•t‚¯‚é
+		AttachThreadInput(nTargetID, nForegroundID, TRUE); // TRUE ‚ÅŒ‹‚Ñ•t‚¯
 
-		// ç¾åœ¨ã®è¨­å®šã‚’ sp_time ã«ä¿å­˜
+		// Œ»İ‚Ìİ’è‚ğ sp_time ‚É•Û‘¶
 		SystemParametersInfo(SPI_GETFOREGROUNDLOCKTIMEOUT, 0, &sp_time, 0);
-		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åˆ‡ã‚Šæ›¿ãˆæ™‚é–“ã‚’ 0ms ã«ã™ã‚‹
+		// ƒEƒBƒ“ƒhƒE‚ÌØ‚è‘Ö‚¦ŠÔ‚ğ 0ms ‚É‚·‚é
 		SystemParametersInfo(SPI_SETFOREGROUNDLOCKTIMEOUT, 0, (LPVOID)0, 0);
 
 		if (bEnforceActive)
 		{
-			// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã«æŒã£ã¦ãã‚‹
+			// ƒEƒBƒ“ƒhƒE‚ğƒtƒHƒAƒOƒ‰ƒEƒ“ƒh‚É‚Á‚Ä‚­‚é
 			if (::IsIconic(hWnd))
 			{
 				ShowWindow(hWnd, SW_HIDE);
@@ -704,11 +704,11 @@ namespace SBUtil
 		}
 		SetForegroundWindow(hWnd);
 
-		// è¨­å®šã‚’å…ƒã«æˆ»ã™
+		// İ’è‚ğŒ³‚É–ß‚·
 		SystemParametersInfo(SPI_SETFOREGROUNDLOCKTIMEOUT, 0, (LPVOID)sp_time, 0);
 
-		// ã‚¹ãƒ¬ãƒƒãƒ‰ã®ã‚¤ãƒ³ãƒ—ãƒƒãƒˆçŠ¶æ…‹ã‚’åˆ‡ã‚Šé›¢ã™
-		AttachThreadInput(nTargetID, nForegroundID, FALSE); // FALSE ã§åˆ‡ã‚Šé›¢ã—
+		// ƒXƒŒƒbƒh‚ÌƒCƒ“ƒvƒbƒgó‘Ô‚ğØ‚è—£‚·
+		AttachThreadInput(nTargetID, nForegroundID, FALSE); // FALSE ‚ÅØ‚è—£‚µ
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -1055,13 +1055,13 @@ public:
 	}
 
 private:
-	//å…¨èˆ¬è¨­å®š
+	//‘S”Êİ’è
 	int EnableMultipleInstance;
 	int EnableMemcache;
 	int EnableCrashRecovery;
 	int KeyCombination;
 
-	//ç”»é¢è¡¨ç¤ºè¨­å®š
+	//‰æ–Ê•\¦İ’è
 	int EnableTab;
 	int EnablePDFExtension;
 
@@ -1073,18 +1073,18 @@ private:
 	int HeightMargin;
 	int DefaultZoomSize;
 
-	//èµ·å‹•é–¢é€£è¨­å®š
+	//‹N“®ŠÖ˜Aİ’è
 	CString StartURL;
 	CString EnforceInitParam;
 	CString InitMessage;
 
-	//ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæ¥ç¶šè¨­å®š
+	//ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±İ’è
 	int ProxyType;
 	CString ProxyAddress;
 	CString ProxyBypassAddress;
 	CString UserAgentAppendStr;
 
-	//åˆ¶é™è¨­å®š
+	//§ŒÀİ’è
 	int EnableDownloadRestriction;
 	int EnableUploadRestriction;
 	int EnableDeleteCache;
@@ -1093,7 +1093,7 @@ private:
 	int MemoryUsageLimit;
 	int WindowCountLimit;
 
-	//ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆè¨­å®š
+	//ƒŠƒ_ƒCƒŒƒNƒgİ’è
 	int EnableURLRedirect;
 	int RedirectMsgTimeout;
 	CString CustomBrowser;
@@ -1102,13 +1102,13 @@ private:
 	CString CustomBrowser4;
 	CString CustomBrowser5;
 
-	//URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š
+	//URLƒtƒBƒ‹ƒ^[İ’è
 	int EnableURLFilter;
 
-	//CustomScriptè¨­å®š
+	//CustomScriptİ’è
 	int EnableCustomScript;
 
-	//ãƒ­ã‚°å‡ºåŠ›è¨­å®š
+	//ƒƒOo—Íİ’è
 	int EnableAdvancedLogMode;
 	int EnableAdvancedLogVerboseMode;
 	int AdvancedLogLevel;
@@ -1150,21 +1150,21 @@ private:
 	int TASK_LIST_MODE_DETAIL;
 
 public:
-	//SystemGuardModeã®åˆ¤å®šç”¨
+	//SystemGuardMode‚Ì”»’è—p
 	BOOL m_IsSGMode;
 
 	inline void LoadDefaultData()
 	{
 		Clear();
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//å…¨èˆ¬è¨­å®š
+		//‘S”Êİ’è
 		EnableMultipleInstance = FALSE;
 		EnableMemcache = FALSE;
 		EnableCrashRecovery = FALSE;
 		KeyCombination = 0;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//ç”»é¢è¡¨ç¤ºè¨­å®š
+		//‰æ–Ê•\¦İ’è
 		EnableTab = TRUE;
 		EnableGPURendering = TRUE;
 		EnablePDFExtension = TRUE;
@@ -1176,20 +1176,20 @@ public:
 		DefaultZoomSize = 100;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//èµ·å‹•é–¢é€£è¨­å®š
+		//‹N“®ŠÖ˜Aİ’è
 		StartURL = _T("https://www.google.co.jp/");
 		EnforceInitParam = _T("");
 		InitMessage = _T("");
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæ¥ç¶šè¨­å®š
+		//ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±İ’è
 		ProxyType = CSG_PROXY_IE;
 		ProxyAddress = _T("");
 		ProxyBypassAddress = _T("");
 		UserAgentAppendStr = _T("");
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//åˆ¶é™è¨­å®š
+		//§ŒÀİ’è
 		EnableDownloadRestriction = FALSE;
 		EnableUploadRestriction = FALSE;
 		EnableDeleteCache = FALSE;
@@ -1200,7 +1200,7 @@ public:
 		WindowCountLimit = 60;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆè¨­å®š
+		//ƒŠƒ_ƒCƒŒƒNƒgİ’è
 		EnableURLRedirect = FALSE;
 		RedirectMsgTimeout = 2500;
 		CustomBrowser = _T("");
@@ -1210,15 +1210,15 @@ public:
 		CustomBrowser5 = _T("");
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š
+		//URLƒtƒBƒ‹ƒ^[İ’è
 		EnableURLFilter = FALSE;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//CustomScriptè¨­å®š
+		//CustomScriptİ’è
 		EnableCustomScript = FALSE;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
-		//ãƒ­ã‚°å‡ºåŠ›è¨­å®š
+		//ƒƒOo—Íİ’è
 		EnableAdvancedLogMode = FALSE;
 		EnableAdvancedLogVerboseMode = FALSE;
 		AdvancedLogLevel = 0;
@@ -1281,7 +1281,7 @@ public:
 		if (!pstrFilePath)
 			return FALSE;
 
-		//Clearã¯ã—ãªã„ã€‚åˆæœŸå€¤ã‚’ãƒ™ãƒ¼ã‚¹ã«ãƒ•ã‚¡ã‚¤ãƒ«ã®å†…å®¹ã§ä¸Šæ›¸ãã™ã‚‹ã€‚
+		//Clear‚Í‚µ‚È‚¢B‰Šú’l‚ğƒx[ƒX‚Éƒtƒ@ƒCƒ‹‚Ì“à—e‚Åã‘‚«‚·‚éB
 		_wsetlocale(LC_ALL, _T("jpn"));
 		CStdioFile in;
 		CString strTemp;
@@ -1316,7 +1316,7 @@ public:
 				if (strTemp2.Find(_T("#")) == 0)
 					continue;
 
-				//Stringç³»ã¯ã€ç©ºç™½strTemp3ã‚’èªã‚ã‚‹ã€‚//////////////////////////////////////////////////////////
+				//StringŒn‚ÍA‹ó”’strTemp3‚ğ”F‚ß‚éB//////////////////////////////////////////////////////////
 				if (strTemp2.CompareNoCase(_T("StartURL")) == 0)
 				{
 					StartURL = strTemp3;
@@ -1446,7 +1446,7 @@ public:
 					continue;
 				}
 
-				//BOOL DWORDç³»ã¯ã€ç©ºç™½strTemp3ã‚’èªã‚ãªã„ã€‚//////////////////////////////////////////////////////////
+				//BOOL DWORDŒn‚ÍA‹ó”’strTemp3‚ğ”F‚ß‚È‚¢B//////////////////////////////////////////////////////////
 				if (strTemp3.IsEmpty())
 					continue;
 				if (strTemp2.CompareNoCase(_T("EnableAdvancedLogMode")) == 0)
@@ -1779,7 +1779,7 @@ public:
 		}
 		in.Close();
 
-		//ç›£æŸ»ãƒ­ã‚°è¨­å®šã‚’Regã«ç™»éŒ²ã™ã‚‹ã€‚
+		//ŠÄ¸ƒƒOİ’è‚ğReg‚É“o˜^‚·‚éB
 		if (m_IsSGMode)
 		{
 			if (this->EnableLogging)
@@ -1797,7 +1797,7 @@ public:
 				_SetBaseFunc_String(_T("LogMethod"), _T(""));
 			}
 		}
-		//åˆ¶é™æ™‚ã¯ã€TaskMgrã®è©³ç´°è¡¨ç¤ºã¯ç„¡åŠ¹
+		//§ŒÀ‚ÍATaskMgr‚ÌÚ×•\¦‚Í–³Œø
 		if (this->KeyCombination != 0)
 		{
 			this->TASK_LIST_MODE_DETAIL = 0;
@@ -1859,13 +1859,13 @@ public:
 	{
 		CString strRet;
 
-		//å…¨èˆ¬è¨­å®š
+		//‘S”Êİ’è
 		strRet += EXTVAL(EnableMultipleInstance);
 		strRet += EXTVAL(EnableMemcache);
 		strRet += EXTVAL(EnableCrashRecovery);
 		strRet += EXTVAL(KeyCombination);
 
-		//ç”»é¢è¡¨ç¤ºè¨­å®š
+		//‰æ–Ê•\¦İ’è
 		strRet += EXTVAL(EnableTab);
 		strRet += EXTVAL(EnablePDFExtension);
 		strRet += EXTVAL(EnableGPURendering);
@@ -1876,18 +1876,18 @@ public:
 		strRet += EXTVAL(HeightMargin);
 		strRet += EXTVAL(DefaultZoomSize);
 
-		//èµ·å‹•é–¢é€£è¨­å®š
+		//‹N“®ŠÖ˜Aİ’è
 		strRet += EXTVAL(StartURL);
 		strRet += EXTVAL(EnforceInitParam);
 		strRet += EXTVAL(InitMessage);
 
-		//ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæ¥ç¶šè¨­å®š
+		//ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±İ’è
 		strRet += EXTVAL(ProxyType);
 		strRet += EXTVAL(ProxyAddress);
 		strRet += EXTVAL(ProxyBypassAddress);
 		strRet += EXTVAL(UserAgentAppendStr);
 
-		//åˆ¶é™è¨­å®š
+		//§ŒÀİ’è
 		strRet += EXTVAL(EnableDownloadRestriction);
 		strRet += EXTVAL(EnableUploadRestriction);
 		strRet += EXTVAL(EnableDeleteCache);
@@ -1896,7 +1896,7 @@ public:
 		strRet += EXTVAL(MemoryUsageLimit);
 		strRet += EXTVAL(WindowCountLimit);
 
-		//ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆè¨­å®š
+		//ƒŠƒ_ƒCƒŒƒNƒgİ’è
 		strRet += EXTVAL(EnableURLRedirect);
 		strRet += EXTVAL(RedirectMsgTimeout);
 		strRet += EXTVAL(CustomBrowser);
@@ -1905,13 +1905,13 @@ public:
 		strRet += EXTVAL(CustomBrowser4);
 		strRet += EXTVAL(CustomBrowser5);
 
-		//URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š
+		//URLƒtƒBƒ‹ƒ^[İ’è
 		strRet += EXTVAL(EnableURLFilter);
 
-		//CustomScriptè¨­å®š
+		//CustomScriptİ’è
 		strRet += EXTVAL(EnableCustomScript);
 
-		//ãƒ­ã‚°å‡ºåŠ›è¨­å®š
+		//ƒƒOo—Íİ’è
 		strRet += EXTVAL(EnableAdvancedLogMode);
 		strRet += EXTVAL(EnableAdvancedLogVerboseMode);
 		strRet += EXTVAL(AdvancedLogLevel);
@@ -2067,7 +2067,7 @@ public:
 	inline void SetKeyCombination(DWORD dVal)
 	{
 		KeyCombination = dVal;
-		//åˆ¶é™æ™‚ã¯ã€TaskMgrã®è©³ç´°è¡¨ç¤ºã¯ç„¡åŠ¹
+		//§ŒÀ‚ÍATaskMgr‚ÌÚ×•\¦‚Í–³Œø
 		if (KeyCombination != 0)
 		{
 			TASK_LIST_MODE_DETAIL = 0;
@@ -2099,7 +2099,7 @@ public:
 	inline void SetEnableLogging(DWORD dVal)
 	{
 		EnableLogging = dVal ? 1 : 0;
-		//ç›£æŸ»ãƒ­ã‚°è¨­å®šã‚’Regã«ç™»éŒ²ã™ã‚‹ã€‚
+		//ŠÄ¸ƒƒOİ’è‚ğReg‚É“o˜^‚·‚éB
 		if (m_IsSGMode)
 		{
 			if (EnableLogging)
@@ -2307,7 +2307,7 @@ public:
 	void Init()
 	{
 		OldVal = 0;
-		// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åŠ¹æœã¯ä¸€æ™‚çš„ã« OFF ã«ã™ã‚‹
+		// ƒAƒjƒ[ƒVƒ‡ƒ“Œø‰Ê‚Íˆê“I‚É OFF ‚É‚·‚é
 		ANIMATIONINFO ai = {0};
 		ai.cbSize = sizeof(ANIMATIONINFO);
 		::SystemParametersInfo(SPI_GETANIMATION, sizeof(ANIMATIONINFO), &ai, 0);
@@ -2322,7 +2322,7 @@ public:
 		{
 			ANIMATIONINFO ai = {0};
 			ai.cbSize = sizeof(ANIMATIONINFO);
-			// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åŠ¹æœã‚’æˆ»ã™
+			// ƒAƒjƒ[ƒVƒ‡ƒ“Œø‰Ê‚ğ–ß‚·
 			ai.iMinAnimate = OldVal;
 			::SystemParametersInfo(SPI_SETANIMATION, sizeof(ANIMATIONINFO), &ai, 0);
 			bInit = FALSE;
@@ -2342,7 +2342,7 @@ public:
 		if (bInit)
 		{
 			ANIMATIONINFO ai = {0};
-			// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åŠ¹æœã‚’æˆ»ã™
+			// ƒAƒjƒ[ƒVƒ‡ƒ“Œø‰Ê‚ğ–ß‚·
 			ai.iMinAnimate = OldVal;
 			::SystemParametersInfo(SPI_SETANIMATION, sizeof(ANIMATIONINFO), &ai, 0);
 			bInit = FALSE;
@@ -2527,7 +2527,7 @@ public:
 		{
 			strTemp.Empty();
 			strTemp = m_arrURL.GetAt(i);
-			//ä¸€è‡´ã™ã‚‹éƒ¨åˆ†ãŒã‚ã£ãŸä¸€éƒ¨ä¸€è‡´
+			//ˆê’v‚·‚é•”•ª‚ª‚ ‚Á‚½ˆê•”ˆê’v
 			if (strSURL.Find(strTemp) > -1)
 			{
 				bRet = TRUE;
@@ -2631,7 +2631,7 @@ public:
 			strTemp = m_arrURL.GetAt(i);
 			strTempA = strTemp;
 
-			//ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰å¯¾å¿œ
+			//ƒƒCƒ‹ƒhƒJ[ƒh‘Î‰
 			if (wildcmp(strTempA, strURLA))
 			{
 				uiRet = (INT_PTR)m_arrURL_AD.GetAt(i);
@@ -2707,7 +2707,7 @@ public:
 						if (!strTemp2.IsEmpty())
 						{
 							m_arrURL.Add(strTemp2);
-							//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
+							//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
 							strTemp3 = SBUtil::GetValidFileName(strTemp3);
 							m_arrURL_FileName.Add(strTemp3);
 						}
@@ -2734,7 +2734,7 @@ public:
 			strTemp = m_arrURL.GetAt(i);
 			strTempA = strTemp;
 
-			//ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰å¯¾å¿œ
+			//ƒƒCƒ‹ƒhƒJ[ƒh‘Î‰
 			if (wildcmp(strTempA, strURLA))
 			{
 				strRet = m_arrURL_FileName.GetAt(i);
@@ -2989,14 +2989,14 @@ public:
 			{
 				if (pThreadLocal)
 				{
-					// ã‚¹ãƒ¬ãƒƒãƒ‰çµ‚äº†å¾…ã¡
+					// ƒXƒŒƒbƒhI—¹‘Ò‚¿
 					if (::WaitForSingleObject(pThreadLocal->m_hThread, 5000) == WAIT_TIMEOUT)
 					{
-						// ã‚¹ãƒ¬ãƒƒãƒ‰å¼·åˆ¶åœæ­¢
-						// (çµ¶å¯¾ã«åœæ­¢ã™ã‚‹ãªã‚‰ WaitForSingleObjectã§ INFINITE ã‚‚å¯ï¼‰
+						// ƒXƒŒƒbƒh‹­§’â~
+						// (â‘Î‚É’â~‚·‚é‚È‚ç WaitForSingleObject‚Å INFINITE ‚à‰Âj
 #pragma warning(push, 0)
-//è­¦å‘Š C6258 TerminateThread ã‚’ä½¿ç”¨ã™ã‚‹ã¨ã€æ­£ã—ãã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—ã™ã‚‹ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚
-// -> æ™®é€šã«åœæ­¢ã§ããªã‹ã£ãŸå ´åˆã«å¼·åˆ¶åœæ­¢ã™ã‚‹ãŸã‚ã«ä½¿ã£ã¦ã„ã‚‹ã€‚æ­£ã—ã„ä½¿ã„æ–¹ãªã®ã§è­¦å‘Šã‚’ç„¡è¦–ã€‚
+//Œx C6258 TerminateThread ‚ğg—p‚·‚é‚ÆA³‚µ‚­ƒXƒŒƒbƒh‚ğƒNƒŠ[ƒ“ƒAƒbƒv‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB
+// -> •’Ê‚É’â~‚Å‚«‚È‚©‚Á‚½ê‡‚É‹­§’â~‚·‚é‚½‚ß‚Ég‚Á‚Ä‚¢‚éB³‚µ‚¢g‚¢•û‚È‚Ì‚ÅŒx‚ğ–³‹B
 #pragma warning(disable : 6258)
 						::TerminateThread(pThreadLocal->m_hThread, 0xffffffff);
 #pragma warning(pop)
@@ -3151,7 +3151,7 @@ public:
 			    unsigned int FAR* puArgErr);
 };
 
-//ã‚¹ã‚¯ãƒªãƒ—ãƒˆã§å…¬é–‹ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
+//ƒXƒNƒŠƒvƒg‚ÅŒöŠJ‚·‚éƒIƒuƒWƒFƒNƒg–¼
 #define SCRIPT_OBJECT_NAME L"Message"
 class CActiveScriptSite;
 class CActiveScriptSite : public IActiveScriptSite
@@ -3252,7 +3252,7 @@ public:
 		return S_OK;
 	}
 };
-//ãƒã‚¯ãƒ­å®šç¾©
+//ƒ}ƒNƒ’è‹`
 #define CREATEINSTANCE(C, I, P) (SUCCEEDED(CoCreateInstance((C), NULL, CLSCTX_INPROC_SERVER, (I), (reinterpret_cast<LPVOID*>(P)))))
 #define QI(X, Y, Z)		((X)->QueryInterface((Y), (reinterpret_cast<LPVOID*>(Z))))
 #define URLBUFFER_SIZE		4096
@@ -3283,16 +3283,16 @@ public:
 			if (CREATEINSTANCE(CLSID_Script, IID_IActiveScript, &pAS))
 			{
 				pASS.Attach(new CActiveScriptSite());
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚¨ãƒ³ã‚¸ãƒ³ã«Siteã‚’è¨­å®š
+				// ƒXƒNƒŠƒvƒgƒGƒ“ƒWƒ“‚ÉSite‚ğİ’è
 				if (FAILED(hRes = pAS->SetScriptSite(pASS)))
 					goto cleanup;
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆè§£æã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+				// ƒXƒNƒŠƒvƒg‰ğÍƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
 				if (FAILED(hRes = QI(pAS, IID_IActiveScriptParse, &pASP)))
 					goto cleanup;
-				// åˆå›ã®ã¿ã€ä»¥å¾ŒCloseã™ã‚‹ã¾ã§å‘¼ã³å‡ºã—ä¸å¯
+				// ‰‰ñ‚Ì‚İAˆÈŒãClose‚·‚é‚Ü‚ÅŒÄ‚Ño‚µ•s‰Â
 				if (FAILED(hRes = pASP->InitNew()))
 					goto cleanup;
-				//ã‚¹ã‚¯ãƒªãƒ—ãƒˆå´ã§ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹ã‚ˆã†ã«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã«åå‰ã‚’è¿½åŠ ã€‚
+				//ƒXƒNƒŠƒvƒg‘¤‚ÅƒAƒNƒZƒX‚Å‚«‚é‚æ‚¤‚ÉƒXƒNƒŠƒvƒg‚ÌƒOƒ[ƒoƒ‹•Ï”‚É–¼‘O‚ğ’Ç‰ÁB
 				if (FAILED(hRes = pAS->AddNamedItem(SCRIPT_OBJECT_NAME, SCRIPTITEM_GLOBALMEMBERS | SCRIPTITEM_ISVISIBLE)))
 					goto cleanup;
 				CString vbFormatTemp = sURL;
@@ -3301,23 +3301,23 @@ public:
 				CString vbGlobalURL;
 				vbGlobalURL.Format(_T("Const TB_Global_URL=\"%s\"\r\n"), (LPCTSTR)vbFormatTemp);
 
-				//äº’æ›ã®ç‚º Trueã‚’ã‚»ãƒƒãƒˆ
+				//ŒİŠ·‚Ìˆ× True‚ğƒZƒbƒg
 				CString vbGlobalTopPage;
 				vbGlobalTopPage.Format(_T("Const TB_Global_TOP_PAGE=%s\r\n"), bTop ? _T("True") : _T("False"));
 
-				//ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®äº’æ›æ€§ã®ãŸã‚ã ã‘ã«æ®‹ã™ã€‚ãƒ–ãƒ©ãƒ³ã‚¯ã‚’è¨­å®šã™ã‚‹ã€‚
+				//ƒXƒNƒŠƒvƒg‚ÌŒİŠ·«‚Ì‚½‚ß‚¾‚¯‚Éc‚·Bƒuƒ‰ƒ“ƒN‚ğİ’è‚·‚éB
 				CString vbGlobalZone;
 				//vbGlobalZone.Format(_T("Const TB_Global_ZONE=\"%s\"\r\n"),_T("INTERNET_ZONE"));
 				vbGlobalZone = _T("Const TB_Global_ZONE=\"\"\r\n");
 
-				//äº’æ›ã®ãŸã‚BeforeNavigateã‚’ã‚»ãƒƒãƒˆ
+				//ŒİŠ·‚Ì‚½‚ßBeforeNavigate‚ğƒZƒbƒg
 				CString vbGlobalEvent;
 				//if(bEventBeforeNavigate)
 				{
 					vbGlobalEvent.Format(_T("Const TB_Global_EVENT=\"%s\"\r\n"), _T("BeforeNavigate"));
 				}
 
-				//Helperè¿½åŠ 
+				//Helper’Ç‰Á
 				CString strHelper;
 				CString strURL;
 				strURL = sURL;
@@ -3389,7 +3389,7 @@ public:
 				LPCWSTR pSource = NULL;
 				pSource = VBSource;
 
-				//ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚³ãƒ¼ãƒ‰ã®ãƒ­ãƒ¼ãƒ‰ã¨è§£æã€‚
+				//ƒXƒNƒŠƒvƒgƒR[ƒh‚Ìƒ[ƒh‚Æ‰ğÍB
 				if (FAILED(hRes = pASP->ParseScriptText(pSource,
 									NULL,
 									NULL,
@@ -3401,16 +3401,16 @@ public:
 									NULL)))
 					goto cleanup;
 
-				//ã‚¹ã‚¯ãƒªãƒ—ãƒˆå®Ÿè¡Œé–‹å§‹
+				//ƒXƒNƒŠƒvƒgÀsŠJn
 				if (FAILED(hRes = pAS->SetScriptState(SCRIPTSTATE_CONNECTED)))
 					goto cleanup;
 
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ãƒ«ãƒ¼ãƒˆã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
+				// ƒXƒNƒŠƒvƒg‚Ìƒ‹[ƒgƒRƒ“ƒeƒLƒXƒg‚ğæ“¾
 				CComPtr<IDispatch> pScriptDisp;
 				if (FAILED(hRes = pAS->GetScriptDispatch(NULL, &pScriptDisp)))
 					goto cleanup;
 
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆä¸Šã«å®šç¾©ã•ã‚Œã¦ã„ã‚‹testfuncã®å‘¼ã³å‡ºã—
+				// ƒXƒNƒŠƒvƒgã‚É’è‹`‚³‚ê‚Ä‚¢‚étestfunc‚ÌŒÄ‚Ño‚µ
 				LPOLESTR szMember[] = {L"OnRedirect", NULL};
 				DISPID dispids[1] = {0};
 
@@ -3449,7 +3449,7 @@ public:
 				bRet = TRUE;
 			}
 		cleanup:
-			//å¾Œå§‹æœ«
+			//Œãn––
 			if (pASP)
 			{
 				pASP.Release();
@@ -3492,19 +3492,19 @@ public:
 			{
 				pASS.Attach(new CActiveScriptSite());
 
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚¨ãƒ³ã‚¸ãƒ³ã«Siteã‚’è¨­å®š
+				// ƒXƒNƒŠƒvƒgƒGƒ“ƒWƒ“‚ÉSite‚ğİ’è
 				if (FAILED(hRes = pAS->SetScriptSite(pASS)))
 					goto cleanup;
 
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆè§£æã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å–å¾—
+				// ƒXƒNƒŠƒvƒg‰ğÍƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìæ“¾
 				if (FAILED(hRes = QI(pAS, IID_IActiveScriptParse, &pASP)))
 					goto cleanup;
 
-				// åˆå›ã®ã¿ã€ä»¥å¾ŒCloseã™ã‚‹ã¾ã§å‘¼ã³å‡ºã—ä¸å¯
+				// ‰‰ñ‚Ì‚İAˆÈŒãClose‚·‚é‚Ü‚ÅŒÄ‚Ño‚µ•s‰Â
 				if (FAILED(hRes = pASP->InitNew()))
 					goto cleanup;
 
-				//ã‚¹ã‚¯ãƒªãƒ—ãƒˆå´ã§ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹ã‚ˆã†ã«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã«åå‰ã‚’è¿½åŠ ã€‚
+				//ƒXƒNƒŠƒvƒg‘¤‚ÅƒAƒNƒZƒX‚Å‚«‚é‚æ‚¤‚ÉƒXƒNƒŠƒvƒg‚ÌƒOƒ[ƒoƒ‹•Ï”‚É–¼‘O‚ğ’Ç‰ÁB
 				if (FAILED(hRes = pAS->AddNamedItem(SCRIPT_OBJECT_NAME, SCRIPTITEM_GLOBALMEMBERS | SCRIPTITEM_ISVISIBLE)))
 					goto cleanup;
 
@@ -3548,7 +3548,7 @@ public:
 				LPCWSTR pSource = NULL;
 				pSource = VBSource;
 
-				//ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚³ãƒ¼ãƒ‰ã®ãƒ­ãƒ¼ãƒ‰ã¨è§£æã€‚
+				//ƒXƒNƒŠƒvƒgƒR[ƒh‚Ìƒ[ƒh‚Æ‰ğÍB
 				if (FAILED(hRes = pASP->ParseScriptText(pSource,
 									NULL,
 									NULL,
@@ -3560,16 +3560,16 @@ public:
 									NULL)))
 					goto cleanup;
 
-				//ã‚¹ã‚¯ãƒªãƒ—ãƒˆå®Ÿè¡Œé–‹å§‹
+				//ƒXƒNƒŠƒvƒgÀsŠJn
 				if (FAILED(hRes = pAS->SetScriptState(SCRIPTSTATE_CONNECTED)))
 					goto cleanup;
 
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ãƒ«ãƒ¼ãƒˆã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
+				// ƒXƒNƒŠƒvƒg‚Ìƒ‹[ƒgƒRƒ“ƒeƒLƒXƒg‚ğæ“¾
 				CComPtr<IDispatch> pScriptDisp;
 				if (FAILED(hRes = pAS->GetScriptDispatch(NULL, &pScriptDisp)))
 					goto cleanup;
 
-				// ã‚¹ã‚¯ãƒªãƒ—ãƒˆä¸Šã«å®šç¾©ã•ã‚Œã¦ã„ã‚‹testfuncã®å‘¼ã³å‡ºã—
+				// ƒXƒNƒŠƒvƒgã‚É’è‹`‚³‚ê‚Ä‚¢‚étestfunc‚ÌŒÄ‚Ño‚µ
 				LPOLESTR szMember[] = {L"URLFilter", NULL};
 				DISPID dispids[1] = {0};
 
@@ -3608,7 +3608,7 @@ public:
 				bRet = TRUE;
 			}
 		cleanup:
-			//å¾Œå§‹æœ«
+			//Œãn––
 			if (pASP)
 			{
 				pASP.Release();
@@ -3649,14 +3649,14 @@ public:
 	virtual ~CTaskbarList3() { Uninitialize(); }
 	BOOL Initialize(HWND hWnd)
 	{
-		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã‚’ä¿æŒ
+		// ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹‚ğ•Û
 		m_hWnd = hWnd;
-		// ã™ã§ã«ä½œæˆæ¸ˆã¿ãªã‚‰æˆåŠŸ
+		// ‚·‚Å‚Éì¬Ï‚İ‚È‚ç¬Œ÷
 		if (NULL != m_pTaskbarList3)
 		{
 			return TRUE;
 		}
-		// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
+		// ƒIƒuƒWƒFƒNƒg‚Ìì¬
 		try
 		{
 			if (FAILED(m_pTaskbarList3.CoCreateInstance(CLSID_TaskbarList)))
@@ -3694,13 +3694,13 @@ public:
 		HRESULT hResult;
 		try
 		{
-			// é€²æ—ä½ç½®å¤‰æ›´
+			// i’»ˆÊ’u•ÏX
 			hResult = m_pTaskbarList3->SetProgressValue(m_hWnd, ul64Pos, ul64Max);
 			if (FAILED(hResult))
 			{
 				return FALSE;
 			}
-			// é€²æ—è‰²å¤‰æ›´
+			// i’»F•ÏX
 			hResult = m_pTaskbarList3->SetProgressState(m_hWnd, tbpFlag);
 			if (FAILED(hResult))
 			{
@@ -3728,7 +3728,7 @@ public:
 		HRESULT hResult;
 		try
 		{
-			// é€²æ—ãªã—ã«å¤‰æ›´
+			// i’»‚È‚µ‚É•ÏX
 			hResult = m_pTaskbarList3->SetProgressState(m_hWnd, TBPF_NOPROGRESS);
 			if (FAILED(hResult))
 			{
@@ -3757,7 +3757,7 @@ public:
 		HRESULT hResult;
 		try
 		{
-			// é€²æ—ãªã—ã«å¤‰æ›´
+			// i’»‚È‚µ‚É•ÏX
 			hResult = m_pTaskbarList3->SetProgressState(m_hWnd, TBPF_INDETERMINATE);
 			if (FAILED(hResult))
 			{
@@ -3888,13 +3888,11 @@ public:
 	}
 	void Cancel(UINT nBrowserId)
 	{
-		CDlgDL* pDLDlg = NULL;
 		for (int i = 0; i < m_ptrArrDlgBrowserID.GetCount(); i++)
 		{
 			if (m_ptrArrDlgBrowserID.GetAt(i) == nBrowserId)
 			{
-				pDLDlg = (CDlgDL*)m_ptrArrDlgPtr.GetAt(i);
-
+				CDlgDL* pDLDlg = (CDlgDL*)m_ptrArrDlgPtr.GetAt(i);
 				if (pDLDlg)
 				{
 					pDLDlg->m_bDLCancel = TRUE;
@@ -4022,7 +4020,7 @@ protected:
 			}
 		}
 
-		//é‡ãªã‚Šèª¿æ•´
+		//d‚È‚è’²®
 		CRect rt;
 		::GetWindowRect(pDLDlg->m_hWnd, &rt);
 		rt.OffsetRect(50 * iCnt, 50 * iCnt);
