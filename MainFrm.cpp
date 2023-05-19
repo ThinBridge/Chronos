@@ -2755,7 +2755,19 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 						//日時を初めの行に出力する。
 						out.WriteString(strWriteTime);
 					}
-					strData.Format(_T("%s\t%s\n"), (LPCTSTR)strTitle, (LPCTSTR)strURL);
+
+					//CStdioFileはMBCSで書き込もうとする一方、入力値はUnicodeなので、
+					//タイトルに特殊文字が含まれていると文字変換に失敗して上手く書き込めない場合がある。
+					//なので、変換に失敗する場合はタイトルを書き込まないようにする。
+					if (CheckConvertabilityToMBCS(strTitle))
+					{
+						strData.Format(_T("%s\t%s\n"), (LPCTSTR)strTitle, (LPCTSTR)strURL);
+					}
+					else
+					{
+						strData.Format(_T("%s\n"), (LPCTSTR)strURL);
+					}
+
 					out.WriteString(strData);
 					iCnt++;
 				}
