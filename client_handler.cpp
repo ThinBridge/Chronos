@@ -1806,6 +1806,8 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 {
 	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
 		return false;
+	if (!theApp.m_AppSettings.IsMediaAccess())
+		return false;
 
 	LPCTSTR pszMessage = NULL;
 	pszMessage = requesting_origin.c_str();
