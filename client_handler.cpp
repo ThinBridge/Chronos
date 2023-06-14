@@ -1809,6 +1809,13 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	if (!theApp.m_AppSettings.IsMediaAccess())
 		return false;
 
+	std::map<CefString, uint32>::iterator findResult = m_originAndPermissionCache.find(requesting_origin);
+	if (findResult != m_originAndPermissionCache.end())
+	{
+		uint32 permission = m_originAndPermissionCache[requesting_origin];
+		callback->Continue(permission);
+		return true;
+	}
 	LPCTSTR pszMessage = NULL;
 	pszMessage = requesting_origin.c_str();
 	CString confirmMessage;
@@ -1836,6 +1843,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
 	if (iRet == IDNO)
 		return false;
+	m_originAndPermissionCache[requesting_origin] = requested_permissions;
 	callback->Continue(requested_permissions);
 	return true;
 }
