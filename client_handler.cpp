@@ -1810,16 +1810,15 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 		return false;
 
 	std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);
-	std::map<std::tuple<CefString, uint32>, BOOL>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
+	std::map<std::tuple<CefString, uint32>, bool>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
 	if (cachedPermissions != m_originAndPermissionsCache.end())
 	{
-		BOOL accepted = cachedPermissions->second;
+		bool accepted = cachedPermissions->second;
 		if (accepted)
 		{
 			callback->Continue(requested_permissions);
-			return true;
 		}
-		return false;
+		return accepted;
 	}
 	LPCTSTR pszMessage = NULL;
 	pszMessage = requesting_origin.c_str();
