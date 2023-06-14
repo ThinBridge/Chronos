@@ -1823,24 +1823,38 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	LPCTSTR pszMessage = NULL;
 	pszMessage = requesting_origin.c_str();
 	CString confirmMessage;
-	confirmMessage = pszMessage;
-	confirmMessage += _T(" は次の許可を求めています。許可しますか？\n");
+	CString enableMediaConfirmation;
+	enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
+	confirmMessage.Format(enableMediaConfirmation, pszMessage);
+	confirmMessage += "\n";
 
 	if (requested_permissions & CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE)
 	{
-		confirmMessage += _T("\nマイクの使用");
+		confirmMessage += "\n";
+		CString mediaType;
+		mediaType.LoadString(ID_ENABLE_MEDIA_MIC);
+		confirmMessage += mediaType;
 	}
 	if (requested_permissions & CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE)
 	{
-		confirmMessage += _T("\nビデオの使用");
+		confirmMessage += "\n";
+		CString mediaType;
+		mediaType.LoadString(ID_ENABLE_MEDIA_VIDEO);
+		confirmMessage += mediaType;
 	}
 	if (requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE)
 	{
-		confirmMessage += _T("\nデスクトップオーディオの取り込み");
+		confirmMessage += "\n";
+		CString mediaType;
+		mediaType.LoadString(ID_ENABLE_MEDIA_DESKTOP_AUDIO);
+		confirmMessage += mediaType;
 	}
 	if (requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE)
 	{
-		confirmMessage += _T("\nデスクトップの画面の取り込み");
+		confirmMessage += "\n";
+		CString mediaType;
+		mediaType.LoadString(ID_ENABLE_MEDIA_DESKTOP_VIDEO);
+		confirmMessage += mediaType;
 	}
 
 	HWND hWindow = GetSafeParentWnd(browser);
