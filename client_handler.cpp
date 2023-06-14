@@ -1820,12 +1820,11 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 		}
 		return accepted;
 	}
-	LPCTSTR pszMessage = NULL;
-	pszMessage = requesting_origin.c_str();
+
 	CString confirmMessage;
 	CString enableMediaConfirmation;
 	enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
-	confirmMessage.Format(enableMediaConfirmation, pszMessage);
+	confirmMessage.Format(enableMediaConfirmation, requesting_origin.c_str());
 	confirmMessage += "\n";
 
 	if (requested_permissions & CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE)
@@ -1861,10 +1860,10 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
 	if (iRet == IDNO)
 	{
-		m_originAndPermissionsCache[permissionInfo] = FALSE;
+		m_originAndPermissionsCache[permissionInfo] = false;
 		return false;
 	}
-	m_originAndPermissionsCache[permissionInfo] = TRUE;
+	m_originAndPermissionsCache[permissionInfo] = true;
 	callback->Continue(requested_permissions);
 	return true;
 }
