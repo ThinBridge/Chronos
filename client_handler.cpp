@@ -1809,12 +1809,17 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	if (!theApp.m_AppSettings.IsMediaAccess())
 		return false;
 
-	std::map<CefString, uint32>::iterator findResult = m_originAndPermissionCache.find(requesting_origin);
-	if (findResult != m_originAndPermissionCache.end())
+	std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);
+	std::map<std::tuple<CefString, uint32>, BOOL>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
+	if (cachedPermissions != m_originAndPermissionsCache.end())
 	{
-		uint32 permission = m_originAndPermissionCache[requesting_origin];
-		callback->Continue(permission);
-		return true;
+		BOOL accepted = cachedPermissions->second;
+		if (accepted)
+		{
+			callback->Continue(requested_permissions);
+			return true;
+		}
+		return false;
 	}
 	LPCTSTR pszMessage = NULL;
 	pszMessage = requesting_origin.c_str();
@@ -1842,8 +1847,11 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	HWND hWindow = GetSafeParentWnd(browser);
 	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
 	if (iRet == IDNO)
+	{
+		m_originAndPermissionsCache[permissionInfo] = FALSE;
 		return false;
-	m_originAndPermissionCache[requesting_origin] = requested_permissions;
+	}
+	m_originAndPermissionsCache[permissionInfo] = TRUE;
 	callback->Continue(requested_permissions);
 	return true;
 }

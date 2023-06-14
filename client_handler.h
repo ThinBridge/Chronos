@@ -286,7 +286,7 @@ protected:
 	// Include the default locking implementation.
 	//IMPLEMENT_LOCKING(ClientHandler);
 private:
-	std::map<CefString, uint32> m_originAndPermissionCache;
+	std::map<std::tuple<CefString, uint32>, BOOL> m_originAndPermissionsCache;
 };
 class AppRenderer : public CefApp, public CefRenderProcessHandler
 {
