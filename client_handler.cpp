@@ -1827,24 +1827,21 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	confirmMessage.Format(enableMediaConfirmation, requesting_origin.c_str());
 	confirmMessage += "\n";
 
-	std::tuple<int32, int32> permissionAndMessages[] = {
-	    {CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC},
-	    {CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO},
-	    {CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO},
-	    {CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO}};
-
-	for (std::tuple<int32, int32> permissionAndMessage : permissionAndMessages)
-	{
-		int32 permission = std::get<0>(permissionAndMessage);
-		int32 messageId = std::get<1>(permissionAndMessage);
-		if (requested_permissions & permission)
-		{
-			confirmMessage += "\n";
-			CString mediaType;
-			mediaType.LoadString(messageId);
-			confirmMessage += mediaType;
-		}
+#define ADD_PERMISSON_MESSAGE(permission, messageId) \
+	if (requested_permissions & permission)      \
+	{                                            \
+		confirmMessage += "\n";              \
+		CString mediaType;                   \
+		mediaType.LoadString(messageId);     \
+		confirmMessage += mediaType;         \
 	}
+
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC);
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO);
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO);
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO);
+
+#define ADD_PERMISSON_MESSAGE
 
 	HWND hWindow = GetSafeParentWnd(browser);
 	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
