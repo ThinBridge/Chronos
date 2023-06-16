@@ -1806,7 +1806,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 {
 	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
 		return false;
-	if (!theApp.m_AppSettings.IsMediaAccess())
+	if (!theApp.m_AppSettings.IsMediaAccessByApproval())
 		return false;
 
 	std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);

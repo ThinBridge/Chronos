@@ -923,7 +923,7 @@ public:
 
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
-		EnableMediaAccess = 0;
+		EnableMediaAccessByApproval = 0;
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
@@ -1007,7 +1007,7 @@ public:
 
 		Data.MemoryUsageLimit = MemoryUsageLimit;
 		Data.WindowCountLimit = WindowCountLimit;
-		Data.EnableMediaAccess = EnableMediaAccess;
+		Data.EnableMediaAccessByApproval = EnableMediaAccessByApproval;
 
 		Data.EnableDownloadRestriction = EnableDownloadRestriction;
 		Data.EnableUploadRestriction = EnableUploadRestriction;
@@ -1094,7 +1094,7 @@ private:
 	int RunningLimitTime;
 	int MemoryUsageLimit;
 	int WindowCountLimit;
-	int EnableMediaAccess;
+	int EnableMediaAccessByApproval;
 
 	//リダイレクト設定
 	int EnableURLRedirect;
@@ -1201,7 +1201,7 @@ public:
 		RunningLimitTime = 1440;
 		MemoryUsageLimit = 2040;
 		WindowCountLimit = 60;
-		EnableMediaAccess = FALSE;
+		EnableMediaAccessByApproval = FALSE;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//リダイレクト設定
@@ -1596,9 +1596,9 @@ public:
 						WindowCountLimit = 999;
 					continue;
 				}
-				if (strTemp2.CompareNoCase(_T("EnableMediaAccess")) == 0)
+				if (strTemp2.CompareNoCase(_T("EnableMediaAccessByApproval")) == 0)
 				{
-					EnableMediaAccess = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableMediaAccessByApproval = strTemp3 == _T("1") ? TRUE : FALSE;
 					continue;
 				}
 
@@ -1904,7 +1904,7 @@ public:
 		strRet += EXTVAL(RunningLimitTime);
 		strRet += EXTVAL(MemoryUsageLimit);
 		strRet += EXTVAL(WindowCountLimit);
-		strRet += EXTVAL(EnableMediaAccess);
+		strRet += EXTVAL(EnableMediaAccessByApproval);
 
 		//リダイレクト設定
 		strRet += EXTVAL(EnableURLRedirect);
@@ -2004,7 +2004,7 @@ public:
 
 	inline int GetMemoryUsageLimit() { return MemoryUsageLimit; }
 	inline int GetWindowCountLimit() { return WindowCountLimit; }
-	inline BOOL IsMediaAccess() { return EnableMediaAccess; }
+	inline BOOL IsMediaAccessByApproval() { return EnableMediaAccessByApproval; }
 
 	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
 	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
@@ -2087,7 +2087,7 @@ public:
 
 	inline void SetMemoryUsageLimit(DWORD dVal) { MemoryUsageLimit = dVal; }
 	inline void SetWindowCountLimit(DWORD dVal) { WindowCountLimit = dVal; }
-	inline void SetEnableMediaAccess(DWORD dVal) { EnableMediaAccess = dVal ? 1 : 0; }
+	inline void SetEnableMediaAccessByApproval(DWORD dVal) { EnableMediaAccessByApproval = dVal ? 1 : 0; }
 
 	inline void SetStartURL(LPCTSTR str) { StartURL = str; }
 	inline void SetEnforceInitParam(LPCTSTR str) { EnforceInitParam = str; }
