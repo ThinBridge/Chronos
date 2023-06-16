@@ -1823,8 +1823,9 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 
 	CString confirmMessage;
 	CString enableMediaConfirmation;
+	CString requestOrigin = requesting_origin.c_str();
 	enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
-	confirmMessage.Format(enableMediaConfirmation, requesting_origin.c_str());
+	confirmMessage.Format(enableMediaConfirmation, (LPCTSTR)requestOrigin);
 	confirmMessage += "\n";
 
 #define ADD_PERMISSON_MESSAGE(permission, messageId) \
@@ -1850,6 +1851,17 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 		m_originAndPermissionsCache[permissionInfo] = false;
 		return false;
 	}
+
+	
+	DebugWndLogData dwLogData;
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
+	dwLogData.mFUNCTION_NAME = _T("OnRequestMediaAccessPermission");
+	dwLogData.mMESSAGE1 = requestOrigin;
+	dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), frame->GetName().c_str());
+	dwLogData.mMESSAGE3.Format(_T("Approved permission type:%d"), requested_permissions);
+	theApp.AppendDebugViewLog(dwLogData);
+	theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_URL);
+
 	m_originAndPermissionsCache[permissionInfo] = true;
 	callback->Continue(requested_permissions);
 	return true;
