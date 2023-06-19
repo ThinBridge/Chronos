@@ -5,6 +5,8 @@
 class DlgCertification : public CDialogEx
 {
 	DECLARE_DYNAMIC(DlgCertification)
+private:
+	CString GetSerialNumberAsHexString(CefRefPtr<CefX509Certificate> x509Certificate);
 
 public:
 	DlgCertification(CWnd* pParent = nullptr);   // 標準コンストラクター
