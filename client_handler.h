@@ -42,7 +42,8 @@ class ClientHandler : public CefClient,
 		      public CefRequestHandler,
 		      public CefResourceRequestHandler,
 		      public CefJSDialogHandler,
-		      public CefDragHandler
+		      public CefDragHandler,
+		      public CefPermissionHandler
 {
 public:
 	// Interface implemented to handle off-screen rendering.
@@ -71,6 +72,7 @@ public:
 	virtual CefRefPtr<CefRequestHandler> GetRequestHandler() override { return this; }
 	virtual CefRefPtr<CefJSDialogHandler> GetJSDialogHandler() override { return this; }
 	virtual CefRefPtr<CefDragHandler> GetDragHandler() override { return this; }
+	virtual CefRefPtr<CefPermissionHandler> GetPermissionHandler() override { return this; }
 
 	// CefLifeSpanHandler methods
 	virtual bool DoClose(CefRefPtr<CefBrowser> browser) override;
@@ -159,6 +161,12 @@ public:
 				 DragOperationsMask mask) override;
 
 	virtual void OnResetDialogState(CefRefPtr<CefBrowser> browser) override;
+
+	virtual bool OnRequestMediaAccessPermission(CefRefPtr<CefBrowser> browser,
+						    CefRefPtr<CefFrame> frame,
+						    const CefString& requesting_origin,
+						    uint32 requested_permissions,
+						    CefRefPtr<CefMediaAccessCallback> callback) override;
 
 	void EmptyWindowClose(CefRefPtr<CefBrowser> browser)
 	{
@@ -277,6 +285,8 @@ protected:
 
 	// Include the default locking implementation.
 	//IMPLEMENT_LOCKING(ClientHandler);
+private:
+	std::map<std::tuple<CefString, uint32>, bool> m_originAndPermissionsCache;
 };
 class AppRenderer : public CefApp, public CefRenderProcessHandler
 {

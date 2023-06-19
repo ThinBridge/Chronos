@@ -287,6 +287,12 @@
 #define ID_DEBUG_CONFIRM_SAVE_RESULT                 426
 #define ID_DEBUG_ALERT_SAVE_FAILED                   427
 #define IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT     428
+#define ID_ENABLE_MEDIA_CONFIRMATION                 429
+#define ID_ENABLE_MEDIA_MIC                          430
+#define ID_ENABLE_MEDIA_VIDEO                        431
+#define ID_ENABLE_MEDIA_DESCTOP_AUDIO                432
+#define ID_ENABLE_MEDIA_DESKTOP_AUDIO                432
+#define ID_ENABLE_MEDIA_DESKTOP_VIDEO                433
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002

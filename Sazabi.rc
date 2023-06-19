@@ -1053,6 +1053,9 @@ BEGIN
                             "ファイルの保存に失敗しました。\n\n別のプログラムがファイルを開いているか、書込権限が不足しています。操作を完了できません。ファイルを閉じてから再実行してください。\n\n%s"
     IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
                             "起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"
+    ID_ENABLE_MEDIA_CONFIRMATION "%s は次の許可を求めています。許可しますか？"
+    ID_ENABLE_MEDIA_MIC    "マイクの使用"
+    ID_ENABLE_MEDIA_VIDEO  "ビデオの使用"
 END
 
 STRINGTABLE
@@ -1331,6 +1334,12 @@ BEGIN
     ID_INFO_DLG_LIST_10_0   "10.0秒"
     ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "「開封済みにする」を表示しない"
     ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "「開封済みにする」を表示する"
+END
+
+STRINGTABLE
+BEGIN
+    ID_ENABLE_MEDIA_DESKTOP_AUDIO "デスクトップオーディオの取り込み"
+    ID_ENABLE_MEDIA_DESKTOP_VIDEO "デスクトップの画面の取り込み"
 END
 
 #endif    // 日本語 (日本) resources
@@ -2379,6 +2388,10 @@ BEGIN
                             "Failed to save the file.\n\nIt may be held by some other applications, or missing writing permission.\nCould not complete the operation. Please retry after closing the file."
     IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
                             "Closing application due to max out the limit of the running time (maximum = %d min.)\nPlease restart the application."
+    ID_ENABLE_MEDIA_CONFIRMATION 
+                            "Do you allow %s to use the following media?"
+    ID_ENABLE_MEDIA_MIC    "Your microphone"
+    ID_ENABLE_MEDIA_VIDEO  "Your video"
 END
 
 STRINGTABLE
@@ -2672,6 +2685,12 @@ BEGIN
     ID_INFO_DLG_LIST_10_0   "10.0 sec."
     ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "Hide ""Mark as Opened"""
     ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "Show ""Mark as Opened"""
+END
+
+STRINGTABLE
+BEGIN
+    ID_ENABLE_MEDIA_DESKTOP_AUDIO "Your desktop audio"
+    ID_ENABLE_MEDIA_DESKTOP_VIDEO "Your desktop video"
 END
 
 #endif    // 英語 resources

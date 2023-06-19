@@ -1797,6 +1797,75 @@ void ClientHandler::OnResetDialogState(CefRefPtr<CefBrowser> browser)
 {
 }
 
+bool ClientHandler::OnRequestMediaAccessPermission(
+    CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame,
+    const CefString& requesting_origin,
+    uint32 requested_permissions,
+    CefRefPtr<CefMediaAccessCallback> callback)
+{
+	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
+		return false;
+	if (!theApp.m_AppSettings.IsMediaAccessByApproval())
+		return false;
+
+	std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);
+	std::map<std::tuple<CefString, uint32>, bool>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
+	if (cachedPermissions != m_originAndPermissionsCache.end())
+	{
+		bool accepted = cachedPermissions->second;
+		if (accepted)
+		{
+			callback->Continue(requested_permissions);
+		}
+		return accepted;
+	}
+
+	CString confirmMessage;
+	CString enableMediaConfirmation;
+	CString requestOrigin = requesting_origin.c_str();
+	enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
+	confirmMessage.Format(enableMediaConfirmation, (LPCTSTR)requestOrigin);
+	confirmMessage += "\n";
+
+#define ADD_PERMISSON_MESSAGE(permission, messageId) \
+	if (requested_permissions & permission)      \
+	{                                            \
+		confirmMessage += "\n";              \
+		CString mediaType;                   \
+		mediaType.LoadString(messageId);     \
+		confirmMessage += mediaType;         \
+	}
+
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC);
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO);
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO);
+	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO);
+
+#undef ADD_PERMISSON_MESSAGE
+
+	HWND hWindow = GetSafeParentWnd(browser);
+	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
+	if (iRet == IDNO)
+	{
+		m_originAndPermissionsCache[permissionInfo] = false;
+		return false;
+	}
+	
+	DebugWndLogData dwLogData;
+	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
+	dwLogData.mFUNCTION_NAME = _T("OnRequestMediaAccessPermission");
+	dwLogData.mMESSAGE1 = requestOrigin;
+	dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), frame->GetName().c_str());
+	dwLogData.mMESSAGE3.Format(_T("Approved permission type:%d"), requested_permissions);
+	theApp.AppendDebugViewLog(dwLogData);
+	theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_URL);
+
+	m_originAndPermissionsCache[permissionInfo] = true;
+	callback->Continue(requested_permissions);
+	return true;
+}
+
 bool ClientHandler::OnJSDialog(CefRefPtr<CefBrowser> browser,
 			       const CefString& origin_url,
 			       JSDialogType dialog_type,
