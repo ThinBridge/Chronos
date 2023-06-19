@@ -87,7 +87,6 @@
 #define IDI_ICON2                       225
 #define IDI_ICON3                       226
 #define IDS_STRING_STARTING_BROWSER     227
-#define IDD_DIALOG7                     227
 #define IDD_DLG_CERTIFICATION           227
 #define IDS_STRING_SETTINGS_DLG_TITLE_GEN 228
 #define IDS_STRING_SETTINGS_DLG_TITLE_DSP 229

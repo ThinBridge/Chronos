@@ -19,4 +19,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
 	DECLARE_MESSAGE_MAP()
+public:
+	std::vector<CefRefPtr<CefX509Certificate>> m_X509CertificateList;
+	afx_msg void OnCbnSelchangeCombo1();
+	CComboBox comboBoxValues;
 };

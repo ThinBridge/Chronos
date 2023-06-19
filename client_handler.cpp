@@ -28,6 +28,7 @@
 #include "client_util.h"
 #include "DlgAuth.h"
 #include "sbcommon.h"
+#include "DlgCertification.h"
 
 #pragma warning(push, 0)
 #pragma warning(disable : 26812)
@@ -1737,11 +1738,23 @@ bool ClientHandler::OnSelectClientCertificate(
 	const X509CertificateList& certificates,
 	CefRefPtr<CefSelectClientCertificateCallback> callback)
 {
-	if (!certificates.empty() && certificates[0] != nullptr)
+	if (certificates.empty())
+		return false;
+
+	HWND hWindow = GetSafeParentWnd(browser);
+	if (SafeWnd(hWindow))
 	{
-		callback->Select(certificates[0]);
-		return true;
+		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
+		DlgCertification Dlg(CWnd::FromHandle(hWindow));
+		Dlg.m_X509CertificateList = certificates;
+		Dlg.DoModal();
 	}
+
+	// if (!certificates.empty() && certificates[0] != nullptr)
+	// {
+	// 	callback->Select(certificates[0]);
+	// 	return true;
+	//}
 	return false;
 }
 
