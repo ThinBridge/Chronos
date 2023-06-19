@@ -182,6 +182,7 @@
     <ClCompile Include="CTabWnd.cpp" />
     <ClCompile Include="CWnd.cpp" />
     <ClCompile Include="DlgAuth.cpp" />
+    <ClCompile Include="DlgCertification.cpp" />
     <ClCompile Include="DlgDebugWnd.cpp" />
     <ClCompile Include="DlgDL.cpp" />
     <ClCompile Include="DlgDomainDetail.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="CTabWnd.h" />
     <ClInclude Include="CWnd.h" />
     <ClInclude Include="DlgAuth.h" />
+    <ClInclude Include="DlgCertification.h" />
     <ClInclude Include="DlgDebugWnd.h" />
     <ClInclude Include="DlgDL.h" />
     <ClInclude Include="DlgDomainDetail.h" />
