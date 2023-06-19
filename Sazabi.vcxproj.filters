@@ -53,7 +53,9 @@
     <ClCompile Include="DlgSetting.cpp">
       <Filter>DLG</Filter>
     </ClCompile>
-    <ClCompile Include="DlgCertification.cpp" />
+    <ClCompile Include="DlgCertification.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -145,7 +147,9 @@
     <ClInclude Include="DlgSetting.h">
       <Filter>DLG</Filter>
     </ClInclude>
-    <ClInclude Include="DlgCertification.h" />
+    <ClInclude Include="DlgCertification.h">
+      <Filter>DLG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\Sazabi.ico">
