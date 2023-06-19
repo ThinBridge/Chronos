@@ -1451,57 +1451,57 @@ public:
 					continue;
 				if (strTemp2.CompareNoCase(_T("EnableAdvancedLogMode")) == 0)
 				{
-					EnableAdvancedLogMode = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableAdvancedLogMode = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableAdvancedLogVerboseMode")) == 0)
 				{
-					EnableAdvancedLogVerboseMode = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableAdvancedLogVerboseMode = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("ShowLogo")) == 0)
 				{
-					ShowLogo = strTemp3 == _T("1") ? TRUE : FALSE;
+					ShowLogo = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableTab")) == 0)
 				{
-					EnableTab = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableTab = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnablePDFExtension")) == 0)
 				{
-					EnablePDFExtension = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnablePDFExtension = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableMemcache")) == 0)
 				{
-					EnableMemcache = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableMemcache = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableGPURendering")) == 0)
 				{
-					EnableGPURendering = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableGPURendering = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableCrashRecovery")) == 0)
 				{
-					EnableCrashRecovery = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableCrashRecovery = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableMultipleInstance")) == 0)
 				{
-					EnableMultipleInstance = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableMultipleInstance = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableRebar")) == 0)
 				{
-					EnableRebar = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableRebar = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableStatusbar")) == 0)
 				{
-					EnableStatusbar = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableStatusbar = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("AdvancedLogLevel")) == 0)
@@ -1595,25 +1595,25 @@ public:
 
 				if (strTemp2.CompareNoCase(_T("EnableDownloadRestriction")) == 0)
 				{
-					EnableDownloadRestriction = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableDownloadRestriction = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
 				if (strTemp2.CompareNoCase(_T("EnableUploadRestriction")) == 0)
 				{
-					EnableUploadRestriction = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableUploadRestriction = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
 				if (strTemp2.CompareNoCase(_T("EnableDeleteCache")) == 0)
 				{
-					EnableDeleteCache = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableDeleteCache = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
 				if (strTemp2.CompareNoCase(_T("EnableRunningTime")) == 0)
 				{
-					EnableRunningTime = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableRunningTime = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("RunningLimitTime")) == 0)
@@ -1626,45 +1626,45 @@ public:
 
 				if (strTemp2.CompareNoCase(_T("EnableURLRedirect")) == 0)
 				{
-					EnableURLRedirect = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableURLRedirect = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
 				if (strTemp2.CompareNoCase(_T("EnableURLFilter")) == 0)
 				{
-					EnableURLFilter = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableURLFilter = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
 				if (strTemp2.CompareNoCase(_T("EnableCustomScript")) == 0)
 				{
-					EnableCustomScript = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableCustomScript = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
 				if (strTemp2.CompareNoCase(_T("EnableLogging")) == 0)
 				{
-					EnableLogging = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableUploadLogging")) == 0)
 				{
-					EnableUploadLogging = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableUploadLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableDownloadLogging")) == 0)
 				{
-					EnableDownloadLogging = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableDownloadLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableBrowsingLogging")) == 0)
 				{
-					EnableBrowsingLogging = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableBrowsingLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableAccessAllLogging")) == 0)
 				{
-					EnableAccessAllLogging = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableAccessAllLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
@@ -1681,12 +1681,12 @@ public:
 				}
 				if (strTemp2.CompareNoCase(_T("EnableTransferLog")) == 0)
 				{
-					EnableTransferLog = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableTransferLog = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("DisableOpendOpAlert")) == 0)
 				{
-					DisableOpendOpAlert = strTemp3 == _T("1") ? TRUE : FALSE;
+					DisableOpendOpAlert = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("DisableExitOpAlert")) == 0)
@@ -1711,17 +1711,17 @@ public:
 				}
 				if (strTemp2.CompareNoCase(_T("ShowUploadTab")) == 0)
 				{
-					ShowUploadTab = strTemp3 == _T("1") ? TRUE : FALSE;
+					ShowUploadTab = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableUploadSync")) == 0)
 				{
-					EnableUploadSync = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableUploadSync = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableUploadSyncMirror")) == 0)
 				{
-					EnableUploadSyncMirror = strTemp3 == _T("1") ? TRUE : FALSE;
+					EnableUploadSyncMirror = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("UploadSyncInterval")) == 0)
@@ -1767,12 +1767,12 @@ public:
 				}
 				if (strTemp2.CompareNoCase(_T("TASK_LIST_TYPE")) == 0)
 				{
-					TASK_LIST_TYPE = strTemp3 == _T("1") ? TRUE : FALSE;
+					TASK_LIST_TYPE = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("TASK_LIST_MODE_DETAIL")) == 0)
 				{
-					TASK_LIST_MODE_DETAIL = strTemp3 == _T("1") ? TRUE : FALSE;
+					TASK_LIST_MODE_DETAIL = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 			}
