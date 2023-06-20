@@ -175,7 +175,7 @@ void CDlgCertification::OnCbnSelchangeCertificationCombo()
 
 void CDlgCertification::OnBnClickedOk()
 {
-	// DoModalなどで結果を返し終えた後、comboBoxValuesなどは解放されてしまって参照できない。
+	// DoModalなどで結果を返し終えた後、certificationComboBoxなどが解放されてしまって参照できない。
 	// なので、このタイミングでクラス変数に結果を代入しておく。
 	int curSel = certificationComboBox.GetCurSel();
 	*m_selectedIndex = curSel;
