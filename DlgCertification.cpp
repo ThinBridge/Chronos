@@ -22,8 +22,8 @@ DlgCertification::~DlgCertification()
 void DlgCertification::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_COMBO_CERTIFICATION, comboBoxValues);
-	comboBoxValues.Clear();
+	DDX_Control(pDX, IDC_COMBO_CERTIFICATION, certificationComboBox);
+	certificationComboBox.Clear();
 	for (CefRefPtr<CefX509Certificate> x509Certificate : m_X509CertificateList)
 	{
 		CString serialNumber = GetSerialNumberAsHexString(x509Certificate);
@@ -33,9 +33,9 @@ void DlgCertification::DoDataExchange(CDataExchange* pDX)
 		    (LPCTSTR)x509Certificate->GetSubject()->GetDisplayName().c_str(),
 		    (LPCTSTR)serialNumber);
 
-		comboBoxValues.AddString(displayItemName);
+		certificationComboBox.AddString(displayItemName);
 	}
-	comboBoxValues.SetCurSel(0);
+	certificationComboBox.SetCurSel(0);
 	OnCbnSelchangeCombo1();
 }
 
@@ -66,7 +66,7 @@ CString DlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificat
 
 int DlgCertification::GetSelectedIndex()
 {
-	return comboBoxValues.GetCurSel();
+	return certificationComboBox.GetCurSel();
 }
 
 BEGIN_MESSAGE_MAP(DlgCertification, CDialogEx)
@@ -145,7 +145,7 @@ CString DlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipa
 
 void DlgCertification::OnCbnSelchangeCombo1()
 {
-	int curSel = comboBoxValues.GetCurSel();
+	int curSel = certificationComboBox.GetCurSel();
 	CefRefPtr<CefX509Certificate> x509Certificate = m_X509CertificateList[curSel];
 
 	CString certificationDetail;
@@ -177,7 +177,7 @@ void DlgCertification::OnBnClickedOk()
 {
 	// DoModalなどで結果を返し終えた後、comboBoxValuesなどは解放されてしまって参照できない。
 	// なので、このタイミングでクラス変数に結果を代入しておく。
-	int curSel = comboBoxValues.GetCurSel();
+	int curSel = certificationComboBox.GetCurSel();
 	*m_selectedIndex = curSel;
 	CDialogEx::OnOK();
 }

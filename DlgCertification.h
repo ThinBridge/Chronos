@@ -30,7 +30,7 @@ protected:
 public:
 	std::vector<CefRefPtr<CefX509Certificate>> m_X509CertificateList;
 	afx_msg void OnCbnSelchangeCombo1();
-	CComboBox comboBoxValues;
+	CComboBox certificationComboBox;
 	int* m_selectedIndex;
 	afx_msg void OnBnClickedOk();
 };
