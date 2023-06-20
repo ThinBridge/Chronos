@@ -1,10 +1,10 @@
 ﻿#pragma once
 
-// DlgCertification ダイアログ
+// CDlgCertification ダイアログ
 
-class DlgCertification : public CDialogEx
+class CDlgCertification : public CDialogEx
 {
-	DECLARE_DYNAMIC(DlgCertification)
+	DECLARE_DYNAMIC(CDlgCertification)
 private:
 	CString GetSerialNumberAsHexString(CefRefPtr<CefX509Certificate> x509Certificate);
 	CString GetTimeString(const CefTime& value);
@@ -14,9 +14,9 @@ protected:
 	void OnOk();
 
 public:
-	DlgCertification(CWnd* pParent = nullptr);   // 標準コンストラクター
-	virtual ~DlgCertification();
-	int DlgCertification::GetSelectedIndex();
+	CDlgCertification(CWnd* pParent = nullptr);   // 標準コンストラクター
+	virtual ~CDlgCertification();
+	int CDlgCertification::GetSelectedIndex();
 
 // ダイアログ データ
 #ifdef AFX_DESIGN_TIME
@@ -29,7 +29,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	std::vector<CefRefPtr<CefX509Certificate>> m_X509CertificateList;
-	afx_msg void OnCbnSelchangeCombo1();
+	afx_msg void OnCbnSelchangeCertificationCombo();
 	CComboBox certificationComboBox;
 	int* m_selectedIndex;
 	afx_msg void OnBnClickedOk();

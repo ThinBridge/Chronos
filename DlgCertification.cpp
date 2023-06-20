@@ -1,25 +1,25 @@
-﻿// DlgCertification.cpp : 実装ファイル
+﻿// CDlgCertification.cpp : 実装ファイル
 //
 #include "stdafx.h"
 #include "Sazabi.h"
 #include "DlgCertification.h"
 #include "afxdialogex.h"
 
-// DlgCertification ダイアログ
+// CDlgCertification ダイアログ
 
-IMPLEMENT_DYNAMIC(DlgCertification, CDialogEx)
+IMPLEMENT_DYNAMIC(CDlgCertification, CDialogEx)
 
-DlgCertification::DlgCertification(CWnd* pParent /*=nullptr*/)
+CDlgCertification::CDlgCertification(CWnd* pParent /*=nullptr*/)
     : CDialogEx(IDD_DLG_CERTIFICATION, pParent)
 {
 	m_selectedIndex = 0;
 }
 
-DlgCertification::~DlgCertification()
+CDlgCertification::~CDlgCertification()
 {
 }
 
-void DlgCertification::DoDataExchange(CDataExchange* pDX)
+void CDlgCertification::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBO_CERTIFICATION, certificationComboBox);
@@ -36,10 +36,10 @@ void DlgCertification::DoDataExchange(CDataExchange* pDX)
 		certificationComboBox.AddString(displayItemName);
 	}
 	certificationComboBox.SetCurSel(0);
-	OnCbnSelchangeCombo1();
+	OnCbnSelchangeCertificationCombo();
 }
 
-CString DlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificate> x509Certificate)
+CString CDlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificate> x509Certificate)
 {
 	auto serialNumber = x509Certificate->GetSerialNumber();
 	auto size = serialNumber->GetSize();
@@ -64,38 +64,26 @@ CString DlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificat
 	return serialNumberAsHexString;
 }
 
-int DlgCertification::GetSelectedIndex()
+CString CDlgCertification::GetTimeString(const CefTime& value)
 {
-	return certificationComboBox.GetCurSel();
+	if (value.GetTimeT() == 0)
+		return "*";
+	if (value.month < 1 || value.month > 12)
+		return "*";
+
+	CString timeString;
+	// CefTime is UTC.
+	timeString.Format(_T("%d-%02d-%02dT%02d:%02d:%02dZ"),
+			  value.year,
+			  value.month,
+			  value.day_of_month,
+			  value.hour,
+			  value.minute,
+			  value.second);
+	return timeString;
 }
 
-BEGIN_MESSAGE_MAP(DlgCertification, CDialogEx)
-	ON_CBN_SELCHANGE(IDC_COMBO_CERTIFICATION, &DlgCertification::OnCbnSelchangeCombo1)
-	ON_BN_CLICKED(IDOK, &DlgCertification::OnBnClickedOk)
-END_MESSAGE_MAP()
-
-// DlgCertification メッセージ ハンドラー
-
-CString DlgCertification::GetTimeString(const CefTime& value)
-{
-  if (value.GetTimeT() == 0)
-	  return "*";
-  if (value.month < 1 || value.month > 12)
-	  return "*";
-
-  CString timeString;
-  // CefTime is UTC.
-  timeString.Format(_T("%d-%02d-%02dT%02d:%02d:%02dZ"),
-		    value.year,
-		    value.month,
-		    value.day_of_month,
-		    value.hour,
-		    value.minute,
-		    value.second);
-  return timeString;
-}
-
-CString DlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipal> principal)
+CString CDlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipal> principal)
 {
 	CString principalString;
 	std::vector<CefString> values;
@@ -143,7 +131,19 @@ CString DlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipa
 	return principalString;
 }
 
-void DlgCertification::OnCbnSelchangeCombo1()
+int CDlgCertification::GetSelectedIndex()
+{
+	return certificationComboBox.GetCurSel();
+}
+
+BEGIN_MESSAGE_MAP(CDlgCertification, CDialogEx)
+	ON_CBN_SELCHANGE(IDC_COMBO_CERTIFICATION, &CDlgCertification::OnCbnSelchangeCertificationCombo)
+	ON_BN_CLICKED(IDOK, &CDlgCertification::OnBnClickedOk)
+END_MESSAGE_MAP()
+
+// CDlgCertification メッセージ ハンドラー
+
+void CDlgCertification::OnCbnSelchangeCertificationCombo()
 {
 	int curSel = certificationComboBox.GetCurSel();
 	CefRefPtr<CefX509Certificate> x509Certificate = m_X509CertificateList[curSel];
@@ -173,7 +173,7 @@ void DlgCertification::OnCbnSelchangeCombo1()
 	SetDlgItemText(IDC_EDIT_CERTIFICATION, certificationDetail);
 }
 
-void DlgCertification::OnBnClickedOk()
+void CDlgCertification::OnBnClickedOk()
 {
 	// DoModalなどで結果を返し終えた後、comboBoxValuesなどは解放されてしまって参照できない。
 	// なので、このタイミングでクラス変数に結果を代入しておく。
