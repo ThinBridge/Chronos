@@ -12,6 +12,7 @@ IMPLEMENT_DYNAMIC(DlgCertification, CDialogEx)
 DlgCertification::DlgCertification(CWnd* pParent /*=nullptr*/)
     : CDialogEx(IDD_DLG_CERTIFICATION, pParent)
 {
+	m_selectedIndex = 0;
 }
 
 DlgCertification::~DlgCertification()
@@ -44,7 +45,7 @@ CString DlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificat
 	auto size = serialNumber->GetSize();
 
 	CString serialNumberAsHexString;
-	for (int i = 0; i < size; i++)
+	for (size_t i = 0; i < size; i++)
 	{
 		short buf = 0;
 		int gotSize = serialNumber->GetData(&buf, 1, i);
@@ -55,7 +56,9 @@ CString DlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificat
 		hex.Format(_T("%02X"), buf);
 
 		if (i > 0)
+		{
 			serialNumberAsHexString += ":";
+		}
 		serialNumberAsHexString += hex;
 	}
 	return serialNumberAsHexString;
@@ -100,7 +103,7 @@ CString DlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipa
 	principalString += principal->GetCommonName().c_str();
 	principalString += _T(", O=");
 	principal->GetOrganizationNames(values);
-	for (int i = 0; i < values.size(); i++)
+	for (size_t i = 0; i < values.size(); i++)
 	{
 		CefString value = values[i];
 		principalString += value.c_str();
@@ -111,7 +114,7 @@ CString DlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipa
 	}
 	principalString += _T(", OU=");
 	principal->GetOrganizationUnitNames(values);
-	for (int i = 0; i < values.size(); i++)
+	for (size_t i = 0; i < values.size(); i++)
 	{
 		CefString value = values[i];
 		principalString += value.c_str();
@@ -122,7 +125,7 @@ CString DlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipa
 	}
 	principalString += _T(", STREET=");
 	principal->GetStreetAddresses(values);
-	for (int i = 0; i < values.size(); i++)
+	for (size_t i = 0; i < values.size(); i++)
 	{
 		CefString value = values[i];
 		principalString += value.c_str();
@@ -172,8 +175,9 @@ void DlgCertification::OnCbnSelchangeCombo1()
 
 void DlgCertification::OnBnClickedOk()
 {
+	// DoModalなどで結果を返し終えた後、comboBoxValuesなどは解放されてしまって参照できない。
+	// なので、このタイミングでクラス変数に結果を代入しておく。
 	int curSel = comboBoxValues.GetCurSel();
 	*m_selectedIndex = curSel;
-	// TODO: ここにコントロール通知ハンドラー コードを追加します。
 	CDialogEx::OnOK();
 }
