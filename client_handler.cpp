@@ -1253,6 +1253,7 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame>
 			}
 		}
 	}
+	
 	// call parent
 	CefLoadHandler::OnLoadEnd(browser, frame, httpStatusCode);
 }
@@ -1745,16 +1746,17 @@ bool ClientHandler::OnSelectClientCertificate(
 	if (SafeWnd(hWindow))
 	{
 		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
-		DlgCertification Dlg(CWnd::FromHandle(hWindow));
-		Dlg.m_X509CertificateList = certificates;
-		Dlg.DoModal();
+		int selectedIndex = 0;
+		DlgCertification dlg(CWnd::FromHandle(hWindow));
+		dlg.m_X509CertificateList = certificates;
+		dlg.m_selectedIndex = &selectedIndex;
+		INT_PTR iResult = dlg.DoModal();
+		if (iResult == IDOK)
+		{
+			callback->Select(certificates[selectedIndex]);
+			return true;
+		}
 	}
-
-	// if (!certificates.empty() && certificates[0] != nullptr)
-	// {
-	// 	callback->Select(certificates[0]);
-	// 	return true;
-	//}
 	return false;
 }
 

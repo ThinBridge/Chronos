@@ -5,15 +5,13 @@
 #include "DlgCertification.h"
 #include "afxdialogex.h"
 
-
 // DlgCertification ダイアログ
 
 IMPLEMENT_DYNAMIC(DlgCertification, CDialogEx)
 
 DlgCertification::DlgCertification(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_DLG_CERTIFICATION, pParent)
+    : CDialogEx(IDD_DLG_CERTIFICATION, pParent)
 {
-
 }
 
 DlgCertification::~DlgCertification()
@@ -30,13 +28,14 @@ void DlgCertification::DoDataExchange(CDataExchange* pDX)
 		CString serialNumber = GetSerialNumberAsHexString(x509Certificate);
 		CString displayItemName;
 		displayItemName.Format(
-			_T("%s [%s]"), 
-			(LPCTSTR)x509Certificate->GetSubject()->GetDisplayName().c_str(),
-			(LPCTSTR)serialNumber);
+		    _T("%s [%s]"),
+		    (LPCTSTR)x509Certificate->GetSubject()->GetDisplayName().c_str(),
+		    (LPCTSTR)serialNumber);
 
 		comboBoxValues.AddString(displayItemName);
 	}
 	comboBoxValues.SetCurSel(0);
+	OnCbnSelchangeCombo1();
 }
 
 CString DlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificate> x509Certificate)
@@ -62,12 +61,84 @@ CString DlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificat
 	return serialNumberAsHexString;
 }
 
+int DlgCertification::GetSelectedIndex()
+{
+	return comboBoxValues.GetCurSel();
+}
+
 BEGIN_MESSAGE_MAP(DlgCertification, CDialogEx)
 	ON_CBN_SELCHANGE(IDC_COMBO1, &DlgCertification::OnCbnSelchangeCombo1)
+	ON_BN_CLICKED(IDOK, &DlgCertification::OnBnClickedOk)
 END_MESSAGE_MAP()
 
-
 // DlgCertification メッセージ ハンドラー
+
+CString DlgCertification::GetTimeString(const CefTime& value)
+{
+  if (value.GetTimeT() == 0)
+	  return "*";
+  if (value.month < 1 || value.month > 12)
+	  return "*";
+
+  CString timeString;
+  // CefTime is UTC.
+  timeString.Format(_T("%d-%02d-%02dT%02d:%02d:%02dZ"),
+		    value.year,
+		    value.month,
+		    value.day_of_month,
+		    value.hour,
+		    value.minute,
+		    value.second);
+  return timeString;
+}
+
+CString DlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincipal> principal)
+{
+	CString principalString;
+	std::vector<CefString> values;
+	principalString += _T("CN=");
+	principalString += principal->GetCommonName().c_str();
+	principalString += _T(", O=");
+	principal->GetOrganizationNames(values);
+	for (int i = 0; i < values.size(); i++)
+	{
+		CefString value = values[i];
+		principalString += value.c_str();
+		if (i > 0)
+		{
+			principalString += _T(" ");
+		}
+	}
+	principalString += _T(", OU=");
+	principal->GetOrganizationUnitNames(values);
+	for (int i = 0; i < values.size(); i++)
+	{
+		CefString value = values[i];
+		principalString += value.c_str();
+		if (i > 0)
+		{
+			principalString += _T(" ");
+		}
+	}
+	principalString += _T(", STREET=");
+	principal->GetStreetAddresses(values);
+	for (int i = 0; i < values.size(); i++)
+	{
+		CefString value = values[i];
+		principalString += value.c_str();
+		if (i > 0)
+		{
+			principalString += _T("-");
+		}
+	}
+	principalString += _T(", L=");
+	principalString += principal->GetLocalityName().c_str();
+	principalString += _T(", ST=");
+	principalString += principal->GetStateOrProvinceName().c_str();
+	principalString += _T(", C");
+	principalString += principal->GetCountryName().c_str();
+	return principalString;
+}
 
 void DlgCertification::OnCbnSelchangeCombo1()
 {
@@ -75,57 +146,34 @@ void DlgCertification::OnCbnSelchangeCombo1()
 	CefRefPtr<CefX509Certificate> x509Certificate = m_X509CertificateList[curSel];
 
 	CString certificationDetail;
-	std::vector<CefString> values;
-	certificationDetail += x509Certificate->GetSubject()->GetCommonName().c_str();
-	certificationDetail += _T("\n");
-	certificationDetail += x509Certificate->GetSubject()->GetCountryName().c_str();
-	certificationDetail += _T("\n");
-	x509Certificate->GetSubject()->GetDomainComponents(values);
-	for (int i = 0; i < values.size(); i++)
-	{
-		CefString value = values[i];
-		certificationDetail += value.c_str();
-		if (i > 0)
-		{
-			certificationDetail += _T(",");
-		}
-	}
-	certificationDetail += _T("\n");
-	certificationDetail += x509Certificate->GetSubject()->GetLocalityName().c_str();
-	certificationDetail += _T("\n");
-	x509Certificate->GetSubject()->GetOrganizationNames(values);
-	for (int i = 0; i < values.size(); i++)
-	{
-		CefString value = values[i];
-		certificationDetail += value.c_str();
-		if (i > 0)
-		{
-			certificationDetail += _T(",");
-		}
-	}
-	certificationDetail += _T("\n");
-	x509Certificate->GetSubject()->GetOrganizationUnitNames(values);
-	for (int i = 0; i < values.size(); i++)
-	{
-		CefString value = values[i];
-		certificationDetail += value.c_str();
-		if (i > 0)
-		{
-			certificationDetail += _T(",");
-		}
-	}
-	certificationDetail += _T("\n");
-	certificationDetail += x509Certificate->GetSubject()->GetStateOrProvinceName().c_str();
-	certificationDetail += _T("\n");
-	x509Certificate->GetSubject()->GetStreetAddresses(values);
-	for (int i = 0; i < values.size(); i++)
-	{
-		CefString value = values[i];
-		certificationDetail += value.c_str();
-		if (i > 0)
-		{
-			certificationDetail += _T(",");
-		}
-	}
+
+	certificationDetail += _T("発行元: ");
+	certificationDetail += GetPrincipalString(x509Certificate->GetIssuer());
+	certificationDetail += _T("\r\n");
+	certificationDetail += _T("発行先: ");
+	certificationDetail += GetPrincipalString(x509Certificate->GetSubject());
+	certificationDetail += _T("\r\n");
+	certificationDetail += _T("シリアル番号: ");
+	certificationDetail += GetSerialNumberAsHexString(x509Certificate);
+
+	CefTime validStart;
+	cef_time_from_basetime(x509Certificate->GetValidStart(), &validStart);
+	CString validStartTimeString = GetTimeString(validStart);
+	
+	CefTime validExpiry;
+	cef_time_from_basetime(x509Certificate->GetValidExpiry(), &validExpiry);
+	CString validExpiryString = GetTimeString(validExpiry);
+
+	certificationDetail += _T("\r\n");
+	certificationDetail += _T("有効期間: ") + validStartTimeString + _T(" - ") + validExpiryString;
+
 	SetDlgItemText(IDC_EDIT1, certificationDetail);
+}
+
+void DlgCertification::OnBnClickedOk()
+{
+	int curSel = comboBoxValues.GetCurSel();
+	*m_selectedIndex = curSel;
+	// TODO: ここにコントロール通知ハンドラー コードを追加します。
+	CDialogEx::OnOK();
 }
