@@ -1366,6 +1366,10 @@ STRINGTABLE
 BEGIN
     ID_ENABLE_MEDIA_DESKTOP_AUDIO "デスクトップオーディオの取り込み"
     ID_ENABLE_MEDIA_DESKTOP_VIDEO "デスクトップの画面の取り込み"
+    ID_CERTIFICATION_ISSUER "発行元: "
+    ID_CERTIFICATION_SUBJECT "発行先: "
+    ID_CERTIFICATION_SERIAL_NUMBER "シリアル番号: "
+    ID_CERTIFICATION_VALID_PERIOD "有効期間: "
 END
 
 #endif    // 日本語 (日本) resources
@@ -2742,6 +2746,10 @@ STRINGTABLE
 BEGIN
     ID_ENABLE_MEDIA_DESKTOP_AUDIO "Your desktop audio"
     ID_ENABLE_MEDIA_DESKTOP_VIDEO "Your desktop video"
+    ID_CERTIFICATION_ISSUER "Issuer: "
+    ID_CERTIFICATION_SUBJECT "Subject: "
+    ID_CERTIFICATION_SERIAL_NUMBER "Serial number: "
+    ID_CERTIFICATION_VALID_PERIOD "Valid period: "
 END
 
 #endif    // 英語 resources

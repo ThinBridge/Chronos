@@ -294,6 +294,11 @@
 #define ID_ENABLE_MEDIA_DESKTOP_AUDIO   432
 #define ID_ENABLE_MEDIA_DESKTOP_VIDEO   433
 #define IDD_DLG_CERTIFICATION           434
+#define ID_CERTIFICATION_ISSUER         435
+#define ID_CERTIFICATION_SUBJECT        436
+#define ID_CERTIFICATION_SERIAL_NUMBER  437
+#define IDS_CERTIFICATION_VALID_PERIOD  438
+#define ID_CERTIFICATION_VALID_PERIOD   438
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002
@@ -520,7 +525,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        435
+#define _APS_NEXT_RESOURCE_VALUE        439
 #define _APS_NEXT_COMMAND_VALUE         33015
 #define _APS_NEXT_CONTROL_VALUE         1096
 #define _APS_NEXT_SYMED_VALUE           104

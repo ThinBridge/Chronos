@@ -149,14 +149,18 @@ void CDlgCertification::OnCbnSelchangeCertificationCombo()
 	CefRefPtr<CefX509Certificate> x509Certificate = m_X509CertificateList[curSel];
 
 	CString certificationDetail;
+	CString title;
 
-	certificationDetail += _T("発行元: ");
+	title.LoadString(ID_CERTIFICATION_ISSUER);
+	certificationDetail += title;
 	certificationDetail += GetPrincipalString(x509Certificate->GetIssuer());
 	certificationDetail += _T("\r\n");
-	certificationDetail += _T("発行先: ");
+	title.LoadString(ID_CERTIFICATION_SUBJECT);
+	certificationDetail += title;
 	certificationDetail += GetPrincipalString(x509Certificate->GetSubject());
 	certificationDetail += _T("\r\n");
-	certificationDetail += _T("シリアル番号: ");
+	title.LoadString(ID_CERTIFICATION_SERIAL_NUMBER);
+	certificationDetail += title;
 	certificationDetail += GetSerialNumberAsHexString(x509Certificate);
 
 	CefTime validStart;
@@ -168,7 +172,8 @@ void CDlgCertification::OnCbnSelchangeCertificationCombo()
 	CString validExpiryString = GetTimeString(validExpiry);
 
 	certificationDetail += _T("\r\n");
-	certificationDetail += _T("有効期間: ") + validStartTimeString + _T(" - ") + validExpiryString;
+	title.LoadString(ID_CERTIFICATION_VALID_PERIOD);
+	certificationDetail += title + validStartTimeString + _T(" - ") + validExpiryString;
 
 	SetDlgItemText(IDC_CERTIFICATION_EDIT, certificationDetail);
 }
