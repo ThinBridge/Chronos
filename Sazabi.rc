@@ -576,8 +576,8 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,198,155,50,14
     PUSHBUTTON      "キャンセル",IDCANCEL,252,155,50,14
-    COMBOBOX        IDC_COMBO1,7,41,295,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_EDIT1,7,68,295,77,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_HSCROLL
+    COMBOBOX        IDC_COMBO_CERTIFICATION,7,41,295,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_CERTIFICATION,7,68,295,77,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_HSCROLL
     LTEXT           "このサイトはあなたの個人証明書を求めています:",IDC_STATIC,7,7,152,8,NOT WS_GROUP
     LTEXT           "使用する証明書を選択してください:",IDC_STATIC,7,28,112,8,NOT WS_GROUP
 END
@@ -1080,8 +1080,8 @@ BEGIN
     IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
                             "起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"
     ID_ENABLE_MEDIA_CONFIRMATION "%s は次の許可を求めています。許可しますか？"
-    ID_ENABLE_MEDIA_MIC    "マイクの使用"
-    ID_ENABLE_MEDIA_VIDEO  "ビデオの使用"
+    ID_ENABLE_MEDIA_MIC     "マイクの使用"
+    ID_ENABLE_MEDIA_VIDEO   "ビデオの使用"
 END
 
 STRINGTABLE
@@ -2414,10 +2414,9 @@ BEGIN
                             "Failed to save the file.\n\nIt may be held by some other applications, or missing writing permission.\nCould not complete the operation. Please retry after closing the file."
     IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
                             "Closing application due to max out the limit of the running time (maximum = %d min.)\nPlease restart the application."
-    ID_ENABLE_MEDIA_CONFIRMATION 
-                            "Do you allow %s to use the following media?"
-    ID_ENABLE_MEDIA_MIC    "Your microphone"
-    ID_ENABLE_MEDIA_VIDEO  "Your video"
+    ID_ENABLE_MEDIA_CONFIRMATION "Do you allow %s to use the following media?"
+    ID_ENABLE_MEDIA_MIC     "Your microphone"
+    ID_ENABLE_MEDIA_VIDEO   "Your video"
 END
 
 STRINGTABLE

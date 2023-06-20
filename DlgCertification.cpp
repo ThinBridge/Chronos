@@ -22,7 +22,7 @@ DlgCertification::~DlgCertification()
 void DlgCertification::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_COMBO1, comboBoxValues);
+	DDX_Control(pDX, IDC_COMBO_CERTIFICATION, comboBoxValues);
 	comboBoxValues.Clear();
 	for (CefRefPtr<CefX509Certificate> x509Certificate : m_X509CertificateList)
 	{
@@ -70,7 +70,7 @@ int DlgCertification::GetSelectedIndex()
 }
 
 BEGIN_MESSAGE_MAP(DlgCertification, CDialogEx)
-	ON_CBN_SELCHANGE(IDC_COMBO1, &DlgCertification::OnCbnSelchangeCombo1)
+	ON_CBN_SELCHANGE(IDC_COMBO_CERTIFICATION, &DlgCertification::OnCbnSelchangeCombo1)
 	ON_BN_CLICKED(IDOK, &DlgCertification::OnBnClickedOk)
 END_MESSAGE_MAP()
 
@@ -170,7 +170,7 @@ void DlgCertification::OnCbnSelchangeCombo1()
 	certificationDetail += _T("\r\n");
 	certificationDetail += _T("有効期間: ") + validStartTimeString + _T(" - ") + validExpiryString;
 
-	SetDlgItemText(IDC_EDIT1, certificationDetail);
+	SetDlgItemText(IDC_EDIT_CERTIFICATION, certificationDetail);
 }
 
 void DlgCertification::OnBnClickedOk()

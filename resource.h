@@ -87,7 +87,6 @@
 #define IDI_ICON2                       225
 #define IDI_ICON3                       226
 #define IDS_STRING_STARTING_BROWSER     227
-#define IDD_DLG_CERTIFICATION           227
 #define IDS_STRING_SETTINGS_DLG_TITLE_GEN 228
 #define IDS_STRING_SETTINGS_DLG_TITLE_DSP 229
 #define IDS_STRING_SETTINGS_DLG_TITLE_INIT 230
@@ -288,12 +287,13 @@
 #define ID_DEBUG_CONFIRM_SAVE_RESULT    426
 #define ID_DEBUG_ALERT_SAVE_FAILED      427
 #define IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 428
-#define ID_ENABLE_MEDIA_CONFIRMATION                 429
-#define ID_ENABLE_MEDIA_MIC                          430
-#define ID_ENABLE_MEDIA_VIDEO                        431
-#define ID_ENABLE_MEDIA_DESCTOP_AUDIO                432
-#define ID_ENABLE_MEDIA_DESKTOP_AUDIO                432
-#define ID_ENABLE_MEDIA_DESKTOP_VIDEO                433
+#define ID_ENABLE_MEDIA_CONFIRMATION    429
+#define ID_ENABLE_MEDIA_MIC             430
+#define ID_ENABLE_MEDIA_VIDEO           431
+#define ID_ENABLE_MEDIA_DESCTOP_AUDIO   432
+#define ID_ENABLE_MEDIA_DESKTOP_AUDIO   432
+#define ID_ENABLE_MEDIA_DESKTOP_VIDEO   433
+#define IDD_DLG_CERTIFICATION           434
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002
@@ -355,6 +355,8 @@
 #define IDC_BUTTON_URL                  1090
 #define IDC_BUTTON_TOP                  1091
 #define IDC_BUTTON_TB_TRACE_LOG         1093
+#define IDC_EDIT_CERTIFICATION          1094
+#define IDC_COMBO_CERTIFICATION         1095
 #define IDC_PAGE_FRAME                  1200
 #define IDC_TREE_CTRL                   1201
 #define IDC_CAPTION_BAR                 1202
@@ -520,7 +522,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        435
 #define _APS_NEXT_COMMAND_VALUE         33015
-#define _APS_NEXT_CONTROL_VALUE         1094
+#define _APS_NEXT_CONTROL_VALUE         1096
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
