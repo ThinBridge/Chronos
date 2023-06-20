@@ -355,8 +355,8 @@
 #define IDC_BUTTON_URL                  1090
 #define IDC_BUTTON_TOP                  1091
 #define IDC_BUTTON_TB_TRACE_LOG         1093
-#define IDC_EDIT_CERTIFICATION          1094
-#define IDC_COMBO_CERTIFICATION         1095
+#define IDC_CERTIFICATION_EDIT          1094
+#define IDC_CERTIFICATION_COMBO         1095
 #define IDC_PAGE_FRAME                  1200
 #define IDC_TREE_CTRL                   1201
 #define IDC_CAPTION_BAR                 1202
