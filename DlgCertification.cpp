@@ -126,7 +126,7 @@ CString CDlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincip
 	principalString += principal->GetLocalityName().c_str();
 	principalString += _T(", ST=");
 	principalString += principal->GetStateOrProvinceName().c_str();
-	principalString += _T(", C");
+	principalString += _T(", C=");
 	principalString += principal->GetCountryName().c_str();
 	return principalString;
 }
