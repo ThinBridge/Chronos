@@ -1253,7 +1253,6 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame>
 			}
 		}
 	}
-	
 	// call parent
 	CefLoadHandler::OnLoadEnd(browser, frame, httpStatusCode);
 }
@@ -1732,12 +1731,12 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 }
 
 bool ClientHandler::OnSelectClientCertificate(
-	CefRefPtr<CefBrowser> browser,
-	bool isProxy,
-	const CefString& host,
-	int port,
-	const X509CertificateList& certificates,
-	CefRefPtr<CefSelectClientCertificateCallback> callback)
+    CefRefPtr<CefBrowser> browser,
+    bool isProxy,
+    const CefString& host,
+    int port,
+    const X509CertificateList& certificates,
+    CefRefPtr<CefSelectClientCertificateCallback> callback)
 {
 	if (certificates.empty())
 		return false;
@@ -1883,7 +1882,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 		m_originAndPermissionsCache[permissionInfo] = false;
 		return false;
 	}
-	
+
 	DebugWndLogData dwLogData;
 	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 	dwLogData.mFUNCTION_NAME = _T("OnRequestMediaAccessPermission");
