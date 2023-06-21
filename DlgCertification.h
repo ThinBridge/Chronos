@@ -1,19 +1,19 @@
-Ôªø#pragma once
+#pragma once
 
-// CDlgCertification „ÉÄ„Ç§„Ç¢„É≠„Ç∞
+// CDlgCertification É_ÉCÉAÉçÉO
 
 class CDlgCertification : public CDialogEx
 {
 	DECLARE_DYNAMIC(CDlgCertification)
 public:
-	CDlgCertification(CWnd* pParent = nullptr); // Ê®ôÊ∫ñ„Ç≥„É≥„Çπ„Éà„É©„ÇØ„Çø„Éº
+	CDlgCertification(CWnd* pParent = nullptr); // ïWèÄÉRÉìÉXÉgÉâÉNÉ^Å[
 	virtual ~CDlgCertification();
 
 	CComboBox certificationComboBox;
 	int* m_selectedIndex;
 	CefString m_host;
 
-// „ÉÄ„Ç§„Ç¢„É≠„Ç∞ „Éá„Éº„Çø
+// É_ÉCÉAÉçÉO ÉfÅ[É^
 #ifdef AFX_DESIGN_TIME
 	enum
 	{
@@ -27,7 +27,7 @@ private:
 	CString GetPrincipalString(const CefRefPtr<CefX509CertPrincipal> principal);
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV „Çµ„Éù„Éº„Éà
+	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV ÉTÉ|Å[Ég
 	BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
