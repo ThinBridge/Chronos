@@ -362,6 +362,7 @@
 #define IDC_BUTTON_TB_TRACE_LOG         1093
 #define IDC_CERTIFICATION_EDIT          1094
 #define IDC_CERTIFICATION_COMBO         1095
+#define IDC_CERTIFICATE_STATIC_SITE_INFO 1096
 #define IDC_PAGE_FRAME                  1200
 #define IDC_TREE_CTRL                   1201
 #define IDC_CAPTION_BAR                 1202
@@ -527,7 +528,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        439
 #define _APS_NEXT_COMMAND_VALUE         33015
-#define _APS_NEXT_CONTROL_VALUE         1096
+#define _APS_NEXT_CONTROL_VALUE         1097
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

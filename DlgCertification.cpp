@@ -23,25 +23,11 @@ void CDlgCertification::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_CERTIFICATION_COMBO, certificationComboBox);
-	certificationComboBox.Clear();
-	for (CefRefPtr<CefX509Certificate> x509Certificate : m_X509CertificateList)
-	{
-		CString serialNumber = GetSerialNumberAsHexString(x509Certificate);
-		CString displayItemName;
-		displayItemName.Format(
-		    _T("%s [%s]"),
-		    (LPCTSTR)x509Certificate->GetSubject()->GetDisplayName().c_str(),
-		    (LPCTSTR)serialNumber);
-
-		certificationComboBox.AddString(displayItemName);
-	}
-	certificationComboBox.SetCurSel(0);
-	OnCbnSelchangeCertificationCombo();
 }
 
-CString CDlgCertification::GetSerialNumberAsHexString(CefRefPtr<CefX509Certificate> x509Certificate)
+CString CDlgCertification::GetSerialNumberAsHexString(const CefRefPtr<CefX509Certificate> certificate)
 {
-	auto serialNumber = x509Certificate->GetSerialNumber();
+	auto serialNumber = certificate->GetSerialNumber();
 	auto size = serialNumber->GetSize();
 
 	CString serialNumberAsHexString;
@@ -146,29 +132,29 @@ END_MESSAGE_MAP()
 void CDlgCertification::OnCbnSelchangeCertificationCombo()
 {
 	int curSel = certificationComboBox.GetCurSel();
-	CefRefPtr<CefX509Certificate> x509Certificate = m_X509CertificateList[curSel];
+	CefRefPtr<CefX509Certificate> certificate = m_certificates[curSel];
 
 	CString certificationDetail;
 	CString title;
 
 	title.LoadString(ID_CERTIFICATION_ISSUER);
 	certificationDetail += title;
-	certificationDetail += GetPrincipalString(x509Certificate->GetIssuer());
+	certificationDetail += GetPrincipalString(certificate->GetIssuer());
 	certificationDetail += _T("\r\n");
 	title.LoadString(ID_CERTIFICATION_SUBJECT);
 	certificationDetail += title;
-	certificationDetail += GetPrincipalString(x509Certificate->GetSubject());
+	certificationDetail += GetPrincipalString(certificate->GetSubject());
 	certificationDetail += _T("\r\n");
 	title.LoadString(ID_CERTIFICATION_SERIAL_NUMBER);
 	certificationDetail += title;
-	certificationDetail += GetSerialNumberAsHexString(x509Certificate);
+	certificationDetail += GetSerialNumberAsHexString(certificate);
 
 	CefTime validStart;
-	cef_time_from_basetime(x509Certificate->GetValidStart(), &validStart);
+	cef_time_from_basetime(certificate->GetValidStart(), &validStart);
 	CString validStartTimeString = GetTimeString(validStart);
-	
+
 	CefTime validExpiry;
-	cef_time_from_basetime(x509Certificate->GetValidExpiry(), &validExpiry);
+	cef_time_from_basetime(certificate->GetValidExpiry(), &validExpiry);
 	CString validExpiryString = GetTimeString(validExpiry);
 
 	certificationDetail += _T("\r\n");
@@ -185,4 +171,25 @@ void CDlgCertification::OnBnClickedOk()
 	int curSel = certificationComboBox.GetCurSel();
 	*m_selectedIndex = curSel;
 	CDialogEx::OnOK();
+}
+
+BOOL CDlgCertification::OnInitDialog()
+{
+	BOOL superResult = CDialogEx::OnInitDialog();
+	SetDlgItemText(IDC_CERTIFICATE_STATIC_SITE_INFO, m_host.c_str());
+
+	for (CefRefPtr<CefX509Certificate> certificate : m_certificates)
+	{
+		CString serialNumber = GetSerialNumberAsHexString(certificate);
+		CString displayItemName;
+		displayItemName.Format(
+		    _T("%s [%s]"),
+		    (LPCTSTR)certificate->GetSubject()->GetDisplayName().c_str(),
+		    (LPCTSTR)serialNumber);
+
+		certificationComboBox.AddString(displayItemName);
+	}
+	certificationComboBox.SetCurSel(0);
+	OnCbnSelchangeCertificationCombo();
+	return superResult;
 }
