@@ -12,8 +12,9 @@ private:
 public:
 	CDlgCertification(CWnd* pParent = nullptr); // 標準コンストラクター
 	virtual ~CDlgCertification();
+	int SelectedIndex();
 
-	CComboBox certificationComboBox;
+	std::vector<CefRefPtr<CefX509Certificate>> m_certificates;
 	CefString m_host;
 
 // ダイアログ データ
@@ -35,8 +36,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	std::vector<CefRefPtr<CefX509Certificate>> m_certificates;
 	afx_msg void OnCbnSelchangeCertificationCombo();
 	afx_msg void OnBnClickedOk();
-	int SelectedIndex();
+
+	CComboBox certificationComboBox;
 };
