@@ -179,8 +179,7 @@ void CDlgCertification::OnBnClickedOk()
 {
 	// DoModalなどで結果を返し終えた後、certificationComboBoxなどが解放されてしまって参照できない。
 	// なので、このタイミングでクラス変数に結果を代入しておく。
-	int curSel = certificationComboBox.GetCurSel();
-	m_selectedIndex = curSel;
+	m_selectedIndex = certificationComboBox.GetCurSel();
 	CDialogEx::OnOK();
 }
 
