@@ -1745,15 +1745,13 @@ bool ClientHandler::OnSelectClientCertificate(
 	if (SafeWnd(hWindow))
 	{
 		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
-		int selectedIndex = 0;
 		CDlgCertification dlg(CWnd::FromHandle(hWindow));
 		dlg.m_certificates = certificates;
-		dlg.m_selectedIndex = &selectedIndex;
 		dlg.m_host = host;
 		INT_PTR iResult = dlg.DoModal();
 		if (iResult == IDOK)
 		{
-			callback->Select(certificates[selectedIndex]);
+			callback->Select(certificates[dlg.SelectedIndex()]);
 			return true;
 		}
 	}

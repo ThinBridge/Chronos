@@ -5,12 +5,15 @@
 class CDlgCertification : public CDialogEx
 {
 	DECLARE_DYNAMIC(CDlgCertification)
+
+private:
+	int m_selectedIndex;
+
 public:
 	CDlgCertification(CWnd* pParent = nullptr); // 標準コンストラクター
 	virtual ~CDlgCertification();
 
 	CComboBox certificationComboBox;
-	int* m_selectedIndex;
 	CefString m_host;
 
 // ダイアログ データ
@@ -35,5 +38,5 @@ public:
 	std::vector<CefRefPtr<CefX509Certificate>> m_certificates;
 	afx_msg void OnCbnSelchangeCertificationCombo();
 	afx_msg void OnBnClickedOk();
-	int GetSelectedIndex();
+	int SelectedIndex();
 };
