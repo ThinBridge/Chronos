@@ -1745,9 +1745,7 @@ bool ClientHandler::OnSelectClientCertificate(
 	if (SafeWnd(hWindow))
 	{
 		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
-		CDlgCertification dlg(CWnd::FromHandle(hWindow));
-		dlg.m_certificates = certificates;
-		dlg.m_host = host;
+		CDlgCertification dlg(host, certificates, CWnd::FromHandle(hWindow));
 		INT_PTR iResult = dlg.DoModal();
 		if (iResult == IDOK)
 		{

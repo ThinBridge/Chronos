@@ -10,9 +10,20 @@
 IMPLEMENT_DYNAMIC(CDlgCertification, CDialogEx)
 
 CDlgCertification::CDlgCertification(CWnd* pParent /*=nullptr*/)
+    : CDlgCertification(CefString(""),
+			std::vector<CefRefPtr<CefX509Certificate>>(),
+			pParent)
+{
+}
+
+CDlgCertification::CDlgCertification(CefString host,
+				     std::vector<CefRefPtr<CefX509Certificate>> certificates,
+				     CWnd* pParent /*=nullptr*/)
     : CDialogEx(IDD_DLG_CERTIFICATION, pParent)
 {
 	m_selectedIndex = 0;
+	m_host = host;
+	m_certificates = certificates;
 }
 
 CDlgCertification::~CDlgCertification()

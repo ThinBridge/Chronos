@@ -8,14 +8,16 @@ class CDlgCertification : public CDialogEx
 
 private:
 	int m_selectedIndex;
+	std::vector<CefRefPtr<CefX509Certificate>> m_certificates;
+	CefString m_host;
 
 public:
 	CDlgCertification(CWnd* pParent = nullptr); // 標準コンストラクター
+	CDlgCertification(CefString host,
+			  std::vector<CefRefPtr<CefX509Certificate>> certificates,
+			  CWnd* pParent = nullptr);
 	virtual ~CDlgCertification();
 	int SelectedIndex();
-
-	std::vector<CefRefPtr<CefX509Certificate>> m_certificates;
-	CefString m_host;
 
 // ダイアログ データ
 #ifdef AFX_DESIGN_TIME
