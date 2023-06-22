@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 (ニュートラル) resources
+// 日本語 resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
@@ -96,7 +96,7 @@ BEGIN
     END
 END
 
-#endif    // 日本語 (ニュートラル) resources
+#endif    // 日本語 resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -569,6 +569,20 @@ BEGIN
     PUSHBUTTON      "キャンセル",IDCANCEL,202,136,50,14
 END
 
+IDD_DLG_CERTIFICATION DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "個人証明書の要求"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,198,155,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,252,155,50,14
+    COMBOBOX        IDC_CERTIFICATION_COMBO,7,62,295,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_CERTIFICATION_EDIT,7,81,295,64,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_HSCROLL
+    LTEXT           "このサイトはあなたの個人証明書を求めています:",IDC_STATIC,7,7,152,8,NOT WS_GROUP
+    LTEXT           "使用する証明書を選択してください:",IDC_STATIC,7,52,112,8,NOT WS_GROUP
+    LTEXT           "サイト情報",IDC_CERTIFICATE_STATIC_SITE_INFO,19,20,261,27,NOT WS_GROUP
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -716,6 +730,14 @@ BEGIN
         RIGHTMARGIN, 254
         TOPMARGIN, 7
         BOTTOMMARGIN, 150
+    END
+
+    IDD_DLG_CERTIFICATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -919,6 +941,11 @@ BEGIN
     0
 END
 
+IDD_DLG_CERTIFICATION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1054,8 +1081,8 @@ BEGIN
     IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
                             "起動制限時間(最大%d分)を超過したため、アプリケーションを終了します。\nアプリケーションを再起動して下さい。"
     ID_ENABLE_MEDIA_CONFIRMATION "%s は次の許可を求めています。許可しますか？"
-    ID_ENABLE_MEDIA_MIC    "マイクの使用"
-    ID_ENABLE_MEDIA_VIDEO  "ビデオの使用"
+    ID_ENABLE_MEDIA_MIC     "マイクの使用"
+    ID_ENABLE_MEDIA_VIDEO   "ビデオの使用"
 END
 
 STRINGTABLE
@@ -1340,6 +1367,10 @@ STRINGTABLE
 BEGIN
     ID_ENABLE_MEDIA_DESKTOP_AUDIO "デスクトップオーディオの取り込み"
     ID_ENABLE_MEDIA_DESKTOP_VIDEO "デスクトップの画面の取り込み"
+    ID_CERTIFICATION_ISSUER "発行元: "
+    ID_CERTIFICATION_SUBJECT "発行先: "
+    ID_CERTIFICATION_SERIAL_NUMBER "シリアル番号: "
+    ID_CERTIFICATION_VALID_PERIOD "有効期間: "
 END
 
 #endif    // 日本語 (日本) resources
@@ -1895,6 +1926,20 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,202,136,50,14
 END
 
+IDD_DLG_CERTIFICATION DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Require personal certificate"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,198,155,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,252,155,50,14
+    COMBOBOX        IDC_CERTIFICATION_COMBO,7,62,295,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_CERTIFICATION_EDIT,7,81,295,64,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_HSCROLL
+    LTEXT           "This site wants your personal certificate:",IDC_STATIC,7,7,131,8,NOT WS_GROUP
+    LTEXT           "Please select the certificate to use:",IDC_STATIC,7,51,114,8,NOT WS_GROUP
+    LTEXT           "Site info",IDC_CERTIFICATE_STATIC_SITE_INFO,19,20,261,27,NOT WS_GROUP
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -2042,6 +2087,14 @@ BEGIN
         RIGHTMARGIN, 254
         TOPMARGIN, 7
         BOTTOMMARGIN, 150
+    END
+
+    IDD_DLG_CERTIFICATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -2245,6 +2298,11 @@ BEGIN
     0
 END
 
+IDD_DLG_CERTIFICATION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -2388,10 +2446,9 @@ BEGIN
                             "Failed to save the file.\n\nIt may be held by some other applications, or missing writing permission.\nCould not complete the operation. Please retry after closing the file."
     IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
                             "Closing application due to max out the limit of the running time (maximum = %d min.)\nPlease restart the application."
-    ID_ENABLE_MEDIA_CONFIRMATION 
-                            "Do you allow %s to use the following media?"
-    ID_ENABLE_MEDIA_MIC    "Your microphone"
-    ID_ENABLE_MEDIA_VIDEO  "Your video"
+    ID_ENABLE_MEDIA_CONFIRMATION "Do you allow %s to use the following media?"
+    ID_ENABLE_MEDIA_MIC     "Your microphone"
+    ID_ENABLE_MEDIA_VIDEO   "Your video"
 END
 
 STRINGTABLE
@@ -2691,6 +2748,10 @@ STRINGTABLE
 BEGIN
     ID_ENABLE_MEDIA_DESKTOP_AUDIO "Your desktop audio"
     ID_ENABLE_MEDIA_DESKTOP_VIDEO "Your desktop video"
+    ID_CERTIFICATION_ISSUER "Issuer: "
+    ID_CERTIFICATION_SUBJECT "Subject: "
+    ID_CERTIFICATION_SERIAL_NUMBER "Serial number: "
+    ID_CERTIFICATION_VALID_PERIOD "Valid period: "
 END
 
 #endif    // 英語 resources

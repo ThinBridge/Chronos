@@ -53,6 +53,9 @@
     <ClCompile Include="DlgSetting.cpp">
       <Filter>DLG</Filter>
     </ClCompile>
+    <ClCompile Include="DlgCertification.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -142,6 +145,9 @@
       <Filter>DLG</Filter>
     </ClInclude>
     <ClInclude Include="DlgSetting.h">
+      <Filter>DLG</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCertification.h">
       <Filter>DLG</Filter>
     </ClInclude>
   </ItemGroup>

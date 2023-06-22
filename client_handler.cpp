@@ -28,6 +28,7 @@
 #include "client_util.h"
 #include "DlgAuth.h"
 #include "sbcommon.h"
+#include "DlgCertification.h"
 
 #pragma warning(push, 0)
 #pragma warning(disable : 26812)
@@ -1729,6 +1730,32 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 	return TRUE;
 }
 
+bool ClientHandler::OnSelectClientCertificate(
+    CefRefPtr<CefBrowser> browser,
+    bool isProxy,
+    const CefString& host,
+    int port,
+    const X509CertificateList& certificates,
+    CefRefPtr<CefSelectClientCertificateCallback> callback)
+{
+	if (certificates.empty())
+		return false;
+
+	HWND hWindow = GetSafeParentWnd(browser);
+	if (SafeWnd(hWindow))
+	{
+		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
+		CDlgCertification dlg(host, certificates, CWnd::FromHandle(hWindow));
+		INT_PTR iResult = dlg.DoModal();
+		if (iResult == IDOK)
+		{
+			callback->Select(certificates[dlg.SelectedIndex()]);
+			return true;
+		}
+	}
+	return false;
+}
+
 void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution)
 {
 	// do default
@@ -1851,7 +1878,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 		m_originAndPermissionsCache[permissionInfo] = false;
 		return false;
 	}
-	
+
 	DebugWndLogData dwLogData;
 	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 	dwLogData.mFUNCTION_NAME = _T("OnRequestMediaAccessPermission");
