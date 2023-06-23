@@ -5022,6 +5022,14 @@ void CAboutDlg::SetDetailString(BOOL bEnableDetail)
 	strCEF_License.LoadString(IDS_STRING_CEF_LIC);
 	strCEF_License.Replace(_T("\n"), _T("\r\n"));
 	strEditValue += strCEF_License;
+
+#ifdef PROPRIETARY_CODECS
+	CString strProprietaryCodecLicenses;
+	strProprietaryCodecLicenses.LoadString(IDS_STRING_PROPRIETARY_CODEC_LICENSES);
+	strProprietaryCodecLicenses.Replace(_T("\n"), _T("\r\n"));
+	strEditValue += strProprietaryCodecLicenses;
+#endif
+
 	SetDlgItemText(IDC_EDIT1, strEditValue);
 
 	theApp.WriteDebugTraceDateTime(strEditValue, DEBUG_LOG_TYPE_AC);
