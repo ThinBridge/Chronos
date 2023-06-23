@@ -20,6 +20,8 @@
 #define IDS_STRING_CEF_LOCALE           140
 #define IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST 141
 #define IDD_DIALOG1                     142
+#define IDS_PROPRIETARY_CODEC_LICENSES  142
+#define IDS_STRING_PROPRIETARY_CODEC_LICENSES 142
 #define IDR_MENU_BACK                   143
 #define IDR_MENU_FORWARD                144
 #define IDB_BITMAP3                     146
