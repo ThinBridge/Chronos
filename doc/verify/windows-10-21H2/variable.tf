@@ -6,3 +6,5 @@ variable "flash-installer-url" {}
 variable "hookdate-download-url" {}
 variable "debugview-download-url" {}
 variable "old-ie-download-url" {}
+variable "download-user" {}
+variable "download-token" {}
