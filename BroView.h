@@ -71,7 +71,7 @@ public:
 		{
 			CefString strURL;
 			strURL = m_cefBrowser->GetMainFrame()->GetURL();
-			strRet = strURL.ToWString().c_str();
+			strRet = strURL.c_str();
 		}
 		return strRet;
 	}
