@@ -171,9 +171,9 @@ void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
 					//CefString cfScheme(&cfURLparts.scheme);
 					CefString cfHost(&cfURLparts.host);
 					CefString cfPath(&cfURLparts.path);
-					//CString strScheme(cfScheme.c_str());
-					CString strHost(cfHost.c_str());
-					CString strPath(cfPath.c_str());
+					//CString strScheme(cfScheme.ToWString().c_str());
+					CString strHost(cfHost.ToWString().c_str());
+					CString strPath(cfPath.ToWString().c_str());
 					CString strFileName;
 					strFileName += strHost;
 					//strFileName += _T("");
