@@ -292,6 +292,8 @@ resource "local_file" "playbook" {
       win_get_url:
         url: "${var.windows-language-pack-url}"
         dest: 'c:\temp\lp.cab'
+        url_username: "${var.download-user}"
+        url_password: "${var.download-token}"
     - name: Install language pack
       when: not "${var.windows-language-pack-url}" == ""
       win_shell: |
@@ -406,11 +408,15 @@ resource "local_file" "playbook" {
       win_get_url:
         url: "${var.flash-installer-url}"
         dest: 'C:\Users\Public\flash_installer.exe'
+        url_username: "${var.download-user}"
+        url_password: "${var.download-token}"
     - name: Download HookDate to override system time for Firefox
       when: not "${var.hookdate-download-url}" == ""
       win_get_url:
         url: "${var.hookdate-download-url}"
         dest: 'C:\Users\Public\hookdate.zip'
+        url_username: "${var.download-user}"
+        url_password: "${var.download-token}"
     - name: Extract contents
       when: not "${var.hookdate-download-url}" == ""
       win_unzip:
@@ -422,6 +428,8 @@ resource "local_file" "playbook" {
       win_get_url:
         url: "${var.debugview-download-url}"
         dest: 'C:\Users\Public\DebugView.zip'
+        url_username: "${var.download-user}"
+        url_password: "${var.download-token}"
     - name: Extract contents
       when: not "${var.old-ie-download-url}" == ""
       win_unzip:
