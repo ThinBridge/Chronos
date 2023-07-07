@@ -58,7 +58,7 @@ public:
 		CString strTitle;
 		CefString strcefTitle;
 		strcefTitle = entry->GetTitle();
-		strTitle = strcefTitle.c_str();
+		strTitle = (LPCTSTR)strcefTitle.c_str();
 		strTitle.TrimLeft();
 		strTitle.TrimRight();
 		if (strTitle.IsEmpty())
@@ -66,7 +66,7 @@ public:
 			CString strURL;
 			CefString strcefURL;
 			strcefURL = entry->GetDisplayURL();
-			strURL = strcefURL.c_str();
+			strURL = (LPCTSTR)strcefURL.c_str();
 			strTitle = strURL;
 		}
 		m_strArrayRet.SetAt(iIndex, strTitle);

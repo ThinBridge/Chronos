@@ -484,7 +484,7 @@ public:
 		CefString strIn(str);
 		CefString strOut;
 		strOut = CefURIEncode(strIn, false);
-		CString strRet = strOut.c_str();
+		CString strRet = (LPCTSTR)strOut.c_str();
 		return strRet;
 	}
 	UINT m_VEcache;

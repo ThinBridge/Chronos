@@ -187,7 +187,7 @@ public:
 			CString strURL;
 			CefString strURLC;
 			strURLC = browser->GetMainFrame()->GetURL();
-			strURL = strURLC.c_str();
+			strURL = (LPCTSTR)strURLC.c_str();
 			if (strURL.IsEmpty())
 			{
 				HWND hRetNULL = {0};
@@ -345,7 +345,7 @@ public:
 	{
 		CefString strName = message->GetName();
 		CString strFilterName;
-		strFilterName = strName.c_str();
+		strFilterName = (LPCTSTR)strName.c_str();
 		strFilterName.TrimLeft();
 		strFilterName.TrimRight();
 		if (strFilterName == _T("GET_PID"))

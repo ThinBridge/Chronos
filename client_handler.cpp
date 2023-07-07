@@ -615,7 +615,7 @@ void ClientHandler::OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString
 	{
 		LPCTSTR pszTitle = NULL;
 		std::wstring hoge = title.ToWString();
-		pszTitle = hoge.c_str();
+		pszTitle = (LPCTSTR)hoge.c_str();
 		::SendMessageTimeout(hWindow, WM_APP_CEF_TITLE_CHANGE, (WPARAM)pszTitle, NULL, SMTO_NORMAL, 1000, NULL);
 	}
 	// call parent
@@ -712,7 +712,7 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 			dwLogData.mFUNCTION_NAME = _T("ConsoleMessage");
 			dwLogData.mMESSAGE1 = (LPCTSTR)message.c_str();
 			dwLogData.mMESSAGE2 = strLogLevel;
-			dwLogData.mMESSAGE3.Format(_T("Source:%s"), source.c_str());
+			dwLogData.mMESSAGE3.Format(_T("Source:%s"), (LPCTSTR)source.c_str());
 			dwLogData.mMESSAGE4.Format(_T("Line:%d"), line);
 			theApp.AppendDebugViewLog(dwLogData);
 		}
@@ -725,7 +725,7 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 			CString strLogPath;
 			strLogPath = theApp.m_strCEFCachePath;
 			strLogPath += _T("\\console.log");
-			strWriteLine.Format(_T("Message:%s\nSource:%s\nLine:%d\n"), message.c_str(), source.c_str(), line);
+			strWriteLine.Format(_T("Message:%s\nSource:%s\nLine:%d\n"), (LPCTSTR)message.c_str(), (LPCTSTR)source.c_str(), line);
 			_wsetlocale(LC_ALL, _T("jpn"));
 			CStdioFile stdFile;
 			if (stdFile.Open(strLogPath, CFile::modeWrite | CFile::shareDenyNone | CFile::modeCreate | CFile::modeNoTruncate))
@@ -1069,7 +1069,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 		dwLogData.mFUNCTION_NAME = _T("OnBeforeResourceLoad");
 		dwLogData.mMESSAGE1 = strTranURL;
-		dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), frame->GetName().c_str());
+		dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), (LPCTSTR)frame->GetName().c_str());
 		dwLogData.mMESSAGE3.Format(_T("IsMain:%s"), frame->IsMain() ? _T("TRUE") : _T("FALSE"));
 		theApp.AppendDebugViewLog(dwLogData);
 		logmsg = dwLogData.GetString();
@@ -1712,7 +1712,7 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 
 	CString confirmMsg;
 	confirmMsg.LoadString(IDS_STRING_CONFIRM_INSECURE_CONNECTION);
-	szMessage.Format(confirmMsg, request_url.c_str());
+	szMessage.Format(confirmMsg, (LPCTSTR)request_url.c_str());
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (hWindow)
 	{
@@ -1884,7 +1884,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 	dwLogData.mFUNCTION_NAME = _T("OnRequestMediaAccessPermission");
 	dwLogData.mMESSAGE1 = requestOrigin;
-	dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), frame->GetName().c_str());
+	dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), (LPCTSTR)frame->GetName().c_str());
 	dwLogData.mMESSAGE3.Format(_T("Approved permission type:%d"), requested_permissions);
 	theApp.AppendDebugViewLog(dwLogData);
 	theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_URL);
