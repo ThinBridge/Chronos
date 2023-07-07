@@ -588,9 +588,9 @@ BOOL CChildView::IsRedirectURLChk(const CString& strURL, BOOL bTop)
 		CefString cfHost(&cfURLparts.host);
 		CefString cfPath(&cfURLparts.path);
 
-		CString strScheme((LPCTSTR)cfScheme.c_str());
-		CString strHost((LPCTSTR)cfHost.c_str());
-		CString strPath((LPCTSTR)cfPath.c_str());
+		CString strScheme((LPCWSTR)cfScheme.c_str());
+		CString strHost((LPCWSTR)cfHost.c_str());
+		CString strPath((LPCWSTR)cfPath.c_str());
 
 		//http httpsのみフィルターを利用する。about: notes: vwmare-view: mailto:を考慮する。
 		if (strScheme.Find(_T("http")) != 0) //http|https
@@ -2430,7 +2430,7 @@ LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 				if (CefParseURL(cefURL, cfURLpa))
 				{
 					CefString cfHost(&cfURLpa.host);
-					strHost = (LPCTSTR)cfHost.c_str();
+					strHost = (LPCWSTR)cfHost.c_str();
 				}
 			}
 			if (theApp.m_pLogDisp)
