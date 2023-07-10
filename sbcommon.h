@@ -244,13 +244,6 @@ static void getTimeStringEx(LPFILETIME ftTime, CString& str)
 	return;
 }
 
-static BOOL CheckConvertabilityToMBCS(CString target)
-{
-	CStringA strA = target;
-	CString str = strA;
-	return str.Compare(target) == 0;
-}
-
 /////////////////////////////////////////////////////////////////////
 #include <winternl.h>
 #include <tlhelp32.h>
