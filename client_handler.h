@@ -19,6 +19,9 @@
 
 #pragma warning(push, 0)
 #pragma warning(disable : 26812)
+#if CHROME_VERSION_MAJOR >= 115
+#define uint32 uint32_t
+#endif
 
 class MyV8Handler : public CefV8Handler
 {
@@ -184,7 +187,7 @@ public:
 			CString strURL;
 			CefString strURLC;
 			strURLC = browser->GetMainFrame()->GetURL();
-			strURL = strURLC.c_str();
+			strURL = (LPCWSTR)strURLC.c_str();
 			if (strURL.IsEmpty())
 			{
 				HWND hRetNULL = {0};
@@ -342,7 +345,7 @@ public:
 	{
 		CefString strName = message->GetName();
 		CString strFilterName;
-		strFilterName = strName.c_str();
+		strFilterName = (LPCWSTR)strName.c_str();
 		strFilterName.TrimLeft();
 		strFilterName.TrimRight();
 		if (strFilterName == _T("GET_PID"))

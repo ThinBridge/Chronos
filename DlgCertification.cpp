@@ -85,13 +85,13 @@ CString CDlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincip
 	CString principalString;
 	std::vector<CefString> values;
 	principalString += _T("CN=");
-	principalString += principal->GetCommonName().c_str();
+	principalString += (LPCWSTR)principal->GetCommonName().c_str();
 	principalString += _T(", O=");
 	principal->GetOrganizationNames(values);
 	for (size_t i = 0; i < values.size(); i++)
 	{
 		CefString value = values[i];
-		principalString += value.c_str();
+		principalString += (LPCWSTR)value.c_str();
 		if (i > 0)
 		{
 			principalString += _T(" ");
@@ -102,29 +102,31 @@ CString CDlgCertification::GetPrincipalString(const CefRefPtr<CefX509CertPrincip
 	for (size_t i = 0; i < values.size(); i++)
 	{
 		CefString value = values[i];
-		principalString += value.c_str();
+		principalString += (LPCWSTR)value.c_str();
 		if (i > 0)
 		{
 			principalString += _T(" ");
 		}
 	}
+#if CHROME_VERSION_MAJOR < 115
 	principalString += _T(", STREET=");
 	principal->GetStreetAddresses(values);
 	for (size_t i = 0; i < values.size(); i++)
 	{
 		CefString value = values[i];
-		principalString += value.c_str();
+		principalString += (LPCWSTR)value.c_str();
 		if (i > 0)
 		{
 			principalString += _T("-");
 		}
 	}
+#endif
 	principalString += _T(", L=");
-	principalString += principal->GetLocalityName().c_str();
+	principalString += (LPCWSTR)principal->GetLocalityName().c_str();
 	principalString += _T(", ST=");
-	principalString += principal->GetStateOrProvinceName().c_str();
+	principalString += (LPCWSTR)principal->GetStateOrProvinceName().c_str();
 	principalString += _T(", C=");
-	principalString += principal->GetCountryName().c_str();
+	principalString += (LPCWSTR)principal->GetCountryName().c_str();
 	return principalString;
 }
 
@@ -186,7 +188,7 @@ void CDlgCertification::OnBnClickedOk()
 BOOL CDlgCertification::OnInitDialog()
 {
 	BOOL superResult = CDialogEx::OnInitDialog();
-	SetDlgItemText(IDC_CERTIFICATE_STATIC_SITE_INFO, m_host.c_str());
+	SetDlgItemText(IDC_CERTIFICATE_STATIC_SITE_INFO, (LPCWSTR)m_host.c_str());
 
 	for (CefRefPtr<CefX509Certificate> certificate : m_certificates)
 	{
@@ -194,7 +196,7 @@ BOOL CDlgCertification::OnInitDialog()
 		CString displayItemName;
 		displayItemName.Format(
 		    _T("%s [%s]"),
-		    (LPCTSTR)certificate->GetSubject()->GetDisplayName().c_str(),
+		    (LPCWSTR)certificate->GetSubject()->GetDisplayName().c_str(),
 		    (LPCTSTR)serialNumber);
 
 		certificationComboBox.AddString(displayItemName);

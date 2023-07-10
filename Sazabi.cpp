@@ -4229,7 +4229,11 @@ void CSazabi::InitializeCef()
 	CString strUserDataPath;
 	strUserDataPath = m_strCEFCachePath;
 	strUserDataPath += _T("\\UserData");
+#if CHROME_VERSION_MAJOR >= 115
+	CefString(&settings.root_cache_path) = strUserDataPath;
+#else
 	CefString(&settings.user_data_path) = strUserDataPath;
+#endif
 	settings.persist_user_preferences = true;
 
 	// ƒƒO‚ð—LŒø‰»‚·‚é (ChronosDefault.conf > EnableAdvancedLogMode)

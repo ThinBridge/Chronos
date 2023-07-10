@@ -136,8 +136,8 @@ bool ClientHandler::OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (SafeWnd(hWindow))
 	{
-		LPCTSTR pszURL = NULL;
-		pszURL = target_url.c_str();
+		LPCWSTR pszURL = NULL;
+		pszURL = (LPCWSTR)target_url.c_str();
 		switch (target_disposition)
 		{
 		case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
@@ -345,7 +345,7 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 			CString strSelText;
 			CefString strCfSt;
 			strCfSt = params->GetSelectionText();
-			strSelText = strCfSt.c_str();
+			strSelText = (LPCWSTR)strCfSt.c_str();
 			strSelText.TrimLeft();
 			strSelText.TrimRight();
 			if (!strSelText.IsEmpty())
@@ -394,7 +394,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			CString strSelText;
 			CefString strCfSt;
 			strCfSt = params->GetSelectionText();
-			strSelText = strCfSt.c_str();
+			strSelText = (LPCWSTR)strCfSt.c_str();
 			strSelText.TrimLeft();
 			strSelText.TrimRight();
 			::SendMessageTimeout(hWindow, WM_APP_CEF_SEARCH_URL, (WPARAM)(LPCTSTR)strSelText, (LPARAM)TRUE, SMTO_NORMAL, 1000, NULL);
@@ -404,8 +404,8 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 		{
 			CefString strURLC;
 			strURLC = params->GetLinkUrl();
-			LPCTSTR pszURL = {0};
-			pszURL = strURLC.c_str();
+			LPCWSTR pszURL = {0};
+			pszURL = (LPCWSTR)strURLC.c_str();
 			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_WINDOW, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
@@ -413,8 +413,8 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 		{
 			CefString strURLC;
 			strURLC = params->GetLinkUrl();
-			LPCTSTR pszURL = {0};
-			pszURL = strURLC.c_str();
+			LPCWSTR pszURL = {0};
+			pszURL = (LPCWSTR)strURLC.c_str();
 			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
@@ -422,8 +422,8 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 		{
 			CefString strURLC;
 			strURLC = params->GetSourceUrl();
-			LPCTSTR pszURL = {0};
-			pszURL = strURLC.c_str();
+			LPCWSTR pszURL = {0};
+			pszURL = (LPCWSTR)strURLC.c_str();
 			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_WINDOW, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
@@ -431,8 +431,8 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 		{
 			CefString strURLC;
 			strURLC = params->GetSourceUrl();
-			LPCTSTR pszURL = {0};
-			pszURL = strURLC.c_str();
+			LPCWSTR pszURL = {0};
+			pszURL = (LPCWSTR)strURLC.c_str();
 			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
@@ -456,7 +456,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			CString str;
 			CefString strURLC;
 			strURLC = params->GetSourceUrl();
-			str = strURLC.c_str();
+			str = (LPCWSTR)strURLC.c_str();
 			if (!str.IsEmpty())
 			{
 				//data:image/pngの場合があるので、IsURL判定を行わない。
@@ -488,11 +488,11 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			CString str;
 			CefString strURLC;
 			strURLC = params->GetSourceUrl();
-			str = strURLC.c_str();
+			str = (LPCWSTR)strURLC.c_str();
 			if (!str.IsEmpty())
 			{
-				LPCTSTR pszURL = {0};
-				pszURL = strURLC.c_str();
+				LPCWSTR pszURL = {0};
+				pszURL = (LPCWSTR)strURLC.c_str();
 				::SendMessageTimeout(hWindow, WM_COPY_IMAGE, (WPARAM)(LPCTSTR)str, NULL, SMTO_NORMAL, 1000, NULL);
 				return true;
 			}
@@ -503,7 +503,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			CString str;
 			CefString strURLC;
 			strURLC = params->GetUnfilteredLinkUrl();
-			str = strURLC.c_str();
+			str = (LPCWSTR)strURLC.c_str();
 			if (!str.IsEmpty())
 			{
 				if (::OpenClipboard(NULL))
@@ -565,8 +565,7 @@ void ClientHandler::OnAddressChange(CefRefPtr<CefBrowser> browser, CefRefPtr<Cef
 	{
 		if (frame->IsMain())
 		{
-			LPCTSTR pszURL = NULL;
-			pszURL = url.c_str();
+			LPCWSTR pszURL = (LPCWSTR)url.c_str();
 			::SendMessageTimeout(hWindow, WM_APP_CEF_ADDRESS_CHANGE, (WPARAM)pszURL, NULL, SMTO_NORMAL, 1000, NULL);
 		}
 	}
@@ -614,8 +613,8 @@ void ClientHandler::OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (SafeWnd(hWindow))
 	{
-		LPCTSTR pszTitle = NULL;
-		pszTitle = title.c_str();
+		LPCWSTR pszTitle = NULL;
+		pszTitle = (LPCWSTR)title.c_str();
 		::SendMessageTimeout(hWindow, WM_APP_CEF_TITLE_CHANGE, (WPARAM)pszTitle, NULL, SMTO_NORMAL, 1000, NULL);
 	}
 	// call parent
@@ -630,11 +629,11 @@ void ClientHandler::OnFaviconURLChange(CefRefPtr<CefBrowser> browser, const std:
 	if (SafeWnd(hWindow))
 	{
 		CefString strIconList;
-		LPCTSTR pszFavURL = NULL;
+		LPCWSTR pszFavURL = NULL;
 		for (UINT i = 0; i < icon_urls.size(); i++)
 		{
 			strIconList = icon_urls[i];
-			pszFavURL = strIconList.c_str();
+			pszFavURL = (LPCWSTR)strIconList.c_str();
 		}
 		if (pszFavURL)
 		{
@@ -653,8 +652,8 @@ void ClientHandler::OnStatusMessage(CefRefPtr<CefBrowser> browser, const CefStri
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (SafeWnd(hWindow))
 	{
-		LPCTSTR pszStatus = NULL;
-		pszStatus = value.c_str();
+		LPCWSTR pszStatus = NULL;
+		pszStatus = (LPCWSTR)value.c_str();
 		::SendMessageTimeout(hWindow, WM_APP_CEF_STATUS_MESSAGE, (WPARAM)pszStatus, NULL, SMTO_NORMAL, 1000, NULL);
 	}
 	// call parent
@@ -710,9 +709,9 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 			DebugWndLogData dwLogData;
 			dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 			dwLogData.mFUNCTION_NAME = _T("ConsoleMessage");
-			dwLogData.mMESSAGE1 = message.c_str();
+			dwLogData.mMESSAGE1 = (LPCWSTR)message.c_str();
 			dwLogData.mMESSAGE2 = strLogLevel;
-			dwLogData.mMESSAGE3.Format(_T("Source:%s"), source.c_str());
+			dwLogData.mMESSAGE3.Format(_T("Source:%s"), (LPCWSTR)source.c_str());
 			dwLogData.mMESSAGE4.Format(_T("Line:%d"), line);
 			theApp.AppendDebugViewLog(dwLogData);
 		}
@@ -725,7 +724,7 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 			CString strLogPath;
 			strLogPath = theApp.m_strCEFCachePath;
 			strLogPath += _T("\\console.log");
-			strWriteLine.Format(_T("Message:%s\nSource:%s\nLine:%d\n"), message.c_str(), source.c_str(), line);
+			strWriteLine.Format(_T("Message:%s\nSource:%s\nLine:%d\n"), (LPCWSTR)message.c_str(), (LPCWSTR)source.c_str(), line);
 			_wsetlocale(LC_ALL, _T("jpn"));
 			CStdioFile stdFile;
 			if (stdFile.Open(strLogPath, CFile::modeWrite | CFile::shareDenyNone | CFile::modeCreate | CFile::modeNoTruncate))
@@ -771,7 +770,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 
 	m_bDownLoadStartFlg = TRUE;
 	CString strFileName;
-	strFileName = suggested_name.c_str();
+	strFileName = (LPCWSTR)suggested_name.c_str();
 	strFileName.TrimLeft();
 	strFileName.TrimRight();
 	//ファイル名に使えない文字を置き換える。
@@ -807,7 +806,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		CString strURL;
 		CefString strURLC;
 		strURLC = browser->GetMainFrame()->GetURL();
-		strURL = strURLC.c_str();
+		strURL = (LPCWSTR)strURLC.c_str();
 		if (strURL.IsEmpty())
 			::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_BLANK_PAGE, (WPARAM)TRUE, NULL, SMTO_NORMAL, 1000, NULL);
 		else
@@ -878,7 +877,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 					}
 					if (strURL.IsEmpty())
 					{
-						strURL = download_item->GetURL().c_str();
+						strURL = (LPCWSTR)download_item->GetURL().c_str();
 					}
 					theApp.m_pLogDisp->SendLog(LOG_DOWNLOAD, strFileName, strURL);
 				}
@@ -930,8 +929,9 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 	if (download_item->IsValid())
 	{
 		CefString cefFulPath = download_item->GetFullPath();
-		if (cefFulPath.c_str())
-			lstrcpyn(values.szFullPath, cefFulPath.c_str(), 512);
+		LPCWSTR fullPath = (LPCWSTR)cefFulPath.c_str();
+		if (fullPath)
+			lstrcpyn(values.szFullPath, fullPath, 512);
 	}
 	HWND hWindow = GetSafeParentWnd(browser);
 	UINT nBrowserId = browser->GetIdentifier();
@@ -1057,7 +1057,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 	request->SetHeaderMap(cefHeaders);
 
 	CefString cefURL = request->GetURL();
-	CString strTranURL(cefURL.c_str());
+	CString strTranURL((LPCWSTR)cefURL.c_str());
 	CString logmsg;
 
 	HWND hWindow = GetSafeParentWnd(browser);
@@ -1068,7 +1068,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 		dwLogData.mFUNCTION_NAME = _T("OnBeforeResourceLoad");
 		dwLogData.mMESSAGE1 = strTranURL;
-		dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), frame->GetName().c_str());
+		dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), (LPCWSTR)frame->GetName().c_str());
 		dwLogData.mMESSAGE3.Format(_T("IsMain:%s"), frame->IsMain() ? _T("TRUE") : _T("FALSE"));
 		theApp.AppendDebugViewLog(dwLogData);
 		logmsg = dwLogData.GetString();
@@ -1082,7 +1082,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		if (CefParseURL(cefURL, cfURLpa))
 		{
 			CefString cfHost(&cfURLpa.host);
-			strHost = cfHost.c_str();
+			strHost = (LPCWSTR)cfHost.c_str();
 		}
 		if (SBUtil::IsURL_HTTP(strTranURL))
 		{
@@ -1096,8 +1096,8 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 	// get URL requested
 	CefString newURL = request->GetURL();
 	CefURLParts cfURLparts;
-	LPCTSTR pszURL = NULL;
-	pszURL = newURL.c_str();
+	LPCWSTR pszURL = NULL;
+	pszURL = (LPCWSTR)newURL.c_str();
 	if (CefParseURL(newURL, cfURLparts))
 	{
 		CefString cfScheme(&cfURLparts.scheme);
@@ -1105,9 +1105,9 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		CefString cfPath(&cfURLparts.path);
 		//CefString cfQuery(&cfURLparts.query);
 
-		CString strScheme(cfScheme.c_str());
-		CString strHost(cfHost.c_str());
-		CString strPath(cfPath.c_str());
+		CString strScheme((LPCWSTR)cfScheme.c_str());
+		CString strHost((LPCWSTR)cfHost.c_str());
+		CString strPath((LPCWSTR)cfPath.c_str());
 
 		if (strScheme.Find(_T("http")) != 0) //http|https
 			return RV_CONTINUE;
@@ -1200,7 +1200,7 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame>
 					CString strURL;
 					CefString strURLC;
 					strURLC = browser->GetMainFrame()->GetURL();
-					strURL = strURLC.c_str();
+					strURL = (LPCWSTR)strURLC.c_str();
 					CString strRetFileName;
 					CStringArray stArr;
 					if (theApp.m_cCustomScriptList.HitWildCardURL(strURL, &stArr))
@@ -1567,7 +1567,7 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	CString errorPageHeadingName;
 	errorPageHeadingName.LoadString(ID_ERROR_PAGE_HEADING_NAME);
 
-	CString strFaildUrl(failedUrl.c_str());
+	CString strFaildUrl((LPCWSTR)failedUrl.c_str());
 	strFaildUrl.Replace(_T("<"), _T(""));
 	strFaildUrl.Replace(_T(">"), _T(""));
 	strFaildUrl.Replace(_T("&"), _T(""));
@@ -1619,7 +1619,7 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	strErrorHTMLFmt += _T("</h4>");
 	strErrorHTMLFmt += _T("<h4>");
 	strErrorHTMLFmt += errorPageHeadingName;
-	strErrorHTMLFmt += errorText.c_str();
+	strErrorHTMLFmt += (LPCWSTR)errorText.c_str();
 	strErrorHTMLFmt += _T("</h4></div></div></div></div></body></html>");
 
 	CefString strCefErrorHTML(strErrorHTMLFmt);
@@ -1657,8 +1657,8 @@ bool ClientHandler::GetAuthCredentials(CefRefPtr<CefBrowser> browser,
 	HWND hWindow = GetSafeParentWnd(browser);
 
 	CEFAuthenticationValues values = {0};
-	values.lpszHost = host.c_str();
-	values.lpszRealm = realm.c_str();
+	values.lpszHost = (LPCWSTR)host.c_str();
+	values.lpszRealm = (LPCWSTR)realm.c_str();
 	_tcscpy_s(values.szUserName, _T(""));
 	_tcscpy_s(values.szUserPass, _T(""));
 	if (SafeWnd(hWindow))
@@ -1711,7 +1711,7 @@ bool ClientHandler::OnCertificateError(CefRefPtr<CefBrowser> browser,
 
 	CString confirmMsg;
 	confirmMsg.LoadString(IDS_STRING_CONFIRM_INSECURE_CONNECTION);
-	szMessage.Format(confirmMsg, request_url.c_str());
+	szMessage.Format(confirmMsg, (LPCWSTR)request_url.c_str());
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (hWindow)
 	{
@@ -1779,8 +1779,8 @@ bool ClientHandler::OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 		// get URL requested
 		CefString newURL = request->GetURL();
 		UINT bTopPage = FALSE;
-		LPCTSTR pszURL = NULL;
-		pszURL = newURL.c_str();
+		LPCWSTR pszURL = NULL;
+		pszURL = (LPCWSTR)newURL.c_str();
 
 		if (frame)
 		{
@@ -1798,7 +1798,7 @@ bool ClientHandler::OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 			CefString strName;
 			strName = frame->GetName();
 			CString strWindowName;
-			strWindowName = strName.c_str();
+			strWindowName = (LPCWSTR)strName.c_str();
 			if (!strWindowName.IsEmpty())
 			{
 				HWND hWindowFrame = {0};
@@ -1850,7 +1850,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 
 	CString confirmMessage;
 	CString enableMediaConfirmation;
-	CString requestOrigin = requesting_origin.c_str();
+	CString requestOrigin = (LPCWSTR)requesting_origin.c_str();
 	enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
 	confirmMessage.Format(enableMediaConfirmation, (LPCTSTR)requestOrigin);
 	confirmMessage += "\n";
@@ -1883,7 +1883,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
 	dwLogData.mFUNCTION_NAME = _T("OnRequestMediaAccessPermission");
 	dwLogData.mMESSAGE1 = requestOrigin;
-	dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), frame->GetName().c_str());
+	dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), (LPCWSTR)frame->GetName().c_str());
 	dwLogData.mMESSAGE3.Format(_T("Approved permission type:%d"), requested_permissions);
 	theApp.AppendDebugViewLog(dwLogData);
 	theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_URL);
@@ -1909,7 +1909,7 @@ bool ClientHandler::OnJSDialog(CefRefPtr<CefBrowser> browser,
 		hWindow = GetParent(hWindow);
 	}
 	LPCTSTR pszMessage = NULL;
-	pszMessage = message_text.c_str();
+	pszMessage = (LPCWSTR)message_text.c_str();
 	if (dialog_type == JSDIALOGTYPE_ALERT)
 	{
 		int iRet = theApp.SB_MessageBox(hWindow, pszMessage, NULL, MB_ICONWARNING | MB_OK | MB_TASKMODAL, TRUE);
@@ -1938,7 +1938,7 @@ bool ClientHandler::OnBeforeUnloadDialog(CefRefPtr<CefBrowser> browser,
 		hWindow = GetParent(hWindow);
 	}
 	LPCTSTR pszMessage = NULL;
-	pszMessage = message_text.c_str();
+	pszMessage = (LPCWSTR)message_text.c_str();
 	CString strMsg;
 	strMsg = pszMessage;
 	//if(strMsg==_T("Is it OK to leave/reload this page?"))
@@ -1993,7 +1993,7 @@ bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 				for (UINT i = 0; i < cefstrFiles.size(); i++)
 				{
 					cstrFileName = cefstrFiles[i];
-					strFileName = cstrFileName.c_str();
+					strFileName = (LPCWSTR)cstrFileName.c_str();
 					{
 						theApp.SendLoggingMsg(LOG_UPLOAD, strFileName, hWindow);
 					}
@@ -2007,7 +2007,7 @@ bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 				CefString cstrFileName;
 				CString strFileName;
 				cstrFileName = dragData->GetLinkURL();
-				strFileName = cstrFileName.c_str();
+				strFileName = (LPCWSTR)cstrFileName.c_str();
 				theApp.m_pLogDisp->SendLog(LOG_DOWNLOAD, strFileName, strFileName);
 			}
 		}
@@ -2028,7 +2028,7 @@ bool ClientHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
 {
 	CefString strName = message->GetName();
 	CString strFilterName;
-	strFilterName = strName.c_str();
+	strFilterName = (LPCWSTR)strName.c_str();
 	strFilterName.TrimLeft();
 	strFilterName.TrimRight();
 	if (strFilterName == _T("SET_PID"))
@@ -2062,9 +2062,9 @@ bool MyV8Handler::Execute(const CefString& name,
 	{
 		if (iArgSize == 3 && arguments[0]->IsString() && arguments[1]->IsString() && arguments[2]->IsString())
 		{
-			CString strText(arguments[0]->GetStringValue().c_str());
-			CString strCaption(arguments[1]->GetStringValue().c_str());
-			CString strChronosExtParentWnd(arguments[2]->GetStringValue().c_str());
+			CString strText((LPCWSTR)arguments[0]->GetStringValue().c_str());
+			CString strCaption((LPCWSTR)arguments[1]->GetStringValue().c_str());
+			CString strChronosExtParentWnd((LPCWSTR)arguments[2]->GetStringValue().c_str());
 			CWnd* pWnd = NULL;
 			HWND hW = 0;
 			if (!strChronosExtParentWnd.IsEmpty())
@@ -2119,10 +2119,10 @@ bool MyV8Handler::Execute(const CefString& name,
 	{
 		if (iArgSize == 4 && arguments[0]->IsString() && arguments[1]->IsString() && arguments[2]->IsString() && arguments[3]->IsString())
 		{
-			CString strID(arguments[0]->GetStringValue().c_str());
-			CString strText(arguments[1]->GetStringValue().c_str());
-			CString strCaption(arguments[2]->GetStringValue().c_str());
-			CString strChronosExtParentWnd(arguments[3]->GetStringValue().c_str());
+			CString strID((LPCWSTR)arguments[0]->GetStringValue().c_str());
+			CString strText((LPCWSTR)arguments[1]->GetStringValue().c_str());
+			CString strCaption((LPCWSTR)arguments[2]->GetStringValue().c_str());
+			CString strChronosExtParentWnd((LPCWSTR)arguments[3]->GetStringValue().c_str());
 			CWnd* pWnd = NULL;
 			HWND hW = 0;
 			if (!strChronosExtParentWnd.IsEmpty())
@@ -2190,7 +2190,7 @@ bool MyV8Handler::Execute(const CefString& name,
 	{
 		if (iArgSize == 1 && arguments[0]->IsString())
 		{
-			CString strChronosExtParentWnd(arguments[0]->GetStringValue().c_str());
+			CString strChronosExtParentWnd((LPCWSTR)arguments[0]->GetStringValue().c_str());
 			CWnd* pWnd = NULL;
 			HWND hW = 0;
 			if (!strChronosExtParentWnd.IsEmpty())
