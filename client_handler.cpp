@@ -614,8 +614,7 @@ void ClientHandler::OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString
 	if (SafeWnd(hWindow))
 	{
 		LPCWSTR pszTitle = NULL;
-		std::wstring hoge = title.ToWString();
-		pszTitle = (LPCWSTR)hoge.c_str();
+		pszTitle = (LPCWSTR)title.c_str();
 		::SendMessageTimeout(hWindow, WM_APP_CEF_TITLE_CHANGE, (WPARAM)pszTitle, NULL, SMTO_NORMAL, 1000, NULL);
 	}
 	// call parent
