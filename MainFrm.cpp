@@ -2711,7 +2711,6 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 		if (out.Open(strPath, uiFlg))
 		{
 			CString strURL;
-			CString strTitle;
 			CString strData;
 
 			POSITION pos1 = {0};
@@ -2747,9 +2746,6 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 				strURL = pView->GetLocationURL();
 				strURL.TrimLeft();
 				strURL.TrimRight();
-				strTitle = pView->m_strTitle;
-				strTitle.TrimLeft();
-				strTitle.TrimRight();
 				if (SBUtil::IsURL_HTTP(strURL))
 				{
 					if (iCnt == 0)
@@ -2757,7 +2753,12 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 						//日時を初めの行に出力する。
 						out.WriteString(strWriteTime);
 					}
-					strData.Format(_T("%s\t%s\n"), (LPCTSTR)strTitle, (LPCTSTR)strURL);
+
+					//CStdioFileはMBCSで書き込もうとする一方、入力値はUnicodeなので、
+					//タイトルに特殊文字が含まれていると文字変換に失敗して上手く書き込めない場合がある。
+					//そのため、タイトルは書きこまずURLのみとする
+					strData.Format(_T("%s\n"), (LPCTSTR)strURL);
+
 					out.WriteString(strData);
 					iCnt++;
 				}
