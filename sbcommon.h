@@ -4,6 +4,7 @@
 #include "fav.h"
 #include "locale.h"
 #include <sddl.h>
+#include <VersionHelpers.h>
 #include "include/cef_version.h"
 
 #include "mmsystem.h"
@@ -500,20 +501,7 @@ namespace SBUtil
 
 	static inline BOOL IsWindowsServerRDS()
 	{
-		OSVERSIONINFOEX ovi = {0};
-		ovi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-		GetVersionEx((OSVERSIONINFO*)&ovi);
-		if (ovi.wProductType == VER_NT_WORKSTATION)
-			return FALSE;
-		else if (ovi.wProductType == VER_NT_DOMAIN_CONTROLLER || ovi.wProductType == VER_NT_SERVER)
-		{
-			if ((ovi.wSuiteMask & VER_SUITE_TERMINAL) == VER_SUITE_TERMINAL)
-			{
-				if (!((ovi.wSuiteMask & VER_SUITE_SINGLEUSERTS) == VER_SUITE_SINGLEUSERTS))
-					return TRUE;
-			}
-		}
-		return FALSE;
+		return IsWindowsServer() && GetSystemMetrics(SM_REMOTESESSION);
 	}
 
 	static inline void SafeGetWindowText(HWND hWnd, CString& str)
