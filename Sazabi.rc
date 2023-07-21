@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// “ú–{Œê resources
+// æ—¥æœ¬èªž resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
@@ -26,82 +26,82 @@ LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
 
 IDR_MAINFRAME MENU
 BEGIN
-    POPUP "ƒtƒ@ƒCƒ‹(&F)"
+    POPUP "ãƒ•ã‚¡ã‚¤ãƒ«(&F)"
     BEGIN
-        MENUITEM "V‹Kì¬-ƒEƒBƒ“ƒhƒE(&N)\tCtrl+N",      ID_NEW_BLANK
-        MENUITEM "V‹Kì¬-ƒEƒBƒ“ƒhƒE(Œ»Ý‚Ìƒy[ƒW)",          ID_NEW
-        MENUITEM "V‹KƒZƒbƒVƒ‡ƒ“",                     ID_NEW_SESSION
+        MENUITEM "æ–°è¦ä½œæˆ-ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦(&N)\tCtrl+N",      ID_NEW_BLANK
+        MENUITEM "æ–°è¦ä½œæˆ-ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦(ç¾åœ¨ã®ãƒšãƒ¼ã‚¸)",          ID_NEW
+        MENUITEM "æ–°è¦ã‚»ãƒƒã‚·ãƒ§ãƒ³",                     ID_NEW_SESSION
         MENUITEM SEPARATOR
-        MENUITEM "ƒEƒBƒ“ƒhƒE‚Ì•œŒ³",                    ID_RESTORE_WND
-        MENUITEM "ƒEƒBƒ“ƒhƒE‚Ì•Û‘¶",                    ID_SAVE_WND
+        MENUITEM "ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¾©å…ƒ",                    ID_RESTORE_WND
+        MENUITEM "ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä¿å­˜",                    ID_SAVE_WND
         MENUITEM SEPARATOR
-        MENUITEM "ˆóü(PDFo—Í)",                   ID_PRINT_PDF
-        MENUITEM "ˆóü(&P)...\tCtrl+P",           ID_PRINT
+        MENUITEM "å°åˆ·(PDFå‡ºåŠ›)",                   ID_PRINT_PDF
+        MENUITEM "å°åˆ·(&P)...\tCtrl+P",           ID_PRINT
         MENUITEM SEPARATOR
-        MENUITEM "•Â‚¶‚é(&C)",                     ID_W_CLOSE
+        MENUITEM "é–‰ã˜ã‚‹(&C)",                     ID_W_CLOSE
         MENUITEM SEPARATOR
-        POPUP "Å‹ß•Â‚¶‚½ƒEƒBƒ“ƒhƒE"
+        POPUP "æœ€è¿‘é–‰ã˜ãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦"
         BEGIN
-            MENUITEM "‚È‚µ",                          ID_CLOSE_WND_HISTORY_DUMMY
+            MENUITEM "ãªã—",                          ID_CLOSE_WND_HISTORY_DUMMY
         END
     END
-    POPUP "•ÒW(&E)"
+    POPUP "ç·¨é›†(&E)"
     BEGIN
-        MENUITEM "Ø‚èŽæ‚è(&T)\tCtrl+X",            ID_CUT
-        MENUITEM "ƒRƒs[(&C)\tCtrl+C",             ID_COPY
-        MENUITEM "“\‚è•t‚¯(&P)\tCtrl+V",            ID_PASTE
+        MENUITEM "åˆ‡ã‚Šå–ã‚Š(&T)\tCtrl+X",            ID_CUT
+        MENUITEM "ã‚³ãƒ”ãƒ¼(&C)\tCtrl+C",             ID_COPY
+        MENUITEM "è²¼ã‚Šä»˜ã‘(&P)\tCtrl+V",            ID_PASTE
         MENUITEM SEPARATOR
-        MENUITEM "‘S‚Ä‘I‘ð(&A)\tCtrl+A",            ID_SEL_ALL
+        MENUITEM "å…¨ã¦é¸æŠž(&A)\tCtrl+A",            ID_SEL_ALL
         MENUITEM SEPARATOR
-        MENUITEM "‚±‚Ìƒy[ƒW‚ÌŒŸõ(&F)...\tCtrl+F",     ID_FIND_PAGE
+        MENUITEM "ã“ã®ãƒšãƒ¼ã‚¸ã®æ¤œç´¢(&F)...\tCtrl+F",     ID_FIND_PAGE
     END
-    POPUP "•\Ž¦(&V)"
+    POPUP "è¡¨ç¤º(&V)"
     BEGIN
-        MENUITEM "‘O‚É–ß‚é\t Alt+©",                ID_GO_BACK
-        MENUITEM "ŽŸ‚Éi‚Þ\t Alt+¨",                ID_GO_FORWARD
-        MENUITEM "’†Ž~\tEsc",                     ID_VIEW_STOP
-        MENUITEM "ÅV‚Ìî•ñ‚ÉXV\t F5",               ID_VIEW_REFRESH
-        MENUITEM "ƒz[ƒ€ ƒy[ƒW\tAlt+Home",           ID_GO_START_PAGE
+        MENUITEM "å‰ã«æˆ»ã‚‹\t Alt+â†",                ID_GO_BACK
+        MENUITEM "æ¬¡ã«é€²ã‚€\t Alt+â†’",                ID_GO_FORWARD
+        MENUITEM "ä¸­æ­¢\tEsc",                     ID_VIEW_STOP
+        MENUITEM "æœ€æ–°ã®æƒ…å ±ã«æ›´æ–°\t F5",               ID_VIEW_REFRESH
+        MENUITEM "ãƒ›ãƒ¼ãƒ  ãƒšãƒ¼ã‚¸\tAlt+Home",           ID_GO_START_PAGE
         MENUITEM SEPARATOR
-        MENUITEM "‘S‰æ–Ê•\Ž¦(&F)\tF11",              ID_FULL_SCREEN
+        MENUITEM "å…¨ç”»é¢è¡¨ç¤º(&F)\tF11",              ID_FULL_SCREEN
     END
-    POPUP "‚¨‹C‚É“ü‚è(&A)"
+    POPUP "ãŠæ°—ã«å…¥ã‚Š(&A)"
     BEGIN
-        MENUITEM "‚¨‹C‚É“ü‚è‚É’Ç‰Á(&A)...",             ID_ADD_FAVORITE
-        MENUITEM "‚¨‹C‚É“ü‚è‚Ì®—(&O)...",             ID_ORGANIZE_FAVORITE
+        MENUITEM "ãŠæ°—ã«å…¥ã‚Šã«è¿½åŠ (&A)...",             ID_ADD_FAVORITE
+        MENUITEM "ãŠæ°—ã«å…¥ã‚Šã®æ•´ç†(&O)...",             ID_ORGANIZE_FAVORITE
         MENUITEM SEPARATOR
         MENUITEM "DUMMY",                       ID_FAVORITE_DUMMY
     END
-    POPUP "ƒc[ƒ‹(&T)"
+    POPUP "ãƒ„ãƒ¼ãƒ«(&T)"
     BEGIN
-        MENUITEM "ƒtƒ@ƒCƒ‹ƒ}ƒl[ƒWƒƒ",                   ID_OPEN_THIN_FILER
+        MENUITEM "ãƒ•ã‚¡ã‚¤ãƒ«ãƒžãƒãƒ¼ã‚¸ãƒ£",                   ID_OPEN_THIN_FILER
         MENUITEM SEPARATOR
-        MENUITEM "Ý’è(&P)...",                   ID_SETTINGS
+        MENUITEM "è¨­å®š(&P)...",                   ID_SETTINGS
     END
-    POPUP "ƒEƒBƒ“ƒhƒE(&W)"
+    POPUP "ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦(&W)"
     BEGIN
-        MENUITEM "•Â‚¶‚é(&C)",                     ID_W_CLOSE
-        MENUITEM "‘S‚Ä‚ÌƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é(&X)",            IDC_APP_EXIT
-        MENUITEM "‚±‚ÌƒEƒBƒ“ƒhƒEˆÈŠO‚ð•Â‚¶‚é",               IDC_APP_EXIT_BUT_THIS
-        MENUITEM "ŽŸ‚ÌƒEƒBƒ“ƒhƒE\tCtrl+Tab",           ID_NEXT_WND
-        MENUITEM "‘O‚ÌƒEƒBƒ“ƒhƒE\tShift+Ctrl+Tab",     ID_PREV_WND
+        MENUITEM "é–‰ã˜ã‚‹(&C)",                     ID_W_CLOSE
+        MENUITEM "å…¨ã¦ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹(&X)",            IDC_APP_EXIT
+        MENUITEM "ã“ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä»¥å¤–ã‚’é–‰ã˜ã‚‹",               IDC_APP_EXIT_BUT_THIS
+        MENUITEM "æ¬¡ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦\tCtrl+Tab",           ID_NEXT_WND
+        MENUITEM "å‰ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦\tShift+Ctrl+Tab",     ID_PREV_WND
         MENUITEM SEPARATOR
         MENUITEM "DUMMY",                       ID_WINDOW_DUMMY
     END
-    POPUP "ƒwƒ‹ƒv(&H)"
+    POPUP "ãƒ˜ãƒ«ãƒ—(&H)"
     BEGIN
-        MENUITEM "ƒo[ƒWƒ‡ƒ“î•ñ(&A)...",              ID_APP_ABOUT
+        MENUITEM "ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±(&A)...",              ID_APP_ABOUT
         MENUITEM SEPARATOR
-        MENUITEM "ƒuƒ‰ƒEƒU[ƒLƒƒƒbƒVƒ…‚ðíœ‚·‚é(&X)",         IDC_APP_DELETE_CACHE
+        MENUITEM "ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤ã™ã‚‹(&X)",         IDC_APP_DELETE_CACHE
     END
 END
 
-#endif    // “ú–{Œê resources
+#endif    // æ—¥æœ¬èªž resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// “ú–{Œê (“ú–{) resources
+// æ—¥æœ¬èªž (æ—¥æœ¬) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
@@ -116,11 +116,11 @@ IDR_MENU_BACK MENU
 BEGIN
     POPUP "BACK"
     BEGIN
-        MENUITEM "1‚Â–ß‚é",                        ID_BF_BACK1
-        MENUITEM "2‚Â–ß‚é",                        ID_BF_BACK2
-        MENUITEM "3‚Â–ß‚é",                        ID_BF_BACK3
-        MENUITEM "4‚Â–ß‚é",                        ID_BF_BACK4
-        MENUITEM "5‚Â–ß‚é",                        ID_BF_BACK5
+        MENUITEM "1ã¤æˆ»ã‚‹",                        ID_BF_BACK1
+        MENUITEM "2ã¤æˆ»ã‚‹",                        ID_BF_BACK2
+        MENUITEM "3ã¤æˆ»ã‚‹",                        ID_BF_BACK3
+        MENUITEM "4ã¤æˆ»ã‚‹",                        ID_BF_BACK4
+        MENUITEM "5ã¤æˆ»ã‚‹",                        ID_BF_BACK5
     END
 END
 
@@ -128,11 +128,11 @@ IDR_MENU_FORWARD MENU
 BEGIN
     POPUP "FORWARD"
     BEGIN
-        MENUITEM "1‚Âi‚Þ",                        ID_BF_FORWARD1
-        MENUITEM "2‚Âi‚Þ",                        ID_BF_FORWARD2
-        MENUITEM "3‚Âi‚Þ",                        ID_BF_FORWARD3
-        MENUITEM "4‚Âi‚Þ",                        ID_BF_FORWARD4
-        MENUITEM "5‚Âi‚Þ",                        ID_BF_FORWARD5
+        MENUITEM "1ã¤é€²ã‚€",                        ID_BF_FORWARD1
+        MENUITEM "2ã¤é€²ã‚€",                        ID_BF_FORWARD2
+        MENUITEM "3ã¤é€²ã‚€",                        ID_BF_FORWARD3
+        MENUITEM "4ã¤é€²ã‚€",                        ID_BF_FORWARD4
+        MENUITEM "5ã¤é€²ã‚€",                        ID_BF_FORWARD5
     END
 END
 
@@ -140,14 +140,14 @@ IDR_MENU_TAB MENU
 BEGIN
     POPUP "TAB_MENU"
     BEGIN
-        MENUITEM "V‚µ‚¢ƒ^ƒu",                       ID_NEW_BLANK
-        MENUITEM "ƒ^ƒu‚ð•¡»",                       ID_NEW
+        MENUITEM "æ–°ã—ã„ã‚¿ãƒ–",                       ID_NEW_BLANK
+        MENUITEM "ã‚¿ãƒ–ã‚’è¤‡è£½",                       ID_NEW
         MENUITEM SEPARATOR
-        MENUITEM "ƒ^ƒu‚ð•Â‚¶‚é",                      ID_W_CLOSE
-        MENUITEM "‘S‚Ä‚ÌƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é(&X)",            IDC_APP_EXIT
-        MENUITEM "‘¼‚Ìƒ^ƒu‚ð‘S‚Ä•Â‚¶‚é",                  IDC_APP_EXIT_BUT_THIS
-        MENUITEM "‰E‚Ìƒ^ƒu‚ð‘S‚Ä•Â‚¶‚é",                  ID_TAB_CLOSE_RIGHT
-        MENUITEM "¶‚Ìƒ^ƒu‚ð‘S‚Ä•Â‚¶‚é",                  ID_TAB_CLOSE_LEFT
+        MENUITEM "ã‚¿ãƒ–ã‚’é–‰ã˜ã‚‹",                      ID_W_CLOSE
+        MENUITEM "å…¨ã¦ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹(&X)",            IDC_APP_EXIT
+        MENUITEM "ä»–ã®ã‚¿ãƒ–ã‚’å…¨ã¦é–‰ã˜ã‚‹",                  IDC_APP_EXIT_BUT_THIS
+        MENUITEM "å³ã®ã‚¿ãƒ–ã‚’å…¨ã¦é–‰ã˜ã‚‹",                  ID_TAB_CLOSE_RIGHT
+        MENUITEM "å·¦ã®ã‚¿ãƒ–ã‚’å…¨ã¦é–‰ã˜ã‚‹",                  ID_TAB_CLOSE_LEFT
     END
 END
 
@@ -181,8 +181,8 @@ BEGIN
     "LANGUAGE 17, 1\r\n"
     "#pragma code_page(932)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\Sazabi.rc2""  // Microsoft Visual C++ ˆÈŠO‚Ìƒc[ƒ‹‚Å•ÒW‚³‚ê‚½ƒŠƒ\[ƒX\r\n"
-    "#include ""l.jpn\\afxres.rc""          // •W€‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg\r\n"
+    "#include ""res\\Sazabi.rc2""  // Microsoft Visual C++ ä»¥å¤–ã®ãƒ„ãƒ¼ãƒ«ã§ç·¨é›†ã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹\r\n"
+    "#include ""l.jpn\\afxres.rc""          // æ¨™æº–ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ\r\n"
     "#ifndef _AFXDLL\r\n"
     "#include ""afxribbon.rc"" // ribbon and control bar resources\r\n"
     "#endif\r\n"
@@ -239,54 +239,54 @@ END
 
 IDD_SETTINGS_DLG_LOG DIALOGEX 0, 0, 370, 291
 STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
-CAPTION "ƒƒOo—ÍÝ’è"
+CAPTION "ãƒ­ã‚°å‡ºåŠ›è¨­å®š"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
     GROUPBOX        "DebugLog",IDC_STATIC,10,7,350,66,WS_GROUP
-    CONTROL         "DebugLogo—Í‚ð—LŒø‚É‚·‚é",IDC_CHECK_ENABLE_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,20,105,10
-    CONTROL         "0:‘S‚Ä‚ÌƒƒOŽí•Ê‚ðo—Í",IDC_RADIO_LOG_ALL,"Button",BS_AUTORADIOBUTTON,27,34,93,10
-    CONTROL         "1:ƒtƒ@ƒCƒ‹o—Í‚È‚µAOutputDebugStringo—Í‚Ì‚Ý",IDC_RADIO_LOG_NOFILE,
+    CONTROL         "DebugLogå‡ºåŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_ENABLE_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,20,105,10
+    CONTROL         "0:å…¨ã¦ã®ãƒ­ã‚°ç¨®åˆ¥ã‚’å‡ºåŠ›",IDC_RADIO_LOG_ALL,"Button",BS_AUTORADIOBUTTON,27,34,93,10
+    CONTROL         "1:ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ãªã—ã€OutputDebugStringå‡ºåŠ›ã®ã¿",IDC_RADIO_LOG_NOFILE,
                     "Button",BS_AUTORADIOBUTTON,27,46,171,10
-    CONTROL         "2:ˆê”Êî•ñ[GE]‚ÆURLî•ñ[URL]‚Ì‚Ýƒtƒ@ƒCƒ‹o—Í",IDC_RADIO_LOG_GE_URL,
+    CONTROL         "2:ä¸€èˆ¬æƒ…å ±[GE]ã¨URLæƒ…å ±[URL]ã®ã¿ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›",IDC_RADIO_LOG_GE_URL,
                     "Button",BS_AUTORADIOBUTTON,27,58,173,10
     PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,8,76,100,14
-    GROUPBOX        "ŠÄ¸ƒƒOÝ’è",IDC_STATIC,10,97,350,185,WS_GROUP
-    CONTROL         "ŠÄ¸ƒƒOo—Í‚ð—LŒø‚É‚·‚é",IDC_CHECK_EnableLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
-    LTEXT           "ƒƒOƒT[ƒo[URL",IDC_STATIC,26,125,283,8
+    GROUPBOX        "ç›£æŸ»ãƒ­ã‚°è¨­å®š",IDC_STATIC,10,97,350,185,WS_GROUP
+    CONTROL         "ç›£æŸ»ãƒ­ã‚°å‡ºåŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_EnableLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
+    LTEXT           "ãƒ­ã‚°ã‚µãƒ¼ãƒãƒ¼URL",IDC_STATIC,26,125,283,8
     EDITTEXT        IDC_EDIT_LogServerURL,26,136,328,14,ES_AUTOHSCROLL
-    LTEXT           "’Ç‰ÁƒŠƒNƒGƒXƒgƒwƒbƒ_[î•ñ",IDC_STATIC,26,154,283,8
+    LTEXT           "è¿½åŠ ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ˜ãƒƒãƒ€ãƒ¼æƒ…å ±",IDC_STATIC,26,154,283,8
     EDITTEXT        IDC_EDIT_RequestHeader,26,165,328,14,ES_AUTOHSCROLL
-    LTEXT           "ƒƒO-ƒƒ\ƒbƒh-Œ`Ž®",IDC_STATIC,27,186,283,8
-    CONTROL         "GET:URLƒNƒGƒŠƒpƒ‰ƒ[ƒ^Œ`Ž®",IDC_RADIO_LOG_GET,"Button",BS_AUTORADIOBUTTON,27,198,193,10
-    CONTROL         "POST:JSONŒ`Ž®",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
-    CONTROL         "ƒ_ƒEƒ“ƒ[ƒh‘€ì‚ð‹L˜^‚·‚é",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
-    CONTROL         "ƒAƒbƒvƒ[ƒh‘€ì‚ð‹L˜^‚·‚é",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
-    CONTROL         "‰{———š—ð‚ð‹L˜^‚·‚é",IDC_CHECK_EnableBrowsingLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
-    CONTROL         "Ú×‚È‰{———š—ð‚ð‹L˜^‚·‚é",IDC_CHECK_EnableAccessAllLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
+    LTEXT           "ãƒ­ã‚°-ãƒ¡ã‚½ãƒƒãƒ‰-å½¢å¼",IDC_STATIC,27,186,283,8
+    CONTROL         "GET:URLã‚¯ã‚¨ãƒªãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å½¢å¼",IDC_RADIO_LOG_GET,"Button",BS_AUTORADIOBUTTON,27,198,193,10
+    CONTROL         "POST:JSONå½¢å¼",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
+    CONTROL         "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ“ä½œã‚’è¨˜éŒ²ã™ã‚‹",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
+    CONTROL         "ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰æ“ä½œã‚’è¨˜éŒ²ã™ã‚‹",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
+    CONTROL         "é–²è¦§å±¥æ­´ã‚’è¨˜éŒ²ã™ã‚‹",IDC_CHECK_EnableBrowsingLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
+    CONTROL         "è©³ç´°ãªé–²è¦§å±¥æ­´ã‚’è¨˜éŒ²ã™ã‚‹",IDC_CHECK_EnableAccessAllLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
 END
 
 IDD_SETTINGS_DLG_DSP DIALOGEX 0, 0, 370, 291
 STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
-CAPTION "‰æ–Ê•\Ž¦Ý’è"
+CAPTION "ç”»é¢è¡¨ç¤ºè¨­å®š"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "ƒ^ƒu‚ð—LŒø‚É‚·‚é",IDC_CHECK_TAB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,161,10
-    CONTROL         "GPUƒŒƒ“ƒ_ƒŠƒ“ƒO‚ð—LŒø‚É‚·‚é",IDC_CHECK_GPU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,161,10
-    CONTROL         "Rebar(ƒƒjƒ…[Aƒc[ƒ‹ƒo[AƒAƒhƒŒƒXƒo[)‚ð•\Ž¦‚·‚é",IDC_CHECK_DISABLE_REBAR,
+    CONTROL         "ã‚¿ãƒ–ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_TAB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,161,10
+    CONTROL         "GPUãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_GPU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,161,10
+    CONTROL         "Rebar(ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã€ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ã€ã‚¢ãƒ‰ãƒ¬ã‚¹ãƒãƒ¼)ã‚’è¡¨ç¤ºã™ã‚‹",IDC_CHECK_DISABLE_REBAR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,55,238,10
-    CONTROL         "Rebar‚ÉƒƒS‚ð•\Ž¦‚·‚é",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,161,10
-    CONTROL         "ƒXƒe[ƒ^ƒXƒo[‚ð•\Ž¦‚·‚é",IDC_CHECK_DISABLE_STATUSBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,85,153,10
-    GROUPBOX        "ƒ|ƒbƒvƒAƒbƒvƒEƒBƒ“ƒhƒE",IDC_STATIC,8,133,265,45
-    LTEXT           "•ƒ}[ƒWƒ“",IDC_STATIC,15,145,45,8
+    CONTROL         "Rebarã«ãƒ­ã‚´ã‚’è¡¨ç¤ºã™ã‚‹",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,161,10
+    CONTROL         "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã‚’è¡¨ç¤ºã™ã‚‹",IDC_CHECK_DISABLE_STATUSBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,85,153,10
+    GROUPBOX        "ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦",IDC_STATIC,8,133,265,45
+    LTEXT           "å¹…ãƒžãƒ¼ã‚¸ãƒ³",IDC_STATIC,15,145,45,8
     EDITTEXT        IDC_EDIT_W,62,143,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "‚‚³ƒ}[ƒWƒ“",IDC_STATIC,15,163,45,8
+    LTEXT           "é«˜ã•ãƒžãƒ¼ã‚¸ãƒ³",IDC_STATIC,15,163,45,8
     EDITTEXT        IDC_EDIT_H,62,162,21,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    GROUPBOX        "ƒY[ƒ€•\Ž¦",IDC_STATIC,8,188,265,33
-    LTEXT           "Šg‘åEk¬—¦",IDC_STATIC,15,202,43,8
+    GROUPBOX        "ã‚ºãƒ¼ãƒ è¡¨ç¤º",IDC_STATIC,8,188,265,33
+    LTEXT           "æ‹¡å¤§ãƒ»ç¸®å°çŽ‡",IDC_STATIC,15,202,43,8
     EDITTEXT        IDC_EDIT_ZOOM,61,200,28,13,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
     LTEXT           "%",IDC_STATIC,93,202,16,8
-    PUSHBUTTON      "‘I‘ð",IDC_BUTTON1,100,200,42,13
-    CONTROL         "PDF•\Ž¦‚ð—LŒø‚É‚·‚é",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,161,10
+    PUSHBUTTON      "é¸æŠž",IDC_BUTTON1,100,200,42,13
+    CONTROL         "PDFè¡¨ç¤ºã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_PDF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,161,10
 END
 
 IDD_SETTINGS_DLG_SEC DIALOGEX 0, 0, 370, 291
@@ -294,26 +294,26 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Dialog"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "URLƒŠƒ_ƒCƒŒƒNƒg‚ð—LŒø‚É‚·‚é",IDC_CHECK_EnableZoneFilterScript,
+    CONTROL         "URLãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_EnableZoneFilterScript,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,100,10
-    PUSHBUTTON      "ƒXƒNƒŠƒvƒg ƒGƒfƒBƒ^[ ƒEƒBƒ“ƒhƒE‚ðŠJ‚­...",IDC_BUTTON_SCRIPT_EDIT,8,25,121,14
-    LTEXT           "î•ñƒƒbƒZ[ƒW•\Ž¦ŽžŠÔ",IDC_STATIC,8,50,74,8
+    PUSHBUTTON      "ã‚¹ã‚¯ãƒªãƒ—ãƒˆ ã‚¨ãƒ‡ã‚£ã‚¿ãƒ¼ ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã...",IDC_BUTTON_SCRIPT_EDIT,8,25,121,14
+    LTEXT           "æƒ…å ±ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤ºæ™‚é–“",IDC_STATIC,8,50,74,8
     COMBOBOX        IDC_COMBO1,87,46,68,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Žw’èƒuƒ‰ƒEƒU[1",IDC_STATIC,8,70,48,8
+    LTEXT           "æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼1",IDC_STATIC,8,70,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser1,65,68,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "ŽQÆ...",IDC_BUTTON_BROWSE1,303,67,30,14
-    LTEXT           "Žw’èƒuƒ‰ƒEƒU[2",IDC_STATIC,8,92,48,8
+    PUSHBUTTON      "å‚ç…§...",IDC_BUTTON_BROWSE1,303,67,30,14
+    LTEXT           "æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼2",IDC_STATIC,8,92,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser2,65,88,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "ŽQÆ...",IDC_BUTTON_BROWSE2,303,87,30,14
-    LTEXT           "Žw’èƒuƒ‰ƒEƒU[3",IDC_STATIC,8,114,48,8
+    PUSHBUTTON      "å‚ç…§...",IDC_BUTTON_BROWSE2,303,87,30,14
+    LTEXT           "æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼3",IDC_STATIC,8,114,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser3,65,112,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "ŽQÆ...",IDC_BUTTON_BROWSE3,303,111,30,14
-    LTEXT           "Žw’èƒuƒ‰ƒEƒU[4",IDC_STATIC,8,136,48,8
+    PUSHBUTTON      "å‚ç…§...",IDC_BUTTON_BROWSE3,303,111,30,14
+    LTEXT           "æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼4",IDC_STATIC,8,136,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser4,65,134,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "ŽQÆ...",IDC_BUTTON_BROWSE4,303,133,30,14
-    LTEXT           "Žw’èƒuƒ‰ƒEƒU[5",IDC_STATIC,8,158,48,8
+    PUSHBUTTON      "å‚ç…§...",IDC_BUTTON_BROWSE4,303,133,30,14
+    LTEXT           "æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼5",IDC_STATIC,8,158,48,8
     EDITTEXT        IDC_EDIT_CustomBrowser5,65,156,234,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "ŽQÆ...",IDC_BUTTON_BROWSE5,303,155,30,14
+    PUSHBUTTON      "å‚ç…§...",IDC_BUTTON_BROWSE5,303,155,30,14
 END
 
 IDD_SETTINGS_DLG_CONNECTION DIALOGEX 0, 0, 370, 291
@@ -321,17 +321,17 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Dialog"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    GROUPBOX        "ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±Ý’è",IDC_STATIC,3,9,353,28,WS_GROUP
-    CONTROL         "ƒVƒXƒeƒ€Ý’è‚ð—˜—p‚·‚é",IDC_RAD_PX_IE,"Button",BS_AUTORADIOBUTTON,10,21,81,10
-    CONTROL         "ƒ_ƒCƒŒƒNƒgÚ‘±iƒvƒƒLƒV–³‚µ)",IDC_RAD_PX_NA,"Button",BS_AUTORADIOBUTTON,103,21,94,10
-    CONTROL         "ƒ}ƒjƒ…ƒAƒ‹Ý’è",IDC_RAD_PX_EF,"Button",BS_AUTORADIOBUTTON,206,21,66,10
-    GROUPBOX        "ƒ}ƒjƒ…ƒAƒ‹Ý’è€–Ú",IDC_STATIC,3,43,353,227,WS_GROUP
-    LTEXT           "ƒvƒƒLƒV ƒT[ƒo[ / Ž©“®\¬ƒXƒNƒŠƒvƒg (ƒvƒƒLƒV ƒT[ƒo[‚Ü‚½‚ÍAŽ©“®\¬ƒXƒNƒŠƒvƒg‚ðŽw’è‚µ‚Ä‰º‚³‚¢B)",IDC_STATIC,14,60,334,8
+    GROUPBOX        "ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šè¨­å®š",IDC_STATIC,3,9,353,28,WS_GROUP
+    CONTROL         "ã‚·ã‚¹ãƒ†ãƒ è¨­å®šã‚’åˆ©ç”¨ã™ã‚‹",IDC_RAD_PX_IE,"Button",BS_AUTORADIOBUTTON,10,21,81,10
+    CONTROL         "ãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆæŽ¥ç¶šï¼ˆãƒ—ãƒ­ã‚­ã‚·ç„¡ã—)",IDC_RAD_PX_NA,"Button",BS_AUTORADIOBUTTON,103,21,94,10
+    CONTROL         "ãƒžãƒ‹ãƒ¥ã‚¢ãƒ«è¨­å®š",IDC_RAD_PX_EF,"Button",BS_AUTORADIOBUTTON,206,21,66,10
+    GROUPBOX        "ãƒžãƒ‹ãƒ¥ã‚¢ãƒ«è¨­å®šé …ç›®",IDC_STATIC,3,43,353,227,WS_GROUP
+    LTEXT           "ãƒ—ãƒ­ã‚­ã‚· ã‚µãƒ¼ãƒãƒ¼ / è‡ªå‹•æ§‹æˆã‚¹ã‚¯ãƒªãƒ—ãƒˆ (ãƒ—ãƒ­ã‚­ã‚· ã‚µãƒ¼ãƒãƒ¼ã¾ãŸã¯ã€è‡ªå‹•æ§‹æˆã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’æŒ‡å®šã—ã¦ä¸‹ã•ã„ã€‚)",IDC_STATIC,14,60,334,8
     EDITTEXT        IDC_EDIT_ProxyAddress,14,71,340,14,ES_AUTOHSCROLL
-    LTEXT           "ƒvƒƒLƒV—áŠO",IDC_STATIC,14,103,41,8
+    LTEXT           "ãƒ—ãƒ­ã‚­ã‚·ä¾‹å¤–",IDC_STATIC,14,103,41,8
     EDITTEXT        IDC_EDIT_ProxyBypassAddress,14,115,340,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
-    LTEXT           "—áŠOƒTƒCƒg‚Å‚ÍƒvƒƒLƒV‚ð—˜—p‚µ‚È‚¢\nƒZƒ~ƒRƒƒ“;‚ðŽg—p‚µ‚ÄƒGƒ“ƒgƒŠ‚ð•ª‚¯‚Ä‰º‚³‚¢\nƒ[ƒJƒ‹ƒAƒhƒŒƒX‚ÉƒvƒƒLƒV‚ð—˜—p‚µ‚È‚¢ê‡‚ÍA<local>‚ÆŽw’è‚µ‚Ä‰º‚³‚¢B",IDC_STATIC,14,170,340,32,0,WS_EX_STATICEDGE
-    LTEXT           "UserAgent’Ç‰Á•¶Žš—ñ",IDC_STATIC,14,241,82,8
+    LTEXT           "ä¾‹å¤–ã‚µã‚¤ãƒˆã§ã¯ãƒ—ãƒ­ã‚­ã‚·ã‚’åˆ©ç”¨ã—ãªã„\nã‚»ãƒŸã‚³ãƒ­ãƒ³;ã‚’ä½¿ç”¨ã—ã¦ã‚¨ãƒ³ãƒˆãƒªã‚’åˆ†ã‘ã¦ä¸‹ã•ã„\nãƒ­ãƒ¼ã‚«ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã«ãƒ—ãƒ­ã‚­ã‚·ã‚’åˆ©ç”¨ã—ãªã„å ´åˆã¯ã€<local>ã¨æŒ‡å®šã—ã¦ä¸‹ã•ã„ã€‚",IDC_STATIC,14,170,340,32,0,WS_EX_STATICEDGE
+    LTEXT           "UserAgentè¿½åŠ æ–‡å­—åˆ—",IDC_STATIC,14,241,82,8
     EDITTEXT        IDC_UserAgentAppendStr,107,239,168,13,ES_AUTOHSCROLL
 END
 
@@ -340,49 +340,49 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Dialog"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    GROUPBOX        "‘S‘ÌÝ’è",IDC_STATIC,8,6,343,79
-    LTEXT           "ƒ_ƒEƒ“ƒ[ƒh/ƒAƒbƒvƒ[ƒhƒAƒCƒeƒ€‚ÌŠù’è‚ÌƒpƒX",IDC_STATIC,12,18,132,8
+    GROUPBOX        "å…¨ä½“è¨­å®š",IDC_STATIC,8,6,343,79
+    LTEXT           "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰/ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã‚¢ã‚¤ãƒ†ãƒ ã®æ—¢å®šã®ãƒ‘ã‚¹",IDC_STATIC,12,18,132,8
     EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL
-    LTEXT           "•\Ž¦‚·‚éƒAƒCƒeƒ€‚ÌŠg’£Žq",IDC_STATIC,12,37,79,8
+    LTEXT           "è¡¨ç¤ºã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã®æ‹¡å¼µå­",IDC_STATIC,12,37,79,8
     EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
-    LTEXT           "ŽÀsAŠJ••A“]‘—‚ð‹ÖŽ~‚·‚éŠg’£Žq",IDC_STATIC,12,56,111,8
+    LTEXT           "å®Ÿè¡Œã€é–‹å°ã€è»¢é€ã‚’ç¦æ­¢ã™ã‚‹æ‹¡å¼µå­",IDC_STATIC,12,56,111,8
     EDITTEXT        IDC_DisallowExt,160,56,179,14,ES_AUTOHSCROLL
-    GROUPBOX        "ƒ_ƒEƒ“ƒ[ƒhÝ’è",IDC_STATIC,8,90,343,67
-    LTEXT           "ƒ_ƒEƒ“ƒ[ƒhƒAƒCƒeƒ€“]‘—æ",IDC_STATIC,12,105,80,8
+    GROUPBOX        "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰è¨­å®š",IDC_STATIC,8,90,343,67
+    LTEXT           "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚¢ã‚¤ãƒ†ãƒ è»¢é€å…ˆ",IDC_STATIC,12,105,80,8
     EDITTEXT        IDC_TransferPath,99,103,246,14,ES_AUTOHSCROLL
-    LTEXT           "ƒTƒuƒtƒHƒ‹ƒ_[ \n ŠÂ‹«•Ï”EŽžŠÔƒtƒH[ƒ}ƒbƒg‚ðŽw’è‰Â”\\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,138,27
+    LTEXT           "ã‚µãƒ–ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ \n ç’°å¢ƒå¤‰æ•°ãƒ»æ™‚é–“ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆã‚’æŒ‡å®šå¯èƒ½\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,138,27
     EDITTEXT        IDC_TransferSubFolder,144,121,200,14,ES_AUTOHSCROLL
-    GROUPBOX        "ƒAƒbƒvƒ[ƒhÝ’è",IDC_STATIC,8,161,343,74
-    LTEXT           "ƒAƒbƒvƒ[ƒhƒAƒCƒeƒ€Žó“üŒ³",IDC_STATIC,12,174,79,8
+    GROUPBOX        "ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰è¨­å®š",IDC_STATIC,8,161,343,74
+    LTEXT           "ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã‚¢ã‚¤ãƒ†ãƒ å—å…¥å…ƒ",IDC_STATIC,12,174,79,8
     EDITTEXT        IDC_UploadPath,99,171,246,14,ES_AUTOHSCROLL
-    CONTROL         "ƒAƒbƒvƒ[ƒhƒAƒCƒeƒ€‚ð•\Ž¦‚·‚é",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,189,104,10
-    GROUPBOX        "‹@”\Ý’è",IDC_STATIC,8,238,343,42
-    LTEXT           "‰EƒNƒŠƒbƒNƒƒjƒ…[Ý’è",IDC_STATIC,12,251,64,8
+    CONTROL         "ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¡¨ç¤ºã™ã‚‹",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,189,104,10
+    GROUPBOX        "æ©Ÿèƒ½è¨­å®š",IDC_STATIC,8,238,343,42
+    LTEXT           "å³ã‚¯ãƒªãƒƒã‚¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¨­å®š",IDC_STATIC,12,251,64,8
     COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "uŠJ••Ï‚Ý‚É‚·‚év‚ðs‚Á‚½ê‡‚ÉAŠm”FƒƒbƒZ[ƒW‚ð•\Ž¦‚µ‚È‚¢",IDC_DisableOpendOpAlert,
+    CONTROL         "ã€Œé–‹å°æ¸ˆã¿ã«ã™ã‚‹ã€ã‚’è¡Œã£ãŸå ´åˆã«ã€ç¢ºèªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã—ãªã„",IDC_DisableOpendOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
-    LTEXT           "¦Šg’£Žq‚ð•¡”Ý’è‚·‚éê‡‚ÍA|‚Å‹æØ‚è‚Ü‚·B—áj|.elf|.lnk|",IDC_STATIC,12,74,187,8
-    CONTROL         "ƒAƒbƒvƒ[ƒhƒAƒCƒeƒ€‚ðŽ©“®XV‚·‚é",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
-    CONTROL         "ƒ~ƒ‰[ƒŠƒ“ƒOƒ‚[ƒh‚ð—LŒø‚É‚·‚é",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
-    LTEXT           "Ž©“®XVŠÔŠu(ƒ~ƒŠ•b)",IDC_STATIC,17,220,68,8
+    LTEXT           "â€»æ‹¡å¼µå­ã‚’è¤‡æ•°è¨­å®šã™ã‚‹å ´åˆã¯ã€|ã§åŒºåˆ‡ã‚Šã¾ã™ã€‚ä¾‹ï¼‰|.elf|.lnk|",IDC_STATIC,12,74,187,8
+    CONTROL         "ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã‚¢ã‚¤ãƒ†ãƒ ã‚’è‡ªå‹•æ›´æ–°ã™ã‚‹",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
+    CONTROL         "ãƒŸãƒ©ãƒ¼ãƒªãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
+    LTEXT           "è‡ªå‹•æ›´æ–°é–“éš”(ãƒŸãƒªç§’)",IDC_STATIC,17,220,68,8
     EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
 END
 
 IDD_DLG_SC_EDITOR DIALOGEX 0, 0, 544, 376
 STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "Script Editor  Window"
-FONT 10, "‚l‚r ƒSƒVƒbƒN", 400, 0, 0x80
+FONT 10, "ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯", 400, 0, 0x80
 BEGIN
     EDITTEXT        IDC_EDIT1,2,33,538,337,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
-    PUSHBUTTON      "•Û‘¶",IDOK,4,13,50,14
-    PUSHBUTTON      "•Â‚¶‚é",IDCANCEL,56,13,50,14
-    GROUPBOX        "ƒeƒ“ƒvƒŒ[ƒg‘}“üF",IDC_STATIC,110,3,386,28
+    PUSHBUTTON      "ä¿å­˜",IDOK,4,13,50,14
+    PUSHBUTTON      "é–‰ã˜ã‚‹",IDCANCEL,56,13,50,14
+    GROUPBOX        "ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆæŒ¿å…¥ï¼š",IDC_STATIC,110,3,386,28
     PUSHBUTTON      "Function OnRedirect",IDC_BUTTON_FUNC,115,13,81,14
     PUSHBUTTON      "TB_Global_URL",IDC_BUTTON_URL,197,13,57,14
     PUSHBUTTON      "TB_Global_TOP_PAGE",IDC_BUTTON_TOP,255,13,77,14
     PUSHBUTTON      "TB_TRACE_LOG",IDC_BUTTON_TB_TRACE_LOG,333,13,65,14
-    PUSHBUTTON      "ƒwƒ‹ƒv",IDC_BUTTON1,399,13,42,14
-    LTEXT           "1s",IDC_STATIC_LINE,499,13,42,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+    PUSHBUTTON      "ãƒ˜ãƒ«ãƒ—",IDC_BUTTON1,399,13,42,14
+    LTEXT           "1è¡Œ",IDC_STATIC_LINE,499,13,42,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
 END
 
 IDD_SETTINGS_DLG_INIT DIALOGEX 0, 0, 370, 291
@@ -390,54 +390,54 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Dialog"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    LTEXT           "ƒz[ƒ€ƒy[ƒWURL",IDC_STATIC,8,12,149,8
+    LTEXT           "ãƒ›ãƒ¼ãƒ ãƒšãƒ¼ã‚¸URL",IDC_STATIC,8,12,149,8
     EDITTEXT        IDC_EDIT_INIT_URL_PARAM,8,27,315,13,ES_AUTOHSCROLL
-    LTEXT           "‹N“®Žž‚Ì•\Ž¦ƒIƒvƒVƒ‡ƒ“ƒpƒ‰ƒ[ƒ^",IDC_STATIC,8,55,195,8
+    LTEXT           "èµ·å‹•æ™‚ã®è¡¨ç¤ºã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿",IDC_STATIC,8,55,195,8
     COMBOBOX        IDC_EDIT_INIT_OP_PARAM,8,70,90,20,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "‹N“®Žž‚É•\Ž¦‚·‚éƒƒbƒZ[ƒW",IDC_STATIC,8,95,149,8
+    LTEXT           "èµ·å‹•æ™‚ã«è¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸",IDC_STATIC,8,95,149,8
     EDITTEXT        IDC_EDIT_INIT_MSG,8,110,315,101,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
 END
 
 IDD_DLG_DEBUG_WND DIALOGEX 0, 0, 630, 380
 STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "TRACE Log Monitor  Window"
-FONT 10, "‚l‚r ƒSƒVƒbƒN", 400, 0, 0x80
+FONT 10, "ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯", 400, 0, 0x80
 BEGIN
-    PUSHBUTTON      "ƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[",IDC_BUTTON1,5,5,93,14
-    PUSHBUTTON      "•\Ž¦ƒNƒŠƒA",IDOK,103,5,50,14
-    PUSHBUTTON      "•Â‚¶‚é",IDCANCEL,155,5,50,14
+    PUSHBUTTON      "ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼",IDC_BUTTON1,5,5,93,14
+    PUSHBUTTON      "è¡¨ç¤ºã‚¯ãƒªã‚¢",IDOK,103,5,50,14
+    PUSHBUTTON      "é–‰ã˜ã‚‹",IDCANCEL,155,5,50,14
     CONTROL         "Auto Scroll",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,230,7,60,10
-    LTEXT           "0Œ",IDC_STATIC_LINE,299,5,57,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
+    LTEXT           "0ä»¶",IDC_STATIC_LINE,299,5,57,12,0,WS_EX_RIGHT | WS_EX_STATICEDGE
     CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,3,21,622,358
 END
 
 IDD_DLG_AUTH DIALOGEX 0, 0, 250, 108
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "”FØ"
-FONT 10, "ƒƒCƒŠƒI", 400, 0, 0x80
+CAPTION "èªè¨¼"
+FONT 10, "ãƒ¡ã‚¤ãƒªã‚ª", 400, 0, 0x80
 BEGIN
-    LTEXT           "”FØ‚ª•K—v‚Å‚·B",IDC_STATIC_MSG,34,7,209,33
-    LTEXT           "ƒ†[ƒU[–¼F",IDC_STATIC,7,44,42,8
+    LTEXT           "èªè¨¼ãŒå¿…è¦ã§ã™ã€‚",IDC_STATIC_MSG,34,7,209,33
+    LTEXT           "ãƒ¦ãƒ¼ã‚¶ãƒ¼åï¼š",IDC_STATIC,7,44,42,8
     EDITTEXT        IDC_EDIT_ID,53,44,183,14,ES_AUTOHSCROLL
-    LTEXT           "ƒpƒXƒ[ƒhF",IDC_STATIC,7,66,42,8
+    LTEXT           "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼š",IDC_STATIC,7,66,42,8
     EDITTEXT        IDC_EDIT_PW,53,66,183,14,ES_PASSWORD | ES_AUTOHSCROLL
-    DEFPUSHBUTTON   "ƒƒOƒCƒ“",IDOK,133,87,50,14
-    PUSHBUTTON      "ƒLƒƒƒ“ƒZƒ‹",IDCANCEL,187,87,50,14
+    DEFPUSHBUTTON   "ãƒ­ã‚°ã‚¤ãƒ³",IDOK,133,87,50,14
+    PUSHBUTTON      "ã‚­ãƒ£ãƒ³ã‚»ãƒ«",IDCANCEL,187,87,50,14
     CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
 END
 
 IDD_SETTINGS_DLG_URL_FILTER DIALOGEX 0, 0, 370, 291
 STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
-CAPTION "URLƒtƒBƒ‹ƒ^[Ý’è"
+CAPTION "URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "URLƒtƒBƒ‹ƒ^[‚ð—LŒø‚É‚·‚é",IDC_CHECK_ENABLE_URL_FILTER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
-    LTEXT           "Žw’è‚µ‚½ƒhƒƒCƒ“‚Ì“Çž‚ð§ŒÀ‚µ‚Ü‚·B(–¢Žw’è‚Ìê‡‚ÍA‹–‰Â)¦ƒpƒ^[ƒ“ƒ}ƒbƒ`ƒ“ƒO‚ÉƒƒCƒ‹ƒhƒJ[ƒh‚ð—˜—p‰Â”\ *? ",IDC_STATIC,8,25,339,8
+    CONTROL         "URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_ENABLE_URL_FILTER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "æŒ‡å®šã—ãŸãƒ‰ãƒ¡ã‚¤ãƒ³ã®èª­è¾¼ã‚’åˆ¶é™ã—ã¾ã™ã€‚(æœªæŒ‡å®šã®å ´åˆã¯ã€è¨±å¯)â€»ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒžãƒƒãƒãƒ³ã‚°ã«ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰ã‚’åˆ©ç”¨å¯èƒ½ *? ",IDC_STATIC,8,25,339,8
     CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
-    PUSHBUTTON      "V‹K“o˜^",IDC_BUTTON_INS,8,271,35,14
-    PUSHBUTTON      "íœ",IDC_BUTTON_DEL,46,271,33,14
-    PUSHBUTTON      "ª",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
-    PUSHBUTTON      "«",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "æ–°è¦ç™»éŒ²",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "å‰Šé™¤",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "â†‘",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "â†“",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
 END
 
 IDD_DIALOG1 DIALOGEX 0, 0, 170, 30
@@ -451,7 +451,7 @@ END
 
 IDD_DIALOG4 DIALOGEX 0, 0, 325, 84
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "ƒtƒ@ƒCƒ‹ ƒ_ƒEƒ“ƒ[ƒh"
+CAPTION "ãƒ•ã‚¡ã‚¤ãƒ« ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         IDD_DLG_DEBUG_WND,IDC_STATIC,"Static",SS_BITMAP,7,3,16,14
@@ -459,128 +459,128 @@ BEGIN
     CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,6,20,312,15
     LTEXT           "MSG",IDC_STATIC_DL_MSG,6,39,308,8
     LTEXT           "transfer",IDC_STATIC_TL,6,50,308,8
-    PUSHBUTTON      "ƒtƒ@ƒCƒ‹‚ðŠJ‚­",IDC_BUTTON_FO,75,66,77,14
-    PUSHBUTTON      "ƒtƒHƒ‹ƒ_[‚ðŠJ‚­",IDC_BUTTON_DIRO,157,66,77,14
-    PUSHBUTTON      "ƒLƒƒƒ“ƒZƒ‹",IDC_BUTTON1,239,66,77,14
+    PUSHBUTTON      "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã",IDC_BUTTON_FO,75,66,77,14
+    PUSHBUTTON      "ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚’é–‹ã",IDC_BUTTON_DIRO,157,66,77,14
+    PUSHBUTTON      "ã‚­ãƒ£ãƒ³ã‚»ãƒ«",IDC_BUTTON1,239,66,77,14
 END
 
 IDD_SETTINGS_DLG_GEN DIALOGEX 0, 0, 370, 291
 STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
-CAPTION "‘S”ÊÝ’è"
+CAPTION "å…¨èˆ¬è¨­å®š"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì2d‹N“®‚ð‹–‰Â‚·‚é",IDC_CHECK_DISABLE_MULTIPLE_INSTANCE,
+    CONTROL         "ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®2é‡èµ·å‹•ã‚’è¨±å¯ã™ã‚‹",IDC_CHECK_DISABLE_MULTIPLE_INSTANCE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,217,10
-    CONTROL         "ƒƒ‚ƒŠ[ƒLƒƒƒbƒVƒ…ƒ‚[ƒh‚ð—LŒø‚É‚·‚é",IDC_ENABLE_MEMCACHE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,232,10
-    CONTROL         "Ž©“®ƒNƒ‰ƒbƒVƒ…‰ñ•œ‹@”\‚ð—LŒø‚É‚·‚é",IDC_CHECK_ENABLECRASHRECOVERY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,224,10
-    GROUPBOX        "Ý’è‰æ–Ê‚Ì•\Ž¦‚ð§ŒÀ‚·‚é",IDC_STATIC,8,71,304,85
-    GROUPBOX        "§ŒÀ‰ðœ ƒL[ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“",IDC_STATIC,12,85,294,62
+    CONTROL         "ãƒ¡ãƒ¢ãƒªãƒ¼ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_ENABLE_MEMCACHE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,232,10
+    CONTROL         "è‡ªå‹•ã‚¯ãƒ©ãƒƒã‚·ãƒ¥å›žå¾©æ©Ÿèƒ½ã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_ENABLECRASHRECOVERY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,40,224,10
+    GROUPBOX        "è¨­å®šç”»é¢ã®è¡¨ç¤ºã‚’åˆ¶é™ã™ã‚‹",IDC_STATIC,8,71,304,85
+    GROUPBOX        "åˆ¶é™è§£é™¤ ã‚­ãƒ¼ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³",IDC_STATIC,12,85,294,62
     CONTROL         "Shift",IDC_CHK_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,101,30,10
     CONTROL         "Ctrl",IDC_CHK_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,56,101,27,10
     CONTROL         "Alt",IDC_CHK_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,90,101,25,10
-    CONTROL         "©",IDC_CHK_LEFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,101,23,10
-    CONTROL         "ª",IDC_CHK_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,101,23,10
-    CONTROL         "¨",IDC_CHK_RIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,182,101,23,10
-    CONTROL         "«",IDC_CHK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,101,23,10
-    PUSHBUTTON      "ƒL[ ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“ “®ìƒ`ƒFƒbƒN",IDC_BUTTON1,18,122,105,14
+    CONTROL         "â†",IDC_CHK_LEFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,101,23,10
+    CONTROL         "â†‘",IDC_CHK_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,101,23,10
+    CONTROL         "â†’",IDC_CHK_RIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,182,101,23,10
+    CONTROL         "â†“",IDC_CHK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,101,23,10
+    PUSHBUTTON      "ã‚­ãƒ¼ ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³ å‹•ä½œãƒã‚§ãƒƒã‚¯",IDC_BUTTON1,18,122,105,14
 END
 
 IDD_SETTINGS_DLG_CAP DIALOGEX 0, 0, 370, 291
 STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
-CAPTION "“®ì§ŒÀÝ’è"
+CAPTION "å‹•ä½œåˆ¶é™è¨­å®š"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "ƒtƒ@ƒCƒ‹‚Ìƒ_ƒEƒ“ƒ[ƒh‚ð‹ÖŽ~‚·‚é",IDC_EnableDownloadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
-    CONTROL         "ƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒ[ƒh‚ð‹ÖŽ~‚·‚é",IDC_EnableUploadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
-    CONTROL         "ƒuƒ‰ƒEƒU[ƒLƒƒƒbƒVƒ…(ƒCƒ“ƒ^[ƒlƒbƒgˆêŽžƒtƒ@ƒCƒ‹)‚ð‹N“®/I—¹Žž‚Éíœ‚·‚é",IDC_EnableDeleteCache,
+    CONTROL         "ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚’ç¦æ­¢ã™ã‚‹",IDC_EnableDownloadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
+    CONTROL         "ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã‚’ç¦æ­¢ã™ã‚‹",IDC_EnableUploadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
+    CONTROL         "ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚­ãƒ£ãƒƒã‚·ãƒ¥(ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«)ã‚’èµ·å‹•/çµ‚äº†æ™‚ã«å‰Šé™¤ã™ã‚‹",IDC_EnableDeleteCache,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,44,277,10
-    GROUPBOX        "ƒŠƒ\[ƒX§ŒÀ",IDC_STATIC,5,60,355,111
-    CONTROL         "‹N“®ŽžŠÔ‚ð§ŒÀ‚·‚é",IDC_Enable_ProcessRunTime,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,76,90,10
+    GROUPBOX        "ãƒªã‚½ãƒ¼ã‚¹åˆ¶é™",IDC_STATIC,5,60,355,111
+    CONTROL         "èµ·å‹•æ™‚é–“ã‚’åˆ¶é™ã™ã‚‹",IDC_Enable_ProcessRunTime,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,76,90,10
     EDITTEXT        IDC_EDIT_LIMIT_TIME,18,91,52,14,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "•ª ( 8ŽžŠÔ=480•ª / 12ŽžŠÔ=720•ª / 24ŽžŠÔ=1440•ª)",IDC_STATIC,76,93,232,8
-    LTEXT           "ƒƒ‚ƒŠ[ Å‘å’l(MB)",IDC_STATIC,11,121,64,8
+    LTEXT           "åˆ† ( 8æ™‚é–“=480åˆ† / 12æ™‚é–“=720åˆ† / 24æ™‚é–“=1440åˆ†)",IDC_STATIC,76,93,232,8
+    LTEXT           "ãƒ¡ãƒ¢ãƒªãƒ¼ æœ€å¤§å€¤(MB)",IDC_STATIC,11,121,64,8
     EDITTEXT        IDC_MemoryUsageLimit,83,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "ƒEƒBƒ“ƒhƒE” Å‘å’l",IDC_STATIC,11,142,64,8
+    LTEXT           "ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æ•° æœ€å¤§å€¤",IDC_STATIC,11,142,64,8
     EDITTEXT        IDC_WindowCountLimit,84,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
 END
 
 IDD_DIALOG5 DIALOGEX 0, 0, 297, 109
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "ƒhƒƒCƒ“ƒtƒBƒ‹ƒ^[Ý’è"
+CAPTION "ãƒ‰ãƒ¡ã‚¤ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "—LŒø‚É‚·‚é",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
-    LTEXT           "ƒhƒƒCƒ“",IDC_STATIC,18,33,33,8
+    CONTROL         "æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "ãƒ‰ãƒ¡ã‚¤ãƒ³",IDC_STATIC,18,33,33,8
     EDITTEXT        IDC_EDIT1,56,32,233,14,ES_AUTOHSCROLL
-    GROUPBOX        "ƒAƒNƒVƒ‡ƒ“",IDC_STATIC,18,52,271,24,WS_GROUP
-    CONTROL         "‹‘”Û",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,63,32,10
-    CONTROL         " ‹–‰Â",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,63,34,10
+    GROUPBOX        "ã‚¢ã‚¯ã‚·ãƒ§ãƒ³",IDC_STATIC,18,52,271,24,WS_GROUP
+    CONTROL         "æ‹’å¦",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,63,32,10
+    CONTROL         " è¨±å¯",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,63,34,10
     DEFPUSHBUTTON   "OK",IDOK,187,86,50,14
-    PUSHBUTTON      "ƒLƒƒƒ“ƒZƒ‹",IDCANCEL,240,86,50,14
+    PUSHBUTTON      "ã‚­ãƒ£ãƒ³ã‚»ãƒ«",IDCANCEL,240,86,50,14
 END
 
 IDD_SETTINGS_DLG_CUSTOM_SCRIPT DIALOGEX 0, 0, 370, 291
 STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
-CAPTION "ƒJƒXƒ^ƒ€ƒXƒNƒŠƒvƒgÝ’è"
+CAPTION "ã‚«ã‚¹ã‚¿ãƒ ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨­å®š"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    CONTROL         "ƒJƒXƒ^ƒ€ƒXƒNƒŠƒvƒg‚ð—LŒø‚É‚·‚é",IDC_CHECK_ENABLE_CUSTOM_SCRIPT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
-    LTEXT           "Žw’è‚µ‚½URL“ÇžŠ®—¹Œã‚ÉƒJƒXƒ^ƒ€JavaScript‚ðŽÀs‚µ‚Ü‚·B¦ƒpƒ^[ƒ“ƒ}ƒbƒ`ƒ“ƒO‚ÉƒƒCƒ‹ƒhƒJ[ƒh‚ð—˜—p‰Â”\ *? ",IDC_STATIC,8,25,349,8
+    CONTROL         "ã‚«ã‚¹ã‚¿ãƒ ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK_ENABLE_CUSTOM_SCRIPT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "æŒ‡å®šã—ãŸURLèª­è¾¼å®Œäº†å¾Œã«ã‚«ã‚¹ã‚¿ãƒ JavaScriptã‚’å®Ÿè¡Œã—ã¾ã™ã€‚â€»ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒžãƒƒãƒãƒ³ã‚°ã«ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰ã‚’åˆ©ç”¨å¯èƒ½ *? ",IDC_STATIC,8,25,349,8
     CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
-    PUSHBUTTON      "V‹K“o˜^",IDC_BUTTON_INS,8,271,35,14
-    PUSHBUTTON      "íœ",IDC_BUTTON_DEL,46,271,33,14
-    PUSHBUTTON      "ª",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
-    PUSHBUTTON      "«",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "æ–°è¦ç™»éŒ²",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "å‰Šé™¤",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "â†‘",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "â†“",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
     PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,142,271,100,14
     PUSHBUTTON      "Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
 END
 
 IDD_DIALOG6 DIALOGEX 0, 0, 415, 89
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "CustomScriptÝ’è"
+CAPTION "CustomScriptè¨­å®š"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "—LŒø‚É‚·‚é",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
-    LTEXT           "ƒ^[ƒQƒbƒgURL",IDC_STATIC,11,33,52,8
+    CONTROL         "æœ‰åŠ¹ã«ã™ã‚‹",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "ã‚¿ãƒ¼ã‚²ãƒƒãƒˆURL",IDC_STATIC,11,33,52,8
     EDITTEXT        IDC_EDIT1,70,32,338,14,ES_AUTOHSCROLL
-    LTEXT           "ƒtƒ@ƒCƒ‹–¼",IDC_STATIC,11,51,39,8
+    LTEXT           "ãƒ•ã‚¡ã‚¤ãƒ«å",IDC_STATIC,11,51,39,8
     EDITTEXT        IDC_EDIT2,70,50,169,14,ES_AUTOHSCROLL
     PUSHBUTTON      "...",IDC_BUTTON1,242,50,20,14
     DEFPUSHBUTTON   "OK",IDOK,304,66,50,14
-    PUSHBUTTON      "ƒLƒƒƒ“ƒZƒ‹",IDCANCEL,358,66,50,14
+    PUSHBUTTON      "ã‚­ãƒ£ãƒ³ã‚»ãƒ«",IDCANCEL,358,66,50,14
 END
 
 IDD_DLG_AUTH_PWC DIALOGEX 0, 0, 261, 157
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "ƒpƒXƒ[ƒh•ÏX"
-FONT 10, "ƒƒCƒŠƒI", 400, 0, 0x80
+CAPTION "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´"
+FONT 10, "ãƒ¡ã‚¤ãƒªã‚ª", 400, 0, 0x80
 BEGIN
     CONTROL         "",IDC_STATIC,"Static",SS_OWNERDRAW,9,10,16,13
-    LTEXT           "ƒpƒXƒ[ƒh‚Ì•ÏX",IDC_STATIC_MSG,34,7,220,33
-    LTEXT           "ƒ†[ƒU[–¼F",IDC_STATIC,7,48,42,8
+    LTEXT           "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®å¤‰æ›´",IDC_STATIC_MSG,34,7,220,33
+    LTEXT           "ãƒ¦ãƒ¼ã‚¶ãƒ¼åï¼š",IDC_STATIC,7,48,42,8
     EDITTEXT        IDC_EDIT_ID,71,45,183,14,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "Œ»Ý‚ÌƒpƒXƒ[ƒhF",IDC_STATIC,7,68,62,8
+    LTEXT           "ç¾åœ¨ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼š",IDC_STATIC,7,68,62,8
     EDITTEXT        IDC_EDIT_PW_CURRENT,71,65,183,14,ES_PASSWORD | ES_AUTOHSCROLL
-    LTEXT           "V‚µ‚¢ƒpƒXƒ[ƒhF",IDC_STATIC,7,93,62,8
+    LTEXT           "æ–°ã—ã„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ï¼š",IDC_STATIC,7,93,62,8
     EDITTEXT        IDC_EDIT_PW_NEW,71,90,183,14,ES_PASSWORD | ES_AUTOHSCROLL
-    LTEXT           "ƒpƒXƒ[ƒh‚ÌŠm”FF",IDC_STATIC,7,113,62,8
+    LTEXT           "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ç¢ºèªï¼š",IDC_STATIC,7,113,62,8
     EDITTEXT        IDC_EDIT_PW_NEW2,71,110,183,14,ES_PASSWORD | ES_AUTOHSCROLL
     DEFPUSHBUTTON   "OK",IDOK,144,136,50,14
-    PUSHBUTTON      "ƒLƒƒƒ“ƒZƒ‹",IDCANCEL,202,136,50,14
+    PUSHBUTTON      "ã‚­ãƒ£ãƒ³ã‚»ãƒ«",IDCANCEL,202,136,50,14
 END
 
 IDD_DLG_CERTIFICATION DIALOGEX 0, 0, 309, 176
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "ŒÂlØ–¾‘‚Ì—v‹"
+CAPTION "å€‹äººè¨¼æ˜Žæ›¸ã®è¦æ±‚"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,198,155,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,252,155,50,14
     COMBOBOX        IDC_CERTIFICATION_COMBO,7,62,295,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     EDITTEXT        IDC_CERTIFICATION_EDIT,7,81,295,64,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_HSCROLL
-    LTEXT           "‚±‚ÌƒTƒCƒg‚Í‚ ‚È‚½‚ÌŒÂlØ–¾‘‚ð‹‚ß‚Ä‚¢‚Ü‚·:",IDC_STATIC,7,6,295,8,NOT WS_GROUP
-    LTEXT           "Žg—p‚·‚éØ–¾‘‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢:",IDC_STATIC,7,52,295,8,NOT WS_GROUP
-    LTEXT           "ƒTƒCƒgî•ñ",IDC_CERTIFICATE_STATIC_SITE_INFO,19,20,261,27,NOT WS_GROUP
+    LTEXT           "ã“ã®ã‚µã‚¤ãƒˆã¯ã‚ãªãŸã®å€‹äººè¨¼æ˜Žæ›¸ã‚’æ±‚ã‚ã¦ã„ã¾ã™:",IDC_STATIC,7,6,295,8,NOT WS_GROUP
+    LTEXT           "ä½¿ç”¨ã™ã‚‹è¨¼æ˜Žæ›¸ã‚’é¸æŠžã—ã¦ãã ã•ã„:",IDC_STATIC,7,52,295,8,NOT WS_GROUP
+    LTEXT           "ã‚µã‚¤ãƒˆæƒ…å ±",IDC_CERTIFICATE_STATIC_SITE_INFO,19,20,261,27,NOT WS_GROUP
 END
 
 
@@ -955,11 +955,11 @@ END
 STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "Chronos"
-    IDS_STRING_FRM1         "ƒAƒhƒŒƒX(&D)"
-    IDS_STRING_FRM2         "HTMLƒtƒ@ƒCƒ‹(*.htm;*.html;*.shtml)|*.htm;*.html;*.shtml|ƒeƒLƒXƒgƒtƒ@ƒCƒ‹(*.txt)|*.txt|GIFƒtƒ@ƒCƒ‹(*.gif)|*.gif|JPEGƒtƒ@ƒCƒ‹(*.jpg;*.jpeg)|*.jpg;*.jpeg|PNGƒtƒ@ƒCƒ‹(*.png)|*.png|‘S‚Ä‚Ìƒtƒ@ƒCƒ‹(*.*)|*.*||"
-    IDS_STRING_FRM3         "ŠJ‚­"
+    IDS_STRING_FRM1         "ã‚¢ãƒ‰ãƒ¬ã‚¹(&D)"
+    IDS_STRING_FRM2         "HTMLãƒ•ã‚¡ã‚¤ãƒ«(*.htm;*.html;*.shtml)|*.htm;*.html;*.shtml|ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«(*.txt)|*.txt|GIFãƒ•ã‚¡ã‚¤ãƒ«(*.gif)|*.gif|JPEGãƒ•ã‚¡ã‚¤ãƒ«(*.jpg;*.jpeg)|*.jpg;*.jpeg|PNGãƒ•ã‚¡ã‚¤ãƒ«(*.png)|*.png|å…¨ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«(*.*)|*.*||"
+    IDS_STRING_FRM3         "é–‹ã"
     IDS_STRING_CEF_LIC      "\n====Copyright License Texts====\nChromium Embedded Framework\nCopyright (c) 2008-2020 Marshall A. Greenblatt. Portions Copyright (c)\n2006-2009 Google Inc. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are\nmet:\n\n   * Redistributions of source code must retain the above copyright\nnotice, this list of conditions and the following disclaimer.\n   * Redistributions in binary form must reproduce the above\ncopyright notice, this list of conditions and the following disclaimer\nin the documentation and/or other materials provided with the\ndistribution.\n   * Neither the name of Google Inc. nor the name Chromium Embedded\nFramework nor the names of its contributors may be used to endorse\nor promote products derived from this software without specific prior\nwritten permission.\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n""AS IS"" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\nLIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\nA PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\nOWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\nSPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\nLIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\nTHEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    IDS_STRING_FAV_NANE     "‚È‚µ"
+    IDS_STRING_FAV_NANE     "ãªã—"
     IDS_STRING_CEF_LOCALE   "ja"
     IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST "ja-JP"
     IDS_STRING_PROPRIETARY_CODEC_LICENSES 
@@ -968,176 +968,176 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_STARTING_BROWSER "%s ‹N“®’†..."
-    IDS_STRING_SETTINGS_DLG_TITLE_GEN "‘S”ÊÝ’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_DSP "‰æ–Ê•\Ž¦Ý’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_INIT "‹N“®ŠÖ˜AÝ’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION "ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±Ý’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_CAP "‹@”\§ŒÀÝ’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_SEC "ƒŠƒ_ƒCƒŒƒNƒgÝ’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER "URLƒtƒBƒ‹ƒ^[Ý’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "ƒJƒXƒ^ƒ€ƒXƒNƒŠƒvƒgÝ’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_LOG "ƒƒOo—ÍÝ’è"
-    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR "ƒtƒ@ƒCƒ‹ƒ}ƒl[ƒWƒƒÝ’è"
+    IDS_STRING_STARTING_BROWSER "%s èµ·å‹•ä¸­..."
+    IDS_STRING_SETTINGS_DLG_TITLE_GEN "å…¨èˆ¬è¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_DSP "ç”»é¢è¡¨ç¤ºè¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_INIT "èµ·å‹•é–¢é€£è¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION "ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šè¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_CAP "æ©Ÿèƒ½åˆ¶é™è¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_SEC "ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆè¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER "URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT "ã‚«ã‚¹ã‚¿ãƒ ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_LOG "ãƒ­ã‚°å‡ºåŠ›è¨­å®š"
+    IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR "ãƒ•ã‚¡ã‚¤ãƒ«ãƒžãƒãƒ¼ã‚¸ãƒ£è¨­å®š"
     ID_SETTINGS_COLUMN_HEADER_URL "URL"
-    ID_SETTINGS_COLUMN_HEADER_DOMAIN "ƒhƒƒCƒ“–¼"
+    ID_SETTINGS_COLUMN_HEADER_DOMAIN "ãƒ‰ãƒ¡ã‚¤ãƒ³å"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_CLOSE_ALL_WINDOW "‘S‚Ä‚ÌƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚Ü‚·‚©?"
-    IDS_STRING_ADMIN_LOCK_FEATURE "‚±‚Ì‹@”\‚Ö‚ÌƒAƒNƒZƒX‚ÍAƒVƒXƒeƒ€ŠÇ—ŽÒ‚É‚æ‚è§ŒÀ‚³‚ê‚Ä‚¢‚Ü‚·B "
-    IDS_STRING_ZONE_MSG_DBL "—v‹‚³‚ê‚½ƒy[ƒW‚ðŠù’è‚Ìƒuƒ‰ƒEƒU‚Å•\Ž¦‚µ‚Ü‚·B"
-    IDS_STRING_ZONE_MSG_NG  "—v‹‚³‚ê‚½ƒy[ƒW‚Í‹–‰Â‚³‚ê‚Ä‚¢‚È‚¢‚½‚ß•\Ž¦‚Å‚«‚Ü‚¹‚ñB"
+    IDS_STRING_CLOSE_ALL_WINDOW "å…¨ã¦ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã¾ã™ã‹?"
+    IDS_STRING_ADMIN_LOCK_FEATURE "ã“ã®æ©Ÿèƒ½ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã¯ã€ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã«ã‚ˆã‚Šåˆ¶é™ã•ã‚Œã¦ã„ã¾ã™ã€‚ "
+    IDS_STRING_ZONE_MSG_DBL "è¦æ±‚ã•ã‚ŒãŸãƒšãƒ¼ã‚¸ã‚’æ—¢å®šã®ãƒ–ãƒ©ã‚¦ã‚¶ã§è¡¨ç¤ºã—ã¾ã™ã€‚"
+    IDS_STRING_ZONE_MSG_NG  "è¦æ±‚ã•ã‚ŒãŸãƒšãƒ¼ã‚¸ã¯è¨±å¯ã•ã‚Œã¦ã„ãªã„ãŸã‚è¡¨ç¤ºã§ãã¾ã›ã‚“ã€‚"
 END
 
 STRINGTABLE
 BEGIN
-    ID_SETTINGS_COLUMN_HEADER_FILE "ƒtƒ@ƒCƒ‹–¼"
-    ID_SETTINGS_COLUMN_HEADER_ACTION "ƒAƒNƒVƒ‡ƒ“"
-    ID_SETTINGS_COLUMN_HEADER_ENABLED "—LŒø"
-    ID_SETTINGS_MENU_LABEL  "Ý’è(&P)..."
+    ID_SETTINGS_COLUMN_HEADER_FILE "ãƒ•ã‚¡ã‚¤ãƒ«å"
+    ID_SETTINGS_COLUMN_HEADER_ACTION "ã‚¢ã‚¯ã‚·ãƒ§ãƒ³"
+    ID_SETTINGS_COLUMN_HEADER_ENABLED "æœ‰åŠ¹"
+    ID_SETTINGS_MENU_LABEL  "è¨­å®š(&P)..."
     IDS_STRING_CONFIRM_CANCEL_DOWNLOAD 
-                            "ƒ_ƒEƒ“ƒ[ƒh’†‚ÌƒEƒCƒ“ƒhƒE‚ð•Â‚¶‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H\n\nƒEƒCƒ“ƒhƒE‚ð•Â‚¶‚é‚Æƒ_ƒEƒ“ƒ[ƒh‚ªƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚·B\nƒ_ƒEƒ“ƒ[ƒh‚ð‘±s‚·‚éê‡‚ÍAu‚¢‚¢‚¦v‚ðƒNƒŠƒbƒN‚µ‚Ä‰º‚³‚¢B"
-    IDS_STRING_WELCOME_MSG  "%s Version %s‚ðŒä—˜—p’¸‚«‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B"
-    IDS_STRING_STARTING_FILEMGR "ƒtƒ@ƒCƒ‹ƒ}ƒl[ƒWƒƒ‹N“®’†..."
+                            "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ\n\nã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹ã¨ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãŒã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã™ã€‚\nãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚’ç¶šè¡Œã™ã‚‹å ´åˆã¯ã€ã€Œã„ã„ãˆã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ä¸‹ã•ã„ã€‚"
+    IDS_STRING_WELCOME_MSG  "%s Version %sã‚’å¾¡åˆ©ç”¨é ‚ãã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚"
+    IDS_STRING_STARTING_FILEMGR "ãƒ•ã‚¡ã‚¤ãƒ«ãƒžãƒãƒ¼ã‚¸ãƒ£èµ·å‹•ä¸­..."
     IDS_STRING_CONFIRM_CLEAR_CACHE 
-                            "ƒuƒ‰ƒEƒU[ƒLƒƒƒbƒVƒ…‚ðíœ‚µ‚Ü‚·‚©H \nu‚Í‚¢v‚ð‰Ÿ‚·‚Æƒuƒ‰ƒEƒU[‚ðÄ‹N“®‚µ‚Ü‚·B"
-    IDS_STRING_STARTING_NEW_SESSION "V‹KƒZƒbƒVƒ‡ƒ“‹N“®’†..."
-    ID_OPEN_FILE_CHOOSER_TITLE "ŠJ‚­"
-    ID_MSG_FILE_DOWNLOAD_RESTRICTED "ƒtƒ@ƒCƒ‹ ƒ_ƒEƒ“ƒ[ƒh‚ÍAƒVƒXƒeƒ€ŠÇ—ŽÒ‚É‚æ‚è§ŒÀ‚³‚ê‚Ä‚¢‚Ü‚·B"
+                            "ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ \nã€Œã¯ã„ã€ã‚’æŠ¼ã™ã¨ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚’å†èµ·å‹•ã—ã¾ã™ã€‚"
+    IDS_STRING_STARTING_NEW_SESSION "æ–°è¦ã‚»ãƒƒã‚·ãƒ§ãƒ³èµ·å‹•ä¸­..."
+    ID_OPEN_FILE_CHOOSER_TITLE "é–‹ã"
+    ID_MSG_FILE_DOWNLOAD_RESTRICTED "ãƒ•ã‚¡ã‚¤ãƒ« ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã¯ã€ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã«ã‚ˆã‚Šåˆ¶é™ã•ã‚Œã¦ã„ã¾ã™ã€‚"
     ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS 
-                            "•Ê‚Ìƒ_ƒEƒ“ƒ[ƒhˆ—‚ðŽÀs’†‚Å‚·B\nI—¹‚·‚é‚Ü‚ÅŽŸ‚Ìƒtƒ@ƒCƒ‹‚Ìƒ_ƒEƒ“ƒ[ƒh‚Ío—ˆ‚Ü‚¹‚ñB"
-    ID_DEFAULT_FILE_BASENAME "–³‘è"
-    ID_FILE_TYPE_ALL        "‚·‚×‚Ä‚Ìƒtƒ@ƒCƒ‹(*.*)|*.*||"
-    ID_FILE_TYPE_PDF        "PDF ƒhƒLƒ…ƒƒ“ƒg (*.pdf)|*.pdf||"
+                            "åˆ¥ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å‡¦ç†ã‚’å®Ÿè¡Œä¸­ã§ã™ã€‚\nçµ‚äº†ã™ã‚‹ã¾ã§æ¬¡ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã¯å‡ºæ¥ã¾ã›ã‚“ã€‚"
+    ID_DEFAULT_FILE_BASENAME "ç„¡é¡Œ"
+    ID_FILE_TYPE_ALL        "ã™ã¹ã¦ã®ãƒ•ã‚¡ã‚¤ãƒ«(*.*)|*.*||"
+    ID_FILE_TYPE_PDF        "PDF ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆ (*.pdf)|*.pdf||"
     ID_FILE_TYPE_EXE        "Executables (*.exe)|*.exe||"
 END
 
 STRINGTABLE
 BEGIN
-    ID_DL_START_APP_FAILED_FILE_NOT_FOUND "Žw’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B"
-    ID_DL_START_APP_FAILED_PATH_NOT_FOUND "Žw’è‚³‚ê‚½ƒpƒX‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B"
+    ID_DL_START_APP_FAILED_FILE_NOT_FOUND "æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚"
+    ID_DL_START_APP_FAILED_PATH_NOT_FOUND "æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚"
     ID_DL_START_APP_FAILED_BAD_FORMAT 
-                            ".exeƒtƒ@ƒCƒ‹‚ª–³Œø‚Å‚·BWin32‚Ì.exe‚Å‚Í‚È‚¢‚©A.exeƒCƒ[ƒW“à‚ÉƒGƒ‰[‚ª‚ ‚è‚Ü‚·B"
+                            ".exeãƒ•ã‚¡ã‚¤ãƒ«ãŒç„¡åŠ¹ã§ã™ã€‚Win32ã®.exeã§ã¯ãªã„ã‹ã€.exeã‚¤ãƒ¡ãƒ¼ã‚¸å†…ã«ã‚¨ãƒ©ãƒ¼ãŒã‚ã‚Šã¾ã™ã€‚"
     ID_DL_START_APP_FAILED_ACCESSDENIED 
-                            "ƒIƒyƒŒ[ƒeƒBƒ“ƒOƒVƒXƒeƒ€‚ªAŽw’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ö‚ÌƒAƒNƒZƒX‚ð‹‘”Û‚µ‚Ü‚µ‚½B"
-    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "ƒtƒ@ƒCƒ‹–¼‚ÌŠÖ˜A•t‚¯‚ª•sŠ®‘S‚Ü‚½‚Í–³Œø‚Å‚·B"
+                            "ã‚ªãƒšãƒ¬ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ã‚·ã‚¹ãƒ†ãƒ ãŒã€æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’æ‹’å¦ã—ã¾ã—ãŸã€‚"
+    ID_DL_START_APP_FAILED_ASSOCINCOMPLETE "ãƒ•ã‚¡ã‚¤ãƒ«åã®é–¢é€£ä»˜ã‘ãŒä¸å®Œå…¨ã¾ãŸã¯ç„¡åŠ¹ã§ã™ã€‚"
     ID_DL_START_APP_FAILED_DDEBUSY 
-                            "‚Ù‚©‚ÌDDEƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ªŒ»Ýˆ—’†‚È‚Ì‚ÅADDEƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ðŠ®—¹‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B"
-    ID_DL_START_APP_FAILED_DDEFAIL "DDEƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ªŽ¸”s‚µ‚Ü‚µ‚½B"
-    ID_DL_START_APP_FAILED_DDETIMEOUT "—v‹‚ªƒ^ƒCƒ€ƒAƒEƒg‚µ‚½‚Ì‚ÅADDEƒgƒ‰ƒ“ƒUƒNƒVƒ‡ƒ“‚ðŠ®—¹‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B"
-    ID_DL_START_APP_FAILED_DLLNOTFOUND "Žw’è‚³‚ê‚½ƒ_ƒCƒiƒ~ƒbƒNƒŠƒ“ƒNƒ‰ƒCƒuƒ‰ƒŠiDLLj‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B"
-    ID_DL_START_APP_FAILED_NOASSOC "Žw’è‚³‚ê‚½ƒtƒ@ƒCƒ‹Šg’£Žq‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ª‚ ‚è‚Ü‚¹‚ñB"
-    ID_DL_START_APP_FAILED_OOM "‘€ì‚ðŠ®—¹‚·‚é‚Ì‚É\•ª‚Èƒƒ‚ƒŠ‚ª‚ ‚è‚Ü‚¹‚ñB"
-    ID_DL_START_APP_FAILED_SHARE "‹¤—Lˆá”½‚ª”­¶‚µ‚Ü‚µ‚½B"
-    ID_DL_START_APP_FAILED_DEFAULT "—áŠO‚ª”­¶‚µ‚Ü‚µ‚½B"
-    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "•Â‚¶‚é"
-    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "ƒ_ƒEƒ“ƒ[ƒh‚ÌŠ®—¹"
-    IDS_STRING_HOST_AUTH_REQUIRED "”FØ‚ª•K—v‚Å‚·B\nÚ‘±æƒzƒXƒg[%s]‚É‚ÍAƒ†[ƒU[–¼‚ÆƒpƒXƒ[ƒh‚ª•K—v‚Å‚·B"
+                            "ã»ã‹ã®DDEãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ãŒç¾åœ¨å‡¦ç†ä¸­ãªã®ã§ã€DDEãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’å®Œäº†ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"
+    ID_DL_START_APP_FAILED_DDEFAIL "DDEãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ãŒå¤±æ•—ã—ã¾ã—ãŸã€‚"
+    ID_DL_START_APP_FAILED_DDETIMEOUT "è¦æ±‚ãŒã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã—ãŸã®ã§ã€DDEãƒˆãƒ©ãƒ³ã‚¶ã‚¯ã‚·ãƒ§ãƒ³ã‚’å®Œäº†ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"
+    ID_DL_START_APP_FAILED_DLLNOTFOUND "æŒ‡å®šã•ã‚ŒãŸãƒ€ã‚¤ãƒŠãƒŸãƒƒã‚¯ãƒªãƒ³ã‚¯ãƒ©ã‚¤ãƒ–ãƒ©ãƒªï¼ˆDLLï¼‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚"
+    ID_DL_START_APP_FAILED_NOASSOC "æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«æ‹¡å¼µå­ã«é–¢é€£ä»˜ã‘ã‚‰ã‚ŒãŸã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãŒã‚ã‚Šã¾ã›ã‚“ã€‚"
+    ID_DL_START_APP_FAILED_OOM "æ“ä½œã‚’å®Œäº†ã™ã‚‹ã®ã«ååˆ†ãªãƒ¡ãƒ¢ãƒªãŒã‚ã‚Šã¾ã›ã‚“ã€‚"
+    ID_DL_START_APP_FAILED_SHARE "å…±æœ‰é•åãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"
+    ID_DL_START_APP_FAILED_DEFAULT "ä¾‹å¤–ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"
+    ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE "é–‰ã˜ã‚‹"
+    ID_DOWNLOAD_COMPLETE_DIALOG_TITLE "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã®å®Œäº†"
+    IDS_STRING_HOST_AUTH_REQUIRED "èªè¨¼ãŒå¿…è¦ã§ã™ã€‚\næŽ¥ç¶šå…ˆãƒ›ã‚¹ãƒˆ[%s]ã«ã¯ã€ãƒ¦ãƒ¼ã‚¶ãƒ¼åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒå¿…è¦ã§ã™ã€‚"
 END
 
 STRINGTABLE
 BEGIN
     IDS_STRING_PROXY_AUTH_REQUIRED 
-                            "”FØ‚ª•K—v‚Å‚·B\nƒvƒƒLƒV[%s]‚É‚ÍAƒ†[ƒU[–¼‚ÆƒpƒXƒ[ƒh‚ðŽw’è‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B"
+                            "èªè¨¼ãŒå¿…è¦ã§ã™ã€‚\nãƒ—ãƒ­ã‚­ã‚·[%s]ã«ã¯ã€ãƒ¦ãƒ¼ã‚¶ãƒ¼åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚"
     IDS_STRING_CONFIRM_INSECURE_CONNECTION 
-                            "ˆÀ‘S‚ÈÚ‘±‚Å‚Í‚ ‚è‚Ü‚¹‚ñB\nŠëŒ¯«‚ð”FŽ¯‚µ‚½‚¤‚¦‚ÅAÚ‘±‚ð‘±s‚·‚éê‡‚ÍAu‚Í‚¢v‚ðƒNƒŠƒbƒN‚µ‚Ä‰º‚³‚¢B\n\n ""%s""‚ÌŠ—LŽÒ‚É‚æ‚éƒEƒFƒuƒTƒCƒg‚ÌÝ’è‚ª•s“KØ‚Å‚·B\n\n‚ ‚È‚½‚Ìî•ñ‚ª“‚Ü‚ê‚é‚±‚Æ‚ð–h‚®‚½‚ßA‚±‚ÌƒEƒFƒuƒTƒCƒg‚Ö‚ÌÚ‘±‚ÍŠm—§‚³‚ê‚Ü‚¹‚ñB\n•s³‚ÈƒZƒLƒ…ƒŠƒeƒBØ–¾‘‚ðŽg—p‚µ‚Ä‚¢‚Ü‚·B \n”­sŽÒ‚ÌØ–¾‘‚ª•s–¾‚Å‚ ‚é‚½‚ß‚±‚ÌØ–¾‘‚ÍM—Š‚³‚ê‚Ü‚¹‚ñB \nƒT[ƒo[‚ª“K³‚È’†ŠÔØ–¾‘‚ð‘—M‚µ‚È‚¢‰Â”\«‚ª‚ ‚è‚Ü‚·B \n\nu‚¢‚¢‚¦v‚ðƒNƒŠƒbƒN‚·‚é‚ÆÚ‘±‚ðƒLƒƒƒ“ƒZƒ‹‚µ‚Ü‚·B"
-    IDS_STRING_CONFIRM_LEAVE_PAGE "‚±‚ÌƒTƒCƒg‚ð—£‚ê‚Ü‚·‚©H\ns‚Á‚½•ÏX‚ª•Û‘¶‚³‚ê‚È‚¢‰Â”\«‚ª‚ ‚è‚Ü‚·B"
+                            "å®‰å…¨ãªæŽ¥ç¶šã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚\nå±é™ºæ€§ã‚’èªè­˜ã—ãŸã†ãˆã§ã€æŽ¥ç¶šã‚’ç¶šè¡Œã™ã‚‹å ´åˆã¯ã€ã€Œã¯ã„ã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ä¸‹ã•ã„ã€‚\n\n ""%s""ã®æ‰€æœ‰è€…ã«ã‚ˆã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã®è¨­å®šãŒä¸é©åˆ‡ã§ã™ã€‚\n\nã‚ãªãŸã®æƒ…å ±ãŒç›—ã¾ã‚Œã‚‹ã“ã¨ã‚’é˜²ããŸã‚ã€ã“ã®ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã¸ã®æŽ¥ç¶šã¯ç¢ºç«‹ã•ã‚Œã¾ã›ã‚“ã€‚\nä¸æ­£ãªã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£è¨¼æ˜Žæ›¸ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™ã€‚ \nç™ºè¡Œè€…ã®è¨¼æ˜Žæ›¸ãŒä¸æ˜Žã§ã‚ã‚‹ãŸã‚ã“ã®è¨¼æ˜Žæ›¸ã¯ä¿¡é ¼ã•ã‚Œã¾ã›ã‚“ã€‚ \nã‚µãƒ¼ãƒãƒ¼ãŒé©æ­£ãªä¸­é–“è¨¼æ˜Žæ›¸ã‚’é€ä¿¡ã—ãªã„å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚ \n\nã€Œã„ã„ãˆã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã™ã‚‹ã¨æŽ¥ç¶šã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¾ã™ã€‚"
+    IDS_STRING_CONFIRM_LEAVE_PAGE "ã“ã®ã‚µã‚¤ãƒˆã‚’é›¢ã‚Œã¾ã™ã‹ï¼Ÿ\nè¡Œã£ãŸå¤‰æ›´ãŒä¿å­˜ã•ã‚Œãªã„å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚"
     IDS_STRING_ALERT_MISSING_FILES 
-                            "‹N“®‚Å‚«‚Ü‚¹‚ñBÄƒZƒbƒgƒAƒbƒv‚ðs‚Á‚Ä‚­‚¾‚³‚¢B\n‹N“®‚É•K—v‚Èƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB[%s]"
-    IDS_STRING_CLEARING_CACHE "ƒuƒ‰ƒEƒU[ƒLƒƒƒbƒVƒ… ƒNƒŠƒA’†..."
-    IDS_STRING_CONFIRM_CLOSE_APPLICATION "%s‚ðI—¹‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H"
+                            "èµ·å‹•ã§ãã¾ã›ã‚“ã€‚å†ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã‚’è¡Œã£ã¦ãã ã•ã„ã€‚\nèµ·å‹•ã«å¿…è¦ãªãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚[%s]"
+    IDS_STRING_CLEARING_CACHE "ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚­ãƒ£ãƒƒã‚·ãƒ¥ ã‚¯ãƒªã‚¢ä¸­..."
+    IDS_STRING_CONFIRM_CLOSE_APPLICATION "%sã‚’çµ‚äº†ã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ"
     IDS_STRING_TOO_MANY_WINDOWS_MSG 
-                            "ƒEƒBƒ“ƒhƒE‚Ì”‚ªãŒÀ’l(%d)‚É’B‚µ‚Ä‚¢‚Ü‚·B\n‘¼‚Ì•s—v‚ÈƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚Ä‚©‚çÄ“xŽÀs‚µ‚Ä‰º‚³‚¢B(%s)"
+                            "ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®æ•°ãŒä¸Šé™å€¤(%d)ã«é”ã—ã¦ã„ã¾ã™ã€‚\nä»–ã®ä¸è¦ãªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã¦ã‹ã‚‰å†åº¦å®Ÿè¡Œã—ã¦ä¸‹ã•ã„ã€‚(%s)"
     IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT 
-                            "‚²–À˜f‚ð‚¨‚©‚¯‚µ‚Ä\‚µ–ó‚ ‚è‚Ü‚¹‚ñB\nƒVƒXƒeƒ€ƒŠƒ\[ƒX‚ª•s‘«‚µ‚Ä‚¢‚é‚½‚ß\nƒAƒvƒŠƒP[ƒVƒ‡ƒ“(%s)‚ðI—¹‚µ‚Ü‚·B"
+                            "ã”è¿·æƒ‘ã‚’ãŠã‹ã‘ã—ã¦ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ã€‚\nã‚·ã‚¹ãƒ†ãƒ ãƒªã‚½ãƒ¼ã‚¹ãŒä¸è¶³ã—ã¦ã„ã‚‹ãŸã‚\nã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³(%s)ã‚’çµ‚äº†ã—ã¾ã™ã€‚"
     IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN 
-                            "ƒVƒXƒeƒ€ƒŠƒ\[ƒX‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B\nƒAƒvƒŠƒP[ƒVƒ‡ƒ“(%s)‚ðI—¹‚µ‚Ü‚·B"
+                            "ã‚·ã‚¹ãƒ†ãƒ ãƒªã‚½ãƒ¼ã‚¹ãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚\nã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³(%s)ã‚’çµ‚äº†ã—ã¾ã™ã€‚"
     IDS_STRING_LOW_SYSTEM_RESOURCE_SUGGEST 
-                            "Œx:ƒVƒXƒeƒ€ƒŠƒ\[ƒX‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B\n‘¼‚ÌƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é‚©AƒAƒvƒŠƒP[ƒVƒ‡ƒ“(%s)‚ðÄ‹N“®‚µ‚Ä‰º‚³‚¢B"
-    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "VOS‚ÅŽÀs’†‚ÌƒvƒƒZƒX‚ð‹­§I—¹‚µ‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©H"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB "V‚µ‚¢ƒ^ƒu‚ÅŠJ‚­"
-    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "V‚µ‚¢ƒ^ƒu‚ÅŠJ‚­(”ñƒAƒNƒeƒBƒu)"
-    ID_CONTEXT_MENU_OPEN_LINK_WINDOW "V‚µ‚¢ƒEƒBƒ“ƒhƒE‚ÅŠJ‚­"
-    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "V‚µ‚¢ƒEƒBƒ“ƒhƒE‚ÅŠJ‚­(”ñƒAƒNƒeƒBƒu)"
-    ID_CONTEXT_MENU_COPY_LINK "ƒŠƒ“ƒN‚ÌƒAƒhƒŒƒX‚ðƒRƒs["
+                            "è­¦å‘Š:ã‚·ã‚¹ãƒ†ãƒ ãƒªã‚½ãƒ¼ã‚¹ãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚\nä»–ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹ã‹ã€ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³(%s)ã‚’å†èµ·å‹•ã—ã¦ä¸‹ã•ã„ã€‚"
+    IDS_STRING_CONFIRM_CLOSE_VOS_PROCESS "VOSã§å®Ÿè¡Œä¸­ã®ãƒ—ãƒ­ã‚»ã‚¹ã‚’å¼·åˆ¶çµ‚äº†ã—ã¦ã‚‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB "æ–°ã—ã„ã‚¿ãƒ–ã§é–‹ã"
+    ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE "æ–°ã—ã„ã‚¿ãƒ–ã§é–‹ã(éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–)"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW "æ–°ã—ã„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã§é–‹ã"
+    ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE "æ–°ã—ã„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã§é–‹ã(éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–)"
+    ID_CONTEXT_MENU_COPY_LINK "ãƒªãƒ³ã‚¯ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ã‚³ãƒ”ãƒ¼"
 END
 
 STRINGTABLE
 BEGIN
-    ID_INFO_OPEN_OPTION_SHOW_TRANSFER "u“]‘—‚·‚év‚ð•\Ž¦‚·‚é"
-    ID_MISSING_PROXY_CONFIG "[ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±Ý’è]\n[ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±Ý’è]-uƒ}ƒjƒ…ƒAƒ‹Ý’èv‚ð‘I‘ð‚µ‚½ê‡\nƒvƒƒLƒV ƒT[ƒo[/Ž©“®\¬ƒXƒNƒŠƒvƒg‚ð“o˜^‚µ‚Ä‰º‚³‚¢B(‹ó”’•s‰Â)"
+    ID_INFO_OPEN_OPTION_SHOW_TRANSFER "ã€Œè»¢é€ã™ã‚‹ã€ã‚’è¡¨ç¤ºã™ã‚‹"
+    ID_MISSING_PROXY_CONFIG "[ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šè¨­å®š]\n[ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šè¨­å®š]-ã€Œãƒžãƒ‹ãƒ¥ã‚¢ãƒ«è¨­å®šã€ã‚’é¸æŠžã—ãŸå ´åˆ\nãƒ—ãƒ­ã‚­ã‚· ã‚µãƒ¼ãƒãƒ¼/è‡ªå‹•æ§‹æˆã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ç™»éŒ²ã—ã¦ä¸‹ã•ã„ã€‚(ç©ºç™½ä¸å¯)"
     ID_URL_REDIRECT_SCRIPT_HELP 
-                            "'##################################################################################\r\n'URLƒŠƒ_ƒCƒŒƒNƒg ƒXƒNƒŠƒvƒg ƒwƒ‹ƒv\r\n'ƒtƒ@ƒ“ƒNƒVƒ‡ƒ“@OnRedirect‚ÉƒŠƒ_ƒCƒŒƒNƒgˆ—‚ð‹Lq‚µ‚Ü‚·B\r\n'ƒXƒNƒŠƒvƒgŒ¾Œê‚ÍAVBScriptƒx[ƒX‚É‚È‚è‚Ü‚·B\r\n'–ß‚è’l‚Æ‚µ‚ÄA‹N“®‚µ‚½‚¢ƒuƒ‰ƒEƒU[‚ð‹Lq‚µ‚Ü‚·B\r\n\r\n'  Šù’è‚Ìƒuƒ‰ƒEƒU[‚Å•\Ž¦‚·‚éê‡\r\n'    OnRedirect=""Default""\r\n'  Microsoft Internet Explorer‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""IE""\r\n'  Mozilla Firefox‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Firefox""\r\n'  Google Chrome‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Chrome""\r\n'  Microsoft Edge‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Edge""\r\n'  Žw’èƒuƒ‰ƒEƒU[1‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Custom1""\r\n'  Žw’èƒuƒ‰ƒEƒU[2‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Custom2""\r\n'  Žw’èƒuƒ‰ƒEƒU[3‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Custom3""\r\n'  Žw’èƒuƒ‰ƒEƒU[4‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Custom4""\r\n'  Žw’èƒuƒ‰ƒEƒU[5‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éê‡\r\n'    OnRedirect=""Custom5""\r\n'  •\Ž¦‚ð‹ÖŽ~‚·‚éê‡\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'ƒOƒ[ƒoƒ‹•Ï”(—\–ñŒê)F\r\n'ˆÈ‰º‚ÌƒOƒ[ƒoƒ‹•Ï”‚ð—˜—p‚·‚é‚±‚Æ‚ª‰Â”\‚Å‚·B\r\n\r\n'TB_Global_URL\t(•¶Žš—ñ’l)\r\n'  ‰æ–Ê‘JˆÚæ‚ÌURLî•ñ\r\n\r\n'TB_Global_SCHME\t(•¶Žš—ñ’l)\r\n'  ‰æ–Ê‘JˆÚæ‚ÌURLƒXƒL[ƒ}î•ñ http/https\r\n\r\n'TB_Global_HOSTNAME\t(•¶Žš—ñ’l)\r\n'  ‰æ–Ê‘JˆÚæ‚ÌURLƒzƒXƒgî•ñ\r\n\r\n'TB_Global_PORT\t(•¶Žš—ñ’l)\r\n'  ‰æ–Ê‘JˆÚæ‚ÌURLƒ|[ƒgî•ñ\r\n\r\n'TB_Global_URL_PATH\t(•¶Žš—ñ’l)\r\n'  ‰æ–Ê‘JˆÚæ‚ÌURLƒpƒXî•ñ\r\n\r\n'—á)uhttps://www.google.co.jp/search?q=Chronosv‚ðŠJ‚­ê‡\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URLF""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHMEF""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAMEF""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORTF""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATHF""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(^‹U’l)\r\n'  ƒgƒbƒvURL‚©ƒTƒuURL(Frame/iFrame)‚©‚Ìî•ñFTrue(ƒgƒbƒvURL)@False(ƒTƒuURL)\r\n\r\n'TB_TRACE_LOG(•¶Žš—ñ’l)\r\n'  Debug TRACE Window‚ÉƒƒOo—Í‚ðs‚¢‚Ü‚·B\r\n'------------------------------------------------------------\r\n'—á)https://www.yahoo.co.jp‚Ìê‡‚ÍAIE‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éB\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
-    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "ƒƒOo—ÍF"
-    ID_AUTH_ALERT_EMPTY_USER "ƒ†[ƒU[–¼‚ð“ü—Í‚µ‚Ä‰º‚³‚¢B"
-    ID_AUTH_REQUIRED        "”FØ‚ª•K—v‚Å‚·B"
-    ID_AUTH_ALERT_MISMATCHED_PASSWORD "V‚µ‚¢ƒpƒXƒ[ƒh‚ÆƒpƒXƒ[ƒh‚ÌŠm”F‚ªˆê’v‚µ‚Ä‚¢‚Ü‚¹‚ñBÄ“x“ü—Í‚µ‚Ä‰º‚³‚¢B"
-    ID_AUTH_CHANGE_PASSWORD "ƒpƒXƒ[ƒh•ÏX"
-    ID_DEBUG_ITEMS_COUNT    "%dŒ"
-    ID_DEBUG_LINES_COUNT    "%ds"
-    ID_DEBUG_CONFIRM_SAVE_RESULT "•Û‘¶‚µ‚Ü‚·‚©H"
+                            "'##################################################################################\r\n'URLãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ ã‚¹ã‚¯ãƒªãƒ—ãƒˆ ãƒ˜ãƒ«ãƒ—\r\n'ãƒ•ã‚¡ãƒ³ã‚¯ã‚·ãƒ§ãƒ³ã€€OnRedirectã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå‡¦ç†ã‚’è¨˜è¿°ã—ã¾ã™ã€‚\r\n'ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨€èªžã¯ã€VBScriptãƒ™ãƒ¼ã‚¹ã«ãªã‚Šã¾ã™ã€‚\r\n'æˆ»ã‚Šå€¤ã¨ã—ã¦ã€èµ·å‹•ã—ãŸã„ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚’è¨˜è¿°ã—ã¾ã™ã€‚\r\n\r\n'  æ—¢å®šã®ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã§è¡¨ç¤ºã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Default""\r\n'  Microsoft Internet Explorerã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""IE""\r\n'  Mozilla Firefoxã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Firefox""\r\n'  Google Chromeã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Chrome""\r\n'  Microsoft Edgeã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Edge""\r\n'  æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼1ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Custom1""\r\n'  æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼2ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Custom2""\r\n'  æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼3ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Custom3""\r\n'  æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼4ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Custom4""\r\n'  æŒ‡å®šãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼5ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Custom5""\r\n'  è¡¨ç¤ºã‚’ç¦æ­¢ã™ã‚‹å ´åˆ\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°(äºˆç´„èªž)ï¼š\r\n'ä»¥ä¸‹ã®ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã‚’åˆ©ç”¨ã™ã‚‹ã“ã¨ãŒå¯èƒ½ã§ã™ã€‚\r\n\r\n'TB_Global_URL\t(æ–‡å­—åˆ—å€¤)\r\n'  ç”»é¢é·ç§»å…ˆã®URLæƒ…å ±\r\n\r\n'TB_Global_SCHME\t(æ–‡å­—åˆ—å€¤)\r\n'  ç”»é¢é·ç§»å…ˆã®URLã‚¹ã‚­ãƒ¼ãƒžæƒ…å ± http/https\r\n\r\n'TB_Global_HOSTNAME\t(æ–‡å­—åˆ—å€¤)\r\n'  ç”»é¢é·ç§»å…ˆã®URLãƒ›ã‚¹ãƒˆæƒ…å ±\r\n\r\n'TB_Global_PORT\t(æ–‡å­—åˆ—å€¤)\r\n'  ç”»é¢é·ç§»å…ˆã®URLãƒãƒ¼ãƒˆæƒ…å ±\r\n\r\n'TB_Global_URL_PATH\t(æ–‡å­—åˆ—å€¤)\r\n'  ç”»é¢é·ç§»å…ˆã®URLãƒ‘ã‚¹æƒ…å ±\r\n\r\n'ä¾‹)ã€Œhttps://www.google.co.jp/search?q=Chronosã€ã‚’é–‹ãå ´åˆ\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URLï¼š""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHMEï¼š""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAMEï¼š""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORTï¼š""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATHï¼š""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(çœŸå½å€¤)\r\n'  ãƒˆãƒƒãƒ—URLã‹ã‚µãƒ–URL(Frame/iFrame)ã‹ã®æƒ…å ±ï¼šTrue(ãƒˆãƒƒãƒ—URL)ã€€False(ã‚µãƒ–URL)\r\n\r\n'TB_TRACE_LOG(æ–‡å­—åˆ—å€¤)\r\n'  Debug TRACE Windowã«ãƒ­ã‚°å‡ºåŠ›ã‚’è¡Œã„ã¾ã™ã€‚\r\n'------------------------------------------------------------\r\n'ä¾‹)https://www.yahoo.co.jpã®å ´åˆã¯ã€IEã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹ã€‚\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
+    ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "ãƒ­ã‚°å‡ºåŠ›ï¼š"
+    ID_AUTH_ALERT_EMPTY_USER "ãƒ¦ãƒ¼ã‚¶ãƒ¼åã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ã€‚"
+    ID_AUTH_REQUIRED        "èªè¨¼ãŒå¿…è¦ã§ã™ã€‚"
+    ID_AUTH_ALERT_MISMATCHED_PASSWORD "æ–°ã—ã„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ç¢ºèªãŒä¸€è‡´ã—ã¦ã„ã¾ã›ã‚“ã€‚å†åº¦å…¥åŠ›ã—ã¦ä¸‹ã•ã„ã€‚"
+    ID_AUTH_CHANGE_PASSWORD "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å¤‰æ›´"
+    ID_DEBUG_ITEMS_COUNT    "%dä»¶"
+    ID_DEBUG_LINES_COUNT    "%dè¡Œ"
+    ID_DEBUG_CONFIRM_SAVE_RESULT "ä¿å­˜ã—ã¾ã™ã‹ï¼Ÿ"
     ID_DEBUG_ALERT_SAVE_FAILED 
-                            "ƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚ÉŽ¸”s‚µ‚Ü‚µ‚½B\n\n•Ê‚ÌƒvƒƒOƒ‰ƒ€‚ªƒtƒ@ƒCƒ‹‚ðŠJ‚¢‚Ä‚¢‚é‚©A‘žŒ ŒÀ‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B‘€ì‚ðŠ®—¹‚Å‚«‚Ü‚¹‚ñBƒtƒ@ƒCƒ‹‚ð•Â‚¶‚Ä‚©‚çÄŽÀs‚µ‚Ä‚­‚¾‚³‚¢B\n\n%s"
+                            "ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\n\nåˆ¥ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã„ã¦ã„ã‚‹ã‹ã€æ›¸è¾¼æ¨©é™ãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚æ“ä½œã‚’å®Œäº†ã§ãã¾ã›ã‚“ã€‚ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã¦ã‹ã‚‰å†å®Ÿè¡Œã—ã¦ãã ã•ã„ã€‚\n\n%s"
     IDS_STRING_ALERT_OVER_RUNNING_TIME_LIMIT 
-                            "‹N“®§ŒÀŽžŠÔ(Å‘å%d•ª)‚ð’´‰ß‚µ‚½‚½‚ßAƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ðI—¹‚µ‚Ü‚·B\nƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ðÄ‹N“®‚µ‚Ä‰º‚³‚¢B"
-    ID_ENABLE_MEDIA_CONFIRMATION "%s ‚ÍŽŸ‚Ì‹–‰Â‚ð‹‚ß‚Ä‚¢‚Ü‚·B‹–‰Â‚µ‚Ü‚·‚©H"
-    ID_ENABLE_MEDIA_MIC     "ƒ}ƒCƒN‚ÌŽg—p"
-    ID_ENABLE_MEDIA_VIDEO   "ƒrƒfƒI‚ÌŽg—p"
+                            "èµ·å‹•åˆ¶é™æ™‚é–“(æœ€å¤§%dåˆ†)ã‚’è¶…éŽã—ãŸãŸã‚ã€ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã—ã¾ã™ã€‚\nã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†èµ·å‹•ã—ã¦ä¸‹ã•ã„ã€‚"
+    ID_ENABLE_MEDIA_CONFIRMATION "%s ã¯æ¬¡ã®è¨±å¯ã‚’æ±‚ã‚ã¦ã„ã¾ã™ã€‚è¨±å¯ã—ã¾ã™ã‹ï¼Ÿ"
+    ID_ENABLE_MEDIA_MIC     "ãƒžã‚¤ã‚¯ã®ä½¿ç”¨"
+    ID_ENABLE_MEDIA_VIDEO   "ãƒ“ãƒ‡ã‚ªã®ä½¿ç”¨"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_ZONE_MSG_IE  "—v‹‚³‚ê‚½ƒy[ƒW‚ðInternet Explorer‚Å•\Ž¦‚µ‚Ü‚·B"
-    IDS_STRING_ZONE_MSG_FF  "—v‹‚³‚ê‚½ƒy[ƒW‚ðMozilla Firefox‚Å•\Ž¦‚µ‚Ü‚·B"
-    IDS_STRING_ZONE_MSG_CHR "—v‹‚³‚ê‚½ƒy[ƒW‚ðGoogle Chrome‚Å•\Ž¦‚µ‚Ü‚·B"
+    IDS_STRING_ZONE_MSG_IE  "è¦æ±‚ã•ã‚ŒãŸãƒšãƒ¼ã‚¸ã‚’Internet Explorerã§è¡¨ç¤ºã—ã¾ã™ã€‚"
+    IDS_STRING_ZONE_MSG_FF  "è¦æ±‚ã•ã‚ŒãŸãƒšãƒ¼ã‚¸ã‚’Mozilla Firefoxã§è¡¨ç¤ºã—ã¾ã™ã€‚"
+    IDS_STRING_ZONE_MSG_CHR "è¦æ±‚ã•ã‚ŒãŸãƒšãƒ¼ã‚¸ã‚’Google Chromeã§è¡¨ç¤ºã—ã¾ã™ã€‚"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_ZONE_MSG_EDG "—v‹‚³‚ê‚½ƒy[ƒW‚ðMicrosoft Edge‚Å•\Ž¦‚µ‚Ü‚·B"
-    IDS_STRING_ZONE_MSG_CUSTOM "—v‹‚³‚ê‚½ƒy[ƒW‚ðŽw’è‚Ìƒuƒ‰ƒEƒU‚Å•\Ž¦‚µ‚Ü‚·B"
-    IDS_STRING_DISABLE_EXEC "ŠO•”ƒvƒƒOƒ‰ƒ€‚ÌŽÀs‚ÍAƒVƒXƒeƒ€ŠÇ—ŽÒ‚É‚æ‚è§ŒÀ‚³‚ê‚Ä‚¢‚Ü‚·B"
+    IDS_STRING_ZONE_MSG_EDG "è¦æ±‚ã•ã‚ŒãŸãƒšãƒ¼ã‚¸ã‚’Microsoft Edgeã§è¡¨ç¤ºã—ã¾ã™ã€‚"
+    IDS_STRING_ZONE_MSG_CUSTOM "è¦æ±‚ã•ã‚ŒãŸãƒšãƒ¼ã‚¸ã‚’æŒ‡å®šã®ãƒ–ãƒ©ã‚¦ã‚¶ã§è¡¨ç¤ºã—ã¾ã™ã€‚"
+    IDS_STRING_DISABLE_EXEC "å¤–éƒ¨ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®å®Ÿè¡Œã¯ã€ã‚·ã‚¹ãƒ†ãƒ ç®¡ç†è€…ã«ã‚ˆã‚Šåˆ¶é™ã•ã‚Œã¦ã„ã¾ã™ã€‚"
     IDS_STRING_AUTO_RECOVERY 
-                            "ˆÈ‘O•\Ž¦‚µ‚Ä‚¢‚½ƒEƒBƒ“ƒhƒE‚ð‰Â”\‚ÈŒÀ‚è•œŒ³‚µ‚Ü‚·‚©H\n\n“®ì‚É–â‘è‚ª”­¶‚µ•s³I—¹‚µ‚½‰Â”\«‚ª‚ ‚è‚Ü‚·B\n\n‚²–À˜f‚ð‚¨‚©‚¯‚µ‚Ä\‚µ–ó‚ ‚è‚Ü‚¹‚ñB\n“úŽžF%s\nƒEƒBƒ“ƒhƒE–‡”F%d"
-    IDS_STRING_UNDO         "Œ³‚É–ß‚·(&U)"
+                            "ä»¥å‰è¡¨ç¤ºã—ã¦ã„ãŸã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’å¯èƒ½ãªé™ã‚Šå¾©å…ƒã—ã¾ã™ã‹ï¼Ÿ\n\nå‹•ä½œã«å•é¡ŒãŒç™ºç”Ÿã—ä¸æ­£çµ‚äº†ã—ãŸå¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚\n\nã”è¿·æƒ‘ã‚’ãŠã‹ã‘ã—ã¦ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ã€‚\næ—¥æ™‚ï¼š%s\nã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æžšæ•°ï¼š%d"
+    IDS_STRING_UNDO         "å…ƒã«æˆ»ã™(&U)"
 END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_CUT          "Ø‚èŽæ‚è(&T)"
-    IDS_STRING_COPY         "ƒRƒs[(&C)"
-    IDS_STRING_PASTE        "“\‚è•t‚¯(&P)"
-    IDS_STRING_DELETE       "íœ(&D)"
-    IDS_STRING_SELECTALL    "‚·‚×‚Ä‘I‘ð(&A)"
-    IDS_STRING_PASTE_GO     "“\‚è•t‚¯‚ÄˆÚ“®"
-    IDS_STRING_PASTE_SEARCH "“\‚è•t‚¯‚ÄŒŸõ"
-    IDS_STRING_GO           "ˆÚ“®"
-    IDS_STRING_SEARCH       "ŒŸõ"
-    IDS_STRING_SEL_SEARCH   "u%sv‚ðŒŸõ"
-    IDS_STRING_OPEN_NOACTIVE "V‚µ‚¢ƒEƒBƒ“ƒhƒE‚ÅŠJ‚­(”ñƒAƒNƒeƒBƒu)"
-    IDS_STRING_SETTINGS     "Ý’è(&P)..."
+    IDS_STRING_CUT          "åˆ‡ã‚Šå–ã‚Š(&T)"
+    IDS_STRING_COPY         "ã‚³ãƒ”ãƒ¼(&C)"
+    IDS_STRING_PASTE        "è²¼ã‚Šä»˜ã‘(&P)"
+    IDS_STRING_DELETE       "å‰Šé™¤(&D)"
+    IDS_STRING_SELECTALL    "ã™ã¹ã¦é¸æŠž(&A)"
+    IDS_STRING_PASTE_GO     "è²¼ã‚Šä»˜ã‘ã¦ç§»å‹•"
+    IDS_STRING_PASTE_SEARCH "è²¼ã‚Šä»˜ã‘ã¦æ¤œç´¢"
+    IDS_STRING_GO           "ç§»å‹•"
+    IDS_STRING_SEARCH       "æ¤œç´¢"
+    IDS_STRING_SEL_SEARCH   "ã€Œ%sã€ã‚’æ¤œç´¢"
+    IDS_STRING_OPEN_NOACTIVE "æ–°ã—ã„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã§é–‹ã(éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–)"
+    IDS_STRING_SETTINGS     "è¨­å®š(&P)..."
 END
 
 STRINGTABLE
 BEGIN
-    ID_CONTEXT_MENU_SAVE_LINK "–¼‘O‚ð•t‚¯‚ÄƒŠƒ“ƒNæ‚ð•Û‘¶"
-    ID_CONTEXT_MENU_OPEN_IMG_TAB "V‚µ‚¢ƒ^ƒu‚Å‰æ‘œ‚ðŠJ‚­"
-    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE "V‚µ‚¢ƒ^ƒu‚Å‰æ‘œ‚ðŠJ‚­(”ñƒAƒNƒeƒBƒu)"
-    ID_CONTEXT_MENU_OPEN_IMG_WINDOW "V‚µ‚¢ƒEƒBƒ“ƒhƒE‚Å‰æ‘œ‚ðŠJ‚­"
-    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE "V‚µ‚¢ƒEƒBƒ“ƒhƒE‚Å‰æ‘œ‚ðŠJ‚­(”ñƒAƒNƒeƒBƒu)"
-    ID_CONTEXT_MENU_SAVE_IMG "–¼‘O‚ð•t‚¯‚Ä‰æ‘œ‚ð•Û‘¶"
-    ID_CONTEXT_MENU_COPY_IMG "‰æ‘œ‚ðƒRƒs["
-    ID_CONTEXT_MENU_COPY_IMG_LINK "‰æ‘œƒAƒhƒŒƒX‚ðƒRƒs["
-    ID_CONTEXT_MENU_SEARCH  "Google‚ÅŒŸõF""%s"""
-    ID_CONTEXT_MENU_RELOAD  "Ä“Ç‚Ýž‚Ý"
-    ID_CONTEXT_MENU_PRINT_PDF "ˆóü(PDFo—Í)"
-    ID_CONTEXT_MENU_PRINT   "ˆóü"
-    ID_ERROR_MSG_FAILED     "ˆê”Ê“I‚Èƒlƒbƒgƒ[ƒNƒGƒ‰["
+    ID_CONTEXT_MENU_SAVE_LINK "åå‰ã‚’ä»˜ã‘ã¦ãƒªãƒ³ã‚¯å…ˆã‚’ä¿å­˜"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB "æ–°ã—ã„ã‚¿ãƒ–ã§ç”»åƒã‚’é–‹ã"
+    ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE "æ–°ã—ã„ã‚¿ãƒ–ã§ç”»åƒã‚’é–‹ã(éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–)"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW "æ–°ã—ã„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã§ç”»åƒã‚’é–‹ã"
+    ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE "æ–°ã—ã„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã§ç”»åƒã‚’é–‹ã(éžã‚¢ã‚¯ãƒ†ã‚£ãƒ–)"
+    ID_CONTEXT_MENU_SAVE_IMG "åå‰ã‚’ä»˜ã‘ã¦ç”»åƒã‚’ä¿å­˜"
+    ID_CONTEXT_MENU_COPY_IMG "ç”»åƒã‚’ã‚³ãƒ”ãƒ¼"
+    ID_CONTEXT_MENU_COPY_IMG_LINK "ç”»åƒã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ã‚³ãƒ”ãƒ¼"
+    ID_CONTEXT_MENU_SEARCH  "Googleã§æ¤œç´¢ï¼š""%s"""
+    ID_CONTEXT_MENU_RELOAD  "å†èª­ã¿è¾¼ã¿"
+    ID_CONTEXT_MENU_PRINT_PDF "å°åˆ·(PDFå‡ºåŠ›)"
+    ID_CONTEXT_MENU_PRINT   "å°åˆ·"
+    ID_ERROR_MSG_FAILED     "ä¸€èˆ¬çš„ãªãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚¨ãƒ©ãƒ¼"
     ID_ERROR_MSG_NONE       "N/A"
-    ID_ERROR_MSG_ABORTED    "ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚µ‚½B"
-    ID_ERROR_MSG_INVALID_ARGUMENT "ˆø”‚ª•s³‚Å‚·B"
+    ID_ERROR_MSG_ABORTED    "ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_INVALID_ARGUMENT "å¼•æ•°ãŒä¸æ­£ã§ã™ã€‚"
 END
 
 STRINGTABLE
@@ -1185,202 +1185,202 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_ADD_FAVORITE         "‚¨‹C‚É“ü‚è‚É’Ç‰Á(&A)..."
-    ID_ORGANIZE_FAVORITE    "‚¨‹C‚É“ü‚è‚Ì®—(&O)..."
+    ID_ADD_FAVORITE         "ãŠæ°—ã«å…¥ã‚Šã«è¿½åŠ (&A)..."
+    ID_ORGANIZE_FAVORITE    "ãŠæ°—ã«å…¥ã‚Šã®æ•´ç†(&O)..."
 END
 
 STRINGTABLE
 BEGIN
-    ID_PRINT                "ˆóü(&P)..."
-    ID_PRINT_PDF            "ˆóü(PDFo—Í)"
+    ID_PRINT                "å°åˆ·(&P)..."
+    ID_PRINT_PDF            "å°åˆ·(PDFå‡ºåŠ›)"
 END
 
 STRINGTABLE
 BEGIN
-    ID_W_CLOSE              "•Â‚¶‚é"
-    ID_PREV_WND             "‘O‚ÌƒEƒBƒ“ƒhƒE\tShift+Ctrl+Tab"
-    ID_NEXT_WND             "ŽŸ‚ÌƒEƒBƒ“ƒhƒE\tCtrl+Tab"
-    IDC_APP_EXIT            "‘S‚Ä‚ÌƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é"
-    IDC_APP_EXIT_BUT_THIS   "‚±‚ÌƒEƒBƒ“ƒhƒEˆÈŠO‚ð•Â‚¶‚é"
+    ID_W_CLOSE              "é–‰ã˜ã‚‹"
+    ID_PREV_WND             "å‰ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦\tShift+Ctrl+Tab"
+    ID_NEXT_WND             "æ¬¡ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦\tCtrl+Tab"
+    IDC_APP_EXIT            "å…¨ã¦ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹"
+    IDC_APP_EXIT_BUT_THIS   "ã“ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä»¥å¤–ã‚’é–‰ã˜ã‚‹"
 END
 
 STRINGTABLE
 BEGIN
-    ID_RESTORE_WND          "ƒEƒBƒ“ƒhƒE‚ð•œŒ³‚µ‚Ü‚·‚©H"
-    ID_SAVE_WND             "ƒEƒBƒ“ƒhƒE‚ð•Û‘¶‚µ‚Ü‚·‚©H"
-    ID_OPEN_THIN_FILER      "ƒtƒ@ƒCƒ‹ƒ}ƒl[ƒWƒƒ‚ð‹N“®"
-    ID_NEW_BLANK            "ƒ^ƒuEƒEƒCƒ“ƒhƒE‚ð’Ç‰Á"
-    ID_TAB_LIST             "ƒ^ƒuƒEƒCƒ“ƒhƒEˆê——"
+    ID_RESTORE_WND          "ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’å¾©å…ƒã—ã¾ã™ã‹ï¼Ÿ"
+    ID_SAVE_WND             "ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä¿å­˜ã—ã¾ã™ã‹ï¼Ÿ"
+    ID_OPEN_THIN_FILER      "ãƒ•ã‚¡ã‚¤ãƒ«ãƒžãƒãƒ¼ã‚¸ãƒ£ã‚’èµ·å‹•"
+    ID_NEW_BLANK            "ã‚¿ãƒ–ãƒ»ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’è¿½åŠ "
+    ID_TAB_LIST             "ã‚¿ãƒ–ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ä¸€è¦§"
 END
 
 STRINGTABLE
 BEGIN
-    ID_FILE_TYPE_JS         "JavaScriptƒtƒ@ƒCƒ‹ (*.js)|*.js||"
-    ID_DOWNLOAD_FILE_CHOOSER_TITLE "ƒ_ƒEƒ“ƒ[ƒhƒtƒ@ƒCƒ‹‚ð•Û‘¶"
-    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "–¼‘O‚ð•t‚¯‚ÄPDF ƒhƒLƒ…ƒƒ“ƒg‚ð•Û‘¶"
-    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "ƒtƒ@ƒCƒ‹ƒ_ƒEƒ“ƒ[ƒh"
-    ID_PRINT_TO_PDF_FINISH_MSG "PDFƒhƒLƒ…ƒƒ“ƒg‚Ìì¬‚ªŠ®—¹‚µ‚Ü‚µ‚½B"
-    ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "ƒ_ƒEƒ“ƒ[ƒh(%d%%) %s"
-    ID_TRANSFER_SPEED_B     "%I64u B / •b"
-    ID_TRANSFER_SPEED_KB    "%0.1f KB / •b"
-    ID_TRANSFER_SPEED_MB    "%0.2f MB / •b"
-    ID_TRANSFER_SIZE_UNDEFERMINED "•s–¾"
-    ID_TRANSFER_PROGRESS_MSG "ŽóMÏƒTƒCƒY %s / ‘S‘ÌƒTƒCƒY %s ( %d %%)"
-    ID_CONFIRM_CANCEL_DOWNLOAD "ƒ_ƒEƒ“ƒ[ƒh‚ðƒLƒƒƒ“ƒZƒ‹‚µ‚Ü‚·‚©H"
-    ID_DL_START_APP_IN_PROGRESS "‹N“®’†"
-    ID_DL_START_APP_FAILED_BASE "ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ð‹N“®‚Å‚«‚Ü‚¹‚ñB\n%s"
-    ID_DL_START_APP_FAILED_LOW_RESOURCE "ƒƒ‚ƒŠ‚Ü‚½‚ÍƒŠƒ\[ƒX‚ª•s‘«‚µ‚Ä‚¢‚é‹°‚ê‚ª‚ ‚è‚Ü‚·B"
+    ID_FILE_TYPE_JS         "JavaScriptãƒ•ã‚¡ã‚¤ãƒ« (*.js)|*.js||"
+    ID_DOWNLOAD_FILE_CHOOSER_TITLE "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜"
+    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "åå‰ã‚’ä»˜ã‘ã¦PDF ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ä¿å­˜"
+    ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "ãƒ•ã‚¡ã‚¤ãƒ«ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰"
+    ID_PRINT_TO_PDF_FINISH_MSG "PDFãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã®ä½œæˆãŒå®Œäº†ã—ã¾ã—ãŸã€‚"
+    ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰(%d%%) %s"
+    ID_TRANSFER_SPEED_B     "%I64u B / ç§’"
+    ID_TRANSFER_SPEED_KB    "%0.1f KB / ç§’"
+    ID_TRANSFER_SPEED_MB    "%0.2f MB / ç§’"
+    ID_TRANSFER_SIZE_UNDEFERMINED "ä¸æ˜Ž"
+    ID_TRANSFER_PROGRESS_MSG "å—ä¿¡æ¸ˆã‚µã‚¤ã‚º %s / å…¨ä½“ã‚µã‚¤ã‚º %s ( %d %%)"
+    ID_CONFIRM_CANCEL_DOWNLOAD "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¾ã™ã‹ï¼Ÿ"
+    ID_DL_START_APP_IN_PROGRESS "èµ·å‹•ä¸­"
+    ID_DL_START_APP_FAILED_BASE "ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’èµ·å‹•ã§ãã¾ã›ã‚“ã€‚\n%s"
+    ID_DL_START_APP_FAILED_LOW_RESOURCE "ãƒ¡ãƒ¢ãƒªã¾ãŸã¯ãƒªã‚½ãƒ¼ã‚¹ãŒä¸è¶³ã—ã¦ã„ã‚‹æã‚ŒãŒã‚ã‚Šã¾ã™ã€‚"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_INVALID_HANDLE "ƒnƒ“ƒhƒ‹‚ª•s³‚Å‚·B"
-    ID_ERROR_MSG_FILE_NOT_FOUND "ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB"
-    ID_ERROR_MSG_TIMED_OUT  "ƒ^ƒCƒ€ƒAƒEƒg‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_FILE_TOO_BIG "ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ª‘å‚«‚·‚¬‚Ü‚·B"
-    ID_ERROR_MSG_UNEXPECTED "—\Šú‚¹‚Ê—áŠO‚ª”­¶‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_ACCESS_DENIED "ƒAƒNƒZƒX‚ª‹‘”Û‚³‚ê‚Ü‚µ‚½B"
-    ID_ERROR_MSG_NOT_IMPLEMENTED "ŽÀ‘•‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
-    ID_ERROR_MSG_CONNECTION_CLOSED "Ú‘±‚ª•Â‚¶‚ç‚ê‚Ü‚µ‚½ (TCP FIN)"
-    ID_ERROR_MSG_CONNECTION_RESET "Ú‘±‚ªƒŠƒZƒbƒg‚³‚ê‚Ü‚µ‚½ (TCP RST)"
-    ID_ERROR_MSG_CONNECTION_REFUSED "ƒT[ƒo[‚ÉÚ‘±‚ð‹‘”Û‚³‚ê‚Ü‚µ‚½B"
-    ID_ERROR_MSG_CONNECTION_ABORTED "Ú‘±‚ª’†’f‚³‚ê‚Ü‚µ‚½ (no ACK received)"
-    ID_ERROR_MSG_CONNECTION_FAILED "Ú‘±‚ÉŽ¸”s‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_NAME_NOT_RESOLVED "ƒzƒXƒg–¼‚ª‰ðŒˆ‚Å‚«‚Ü‚¹‚ñB"
-    ID_ERROR_MSG_INTERNET_DISCONNECTED "ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±‚ªŽ¸‚í‚ê‚Ü‚µ‚½B"
-    ID_ERROR_MSG_SSL_PROTOCOL_ERROR "SSL ƒvƒƒgƒRƒ‹ƒGƒ‰["
-    ID_ERROR_MSG_ADDRESS_INVALID "•s³‚È IP ƒAƒhƒŒƒX ‚Ü‚½‚Í ƒ|[ƒg”Ô†‚Å‚·B"
+    ID_ERROR_MSG_INVALID_HANDLE "ãƒãƒ³ãƒ‰ãƒ«ãŒä¸æ­£ã§ã™ã€‚"
+    ID_ERROR_MSG_FILE_NOT_FOUND "ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚"
+    ID_ERROR_MSG_TIMED_OUT  "ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_FILE_TOO_BIG "ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºãŒå¤§ãã™ãŽã¾ã™ã€‚"
+    ID_ERROR_MSG_UNEXPECTED "äºˆæœŸã›ã¬ä¾‹å¤–ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_ACCESS_DENIED "ã‚¢ã‚¯ã‚»ã‚¹ãŒæ‹’å¦ã•ã‚Œã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_NOT_IMPLEMENTED "å®Ÿè£…ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"
+    ID_ERROR_MSG_CONNECTION_CLOSED "æŽ¥ç¶šãŒé–‰ã˜ã‚‰ã‚Œã¾ã—ãŸ (TCP FIN)"
+    ID_ERROR_MSG_CONNECTION_RESET "æŽ¥ç¶šãŒãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã—ãŸ (TCP RST)"
+    ID_ERROR_MSG_CONNECTION_REFUSED "ã‚µãƒ¼ãƒãƒ¼ã«æŽ¥ç¶šã‚’æ‹’å¦ã•ã‚Œã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_CONNECTION_ABORTED "æŽ¥ç¶šãŒä¸­æ–­ã•ã‚Œã¾ã—ãŸ (no ACK received)"
+    ID_ERROR_MSG_CONNECTION_FAILED "æŽ¥ç¶šã«å¤±æ•—ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_NAME_NOT_RESOLVED "ãƒ›ã‚¹ãƒˆåãŒè§£æ±ºã§ãã¾ã›ã‚“ã€‚"
+    ID_ERROR_MSG_INTERNET_DISCONNECTED "ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šãŒå¤±ã‚ã‚Œã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_SSL_PROTOCOL_ERROR "SSL ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚¨ãƒ©ãƒ¼"
+    ID_ERROR_MSG_ADDRESS_INVALID "ä¸æ­£ãª IP ã‚¢ãƒ‰ãƒ¬ã‚¹ ã¾ãŸã¯ ãƒãƒ¼ãƒˆç•ªå·ã§ã™ã€‚"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_ADDRESS_UNREACHABLE "“ž’B•s”\‚È IP ƒAƒhƒŒƒX‚Å‚·B"
-    ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED "ƒT[ƒo[‚ªSSLƒNƒ‰ƒCƒAƒ“ƒg”FØ—p‚ÌØ–¾‘‚ð—v‹‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED "ƒgƒ“ƒlƒ‹Ú‘±‚ÉŽ¸”s‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED "—˜—p‰Â”\‚ÈSSLƒvƒƒgƒRƒ‹ƒo[ƒWƒ‡ƒ“‚ª‚ ‚è‚Ü‚¹‚ñB"
+    ID_ERROR_MSG_ADDRESS_UNREACHABLE "åˆ°é”ä¸èƒ½ãª IP ã‚¢ãƒ‰ãƒ¬ã‚¹ã§ã™ã€‚"
+    ID_ERROR_MSG_SSL_CLIENT_AUTH_CERT_NEEDED "ã‚µãƒ¼ãƒãƒ¼ãŒSSLã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆèªè¨¼ç”¨ã®è¨¼æ˜Žæ›¸ã‚’è¦æ±‚ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED "ãƒˆãƒ³ãƒãƒ«æŽ¥ç¶šã«å¤±æ•—ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED "åˆ©ç”¨å¯èƒ½ãªSSLãƒ—ãƒ­ãƒˆã‚³ãƒ«ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒã‚ã‚Šã¾ã›ã‚“ã€‚"
     ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH 
-                            "ƒNƒ‰ƒCƒAƒ“ƒg‚ÆƒT[ƒo[‚ÍAˆê”Ê“I‚ÈSSLƒvƒƒgƒRƒ‹‚Ìƒo[ƒWƒ‡ƒ“‚Ü‚½‚Í Cipher Suite ‚ðƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚¹‚ñB"
+                            "ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã‚µãƒ¼ãƒãƒ¼ã¯ã€ä¸€èˆ¬çš„ãªSSLãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¾ãŸã¯ Cipher Suite ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã›ã‚“ã€‚"
     ID_ERROR_MSG_SSL_RENEGOTIATION_REQUESTED 
-                            "ƒT[ƒo[‚ªÄƒlƒSƒVƒG[ƒVƒ‡ƒ“‚ð—v‹‚µ‚Ü‚µ‚½B (Äƒnƒ“ƒhƒVƒFƒCƒN)"
+                            "ã‚µãƒ¼ãƒãƒ¼ãŒå†ãƒã‚´ã‚·ã‚¨ãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¦æ±‚ã—ã¾ã—ãŸã€‚ (å†ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯)"
     ID_ERROR_MSG_CERT_COMMON_NAME_INVALID 
-                            "ƒT[ƒo[‚ÍAØ–¾‘‚Ì‹¤’Ê–¼‚ÆƒzƒXƒg–¼‚ªˆê’v‚µ‚È‚¢Ø–¾‘‚Å‚ ‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_CERT_DATE_INVALID "ƒT[ƒo[‚ÍAØ–¾‘‚ÌŠúŒÀ‚ª•s³‚Å‚ ‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
+                            "ã‚µãƒ¼ãƒãƒ¼ã¯ã€è¨¼æ˜Žæ›¸ã®å…±é€šåã¨ãƒ›ã‚¹ãƒˆåãŒä¸€è‡´ã—ãªã„è¨¼æ˜Žæ›¸ã§ã‚ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_CERT_DATE_INVALID "ã‚µãƒ¼ãƒãƒ¼ã¯ã€è¨¼æ˜Žæ›¸ã®æœŸé™ãŒä¸æ­£ã§ã‚ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
     ID_ERROR_MSG_CERT_AUTHORITY_INVALID 
-                            "ƒT[ƒo[‚ÍAM—Š‚³‚ê‚Ä‚¢‚È‚¢‹@ŠÖ‚É‚æ‚Á‚Ä–¼‚³‚ê‚½Ø–¾‘‚Å‚ ‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_CERT_CONTAINS_ERRORS "ƒT[ƒo[‚ÍAƒGƒ‰[‚ðŠÜ‚ÞØ–¾‘‚Å‚ ‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM "‚±‚ÌØ–¾‘‚É‚ÍAŽ¸Œø‚µ‚½‚©‚ð”»’f‚·‚éŽd‘g‚Ý‚ª‚ ‚è‚Ü‚¹‚ñB"
+                            "ã‚µãƒ¼ãƒãƒ¼ã¯ã€ä¿¡é ¼ã•ã‚Œã¦ã„ãªã„æ©Ÿé–¢ã«ã‚ˆã£ã¦ç½²åã•ã‚ŒãŸè¨¼æ˜Žæ›¸ã§ã‚ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_CERT_CONTAINS_ERRORS "ã‚µãƒ¼ãƒãƒ¼ã¯ã€ã‚¨ãƒ©ãƒ¼ã‚’å«ã‚€è¨¼æ˜Žæ›¸ã§ã‚ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_CERT_NO_REVOCATION_MECHANISM "ã“ã®è¨¼æ˜Žæ›¸ã«ã¯ã€å¤±åŠ¹ã—ãŸã‹ã‚’åˆ¤æ–­ã™ã‚‹ä»•çµ„ã¿ãŒã‚ã‚Šã¾ã›ã‚“ã€‚"
     ID_ERROR_MSG_CERT_UNABLE_TO_CHECK_REVOCATION 
-                            "‚±‚ÌƒTƒCƒg‚ÌƒZƒLƒ…ƒŠƒeƒBØ–¾‘‚ÌŽ¸Œøî•ñ‚Í—˜—p‚Å‚«‚Ü‚¹‚ñB"
-    ID_ERROR_MSG_CERT_REVOKED "ƒT[ƒo[‚ÍAØ–¾‘‚ªŽ¸Œø‚µ‚Ä‚¢‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_CERT_INVALID "ƒT[ƒo[‚ÍAØ–¾‘‚ª–³Œø‚Å‚ ‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
+                            "ã“ã®ã‚µã‚¤ãƒˆã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£è¨¼æ˜Žæ›¸ã®å¤±åŠ¹æƒ…å ±ã¯åˆ©ç”¨ã§ãã¾ã›ã‚“ã€‚"
+    ID_ERROR_MSG_CERT_REVOKED "ã‚µãƒ¼ãƒãƒ¼ã¯ã€è¨¼æ˜Žæ›¸ãŒå¤±åŠ¹ã—ã¦ã„ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_CERT_INVALID "ã‚µãƒ¼ãƒãƒ¼ã¯ã€è¨¼æ˜Žæ›¸ãŒç„¡åŠ¹ã§ã‚ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
     ID_ERROR_MSG_CERT_WEAK_SIGNATURE_ALGORITHM 
-                            "ƒT[ƒo[‚ÍAÆŽã‚È–¼ƒAƒ‹ƒSƒŠƒYƒ€‚ðŽg—p‚µ‚Ä–¼‚³‚ê‚½Ø–¾‘‚Å‚ ‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_CERT_NON_UNIQUE_NAME "Ø–¾‘‚ÉŽw’è‚³‚ê‚½ƒzƒXƒg–¼‚Íƒ†ƒj[ƒN‚Å‚ ‚è‚Ü‚¹‚ñB"
+                            "ã‚µãƒ¼ãƒãƒ¼ã¯ã€è„†å¼±ãªç½²åã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ä½¿ç”¨ã—ã¦ç½²åã•ã‚ŒãŸè¨¼æ˜Žæ›¸ã§ã‚ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_CERT_NON_UNIQUE_NAME "è¨¼æ˜Žæ›¸ã«æŒ‡å®šã•ã‚ŒãŸãƒ›ã‚¹ãƒˆåã¯ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã‚ã‚Šã¾ã›ã‚“ã€‚"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_CERT_WEAK_KEY "ƒT[ƒo[‚ÍAØ–¾‘‚ªÆŽã‚ÈƒL[‚ðŠÜ‚ñ‚Å‚¢‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
+    ID_ERROR_MSG_CERT_WEAK_KEY "ã‚µãƒ¼ãƒãƒ¼ã¯ã€è¨¼æ˜Žæ›¸ãŒè„†å¼±ãªã‚­ãƒ¼ã‚’å«ã‚“ã§ã„ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
     ID_ERROR_MSG_CERT_NAME_CONSTRAINT_VIOLATION 
-                            "ƒT[ƒo[‚ÍAØ–¾‘‚ÌDNS–¼‚ª–½–¼‹K–ñ‚Éˆá”½‚µ‚Ä‚¢‚é‚Æ•Ô‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG "Ø–¾‘‚Ì—LŒøŠúŠÔ‚ª’·‚·‚¬‚Ü‚·"
-    ID_ERROR_MSG_INVALID_URL "URL‚ª•s³‚Å‚·B"
-    ID_ERROR_MSG_DISALLOWED_URL_SCHEME "‹–‰Â‚³‚ê‚Ä‚¢‚È‚¢URLƒXƒL[ƒ}‚Å‚·B"
-    ID_ERROR_MSG_UNKNOWN_URL_SCHEME "–¢’è‹`‚ÌURLƒXƒL[ƒ}‚Å‚·B"
-    ID_ERROR_MSG_TOO_MANY_REDIRECTS "‚±‚ÌƒEƒFƒuƒy[ƒW‚É‚ÍƒŠƒ_ƒCƒŒƒNƒgƒ‹[ƒv‚ªŠÜ‚Ü‚ê‚Ä‚¢‚Ü‚·B"
-    ID_ERROR_MSG_UNSAFE_REDIRECT "ˆÀ‘S‚Å‚È‚¢ƒŠƒ_ƒCƒŒƒNƒg‚ð—v‹‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_UNSAFE_PORT "ˆÀ‘S‚Å‚È‚¢ƒ|[ƒg‚ð—v‹‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_INVALID_RESPONSE "ƒŒƒXƒ|ƒ“ƒX‚ª•s³‚Å‚·B"
-    ID_ERROR_MSG_INVALID_CHUNKED_ENCODING "•s³‚Èƒ`ƒƒƒ“ƒNƒGƒ“ƒR[ƒh‚Å‚·B"
-    ID_ERROR_MSG_METHOD_NOT_SUPPORTED "ƒƒ\ƒbƒh‚ªƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"
-    ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH "ProxyƒT[ƒo[”FØƒGƒ‰["
-    ID_ERROR_MSG_EMPTY_RESPONSE "ƒŒƒXƒ|ƒ“ƒX‚ª‹ó”’‚Å‚·B"
-    ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG "ƒŒƒXƒ|ƒ“ƒXƒwƒbƒ_[‚ª‘å‚«‚·‚¬‚Ü‚·B"
-    ID_ERROR_MSG_CACHE_MISS "ƒLƒƒƒbƒVƒ… ƒ~ƒX‚ª”­¶‚µ‚Ü‚µ‚½B"
+                            "ã‚µãƒ¼ãƒãƒ¼ã¯ã€è¨¼æ˜Žæ›¸ã®DNSåãŒå‘½åè¦ç´„ã«é•åã—ã¦ã„ã‚‹ã¨è¿”ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_CERT_VALIDITY_TOO_LONG "è¨¼æ˜Žæ›¸ã®æœ‰åŠ¹æœŸé–“ãŒé•·ã™ãŽã¾ã™"
+    ID_ERROR_MSG_INVALID_URL "URLãŒä¸æ­£ã§ã™ã€‚"
+    ID_ERROR_MSG_DISALLOWED_URL_SCHEME "è¨±å¯ã•ã‚Œã¦ã„ãªã„URLã‚¹ã‚­ãƒ¼ãƒžã§ã™ã€‚"
+    ID_ERROR_MSG_UNKNOWN_URL_SCHEME "æœªå®šç¾©ã®URLã‚¹ã‚­ãƒ¼ãƒžã§ã™ã€‚"
+    ID_ERROR_MSG_TOO_MANY_REDIRECTS "ã“ã®ã‚¦ã‚§ãƒ–ãƒšãƒ¼ã‚¸ã«ã¯ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆãƒ«ãƒ¼ãƒ—ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ã€‚"
+    ID_ERROR_MSG_UNSAFE_REDIRECT "å®‰å…¨ã§ãªã„ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã‚’è¦æ±‚ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_UNSAFE_PORT "å®‰å…¨ã§ãªã„ãƒãƒ¼ãƒˆã‚’è¦æ±‚ã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_INVALID_RESPONSE "ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãŒä¸æ­£ã§ã™ã€‚"
+    ID_ERROR_MSG_INVALID_CHUNKED_ENCODING "ä¸æ­£ãªãƒãƒ£ãƒ³ã‚¯ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã§ã™ã€‚"
+    ID_ERROR_MSG_METHOD_NOT_SUPPORTED "ãƒ¡ã‚½ãƒƒãƒ‰ãŒã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"
+    ID_ERROR_MSG_UNEXPECTED_PROXY_AUTH "Proxyã‚µãƒ¼ãƒãƒ¼èªè¨¼ã‚¨ãƒ©ãƒ¼"
+    ID_ERROR_MSG_EMPTY_RESPONSE "ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãŒç©ºç™½ã§ã™ã€‚"
+    ID_ERROR_MSG_RESPONSE_HEADERS_TOO_BIG "ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ˜ãƒƒãƒ€ãƒ¼ãŒå¤§ãã™ãŽã¾ã™ã€‚"
+    ID_ERROR_MSG_CACHE_MISS "ã‚­ãƒ£ãƒƒã‚·ãƒ¥ ãƒŸã‚¹ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ERROR_MSG_INSECURE_RESPONSE "ˆÀ‘S‚Å‚È‚¢ƒŒƒXƒ|ƒ“ƒX‚ª”­¶‚µ‚Ü‚µ‚½B"
-    ID_ERROR_MSG_PROXY_CONNECTION_FAILED "ProxyƒT[ƒo[‚ÉÚ‘±‚Å‚«‚Ü‚¹‚ñB"
-    ID_ERROR_PAGE_TITLE     "“ÇžƒGƒ‰["
-    ID_ERROR_PAGE_HEADING   "ƒAƒNƒZƒX‚µ‚æ‚¤‚Æ‚µ‚½ƒy[ƒW‚ª•\Ž¦‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B"
-    ID_ERROR_PAGE_HEADING_DETAILS "Ú×"
-    ID_ERROR_PAGE_HEADING_URL "URLF"
-    ID_ERROR_PAGE_HEADING_CODE "ƒGƒ‰[ƒR[ƒhF"
-    ID_ERROR_PAGE_HEADING_MSG "ƒGƒ‰[“à—eF"
-    ID_ERROR_PAGE_HEADING_NAME "ƒGƒ‰[–¼ÌF"
-    ID_ERROR_MISMATCHED_PARAMTER "ƒpƒ‰ƒ[ƒ^‚ª•sˆê’v‚Å‚·B"
+    ID_ERROR_MSG_INSECURE_RESPONSE "å®‰å…¨ã§ãªã„ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚"
+    ID_ERROR_MSG_PROXY_CONNECTION_FAILED "Proxyã‚µãƒ¼ãƒãƒ¼ã«æŽ¥ç¶šã§ãã¾ã›ã‚“ã€‚"
+    ID_ERROR_PAGE_TITLE     "èª­è¾¼ã‚¨ãƒ©ãƒ¼"
+    ID_ERROR_PAGE_HEADING   "ã‚¢ã‚¯ã‚»ã‚¹ã—ã‚ˆã†ã¨ã—ãŸãƒšãƒ¼ã‚¸ãŒè¡¨ç¤ºã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"
+    ID_ERROR_PAGE_HEADING_DETAILS "è©³ç´°"
+    ID_ERROR_PAGE_HEADING_URL "URLï¼š"
+    ID_ERROR_PAGE_HEADING_CODE "ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ï¼š"
+    ID_ERROR_PAGE_HEADING_MSG "ã‚¨ãƒ©ãƒ¼å†…å®¹ï¼š"
+    ID_ERROR_PAGE_HEADING_NAME "ã‚¨ãƒ©ãƒ¼åç§°ï¼š"
+    ID_ERROR_MISMATCHED_PARAMTER "ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒä¸ä¸€è‡´ã§ã™ã€‚"
     ID_ALERT_CANNOT_SAVE_CONFIGS 
-                            "Ý’èƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚ÉŽ¸”s‚µ‚Ü‚µ‚½B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ªƒtƒ@ƒCƒ‹‚ðŠJ‚¢‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ðI—¹‚³‚¹Ä“xŽÀs‚µ‚Ä‰º‚³‚¢B"
-    ID_KEY_COMBINATION_EMPTY "ƒL[ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“‚ðÝ’è‚µ‚Ä‰º‚³‚¢B"
+                            "è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã„ã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã•ã›å†åº¦å®Ÿè¡Œã—ã¦ä¸‹ã•ã„ã€‚"
+    ID_KEY_COMBINATION_EMPTY "ã‚­ãƒ¼ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¨­å®šã—ã¦ä¸‹ã•ã„ã€‚"
     ID_KEY_COMBINATION_CONFIRM 
-                            "ƒL[ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“‚ÌŠm”F‰æ–Ê\nÝ’è‚µ‚½ƒL[ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“‚ð‰Ÿ‚µ‚½‚Ü‚ÜA\nEnterƒL[‚ð‰Ÿ‚·‚©OKƒ{ƒ^ƒ“‚ðƒNƒŠƒbƒN‚µ‚Ä‰º‚³‚¢B\nÝ’è’lF%s"
-    ID_KEY_COMBINATION_SUCCEEDED "¬Œ÷\nƒL[ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“‚ðŠm”F‚µ‚Ü‚µ‚½B\nÝ’è’lF%s\n“ü—Í’lF%s"
-    ID_KEY_COMBINATION_FAILED "Ž¸”s\nƒL[ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“‚ÌŠm”F‚ÉŽ¸”s‚µ‚Ü‚µ‚½B\nÝ’è’lF%s\n“ü—Í’lF%s"
-    ID_ACTION_LABEL_ALLOW   "› ‹–‰Â"
+                            "ã‚­ãƒ¼ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³ã®ç¢ºèªç”»é¢\nè¨­å®šã—ãŸã‚­ãƒ¼ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³ã‚’æŠ¼ã—ãŸã¾ã¾ã€\nEnterã‚­ãƒ¼ã‚’æŠ¼ã™ã‹OKãƒœã‚¿ãƒ³ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ä¸‹ã•ã„ã€‚\nè¨­å®šå€¤ï¼š%s"
+    ID_KEY_COMBINATION_SUCCEEDED "æˆåŠŸ\nã‚­ãƒ¼ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç¢ºèªã—ã¾ã—ãŸã€‚\nè¨­å®šå€¤ï¼š%s\nå…¥åŠ›å€¤ï¼š%s"
+    ID_KEY_COMBINATION_FAILED "å¤±æ•—\nã‚­ãƒ¼ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³ã®ç¢ºèªã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nè¨­å®šå€¤ï¼š%s\nå…¥åŠ›å€¤ï¼š%s"
+    ID_ACTION_LABEL_ALLOW   "â—‹ è¨±å¯"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ACTION_LABEL_DENY    "x ‹‘”Û"
+    ID_ACTION_LABEL_DENY    "x æ‹’å¦"
     ID_CANNOT_SAVE_URL_FILTER 
-                            "[URLƒtƒBƒ‹ƒ^[Ý’è]\nƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚ÉŽ¸”s‚µ‚Ü‚µ‚½B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ªƒtƒ@ƒCƒ‹‚ðŠJ‚¢‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ðI—¹‚³‚¹Ä“xŽÀs‚µ‚Ä‰º‚³‚¢B\n%s"
+                            "[URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š]\nãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã„ã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã•ã›å†åº¦å®Ÿè¡Œã—ã¦ä¸‹ã•ã„ã€‚\n%s"
     ID_CANNOT_LOAD_CUSTOM_SCRIPT 
-                            "[ƒJƒXƒ^ƒ€ƒXƒNƒŠƒvƒgÝ’è]\nƒtƒ@ƒCƒ‹‚Ì“Çž‚ÉŽ¸”s‚µ‚Ü‚µ‚½B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ªƒtƒ@ƒCƒ‹‚ðŠJ‚¢‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ðI—¹‚³‚¹Ä“xŽÀs‚µ‚Ä‰º‚³‚¢B\n%s"
+                            "[ã‚«ã‚¹ã‚¿ãƒ ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨­å®š]\nãƒ•ã‚¡ã‚¤ãƒ«ã®èª­è¾¼ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã„ã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã•ã›å†åº¦å®Ÿè¡Œã—ã¦ä¸‹ã•ã„ã€‚\n%s"
     ID_CANNOT_SAVE_CUSTOM_SCRIPT 
-                            "[ƒJƒXƒ^ƒ€ƒXƒNƒŠƒvƒgÝ’è]\nƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚ÉŽ¸”s‚µ‚Ü‚µ‚½B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ªƒtƒ@ƒCƒ‹‚ðŠJ‚¢‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B\n‘¼‚ÌƒvƒƒOƒ‰ƒ€‚ðI—¹‚³‚¹Ä“xŽÀs‚µ‚Ä‰º‚³‚¢B\n%s"
-    ID_ALERT_ALREADY_ADDED_DOMAIN "‚±‚ÌƒhƒƒCƒ“–¼‚ÍAŠù‚É“o˜^‚³‚ê‚Ä‚¢‚Ü‚·B\n%ds–Ú\n%s\n"
+                            "[ã‚«ã‚¹ã‚¿ãƒ ã‚¹ã‚¯ãƒªãƒ—ãƒˆè¨­å®š]\nãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã„ã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚\nä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã•ã›å†åº¦å®Ÿè¡Œã—ã¦ä¸‹ã•ã„ã€‚\n%s"
+    ID_ALERT_ALREADY_ADDED_DOMAIN "ã“ã®ãƒ‰ãƒ¡ã‚¤ãƒ³åã¯ã€æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™ã€‚\n%dè¡Œç›®\n%s\n"
     ID_ALERT_ALREADY_ADDED_URL_OR_FILE 
-                            "‚±‚ÌURLEFile–¼‚ÍAŠù‚É“o˜^‚³‚ê‚Ä‚¢‚Ü‚·B\n%ds–Ú\n%s\n%s\n"
-    ID_ALERT_EMPTY_URL      "URL‚ð“ü—Í‚µ‚Ä‰º‚³‚¢B"
-    ID_ALERT_EMPTY_FILENAME "ƒtƒ@ƒCƒ‹–¼‚ð“ü—Í‚µ‚Ä‰º‚³‚¢B"
-    ID_ALERT_EMPTY_DOMAIN   "ƒhƒƒCƒ“‚ð“ü—Í‚µ‚Ä‰º‚³‚¢B"
-    ID_INFO_DLG_LIST_HIDE   "•\Ž¦‚µ‚È‚¢"
-    ID_INFO_DLG_LIST_0_5    "0.5•b"
-    ID_INFO_DLG_LIST_1_0    "1.0•b"
-    ID_INFO_DLG_LIST_1_5    "1.5•b"
-    ID_INFO_DLG_LIST_2_0    "2.0•b"
-    ID_INFO_DLG_LIST_2_5    "2.5•b"
-    ID_INFO_DLG_LIST_3_0    "3.0•b"
+                            "ã“ã®URLãƒ»Fileåã¯ã€æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™ã€‚\n%dè¡Œç›®\n%s\n%s\n"
+    ID_ALERT_EMPTY_URL      "URLã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ã€‚"
+    ID_ALERT_EMPTY_FILENAME "ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ã€‚"
+    ID_ALERT_EMPTY_DOMAIN   "ãƒ‰ãƒ¡ã‚¤ãƒ³ã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ã€‚"
+    ID_INFO_DLG_LIST_HIDE   "è¡¨ç¤ºã—ãªã„"
+    ID_INFO_DLG_LIST_0_5    "0.5ç§’"
+    ID_INFO_DLG_LIST_1_0    "1.0ç§’"
+    ID_INFO_DLG_LIST_1_5    "1.5ç§’"
+    ID_INFO_DLG_LIST_2_0    "2.0ç§’"
+    ID_INFO_DLG_LIST_2_5    "2.5ç§’"
+    ID_INFO_DLG_LIST_3_0    "3.0ç§’"
 END
 
 STRINGTABLE
 BEGIN
-    ID_INFO_DLG_LIST_3_5    "3.5•b"
-    ID_INFO_DLG_LIST_4_0    "4.0•b"
-    ID_INFO_DLG_LIST_4_5    "4.5•b"
-    ID_INFO_DLG_LIST_5_0    "5.0•b"
-    ID_INFO_DLG_LIST_5_5    "5.5•b"
-    ID_INFO_DLG_LIST_6_0    "6.0•b"
-    ID_INFO_DLG_LIST_6_5    "6.5•b"
-    ID_INFO_DLG_LIST_7_0    "7.0•b"
-    ID_INFO_DLG_LIST_7_5    "7.5•b"
-    ID_INFO_DLG_LIST_8_0    "8.0•b"
-    ID_INFO_DLG_LIST_8_5    "8.5•b"
-    ID_INFO_DLG_LIST_9_0    "9.0•b"
-    ID_INFO_DLG_LIST_9_5    "9.5•b"
-    ID_INFO_DLG_LIST_10_0   "10.0•b"
-    ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "uŠJ••Ï‚Ý‚É‚·‚év‚ð•\Ž¦‚µ‚È‚¢"
-    ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "uŠJ••Ï‚Ý‚É‚·‚év‚ð•\Ž¦‚·‚é"
+    ID_INFO_DLG_LIST_3_5    "3.5ç§’"
+    ID_INFO_DLG_LIST_4_0    "4.0ç§’"
+    ID_INFO_DLG_LIST_4_5    "4.5ç§’"
+    ID_INFO_DLG_LIST_5_0    "5.0ç§’"
+    ID_INFO_DLG_LIST_5_5    "5.5ç§’"
+    ID_INFO_DLG_LIST_6_0    "6.0ç§’"
+    ID_INFO_DLG_LIST_6_5    "6.5ç§’"
+    ID_INFO_DLG_LIST_7_0    "7.0ç§’"
+    ID_INFO_DLG_LIST_7_5    "7.5ç§’"
+    ID_INFO_DLG_LIST_8_0    "8.0ç§’"
+    ID_INFO_DLG_LIST_8_5    "8.5ç§’"
+    ID_INFO_DLG_LIST_9_0    "9.0ç§’"
+    ID_INFO_DLG_LIST_9_5    "9.5ç§’"
+    ID_INFO_DLG_LIST_10_0   "10.0ç§’"
+    ID_INFO_OPEN_OPTION_HIDE_MARK_AS_OPENED "ã€Œé–‹å°æ¸ˆã¿ã«ã™ã‚‹ã€ã‚’è¡¨ç¤ºã—ãªã„"
+    ID_INFO_OPEN_OPTION_SHOW_MARK_AS_OPENED "ã€Œé–‹å°æ¸ˆã¿ã«ã™ã‚‹ã€ã‚’è¡¨ç¤ºã™ã‚‹"
 END
 
 STRINGTABLE
 BEGIN
-    ID_ENABLE_MEDIA_DESKTOP_AUDIO "ƒfƒXƒNƒgƒbƒvƒI[ƒfƒBƒI‚ÌŽæ‚èž‚Ý"
-    ID_ENABLE_MEDIA_DESKTOP_VIDEO "ƒfƒXƒNƒgƒbƒv‚Ì‰æ–Ê‚ÌŽæ‚èž‚Ý"
-    ID_CERTIFICATION_ISSUER "”­sŒ³: "
-    ID_CERTIFICATION_SUBJECT "”­sæ: "
-    ID_CERTIFICATION_SERIAL_NUMBER "ƒVƒŠƒAƒ‹”Ô†: "
-    ID_CERTIFICATION_VALID_PERIOD "—LŒøŠúŠÔ: "
+    ID_ENABLE_MEDIA_DESKTOP_AUDIO "ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®å–ã‚Šè¾¼ã¿"
+    ID_ENABLE_MEDIA_DESKTOP_VIDEO "ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã®ç”»é¢ã®å–ã‚Šè¾¼ã¿"
+    ID_CERTIFICATION_ISSUER "ç™ºè¡Œå…ƒ: "
+    ID_CERTIFICATION_SUBJECT "ç™ºè¡Œå…ˆ: "
+    ID_CERTIFICATION_SERIAL_NUMBER "ã‚·ãƒªã‚¢ãƒ«ç•ªå·: "
+    ID_CERTIFICATION_VALID_PERIOD "æœ‰åŠ¹æœŸé–“: "
 END
 
-#endif    // “ú–{Œê (“ú–{) resources
+#endif    // æ—¥æœ¬èªž (æ—¥æœ¬) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// ‰pŒê resources
+// è‹±èªž resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
@@ -1424,8 +1424,8 @@ BEGIN
     END
     POPUP "&View"
     BEGIN
-        MENUITEM "Back\t Alt+©",               ID_GO_BACK
-        MENUITEM "Forward\t Alt+¨",            ID_GO_FORWARD
+        MENUITEM "Back\t Alt+â†",               ID_GO_BACK
+        MENUITEM "Forward\t Alt+â†’",            ID_GO_FORWARD
         MENUITEM "Stop\tEsc",                   ID_VIEW_STOP
         MENUITEM "Refresh\t F5",                ID_VIEW_REFRESH
         MENUITEM "Home Page\tAlt+Home",         ID_GO_START_PAGE
@@ -1791,8 +1791,8 @@ BEGIN
     CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
     PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
     PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
-    PUSHBUTTON      "ª",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
-    PUSHBUTTON      "«",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "â†‘",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "â†“",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
 END
 
 IDD_DIALOG1 DIALOGEX 0, 0, 170, 30
@@ -1834,10 +1834,10 @@ BEGIN
     CONTROL         "Shift",IDC_CHK_SHIFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,101,30,10
     CONTROL         "Ctrl",IDC_CHK_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,56,101,27,10
     CONTROL         "Alt",IDC_CHK_ALT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,90,101,25,10
-    CONTROL         "©",IDC_CHK_LEFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,101,23,10
-    CONTROL         "ª",IDC_CHK_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,101,23,10
-    CONTROL         "¨",IDC_CHK_RIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,182,101,23,10
-    CONTROL         "«",IDC_CHK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,101,23,10
+    CONTROL         "â†",IDC_CHK_LEFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,101,23,10
+    CONTROL         "â†‘",IDC_CHK_UP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,101,23,10
+    CONTROL         "â†’",IDC_CHK_RIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,182,101,23,10
+    CONTROL         "â†“",IDC_CHK_DOWN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,212,101,23,10
     PUSHBUTTON      "Test key combination",IDC_BUTTON1,18,122,105,14
 END
 
@@ -1888,8 +1888,8 @@ BEGIN
     CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
     PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
     PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
-    PUSHBUTTON      "ª",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
-    PUSHBUTTON      "«",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "â†‘",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "â†“",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
     PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,142,271,100,14
     PUSHBUTTON      "Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
 END
@@ -2436,7 +2436,7 @@ BEGIN
     ID_INFO_OPEN_OPTION_SHOW_TRANSFER "Show ""Transfer"""
     ID_MISSING_PROXY_CONFIG "[Internet connection]\n[Internet connection]-""Manual settings"" requires any proxy server or PAC file. It cannot be blank."
     ID_URL_REDIRECT_SCRIPT_HELP 
-                            "'##################################################################################\r\n'Help for URL Redirection Scripts\r\n'The script needs to be written in the VBScript syntax.\r\n'You should put codes to define redirection logic into the function OnRedirect,\r\n'and it needs to return the browser name which you want the URL to be loaded by.\r\n\r\n'  To load the URL by the system default browser:\r\n'    OnRedirect=""Default""\r\n'  For the case by Microsoft Internet Explorer:\r\n'    OnRedirect=""IE""\r\n'  For the case by Mozilla Firefox:\r\n'    OnRedirect=""Firefox""\r\n'  For the case by Google Chrome:\r\n'    OnRedirect=""Chrome""\r\n'  For the case by Microsoft Edge:\r\n'    OnRedirect=""Edge""\r\n'  For the case by the custom browser 1:\r\n'    OnRedirect=""Custom1""\r\n'  For the case by the custom browser 2:\r\n'    OnRedirect=""Custom2""\r\n'  For the case by the custom browser 3:\r\n'    OnRedirect=""Custom3""\r\n'  For the case by the custom browser 4:\r\n'    OnRedirect=""Custom4""\r\n'  For the case by the custom browser 5:\r\n'    OnRedirect=""Custom5""\r\n'  To block loading of the URL:\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'Global variables (reserved):\r\n'Here is a list of available global variables.\r\n\r\n'TB_Global_URL\t(String)\r\n'  The loading URL.\r\n\r\n'TB_Global_SCHME\t(String)\r\n'  The scheme of the loading URL (http or https)\r\n\r\n'TB_Global_HOSTNAME\t(String)\r\n'  The hostname of the loading URL.\r\n\r\n'TB_Global_PORT\t(String)\r\n'  The port number of the loading URL.\r\n\r\n'TB_Global_URL_PATH\t(String)\r\n'  The path of the loading URL.\r\n\r\n'For example: if the loading URL is https://www.google.co.jp/search?q=Chronos ,\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URLF""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHMEF""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAMEF""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORTF""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATHF""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(Boolean)\r\n'  Which the URL is the one of the top frame or a sub frame. True = top frame, False = sub frame.\r\n\r\n'TB_TRACE_LOG(String)\r\n'  Prints a log line to the Debug TRACE Window.\r\n'------------------------------------------------------------\r\n'For example: setting https://www.yahoo.co.jp to be loaded by IE.\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
+                            "'##################################################################################\r\n'Help for URL Redirection Scripts\r\n'The script needs to be written in the VBScript syntax.\r\n'You should put codes to define redirection logic into the function OnRedirect,\r\n'and it needs to return the browser name which you want the URL to be loaded by.\r\n\r\n'  To load the URL by the system default browser:\r\n'    OnRedirect=""Default""\r\n'  For the case by Microsoft Internet Explorer:\r\n'    OnRedirect=""IE""\r\n'  For the case by Mozilla Firefox:\r\n'    OnRedirect=""Firefox""\r\n'  For the case by Google Chrome:\r\n'    OnRedirect=""Chrome""\r\n'  For the case by Microsoft Edge:\r\n'    OnRedirect=""Edge""\r\n'  For the case by the custom browser 1:\r\n'    OnRedirect=""Custom1""\r\n'  For the case by the custom browser 2:\r\n'    OnRedirect=""Custom2""\r\n'  For the case by the custom browser 3:\r\n'    OnRedirect=""Custom3""\r\n'  For the case by the custom browser 4:\r\n'    OnRedirect=""Custom4""\r\n'  For the case by the custom browser 5:\r\n'    OnRedirect=""Custom5""\r\n'  To block loading of the URL:\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'Global variables (reserved):\r\n'Here is a list of available global variables.\r\n\r\n'TB_Global_URL\t(String)\r\n'  The loading URL.\r\n\r\n'TB_Global_SCHME\t(String)\r\n'  The scheme of the loading URL (http or https)\r\n\r\n'TB_Global_HOSTNAME\t(String)\r\n'  The hostname of the loading URL.\r\n\r\n'TB_Global_PORT\t(String)\r\n'  The port number of the loading URL.\r\n\r\n'TB_Global_URL_PATH\t(String)\r\n'  The path of the loading URL.\r\n\r\n'For example: if the loading URL is https://www.google.co.jp/search?q=Chronos ,\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URLï¼š""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHMEï¼š""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAMEï¼š""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORTï¼š""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATHï¼š""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(Boolean)\r\n'  Which the URL is the one of the top frame or a sub frame. True = top frame, False = sub frame.\r\n\r\n'TB_TRACE_LOG(String)\r\n'  Prints a log line to the Debug TRACE Window.\r\n'------------------------------------------------------------\r\n'For example: setting https://www.yahoo.co.jp to be loaded by IE.\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
     ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "Log: "
     ID_AUTH_ALERT_EMPTY_USER "Please input the username."
     ID_AUTH_REQUIRED        "Authentication required."
@@ -2758,7 +2758,7 @@ BEGIN
     ID_CERTIFICATION_VALID_PERIOD "Valid period: "
 END
 
-#endif    // ‰pŒê resources
+#endif    // è‹±èªž resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -2778,8 +2778,8 @@ END
 LANGUAGE 17, 1
 #pragma code_page(932)
 #endif //_WIN32
-#include "res\Sazabi.rc2"  // Microsoft Visual C++ ˆÈŠO‚Ìƒc[ƒ‹‚Å•ÒW‚³‚ê‚½ƒŠƒ\[ƒX
-#include "l.jpn\afxres.rc"          // •W€‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg
+#include "res\Sazabi.rc2"  // Microsoft Visual C++ ä»¥å¤–ã®ãƒ„ãƒ¼ãƒ«ã§ç·¨é›†ã•ã‚ŒãŸãƒªã‚½ãƒ¼ã‚¹
+#include "l.jpn\afxres.rc"          // æ¨™æº–ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 #ifndef _AFXDLL
 #include "afxribbon.rc" // ribbon and control bar resources
 #endif

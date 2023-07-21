@@ -104,7 +104,7 @@ protected:
 public:
 	CWndSkr(const TCHAR* pszInheritanceAppend = _T(""));
 	virtual ~CWndSkr();
-	// ウィンドウクラス登録
+	// 繧ｦ繧｣繝ｳ繝峨え繧ｯ繝ｩ繧ｹ逋ｻ骭ｲ
 	ATOM RegisterWC(
 	    HINSTANCE hInstance,
 	    HICON hIcon,	  // Handle to the class icon.
@@ -115,7 +115,7 @@ public:
 	    LPCTSTR lpszClassName // Pointer to a null-terminated string or is an atom.
 	);
 
-	//ウィンドウ作成
+	//繧ｦ繧｣繝ｳ繝峨え菴懈��
 	HWND Create(
 	    HWND hwndParent,
 	    DWORD dwExStyle,	   // extended window style
@@ -169,7 +169,7 @@ protected:
 	virtual LRESULT CallDefWndProc(HWND, UINT, WPARAM, LPARAM);
 
 public:
-	//インターフェース
+	//繧､繝ｳ繧ｿ繝ｼ繝輔ぉ繝ｼ繧ｹ
 	HWND GetHwnd() const { return m_hWnd; }
 	HWND GetParentHwnd() const { return m_hwndParent; }
 	HINSTANCE GetAppInstance() const { return m_hInstance; }

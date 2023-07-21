@@ -67,7 +67,7 @@ void CDlgDL::OnTimer(UINT_PTR nIDEvent)
 }
 void CDlgDL::OnBnClickedCancel()
 {
-	//DL‚ªI—¹‚µ‚Ä‚¢‚éB
+	//DLãŒçµ‚äº†ã—ã¦ã„ã‚‹ã€‚
 	if (m_bDLComp)
 	{
 		m_bDLCancel = FALSE;
@@ -275,8 +275,8 @@ void CDlgDL::OnBnClickedButtonFo()
 		}
 		return;
 	}
-	//B:\‚Ìƒtƒ@ƒCƒ‹‚ğŠJ‚­ê‡‚ÍAfiler‚É”C‚¹‚éB
-	//filer‚Ìƒ‹[ƒg‚ğæ“¾
+	//B:\ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãå ´åˆã¯ã€filerã«ä»»ã›ã‚‹ã€‚
+	//filerã®ãƒ«ãƒ¼ãƒˆã‚’å–å¾—
 	if (PathIsSameRoot(m_strFileFullPath, theApp.m_AppSettings.GetRootPath()))
 	{
 		if (::PathFileExists(m_strFileFullPath))
@@ -291,10 +291,10 @@ void CDlgDL::OnBnClickedButtonDiro()
 {
 	if (!theApp.IsSGMode())
 	{
-		//[ƒtƒHƒ‹ƒ_[‚ğŠJ‚­]‚Ìê‡
+		//[ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚’é–‹ã]ã®å ´åˆ
 		if (::PathFileExists(m_strFileFolderPath) && !::PathIsDirectory(m_strFileFolderPath))
 		{
-			// w’è‚³‚ê‚½ƒpƒX‚Éƒtƒ@ƒCƒ‹‚ª‘¶İA‚©‚ÂƒfƒBƒŒƒNƒgƒŠ‚Å‚È‚¢
+			// æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ã«ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã€ã‹ã¤ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§ãªã„
 			;
 		}
 		else if (::PathFileExists(m_strFileFolderPath))
@@ -304,14 +304,14 @@ void CDlgDL::OnBnClickedButtonDiro()
 		}
 		return;
 	}
-	//B:\‚Ìƒtƒ@ƒCƒ‹‚ğŠJ‚­ê‡‚ÍAfiler‚É”C‚¹‚éB
-	//filer‚Ìƒ‹[ƒg‚ğæ“¾
+	//B:\ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãå ´åˆã¯ã€filerã«ä»»ã›ã‚‹ã€‚
+	//filerã®ãƒ«ãƒ¼ãƒˆã‚’å–å¾—
 	if (PathIsSameRoot(m_strFileFolderPath, theApp.m_AppSettings.GetRootPath()))
 	{
-		//[ƒtƒHƒ‹ƒ_[‚ğŠJ‚­]‚Ìê‡
+		//[ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚’é–‹ã]ã®å ´åˆ
 		if (::PathFileExists(m_strFileFolderPath) && !::PathIsDirectory(m_strFileFolderPath))
 		{
-			// w’è‚³‚ê‚½ƒpƒX‚Éƒtƒ@ƒCƒ‹‚ª‘¶İA‚©‚ÂƒfƒBƒŒƒNƒgƒŠ‚Å‚È‚¢
+			// æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ã«ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã€ã‹ã¤ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§ãªã„
 			;
 		}
 		else if (::PathFileExists(m_strFileFolderPath))

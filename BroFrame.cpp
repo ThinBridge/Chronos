@@ -186,10 +186,10 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 			if (pMsg->message == WM_MOUSEMOVE)
 			{
 				CPoint ptw = pMsg->pt;
-				//TabƒEƒCƒ“ƒhƒE‚Éƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ªÚ‚Á‚Ä‚¢‚é
+				//Tabã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ãŒè¼‰ã£ã¦ã„ã‚‹
 				if (pMsg->hwnd == m_cTabWnd->GetHwnd() || pMsg->hwnd == m_cTabWnd->m_hwndTab)
 				{
-					//•Â‚¶‚éƒ{ƒ^ƒ“‚ªì¬Ï‚İŠ‚Â‚±‚ÌFrame‚Ìê‡AƒJ[ƒ\ƒ‹‚ÌÚ‚Á‚Ä‚¢‚éƒ^ƒu‚ÌÀ•W‚ğæ“¾
+					//é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ãŒä½œæˆæ¸ˆã¿ä¸”ã¤ã“ã®Frameã®å ´åˆã€ã‚«ãƒ¼ã‚½ãƒ«ã®è¼‰ã£ã¦ã„ã‚‹ã‚¿ãƒ–ã®åº§æ¨™ã‚’å–å¾—
 					if (theApp.IsWnd(theApp.m_wndpClose) && theApp.m_wndpClose->m_pParent == this)
 					{
 						CRect rc(0, 0, 0, 0);
@@ -203,7 +203,7 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 						::ScreenToClient(m_cTabWnd->m_hwndTab, &kChkHit2.pt);
 						kChkHit2.flags = TCHT_ONITEM | TCHT_NOWHERE;
 
-						//•Â‚¶‚éƒ{ƒ^ƒ“‚ªì¬Ï‚İŠ‚Â‚±‚ÌFrame‚Ìê‡AƒJ[ƒ\ƒ‹‚ÌÚ‚Á‚Ä‚¢‚éƒ^ƒu‚ÌÀ•W‚ğæ“¾
+						//é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ãŒä½œæˆæ¸ˆã¿ä¸”ã¤ã“ã®Frameã®å ´åˆã€ã‚«ãƒ¼ã‚½ãƒ«ã®è¼‰ã£ã¦ã„ã‚‹ã‚¿ãƒ–ã®åº§æ¨™ã‚’å–å¾—
 						LRESULT iResult2 = ::SendMessage(m_cTabWnd->m_hwndTab, TCM_HITTEST, 0, (LPARAM)&kChkHit2);
 						if (iResult2 > -1)
 						{
@@ -219,7 +219,7 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 							rc.bottom = rc.top + iHeight;
 
 							HWND hwndUpDown = {0};
-							hwndUpDown = ::FindWindowEx(m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // ƒ^ƒu“à‚Ì Up-Down ƒRƒ“ƒgƒ[ƒ‹
+							hwndUpDown = ::FindWindowEx(m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // ã‚¿ãƒ–å†…ã® Up-Down ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 							if (hwndUpDown != NULL && ::IsWindowVisible(hwndUpDown))
 							{
 								CRect rcUp;
@@ -228,32 +228,32 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 								if (rcHitTest.IntersectRect(rcUp, rc))
 									theApp.m_wndpClose->ShowWindow(SW_HIDE);
 								else
-									//•Â‚¶‚éƒ{ƒ^ƒ“‚ÌˆÊ’u‚ğˆÚ“®‚·‚éB
+									//é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ã®ä½ç½®ã‚’ç§»å‹•ã™ã‚‹ã€‚
 									theApp.m_wndpClose->MoveWnd(rc);
 							}
 							else
 							{
-								//•Â‚¶‚éƒ{ƒ^ƒ“‚ÌˆÊ’u‚ğˆÚ“®‚·‚éB
+								//é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ã®ä½ç½®ã‚’ç§»å‹•ã™ã‚‹ã€‚
 								theApp.m_wndpClose->MoveWnd(rc);
 							}
 						}
-						//ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ªƒ^ƒu‚ÉÚ‚Á‚Ä‚¢‚È‚¢‚Ì‚Å”ñ•\¦‚É‚·‚éB
+						//ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚¿ãƒ–ã«è¼‰ã£ã¦ã„ãªã„ã®ã§éè¡¨ç¤ºã«ã™ã‚‹ã€‚
 						else
 						{
 							if (theApp.IsWnd(theApp.m_wndpClose))
 								theApp.m_wndpClose->ShowWindow(SW_HIDE);
 						}
 					}
-					//TabƒEƒCƒ“ƒhƒE‚Éƒ}ƒEƒX‚ª‚ ‚é‚ªA•Â‚¶‚éƒ{ƒ^ƒ“‚ª–¢¶¬or‚±‚ÌFram‚Åì‚ç‚ê‚½•¨‚Å‚Í‚È‚¢B
+					//Tabã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«ãƒã‚¦ã‚¹ãŒã‚ã‚‹ãŒã€é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ãŒæœªç”Ÿæˆorã“ã®Framã§ä½œã‚‰ã‚ŒãŸç‰©ã§ã¯ãªã„ã€‚
 					else
 					{
-						//ˆê“x‚àì¬‚³‚ê‚½‚±‚Æ‚ª–³‚¢
+						//ä¸€åº¦ã‚‚ä½œæˆã•ã‚ŒãŸã“ã¨ãŒç„¡ã„
 						if (NULL == theApp.m_wndpClose)
 						{
 							theApp.m_wndpClose = new CCloseNilButton();
 							theApp.m_wndpClose->Init(55, this, this);
 						}
-						//ì¬‚³‚ê‚Ä‚¢‚é‚ªA‚±‚ÌFrame‚Å‚Í‚È‚¢B
+						//ä½œæˆã•ã‚Œã¦ã„ã‚‹ãŒã€ã“ã®Frameã§ã¯ãªã„ã€‚
 						else if (theApp.m_wndpClose && theApp.m_wndpClose->m_pParent != this)
 						{
 							theApp.m_wndpClose->DestroyWindow();
@@ -264,24 +264,24 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 						}
 					}
 				}
-				//ƒ^ƒuˆÈŠO‚Éƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ªˆÚ“®‚µ‚½ê‡‚ÍAxƒ{ƒ^ƒ“‚ğ”ñ•\¦‚É‚·‚éB
+				//ã‚¿ãƒ–ä»¥å¤–ã«ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ãŒç§»å‹•ã—ãŸå ´åˆã¯ã€xãƒœã‚¿ãƒ³ã‚’éè¡¨ç¤ºã«ã™ã‚‹ã€‚
 				else
 				{
 					if (theApp.IsWnd(theApp.m_wndpClose))
 						theApp.m_wndpClose->ShowWindow(SW_HIDE);
 				}
 				////////////////////////////////////////////////////////////////////////////////////////////////
-				//‘I‘ğ‚³‚ê‚Ä‚¢‚éƒ^ƒu‚ÉÂ‚¢ƒ‰ƒCƒ“‚ğ•\¦‚·‚é
+				//é¸æŠã•ã‚Œã¦ã„ã‚‹ã‚¿ãƒ–ã«é’ã„ãƒ©ã‚¤ãƒ³ã‚’è¡¨ç¤ºã™ã‚‹
 				////////////////////////////////////////////////////////////////////////////////////////////////
 				if (::theApp.IsWndVisible(m_cTabWnd->GetHwnd()))
 				{
-					//ˆê“x‚àì¬‚³‚ê‚½‚±‚Æ‚ª–³‚¢
+					//ä¸€åº¦ã‚‚ä½œæˆã•ã‚ŒãŸã“ã¨ãŒç„¡ã„
 					if (NULL == theApp.m_wndpActiveTabLine)
 					{
 						theApp.m_wndpActiveTabLine = new CActiveTabLine();
 						theApp.m_wndpActiveTabLine->Init(56, this, this);
 					}
-					//ì¬Ï‚İ‚¾‚ªA‚±‚ÌFrame‚Å‚Í‚È‚¢B
+					//ä½œæˆæ¸ˆã¿ã ãŒã€ã“ã®Frameã§ã¯ãªã„ã€‚
 					else if (theApp.m_wndpActiveTabLine && theApp.m_wndpActiveTabLine->m_pParent != this)
 					{
 						theApp.m_wndpActiveTabLine->DestroyWindow();
@@ -290,7 +290,7 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 						theApp.m_wndpActiveTabLine = new CActiveTabLine();
 						theApp.m_wndpActiveTabLine->Init(56, this, this);
 					}
-					//ƒ^ƒuƒ‰ƒCƒ“‚ªì¬‚³‚ê‚Ä‚¢‚éand‚±‚ÌFrame‚Ìê‡
+					//ã‚¿ãƒ–ãƒ©ã‚¤ãƒ³ãŒä½œæˆã•ã‚Œã¦ã„ã‚‹andã“ã®Frameã®å ´åˆ
 					if (theApp.IsWnd(theApp.m_wndpActiveTabLine) && theApp.m_wndpActiveTabLine->m_pParent == this)
 					{
 						CRect rc(0, 0, 0, 0);
@@ -309,7 +309,7 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 							rc.right = rcOver.right + 1; // +4;
 							rc.bottom = rcOver.top + 3;  // +3;
 
-							//View‚ÉƒtƒH[ƒJƒX‚ğƒZƒbƒg‚·‚éB
+							//Viewã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã€‚
 							if (theApp.m_wndpActiveTabLine->m_Rc != rc)
 							{
 								if (this->m_wndView)
@@ -339,13 +339,13 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 					}
 					//////////////////////////////////////////////////////////////////////////////////
 					//NewTabButton
-					//ˆê“x‚àì¬‚³‚ê‚½‚±‚Æ‚ª–³‚¢
+					//ä¸€åº¦ã‚‚ä½œæˆã•ã‚ŒãŸã“ã¨ãŒç„¡ã„
 					if (NULL == theApp.m_wndpNewTab)
 					{
 						theApp.m_wndpNewTab = new CNewTabButton();
 						theApp.m_wndpNewTab->Init(57, this, this);
 					}
-					//ì¬Ï‚İ‚¾‚ªA‚±‚ÌFrame‚Å‚Í‚È‚¢B
+					//ä½œæˆæ¸ˆã¿ã ãŒã€ã“ã®Frameã§ã¯ãªã„ã€‚
 					else if (theApp.m_wndpNewTab && theApp.m_wndpNewTab->m_pParent != this)
 					{
 						theApp.m_wndpNewTab->DestroyWindow();
@@ -354,7 +354,7 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 						theApp.m_wndpNewTab = new CNewTabButton();
 						theApp.m_wndpNewTab->Init(57, this, this);
 					}
-					//ì¬‚³‚ê‚Ä‚¢‚éand‚±‚ÌFrame‚Ìê‡
+					//ä½œæˆã•ã‚Œã¦ã„ã‚‹andã“ã®Frameã®å ´åˆ
 					if (theApp.IsWnd(theApp.m_wndpNewTab) && theApp.m_wndpNewTab->m_pParent == this)
 					{
 						CRect rc(0, 0, 0, 0);
@@ -377,7 +377,7 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 							rc.bottom = rc.top + iHeight;
 
 							HWND hwndUpDown = {0};
-							hwndUpDown = ::FindWindowEx(m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // ƒ^ƒu“à‚Ì Up-Down ƒRƒ“ƒgƒ[ƒ‹
+							hwndUpDown = ::FindWindowEx(m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // ã‚¿ãƒ–å†…ã® Up-Down ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 							if (hwndUpDown != NULL && ::IsWindowVisible(hwndUpDown))
 							{
 								CRect rcUp;
@@ -457,11 +457,11 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 				{
 					HWND hwndUpDown = {0};
 					DWORD nScrollPos = {0};
-					hwndUpDown = ::FindWindowEx(m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // ƒ^ƒu“à‚Ì Up-Down ƒRƒ“ƒgƒ[ƒ‹
+					hwndUpDown = ::FindWindowEx(m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // ã‚¿ãƒ–å†…ã® Up-Down ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 					if (hwndUpDown != NULL && ::IsWindowVisible(hwndUpDown))
 					{
 						nScrollPos = LOWORD(UpDown_GetPos(hwndUpDown));
-						// Œ»İˆÊ’u nScrollPos ‚Æ‰æ–Ê•\¦‚Æ‚ğˆê’v‚³‚¹‚é
+						// ç¾åœ¨ä½ç½® nScrollPos ã¨ç”»é¢è¡¨ç¤ºã¨ã‚’ä¸€è‡´ã•ã›ã‚‹
 						((CMainFrame*)theApp.m_pMainWnd)->Tab_HScrollSync(this->GetSafeHwnd(), SB_THUMBPOSITION, nScrollPos, NULL);
 					}
 				}
@@ -480,7 +480,7 @@ BOOL CBrowserFrame::OnNcCreate(LPCREATESTRUCT lpCreateStruct)
 int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	PROC_TIME(OnCreate)
-	//Tab‚ ‚è
+	//Tabã‚ã‚Š
 	if (theApp.m_bTabEnable_Init)
 	{
 		WINDOWPLACEMENT zFramePracement = {0};
@@ -565,9 +565,9 @@ void CBrowserFrame::CreateView()
 	//popup
 	if (m_bIsPopupWindow)
 	{
-		//Addressbar‚Ì‚İ•K—v Chromium€‹’
+		//Addressbarã®ã¿å¿…è¦ Chromiumæº–æ‹ 
 		CreateRebarsPopup();
-		//Statusbar‚Í•s—v
+		//Statusbarã¯ä¸è¦
 		return;
 	}
 	//normal
@@ -772,11 +772,11 @@ void CBrowserFrame::CreateRebars()
 			iSearchIndex -= 1;
 			if (iSearchIndex > 0)
 			{
-				// ƒZƒpƒŒ[ƒ^‚Ì•‚ğİ’è
+				// ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿ã®å¹…ã‚’è¨­å®š
 				m_pwndToolBar->SetButtonInfo(iSearchIndex, IDC_EDIT_SEARCH, TBBS_SEPARATOR, 500);
 				PROC_TIME_E(CreateRebars_TOOLBAR_LoadToolBar_STAGE2)
 
-				//ƒc[ƒ‹ƒo[‚ÌƒZƒpƒŒ[ƒ^ã‚ÉƒGƒfƒBƒbƒgƒ{ƒbƒNƒX‚ğÚ‚¹‚é
+				//ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ã®ã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿ä¸Šã«ã‚¨ãƒ‡ã‚£ãƒƒãƒˆãƒœãƒƒã‚¯ã‚¹ã‚’è¼‰ã›ã‚‹
 				PROC_TIME_S(CreateRebars_TOOLBAR_LoadToolBar_STAGE3)
 				CRect rect;
 				m_pwndToolBar->GetItemRect(iSearchIndex, &rect);
@@ -1048,7 +1048,7 @@ BOOL CBrowserFrame::PreCreateWindow(CREATESTRUCT& cs)
 	AfxRegisterClass(&wc);
 
 	cs.lpszClass = _T("CSGFrame");
-	//Tab‚ ‚è
+	//Tabã‚ã‚Š
 	if (theApp.m_bTabEnable_Init)
 	{
 		WINDOWPLACEMENT zFramePracement = {0};
@@ -1154,7 +1154,7 @@ void CBrowserFrame::SearchAndNavigate(CString strIn)
 		if (this->m_wndView)
 			m_wndView.Navigate(strIn);
 	}
-	//ŒŸõƒvƒƒoƒCƒ_[
+	//æ¤œç´¢ãƒ—ãƒ­ãƒã‚¤ãƒ€ãƒ¼
 	else
 	{
 		this->Search(strIn, FALSE);
@@ -1246,7 +1246,7 @@ void CBrowserFrame::OnClose()
 
 					if (theApp.m_bTabEnable_Init)
 					{
-						//˜A‘±‚µ‚Ä•Â‚¶‚éê‡A©M‚ªƒAƒNƒeƒBƒu‚Å‚È‚¢ê‡‚ÍA•s—v
+						//é€£ç¶šã—ã¦é–‰ã˜ã‚‹å ´åˆã€è‡ªä¿¡ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã§ãªã„å ´åˆã¯ã€ä¸è¦
 						if (theApp.GetActiveBFramePtr() == this)
 						{
 							CBrowserFrame* pWnd = NULL;
@@ -1434,7 +1434,7 @@ void CBrowserFrame::OnCloseWndMenu(UINT nID)
 		CString strURL;
 		int iCnt = 0;
 		POSITION pos1 = {0};
-		//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+		//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 		for (pos1 = theApp.m_listCloseWindowURL.GetHeadPosition(); pos1 != NULL; theApp.m_listCloseWindowURL.GetNext(pos1))
 		{
 			strURL.Empty();
@@ -1532,7 +1532,7 @@ void CBrowserFrame::CreateWindowMenuSync(CMenu* pMenu)
 			strTitle = strATitle.GetAt(i);
 			strTitle.TrimLeft();
 			strTitle.TrimRight();
-			// •¶š‚ÌƒJƒbƒg
+			// æ–‡å­—ã®ã‚«ãƒƒãƒˆ
 			CString str;
 			SBUtil::GetDivChar(strTitle, 160, str);
 			strTitle = str;
@@ -1559,7 +1559,7 @@ void CBrowserFrame::CreateWindowMenuSync(CMenu* pMenu)
 			strTitle = m_WindwMgrClass.m_ArrayWindowTitle.GetAt(i);
 			strTitle.TrimLeft();
 			strTitle.TrimRight();
-			CString strMag(_T("@@@@"));
+			CString strMag(_T("ã€€ã€€ã€€ã€€"));
 			if (strTitle.Find(strMag) == strTitle.GetLength() - strMag.GetLength())
 			{
 				CString str1;
@@ -1567,7 +1567,7 @@ void CBrowserFrame::CreateWindowMenuSync(CMenu* pMenu)
 				strTitle = str1;
 			}
 
-			// •¶š‚ÌƒJƒbƒg
+			// æ–‡å­—ã®ã‚«ãƒƒãƒˆ
 			CString str;
 			SBUtil::GetDivChar(strTitle, 160, str);
 			strTitle = str;
@@ -1649,7 +1649,7 @@ void CBrowserFrame::CrateFavoriteMenu(CMenu* pMenu, CFavoriteItem* parentItem)
 		{
 			strTitle = strTitle.Mid(0, strTitle.ReverseFind(_T('.')));
 		}
-		// •¶š‚ÌƒJƒbƒg
+		// æ–‡å­—ã®ã‚«ãƒƒãƒˆ
 		CString str;
 		SBUtil::GetDivChar(strTitle, 120, str);
 		strTitle = str;
@@ -1810,17 +1810,17 @@ void CBrowserFrame::OnFavoriteOrganize()
 void CBrowserFrame::OnFullScreen()
 {
 	CString logmsg;
-	//fullscreen mode ‰ğœ
+	//fullscreen mode è§£é™¤
 	if (m_bFullScreen)
 	{
 		ChangeNomalWindow();
 		logmsg.Format(_T("BF_WND:0x%08p OnFullScreen_OFF"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	}
-	//fullscreen mode ‚É•ÏX
+	//fullscreen mode ã«å¤‰æ›´
 	else
 	{
-		//Popup‚Ìê‡‚ÍAƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚ÍA–³Œø
+		//Popupã®å ´åˆã¯ã€ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã¯ã€ç„¡åŠ¹
 		if (this->m_wndView)
 		{
 			if (!m_wndView.IsPopupWindow())
@@ -1997,7 +1997,7 @@ UINT CBrowserFrame::GetWindowStyleSB()
 
 		//menu
 		VERIFY(rbCtrl.GetBandInfo(0, &rbbi));
-		//•\¦‚³‚ê‚Ä‚¢‚é
+		//è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹
 		if (!(rbbi.fStyle & RBBS_HIDDEN))
 		{
 			iRet = iRet | SBW_SHOW_MENU_BAR;
@@ -2006,7 +2006,7 @@ UINT CBrowserFrame::GetWindowStyleSB()
 		rbbi = rbbiNull;
 		rbbi.fMask = RBBIM_STYLE;
 		VERIFY(rbCtrl.GetBandInfo(1, &rbbi));
-		//•\¦‚³‚ê‚Ä‚¢‚é
+		//è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹
 		if (!(rbbi.fStyle & RBBS_HIDDEN))
 		{
 			iRet = iRet | SBW_SHOW_TOOL_BAR;
@@ -2016,7 +2016,7 @@ UINT CBrowserFrame::GetWindowStyleSB()
 		rbbi = rbbiNull;
 		rbbi.fMask = RBBIM_STYLE;
 		VERIFY(rbCtrl.GetBandInfo(2, &rbbi));
-		//•\¦‚³‚ê‚Ä‚¢‚é
+		//è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹
 		if (!(rbbi.fStyle & RBBS_HIDDEN))
 		{
 			iRet = iRet | SBW_SHOW_ADDRESS_BAR;
@@ -2025,7 +2025,7 @@ UINT CBrowserFrame::GetWindowStyleSB()
 	//statusbar
 	if (theApp.IsWnd(m_pwndStatusBar))
 	{
-		//•\¦‚³‚ê‚Ä‚¢‚é
+		//è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹
 		if (m_pwndStatusBar->IsWindowVisible())
 		{
 			iRet = iRet | SBW_SHOW_STATUS_BAR;
@@ -2166,13 +2166,13 @@ BOOL CBrowserFrame::OnShowPopupMenu(CMFCPopupMenu* pMenuPopup)
 			POSITION pos1 = {0};
 			BOOL bFound = FALSE;
 			int iCnt = 0;
-			//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+			//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			for (pos1 = theApp.m_listCloseWindowTitle.GetHeadPosition(); pos1 != NULL; theApp.m_listCloseWindowTitle.GetNext(pos1))
 			{
 				CString strTempStr;
 				CString strTempStr2;
 				strTempStr = theApp.m_listCloseWindowTitle.GetAt(pos1);
-				// •¶š‚ÌƒJƒbƒg
+				// æ–‡å­—ã®ã‚«ãƒƒãƒˆ
 				SBUtil::GetDivChar(strTempStr, 80, strTempStr2);
 				strTempStr2.Replace(_T("&"), _T("&&"));
 				strTitle.Format(_T("&%X  %s"), iCnt, (LPCTSTR)strTempStr2);
@@ -2722,7 +2722,7 @@ void CBrowserFrame::OnDestroy()
 void CBrowserFrame::OnCloseDelay()
 {
 	PROC_TIME(OnCloseDelay)
-	//ƒ_ƒEƒ“ƒ[ƒh’†‚Ìê‡‚ÍAŒx‚ğ•\¦‚·‚éB
+	//ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ã®å ´åˆã¯ã€è­¦å‘Šã‚’è¡¨ç¤ºã™ã‚‹ã€‚
 	if (m_bDownloadProgress)
 	{
 		CString confirmMsg;
@@ -2741,7 +2741,7 @@ void CBrowserFrame::OnCloseDelay()
 	{
 		if (theApp.IsWnd(&m_wndView))
 		{
-			//Popup‚Íœ‚­
+			//Popupã¯é™¤ã
 			if (!m_wndView.IsPopupWindow())
 			{
 				hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, theApp.m_strEventLogName);
@@ -2767,7 +2767,7 @@ void CBrowserFrame::OnCloseDelay()
 						CString strURLDup;
 						POSITION pos1 = {0};
 						BOOL bFound = FALSE;
-						//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+						//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 						for (pos1 = theApp.m_listCloseWindowURL.GetHeadPosition(); pos1 != NULL; theApp.m_listCloseWindowURL.GetNext(pos1))
 						{
 							strURLDup.Empty();
@@ -2825,14 +2825,14 @@ void CBrowserFrame::OnCloseDelay()
 	{
 		if (theApp.m_bTabEnable_Init)
 		{
-			//˜A‘±‚µ‚Ä•Â‚¶‚éê‡A©M‚ªƒAƒNƒeƒBƒu‚Å‚È‚¢ê‡‚ÍA•s—v
+			//é€£ç¶šã—ã¦é–‰ã˜ã‚‹å ´åˆã€è‡ªä¿¡ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã§ãªã„å ´åˆã¯ã€ä¸è¦
 			if (theApp.GetActiveBFramePtr() == this)
 			{
 				CBrowserFrame* pWnd = NULL;
 				pWnd = theApp.GetNextGenerationActiveWindow(this);
 				if (pWnd == this)
 				{
-					//ÅŒã‚Ìˆê‚ÂˆÈŠO‚É‚Í–³‚¢‚Í‚¸B
+					//æœ€å¾Œã®ä¸€ã¤ä»¥å¤–ã«ã¯ç„¡ã„ã¯ãšã€‚
 #ifdef _DEBUG
 					if (TabCtrl_GetItemCount(this->m_cTabWnd->m_hwndTab) != 1)
 						ASSERT(FALSE);
@@ -2868,7 +2868,7 @@ int CBrowserFrame::OnMouseActivate(CWnd* pDetelnetopWnd, UINT nHitTest, UINT mes
 }
 
 /*
- * ˆÊ’u‚É‰‚¶‚ÄƒJ[ƒ\ƒ‹‚ğ•Ï‚¦‚é
+ * ä½ç½®ã«å¿œã˜ã¦ã‚«ãƒ¼ã‚½ãƒ«ã‚’å¤‰ãˆã‚‹
  */
 BOOL CBrowserFrame::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
@@ -2912,7 +2912,7 @@ BOOL CBrowserFrame::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 }
 
 /*
- * ƒƒjƒ…[ > ƒ^ƒuƒEƒBƒ“ƒhƒE‚Ìˆê——
+ * ãƒ¡ãƒ‹ãƒ¥ãƒ¼ > ã‚¿ãƒ–ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä¸€è¦§
  */
 void CBrowserFrame::OnTabListShow()
 {
@@ -2948,7 +2948,7 @@ void CBrowserFrame::OnTabListShow()
 			strTitle = strATitle.GetAt(i);
 			strTitle.TrimLeft();
 			strTitle.TrimRight();
-			// •¶š‚ÌƒJƒbƒg
+			// æ–‡å­—ã®ã‚«ãƒƒãƒˆ
 			CString str;
 			SBUtil::GetDivChar(strTitle, 160, str);
 			strTitle = str;
@@ -3016,7 +3016,7 @@ void CBrowserFrame::OnTabListShow()
 }
 
 /*
- * ƒtƒ@ƒCƒ‹ > ƒEƒBƒ“ƒhƒE‚ğ•œŒ³
+ * ãƒ•ã‚¡ã‚¤ãƒ« > ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’å¾©å…ƒ
  */
 void CBrowserFrame::OnRestoreWnd()
 {
@@ -3036,7 +3036,7 @@ void CBrowserFrame::OnRestoreWnd()
 }
 
 /*
- * ƒc[ƒ‹ > ƒtƒ@ƒCƒ‹ƒ}ƒl[ƒWƒƒ (SGƒ‚[ƒh‚Ì‚İ)
+ * ãƒ„ãƒ¼ãƒ« > ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒãƒ¼ã‚¸ãƒ£ (SGãƒ¢ãƒ¼ãƒ‰ã®ã¿)
  */
 void CBrowserFrame::OpenThinFiler()
 {
@@ -3045,10 +3045,10 @@ void CBrowserFrame::OpenThinFiler()
 	CString strFrmWnd;
 	strFrmWnd = _T("CFiler:");
 	strFrmWnd += theApp.m_FrmWndClassName;
-	//Šù‚É‹N“®‚µ‚Ä‚¢‚é‚©H
-	HWND hWndCap = ::FindWindow(strFrmWnd, NULL); //AP‚Ìƒnƒ“ƒhƒ‹æ“¾
+	//æ—¢ã«èµ·å‹•ã—ã¦ã„ã‚‹ã‹ï¼Ÿ
+	HWND hWndCap = ::FindWindow(strFrmWnd, NULL); //APã®ãƒãƒ³ãƒ‰ãƒ«å–å¾—
 
-	//‹N“®‚µ‚Ä‚¢‚éB
+	//èµ·å‹•ã—ã¦ã„ã‚‹ã€‚
 	if (hWndCap)
 	{
 		SBUtil::SetAbsoluteForegroundWindow(hWndCap, FALSE);
@@ -3065,7 +3065,7 @@ void CBrowserFrame::OpenThinFiler()
 }
 
 /*
- * ƒtƒ@ƒCƒ‹ > ƒEƒBƒ“ƒhƒE‚Ì•Û‘¶
+ * ãƒ•ã‚¡ã‚¤ãƒ« > ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä¿å­˜
  */
 void CBrowserFrame::OnSaveWnd()
 {
@@ -3096,7 +3096,7 @@ void CBrowserFrame::OnSaveWnd()
 			::GetWindowText(hWndChild, szTitleMultipleInstance, 259);
 			CString strTitleMultiple;
 			strTitleMultiple = szTitleMultipleInstance;
-			//window–¼‚ğŠm”F‚·‚éB
+			//windowåã‚’ç¢ºèªã™ã‚‹ã€‚
 			if (strTitleMultiple == theApp.m_FrmWndClassName)
 			{
 				if (hWndChild != ((CMainFrame*)theApp.m_pMainWnd)->m_hWnd)
@@ -3111,7 +3111,7 @@ void CBrowserFrame::OnTabCloseLeft()
 {
 	if (theApp.IsWnd(theApp.m_pMainWnd))
 	{
-		//˜A‘±‚µ‚Ä•Â‚¶‚éê‡A©M‚ªƒAƒNƒeƒBƒu‚Å‚È‚¢ê‡‚ÍA•s—v
+		//é€£ç¶šã—ã¦é–‰ã˜ã‚‹å ´åˆã€è‡ªä¿¡ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã§ãªã„å ´åˆã¯ã€ä¸è¦
 		if (theApp.GetActiveBFramePtr() == this)
 		{
 			((CMainFrame*)theApp.m_pMainWnd)->CloseTabWindowLeft(this);
@@ -3122,7 +3122,7 @@ void CBrowserFrame::OnTabCloseRight()
 {
 	if (theApp.IsWnd(theApp.m_pMainWnd))
 	{
-		//˜A‘±‚µ‚Ä•Â‚¶‚éê‡A©M‚ªƒAƒNƒeƒBƒu‚Å‚È‚¢ê‡‚ÍA•s—v
+		//é€£ç¶šã—ã¦é–‰ã˜ã‚‹å ´åˆã€è‡ªä¿¡ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã§ãªã„å ´åˆã¯ã€ä¸è¦
 		if (theApp.GetActiveBFramePtr() == this)
 		{
 			((CMainFrame*)theApp.m_pMainWnd)->CloseTabWindowRight(this);
@@ -3131,7 +3131,7 @@ void CBrowserFrame::OnTabCloseRight()
 }
 
 /*
- * ƒEƒBƒ“ƒhƒE > Ÿ‚ÌƒEƒBƒ“ƒhƒE (Ctrl-Tab)
+ * ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ > æ¬¡ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ (Ctrl-Tab)
  */
 void CBrowserFrame::OnNextWnd()
 {
@@ -3162,7 +3162,7 @@ void CBrowserFrame::OnNextWnd()
 }
 
 /*
- * ƒc[ƒ‹ƒo[ > ƒEƒBƒ“ƒhƒE > ‘O‚ÌƒEƒBƒ“ƒhƒE (Shift-Ctrl-Tab)
+ * ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ > ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ > å‰ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ (Shift-Ctrl-Tab)
  */
 void CBrowserFrame::OnPrevWnd()
 {
@@ -3193,7 +3193,7 @@ void CBrowserFrame::OnPrevWnd()
 }
 
 /*
- * “¯‚É•¡”‚Ìƒ^ƒu‚ğ•Â‚¶‚é‚ÍŠm”F‚·‚é
+ * åŒæ™‚ã«è¤‡æ•°ã®ã‚¿ãƒ–ã‚’é–‰ã˜ã‚‹æ™‚ã¯ç¢ºèªã™ã‚‹
  */
 void CBrowserFrame::OnAppExitEx()
 {
@@ -3226,7 +3226,7 @@ void CBrowserFrame::OnAppExitExBT()
 }
 
 /*
- * ƒwƒ‹ƒv > ƒuƒ‰ƒEƒU[ƒLƒƒƒbƒVƒ…‚ğíœ‚·‚é
+ * ãƒ˜ãƒ«ãƒ— > ãƒ–ãƒ©ã‚¦ã‚¶ãƒ¼ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å‰Šé™¤ã™ã‚‹
  */
 void CBrowserFrame::OnAppDeleteCache()
 {
@@ -3244,7 +3244,7 @@ void CBrowserFrame::OnAppDeleteCache()
 }
 
 /*
- * OnSizing: ƒTƒCƒY•ÏX’†‚Íƒ^ƒu‚ÌUI‚ğ‰B‚·
+ * OnSizing: ã‚µã‚¤ã‚ºå¤‰æ›´ä¸­ã¯ã‚¿ãƒ–ã®UIã‚’éš ã™
  */
 void CBrowserFrame::OnSizing(UINT fwSide, LPRECT pRect)
 {
@@ -3252,10 +3252,10 @@ void CBrowserFrame::OnSizing(UINT fwSide, LPRECT pRect)
 		;
 	else
 	{
-		//ƒTƒCƒY•ÏX’†‚ÍA”ñ•\¦
+		//ã‚µã‚¤ã‚ºå¤‰æ›´ä¸­ã¯ã€éè¡¨ç¤º
 		if (theApp.m_bTabEnable_Init)
 		{
-			//ì¬Ï‚İ‚¾‚ªA‚±‚ÌFrame‚Å‚Í‚È‚¢B
+			//ä½œæˆæ¸ˆã¿ã ãŒã€ã“ã®Frameã§ã¯ãªã„ã€‚
 			if (theApp.m_wndpActiveTabLine)
 			{
 				theApp.m_wndpActiveTabLine->DestroyWindow();
@@ -3291,13 +3291,13 @@ void CBrowserFrame::OnSize(UINT nType, int cx, int cy)
 	{
 		if (!m_cTabWnd)
 			return;
-		//VisibleƒAƒNƒeƒBƒu‚ÈƒEƒCƒ“ƒhƒE‚Ì‚Í‚¸
+		//Visibleã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã¯ãš
 		if (!theApp.IsWndVisible(this->m_hWnd))
 			return;
-		//—LŒø‚È‚Í‚¸B
+		//æœ‰åŠ¹ãªã¯ãšã€‚
 		if (!this->m_wndView.IsWindowEnabled())
 			return;
-		//Popup‚Íœ‚­
+		//Popupã¯é™¤ã
 		if (this->m_wndView.IsPopupWindow())
 			return;
 
@@ -3306,19 +3306,19 @@ void CBrowserFrame::OnSize(UINT nType, int cx, int cy)
 		this->GetWindowPlacement(&zFramePracement);
 		if (zFramePracement.showCmd == SW_SHOWNORMAL)
 		{
-			//ƒ^ƒXƒNƒo[‚ğœ‚­‰æ–ÊƒTƒCƒY‚ğæ“¾
+			//ã‚¿ã‚¹ã‚¯ãƒãƒ¼ã‚’é™¤ãç”»é¢ã‚µã‚¤ã‚ºã‚’å–å¾—
 			RECT rcDisp = {0};
 			SystemParametersInfo(SPI_GETWORKAREA, NULL, &rcDisp, NULL);
 			CRect rc;
 			this->GetWindowRect(&rc);
-			//ƒ^ƒXƒNƒo[‚ÌˆÊ’u‚ğl—¶‚·‚éBãA¶‚É‚ ‚é‚ÆÀ•W‚ª‚¸‚ê‚é‚Ì‚ÅB‰ºA‰E‚É‚ ‚é•ª‚É‚Í‰e‹¿‚ª‚È‚¢BŒ´“_À•W‚Ìxy‚É‰e‹¿
-			//ã‚É‚ ‚éê‡
+			//ã‚¿ã‚¹ã‚¯ãƒãƒ¼ã®ä½ç½®ã‚’è€ƒæ…®ã™ã‚‹ã€‚ä¸Šã€å·¦ã«ã‚ã‚‹ã¨åº§æ¨™ãŒãšã‚Œã‚‹ã®ã§ã€‚ä¸‹ã€å³ã«ã‚ã‚‹åˆ†ã«ã¯å½±éŸ¿ãŒãªã„ã€‚åŸç‚¹åº§æ¨™ã®xyã«å½±éŸ¿
+			//ä¸Šã«ã‚ã‚‹å ´åˆ
 			if (rcDisp.top > 0)
 			{
 				rc.top -= rcDisp.top;
 				rc.bottom -= rcDisp.top;
 			}
-			//¶‚É‚ ‚éê‡
+			//å·¦ã«ã‚ã‚‹å ´åˆ
 			if (rcDisp.left > 0)
 			{
 				rc.left -= rcDisp.left;
@@ -3348,7 +3348,7 @@ void CBrowserFrame::OnEnterSizeMove()
 }
 
 /*
- * OnExitSizeMove: ˆÚ“®EƒŠƒTƒCƒYI—¹Œã‚ÉƒEƒBƒ“ƒhƒEˆÊ’u‚ğ“¯Šú‚·‚é
+ * OnExitSizeMove: ç§»å‹•ãƒ»ãƒªã‚µã‚¤ã‚ºçµ‚äº†å¾Œã«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®ã‚’åŒæœŸã™ã‚‹
  */
 void CBrowserFrame::OnExitSizeMove()
 {
@@ -3357,17 +3357,17 @@ void CBrowserFrame::OnExitSizeMove()
 	{
 		if (!m_cTabWnd)
 			return;
-		//VisibleƒAƒNƒeƒBƒu‚ÈƒEƒCƒ“ƒhƒE‚Ì‚Í‚¸
+		//Visibleã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã¯ãš
 		if (!theApp.IsWndVisible(this->m_hWnd))
 			return;
-		//—LŒø‚È‚Í‚¸B
+		//æœ‰åŠ¹ãªã¯ãšã€‚
 		if (!this->m_wndView.IsWindowEnabled())
 			return;
-		//Popup‚Íœ‚­
+		//Popupã¯é™¤ã
 		if (this->m_wndView.IsPopupWindow())
 			return;
 
-		//Active‚Å‚Í‚È‚¢B
+		//Activeã§ã¯ãªã„ã€‚
 		if (theApp.GetActiveBFramePtr() != this)
 			return;
 
@@ -3375,19 +3375,19 @@ void CBrowserFrame::OnExitSizeMove()
 		zFramePracement.length = sizeof(WINDOWPLACEMENT);
 		this->GetWindowPlacement(&zFramePracement);
 
-		//ƒ^ƒXƒNƒo[‚ğœ‚­‰æ–ÊƒTƒCƒY‚ğæ“¾
+		//ã‚¿ã‚¹ã‚¯ãƒãƒ¼ã‚’é™¤ãç”»é¢ã‚µã‚¤ã‚ºã‚’å–å¾—
 		RECT rcDisp = {0};
 		SystemParametersInfo(SPI_GETWORKAREA, NULL, &rcDisp, NULL);
 		CRect rc;
 		this->GetWindowRect(&rc);
-		//ƒ^ƒXƒNƒo[‚ÌˆÊ’u‚ğl—¶‚·‚éBãA¶‚É‚ ‚é‚ÆÀ•W‚ª‚¸‚ê‚é‚Ì‚ÅB‰ºA‰E‚É‚ ‚é•ª‚É‚Í‰e‹¿‚ª‚È‚¢BŒ´“_À•W‚Ìxy‚É‰e‹¿
-		//ã‚É‚ ‚éê‡
+		//ã‚¿ã‚¹ã‚¯ãƒãƒ¼ã®ä½ç½®ã‚’è€ƒæ…®ã™ã‚‹ã€‚ä¸Šã€å·¦ã«ã‚ã‚‹ã¨åº§æ¨™ãŒãšã‚Œã‚‹ã®ã§ã€‚ä¸‹ã€å³ã«ã‚ã‚‹åˆ†ã«ã¯å½±éŸ¿ãŒãªã„ã€‚åŸç‚¹åº§æ¨™ã®xyã«å½±éŸ¿
+		//ä¸Šã«ã‚ã‚‹å ´åˆ
 		if (rcDisp.top > 0)
 		{
 			rc.top -= rcDisp.top;
 			rc.bottom -= rcDisp.top;
 		}
-		//¶‚É‚ ‚éê‡
+		//å·¦ã«ã‚ã‚‹å ´åˆ
 		if (rcDisp.left > 0)
 		{
 			rc.left -= rcDisp.left;
@@ -3451,7 +3451,7 @@ void CBrowserFrame::OnSysCommand(UINT nID, LPARAM lParam)
 		{
 			if (m_cTabWnd)
 			{
-				//Popup‚Íœ‚­
+				//Popupã¯é™¤ã
 				if (!m_wndView.IsPopupWindow())
 				{
 					PostMessage(WM_COMMAND, IDC_APP_EXIT);
@@ -3476,7 +3476,7 @@ void CBrowserFrame::OnSysCommand(UINT nID, LPARAM lParam)
 }
 
 /*
- * ƒTƒXƒyƒ“ƒh•œ‹A‚ÉƒtƒHƒ“ƒg•ö‚ê‚ğ–h‚®
+ * ã‚µã‚¹ãƒšãƒ³ãƒ‰å¾©å¸°æ™‚ã«ãƒ•ã‚©ãƒ³ãƒˆå´©ã‚Œã‚’é˜²ã
  */
 LRESULT CBrowserFrame::OnPowerBroadcast(WPARAM wp, LPARAM)
 {
@@ -3510,7 +3510,7 @@ void CBrowserFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 }
 
 /*
- * CMyStatusBar: ƒXƒe[ƒ^ƒXƒo[
+ * CMyStatusBar: ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼
  */
 IMPLEMENT_DYNAMIC(CMyStatusBar, CMFCStatusBar)
 //{{AFX_MSG_MAP(CMyStatusBar)
@@ -3557,7 +3557,7 @@ BOOL CWindowStatusHelper::EnumWindowsProc(HWND hwnd)
 {
 	int nRet = 0;
 	TCHAR pszName[64] = {0};
-	//ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ìæ“¾
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®å–å¾—
 	nRet = ::GetClassName(hwnd, pszName, 64);
 	if (nRet == 0)
 		return TRUE;
@@ -3602,7 +3602,7 @@ BOOL CWindowStatusHelper::EnumWindowsProc(HWND hwnd)
 }
 
 /*
- * CNilButton: ƒEƒBƒ“ƒhƒE‰Eã‚ÌSazabiƒAƒCƒRƒ“
+ * CNilButton: ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å³ä¸Šã®Sazabiã‚¢ã‚¤ã‚³ãƒ³
  */
 BEGIN_MESSAGE_MAP(CNilButton, CStatic)
 	//{{AFX_MSG_MAP(CNilButton)
@@ -3707,28 +3707,28 @@ BOOL CNilButton::OnEraseBkgnd(CDC* pDC)
 	if (!theApp.IsWnd(m_pParent)) return TRUE;
 	if (!theApp.IsWnd(m_pView)) return TRUE;
 
-	// ƒuƒ‰ƒV‚Ìì¬
+	// ãƒ–ãƒ©ã‚·ã®ä½œæˆ
 	CBrush brush;
 	brush.CreateSysColorBrush(COLOR_3DHILIGHT);
-	// V‚µ‚¢ƒuƒ‰ƒV‚ğw’è(Œ³‚Ìƒuƒ‰ƒV‚Ì•Û‘¶)
+	// æ–°ã—ã„ãƒ–ãƒ©ã‚·ã‚’æŒ‡å®š(å…ƒã®ãƒ–ãƒ©ã‚·ã®ä¿å­˜)
 	CBrush* pOldBrush = pDC->SelectObject(&brush);
 
-	// “h‚è‚Â‚Ô‚·—Ìˆæ‚ğæ“¾
+	// å¡—ã‚Šã¤ã¶ã™é ˜åŸŸã‚’å–å¾—
 	CRect rect;
 	GetClientRect(&rect);
 	//pDC->GetClipBox(&rect);
 
-	// “h‚è‚Â‚Ô‚·
+	// å¡—ã‚Šã¤ã¶ã™
 	pDC->PatBlt(rect.left, rect.top, rect.Width(), rect.Height(), PATCOPY);
 
-	// ƒuƒ‰ƒV‚ğŒ³‚É–ß‚·
+	// ãƒ–ãƒ©ã‚·ã‚’å…ƒã«æˆ»ã™
 	pDC->SelectObject(pOldBrush);
 
 	return TRUE;
 }
 
 /*
- * CMyToolBar: ƒc[ƒ‹ƒo[
+ * CMyToolBar: ãƒ„ãƒ¼ãƒ«ãƒãƒ¼
  */
 IMPLEMENT_DYNAMIC(CMyToolBar, CMFCToolBar)
 //{{AFX_MSG_MAP(CMyToolBar)
@@ -3741,7 +3741,7 @@ void CMyToolBar::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 }
 
 /*
- * CMyMenuBar: ƒƒjƒ…[ƒo[
+ * CMyMenuBar: ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ¼
  */
 IMPLEMENT_DYNAMIC(CMyMenuBar, CMFCMenuBar)
 //{{AFX_MSG_MAP(CMyMenuBar)
@@ -3754,7 +3754,7 @@ void CMyMenuBar::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 }
 
 /*
- * CMyMenuBar: ƒƒjƒ…[ƒRƒ“ƒeƒi (ƒc[ƒ‹/ƒƒjƒ…[)
+ * CMyMenuBar: ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚³ãƒ³ãƒ†ãƒŠ (ãƒ„ãƒ¼ãƒ«/ãƒ¡ãƒ‹ãƒ¥ãƒ¼)
  */
 IMPLEMENT_DYNAMIC(CMyReBar, CMFCReBar)
 //{{AFX_MSG_MAP(CMyReBar)

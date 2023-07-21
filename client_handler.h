@@ -195,7 +195,7 @@ public:
 				//if(SafeWnd(hRetNULL))
 				//	::PostMessage(hRetNULL, WM_COMMAND, ID_W_CLOSE, 0);
 				browser->GetHost()->CloseBrowser(true);
-				//CEF93‚©‚ç“®‚©‚È‚¢
+				//CEF93ã‹ã‚‰å‹•ã‹ãªã„
 				//browser->GetMainFrame()->ExecuteJavaScript(
 				//    "window.close();", "", 0);
 			}

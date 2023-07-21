@@ -1,4 +1,4 @@
-// DlgDebugWnd.cpp : ŽÀ‘•ƒtƒ@ƒCƒ‹
+// DlgDebugWnd.cpp : å®Ÿè£…ãƒ•ã‚¡ã‚¤ãƒ«
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "DlgDebugWnd.h"
 #include "afxdialogex.h"
 
-// CDlgDebugWnd ƒ_ƒCƒAƒƒO
+// CDlgDebugWnd ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNAMIC(CDlgDebugWnd, CDialogEx)
 
@@ -92,8 +92,8 @@ BOOL CDlgDebugWnd::OnInitDialog()
 
 	CIconHelper ICoHelper;
 	ICoHelper = theApp.LoadIcon(IDR_MAINFRAME);
-	SetIcon(ICoHelper, TRUE);  // ‘å‚«‚¢ƒAƒCƒRƒ“‚ÌÝ’è
-	SetIcon(ICoHelper, FALSE); // ¬‚³‚¢ƒAƒCƒRƒ“‚ÌÝ’è
+	SetIcon(ICoHelper, TRUE);  // å¤§ãã„ã‚¢ã‚¤ã‚³ãƒ³ã®è¨­å®š
+	SetIcon(ICoHelper, FALSE); // å°ã•ã„ã‚¢ã‚¤ã‚³ãƒ³ã®è¨­å®š
 
 	DWORD pidCurrent = GetCurrentProcessId();
 	m_strEventLogDebugWnd.Format(_T("CSG_EventLogDWND%08x"), pidCurrent);
@@ -124,10 +124,10 @@ void CDlgDebugWnd::OnBnClickedCheck1()
 
 void CDlgDebugWnd::CreateListView()
 {
-	// ƒŠƒXƒgƒrƒ…[‚ÌŠg’£ƒXƒ^ƒCƒ‹‚ÌŽæ“¾‚ÆƒZƒbƒgƒ}ƒNƒ
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®æ‹¡å¼µã‚¹ã‚¿ã‚¤ãƒ«ã®å–å¾—ã¨ã‚»ãƒƒãƒˆãƒžã‚¯ãƒ­
 	DWORD style = m_List.GetExtendedStyle();
 	m_List.SetExtendedStyle(style /*| LVS_EX_INFOTIP*/ | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
-	// ƒJƒ‰ƒ€ƒwƒbƒ_[‚ðƒZƒbƒg
+	// ã‚«ãƒ©ãƒ ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’ã‚»ãƒƒãƒˆ
 	LVCOLUMN lvc = {0};
 	lvc.mask = LVCF_FMT | LVCF_TEXT | LVCF_WIDTH | LVCF_SUBITEM;
 	lvc.cx = 150;
@@ -479,7 +479,7 @@ void CDlgDebugWnd::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 		pData = m_pOwnerData.GetAt(item->iItem);
 		if (!pData)
 			return;
-		// ƒeƒLƒXƒg‚ðƒZƒbƒg
+		// ãƒ†ã‚­ã‚¹ãƒˆã‚’ã‚»ãƒƒãƒˆ
 		if (item->mask & LVIF_TEXT)
 		{
 			switch (item->iSubItem)
@@ -581,7 +581,7 @@ BEGIN_MESSAGE_MAP(CDlgSCEditor, CDialogEx)
 	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
-// CDlgSCEditor ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[
+// CDlgSCEditor ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©ãƒ¼
 BOOL CDlgSCEditor::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
@@ -716,7 +716,7 @@ void CDlgSCEditor::OnSize(UINT nType, int cx, int cy)
 
 void CDlgSCEditor::OnBnClickedCancel()
 {
-	// TODO: ‚±‚±‚ÉƒRƒ“ƒgƒ[ƒ‹’Ê’mƒnƒ“ƒhƒ‰[ ƒR[ƒh‚ð’Ç‰Á‚µ‚Ü‚·B
+	// TODO: ã“ã“ã«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é€šçŸ¥ãƒãƒ³ãƒ‰ãƒ©ãƒ¼ ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã—ã¾ã™ã€‚
 	CDialogEx::OnCancel();
 }
 

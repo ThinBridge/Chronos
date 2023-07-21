@@ -1,17 +1,17 @@
 #pragma once
 
 #include "CWnd.h"
-//ƒ^ƒuƒEƒCƒ“ƒhƒE—pƒƒbƒZ[ƒW
+//ã‚¿ãƒ–ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç”¨ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 #define MYWM_TAB_WINDOW_NOTIFY (WM_APP + 213)
 
-//ƒ^ƒuƒEƒCƒ“ƒhƒE—pƒƒbƒZ[ƒWƒTƒuƒRƒ}ƒ“ƒh
+//ã‚¿ãƒ–ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç”¨ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚µãƒ–ã‚³ãƒãƒ³ãƒ‰
 enum ETabWndNotifyType
 {
-	TWNT_REFRESH = 0,      //Ä•\¦
-	TWNT_ADD = 1,	       //ƒEƒCƒ“ƒhƒE“o˜^
-	TWNT_DEL = 2,	       //ƒEƒCƒ“ƒhƒEíœ
-	TWNT_ORDER = 3,	       //ƒEƒCƒ“ƒhƒE‡˜•ÏX
-	TWNT_WNDPL_ADJUST = 4, //ƒEƒBƒ“ƒhƒEˆÊ’u‡‚í‚¹
+	TWNT_REFRESH = 0,      //å†è¡¨ç¤º
+	TWNT_ADD = 1,	       //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç™»éŒ²
+	TWNT_DEL = 2,	       //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦å‰Šé™¤
+	TWNT_ORDER = 3,	       //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦é †åºå¤‰æ›´
+	TWNT_WNDPL_ADJUST = 4, //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®åˆã‚ã›
 };
 inline LRESULT UpDown_SetRange(HWND hwndCtl, int upper, int lower) { return (LRESULT)(ULONG_PTR)::SendMessage(hwndCtl, UDM_SETRANGE, 0L, MAKELPARAM(upper, lower)); }
 inline LRESULT UpDown_GetPos(HWND hwndCtl) { return (LRESULT)(ULONG_PTR)::SendMessage(hwndCtl, UDM_GETPOS, 0L, 0L); }
@@ -25,7 +25,7 @@ inline void Tooltip_Activate(HWND hwndCtl, BOOL enable) { ::SendMessage(hwndCtl,
 static void ActivateFrameWindow(HWND hwnd)
 {
 	if (theApp.m_bTabWndChanging)
-		return; // Ø‘Ö‚ÌÅ’†(busy)‚Í—v‹‚ğ–³‹‚·‚é
+		return; // åˆ‡æ›¿ã®æœ€ä¸­(busy)ã¯è¦æ±‚ã‚’ç„¡è¦–ã™ã‚‹
 	theApp.m_bTabWndChanging = TRUE;
 	DWORD_PTR dwResult = 0;
 	::SendMessageTimeout(

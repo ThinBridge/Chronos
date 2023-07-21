@@ -7,7 +7,7 @@
 #error include 'stdafx.h' before including this file for PCH
 #endif
 #include "StdAfx.h"
-#include "resource.h" // ƒƒCƒ“ ƒVƒ“ƒ{ƒ‹
+#include "resource.h" // ãƒ¡ã‚¤ãƒ³ ã‚·ãƒ³ãƒœãƒ«
 
 //////////////////////////////////////////////
 #include "Psapi.h"
@@ -178,9 +178,9 @@ public:
 	BOOL IsExistsAnotherInstance()
 	{
 		BOOL bRet = FALSE;
-		//Šù‚É‹N“®‚µ‚Ä‚¢‚é‚©H
-		HWND hWndCap = FindWindow(m_FrmWndClassName, NULL); //AP‚Ìƒnƒ“ƒhƒ‹æ“¾
-								    //‹N“®‚µ‚Ä‚¢‚éB
+		//æ—¢ã«èµ·å‹•ã—ã¦ã„ã‚‹ã‹ï¼Ÿ
+		HWND hWndCap = FindWindow(m_FrmWndClassName, NULL); //APã®ãƒãƒ³ãƒ‰ãƒ«å–å¾—
+								    //èµ·å‹•ã—ã¦ã„ã‚‹ã€‚
 		if (hWndCap != NULL)
 		{
 			TCHAR szTitleMultipleInstance[260] = {0};
@@ -201,7 +201,7 @@ public:
 		return bRet;
 	}
 
-	//ChildView‚Ìƒ|ƒCƒ“ƒ^‚ğƒŠƒXƒg‚©‚ç•Ô‚·B
+	//ChildViewã®ãƒã‚¤ãƒ³ã‚¿ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰è¿”ã™ã€‚
 	CChildView* GetChildViewPtr(HWND hWnd);
 
 	DWORD m_dwProcessId;
@@ -556,10 +556,10 @@ public:
 	{
 		if (!ptrPath) return FALSE;
 		BOOL bFolderExists = FALSE;
-		//ƒtƒHƒ‹ƒ_[‚Ì‘¶İƒ`ƒFƒbƒN
+		//ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯
 		if (::PathFileExists(ptrPath) && !::PathIsDirectory(ptrPath))
 		{
-			// w’è‚³‚ê‚½ƒpƒX‚Éƒtƒ@ƒCƒ‹‚ª‘¶İA‚©‚ÂƒfƒBƒŒƒNƒgƒŠ‚Å‚È‚¢
+			// æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ã«ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã€ã‹ã¤ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§ãªã„
 			bFolderExists = FALSE;
 		}
 		else if (::PathFileExists(ptrPath))
@@ -577,14 +577,14 @@ public:
 		strPathName.TrimRight('\\');
 		strPathName += _T("\\");
 
-		// ƒfƒBƒŒƒNƒgƒŠ‚ğ1‚Â‚¸‚ÂŒJ‚è•Ô‚µì¬
+		// ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’1ã¤ãšã¤ç¹°ã‚Šè¿”ã—ä½œæˆ
 		while (strMakePath + _T("\\") != strPathName)
 		{
-			// ì¬‚·‚éƒfƒBƒŒƒNƒgƒŠ–¼‚ğİ’è
+			// ä½œæˆã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªåã‚’è¨­å®š
 			nStart = strPathName.Find(_T("\\"), nStart + 1);
 			strMakePath = strPathName.Left(nStart);
 
-			// ƒfƒBƒŒƒNƒgƒŠ‚ª‘¶İ‚·‚é‚©ƒ`ƒFƒbƒN‚µ–³‚¯‚ê‚Îì¬
+			// ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒå­˜åœ¨ã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã—ç„¡ã‘ã‚Œã°ä½œæˆ
 			if (strMakePath.GetLength() > 2)
 			{
 				if (!IsFolderExists(strMakePath))
@@ -674,7 +674,7 @@ public:
 		CString strRet;
 		if (InVirtualEnvironment() != VE_THINAPP)
 			return strRet;
-		//Œ»À“I‚Éƒtƒ@ƒCƒ‹‚ğ•Û‘¶‚·‚éæ‚Ì‚İ‚Éi‚éB
+		//ç¾å®Ÿçš„ã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜ã™ã‚‹å…ˆã®ã¿ã«çµã‚‹ã€‚
 		CString strDesktopPath;
 		CString strPersonalPath;
 		CString strProfilePath;
@@ -719,7 +719,7 @@ public:
 		strDrive = GetDriveName(strFile);
 		strDrive.MakeLower();
 
-		//Path‚ª‚Ç‚Ì€–Ú‚ÉŠY“–‚·‚é‚©ƒ`ƒFƒbƒN
+		//PathãŒã©ã®é …ç›®ã«è©²å½“ã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 		TCHAR szBuffer[MAX_PATH] = {0};
 		CString strBuffer;
 		CString strTemp;
@@ -920,25 +920,25 @@ public:
 	BOOL m_bEnforceDeleteCache;
 	void DeleteCEFCache()
 	{
-		//CEFCache‚ğíœ‚·‚éB
+		//CEFCacheã‚’å‰Šé™¤ã™ã‚‹ã€‚
 		if (!m_strCEFCachePath.IsEmpty())
 		{
 			DeleteDirectory(m_strCEFCachePath, _T("*.*"));
 		}
 	}
-	//Windows10 1903ŠÂ‹«‚Å–â‘è”­¶B‘ÎôƒR[ƒh2019-10-15
+	//Windows10 1903ç’°å¢ƒã§å•é¡Œç™ºç”Ÿã€‚å¯¾ç­–ã‚³ãƒ¼ãƒ‰2019-10-15
 	BOOL DeleteFileFix(LPCTSTR ptrPath)
 	{
 		if (!ptrPath)
 			return FALSE;
 
-		//ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢B
+		//ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„ã€‚
 		if (!::PathFileExists(ptrPath))
 			return FALSE;
-		//Win32API‚ÌDeleteFile‚ğCall
-		//Windows 10 1903 VOS‚Å‚ÍAíœ‚³‚ê‚È‚¢ê‡‚ª‚ ‚éB2019-10-18
+		//Win32APIã®DeleteFileã‚’Call
+		//Windows 10 1903 VOSã§ã¯ã€å‰Šé™¤ã•ã‚Œãªã„å ´åˆãŒã‚ã‚‹ã€‚2019-10-18
 		::DeleteFile(ptrPath);
-		//ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚È‚¢íœ‚³‚ê‚½B
+		//ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„ï¼å‰Šé™¤ã•ã‚ŒãŸã€‚
 		if (!::PathFileExists(ptrPath))
 			return TRUE;
 
@@ -946,8 +946,8 @@ public:
 		strLog.Format(_T("##ChWin32API_DeleteFile FailBack: %s\n"), ptrPath);
 		::OutputDebugString(strLog);
 
-		//Windows 10 1903 VOS‚Å‚ÍAíœ‚³‚ê‚È‚¢ê‡‚ª‚ ‚éB2019-10-18
-		//IFileOperation‚ÅÁ‚·B
+		//Windows 10 1903 VOSã§ã¯ã€å‰Šé™¤ã•ã‚Œãªã„å ´åˆãŒã‚ã‚‹ã€‚2019-10-18
+		//IFileOperationã§æ¶ˆã™ã€‚
 		BOOL bRet = FALSE;
 		CStringW strDeleteFilePath(ptrPath);
 		HRESULT hr = {0};
@@ -970,7 +970,7 @@ public:
 					if (SUCCEEDED(hr))
 					{
 						bRet = TRUE;
-						//íœ¬Œ÷‚µ‚½‚Ì‚É‘¶İ‚µ‚Ä‚¢‚éBBB
+						//å‰Šé™¤æˆåŠŸã—ãŸã®ã«å­˜åœ¨ã—ã¦ã„ã‚‹ã€‚ã€‚ã€‚
 						if (::PathFileExists(ptrPath))
 						{
 							strLog.Format(_T("##ChWin32API_DeleteFile(FAILED) FailBack: %s\n"), ptrPath);

@@ -499,24 +499,24 @@ public:
 		pos.y = rect.top;
 		if (m_bProgress)
 		{
-			// ƒuƒ‰ƒV‚Ìì¬
+			// ãƒ–ãƒ©ã‚·ã®ä½œæˆ
 			CBrush brush(RGB(34, 177, 76));
-			// V‚µ‚¢ƒuƒ‰ƒV‚ðŽw’è(Œ³‚Ìƒuƒ‰ƒV‚Ì•Û‘¶)
+			// æ–°ã—ã„ãƒ–ãƒ©ã‚·ã‚’æŒ‡å®š(å…ƒã®ãƒ–ãƒ©ã‚·ã®ä¿å­˜)
 			CBrush* pOldBrush = dc.SelectObject(&brush);
-			// “h‚è‚Â‚Ô‚·
+			// å¡—ã‚Šã¤ã¶ã™
 			dc.PatBlt(rect.left, rect.top, rect.Width(), rect.Height(), PATCOPY);
-			// ƒuƒ‰ƒV‚ðŒ³‚É–ß‚·
+			// ãƒ–ãƒ©ã‚·ã‚’å…ƒã«æˆ»ã™
 			dc.SelectObject(pOldBrush);
 		}
 		else
 		{
-			// ƒuƒ‰ƒV‚Ìì¬
+			// ãƒ–ãƒ©ã‚·ã®ä½œæˆ
 			CBrush brush(RGB(10, 132, 255));
-			// V‚µ‚¢ƒuƒ‰ƒV‚ðŽw’è(Œ³‚Ìƒuƒ‰ƒV‚Ì•Û‘¶)
+			// æ–°ã—ã„ãƒ–ãƒ©ã‚·ã‚’æŒ‡å®š(å…ƒã®ãƒ–ãƒ©ã‚·ã®ä¿å­˜)
 			CBrush* pOldBrush = dc.SelectObject(&brush);
-			// “h‚è‚Â‚Ô‚·
+			// å¡—ã‚Šã¤ã¶ã™
 			dc.PatBlt(rect.left, rect.top, rect.Width(), rect.Height(), PATCOPY);
-			// ƒuƒ‰ƒV‚ðŒ³‚É–ß‚·
+			// ãƒ–ãƒ©ã‚·ã‚’å…ƒã«æˆ»ã™
 			dc.SelectObject(pOldBrush);
 		}
 	}
@@ -616,18 +616,18 @@ protected:
 	{
 		CBrush brush;
 		brush.CreateSysColorBrush(COLOR_3DHILIGHT);
-		// V‚µ‚¢ƒuƒ‰ƒV‚ðŽw’è(Œ³‚Ìƒuƒ‰ƒV‚Ì•Û‘¶)
+		// æ–°ã—ã„ãƒ–ãƒ©ã‚·ã‚’æŒ‡å®š(å…ƒã®ãƒ–ãƒ©ã‚·ã®ä¿å­˜)
 		CBrush* pOldBrush = pDC->SelectObject(&brush);
 
-		// “h‚è‚Â‚Ô‚·—Ìˆæ‚ðŽæ“¾
+		// å¡—ã‚Šã¤ã¶ã™é ˜åŸŸã‚’å–å¾—
 		CRect rect;
 		GetClientRect(&rect);
 		//pDC->GetClipBox(&rect);
 
-		// “h‚è‚Â‚Ô‚·
+		// å¡—ã‚Šã¤ã¶ã™
 		pDC->PatBlt(rect.left, rect.top, rect.Width(), rect.Height(), PATCOPY);
 
-		// ƒuƒ‰ƒV‚ðŒ³‚É–ß‚·
+		// ãƒ–ãƒ©ã‚·ã‚’å…ƒã«æˆ»ã™
 		pDC->SelectObject(pOldBrush);
 		return TRUE;
 		//return FALSE;

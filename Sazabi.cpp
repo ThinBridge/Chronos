@@ -67,7 +67,7 @@ CSazabi::~CSazabi()
 CSazabi theApp;
 
 /*
- * ThinApp‚Ì”z‰º‚ÌƒvƒƒZƒX‚Æ‚µ‚ÄChronos‚ğ‹N“®‚·‚éB
+ * ThinAppã®é…ä¸‹ã®ãƒ—ãƒ­ã‚»ã‚¹ã¨ã—ã¦Chronosã‚’èµ·å‹•ã™ã‚‹ã€‚
  */
 BOOL CSazabi::InitFunc_ExecOnVOS()
 {
@@ -78,7 +78,7 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 		strChronosVirtAppPath = m_strExeFolderPath;
 		strChronosVirtAppPath += _T("Chronos.exe");
 
-		//Chronos.exe‚ğÀs‚·‚é
+		//Chronos.exeã‚’å®Ÿè¡Œã™ã‚‹
 		if (PathFileExists(strChronosVirtAppPath))
 		{
 			CString strCommandParam;
@@ -138,7 +138,7 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 			CString strMsg;
 			strMsg.Format(alertMsg, strChronosVirtAppPath);
 			::MessageBox(NULL, strMsg, m_strThisAppName, MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
-			//Debug‚Å¢‚é‚Ì‚ÅShitƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚éê‡‚ÍA‘±sB
+			//Debugã§å›°ã‚‹ã®ã§Shitã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã„ã‚‹å ´åˆã¯ã€ç¶šè¡Œã€‚
 			if (::GetKeyState(VK_SHIFT) < 0)
 				return TRUE;
 			return FALSE;
@@ -148,7 +148,7 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 }
 
 /*
- * Win32 GUIƒRƒ“ƒ|[ƒlƒ“ƒg (MFCEƒRƒ‚ƒ“ƒRƒ“ƒgƒ[ƒ‹) ‚ğ‰Šú‰»‚·‚é
+ * Win32 GUIã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ (MFCãƒ»ã‚³ãƒ¢ãƒ³ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«) ã‚’åˆæœŸåŒ–ã™ã‚‹
  */
 BOOL CSazabi::InitFunc_Base()
 {
@@ -175,13 +175,13 @@ BOOL CSazabi::InitFunc_Base()
 }
 
 /*
- * ƒXƒŒƒbƒh“¯Šú—p‚ÌƒCƒxƒ“ƒgƒIƒuƒWƒFƒNƒg‚ğ€”õ‚·‚éB
+ * ã‚¹ãƒ¬ãƒƒãƒ‰åŒæœŸç”¨ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æº–å‚™ã™ã‚‹ã€‚
  *
- * ƒCƒxƒ“ƒgƒIƒuƒWƒFƒNƒg‚Í”r‘¼§Œäiƒ~ƒ…[ƒeƒbƒNƒXj—p‚É—˜—p‚·‚éB
- * ƒNƒŠƒeƒBƒJƒ‹ƒZƒbƒVƒ‡ƒ“i“ü‚É WaitForSingleObject() ‚ÅƒƒbƒN‚ğæ“¾‚µA
- * ˆ—‚ªŠ®—¹‚µ‚½Û‚É SetEvent() ‚Å‰ğ•ú‚·‚éB
+ * ã‚¤ãƒ™ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯æ’ä»–åˆ¶å¾¡ï¼ˆãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ï¼‰ç”¨ã«åˆ©ç”¨ã™ã‚‹ã€‚
+ * ã‚¯ãƒªãƒ†ã‚£ã‚«ãƒ«ã‚»ãƒƒã‚·ãƒ§ãƒ³é€²å…¥æ™‚ã« WaitForSingleObject() ã§ãƒ­ãƒƒã‚¯ã‚’å–å¾—ã—ã€
+ * å‡¦ç†ãŒå®Œäº†ã—ãŸéš›ã« SetEvent() ã§è§£æ”¾ã™ã‚‹ã€‚
  *
- * ‚»‚ê‚¼‚ê‚ÌƒCƒxƒ“ƒg‚ª—˜—p‚³‚ê‚é‰ÓŠ‚Í Sazabi.h ‚ğQÆB
+ * ãã‚Œãã‚Œã®ã‚¤ãƒ™ãƒ³ãƒˆãŒåˆ©ç”¨ã•ã‚Œã‚‹ç®‡æ‰€ã¯ Sazabi.h ã‚’å‚ç…§ã€‚
  */
 BOOL CSazabi::InitFunc_Events()
 {
@@ -203,16 +203,16 @@ BOOL CSazabi::InitFunc_Events()
 }
 
 /*
- * Àsƒtƒ@ƒCƒ‹–¼‚©‚çƒpƒX•Ï”‚ğ‰Šú‰»‚·‚éB
+ * å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ãƒ‘ã‚¹å¤‰æ•°ã‚’åˆæœŸåŒ–ã™ã‚‹ã€‚
  *
  * C:\Program Files\Chronos
- * „¥„Ÿ„Ÿ ChronosN.exe           ... Àsƒtƒ@ƒCƒ‹
- * „¥„Ÿ„Ÿ ChronosDefault.conf    ... İ’èƒtƒ@ƒCƒ‹
- * „¥„Ÿ„Ÿ Chronos_trace.log      ... ƒƒOƒtƒ@ƒCƒ‹
- * „¥„Ÿ„Ÿ ChTaskMgrexe           ... 
- * „¥„Ÿ„Ÿ SPC.exe                ... ‹N“®‚ÌƒXƒvƒ‰ƒbƒVƒ…ƒXƒNƒŠ[ƒ“ (SPlash screen for Chronos)
- * „¤„Ÿ„Ÿ DBLC.exe               ... IE/Firefox/Edge/Chrome‚Ìƒuƒ‰ƒEƒU‚Ì‹N“®A
- *                                ‚¨‹C“ü‚è‚Ì’Ç‰Á (Default Browser Launcher for Chronos)
+ * â”œâ”€â”€ ChronosN.exe           ... å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«
+ * â”œâ”€â”€ ChronosDefault.conf    ... è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«
+ * â”œâ”€â”€ Chronos_trace.log      ... ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«
+ * â”œâ”€â”€ ChTaskMgrexe           ... 
+ * â”œâ”€â”€ SPC.exe                ... èµ·å‹•æ™‚ã®ã‚¹ãƒ—ãƒ©ãƒƒã‚·ãƒ¥ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ (SPlash screen for Chronos)
+ * â””â”€â”€ DBLC.exe               ... IE/Firefox/Edge/Chromeã®ãƒ–ãƒ©ã‚¦ã‚¶ã®èµ·å‹•ã€
+ *                                ãŠæ°—å…¥ã‚Šã®è¿½åŠ  (Default Browser Launcher for Chronos)
  */
 BOOL CSazabi::InitFunc_Paths()
 {
@@ -242,7 +242,7 @@ BOOL CSazabi::InitFunc_Paths()
 	m_strSettingFileFullPath = m_strExeFolderPath;
 	m_strSettingFileFullPath += _T("ChronosDefault.conf");
 
-	// Debug—p‚ÌLogƒtƒ@ƒCƒ‹‚ğ€”õ
+	// Debugç”¨ã®Logãƒ•ã‚¡ã‚¤ãƒ«ã‚’æº–å‚™
 	m_strLogFileFullPath = m_strExeFolderPath;
 	m_strLogFileFullPath += _T("Chronos_trace.log");
 
@@ -250,7 +250,7 @@ BOOL CSazabi::InitFunc_Paths()
 	m_strDBL_EXE_FullPath += _T("DBLC.EXE");
 	m_strDBL_EXE_Default_FullPath = m_strDBL_EXE_FullPath;
 
-	// ƒpƒX‚ğƒJƒŒƒ“ƒg‚É•ÏX‚µ‚Ä‚¨‚­BƒZƒLƒ…ƒŠƒeƒB‘ÎôB
+	// ãƒ‘ã‚¹ã‚’ã‚«ãƒ¬ãƒ³ãƒˆã«å¤‰æ›´ã—ã¦ãŠãã€‚ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£å¯¾ç­–ã€‚
 	::SetCurrentDirectory(m_strExeFolderPath);
 	SetLastError(NO_ERROR);
 
@@ -258,29 +258,29 @@ BOOL CSazabi::InitFunc_Paths()
 }
 
 /*
- * İ’èƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚ñ‚Å“K—p‚·‚éB
+ * è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚“ã§é©ç”¨ã™ã‚‹ã€‚
  *
- *  - LoadDefaultData()    ... •W€İ’è’l
- *  - ChronosDefault.conf  ... İ’èƒtƒ@ƒCƒ‹
- *  - Chronos.conf         ... İ’èƒtƒ@ƒCƒ‹ (ThinAppŠÂ‹«‚Ì‚İ)
+ *  - LoadDefaultData()    ... æ¨™æº–è¨­å®šå€¤
+ *  - ChronosDefault.conf  ... è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«
+ *  - Chronos.conf         ... è¨­å®šãƒ•ã‚¡ã‚¤ãƒ« (ThinAppç’°å¢ƒã®ã¿)
  */
 BOOL CSazabi::InitFunc_Settings()
 {
 	PROC_TIME(InitFunc_Settings)
 
-	// AppSettings‚ÉSystem Guardƒtƒ‰ƒO‚ğƒRƒs[‚·‚é
+	// AppSettingsã«System Guardãƒ•ãƒ©ã‚°ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 	this->m_AppSettings.m_IsSGMode = this->m_IsSGMode;
 
-	// İ’èƒf[ƒ^‚Ì‰Šú’l‚ğ“Ç‚İ‚Ş
+	// è¨­å®šãƒ‡ãƒ¼ã‚¿ã®åˆæœŸå€¤ã‚’èª­ã¿è¾¼ã‚€
 	this->m_AppSettings.LoadDefaultData();
 
-	// ChronosDefault.conf‚©‚çİ’èƒf[ƒ^‚ğ“Ç‚İ‚Ş
+	// ChronosDefault.confã‹ã‚‰è¨­å®šãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
 	if (PathFileExists(m_strSettingFileFullPath))
 	{
 		this->m_AppSettings.LoadDataFromFile(m_strSettingFileFullPath);
 	}
 
-	// ThinAppŠÂ‹«‚Å‚ÍChronos.conf‚©‚çİ’è‚ğ’Ç‰Á‚Å“Ç‚İ‚ŞB
+	// ThinAppç’°å¢ƒã§ã¯Chronos.confã‹ã‚‰è¨­å®šã‚’è¿½åŠ ã§èª­ã¿è¾¼ã‚€ã€‚
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
 		CString strTS_Path;
@@ -292,7 +292,7 @@ BOOL CSazabi::InitFunc_Settings()
 		}
 	}
 
-	// ‹N“®‚ÌTabİ’è‚ğGlobal‚É“o˜^‚µ‚Ä‚¨‚­A“r’†‚Å‚ÌØ‚è‘Ö‚¦•s‰Â
+	// èµ·å‹•æ™‚ã®Tabè¨­å®šã‚’Globalã«ç™»éŒ²ã—ã¦ãŠãã€é€”ä¸­ã§ã®åˆ‡ã‚Šæ›¿ãˆä¸å¯
 	m_bTabEnable_Init = this->m_AppSettings.IsEnableTab();
 
 	return TRUE;
@@ -307,17 +307,17 @@ BOOL CSazabi::InitFunc_SGMode()
 	if (!IsFirstInstance())
 		return TRUE;
 
-	// -NEW‚Å‹N“®‚³‚ê‚½ê‡ˆÈŠO
+	// -NEWã§èµ·å‹•ã•ã‚ŒãŸå ´åˆä»¥å¤–
 	if (m_bNewInstanceParam)
 		return TRUE;
 
-	// ˆÈ‰º‚Ìˆ—‚ÍVOSŠÂ‹«‚Ì‚İÀs‚·‚é
+	// ä»¥ä¸‹ã®å‡¦ç†ã¯VOSç’°å¢ƒã®ã¿å®Ÿè¡Œã™ã‚‹
 	UINT InVirtEnv = VE_NA;
 	InVirtEnv = InVirtualEnvironment();
 	if (InVirtEnv == VE_NA)
 		return TRUE;
 
-	// ƒGƒNƒXƒvƒ[ƒ‰‚©‚çƒNƒCƒbƒNƒAƒNƒZƒX‚ğíœ‚·‚é
+	// ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©ã‹ã‚‰ã‚¯ã‚¤ãƒƒã‚¯ã‚¢ã‚¯ã‚»ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
 	HKEY hKey = {0};
 	DWORD dwDisposition = 0;
 	LONG lResult = 0L;
@@ -353,7 +353,7 @@ BOOL CSazabi::InitFunc_SGMode()
 	}
 	SHDeleteKey(HKEY_LOCAL_MACHINE, strRegKey);
 
-	// SpC.exe‚ğÀs‚·‚é
+	// SpC.exeã‚’å®Ÿè¡Œã™ã‚‹
 	CString strSpCAppPath;
 	strSpCAppPath = m_strExeFolderPath;
 	strSpCAppPath += _T("SpC.exe");
@@ -425,7 +425,7 @@ BOOL CSazabi::InitFunc_SGMode()
 }
 
 /*
- * MFCƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒGƒ“ƒgƒŠƒ|ƒCƒ“ƒg
+ * MFCã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¨ãƒ³ãƒˆãƒªãƒã‚¤ãƒ³ãƒˆ
  */
 BOOL CSazabi::InitInstance()
 {
@@ -446,7 +446,7 @@ BOOL CSazabi::InitInstance()
 	this->GetOSVersion();
 	this->SetThisAppVersionString();
 
-	// SpC.exe‚Ì—L‚è–³‚µ‚ÅSGƒ‚[ƒh‚©‚Ç‚¤‚©‚ğ”»’f‚·‚é
+	// SpC.exeã®æœ‰ã‚Šç„¡ã—ã§SGãƒ¢ãƒ¼ãƒ‰ã‹ã©ã†ã‹ã‚’åˆ¤æ–­ã™ã‚‹
 	CString strSpCAppPath;
 	strSpCAppPath = m_strExeFolderPath;
 	strSpCAppPath += _T("SpC.exe");
@@ -458,40 +458,40 @@ BOOL CSazabi::InitInstance()
 	}
 	else
 	{
-		// SpC.exe‚ª‚È‚¢ê‡‚ÍASGƒ‚[ƒh‚Å‚Í‚È‚­’Êíƒ‚[ƒh (‹Œd—l)
+		// SpC.exeãŒãªã„å ´åˆã¯ã€SGãƒ¢ãƒ¼ãƒ‰ã§ã¯ãªãé€šå¸¸ãƒ¢ãƒ¼ãƒ‰ (æ—§ä»•æ§˜)
 		m_IsSGMode = FALSE;
 		m_strThisAppName = gstrThisAppNameR;
 	}
 
-	// İ’èƒtƒ@ƒCƒ‹‰Šú“Ç‚İ‚İ
+	// è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«åˆæœŸèª­ã¿è¾¼ã¿
 	if (!InitFunc_Settings())
 		return FALSE;
 
-	// ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ƒIƒvƒVƒ‡ƒ“‚ğ‰ğÍ‚·‚é
+	// ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’è§£æã™ã‚‹
 	this->InitParseCommandLine();
 
-	// VOSˆÈŠOi•¨—ŠÂ‹«‚Å’¼Ú‚±‚ÌEXE‚ª‹N“®‚³‚ê‚½ê‡‚ÍAVOSŠÂ‹«‚ÅÄÀsj
+	// VOSä»¥å¤–ï¼ˆç‰©ç†ç’°å¢ƒã§ç›´æ¥ã“ã®EXEãŒèµ·å‹•ã•ã‚ŒãŸå ´åˆã¯ã€VOSç’°å¢ƒã§å†å®Ÿè¡Œï¼‰
 	if (!InitFunc_ExecOnVOS())
 		return TRUE;
 
-	// 2d‹N“®‚ğƒ`ƒFƒbƒN‚·‚éBEXE‚ÌƒpƒX‚ªˆá‚¤ê‡‚ÍA‹N“®‚ğ‹–‰Â‚·‚éB
+	// 2é‡èµ·å‹•ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ã€‚EXEã®ãƒ‘ã‚¹ãŒé•ã†å ´åˆã¯ã€èµ·å‹•ã‚’è¨±å¯ã™ã‚‹ã€‚
 	if (InitMultipleInstance())
 		return TRUE;
 
-	// •Û‘¶ (ChronosDefault.conf)
+	// ä¿å­˜ (ChronosDefault.conf)
 	this->m_AppSettings.SaveDataToFileEx(this->m_strSettingFileFullPath);
 
 	// SZB
 	InitializeCef();
 
-	// API Hook‰Šú‰»
+	// API HookåˆæœŸåŒ–
 	if (!m_pAPIHook)
 	{
 		m_pAPIHook = new APIHookC;
 		m_pAPIHook->DoHookComDlgAPI();
 	}
 
-	// SystemGuard—p‚Ìˆ—
+	// SystemGuardç”¨ã®å‡¦ç†
 	if (this->IsSGMode())
 	{
 		InitFunc_SGMode();
@@ -500,17 +500,17 @@ BOOL CSazabi::InitInstance()
 	CopyDBLEXEToTempInit();
 	SetRecoveryFilePath();
 
-	// ‹N“®‚ÌƒƒO‚ğo—Í
+	// èµ·å‹•æ™‚ã®ãƒ­ã‚°ã‚’å‡ºåŠ›
 	if (m_AppSettings.IsAdvancedLogMode())
 	{
 		if (IsFirstInstance())
 			this->InitLogWrite();
 	}
 
-	// Šeíconfƒtƒ@ƒCƒ‹‚Ì“Ç
+	// å„ç¨®confãƒ•ã‚¡ã‚¤ãƒ«ã®èª­è¾¼
 	this->InitReadConfSetting();
 
-	// Message•¶Œ¾ƒZƒbƒg
+	// Messageæ–‡è¨€ã‚»ãƒƒãƒˆ
 	m_strZoneMessageDBL.LoadString(IDS_STRING_ZONE_MSG_DBL);
 	m_strZoneMessageNG.LoadString(IDS_STRING_ZONE_MSG_NG);
 	m_strZoneMessageIE.LoadString(IDS_STRING_ZONE_MSG_IE);
@@ -522,7 +522,7 @@ BOOL CSazabi::InitInstance()
 	// ???
 	bCreateFavDone = FALSE;
 
-	// ƒAƒCƒRƒ“‰æ‘œ‚ğ“Ç‚İ‚Ş
+	// ã‚¢ã‚¤ã‚³ãƒ³ç”»åƒã‚’èª­ã¿è¾¼ã‚€
 	CBitmap bitmap1;
 	bitmap1.LoadBitmap(IDB_BITMAP4);
 	m_imgMenuIcons.Create(16, 16, ILC_COLOR8 | ILC_MASK, 8, 1);
@@ -531,7 +531,7 @@ BOOL CSazabi::InitInstance()
 
 	m_imgFavIcons.Create(24, 24, ILC_COLOR32 | ILC_MASK, 8, 10);
 
-	// ƒEƒBƒ“ƒhƒE‚ğˆêˆÓ‚É¯•Ê‚·‚éID‚ğ¶¬‚·‚é (e.g. "_2552")
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä¸€æ„ã«è­˜åˆ¥ã™ã‚‹IDã‚’ç”Ÿæˆã™ã‚‹ (e.g. "_2552")
 	WCHAR szAppID[129] = {0};
 	PWSTR pszAppID = szAppID;
 	DWORD pidCurrent = GetCurrentProcessId();
@@ -561,7 +561,7 @@ BOOL CSazabi::InitInstance()
 		m_pLogDisp->Init();
 	}
 
-	// ƒƒCƒ“ƒtƒŒ[ƒ€‚ğ‰Šú‰»‚·‚é
+	// ãƒ¡ã‚¤ãƒ³ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’åˆæœŸåŒ–ã™ã‚‹
 	CMainFrame* pFrame = new CMainFrame;
 	m_pMainWnd = pFrame;
 
@@ -631,7 +631,7 @@ CChildView* CSazabi::GetChildViewPtr(HWND hWnd)
 
 void CSazabi::InitProcessSetting()
 {
-	//Server OS‚Ìê‡‚ÍARDSHŠÂ‹«‚Ì‰Â”\«‚ª‚‚¢‚Ì‚ÅA—Dæ“x‚ğ‰º‚°‚éB
+	//Server OSã®å ´åˆã¯ã€RDSHç’°å¢ƒã®å¯èƒ½æ€§ãŒé«˜ã„ã®ã§ã€å„ªå…ˆåº¦ã‚’ä¸‹ã’ã‚‹ã€‚
 	if (SBUtil::IsWindowsServerRDS())
 	{
 		::SetPriorityClass(::GetCurrentProcess(), BELOW_NORMAL_PRIORITY_CLASS);
@@ -639,15 +639,15 @@ void CSazabi::InitProcessSetting()
 }
 
 /*
- * Ÿ‚Ìİ’èƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚ŞB
+ * æ¬¡ã®è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€ã€‚
  *
- * RedirectFilterScript.conf  ... ‘¼‚Ìƒuƒ‰ƒEƒU‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚éB
- * URL_DomainFilter.conf      ... ƒhƒƒCƒ“‚Å‰{——‚ğ–³Œø‰»‚·‚éB
+ * RedirectFilterScript.conf  ... ä»–ã®ãƒ–ãƒ©ã‚¦ã‚¶ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹ã€‚
+ * URL_DomainFilter.conf      ... ãƒ‰ãƒ¡ã‚¤ãƒ³ã§é–²è¦§ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹ã€‚
  * CustomScript.conf          ...
  *
- * Ÿ‚Ìƒtƒ@ƒCƒ‹‚ğƒRƒs[‚·‚éB
+ * æ¬¡ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
  *
- * logo{Default}.(bmp|png)    ... Chronos‚ÌƒƒSƒtƒ@ƒCƒ‹
+ * logo{Default}.(bmp|png)    ... Chronosã®ãƒ­ã‚´ãƒ•ã‚¡ã‚¤ãƒ«
  */
 void CSazabi::InitReadConfSetting()
 {
@@ -658,16 +658,16 @@ void CSazabi::InitReadConfSetting()
 	// -------------------------
 	CString strRedirectFilterScriptFullPath = m_strExeFolderPath;
 	strRedirectFilterScriptFullPath += _T("RedirectFilterScriptDefault.conf");
-	//ˆê’UƒRƒs[‚·‚éB
+	//ä¸€æ—¦ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
 		CString strTS_Path;
 		strTS_Path = GetThinAppEntryPointFolderPath();
 		strTS_Path += _T("RedirectFilterScript.conf");
-		//File‚ª‘¶İ‚·‚éê‡‚ÍAƒRƒs[‚·‚éB
+		//FileãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ã€ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 		if (PathFileExists(strTS_Path))
 		{
-			//File‚©‚çİ’è’l‚ğ“Ç‚İ‚Ş‹–‰Â
+			//Fileã‹ã‚‰è¨­å®šå€¤ã‚’èª­ã¿è¾¼ã‚€è¨±å¯
 			::CopyFile(strTS_Path, strRedirectFilterScriptFullPath, FALSE);
 			SetLastError(NO_ERROR);
 		}
@@ -679,16 +679,16 @@ void CSazabi::InitReadConfSetting()
 	// -------------------------
 	m_strDomainFilterFileFullPath = m_strExeFolderPath;
 	m_strDomainFilterFileFullPath += _T("URL_DomainFilterDefault.conf");
-	//ˆê’UƒRƒs[‚·‚éB
+	//ä¸€æ—¦ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
 		CString strTS_Path;
 		strTS_Path = GetThinAppEntryPointFolderPath();
 		strTS_Path += _T("URL_DomainFilter.conf");
-		//File‚ª‘¶İ‚·‚éê‡‚ÍAƒRƒs[‚·‚éB
+		//FileãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ã€ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 		if (PathFileExists(strTS_Path))
 		{
-			//File‚©‚çİ’è’l‚ğ“Ç‚İ‚Ş‹–‰Â
+			//Fileã‹ã‚‰è¨­å®šå€¤ã‚’èª­ã¿è¾¼ã‚€è¨±å¯
 			::CopyFile(strTS_Path, m_strDomainFilterFileFullPath, FALSE);
 			SetLastError(NO_ERROR);
 		}
@@ -701,16 +701,16 @@ void CSazabi::InitReadConfSetting()
 	// -------------------------
 	m_strCustomScriptConfFullPath = m_strExeFolderPath;
 	m_strCustomScriptConfFullPath += _T("CustomScriptDefault.conf");
-	//ˆê’UƒRƒs[‚·‚éB
+	//ä¸€æ—¦ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
 		CString strTS_Path;
 		strTS_Path = GetThinAppEntryPointFolderPath();
 		strTS_Path += _T("CustomScript.conf");
-		//File‚ª‘¶İ‚·‚éê‡‚ÍAƒRƒs[‚·‚éB
+		//FileãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ã€ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 		if (PathFileExists(strTS_Path))
 		{
-			//File‚©‚çİ’è’l‚ğ“Ç‚İ‚Ş‹–‰Â
+			//Fileã‹ã‚‰è¨­å®šå€¤ã‚’èª­ã¿è¾¼ã‚€è¨±å¯
 			::CopyFile(strTS_Path, m_strCustomScriptConfFullPath, FALSE);
 			SetLastError(NO_ERROR);
 		}
@@ -724,13 +724,13 @@ void CSazabi::InitReadConfSetting()
 	CString strLogoFileFullPath = m_strExeFolderPath;
 	strLogoFileFullPath += _T("logoDefault.bmp");
 	m_strLogoFileFullPath = strLogoFileFullPath;
-	//ˆê’UƒRƒs[‚·‚éB
+	//ä¸€æ—¦ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
 		CString strTS_Path;
 		strTS_Path = GetThinAppEntryPointFolderPath();
 		strTS_Path += _T("logo.bmp");
-		//File‚ª‘¶İ‚·‚éê‡‚ÍAƒRƒs[‚·‚éB
+		//FileãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ã€ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 		if (PathFileExists(strTS_Path))
 		{
 			::CopyFile(strTS_Path, strLogoFileFullPath, FALSE);
@@ -745,7 +745,7 @@ void CSazabi::InitReadConfSetting()
 			CString strTS_PathPNG;
 			strTS_PathPNG = GetThinAppEntryPointFolderPath();
 			strTS_PathPNG += _T("logo.png");
-			//File‚ª‘¶İ‚·‚éê‡‚ÍAƒRƒs[‚·‚éB
+			//FileãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯ã€ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
 			if (PathFileExists(strTS_PathPNG))
 			{
 				::CopyFile(strTS_PathPNG, strLogoFileFullPath, FALSE);
@@ -756,16 +756,16 @@ void CSazabi::InitReadConfSetting()
 }
 
 /*
- * ‘½d‹N“®”»’è‚ÉŠY“–‚µ‚½ê‡‚ÉTRUE‚ğ•Ô‹p‚·‚éB
+ * å¤šé‡èµ·å‹•åˆ¤å®šã«è©²å½“ã—ãŸå ´åˆã«TRUEã‚’è¿”å´ã™ã‚‹ã€‚
  *
- * - Chronos‚Íƒ‚[ƒ_ƒ‹ID‚ÉAÀsƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğ¯•Êq‚Æ‚µ‚Äİ’è‚·‚é
- *   (—á: "C-Program_Files-Chronos-Chronosexe")
- * - Šù‚Éƒ‚[ƒ_ƒ‹ID‚ª“™‚µ‚¢ƒEƒBƒ“ƒhƒE‚ª‚ ‚ê‚ÎA‘½d‹N“®‚Æ‚İ‚È‚·B
+ * - Chronosã¯ãƒ¢ãƒ¼ãƒ€ãƒ«IDã«ã€å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’è­˜åˆ¥å­ã¨ã—ã¦è¨­å®šã™ã‚‹
+ *   (ä¾‹: "C-Program_Files-Chronos-Chronosexe")
+ * - æ—¢ã«ãƒ¢ãƒ¼ãƒ€ãƒ«IDãŒç­‰ã—ã„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒã‚ã‚Œã°ã€å¤šé‡èµ·å‹•ã¨ã¿ãªã™ã€‚
  *
- * ‚½‚¾‚µAŸ‚Ìê‡‚Í‘½d‹N“®‚ğ‹–‰Â‚·‚éB
+ * ãŸã ã—ã€æ¬¡ã®å ´åˆã¯å¤šé‡èµ·å‹•ã‚’è¨±å¯ã™ã‚‹ã€‚
  *
- * - `-NEW` ƒIƒvƒVƒ‡ƒ“‚ğ‚Â‚¯‚Ä‹N“®‚µ‚½ê‡
- * - `EnableMultipleInstance` ‚Ìİ’è‚Å‘½d‹N“®‚ğ‹–‰Â‚µ‚Ä‚¢‚éê‡
+ * - `-NEW` ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’ã¤ã‘ã¦èµ·å‹•ã—ãŸå ´åˆ
+ * - `EnableMultipleInstance` ã®è¨­å®šã§å¤šé‡èµ·å‹•ã‚’è¨±å¯ã—ã¦ã„ã‚‹å ´åˆ
  */
 BOOL CSazabi::InitMultipleInstance()
 {
@@ -798,7 +798,7 @@ BOOL CSazabi::InitMultipleInstance()
 
 	SetAppID(m_FrmWndClassName);
 
-	// ƒEƒBƒ“ƒhƒE‚ğ’Tõ‚µ‚Ä‘½d‹N“®‚ğŠm”F‚·‚é
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’æ¢ç´¢ã—ã¦å¤šé‡èµ·å‹•ã‚’ç¢ºèªã™ã‚‹
 	HWND hWndCap = FindWindow(m_FrmWndClassName, NULL);
 	if (hWndCap != NULL)
 	{
@@ -806,17 +806,17 @@ BOOL CSazabi::InitMultipleInstance()
 		::GetWindowText(hWndCap, szTitleMultipleInstance, 259);
 		CString strTitleMultiple;
 		strTitleMultiple = szTitleMultipleInstance;
-		// ƒ‚[ƒ_ƒ‹ID‚ğŠm”F‚·‚é
+		// ãƒ¢ãƒ¼ãƒ€ãƒ«IDã‚’ç¢ºèªã™ã‚‹
 		if (strTitleMultiple == m_FrmWndClassName)
 		{
-			// ‹N“®‚µ‚Ä‚¢‚é
+			// èµ·å‹•ã—ã¦ã„ã‚‹
 			m_bFirstInstance = FALSE;
-			// NEWƒCƒ“ƒXƒ^ƒ“ƒX@ƒIƒvƒVƒ‡ƒ“‚ª‚ ‚éê‡
+			// NEWã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã€€ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãŒã‚ã‚‹å ´åˆ
 			if (m_bNewInstanceParam)
 			{
 				return FALSE;
 			}
-			// ‘½d‹N“®–h~‚Ìê‡B
+			// å¤šé‡èµ·å‹•é˜²æ­¢ã®å ´åˆã€‚
 			if (!m_AppSettings.IsMultipleInstance())
 			{
 				ATOM nAtom = {0};
@@ -842,10 +842,10 @@ BOOL CSazabi::InitMultipleInstance()
 /*
  * Chronos.exe [-NEW] [/View] [/NORMAL] [-MAX] [-MIN] URL
  *
- * -NEW    ... V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‹N“®‚·‚é
- * -VIEW   ... ƒ^ƒu‚ğ–³Œø‰»‚µ‚ÄV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‹N“®‚·‚é
- * -MAX    ... Å‘å‰»ƒ‚[ƒh (MainFrm.cpp)
- * -MIN    ... Å¬‰»ƒ‚[ƒh (MainFrm.cpp)
+ * -NEW    ... æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’èµ·å‹•ã™ã‚‹
+ * -VIEW   ... ã‚¿ãƒ–ã‚’ç„¡åŠ¹åŒ–ã—ã¦æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’èµ·å‹•ã™ã‚‹
+ * -MAX    ... æœ€å¤§åŒ–ãƒ¢ãƒ¼ãƒ‰ (MainFrm.cpp)
+ * -MIN    ... æœ€å°åŒ–ãƒ¢ãƒ¼ãƒ‰ (MainFrm.cpp)
  * -NORMAL ...
  */
 void CSazabi::InitParseCommandLine()
@@ -859,16 +859,16 @@ void CSazabi::InitParseCommandLine()
 	m_strCommandParam.Empty();
 	m_strOptionParam.Empty();
 
-	//‹N“®‚Ì‹­§ƒpƒ‰ƒ[ƒ^‚ğŠm”F
+	//èµ·å‹•æ™‚ã®å¼·åˆ¶ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ç¢ºèª
 	CString strEnforceInitParam;
 	strEnforceInitParam = m_AppSettings.GetEnforceInitParam();
 
-	//®Œ`
+	//æ•´å½¢
 	strEnforceInitParam.TrimLeft();
 	strEnforceInitParam.TrimRight();
 	strEnforceInitParam.Replace(_T("\""), _T(""));
 
-	//ˆê’UƒNƒŠƒA
+	//ä¸€æ—¦ã‚¯ãƒªã‚¢
 	m_strAtomParam.Empty();
 
 	if (!strEnforceInitParam.IsEmpty())
@@ -876,10 +876,10 @@ void CSazabi::InitParseCommandLine()
 		m_strOptionParam = strEnforceInitParam;
 	}
 
-	//ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ ‚èB
+	//ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‚ã‚Šã€‚
 	if (m_lpCmdLine[0] != '\0')
 	{
-		//ƒpƒ‰ƒ[ƒ^‚ª1‚Â‚¾‚¯
+		//ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒ1ã¤ã ã‘
 		if (__argc == 2)
 		{
 			Command1 = CString(__wargv[1]);
@@ -889,7 +889,7 @@ void CSazabi::InitParseCommandLine()
 
 			if (!Command1.IsEmpty())
 			{
-				//URL‚©FilePath‚Ìê‡‚ÍA‹­§“I‚ÉCommandParam‚Æ‚·‚éB
+				//URLã‹FilePathã®å ´åˆã¯ã€å¼·åˆ¶çš„ã«CommandParamã¨ã™ã‚‹ã€‚
 				if (SBUtil::IsURL(Command1))
 				{
 					m_strCommandParam = Command1;
@@ -910,12 +910,12 @@ void CSazabi::InitParseCommandLine()
 				}
 				else
 				{
-					//-‚ÍAƒIƒvƒVƒ‡ƒ“
+					//-ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					if (Command1.Find(_T("-")) == 0)
 					{
 						m_strOptionParam = Command1;
 					}
-					// /‚ÍAƒIƒvƒVƒ‡ƒ“
+					// /ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					else if (Command1.Find(_T("/")) == 0)
 					{
 						m_strOptionParam = Command1;
@@ -923,7 +923,7 @@ void CSazabi::InitParseCommandLine()
 				}
 			}
 		}
-		//ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ª3‚ÂˆÈãA0”Ô‚ÍAEXEƒpƒX
+		//ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ãŒ3ã¤ä»¥ä¸Šã€0ç•ªã¯ã€EXEãƒ‘ã‚¹
 		else if (__argc == 3)
 		{
 			Command1 = CString(__wargv[1]);
@@ -938,7 +938,7 @@ void CSazabi::InitParseCommandLine()
 
 			if (!Command1.IsEmpty())
 			{
-				//URL‚©FilePath‚Ìê‡‚ÍA‹­§“I‚ÉCommandParam‚Æ‚·‚éB
+				//URLã‹FilePathã®å ´åˆã¯ã€å¼·åˆ¶çš„ã«CommandParamã¨ã™ã‚‹ã€‚
 				if (SBUtil::IsURL(Command1))
 				{
 					m_strCommandParam = Command1;
@@ -959,12 +959,12 @@ void CSazabi::InitParseCommandLine()
 				}
 				else
 				{
-					//-‚ÍAƒIƒvƒVƒ‡ƒ“
+					//-ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					if (Command1.Find(_T("-")) == 0)
 					{
 						m_strOptionParam = Command1;
 					}
-					// /‚ÍAƒIƒvƒVƒ‡ƒ“
+					// /ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					else if (Command1.Find(_T("/")) == 0)
 					{
 						m_strOptionParam = Command1;
@@ -973,7 +973,7 @@ void CSazabi::InitParseCommandLine()
 			}
 			if (!Command2.IsEmpty())
 			{
-				//URL‚©FilePath‚Ìê‡‚ÍA‹­§“I‚ÉCommandParam‚Æ‚·‚éB
+				//URLã‹FilePathã®å ´åˆã¯ã€å¼·åˆ¶çš„ã«CommandParamã¨ã™ã‚‹ã€‚
 				if (SBUtil::IsURL(Command2))
 				{
 					m_strCommandParam = Command2;
@@ -994,12 +994,12 @@ void CSazabi::InitParseCommandLine()
 				}
 				else
 				{
-					//-‚ÍAƒIƒvƒVƒ‡ƒ“
+					//-ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					if (Command2.Find(_T("-")) == 0)
 					{
 						m_strOptionParam = Command2;
 					}
-					// /‚ÍAƒIƒvƒVƒ‡ƒ“
+					// /ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					else if (Command2.Find(_T("/")) == 0)
 					{
 						m_strOptionParam = Command2;
@@ -1007,7 +1007,7 @@ void CSazabi::InitParseCommandLine()
 				}
 			}
 		}
-		//ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ª4‚ÂˆÈãA0”Ô‚ÍAEXEƒpƒX
+		//ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ãŒ4ã¤ä»¥ä¸Šã€0ç•ªã¯ã€EXEãƒ‘ã‚¹
 		else if (__argc >= 4)
 		{
 			Command1 = CString(__wargv[1]);
@@ -1027,7 +1027,7 @@ void CSazabi::InitParseCommandLine()
 
 			if (!Command1.IsEmpty())
 			{
-				//URL‚©FilePath‚Ìê‡‚ÍA‹­§“I‚ÉCommandParam‚Æ‚·‚éB
+				//URLã‹FilePathã®å ´åˆã¯ã€å¼·åˆ¶çš„ã«CommandParamã¨ã™ã‚‹ã€‚
 				if (SBUtil::IsURL(Command1))
 				{
 					m_strCommandParam = Command1;
@@ -1048,12 +1048,12 @@ void CSazabi::InitParseCommandLine()
 				}
 				else
 				{
-					//-‚ÍAƒIƒvƒVƒ‡ƒ“
+					//-ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					if (Command1.Find(_T("-")) == 0)
 					{
 						m_strOptionParam = Command1;
 					}
-					// /‚ÍAƒIƒvƒVƒ‡ƒ“
+					// /ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					else if (Command1.Find(_T("/")) == 0)
 					{
 						m_strOptionParam = Command1;
@@ -1062,7 +1062,7 @@ void CSazabi::InitParseCommandLine()
 			}
 			if (!Command2.IsEmpty())
 			{
-				//URL‚©FilePath‚Ìê‡‚ÍA‹­§“I‚ÉCommandParam‚Æ‚·‚éB
+				//URLã‹FilePathã®å ´åˆã¯ã€å¼·åˆ¶çš„ã«CommandParamã¨ã™ã‚‹ã€‚
 				if (SBUtil::IsURL(Command2))
 				{
 					m_strCommandParam = Command2;
@@ -1082,12 +1082,12 @@ void CSazabi::InitParseCommandLine()
 				}
 				else
 				{
-					//-‚ÍAƒIƒvƒVƒ‡ƒ“
+					//-ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					if (Command2.Find(_T("-")) == 0)
 					{
 						m_strOptionParam = Command2;
 					}
-					// /‚ÍAƒIƒvƒVƒ‡ƒ“
+					// /ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					else if (Command2.Find(_T("/")) == 0)
 					{
 						m_strOptionParam = Command2;
@@ -1096,7 +1096,7 @@ void CSazabi::InitParseCommandLine()
 			}
 			if (!Command3.IsEmpty())
 			{
-				//URL‚©FilePath‚Ìê‡‚ÍA‹­§“I‚ÉCommandParam‚Æ‚·‚éB
+				//URLã‹FilePathã®å ´åˆã¯ã€å¼·åˆ¶çš„ã«CommandParamã¨ã™ã‚‹ã€‚
 				if (SBUtil::IsURL(Command3))
 				{
 					m_strCommandParam = Command3;
@@ -1116,12 +1116,12 @@ void CSazabi::InitParseCommandLine()
 				}
 				else
 				{
-					//-‚ÍAƒIƒvƒVƒ‡ƒ“
+					//-ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					if (Command3.Find(_T("-")) == 0)
 					{
 						m_strOptionParam = Command3;
 					}
-					// /‚ÍAƒIƒvƒVƒ‡ƒ“
+					// /ã¯ã€ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 					else if (Command3.Find(_T("/")) == 0)
 					{
 						m_strOptionParam = Command3;
@@ -1152,17 +1152,17 @@ void CSazabi::InitParseCommandLine()
 		}
 	}
 
-	//—¼•ûƒZƒbƒg‚³‚ê‚Ä‚¢‚éê‡
+	//ä¸¡æ–¹ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹å ´åˆ
 	if (!m_strCommandParam.IsEmpty() && !m_strOptionParam.IsEmpty())
 	{
 		m_strAtomParam.Format(_T("%s|@@|%s"), (LPCTSTR)m_strCommandParam, (LPCTSTR)m_strOptionParam);
 	}
 	else
 	{
-		//Command‚Ì‚İ
+		//Commandã®ã¿
 		if (!m_strCommandParam.IsEmpty())
 			m_strAtomParam = m_strCommandParam;
-		//Option‚Ì‚İ
+		//Optionã®ã¿
 		if (!m_strOptionParam.IsEmpty())
 			m_strAtomParam = m_strOptionParam;
 	}
@@ -1174,7 +1174,7 @@ void CSazabi::ExitKillZombieProcess()
 
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
-		//DBL‚Åƒ]ƒ“ƒr‚ğI—¹‚³‚¹‚éBVOSã‚Å‚ÍTerminate‚Å‚«‚È‚©‚Á‚½B
+		//DBLã§ã‚¾ãƒ³ãƒ“ã‚’çµ‚äº†ã•ã›ã‚‹ã€‚VOSä¸Šã§ã¯Terminateã§ããªã‹ã£ãŸã€‚
 		CString strCommand;
 		CString strParam;
 		CopyDBLEXEToTempEx();
@@ -1228,17 +1228,17 @@ void CSazabi::OpenChFiler(LPCTSTR lpOpenPath)
 				}
 			}
 #ifdef _WIN64
-			//‹N“®‚Ü‚ÅŠm”F‚·‚éB
+			//èµ·å‹•ã¾ã§ç¢ºèªã™ã‚‹ã€‚
 			int iCntLimit = 0;
 			CString strFndWndChk;
 			strFndWndChk = _T("CFiler:");
 			strFndWndChk += m_FrmWndClassName;
 			while (WaitForSingleObject(pi.hProcess, 1000) == WAIT_TIMEOUT)
 			{
-				this->PumpMessage(); // ’èŠú“I‚ÉƒƒbƒZ[ƒWƒLƒ…[‚ğÁ‰»‚³‚¹‚Ü‚·
-				//Šù‚É‹N“®‚µ‚Ä‚¢‚é‚©H
+				this->PumpMessage(); // å®šæœŸçš„ã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚­ãƒ¥ãƒ¼ã‚’æ¶ˆåŒ–ã•ã›ã¾ã™
+				//æ—¢ã«èµ·å‹•ã—ã¦ã„ã‚‹ã‹ï¼Ÿ
 				HWND hWndCap = FindWindow(strFndWndChk, NULL);
-				//‹N“®‚µ‚Ä‚¢‚éB
+				//èµ·å‹•ã—ã¦ã„ã‚‹ã€‚
 				if (hWndCap != NULL)
 				{
 					if (pi.hThread)
@@ -1286,16 +1286,16 @@ void CSazabi::OpenChFiler(LPCTSTR lpOpenPath)
 			CString strFrmWnd;
 			strFrmWnd = _T("CFiler:");
 			strFrmWnd += m_FrmWndClassName;
-			//Šù‚É‹N“®‚µ‚Ä‚¢‚é‚©H
-			HWND hWndCap = FindWindow(strFrmWnd, NULL); //AP‚Ìƒnƒ“ƒhƒ‹æ“¾
-								    //‹N“®‚µ‚Ä‚¢‚éB
+			//æ—¢ã«èµ·å‹•ã—ã¦ã„ã‚‹ã‹ï¼Ÿ
+			HWND hWndCap = FindWindow(strFrmWnd, NULL); //APã®ãƒãƒ³ãƒ‰ãƒ«å–å¾—
+								    //èµ·å‹•ã—ã¦ã„ã‚‹ã€‚
 			if (hWndCap != NULL)
 			{
 				TCHAR szTitleMultipleInstance[260] = {0};
 				::GetWindowText(hWndCap, szTitleMultipleInstance, 259);
 				CString strTitleMultiple;
 				strTitleMultiple = szTitleMultipleInstance;
-				//window–¼‚ğŠm”F‚·‚éB
+				//windowåã‚’ç¢ºèªã™ã‚‹ã€‚
 				if (strTitleMultiple == strFrmWnd)
 				{
 					ATOM nAtom = {0};
@@ -1355,18 +1355,18 @@ void CSazabi::OpenChTaskMgr()
 	strFndWndChk += m_FrmWndClassName;
 	lstrcpyn(FrmWndClassName, strFndWndChk, 255);
 
-	HWND hWndCap = ::FindWindow(FrmWndClassName, NULL); //AP‚Ìƒnƒ“ƒhƒ‹æ“¾
-	//‹N“®‚µ‚Ä‚¢‚éB
+	HWND hWndCap = ::FindWindow(FrmWndClassName, NULL); //APã®ãƒãƒ³ãƒ‰ãƒ«å–å¾—
+	//èµ·å‹•ã—ã¦ã„ã‚‹ã€‚
 	if (hWndCap != NULL)
 	{
 		TCHAR szTitleMultipleInstance[260] = {0};
 		::GetWindowText(hWndCap, szTitleMultipleInstance, 255);
 		CString strTitleMultiple;
 		strTitleMultiple = szTitleMultipleInstance;
-		//window–¼‚ğŠm”F‚·‚éB
+		//windowåã‚’ç¢ºèªã™ã‚‹ã€‚
 		if (strTitleMultiple == FrmWndClassName)
 		{
-			//‹N“®‚µ‚Ä‚¢‚é
+			//èµ·å‹•ã—ã¦ã„ã‚‹
 			ATOM nAtom = {0};
 			LRESULT lr = SendMessageTimeout(hWndCap, tSG_WM_NEWINSTANCE, (WPARAM)0, 0, SMTO_NORMAL, 5 * 1000, NULL);
 			return;
@@ -1417,12 +1417,12 @@ void CSazabi::OpenChTaskMgr()
 	}
 	if (pi.hThread)
 	{
-		CloseHandle(pi.hThread); // ƒXƒŒƒbƒh‚Ìƒnƒ“ƒhƒ‹‚Íg‚í‚È‚¢‚Ì‚Å‚·‚®”jŠü
+		CloseHandle(pi.hThread); // ã‚¹ãƒ¬ãƒƒãƒ‰ã®ãƒãƒ³ãƒ‰ãƒ«ã¯ä½¿ã‚ãªã„ã®ã§ã™ãç ´æ£„
 		pi.hThread = 0;
 	}
 	if (pi.hProcess)
 	{
-		CloseHandle(pi.hProcess); // ‚à‚¤ƒvƒƒZƒX‚Ìƒnƒ“ƒhƒ‹‚Íg‚í‚È‚¢‚Ì‚Å”jŠü
+		CloseHandle(pi.hProcess); // ã‚‚ã†ãƒ—ãƒ­ã‚»ã‚¹ã®ãƒãƒ³ãƒ‰ãƒ«ã¯ä½¿ã‚ãªã„ã®ã§ç ´æ£„
 		pi.hProcess = 0;
 	}
 }
@@ -1431,7 +1431,7 @@ void CSazabi::InitLogWrite()
 	PROC_TIME(InitLogWrite)
 
 	CString logmsg;
-	//Debug—p‚ÌLogƒtƒ@ƒCƒ‹‚ÌƒoƒbƒNƒAƒbƒv5¢‘ãŠÇ—
+	//Debugç”¨ã®Logãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—5ä¸–ä»£ç®¡ç†
 	TraceLogBackup();
 	WriteDebugTraceDateTime(_T("===================================================================================================="), DEBUG_LOG_TYPE_GE);
 	WriteDebugTraceDateTime(_T("InitInstance"), DEBUG_LOG_TYPE_GE);
@@ -1469,7 +1469,7 @@ void CSazabi::InitLogWrite()
 		logmsg.Format(_T("TurboVMInfo:%s"), (LPCTSTR)GetTurboVMInfo());
 		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
-	//İ’è’l‚ğo—Í
+	//è¨­å®šå€¤ã‚’å‡ºåŠ›
 	WriteDebugTraceDateTime(m_AppSettings.ExportTxt(), DEBUG_LOG_TYPE_DE);
 }
 
@@ -1579,10 +1579,10 @@ int CSazabi::ExitInstance()
 
 	WriteDebugTraceDateTime(_T("----------------------------------------------------------------------------------------------------"), DEBUG_LOG_TYPE_GE);
 
-	//ObjectŠJ•ú
+	//Objecté–‹æ”¾
 	UnInitializeObjects();
 
-	//RecoveryFile‚ğíœ‚·‚éB
+	//RecoveryFileã‚’å‰Šé™¤ã™ã‚‹ã€‚
 	if (!m_strRecoveryFileFullPath.IsEmpty())
 	{
 		if (!m_bAbortFlg)
@@ -1596,7 +1596,7 @@ int CSazabi::ExitInstance()
 	PROC_TIME_S(ExitInstance_p2)
 	if (m_bUseApp)
 	{
-		//‹­§ƒLƒƒƒbƒVƒ…ƒNƒŠƒA
+		//å¼·åˆ¶ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚¯ãƒªã‚¢
 		if (m_bEnforceDeleteCache)
 		{
 			ProgressDlg DlgMsgP(NULL);
@@ -1616,14 +1616,14 @@ int CSazabi::ExitInstance()
 		}
 		else
 		{
-			//‘¼‚ÌƒvƒƒZƒX‚ª‚¢‚È‚¢AÅŒã‚Ìˆ—
+			//ä»–ã®ãƒ—ãƒ­ã‚»ã‚¹ãŒã„ãªã„ã€æœ€å¾Œã®å‡¦ç†
 			if (!IsExistsAnotherInstance())
 			{
 				DeleteDirectoryTempFolder(m_strDBL_EXE_FolderPath);
 
 				if (InVirtualEnvironment() != VE_NA && this->IsSGMode())
 				{
-					//CloseAll‚Å•¡”‚ÌƒvƒƒZƒX‚Å‚±‚Ì•”•ª‚ğ’Ê‚Á‚Ä‚µ‚Ü‚¤‚Ì‚ÅBlock‚·‚éB
+					//CloseAllã§è¤‡æ•°ã®ãƒ—ãƒ­ã‚»ã‚¹ã§ã“ã®éƒ¨åˆ†ã‚’é€šã£ã¦ã—ã¾ã†ã®ã§Blockã™ã‚‹ã€‚
 					SetLastError(NO_ERROR);
 					HANDLE hMutex = {0};
 					hMutex = ::CreateMutex(NULL, FALSE, _T("tfgszb_close"));
@@ -1634,7 +1634,7 @@ int CSazabi::ExitInstance()
 						CString strMsg;
 						strMsg.Format(confirmMsg, m_strThisAppName);
 						int iRt = 0;
-						//ƒVƒƒƒbƒgƒ_ƒEƒ“ˆ—’†‚ÍAƒƒbƒZ[ƒWƒ{ƒbƒNƒX‚ğ•\¦‚µ‚È‚¢B
+						//ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³å‡¦ç†ä¸­ã¯ã€ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ã‚’è¡¨ç¤ºã—ãªã„ã€‚
 						if (m_bShutdownFlg)
 						{
 							iRt = IDYES;
@@ -1672,7 +1672,7 @@ int CSazabi::ExitInstance()
 						this->DeleteCEFCache();
 					}
 				}
-				//ƒ]ƒ“ƒrƒvƒƒZƒX‰»‚ğ–h‚®B
+				//ã‚¾ãƒ³ãƒ“ãƒ—ãƒ­ã‚»ã‚¹åŒ–ã‚’é˜²ãã€‚
 				ExitKillZombieProcess();
 			}
 		}
@@ -1697,10 +1697,10 @@ int CSazabi::GetOSVersion()
 {
 	PROC_TIME(GetOSVersion)
 
-	//–ˆ‰ñæ“¾‚·‚é‚Ì‚ÍAŒø—¦‚ªˆ«‚¢‚Ì‚ÅƒRƒR‚Å“ü‚ê‚éB
+	//æ¯å›å–å¾—ã™ã‚‹ã®ã¯ã€åŠ¹ç‡ãŒæ‚ªã„ã®ã§ã‚³ã‚³ã§å…¥ã‚Œã‚‹ã€‚
 	if (m_iWinOSVersion == 0)
 	{
-		//‚Ğ‚Æ‚Ü‚¸AWin10‚ğ“ü‚ê‚Ä‚¨‚­B
+		//ã²ã¨ã¾ãšã€Win10ã‚’å…¥ã‚Œã¦ãŠãã€‚
 		m_iWinOSVersion = 100;
 		DWORD dwDummy = 0;
 		DWORD dwSize = 0;
@@ -1724,9 +1724,9 @@ int CSazabi::GetOSVersion()
 					dwBuild = HIWORD(pFileInfo->dwFileVersionLS);
 					dwPrivate = LOWORD(pFileInfo->dwFileVersionLS);
 					m_iWinOSBuildVersion = dwBuild;
-					m_iWinOSVersion = dwMajar * 10; //ƒƒWƒƒ[‚ğ10”{
+					m_iWinOSVersion = dwMajar * 10; //ãƒ¡ã‚¸ãƒ£ãƒ¼ã‚’10å€
 					m_iWinOSVersion += dwMinor;
-					//‘z’è
+					//æƒ³å®š
 					//WinXP 5.1->51
 					//WinVista 6.0->60
 					//Win7  6.1->61
@@ -1800,7 +1800,7 @@ CString CSazabi::GetThinAppEntryPointPath()
 		}
 		RegCloseKey(hKey);
 	}
-	//TS_ORIGIN‚©‚çB
+	//TS_ORIGINã‹ã‚‰ã€‚
 	if (strPath.IsEmpty())
 	{
 		TCHAR szTargetPath[512] = {0};
@@ -1862,14 +1862,14 @@ CString CSazabi::GetVOSProcessString(BOOL bCurrent, DWORD* pdwCnt, BOOL bNeedCmd
 						strCommandLine = SBUtil::GetCommandLineData(pid);
 					else
 					{
-						//EXE‚ÌƒpƒXAƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Í”ñ•\¦AEXE–¼‚Ì‚İ
+						//EXEã®ãƒ‘ã‚¹ã€ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã¯éè¡¨ç¤ºã€EXEåã®ã¿
 						strValue = PathFindFileNameW(strValue);
 						strCommandLine = _T("");
 					}
 
 					if (pidCurrent == pid)
 					{
-						//©g‚ÌƒvƒƒZƒX‚àŠÜ‚ß‚é
+						//è‡ªèº«ã®ãƒ—ãƒ­ã‚»ã‚¹ã‚‚å«ã‚ã‚‹
 						if (bCurrent)
 						{
 							strTemp.Format(_T("PID[*]:%s \"%s\" %s\r\n"), (LPCTSTR)strValueName, (LPCTSTR)strValue, (LPCTSTR)strCommandLine);
@@ -1934,20 +1934,20 @@ void CSazabi::CloseVOSProcessOther()
 		{
 			DWORD pid = 0;
 			pid = _ttoi(strValueName);
-			//©g‚Ìpid‚Ìê‡‚ÍƒXƒLƒbƒv
+			//è‡ªèº«ã®pidã®å ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
 			if (pidCurrent == pid)
 				continue;
 			HWND hWndTop = {0};
 			hWndTop = GetTopWindowHandle(pid);
-			//filenamager‚Í“Á•Ê‚È‘Î‰
+			//filenamagerã¯ç‰¹åˆ¥ãªå¯¾å¿œ
 			if (strValue.CompareNoCase(strThinFilerPath) == 0)
 			{
 				CString strFWM;
 				strFWM.Format(_T("CFiler:%s"), m_FrmWndClassName);
-				HWND hWndCap = FindWindow(strFWM, NULL); //AP‚Ìƒnƒ“ƒhƒ‹æ“¾
+				HWND hWndCap = FindWindow(strFWM, NULL); //APã®ãƒãƒ³ãƒ‰ãƒ«å–å¾—
 				if (hWndCap)
 				{
-					//‹N“®‚µ‚Ä‚¢‚é
+					//èµ·å‹•ã—ã¦ã„ã‚‹
 					//ATOM nAtom = { 0 };
 					LRESULT lr = SendMessageTimeout(hWndCap, WM_TSG_CLOSE, (WPARAM)0, 0, SMTO_NORMAL, 5 * 1000, NULL);
 					bThinFilerExecFlg = TRUE;
@@ -1956,33 +1956,33 @@ void CSazabi::CloseVOSProcessOther()
 			}
 			if (hWndTop != NULL)
 			{
-				//è‘±‚«‚Ç‚¨‚è‚ÉA•Â‚¶‚é‚¨Šè‚¢‚ğ‚·‚éB
+				//æ‰‹ç¶šãã©ãŠã‚Šã«ã€é–‰ã˜ã‚‹ãŠé¡˜ã„ã‚’ã™ã‚‹ã€‚
 				::PostMessage(hWndTop, WM_CLOSE, 0, 0);
 				::Sleep(100);
 				for (int j = 0; j < 5; j++)
 				{
-					//I—¹‚³‚ê‚½B
+					//çµ‚äº†ã•ã‚ŒãŸã€‚
 					if (!IsProcessExists(pid))
 						break;
 
 					HWND hWndTop2 = {0};
 					hWndTop2 = GetTopWindowHandle(pid);
-					//I—¹‚³‚ê‚½B
+					//çµ‚äº†ã•ã‚ŒãŸã€‚
 					if (hWndTop2 == NULL)
 						break;
 
-					//‚à‚¤ˆê“x‚¨Šè‚¢‚·‚éB
+					//ã‚‚ã†ä¸€åº¦ãŠé¡˜ã„ã™ã‚‹ã€‚
 					::PostMessage(hWndTop2, WM_CLOSE, 0, 0);
 					::Sleep(300);
 				}
 			}
-			//I—¹‚³‚ê‚Ä‚¢‚È‚¢B
+			//çµ‚äº†ã•ã‚Œã¦ã„ãªã„ã€‚
 			if (IsProcessExists(pid))
 			{
 				::Sleep(300);
 				HANDLE processHandle = {0};
 				processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-				//‚»‚ê‚Å‚à•Â‚¶‚È‚¢ê‡‚ÍA‹­§I—¹B
+				//ãã‚Œã§ã‚‚é–‰ã˜ãªã„å ´åˆã¯ã€å¼·åˆ¶çµ‚äº†ã€‚
 				::TerminateProcess(processHandle, 0);
 				if (processHandle)
 					CloseHandle(processHandle);
@@ -2206,11 +2206,11 @@ BOOL CSazabi::PumpMessage()
 		{
 			if (!m_bMultiThreadedMessageLoop)
 			{
-				//Windows 10 (2004)ˆÈ~‚É“‹Ú‚³‚ê‚Ä‚¢‚éMS-IME‚ÅƒAƒhƒŒƒXƒo[‚ÅEnterƒL[‚ªŒø‚©‚È‚¢–â‘è‚ª”­¶
-				//IME‚ğuˆÈ‘O‚Ìƒo[ƒWƒ‡ƒ“‚ÌMicrosoft IME‚ğg‚¤v‚É‚·‚é‚Æ–â‘è‚È‚­‚È‚é‚ª
-				//KEYƒ{[ƒhŒn‚ÌƒCƒxƒ“ƒg”­¶‚ÉEditƒRƒ“ƒgƒ[ƒ‹‚È‚Ç‚Å‚ÍACefDoMessageLoopWork‚ğCall‚µ‚È‚¯‚ê‚Î–â‘è‚È‚¢‚±‚Æ‚ª
-				//”»–¾‚µ‚½‚½‚ßAƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚·‚éBmulti_threaded_message_loop‚ğ—LŒø‚É‚·‚ê‚Î–â‘è‚È‚¢‚±‚Æ‚à”»–¾‚µ‚½‚ª
-				//ƒL[ƒ{[ƒhAƒ}ƒEƒXŒn‚ÌƒCƒxƒ“ƒg‚ªBroView‚âBroFrame‚É”ò‚ñ‚Å‚±‚È‚¢•¾ŠQ‚ ‚è
+				//Windows 10 (2004)ä»¥é™ã«æ­è¼‰ã•ã‚Œã¦ã„ã‚‹MS-IMEã§ã‚¢ãƒ‰ãƒ¬ã‚¹ãƒãƒ¼ã§Enterã‚­ãƒ¼ãŒåŠ¹ã‹ãªã„å•é¡ŒãŒç™ºç”Ÿ
+				//IMEã‚’ã€Œä»¥å‰ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®Microsoft IMEã‚’ä½¿ã†ã€ã«ã™ã‚‹ã¨å•é¡Œãªããªã‚‹ãŒ
+				//KEYãƒœãƒ¼ãƒ‰ç³»ã®ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæ™‚ã«Editã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãªã©ã§ã¯ã€CefDoMessageLoopWorkã‚’Callã—ãªã‘ã‚Œã°å•é¡Œãªã„ã“ã¨ãŒ
+				//åˆ¤æ˜ã—ãŸãŸã‚ã€ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã™ã‚‹ã€‚multi_threaded_message_loopã‚’æœ‰åŠ¹ã«ã™ã‚Œã°å•é¡Œãªã„ã“ã¨ã‚‚åˆ¤æ˜ã—ãŸãŒ
+				//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã€ãƒã‚¦ã‚¹ç³»ã®ã‚¤ãƒ™ãƒ³ãƒˆãŒBroViewã‚„BroFrameã«é£›ã‚“ã§ã“ãªã„å¼Šå®³ã‚ã‚Š
 				if (::PeekMessage(&msg, NULL, WM_KEYFIRST, WM_KEYLAST, PM_NOREMOVE))
 				{
 					if (msg.hwnd)
@@ -2340,22 +2340,22 @@ void CSazabi::WriteDebugTraceDateTime(LPCTSTR msg, int iLogType)
 	BOOL bFileWriteFlg = FALSE;
 	switch (m_AppSettings.GetAdvancedLogLevel())
 	{
-	//‘S‚Ä‚ÌƒƒO‚ğo—Í
+	//å…¨ã¦ã®ãƒ­ã‚°ã‚’å‡ºåŠ›
 	case DEBUG_LOG_LEVEL_OUTPUT_ALL:
 	{
 		bFileWriteFlg = TRUE;
 		break;
 	}
-	//ƒtƒ@ƒCƒ‹‘‚«‚İ–³‚µB
+	//ãƒ•ã‚¡ã‚¤ãƒ«æ›¸ãè¾¼ã¿ç„¡ã—ã€‚
 	case DEBUG_LOG_LEVEL_OUTPUT_NO_FILE:
 	{
 		bFileWriteFlg = FALSE;
 		break;
 	}
-	//URLŠÖ˜A‚Ì‚İ
+	//URLé–¢é€£ã®ã¿
 	case DEBUG_LOG_LEVEL_OUTPUT_URL:
 	{
-		//ƒƒO‚Ìí—Ş‚ªˆê”ÊAURL‚Ìê‡
+		//ãƒ­ã‚°ã®ç¨®é¡ãŒä¸€èˆ¬ã€URLã®å ´åˆ
 		if (iLogType == DEBUG_LOG_TYPE_GE || iLogType == DEBUG_LOG_TYPE_URL)
 		{
 			bFileWriteFlg = TRUE;
@@ -2513,18 +2513,18 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 			strFrmWndClass.Replace(_T(" "), _T("_"));
 			lstrcpyn(FrmWndClassName, strFrmWndClass, 255);
 
-			HWND hWndCap = FindWindow(FrmWndClassName, NULL); //AP‚Ìƒnƒ“ƒhƒ‹æ“¾
-			//‹N“®‚µ‚Ä‚¢‚éB
+			HWND hWndCap = FindWindow(FrmWndClassName, NULL); //APã®ãƒãƒ³ãƒ‰ãƒ«å–å¾—
+			//èµ·å‹•ã—ã¦ã„ã‚‹ã€‚
 			if (hWndCap != NULL)
 			{
 				TCHAR szTitleMultipleInstance[260] = {0};
 				::GetWindowText(hWndCap, szTitleMultipleInstance, 259);
 				CString strTitleMultiple;
 				strTitleMultiple = szTitleMultipleInstance;
-				//window–¼‚ğŠm”F‚·‚éB
+				//windowåã‚’ç¢ºèªã™ã‚‹ã€‚
 				if (strTitleMultiple == FrmWndClassName)
 				{
-					//‹N“®‚µ‚Ä‚¢‚é
+					//èµ·å‹•ã—ã¦ã„ã‚‹
 					ATOM nAtom = {0};
 					nAtom = ::GlobalAddAtom(strURL);
 					::PostMessage(hWndCap, WM_NEWINSTANCE, (WPARAM)nAtom, 0);
@@ -2587,7 +2587,7 @@ void CSazabi::ExecNewInstance(const CString strURL)
 {
 	PROC_TIME(ExecNewInstance)
 
-	//ƒƒ‚ƒŠ‚ğŠJ•ú
+	//ãƒ¡ãƒ¢ãƒªã‚’é–‹æ”¾
 	EmptyWorkingSetAll();
 
 	CString strCommand;
@@ -2703,7 +2703,7 @@ void CSazabi::CopyDBLEXEToTempInit()
 	{
 		m_strDBL_EXE_FullPath = m_strDBL_EXE_Default_FullPath;
 	}
-	//‰¼‘z‚ÅÀs‚³‚ê‚½ê‡‚ÍTEMP‚ÉƒRƒs[
+	//ä»®æƒ³ã§å®Ÿè¡Œã•ã‚ŒãŸå ´åˆã¯TEMPã«ã‚³ãƒ”ãƒ¼
 	else
 	{
 		m_strDBL_EXE_FullPath = strTempPath;
@@ -2722,18 +2722,18 @@ static void LogErrNo(LPCWSTR prefix, int errNum)
 }
 
 // 2023-04-07
-// Windows 11 22H2‚É‚¨‚¢‚ÄACopyFile()‚ğg—p‚µ‚ÄDBLC.exe‚ğThinApp“à‚©‚çƒzƒXƒg‚Ì
-// Temp‚ÉƒRƒs[‚·‚é‚Æƒtƒ@ƒCƒ‹‚ª”j‘¹‚·‚é–Û‚ª‹N‚±‚Á‚Ä‚¢‚é‚½‚ßACopyFile()‚ğ“Æ©
-// À‘•‚É’u‚«Š·‚¦‚éB
-// Œ»“_‚Å‚ÍˆÈ‰ºğŒ‚Å‚Ì‚İ”­¶‚·‚é‚Æl‚¦‚ç‚êA‚±‚ê‚ğ–‚½‚·‚Ì‚ÍDBLC.exe‚ÌƒRƒs[
-// ‚Ì‚İ‚Æl‚¦‚ç‚ê‚é‚½‚ßA“¯ˆ—‚É‚Ì‚İ“K—p‚·‚éB
+// Windows 11 22H2ã«ãŠã„ã¦ã€CopyFile()ã‚’ä½¿ç”¨ã—ã¦DBLC.exeã‚’ThinAppå†…ã‹ã‚‰ãƒ›ã‚¹ãƒˆã®
+// Tempã«ã‚³ãƒ”ãƒ¼ã™ã‚‹ã¨ãƒ•ã‚¡ã‚¤ãƒ«ãŒç ´æã™ã‚‹äº‹è±¡ãŒèµ·ã“ã£ã¦ã„ã‚‹ãŸã‚ã€CopyFile()ã‚’ç‹¬è‡ª
+// å®Ÿè£…ã«ç½®ãæ›ãˆã‚‹ã€‚
+// ç¾æ™‚ç‚¹ã§ã¯ä»¥ä¸‹æ¡ä»¶ã§ã®ã¿ç™ºç”Ÿã™ã‚‹ã¨è€ƒãˆã‚‰ã‚Œã€ã“ã‚Œã‚’æº€ãŸã™ã®ã¯DBLC.exeã®ã‚³ãƒ”ãƒ¼
+// æ™‚ã®ã¿ã¨è€ƒãˆã‚‰ã‚Œã‚‹ãŸã‚ã€åŒå‡¦ç†ã«ã®ã¿é©ç”¨ã™ã‚‹ã€‚
 // * Windows 22H2
-//   * Windows 11 21H2ˆÈ‘O‚Å‚Í”­¶‚µ‚Ä‚¢‚È‚¢
-// * CopyFile()‚ğg—p‚·‚é
-// * ThinApp‚Å‰¼‘z‰»‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ğƒRƒs[‚·‚é
+//   * Windows 11 21H2ä»¥å‰ã§ã¯ç™ºç”Ÿã—ã¦ã„ãªã„
+// * CopyFile()ã‚’ä½¿ç”¨ã™ã‚‹
+// * ThinAppã§ä»®æƒ³åŒ–ã•ã‚Œã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 void CSazabi::CopyDBLEXEToTempEx()
 {
-	//ƒlƒCƒeƒBƒu”Å‚ÍADBLC‚Í•s—v
+	//ãƒã‚¤ãƒ†ã‚£ãƒ–ç‰ˆã¯ã€DBLCã¯ä¸è¦
 	if (InVirtualEnvironment() == VE_NA)
 		return;
 
@@ -2788,7 +2788,7 @@ void CSazabi::CopyDBLEXEToTempEx()
 }
 
 /*
- * •\¦ƒEƒBƒ“ƒhƒE‚Ìó‘Ô‚ğ•Û‘¶‚·‚éƒpƒX‚ğ¶¬‚·‚é
+ * è¡¨ç¤ºã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®çŠ¶æ…‹ã‚’ä¿å­˜ã™ã‚‹ãƒ‘ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
  *
  * (e.g. %AppDataLocal%\Temp\2\ChronosSG\CSG_SaveWnd_chronosn.dat)
  */
@@ -2830,21 +2830,21 @@ BOOL CSazabi::DeleteDirectory(LPCTSTR lpPathName, LPCTSTR lpPat)
 		{
 			i = fnd.FindNextFile();
 
-			// ƒtƒ@ƒCƒ‹–¼‚ª"."‚©".."‚Ìê‡‚ÍŸ‚ğŒŸõ
+			// ãƒ•ã‚¡ã‚¤ãƒ«åãŒ"."ã‹".."ã®å ´åˆã¯æ¬¡ã‚’æ¤œç´¢
 			if (fnd.IsDots())
 				continue;
 
-			// íœ‚·‚éƒtƒ@ƒCƒ‹–¼æ“¾
+			// å‰Šé™¤ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«åå–å¾—
 			CString strDeleteFile = lpPathName;
 			strDeleteFile.TrimRight('\\');
 			strDeleteFile += _T("\\") + fnd.GetFileName();
 
-			// ƒtƒHƒ‹ƒ_‚¾‚Á‚½ê‡AÄ‹AŒÄ‚Ño‚µ‚Å‚»‚ÌƒtƒHƒ‹ƒ_‚ğíœ
+			// ãƒ•ã‚©ãƒ«ãƒ€ã ã£ãŸå ´åˆã€å†å¸°å‘¼ã³å‡ºã—ã§ãã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’å‰Šé™¤
 			if (fnd.IsDirectory())
 			{
 				DeleteDirectory(strDeleteFile, lpPat);
 
-				// ƒtƒHƒ‹ƒ_‚Ìíœ
+				// ãƒ•ã‚©ãƒ«ãƒ€ã®å‰Šé™¤
 				DWORD dwAttributes = 0;
 				SetFileAttributes(strDeleteFile, dwAttributes);
 				CStringW strLogFilePath(L"\\\\?\\");
@@ -2855,7 +2855,7 @@ BOOL CSazabi::DeleteDirectory(LPCTSTR lpPathName, LPCTSTR lpPat)
 				::RemoveDirectoryW(strLogFilePath);
 			}
 
-			// ƒtƒ@ƒCƒ‹‚Ìíœ
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®å‰Šé™¤
 			else
 			{
 				DWORD dwAttributes = 0;
@@ -2894,20 +2894,20 @@ BOOL CSazabi::DeleteDirectoryTempFolder(LPCTSTR lpPathName)
 		{
 			i = fnd.FindNextFile();
 
-			// ƒtƒ@ƒCƒ‹–¼‚ª"."‚©".."‚Ìê‡‚ÍŸ‚ğŒŸõ
+			// ãƒ•ã‚¡ã‚¤ãƒ«åãŒ"."ã‹".."ã®å ´åˆã¯æ¬¡ã‚’æ¤œç´¢
 			if (fnd.IsDots())
 				continue;
 
-			// íœ‚·‚éƒtƒ@ƒCƒ‹–¼æ“¾
+			// å‰Šé™¤ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«åå–å¾—
 			CString strDeleteFile = lpPathName;
 			strDeleteFile.TrimRight('\\');
 			strDeleteFile += _T("\\") + fnd.GetFileName();
 
-			// ƒtƒHƒ‹ƒ_‚¾‚Á‚½ê‡AÄ‹AŒÄ‚Ño‚µ‚Å‚»‚ÌƒtƒHƒ‹ƒ_‚ğíœ
+			// ãƒ•ã‚©ãƒ«ãƒ€ã ã£ãŸå ´åˆã€å†å¸°å‘¼ã³å‡ºã—ã§ãã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’å‰Šé™¤
 			if (fnd.IsDirectory())
 			{
 				DeleteDirectory(strDeleteFile, szPat);
-				// ƒtƒHƒ‹ƒ_‚Ìíœ
+				// ãƒ•ã‚©ãƒ«ãƒ€ã®å‰Šé™¤
 				DWORD dwAttributes = 0;
 				SetFileAttributes(strDeleteFile, dwAttributes);
 				CStringW strLogFilePath(L"\\\\?\\");
@@ -2917,10 +2917,10 @@ BOOL CSazabi::DeleteDirectoryTempFolder(LPCTSTR lpPathName)
 				::RemoveDirectory(strDeleteFile);
 				::RemoveDirectoryW(strLogFilePath);
 			}
-			// ƒtƒ@ƒCƒ‹‚Ìíœ
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã®å‰Šé™¤
 			else
 			{
-				//œŠOƒtƒ@ƒCƒ‹
+				//é™¤å¤–ãƒ•ã‚¡ã‚¤ãƒ«
 				CString strFileName(fnd.GetFileName());
 				CString FileExt;
 				FileExt = strFileName.Mid(strFileName.ReverseFind('.'));
@@ -2930,7 +2930,7 @@ BOOL CSazabi::DeleteDirectoryTempFolder(LPCTSTR lpPathName)
 				CStringW strLogFilePath(L"\\\\?\\");
 				strLogFilePath += strDeleteFile;
 
-				//œŠOƒtƒ@ƒCƒ‹
+				//é™¤å¤–ãƒ•ã‚¡ã‚¤ãƒ«
 				if (strFileName.CompareNoCase(_T("DBLC.exe")) == 0)
 				{
 					continue;
@@ -2978,7 +2978,7 @@ void CSazabi::TraceLogBackup()
 	if (!m_AppSettings.IsAdvancedLogMode()) return;
 	if (m_AppSettings.GetAdvancedLogLevel() == DEBUG_LOG_LEVEL_OUTPUT_NO_FILE)
 		return;
-	//file backup  ‹N“®‚ÉƒƒOƒtƒ@ƒCƒ‹‚ğƒ[ƒe[ƒVƒ‡ƒ“‚µƒƒOƒtƒ@ƒCƒ‹‚É‚æ‚éƒfƒBƒXƒNˆ³”—‚ğ‰ñ”ğ
+	//file backup  èµ·å‹•æ™‚ã«ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã—ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã«ã‚ˆã‚‹ãƒ‡ã‚£ã‚¹ã‚¯åœ§è¿«ã‚’å›é¿
 	::CopyFile(m_strLogFileFullPath + ".bak3", m_strLogFileFullPath + ".bak4", FALSE);
 	::CopyFile(m_strLogFileFullPath + ".bak2", m_strLogFileFullPath + ".bak3", FALSE);
 	::CopyFile(m_strLogFileFullPath + ".bak1", m_strLogFileFullPath + ".bak2", FALSE);
@@ -3101,7 +3101,7 @@ void CSazabi::EmptyWorkingSetAll()
 					DWORD PID = pe32.th32ProcessID;
 					if (IsProcOwner(PID))
 					{
-						//©•ª
+						//è‡ªåˆ†
 						if (PID == pidCurrent)
 						{
 							EmptyWorkingSetSingle(PID);
@@ -3111,7 +3111,7 @@ void CSazabi::EmptyWorkingSetAll()
 							DWORD ParentPID = pe32.th32ParentProcessID;
 							CString strStrDataTemp = pe32.szExeFile;
 							strStrDataTemp.MakeLower();
-							//e‚ªˆê
+							//è¦ªãŒä¸€ç·’
 							if (ParentPID == pidCurrent)
 							{
 								if (strStrDataTemp.Find(_T("chronos")) >= 0)
@@ -3152,7 +3152,7 @@ unsigned long long CSazabi::GetMemoryUsageSize()
 					DWORD PID = pe32.th32ProcessID;
 					if (IsProcOwner(PID))
 					{
-						//©•ª
+						//è‡ªåˆ†
 						if (PID == pidCurrent)
 						{
 							;
@@ -3162,7 +3162,7 @@ unsigned long long CSazabi::GetMemoryUsageSize()
 							DWORD ParentPID = pe32.th32ParentProcessID;
 							CString strStrDataTemp = pe32.szExeFile;
 							strStrDataTemp.MakeLower();
-							//e‚ªˆê
+							//è¦ªãŒä¸€ç·’
 							if (ParentPID == pidCurrent)
 							{
 								if (strStrDataTemp.Find(_T("chronos")) >= 0)
@@ -3188,10 +3188,10 @@ int CSazabi::GetProcessRunningTime()
 	int iRet = 0;
 	try
 	{
-		FILETIME ftMakeTime = {0}; // ƒvƒƒZƒX‚Ìì¬
-		FILETIME ftExitTime = {0}; // ƒvƒƒZƒX‚ÌI—¹
-		FILETIME ftKernTime = {0}; // ƒvƒƒZƒX‚ÌƒJ[ƒlƒ‹“®ìŠÔ
-		FILETIME ftUserTime = {0}; // ƒvƒƒZƒX‚Ìƒ†[ƒU[“®ìŠÔ
+		FILETIME ftMakeTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®ä½œæˆæ™‚åˆ»
+		FILETIME ftExitTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®çµ‚äº†æ™‚åˆ»
+		FILETIME ftKernTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®ã‚«ãƒ¼ãƒãƒ«å‹•ä½œæ™‚é–“
+		FILETIME ftUserTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼å‹•ä½œæ™‚é–“
 		GetProcessTimes(m_hProcess, &ftMakeTime, &ftExitTime, &ftKernTime, &ftUserTime);
 		COleDateTime timeNow = COleDateTime::GetCurrentTime();
 		COleDateTime timeCreation(ftMakeTime);
@@ -3250,7 +3250,7 @@ BOOL CSazabi::IsCacheRedirectFilterNone(LPCTSTR pURL)
 		}
 		else
 		{
-			//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+			//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			void* ptr = NULL;
 			if (m_CacheRedirectFilter_None.Lookup(pURL, ptr))
 			{
@@ -3282,7 +3282,7 @@ void CSazabi::AddCacheRedirectFilterNone(LPCTSTR pURL)
 		}
 		else
 		{
-			//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+			//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			void* ptr = NULL;
 			if (m_CacheRedirectFilter_None.Lookup(pURL, ptr))
 			{
@@ -3323,7 +3323,7 @@ BOOL CSazabi::IsCacheURLFilterAllow(LPCTSTR pURL)
 		}
 		else
 		{
-			//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+			//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			void* ptr = NULL;
 			if (m_CacheURLFilter_Allow.Lookup(pURL, ptr))
 			{
@@ -3355,7 +3355,7 @@ BOOL CSazabi::IsCacheURLFilterDeny(LPCTSTR pURL)
 		}
 		else
 		{
-			//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+			//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			void* ptr = NULL;
 			if (m_CacheURLFilter_Deny.Lookup(pURL, ptr))
 			{
@@ -3388,7 +3388,7 @@ void CSazabi::AddCacheURLFilterAllow(LPCTSTR pURL)
 		}
 		else
 		{
-			//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+			//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			void* ptr = NULL;
 			if (m_CacheURLFilter_Allow.Lookup(pURL, ptr))
 			{
@@ -3428,7 +3428,7 @@ void CSazabi::AddCacheURLFilterDeny(LPCTSTR pURL)
 		}
 		else
 		{
-			//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+			//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			void* ptr = NULL;
 			if (m_CacheURLFilter_Deny.Lookup(pURL, ptr))
 			{
@@ -3474,7 +3474,7 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 		CString strMsg;
 		strMsg.LoadString(IDS_STRING_ADMIN_LOCK_FEATURE);
 		SB_MessageBox(pParentWnd->m_hWnd, strMsg, NULL, MB_OK | MB_ICONERROR, TRUE);
-		//‰B‚µİ’è‰æ–Ê‚ğ•\¦‚·‚éBShiftƒL[‚ğ‰Ÿ‚µ‚Ä‚¢‚éê‡‚Ì‚İ•\¦
+		//éš ã—è¨­å®šç”»é¢ã‚’è¡¨ç¤ºã™ã‚‹ã€‚Shiftã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã„ã‚‹å ´åˆã®ã¿è¡¨ç¤º
 		if (!bValidKeyCombi())
 		{
 			return;
@@ -3485,47 +3485,47 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 	strTitle += _T(" - Settings");
 	this->m_pSettingDlg->SetTitle(strTitle);
 
-	//‘S”Êİ’è
+	//å…¨èˆ¬è¨­å®š
 	CString titleGen;
 	titleGen.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_GEN);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetGen), titleGen, IDD_SETTINGS_DLG_GEN, titleGen);
-	//‰æ–Ê•\¦İ’è
+	//ç”»é¢è¡¨ç¤ºè¨­å®š
 	CString titleDSP;
 	titleDSP.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_DSP);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDSP), titleDSP, IDD_SETTINGS_DLG_DSP, titleDSP);
-	//‹N“®ŠÖ˜Aİ’è
+	//èµ·å‹•é–¢é€£è¨­å®š
 	CString titleINIT;
 	titleINIT.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_INIT);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetINIT), titleINIT, IDD_SETTINGS_DLG_INIT, titleINIT);
-	//ƒCƒ“ƒ^[ƒlƒbƒgÚ‘±İ’è
+	//ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæ¥ç¶šè¨­å®š
 	CString titleConnection;
 	titleConnection.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CONNECTION);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetConnectionSetting), titleConnection, IDD_SETTINGS_DLG_CONNECTION, titleConnection);
-	//ƒŠƒ\[ƒX§ŒÀİ’è
+	//ãƒªã‚½ãƒ¼ã‚¹åˆ¶é™è¨­å®š
 	CString titleCAP;
 	titleCAP.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CAP);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCAP), titleCAP, IDD_SETTINGS_DLG_CAP, titleCAP);
-	//ƒŠƒ_ƒCƒŒƒNƒgİ’è
+	//ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆè¨­å®š
 	CString titleSEC;
 	titleSEC.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_SEC);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetSEC), titleSEC, IDD_SETTINGS_DLG_SEC, titleSEC);
-	//URLƒtƒBƒ‹ƒ^[İ’è
+	//URLãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è¨­å®š
 	CString titleURLFilter;
 	titleURLFilter.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDomainFilter), titleURLFilter, IDD_SETTINGS_DLG_URL_FILTER, titleURLFilter);
-	//CustomScriptİ’è
+	//CustomScriptè¨­å®š
 	CString titleCustomScript;
 	titleCustomScript.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCustomScript), titleCustomScript, IDD_SETTINGS_DLG_CUSTOM_SCRIPT, titleCustomScript);
 
-	//ƒƒOo—Íİ’è
+	//ãƒ­ã‚°å‡ºåŠ›è¨­å®š
 	CString titleLog;
 	titleLog.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_LOG);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetLog), titleLog, IDD_SETTINGS_DLG_LOG, titleLog);
 
 	if (this->IsSGMode())
 	{
-		//ƒtƒ@ƒCƒ‹ƒ}ƒl[ƒWƒƒİ’è
+		//ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒãƒ¼ã‚¸ãƒ£è¨­å®š
 		CString titleFileMgr;
 		titleFileMgr.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR);
 		this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetFileMgr), titleFileMgr, IDD_SETTINGS_DLG_FILEMGR, titleFileMgr);
@@ -3555,7 +3555,7 @@ void CSazabi::ShowDebugTraceDlg()
 }
 BOOL CSazabi::IsShowDevTools()
 {
-	//2021-07-02 CEF 91‚Å‚Íresources.pak‚É“‡‚³‚ê‚½‚Ì‚Å•K‚¸•\¦‚·‚éB
+	//2021-07-02 CEF 91ã§ã¯resources.pakã«çµ±åˆã•ã‚ŒãŸã®ã§å¿…ãšè¡¨ç¤ºã™ã‚‹ã€‚
 	//CString strDevToolPath;
 	//strDevToolPath = m_strExeFolderPath;
 	//strDevToolPath += _T("devtools_resources.pak");
@@ -3609,7 +3609,7 @@ CString CSazabi::GetCefVersionStr()
 
 			for (UINT i = 0; i < TranslateLen / sizeof(*lpTranslate); i++)
 			{
-				//ƒR[ƒhƒy[ƒW‚ğw’è
+				//ã‚³ãƒ¼ãƒ‰ãƒšãƒ¼ã‚¸ã‚’æŒ‡å®š
 				CString name;
 
 				name.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
@@ -3658,7 +3658,7 @@ CString CSazabi::GetChromiumVersionStr()
 
 			for (UINT i = 0; i < TranslateLen / sizeof(*lpTranslate); i++)
 			{
-				//ƒR[ƒhƒy[ƒW‚ğw’è
+				//ã‚³ãƒ¼ãƒ‰ãƒšãƒ¼ã‚¸ã‚’æŒ‡å®š
 				CString name;
 
 				name.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
@@ -3791,7 +3791,7 @@ CString CSazabi::GetVOSInfo()
 	DWORD dwZero = 0;
 	DWORD dwVerInfoSize = 0;
 	UCHAR* pBlock = {0};
-	//ƒo[ƒWƒ‡ƒ“‚ğæ“¾‚·‚éˆ×‚Ìƒoƒbƒtƒ@
+	//ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹ç‚ºã®ãƒãƒƒãƒ•ã‚¡
 	void* pvVersion = {0};
 	UINT VersionLen = 0;
 	UINT TranslateLen = 0;
@@ -3830,7 +3830,7 @@ CString CSazabi::GetVOSInfo()
 
 		for (UINT i = 0; i < TranslateLen / sizeof(*lpTranslate); i++)
 		{
-			//ƒR[ƒhƒy[ƒW‚ğw’è
+			//ã‚³ãƒ¼ãƒ‰ãƒšãƒ¼ã‚¸ã‚’æŒ‡å®š
 			CString name;
 
 			name.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
@@ -4005,7 +4005,7 @@ CBrowserFrame* CSazabi::GetActiveBFramePtr()
 	{
 		if (IsWnd(m_pMainWnd))
 		{
-			//popup‚ğœ‚­
+			//popupã‚’é™¤ã
 			pFrm = dynamic_cast<CBrowserFrame*>(m_pMainWnd->GetForegroundWindow());
 			if (IsWnd(pFrm))
 			{
@@ -4097,7 +4097,7 @@ void CSazabi::HideRebar(CWnd* pWnd)
 	if (!IsWnd(pFrame))
 		return;
 
-	//ƒXƒe[ƒ^ƒXƒo[‚ğ”ñ•\¦‚É‚·‚éB
+	//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã‚’éè¡¨ç¤ºã«ã™ã‚‹ã€‚
 	if (IsWnd(pFrame->m_pwndStatusBar))
 		pFrame->m_pwndStatusBar->ShowWindow(SW_HIDE);
 
@@ -4148,8 +4148,8 @@ void CSazabi::InitializeCef()
 
 	CefSettings settings;
 
-	// •ÊƒXƒŒƒbƒh‚ÅƒƒbƒZ[ƒWƒ‹[ƒv‚ğŠÇ—‚µ‚È‚¢
-	// (CefDoMessageLoopWork()‚ğƒƒCƒ“ƒvƒƒOƒ‰ƒ€‚©‚çŒÄ‚Ño‚·)
+	// åˆ¥ã‚¹ãƒ¬ãƒƒãƒ‰ã§ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—ã‚’ç®¡ç†ã—ãªã„
+	// (CefDoMessageLoopWork()ã‚’ãƒ¡ã‚¤ãƒ³ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‹ã‚‰å‘¼ã³å‡ºã™)
 	m_bMultiThreadedMessageLoop = FALSE;
 	settings.multi_threaded_message_loop = m_bMultiThreadedMessageLoop;
 
@@ -4175,10 +4175,10 @@ void CSazabi::InitializeCef()
 	strCefAcceptLanguageList = strLAcceptLanguageList;
 	CefString(&settings.accept_language_list) = strCefAcceptLanguageList;
 
-	// ƒLƒƒƒbƒVƒ…ƒtƒHƒ‹ƒ_‚ÌƒpƒX‚ğæ“¾‚·‚éB
+	// ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãƒ•ã‚©ãƒ«ãƒ€ã®ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹ã€‚
 	//
-	// * C:\Program Files\Chronos\CEFCache (SGƒ‚[ƒh)
-	// * C:\Users\<user>\AppData\Local\ChronosCache (’Êíƒ‚[ƒh)
+	// * C:\Program Files\Chronos\CEFCache (SGãƒ¢ãƒ¼ãƒ‰)
+	// * C:\Users\<user>\AppData\Local\ChronosCache (é€šå¸¸ãƒ¢ãƒ¼ãƒ‰)
 	//
 	if (this->IsSGMode())
 	{
@@ -4219,7 +4219,7 @@ void CSazabi::InitializeCef()
 #endif
 	settings.persist_user_preferences = true;
 
-	// ƒƒO‚ğ—LŒø‰»‚·‚é (ChronosDefault.conf > EnableAdvancedLogMode)
+	// ãƒ­ã‚°ã‚’æœ‰åŠ¹åŒ–ã™ã‚‹ (ChronosDefault.conf > EnableAdvancedLogMode)
 	if (m_AppSettings.IsAdvancedLogMode())
 	{
 		m_strFaviconCachePath = m_strCEFCachePath;
@@ -4254,7 +4254,7 @@ void CSazabi::InitializeCef()
 }
 
 /*
- * ŠÂ‹«‚É‰‚¶‚½UserAgent•¶š—ñ‚ğ¶¬‚·‚éB
+ * ç’°å¢ƒã«å¿œã˜ãŸUserAgentæ–‡å­—åˆ—ã‚’ç”Ÿæˆã™ã‚‹ã€‚
  * ----
  * Mozilla/5.0 (Windows NT 10.0;) AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA)
  * Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.4472.114 Chronos/SystemGuard
@@ -4317,13 +4317,13 @@ BOOL CSazabi::IsURLFilterAllow(LPCTSTR sURL,
 		if (!m_AppSettings.IsEnableURLFilter())
 			return TRUE;
 
-		//Deny‚ÉHit‚µ‚½B
+		//Denyã«Hitã—ãŸã€‚
 		if (IsCacheURLFilterDeny(sHost))
 		{
 			return FALSE;
 		}
 
-		//Allow‚ÉHit‚µ‚½
+		//Allowã«Hitã—ãŸ
 		if (IsCacheURLFilterAllow(sHost))
 		{
 			return TRUE;
@@ -4399,7 +4399,7 @@ BOOL CSazabi::IsLimitChkEx()
 			//WARNING
 			if (iMemSize > (unsigned long long)(iMemL - 250) * 1024 * 1024)
 			{
-				//ˆê’Uƒ[ƒLƒ“ƒOƒZƒbƒg‚ğƒNƒŠƒA‚µ‚ÄŠJ•ú‚µ‚Ä‚µ‚Ü‚¤B
+				//ä¸€æ—¦ãƒ¯ãƒ¼ã‚­ãƒ³ã‚°ã‚»ãƒƒãƒˆã‚’ã‚¯ãƒªã‚¢ã—ã¦é–‹æ”¾ã—ã¦ã—ã¾ã†ã€‚
 				EmptyWorkingSetAll();
 			}
 			iMemSize = GetMemoryUsageSize();
@@ -4520,12 +4520,12 @@ int CSazabi::SB_MessageBox(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uT
 	int iRet = 0;
 	try
 	{
-		//RDSŠÂ‹«‚Ìê‡‚ÍA”¼“§–¾‚Ìƒtƒ‹ƒXƒNƒŠ[ƒ“‚ª•`‰æƒpƒtƒH[ƒ}ƒ“ƒX‚É‰e‹¿‚·‚é‚½‚ß–³Œø‚É‚·‚éB
+		//RDSç’°å¢ƒã®å ´åˆã¯ã€åŠé€æ˜ã®ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãŒæç”»ãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹ã«å½±éŸ¿ã™ã‚‹ãŸã‚ç„¡åŠ¹ã«ã™ã‚‹ã€‚
 		if (InRDSEnvironment() != RDS_NA)
 		{
 			bBlackOut = FALSE;
 		}
-		//0‚Í”ñ•\¦
+		//0ã¯éè¡¨ç¤º
 		if (iTimeOut == 0)
 			return MB_OK;
 
@@ -4640,7 +4640,7 @@ int CSazabi::SB_MessageBox(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uT
 					}
 					else
 					{
-						//’Êí‚ÌƒƒbƒZ[ƒWƒ{ƒbƒNƒX or Module‚ªNULL
+						//é€šå¸¸ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ or ModuleãŒNULL
 						if (iTimeOut == -1 || hModule == NULL)
 						{
 							iRet = ::MessageBox(hStopWnd, lpText, lpstrCaption, uType);
@@ -4674,7 +4674,7 @@ int CSazabi::SB_MessageBox(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uT
 			return iRet;
 		}
 
-		//’Êí‚ÌƒƒbƒZ[ƒWƒ{ƒbƒNƒX or Module‚ªNULL
+		//é€šå¸¸ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ or ModuleãŒNULL
 		if (iTimeOut == -1 || hModule == NULL)
 		{
 			iRet = ::MessageBox(hWnd, lpText, lpstrCaption, uType);
@@ -4814,7 +4814,7 @@ void CAboutDlg::SetDetailString(BOOL bEnableDetail)
 		MODULEENTRY32 me32 = {sizeof(MODULEENTRY32)};
 		THREADENTRY32 te32 = {sizeof(THREADENTRY32)};
 
-		// ƒ‚ƒWƒ…[ƒ‹”
+		// ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«æ•°
 		if (Module32First(hSnapshot, &me32))
 		{
 			do
@@ -4822,7 +4822,7 @@ void CAboutDlg::SetDetailString(BOOL bEnableDetail)
 				nModule++;
 			} while (Module32Next(hSnapshot, &me32));
 		}
-		// ƒXƒŒƒbƒh”
+		// ã‚¹ãƒ¬ãƒƒãƒ‰æ•°
 		if (Thread32First(hSnapshot, &te32))
 		{
 			do
@@ -4838,10 +4838,10 @@ void CAboutDlg::SetDetailString(BOOL bEnableDetail)
 		strEditValue += verstr;
 	}
 
-	FILETIME ftMakeTime = {0}; // ƒvƒƒZƒX‚Ìì¬
-	FILETIME ftExitTime = {0}; // ƒvƒƒZƒX‚ÌI—¹
-	FILETIME ftKernTime = {0}; // ƒvƒƒZƒX‚ÌƒJ[ƒlƒ‹“®ìŠÔ
-	FILETIME ftUserTime = {0}; // ƒvƒƒZƒX‚Ìƒ†[ƒU[“®ìŠÔ
+	FILETIME ftMakeTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®ä½œæˆæ™‚åˆ»
+	FILETIME ftExitTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®çµ‚äº†æ™‚åˆ»
+	FILETIME ftKernTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®ã‚«ãƒ¼ãƒãƒ«å‹•ä½œæ™‚é–“
+	FILETIME ftUserTime = {0}; // ãƒ—ãƒ­ã‚»ã‚¹ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼å‹•ä½œæ™‚é–“
 	GetProcessTimes(hProcess, &ftMakeTime, &ftExitTime, &ftKernTime, &ftUserTime);
 	CString strTimeFmt;
 	getTimeString(&ftMakeTime, TRUE, strTimeFmt);
@@ -5026,7 +5026,7 @@ BOOL CAboutDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	BOOL bEnableDetail = FALSE;
-	//Ú×•\¦‹–‰Â
+	//è©³ç´°è¡¨ç¤ºè¨±å¯
 	if (theApp.m_AppSettings.GetKeyCombination() == 0)
 	{
 		bEnableDetail = TRUE;

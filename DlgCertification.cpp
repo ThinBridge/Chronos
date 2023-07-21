@@ -1,11 +1,11 @@
-// CDlgCertification.cpp : À‘•ƒtƒ@ƒCƒ‹
+// CDlgCertification.cpp : å®Ÿè£…ãƒ•ã‚¡ã‚¤ãƒ«
 //
 #include "stdafx.h"
 #include "Sazabi.h"
 #include "DlgCertification.h"
 #include "afxdialogex.h"
 
-// CDlgCertification ƒ_ƒCƒAƒƒO
+// CDlgCertification ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNAMIC(CDlgCertification, CDialogEx)
 
@@ -140,7 +140,7 @@ BEGIN_MESSAGE_MAP(CDlgCertification, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CDlgCertification::OnBnClickedOk)
 END_MESSAGE_MAP()
 
-// CDlgCertification ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰[
+// CDlgCertification ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©ãƒ¼
 
 void CDlgCertification::OnCbnSelchangeCertificationCombo()
 {
@@ -179,8 +179,8 @@ void CDlgCertification::OnCbnSelchangeCertificationCombo()
 
 void CDlgCertification::OnBnClickedOk()
 {
-	// DoModal‚È‚Ç‚ÅŒ‹‰Ê‚ğ•Ô‚µI‚¦‚½ŒãAcertificationComboBox‚È‚Ç‚ª‰ğ•ú‚³‚ê‚Ä‚µ‚Ü‚Á‚ÄQÆ‚Å‚«‚È‚¢B
-	// ‚È‚Ì‚ÅA‚±‚Ìƒ^ƒCƒ~ƒ“ƒO‚ÅƒNƒ‰ƒX•Ï”‚ÉŒ‹‰Ê‚ğ‘ã“ü‚µ‚Ä‚¨‚­B
+	// DoModalãªã©ã§çµæœã‚’è¿”ã—çµ‚ãˆãŸå¾Œã€certificationComboBoxãªã©ãŒè§£æ”¾ã•ã‚Œã¦ã—ã¾ã£ã¦å‚ç…§ã§ããªã„ã€‚
+	// ãªã®ã§ã€ã“ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ã‚¯ãƒ©ã‚¹å¤‰æ•°ã«çµæœã‚’ä»£å…¥ã—ã¦ãŠãã€‚
 	m_selectedIndex = certificationComboBox.GetCurSel();
 	CDialogEx::OnOK();
 }
