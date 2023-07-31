@@ -188,6 +188,7 @@
     <ClCompile Include="DlgDomainDetail.cpp" />
     <ClCompile Include="DlgSetting.cpp" />
     <ClCompile Include="FullScreenTitleBar.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MyComboBoxEx.cpp" />
     <ClCompile Include="Sazabi.cpp" />
