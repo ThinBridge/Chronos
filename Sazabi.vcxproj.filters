@@ -56,6 +56,9 @@
     <ClCompile Include="DlgCertification.cpp">
       <Filter>DLG</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
