@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "..\..\StdAfx.h"
 #include "..\..\sbcommon.h"
-
 TEST(Test_Sbcommon, CLogDispatcher_GetOpStr)
 {
 	CLogDispatcher clogDispatcher;

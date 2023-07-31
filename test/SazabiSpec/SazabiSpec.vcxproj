@@ -73,7 +73,9 @@
       <AdditionalDependencies>C:\gitdir\Chronos\ChronosDebug\*.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>move $(SolutionDir)ChronosDebug\Main.obj $(SolutionDir)ChronosDebug\Main.obj.backup</Command>
+      <Command>xcopy /Y $(SolutionDir)lib $(ProjectDir)lib\
+move $(SolutionDir)ChronosDebug\Main.obj $(SolutionDir)ChronosDebug\Main.obj.backup
+</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>move $(SolutionDir)ChronosDebug\Main.obj.backup $(SolutionDir)ChronosDebug\Main.obj</Command>
@@ -110,7 +112,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <PreBuildEvent>
-      <Command>move $(SolutionDir)ChronosRelease\Main.obj $(SolutionDir)ChronosRelease\Main.obj.backup</Command>
+      <Command>xcopy /Y $(SolutionDir)rlib $(ProjectDir)rlib\
+move $(SolutionDir)ChronosRelease\Main.obj $(SolutionDir)ChronosRelease\Main.obj.backup</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>move $(SolutionDir)ChronosRelease\Main.obj.backup $(SolutionDir)ChronosRelease\Main.obj</Command>
