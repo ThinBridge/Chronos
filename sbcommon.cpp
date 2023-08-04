@@ -470,6 +470,9 @@ void CLogDispatcher::SendLog(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTargetU
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventSendMsgName);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 200);
 		if (waitRes == WAIT_TIMEOUT)
 		{

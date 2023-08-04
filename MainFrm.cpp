@@ -2695,6 +2695,9 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 	try
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, theApp.m_strEventRecoveryName);
+		if (!hEvent)
+			throw std::runtime_error("Failed to execute OpenEvent");
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 100);
 		if (waitRes == WAIT_TIMEOUT)
 		{
