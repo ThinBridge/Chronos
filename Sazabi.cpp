@@ -3477,6 +3477,8 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 		//隠し設定画面を表示する。Shiftキーを押している場合のみ表示
 		if (!bValidKeyCombi())
 		{
+			delete m_pSettingDlg;
+			this->m_pSettingDlg = NULL;
 			return;
 		}
 	}
