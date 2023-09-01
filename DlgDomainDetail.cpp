@@ -147,7 +147,7 @@ void CDlgCustomScriptDetail::OnBnClickedOk()
 	}
 	else
 	{
-		//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
+		//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
 		m_strFileName = SBUtil::GetValidFileName(m_strFileName);
 	}
 	CDialogEx::OnOK();

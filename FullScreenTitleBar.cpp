@@ -67,7 +67,7 @@ void CTitleBar::Create(HINSTANCE hInst, HWND ParentWindow)
 
 void CTitleBar::CreateDisplay()
 {
-	//	デスクトップサイズを得る
+	//	繝�繧ｹ繧ｯ繝医ャ繝励し繧､繧ｺ繧貞ｾ励ｋ
 	CRect rcDesktop;
 	CWnd* pView = NULL;
 	HWND hWnd = {0};

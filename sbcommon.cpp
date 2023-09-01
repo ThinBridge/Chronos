@@ -122,7 +122,7 @@ STDMETHODIMP CMyObject::Invoke(DISPID dispIdMember,
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 STDMETHODIMP CActiveScriptSite::OnScriptError(IActiveScriptError* pscripterror)
 {
-	//ƒXƒNƒŠƒvƒg‚ÅƒGƒ‰[‚ª‹N‚±‚Á‚½‚Æ‚«‚Ì’Ê’m
+	//ã‚¹ã‚¯ãƒªãƒ—ãƒˆã§ã‚¨ãƒ©ãƒ¼ãŒèµ·ã“ã£ãŸã¨ãã®é€šçŸ¥
 	HRESULT hRes = {0};
 
 	try
@@ -209,7 +209,7 @@ void CLogDispatcher::ChkThread()
 		CWinThread* pThread = NULL;
 		CString strKey;
 
-		//I—¹‚µ‚½•¨‚ğÁ‚·B
+		//çµ‚äº†ã—ãŸç‰©ã‚’æ¶ˆã™ã€‚
 		CStringArray strARemoveList;
 		POSITION pos = m_MapLogThreadMgr.GetStartPosition();
 		while (pos)
@@ -286,7 +286,7 @@ void CLogDispatcher::ChkThread()
 									break;
 								}
 
-								// ƒXƒŒƒbƒhI—¹‘Ò‚¿
+								// ã‚¹ãƒ¬ãƒƒãƒ‰çµ‚äº†å¾…ã¡
 								if (dRet == WAIT_TIMEOUT)
 								{
 									m_strForceStopIdx = strKey;
@@ -305,14 +305,14 @@ void CLogDispatcher::ChkThread()
 									CloseThreadList(strKey);
 									break;
 								}
-								// ƒXƒŒƒbƒhI—¹‘Ò‚¿
+								// ã‚¹ãƒ¬ãƒƒãƒ‰çµ‚äº†å¾…ã¡
 								if (::WaitForSingleObject(pThread->m_hThread, 60 * 1000) == WAIT_TIMEOUT)
 								{
-									// ƒXƒŒƒbƒh‹­§’â~
-									// (â‘Î‚É’â~‚·‚é‚È‚ç WaitForSingleObject‚Å INFINITE ‚à‰Âj
+									// ã‚¹ãƒ¬ãƒƒãƒ‰å¼·åˆ¶åœæ­¢
+									// (çµ¶å¯¾ã«åœæ­¢ã™ã‚‹ãªã‚‰ WaitForSingleObjectã§ INFINITE ã‚‚å¯ï¼‰
 #pragma warning(push, 0)
-//Œx C6258 TerminateThread ‚ğg—p‚·‚é‚ÆA³‚µ‚­ƒXƒŒƒbƒh‚ğƒNƒŠ[ƒ“ƒAƒbƒv‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB
-// -> •’Ê‚É’â~‚Å‚«‚È‚©‚Á‚½ê‡‚É‹­§’â~‚·‚é‚½‚ß‚Ég‚Á‚Ä‚¢‚éB³‚µ‚¢g‚¢•û‚È‚Ì‚ÅŒx‚ğ–³‹B
+//è­¦å‘Š C6258 TerminateThread ã‚’ä½¿ç”¨ã™ã‚‹ã¨ã€æ­£ã—ãã‚¹ãƒ¬ãƒƒãƒ‰ã‚’ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—ã™ã‚‹ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚
+// -> æ™®é€šã«åœæ­¢ã§ããªã‹ã£ãŸå ´åˆã«å¼·åˆ¶åœæ­¢ã™ã‚‹ãŸã‚ã«ä½¿ã£ã¦ã„ã‚‹ã€‚æ­£ã—ã„ä½¿ã„æ–¹ãªã®ã§è­¦å‘Šã‚’ç„¡è¦–ã€‚
 #pragma warning(disable : 6258)
 									::TerminateThread(pThread->m_hThread, 0xffffffff);
 #pragma warning(pop)
@@ -443,13 +443,13 @@ UINT MyThread(LPVOID ptr)
 		//OK
 		if (iRet == OK_SERVER)
 			break;
-		//Serverİ’è‚ª–³‚¢B
+		//Serverè¨­å®šãŒç„¡ã„ã€‚
 		else if (iRet == ERR_SERVER_SETTINGS_NOT_FOUND)
 			break;
-		//Serverİ’è‚ÌURLw’è‚ª‘Ã“–‚Å‚È‚¢B
+		//Serverè¨­å®šã®URLæŒ‡å®šãŒå¦¥å½“ã§ãªã„ã€‚
 		else if (iRet == ERR_SERVER_SETTINGS_INVALID)
 			break;
-		//httpƒZƒbƒVƒ‡ƒ“‚ª’£‚ê‚È‚¢BƒŠƒgƒ‰ƒC‚µ‚Ä‚à–³‘Ê‚ÈƒP[ƒX‚ª‘½‚¢‚Ì‚ÅI—¹
+		//httpã‚»ãƒƒã‚·ãƒ§ãƒ³ãŒå¼µã‚Œãªã„ã€‚ãƒªãƒˆãƒ©ã‚¤ã—ã¦ã‚‚ç„¡é§„ãªã‚±ãƒ¼ã‚¹ãŒå¤šã„ã®ã§çµ‚äº†
 		else if (iRet == ERR_SERVER_SESSION)
 			break;
 		else
@@ -531,12 +531,12 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 
 	int iRet = OK_SERVER;
 
-	// ƒZƒbƒVƒ‡ƒ“ƒIƒuƒWƒFƒNƒg‚Ìì¬
+	// ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
 	HINTERNET hConnect = {0};
 	HINTERNET hRequest = {0};
 	HINTERNET hSession = {0};
 
-	// •Ï”
+	// å¤‰æ•°
 	CStringW strServer;
 	INTERNET_PORT nPort = 0;
 	CStringW strVerb;
@@ -545,7 +545,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 
 	CString logmsg;
 
-	//1‰ñ‚Å”²‚¯‚é goto‚Ì•Ï‚í‚è
+	//1å›ã§æŠœã‘ã‚‹ gotoã®å¤‰ã‚ã‚Š
 	while (1)
 	{
 		if (m_bStop)
@@ -559,20 +559,20 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 		WinHttpGetIEProxyConfigForCurrentUser(&ieProxyConfig);
 		if (ieProxyConfig.lpszProxy)
 		{
-			// InternetExplorer‚ÌƒvƒƒLƒVİ’è‚ÅƒZƒbƒVƒ‡ƒ“ƒIƒuƒWƒFƒNƒgì¬
-			hSession = WinHttpOpen(L"CSGAgent",										// UserAgent–¼
-					       WINHTTP_ACCESS_TYPE_NAMED_PROXY,								// ƒvƒƒLƒVİ’è
-					       ieProxyConfig.lpszProxy,									// ƒvƒƒLƒV–¼
-					       ieProxyConfig.lpszProxyBypass ? ieProxyConfig.lpszProxyBypass : WINHTTP_NO_PROXY_BYPASS, // ƒvƒƒLƒVƒoƒCƒpƒX
-					       WINHTTP_FLAG_ASYNC);									// U‚é•‘‚¢ƒIƒvƒVƒ‡ƒ“BŒ»óWINHTTP_FLAG_ASYNC‚Ì‚İw’è‰Â”\B
+			// InternetExplorerã®ãƒ—ãƒ­ã‚­ã‚·è¨­å®šã§ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä½œæˆ
+			hSession = WinHttpOpen(L"CSGAgent",										// UserAgentå
+					       WINHTTP_ACCESS_TYPE_NAMED_PROXY,								// ãƒ—ãƒ­ã‚­ã‚·è¨­å®š
+					       ieProxyConfig.lpszProxy,									// ãƒ—ãƒ­ã‚­ã‚·å
+					       ieProxyConfig.lpszProxyBypass ? ieProxyConfig.lpszProxyBypass : WINHTTP_NO_PROXY_BYPASS, // ãƒ—ãƒ­ã‚­ã‚·ãƒã‚¤ãƒ‘ã‚¹
+					       WINHTTP_FLAG_ASYNC);									// æŒ¯ã‚‹èˆã„ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã€‚ç¾çŠ¶WINHTTP_FLAG_ASYNCã®ã¿æŒ‡å®šå¯èƒ½ã€‚
 		}
 		else
 		{
-			hSession = WinHttpOpen(L"CSGAgent",			  // UserAgent–¼
-					       WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, // ƒvƒƒLƒVİ’è
-					       WINHTTP_NO_PROXY_NAME,		  // ƒvƒƒLƒV–¼
-					       WINHTTP_NO_PROXY_BYPASS,		  // ƒvƒƒLƒVƒoƒCƒpƒX
-					       WINHTTP_FLAG_ASYNC);		  // U‚é•‘‚¢ƒIƒvƒVƒ‡ƒ“BŒ»óWINHTTP_FLAG_ASYNC‚Ì‚İw’è‰Â”\B
+			hSession = WinHttpOpen(L"CSGAgent",			  // UserAgentå
+					       WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, // ãƒ—ãƒ­ã‚­ã‚·è¨­å®š
+					       WINHTTP_NO_PROXY_NAME,		  // ãƒ—ãƒ­ã‚­ã‚·å
+					       WINHTTP_NO_PROXY_BYPASS,		  // ãƒ—ãƒ­ã‚­ã‚·ãƒã‚¤ãƒ‘ã‚¹
+					       WINHTTP_FLAG_ASYNC);		  // æŒ¯ã‚‹èˆã„ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã€‚ç¾çŠ¶WINHTTP_FLAG_ASYNCã®ã¿æŒ‡å®šå¯èƒ½ã€‚
 		}
 		if (!hSession)
 		{
@@ -587,7 +587,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 				   10000  //dwReceiveTimeout
 		);
 
-		// URL‰ğÍ
+		// URLè§£æ
 		URL_COMPONENTS urlcomponents = {0};
 		ZeroMemory(&urlcomponents, sizeof(URL_COMPONENTS));
 		urlcomponents.dwStructSize = sizeof(URL_COMPONENTS);
@@ -696,7 +696,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 
 		if (!InternetCrackUrl(strURL, 0, 0, &urlcomponents))
 		{
-			// URL‚Ì‰ğÍ‚É¸”s
+			// URLã®è§£æã«å¤±æ•—
 			iRet = ERR_SERVER_SETTINGS_INVALID;
 			break;
 		}
@@ -704,7 +704,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 		strObjectName = urlcomponents.lpszUrlPath;
 		nPort = urlcomponents.nPort;
 
-		// HTTP‚©HTTPS‚©‚»‚êˆÈŠO‚©
+		// HTTPã‹HTTPSã‹ãã‚Œä»¥å¤–ã‹
 		DWORD dwOpenRequestFlag = (/*INTERNET_SCHEME_HTTPS*/ 4 == urlcomponents.nScheme) ? WINHTTP_FLAG_SECURE : 0;
 		dwOpenRequestFlag = dwOpenRequestFlag | WINHTTP_FLAG_REFRESH;
 		//GET or POST
@@ -721,7 +721,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			strHeaders = strRequestHeader;
 		}
 
-		//POST‚Ìê‡‚ÍJSONŒ`®
+		//POSTã®å ´åˆã¯JSONå½¢å¼
 		if (iLogMethod == LOG_M_POST)
 		{
 			strVerb = L"POST";
@@ -741,7 +741,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			break;
 		}
 
-		// HTTPÚ‘±
+		// HTTPæ¥ç¶š
 		hConnect = WinHttpConnect(hSession, strServer, nPort, 0);
 		if (NULL == hConnect)
 		{
@@ -749,7 +749,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			break;
 		}
 
-		// HTTPÚ‘±‚ğŠJ‚­
+		// HTTPæ¥ç¶šã‚’é–‹ã
 		hRequest = WinHttpOpenRequest(hConnect,
 					      strVerb,
 					      strObjectName,
@@ -768,7 +768,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			break;
 		}
 
-		// ƒŠƒNƒGƒXƒg‚Ì‘—M
+		// ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®é€ä¿¡
 
 		//POST
 		if (iLogMethod == LOG_M_POST)
@@ -844,7 +844,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			break;
 		}
 
-		// ƒŒƒXƒ|ƒ“ƒX‚Ì“’…‚Ì‘Ò‹@
+		// ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®åˆ°ç€ã®å¾…æ©Ÿ
 		if (!WinHttpReceiveResponse(hRequest, NULL))
 		{
 			iRet = ERR_SERVER_RECEIVE_RESPONSE;
@@ -856,15 +856,15 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			break;
 		}
 
-		// ƒXƒe[ƒ^ƒXƒR[ƒh‚Ìæ“¾
+		// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã®å–å¾—
 		DWORD dwStatusCode = 0;
 		DWORD dwStatusCodeSize = sizeof(DWORD);
 		if (!WinHttpQueryHeaders(hRequest,
-					 WINHTTP_QUERY_STATUS_CODE | WINHTTP_QUERY_FLAG_NUMBER, // ƒXƒe[ƒ^ƒXƒR[ƒh‚ğDWORDŒ^‚Åæ“¾‚·‚éB
-					 WINHTTP_HEADER_NAME_BY_INDEX,				// ƒwƒbƒ_[–¼‚Ìƒ|ƒCƒ“ƒ^
-					 &dwStatusCode,						// ƒoƒbƒtƒ@[
-					 &dwStatusCodeSize,					// ƒoƒbƒtƒ@[ƒTƒCƒY
-					 WINHTTP_NO_HEADER_INDEX))				// Å‰‚É”­¶‚µ‚½ƒwƒbƒ_[‚Ì‚İæ‚èo‚·
+					 WINHTTP_QUERY_STATUS_CODE | WINHTTP_QUERY_FLAG_NUMBER, // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’DWORDå‹ã§å–å¾—ã™ã‚‹ã€‚
+					 WINHTTP_HEADER_NAME_BY_INDEX,				// ãƒ˜ãƒƒãƒ€ãƒ¼åã®ãƒã‚¤ãƒ³ã‚¿
+					 &dwStatusCode,						// ãƒãƒƒãƒ•ã‚¡ãƒ¼
+					 &dwStatusCodeSize,					// ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚µã‚¤ã‚º
+					 WINHTTP_NO_HEADER_INDEX))				// æœ€åˆã«ç™ºç”Ÿã—ãŸãƒ˜ãƒƒãƒ€ãƒ¼ã®ã¿å–ã‚Šå‡ºã™
 		{
 			iRet = ERR_SERVER_QUERY_HEADERS;
 			break;

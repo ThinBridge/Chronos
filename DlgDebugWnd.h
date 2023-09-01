@@ -73,7 +73,7 @@ public:
 	CString mMESSAGE6;
 };
 
-// €–Ú‚Ìƒf[ƒ^ƒNƒ‰ƒX
+// é …ç›®ã®ãƒ‡ãƒ¼ã‚¿ã‚¯ãƒ©ã‚¹
 class OWNERDATA
 {
 public:
@@ -111,21 +111,21 @@ class CDlgDebugWnd : public CDialogEx
 	DECLARE_DYNAMIC(CDlgDebugWnd)
 
 public:
-	CDlgDebugWnd(CWnd* pParent = NULL); // •W€ƒRƒ“ƒXƒgƒ‰ƒNƒ^[
+	CDlgDebugWnd(CWnd* pParent = NULL); // æ¨™æº–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼
 	virtual ~CDlgDebugWnd();
 	autoresize::CAutoResize m_autoResize;
 	HANDLE m_hEventLogDebugWnd;
 	CString m_strEventLogDebugWnd;
 
-	// ƒ_ƒCƒAƒƒO ƒf[ƒ^
+	// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
 	enum
 	{
 		IDD = IDD_DLG_DEBUG_WND
 	};
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV ƒTƒ|[ƒg
-	// ƒŠƒXƒgƒrƒ…[‚ÌƒI[ƒi[ƒf[ƒ^
+	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
+	// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®ã‚ªãƒ¼ãƒŠãƒ¼ãƒ‡ãƒ¼ã‚¿
 	CTypedPtrArray<CPtrArray, OWNERDATA*> m_pOwnerData;
 	virtual void CreateListView();
 	void ClearData();
@@ -181,11 +181,11 @@ class CDlgSCEditor : public CDialogEx
 	DECLARE_DYNAMIC(CDlgSCEditor)
 
 public:
-	CDlgSCEditor(CWnd* pParent = NULL); // •W€ƒRƒ“ƒXƒgƒ‰ƒNƒ^[
+	CDlgSCEditor(CWnd* pParent = NULL); // æ¨™æº–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼
 	virtual ~CDlgSCEditor();
 	autoresize::CAutoResize m_autoResize;
 	CString m_strFilePath;
-	// ƒ_ƒCƒAƒƒO ƒf[ƒ^
+	// ãƒ€ã‚¤ã‚¢ãƒ­ã‚° ãƒ‡ãƒ¼ã‚¿
 	enum
 	{
 		IDD = IDD_DLG_SC_EDITOR
@@ -193,7 +193,7 @@ public:
 
 protected:
 	BOOL bFirstFlg;
-	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV ƒTƒ|[ƒg
+	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV ã‚µãƒãƒ¼ãƒˆ
 	void ReadText();
 	void WriteText();
 

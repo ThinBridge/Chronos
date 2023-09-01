@@ -17,7 +17,7 @@ LRESULT CALLBACK CWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 namespace CWindowCreationHook
 {
-	int g_nCnt = 0; //参照カウンタ
+	int g_nCnt = 0; //蜿ら�ｧ繧ｫ繧ｦ繝ｳ繧ｿ
 	HHOOK g_hHook = NULL;
 
 	static LRESULT CALLBACK CBTProc(int nCode, WPARAM wParam, LPARAM lParam)

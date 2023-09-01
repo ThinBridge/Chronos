@@ -1,6 +1,6 @@
 #pragma once
 
-// CDlgCertification É_ÉCÉAÉçÉO
+// CDlgCertification „ÉÄ„Ç§„Ç¢„É≠„Ç∞
 
 class CDlgCertification : public CDialogEx
 {
@@ -12,14 +12,14 @@ private:
 	CefString m_host;
 
 public:
-	CDlgCertification(CWnd* pParent = nullptr); // ïWèÄÉRÉìÉXÉgÉâÉNÉ^Å[
+	CDlgCertification(CWnd* pParent = nullptr); // Ê®ôÊ∫ñ„Ç≥„É≥„Çπ„Éà„É©„ÇØ„Çø„Éº
 	CDlgCertification(CefString host,
 			  std::vector<CefRefPtr<CefX509Certificate>> certificates,
 			  CWnd* pParent = nullptr);
 	virtual ~CDlgCertification();
 	int SelectedIndex();
 
-// É_ÉCÉAÉçÉO ÉfÅ[É^
+// „ÉÄ„Ç§„Ç¢„É≠„Ç∞ „Éá„Éº„Çø
 #ifdef AFX_DESIGN_TIME
 	enum
 	{
@@ -33,7 +33,7 @@ private:
 	CString GetPrincipalString(const CefRefPtr<CefX509CertPrincipal> principal);
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV ÉTÉ|Å[Ég
+	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV „Çµ„Éù„Éº„Éà
 	BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()

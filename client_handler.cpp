@@ -52,7 +52,7 @@ bool ClientHandler::DoClose(CefRefPtr<CefBrowser> browser)
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (SafeWnd(hWindow))
 	{
-		//ƒ_ƒEƒ“ƒ[ƒh’†‚Ìê‡‚ÍAŒx‚ğ•\¦‚·‚éB
+		//ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ã®å ´åˆã¯ã€è­¦å‘Šã‚’è¡¨ç¤ºã™ã‚‹ã€‚
 		if (theApp.m_DlMgr.IsDlProgress(nBrowserId))
 		{
 			SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
@@ -87,8 +87,8 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (SafeWnd(hWindow))
 	{
-		//CEF93‚©‚çƒ|ƒCƒ“ƒ^‚ğ’¼ÚSendMessage‚Å“n‚·‚±‚Æ‚ª‚Å‚«‚È‚­‚È‚Á‚½B
-		//ŠÖ”‚ğ’¼ÚŒÄ‚Ño‚·
+		//CEF93ã‹ã‚‰ãƒã‚¤ãƒ³ã‚¿ã‚’ç›´æ¥SendMessageã§æ¸¡ã™ã“ã¨ãŒã§ããªããªã£ãŸã€‚
+		//é–¢æ•°ã‚’ç›´æ¥å‘¼ã³å‡ºã™
 		CChildView* pChild = NULL;
 		pChild = theApp.GetChildViewPtr(hWindow);
 		if (pChild)
@@ -459,7 +459,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			str = (LPCWSTR)strURLC.c_str();
 			if (!str.IsEmpty())
 			{
-				//data:image/png‚Ìê‡‚ª‚ ‚é‚Ì‚ÅAIsURL”»’è‚ğs‚í‚È‚¢B
+				//data:image/pngã®å ´åˆãŒã‚ã‚‹ã®ã§ã€IsURLåˆ¤å®šã‚’è¡Œã‚ãªã„ã€‚
 				//if (SBUtil::IsURL_HTTP(str))
 				{
 					if (::OpenClipboard(NULL))
@@ -751,7 +751,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 {
 	REQUIRE_UI_THREAD();
 
-	//Download‹Ö~
+	//Downloadç¦æ­¢
 	if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 	{
 		HWND hWindow = GetSafeParentWnd(browser);
@@ -773,7 +773,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 	strFileName = (LPCWSTR)suggested_name.c_str();
 	strFileName.TrimLeft();
 	strFileName.TrimRight();
-	//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
+	//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
 	strFileName = SBUtil::GetValidFileName(strFileName);
 
 	CString strPath;
@@ -814,7 +814,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 
 		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
 
-		//ƒ_ƒEƒ“ƒ[ƒh’†‚Ìê‡‚ÍAŒx‚ğ•\¦‚·‚éB
+		//ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ã®å ´åˆã¯ã€è­¦å‘Šã‚’è¡¨ç¤ºã™ã‚‹ã€‚
 		if (theApp.m_DlMgr.IsDlProgress(nBrowserId))
 		{
 			HWND hWindowFrm = GetParent(hWindow);
@@ -836,7 +836,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		CFileDialog* pFileDlg = NULL;
 		if (theApp.IsSGMode())
 		{
-			//SGMode‚Ìê‡‚ÍAClassicƒ_ƒCƒAƒƒO‚ğg—p
+			//SGModeã®å ´åˆã¯ã€Classicãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä½¿ç”¨
 			pFileDlg = new CFileDialog(FALSE,
 						   NULL, strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, pCWnd, 0, FALSE);
 		}
@@ -909,7 +909,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 	///https://www.catalog.update.microsoft.com/Search.aspx?q=KB4051963
 
 	REQUIRE_UI_THREAD();
-	//Download‹Ö~
+	//Downloadç¦æ­¢
 	if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 	{
 		return;
@@ -1030,7 +1030,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 		}
 		else
 		{
-			// values.bIsCanceled ‚Ü‚½‚Í DownloadItem::INTERRUPTE
+			// values.bIsCanceled ã¾ãŸã¯ DownloadItem::INTERRUPTE
 			theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
 			::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
 
@@ -1117,7 +1117,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 
 		if (strPath.IsEmpty())
 			strPath = _T("/");
-		//2019-05-14 GoogleDrive‘¤‚ª•ÏX‚³‚ê‚½‚æ‚¤‚È‚Ì‚ÅA³í‚É“®ì‚·‚éB‘ÎˆƒR[ƒh‚ğƒRƒƒ“ƒgƒAƒEƒg
+		//2019-05-14 GoogleDriveå´ãŒå¤‰æ›´ã•ã‚ŒãŸã‚ˆã†ãªã®ã§ã€æ­£å¸¸ã«å‹•ä½œã™ã‚‹ã€‚å¯¾å‡¦ã‚³ãƒ¼ãƒ‰ã‚’ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
 		//		if(strHost==_T("drive.google.com"))
 		//		{
 		//			request->GetHeaderMap(cefHeaders);
@@ -1126,12 +1126,12 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		//			request->SetHeaderMap(cefHeaders);
 		//		}
 
-		//2021-01-07Google‚ÉƒƒOƒCƒ“‚Å‚«‚È‚¢BBB
-		//’²¸Œ‹‰ÊAFirefox‚É‚·‚ê‚ÎOK, Edge/87.0.0.0‚ğ‚Â‚¯‚Ä‚àOK
-		//ƒfƒtƒHƒ‹ƒg‚ÌUA‚ğEdge‚É•ÏX‚·‚é‘Î‰‚É‚·‚éB
-		//2021-11-30 ª‚Ì‘Îô‚ªNG‚É‚È‚Á‚Ä‚¢‚é‚±‚Æ‚É‹C‚ª‚Â‚¢‚½BUA‚ÉEdge‚ğ‚Â‚¯‚Ä‚àNG
-		//«‚ÌƒR[ƒh•œŠˆ
-		//accounts.google.com‚Ö‚ÌƒAƒNƒZƒX‚ÍAFirefox‚ÌUA‚É‚µ‚Ä‚µ‚Ü‚¤B
+		//2021-01-07Googleã«ãƒ­ã‚°ã‚¤ãƒ³ã§ããªã„ã€‚ã€‚ã€‚
+		//èª¿æŸ»çµæœã€Firefoxã«ã™ã‚Œã°OK, Edge/87.0.0.0ã‚’ã¤ã‘ã¦ã‚‚OK
+		//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®UAã‚’Edgeã«å¤‰æ›´ã™ã‚‹å¯¾å¿œã«ã™ã‚‹ã€‚
+		//2021-11-30 â†‘ã®å¯¾ç­–ãŒNGã«ãªã£ã¦ã„ã‚‹ã“ã¨ã«æ°—ãŒã¤ã„ãŸã€‚UAã«Edgeã‚’ã¤ã‘ã¦ã‚‚NG
+		//â†“ã®ã‚³ãƒ¼ãƒ‰å¾©æ´»
+		//accounts.google.comã¸ã®ã‚¢ã‚¯ã‚»ã‚¹æ™‚ã¯ã€Firefoxã®UAã«ã—ã¦ã—ã¾ã†ã€‚
 		if (strHost == _T("accounts.google.com"))
 		{
 			request->GetHeaderMap(cefHeaders);
@@ -1145,7 +1145,7 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 		if (!theApp.m_AppSettings.IsEnableURLFilter())
 			return RV_CONTINUE;
 
-		CString strURLChk; //Query‚ğœ‚­B–³‘Ê‚Èî•ñ‚ğÈ‚­B
+		CString strURLChk; //Queryã‚’é™¤ãã€‚ç„¡é§„ãªæƒ…å ±ã‚’çœãã€‚
 		//strURLChk.Format(_T("%s://%s%s"), strScheme, strHost, strPath);
 		strURLChk.Format(_T("%s://%s"), (LPCTSTR)strScheme, (LPCTSTR)strHost);
 
@@ -1237,7 +1237,7 @@ void ClientHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame>
 									logmsg = dwLogData.GetString();
 									theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
 
-									//Å‰‚¾‚¯
+									//æœ€åˆã ã‘
 									if (i == 0)
 										strJSsrc.Format(_T("const ChronosExtParentWnd=\"%ld\";\r\ntry{ChronosExt_AppActive(ChronosExtParentWnd);console.log('##CSG_Script:ChronosExtParentWnd:'+ChronosExtParentWnd);}catch(e){}\r\n"), (long)hWindow);
 
@@ -1788,7 +1788,7 @@ bool ClientHandler::OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 				bTopPage = TRUE;
 		}
 		::SendMessageTimeout(hWindow, WM_APP_CEF_BEFORE_BROWSE, (WPARAM)pszURL, (LPARAM)&bTopPage, SMTO_NORMAL, 1000, NULL);
-		//ƒiƒrƒQ[ƒVƒ‡ƒ“‚ğƒLƒƒƒ“ƒZƒ‹‚·‚éB
+		//ãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹ã€‚
 		if (bTopPage == 2)
 		{
 			return TRUE;
@@ -1957,11 +1957,11 @@ bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 	CEF_REQUIRE_UI_THREAD();
 	if (theApp.IsSGMode())
 	{
-		//D&D‚ğŠî–{–³Œø‰»‚·‚éB
+		//D&Dã‚’åŸºæœ¬ç„¡åŠ¹åŒ–ã™ã‚‹ã€‚
 		return true;
 	}
 
-	//Download‹Ö~
+	//Downloadç¦æ­¢
 	if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 	{
 		if (dragData->IsLink())
@@ -1970,7 +1970,7 @@ bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 		}
 	}
 
-	//Upload‹Ö~
+	//Uploadç¦æ­¢
 	if (theApp.m_AppSettings.IsEnableUploadRestriction())
 	{
 		if (dragData->IsFile())

@@ -160,12 +160,12 @@ BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwS
 	BOOL bRet = CWnd::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext);
 	try
 	{
-		//eƒtƒŒ[ƒ€‚Ìƒ|ƒCƒ“ƒ^[‚ğƒZƒbƒgBæ“¾‚Å‚«‚È‚¢ê‡‚ÍANG
+		//è¦ªãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒã‚¤ãƒ³ã‚¿ãƒ¼ã‚’ã‚»ãƒƒãƒˆã€‚å–å¾—ã§ããªã„å ´åˆã¯ã€NG
 		this->m_pwndFrame = this->GetParent();
 		if (!theApp.IsWnd(m_pwndFrame))
 			return FALSE;
 
-		//Zoom‰Šú’lƒZƒbƒg
+		//ZoomåˆæœŸå€¤ã‚»ãƒƒãƒˆ
 		UINT iZoomSizeReg = 0;
 		iZoomSizeReg = theApp.m_AppSettings.GetZoomSize();
 		if (iZoomSizeReg != 100 && m_dbZoomSize == 0.0)
@@ -297,7 +297,7 @@ BOOL CChildView::GetToolBar() const
 	{
 		if (m_popupFeatures)
 		{
-			//í‚É”ñ•\¦ 2020-01-06
+			//å¸¸ã«éè¡¨ç¤º 2020-01-06
 			return FALSE;
 		}
 	}
@@ -313,7 +313,7 @@ BOOL CChildView::GetMenuBar() const
 	{
 		if (m_popupFeatures)
 		{
-			//í‚É”ñ•\¦ 2020-01-06
+			//å¸¸ã«éè¡¨ç¤º 2020-01-06
 			return FALSE;
 		}
 	}
@@ -329,7 +329,7 @@ BOOL CChildView::GetStatusBar() const
 	{
 		if (m_popupFeatures)
 		{
-			//í‚É”ñ•\¦ 2020-01-06
+			//å¸¸ã«éè¡¨ç¤º 2020-01-06
 			return FALSE;
 		}
 	}
@@ -345,7 +345,7 @@ BOOL CChildView::GetAddressBar() const
 	{
 		if (m_popupFeatures)
 		{
-			//chrome 59‚Ü‚Å‚Í‚ ‚Á‚½‚ªA62‚Å‚Í‚±‚ÌƒvƒƒpƒeƒB[‚Ííœ‚³‚ê‚Ä‚¢‚éB
+			//chrome 59ã¾ã§ã¯ã‚ã£ãŸãŒã€62ã§ã¯ã“ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ¼ã¯å‰Šé™¤ã•ã‚Œã¦ã„ã‚‹ã€‚
 			//if (m_popupFeatures->locationBarVisible)
 			return TRUE;
 		}
@@ -372,8 +372,8 @@ void CChildView::UpDateAddressBar()
 }
 BOOL CChildView::IsFileURINavigation(const CString& strURL)
 {
-	//True‚Ìê‡‚ÍAƒqƒbƒg‚µ‚½‚Ì‚ÅA‚»‚Ì‚Ü‚ÜŠJ‚¢‚Ä‚Íƒ_ƒ
-	//False‚Ìê‡‚ÍA‚»‚Ì‚Ü‚ÜŠJ‚­B
+	//Trueã®å ´åˆã¯ã€ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€ãã®ã¾ã¾é–‹ã„ã¦ã¯ãƒ€ãƒ¡
+	//Falseã®å ´åˆã¯ã€ãã®ã¾ã¾é–‹ãã€‚
 	BOOL bRet = FALSE;
 	if (strURL.IsEmpty())
 		return FALSE;
@@ -400,7 +400,7 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	CString strURL;
 	strURL = sURL;
 
-	//Scriptƒx[ƒX‚Ì”»’è
+	//Scriptãƒ™ãƒ¼ã‚¹ã®åˆ¤å®š
 	if (theApp.m_cScriptSrc.m_strSrc.IsEmpty())
 		return FALSE;
 
@@ -592,7 +592,7 @@ BOOL CChildView::IsRedirectURLChk(const CString& strURL, BOOL bTop)
 		CString strHost((LPCWSTR)cfHost.c_str());
 		CString strPath((LPCWSTR)cfPath.c_str());
 
-		//http https‚Ì‚İƒtƒBƒ‹ƒ^[‚ğ—˜—p‚·‚éBabout: notes: vwmare-view: mailto:‚ğl—¶‚·‚éB
+		//http httpsã®ã¿ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã‚’åˆ©ç”¨ã™ã‚‹ã€‚about: notes: vwmare-view: mailto:ã‚’è€ƒæ…®ã™ã‚‹ã€‚
 		if (strScheme.Find(_T("http")) != 0) //http|https
 			return FALSE;
 
@@ -601,10 +601,10 @@ BOOL CChildView::IsRedirectURLChk(const CString& strURL, BOOL bTop)
 		if (strPath.IsEmpty())
 			strPath = _T("/");
 
-		CString strURLChk; //Query‚ğœ‚­B–³‘Ê‚Èî•ñ‚ğÈ‚­B
+		CString strURLChk; //Queryã‚’é™¤ãã€‚ç„¡é§„ãªæƒ…å ±ã‚’çœãã€‚
 		strURLChk.Format(_T("%s://%s%s"), (LPCTSTR)strScheme, (LPCTSTR)strHost, (LPCTSTR)strPath);
 
-		//œŠO‚ÉHit‚µ‚½B
+		//é™¤å¤–ã«Hitã—ãŸã€‚
 		if (theApp.IsCacheRedirectFilterNone(strURLChk))
 		{
 			return FALSE;
@@ -617,7 +617,7 @@ BOOL CChildView::IsRedirectURLChk(const CString& strURL, BOOL bTop)
 			}
 			else
 			{
-				//œŠO‚ÉƒLƒƒƒbƒVƒ…
+				//é™¤å¤–ã«ã‚­ãƒ£ãƒƒã‚·ãƒ¥
 				theApp.AddCacheRedirectFilterNone(strURLChk);
 			}
 		}
@@ -631,14 +631,14 @@ void CChildView::IsRedirectWndAutoCloseChk()
 	if (!theApp.IsWnd(FRM))
 		return;
 
-	//ShiftƒL[ / ESC‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éê‡‚ÍA•Â‚¶‚È‚¢B
+	//Shiftã‚­ãƒ¼ / ESCãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€é–‰ã˜ãªã„ã€‚
 	if (::GetKeyState(VK_SHIFT) < 0 || ::GetKeyState(VK_ESCAPE) < 0)
 	{
 		logmsg.Format(_T("CV_WND:0x%08p IsRedirectWndAutoCloseChk :AutoClose Shift Key Skip"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 		return;
 	}
-	//‰‚ß‚Ì‹N“®‚Åƒ][ƒ“ƒtƒBƒ‹ƒ^[‚Éˆø‚Á‚©‚©‚é‚ÆA‰½‚à‚Å‚«‚È‚¢‚Ì‚ÅB
+	//åˆã‚ã®èµ·å‹•ã§ã‚¾ãƒ¼ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã«å¼•ã£ã‹ã‹ã‚‹ã¨ã€ä½•ã‚‚ã§ããªã„ã®ã§ã€‚
 	if (m_bFirstCallDontClose)
 	{
 		m_bFirstCallDontClose = FALSE;
@@ -707,11 +707,11 @@ void CChildView::ResizeFrmWindow(RECT& rectClient)
 		BOOL bResizeAndCenter = FALSE;
 		if (theApp.IsWnd(FRM))
 		{
-			//ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Ìê‡‚ÍA–³Œø
+			//ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆã¯ã€ç„¡åŠ¹
 			if (FRM->m_bFullScreen) return;
 			WINDOWPLACEMENT zFramePracement = {0};
 			zFramePracement.length = sizeof(WINDOWPLACEMENT);
-			// Œ»İæ“¾
+			// ç¾åœ¨å–å¾—
 			FRM->GetWindowPlacement(&zFramePracement);
 			zFramePracement.showCmd = SW_NORMAL;
 
@@ -754,7 +754,7 @@ void CChildView::ResizeWindowPopupInpl()
 		if (!theApp.IsWnd(m_pwndFrame))
 			return;
 
-		//DevTools‚Ìê‡‚Íƒc[ƒ‹ƒo[ŠÖ˜A”ñ•\¦
+		//DevToolsã®å ´åˆã¯ãƒ„ãƒ¼ãƒ«ãƒãƒ¼é–¢é€£éè¡¨ç¤º
 		if (m_bDevToolsWnd)
 		{
 			if (FRM->m_pwndReBar)
@@ -810,21 +810,21 @@ void CChildView::ResizeWindowPopupInpl()
 			CRect rcDesktop;
 			CRect rcFeature;
 
-			//‰Šú’l(0,0)
+			//åˆæœŸå€¤(0,0)
 			rcFeature.top = 0;
 			rcFeature.left = 0;
-			//‰Šú’l(ƒAƒNƒeƒBƒuƒEƒCƒ“ƒhƒE‚Ì‚‚³)
+			//åˆæœŸå€¤(ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®é«˜ã•)
 			rcFeature.bottom = rcCurrent.Height();
-			//‰Šú’l(ƒAƒNƒeƒBƒuƒEƒCƒ“ƒhƒE‚Ì•)
+			//åˆæœŸå€¤(ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®å¹…)
 			rcFeature.right = rcCurrent.Width();
 
-			//‚‚³‚ğw’è‚µ‚Ä‚¢‚éê‡‚ÍƒZƒbƒg
+			//é«˜ã•ã‚’æŒ‡å®šã—ã¦ã„ã‚‹å ´åˆã¯ã‚»ãƒƒãƒˆ
 			if (m_popupFeatures->height)
 			{
 				rcFeature.bottom = m_popupFeatures->height;
 				rcFeature.bottom += iAdjustHeight;
 				rcFeature.bottom += theApp.m_AppSettings.GetHeightMargin();
-				//DPI‚É‚æ‚é•â³
+				//DPIã«ã‚ˆã‚‹è£œæ­£
 				if (theApp.m_ScaleDPI > 1)
 				{
 					double dScale = 0.0;
@@ -835,13 +835,13 @@ void CChildView::ResizeWindowPopupInpl()
 				}
 			}
 
-			//•‚ğw’è‚µ‚Ä‚¢‚éê‡‚ÍƒZƒbƒg
+			//å¹…ã‚’æŒ‡å®šã—ã¦ã„ã‚‹å ´åˆã¯ã‚»ãƒƒãƒˆ
 			if (m_popupFeatures->width)
 			{
 				rcFeature.right = m_popupFeatures->width;
 				rcFeature.right += iAdjustWidth;
 				rcFeature.right += theApp.m_AppSettings.GetWideMargin();
-				//DPI‚É‚æ‚é•â³
+				//DPIã«ã‚ˆã‚‹è£œæ­£
 				if (theApp.m_ScaleDPI > 1)
 				{
 					double dScale = 0.0;
@@ -852,14 +852,14 @@ void CChildView::ResizeWindowPopupInpl()
 				}
 			}
 
-			//top‚ğw’è‚µ‚Ä‚¢‚éê‡
+			//topã‚’æŒ‡å®šã—ã¦ã„ã‚‹å ´åˆ
 			if (m_popupFeatures->y)
 				rcFeature.OffsetRect(0, m_popupFeatures->y);
-			//left‚ğw’è‚µ‚Ä‚¢‚éê‡
+			//leftã‚’æŒ‡å®šã—ã¦ã„ã‚‹å ´åˆ
 			if (m_popupFeatures->x)
 				rcFeature.OffsetRect(m_popupFeatures->x, 0);
 
-			//ƒ}ƒ‹ƒ`ƒ‚ƒjƒ^[•â³
+			//ãƒãƒ«ãƒãƒ¢ãƒ‹ã‚¿ãƒ¼è£œæ­£
 			CWnd* pView = NULL;
 			HWND hWnd = {0};
 			pView = (CWnd*)theApp.GetActiveViewPtr();
@@ -878,10 +878,10 @@ void CChildView::ResizeWindowPopupInpl()
 				rcDesktop.bottom += 7;
 			}
 
-			//ƒ}ƒ‹ƒ`ƒ‚ƒjƒ^[•â³
+			//ãƒãƒ«ãƒãƒ¢ãƒ‹ã‚¿ãƒ¼è£œæ­£
 			rcFeature.OffsetRect(rcDesktop.left, rcDesktop.top);
 
-			//ÅI“I‚È’l‚ğƒZƒbƒg
+			//æœ€çµ‚çš„ãªå€¤ã‚’ã‚»ãƒƒãƒˆ
 			rcCurrent = rcFeature;
 		}
 		zFramePracement.rcNormalPosition = rcCurrent;
@@ -1309,7 +1309,7 @@ void CChildView::OnReopenCloseTab()
 			{
 				CString strURL;
 				POSITION pos1 = {0};
-				//Šù‚É“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+				//æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 				for (pos1 = theApp.m_listCloseWindowURL.GetHeadPosition(); pos1 != NULL; theApp.m_listCloseWindowURL.GetNext(pos1))
 				{
 					strURL.Empty();
@@ -1393,7 +1393,7 @@ void CChildView::OnPrintPDF()
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
-		//Download‹Ö~
+		//Downloadç¦æ­¢
 		if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 		{
 			if (theApp.IsWnd(m_pwndFrame))
@@ -1414,7 +1414,7 @@ void CChildView::OnPrintPDF()
 			strFileName.LoadString(ID_DEFAULT_FILE_BASENAME);
 		}
 
-		//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
+		//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
 		strFileName = SBUtil::GetValidFileName(strFileName);
 		strFileName += _T(".pdf");
 
@@ -1452,7 +1452,7 @@ void CChildView::OnPrintPDF()
 		CFileDialog* pFileDlg = NULL;
 		if (theApp.IsSGMode())
 		{
-			//SGMode‚Ìê‡‚ÍAClassicƒ_ƒCƒAƒƒO‚ğg—p
+			//SGModeã®å ´åˆã¯ã€Classicãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä½¿ç”¨
 			pFileDlg = new CFileDialog(FALSE, _T("pdf"), strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, this, 0, FALSE);
 		}
 		else
@@ -1884,7 +1884,7 @@ void CChildView::OnAddressBar(BOOL bFlg)
 	try
 	{
 		CString logmsg;
-		//”ñ•\¦
+		//éè¡¨ç¤º
 		if (!bFlg)
 		{
 			logmsg.Format(_T("CV_WND:0x%08p OnAddressBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
@@ -1924,7 +1924,7 @@ void CChildView::OnAddressBar(BOOL bFlg)
 void CChildView::OnToolBar(BOOL bFlg)
 {
 	CString logmsg;
-	//”ñ•\¦
+	//éè¡¨ç¤º
 	if (!bFlg)
 	{
 		logmsg.Format(_T("CV_WND:0x%08p OnToolBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
@@ -1958,7 +1958,7 @@ void CChildView::OnToolBar(BOOL bFlg)
 void CChildView::OnMenuBar(BOOL bFlg)
 {
 	CString logmsg;
-	//”ñ•\¦
+	//éè¡¨ç¤º
 	if (!bFlg)
 	{
 		logmsg.Format(_T("CV_WND:0x%08p OnMenuBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
@@ -1991,7 +1991,7 @@ void CChildView::OnMenuBar(BOOL bFlg)
 void CChildView::OnStatusBar(BOOL bFlg)
 {
 	CString logmsg;
-	//”ñ•\¦
+	//éè¡¨ç¤º
 	if (!bFlg)
 	{
 		logmsg.Format(_T("CV_WND:0x%08p OnStatusBar_HIDE"), theApp.SafeWnd(this->m_hWnd));
@@ -2011,13 +2011,13 @@ void CChildView::OnStatusBar(BOOL bFlg)
 void CChildView::OnVisible(BOOL bFlg)
 {
 	CString logmsg;
-	//•\¦
+	//è¡¨ç¤º
 	if (bFlg)
 	{
 		logmsg.Format(_T("CV_WND:0x%08p OnVisible"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_JS);
 	}
-	//”ñ•\¦
+	//éè¡¨ç¤º
 	else
 	{
 		logmsg.Format(_T("CV_WND:0x%08p OnVisible_HIDE"), theApp.SafeWnd(this->m_hWnd));
@@ -2036,7 +2036,7 @@ void CChildView::OnWindowSetResizable(BOOL bFlg)
 		LONG nOldStyle = ::GetWindowLong(m_pwndFrame->m_hWnd, GWL_STYLE);
 		LONG nNewStyle = 0;
 		CString logmsg;
-		//ƒTƒCƒY•ÏX‰Â”\
+		//ã‚µã‚¤ã‚ºå¤‰æ›´å¯èƒ½
 		if (bFlg)
 		{
 			logmsg.Format(_T("CV_WND:0x%08p OnWindowSetResizable_TRUE"), theApp.SafeWnd(this->m_hWnd));
@@ -2046,7 +2046,7 @@ void CChildView::OnWindowSetResizable(BOOL bFlg)
 			::SetWindowLong(m_pwndFrame->m_hWnd, GWL_STYLE, nNewStyle);
 			m_pwndFrame->SetWindowPos(NULL, 0, 0, 0, 0, SWP_NOZORDER | SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_DRAWFRAME);
 		}
-		//ƒTƒCƒY•ÏX•s‰Â
+		//ã‚µã‚¤ã‚ºå¤‰æ›´ä¸å¯
 		else
 		{
 			logmsg.Format(_T("CV_WND:0x%08p OnWindowSetResizable_FALSE"), theApp.SafeWnd(this->m_hWnd));
@@ -2254,7 +2254,7 @@ void CChildView::OnDestroy()
 
 void CChildView::SafeWindowCloseFunction()
 {
-	//À{Ï‚İ
+	//å®Ÿæ–½æ¸ˆã¿
 	if (m_bWndCloseFlg) return;
 	m_bWndCloseFlg = TRUE;
 }
@@ -2272,7 +2272,7 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 			BOOL bTopPage = FALSE;
 			UINT* pbRet = NULL;
 
-			//TOPƒy[ƒW(Frame‚È‚µ)
+			//TOPãƒšãƒ¼ã‚¸(Frameãªã—)
 			if (lParam)
 			{
 				pbRet = (UINT*)lParam;
@@ -2337,7 +2337,7 @@ LRESULT CChildView::OnDownloadBlankPage(WPARAM wParam, LPARAM lParam)
 				}
 			}
 		}
-		//”ñ•\¦
+		//éè¡¨ç¤º
 		FRM->EnableWindow(FALSE);
 		FRM->ShowWindow(SW_HIDE);
 		return S_OK;
@@ -2575,14 +2575,14 @@ LRESULT CChildView::OnSetRendererPID(WPARAM wParam, LPARAM lParam)
 		pFrm = theApp.GetActiveBFramePtr();
 		if (pFrm)
 		{
-			//—Dæ“x‚ğ‰º‚°‚é
+			//å„ªå…ˆåº¦ã‚’ä¸‹ã’ã‚‹
 			if (pFrm != FRM)
 			{
 				if (pFrm->m_RendererPID > 0)
 				{
 					if (pFrm->m_RendererPID != FRM->m_RendererPID)
 					{
-						//’á
+						//ä½
 						if (!theApp.SetPriority(FRM->m_RendererPID, IDLE_PRIORITY_CLASS))
 						{
 							//ReSetRendererPID();

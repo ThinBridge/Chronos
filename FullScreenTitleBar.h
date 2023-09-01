@@ -1,6 +1,6 @@
 #pragma once
 #include "Sazabi.h"
-#define MONITORS_MAX_LIM 16 //	サポートする最大モニター数
+#define MONITORS_MAX_LIM 16 //	繧ｵ繝昴�ｼ繝医☆繧区怙螟ｧ繝｢繝九ち繝ｼ謨ｰ
 #include "FullScreenTitleBarConst.h"
 class CTitleBar
 {

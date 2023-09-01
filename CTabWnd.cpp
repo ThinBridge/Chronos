@@ -98,7 +98,7 @@ LRESULT CTabWnd::TabWndDispatchEvent(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM
 
 LRESULT CTabWnd::OnTabLButtonDown(WPARAM wParam, LPARAM lParam)
 {
-	// ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½ˆÊ’u‚ğŠm”F‚·‚é
+	// ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸä½ç½®ã‚’ç¢ºèªã™ã‚‹
 	TCHITTESTINFO hitinfo = {0};
 	hitinfo.pt.x = LOWORD((DWORD)lParam);
 	hitinfo.pt.y = HIWORD((DWORD)lParam);
@@ -155,9 +155,9 @@ LRESULT CTabWnd::OnTabLButtonDown(WPARAM wParam, LPARAM lParam)
 			}
 		}
 	}
-	// ƒ}ƒEƒXƒhƒ‰ƒbƒOŠJnˆ—
-	m_eDragState = DragState::CHECK; // ƒhƒ‰ƒbƒO‚Ìƒ`ƒFƒbƒN‚ğŠJn
-	// ƒhƒ‰ƒbƒOŒ³ƒ^ƒu‚ğ‹L‰¯‚·‚é
+	// ãƒã‚¦ã‚¹ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹å‡¦ç†
+	m_eDragState = DragState::CHECK; // ãƒ‰ãƒ©ãƒƒã‚°ã®ãƒã‚§ãƒƒã‚¯ã‚’é–‹å§‹
+	// ãƒ‰ãƒ©ãƒƒã‚°å…ƒã‚¿ãƒ–ã‚’è¨˜æ†¶ã™ã‚‹
 	m_nSrcTab = nSrcTab;
 	::GetCursorPos(&m_ptSrcCursor);
 	::SetCapture(m_hwndTab);
@@ -172,7 +172,7 @@ LRESULT CTabWnd::OnTabLButtonUp(WPARAM wParam, LPARAM lParam)
 	int nDstTab = TabCtrl_HitTest(m_hwndTab, (LPARAM)&hitinfo);
 	int nSelfTab = FindTabIndexByHWND(m_pwndFrame->m_hWnd);
 
-	// ƒ}ƒEƒXƒhƒƒbƒvˆ—
+	// ãƒã‚¦ã‚¹ãƒ‰ãƒ­ãƒƒãƒ—å‡¦ç†
 	switch (m_eDragState)
 	{
 	case DragState::CHECK:
@@ -194,7 +194,7 @@ LRESULT CTabWnd::OnTabLButtonUp(WPARAM wParam, LPARAM lParam)
 			}
 			if (bActive)
 			{
-				//w’è‚ÌƒEƒCƒ“ƒhƒE‚ğƒAƒNƒeƒBƒu‚É
+				//æŒ‡å®šã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«
 				TCITEM tcitem = {0};
 				tcitem.mask = TCIF_PARAM;
 				tcitem.lParam = 0;
@@ -256,17 +256,17 @@ LRESULT CTabWnd::OnTabMouseMove(WPARAM wParam, LPARAM lParam)
 		}
 	}
 
-	// ƒ}ƒEƒXƒhƒ‰ƒbƒO’†‚Ìˆ—
+	// ãƒã‚¦ã‚¹ãƒ‰ãƒ©ãƒƒã‚°ä¸­ã®å‡¦ç†
 	switch (m_eDragState)
 	{
 	case DragState::CHECK:
-		// Œ³‚Ìƒ^ƒu‚©‚ç—£‚ê‚½‚çƒhƒ‰ƒbƒOŠJn
+		// å…ƒã®ã‚¿ãƒ–ã‹ã‚‰é›¢ã‚ŒãŸã‚‰ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹
 		if (m_nSrcTab == nDstTab)
 			break;
 		m_eDragState = DragState::DRAG;
 		m_hDefaultCursor = ::GetCursor();
 
-		// Œ»İ‚Ìƒ^ƒu‹«ŠEˆÊ’u‚ğ‹L‰¯‚·‚é
+		// ç¾åœ¨ã®ã‚¿ãƒ–å¢ƒç•Œä½ç½®ã‚’è¨˜æ†¶ã™ã‚‹
 		nTabCount = TabCtrl_GetItemCount(m_hwndTab);
 		if (m_nTabBorderArray)
 		{
@@ -280,19 +280,19 @@ LRESULT CTabWnd::OnTabMouseMove(WPARAM wParam, LPARAM lParam)
 			TabCtrl_GetItemRect(m_hwndTab, i, &rc);
 			m_nTabBorderArray[i] = rc.right;
 		}
-		m_nTabBorderArray[i] = 0; // ÅŒã‚Ì—v‘f‚Í”Ô•º
-					  // ‚±‚±‚É—ˆ‚½‚çƒhƒ‰ƒbƒOŠJn‚È‚Ì‚Å break ‚µ‚È‚¢‚Å‚»‚Ì‚Ü‚Ü DRAG_DRAG ˆ—‚É“ü‚é
+		m_nTabBorderArray[i] = 0; // æœ€å¾Œã®è¦ç´ ã¯ç•ªå…µ
+					  // ã“ã“ã«æ¥ãŸã‚‰ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ãªã®ã§ break ã—ãªã„ã§ãã®ã¾ã¾ DRAG_DRAG å‡¦ç†ã«å…¥ã‚‹
 
 	case DragState::DRAG:
-		// ƒhƒ‰ƒbƒO’†‚Ìƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ğ•\¦‚·‚é
+		// ãƒ‰ãƒ©ãƒƒã‚°ä¸­ã®ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¡¨ç¤ºã™ã‚‹
 		HINSTANCE hInstance;
 		LPCTSTR lpCursorName;
-		lpCursorName = IDC_NO; // ‹Ö~ƒJ[ƒ\ƒ‹
-		if (0 <= nDstTab)      // ƒ^ƒu‚Ìã‚ÉƒJ[ƒ\ƒ‹‚ª‚ ‚é
+		lpCursorName = IDC_NO; // ç¦æ­¢ã‚«ãƒ¼ã‚½ãƒ«
+		if (0 <= nDstTab)      // ã‚¿ãƒ–ã®ä¸Šã«ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚ã‚‹
 		{
-			lpCursorName = NULL; // ŠJnƒJ[ƒ\ƒ‹w’è
+			lpCursorName = NULL; // é–‹å§‹æ™‚ã‚«ãƒ¼ã‚½ãƒ«æŒ‡å®š
 
-			// ƒhƒ‰ƒbƒOŠJn‚Ìƒ^ƒuˆÊ’u‚ÅˆÚ“®æƒ^ƒu‚ğÄŒvZ
+			// ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹æ™‚ã®ã‚¿ãƒ–ä½ç½®ã§ç§»å‹•å…ˆã‚¿ãƒ–ã‚’å†è¨ˆç®—
 			for (nDstTab = 0; m_nTabBorderArray[nDstTab] != 0; nDstTab++)
 			{
 				if (hitinfo.pt.x < m_nTabBorderArray[nDstTab])
@@ -300,7 +300,7 @@ LRESULT CTabWnd::OnTabMouseMove(WPARAM wParam, LPARAM lParam)
 					break;
 				}
 			}
-			// ƒhƒ‰ƒbƒO’†‚É‘¦ˆÚ“®
+			// ãƒ‰ãƒ©ãƒƒã‚°ä¸­ã«å³æ™‚ç§»å‹•
 			if (m_nSrcTab != nDstTab)
 			{
 				RECT rc = {0};
@@ -335,7 +335,7 @@ LRESULT CTabWnd::OnTabTimer(WPARAM wParam, LPARAM lParam)
 {
 	if (wParam == 1)
 	{
-		// ƒJ[ƒ\ƒ‹‚ªƒ^ƒuŠO‚É‚ ‚éê‡‚É‚à WM_MOUSEMOVE ‚ğ‘—‚é
+		// ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚¿ãƒ–å¤–ã«ã‚ã‚‹å ´åˆã«ã‚‚ WM_MOUSEMOVE ã‚’é€ã‚‹
 		TCHITTESTINFO hitinfo = {0};
 		::GetCursorPos(&hitinfo.pt);
 		::ScreenToClient(m_hwndTab, &hitinfo.pt);
@@ -534,7 +534,7 @@ HWND CTabWnd::CreateTab(HINSTANCE hInstance, CWnd* pFrame, CWnd* pView, HWND hwn
 	    NULL				     // handle to menu, or child-window identifier
 	);
 
-	//ƒ^ƒuƒEƒCƒ“ƒhƒE‚ğì¬‚·‚éB
+	//ã‚¿ãƒ–ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã™ã‚‹ã€‚
 	m_hwndTab = ::CreateWindow(
 	    WC_TABCONTROL,
 	    _T(""),
@@ -553,7 +553,7 @@ HWND CTabWnd::CreateTab(HINSTANCE hInstance, CWnd* pFrame, CWnd* pView, HWND hwn
 		::SetWindowLongPtr(m_hwndTab, GWLP_USERDATA, (LONG_PTR)this);
 		gm_pOldWndProc = (WNDPROC)::SetWindowLongPtr(m_hwndTab, GWLP_WNDPROC, (LONG_PTR)TabWndProc);
 
-		//ƒXƒ^ƒCƒ‹‚ğ•ÏX‚·‚éB
+		//ã‚¹ã‚¿ã‚¤ãƒ«ã‚’å¤‰æ›´ã™ã‚‹ã€‚
 		UINT lngStyle;
 		lngStyle = (UINT)::GetWindowLongPtr(m_hwndTab, GWL_STYLE);
 		lngStyle &= ~(TCS_BUTTONS | TCS_MULTILINE);
@@ -573,7 +573,7 @@ HWND CTabWnd::CreateTab(HINSTANCE hInstance, CWnd* pFrame, CWnd* pView, HWND hwn
 		m_hFont.CreateFontIndirect(&lf);
 		::SendMessage(m_hwndTab, WM_SETFONT, (WPARAM)m_hFont.GetSafeHandle(), MAKELPARAM(TRUE, 0));
 
-		//Tabì¬‚ªŠ®—¹‚µ‚½‚Ì‚ÅAList‚É’Ç‰ÁB
+		//Tabä½œæˆãŒå®Œäº†ã—ãŸã®ã§ã€Listã«è¿½åŠ ã€‚
 		this->m_pwndMainFrame->Add_TabWindow(m_pwndFrame);
 		TabCtrl_SetImageList(m_hwndTab, theApp.m_imgFavIcons);
 
@@ -647,9 +647,9 @@ LRESULT CTabWnd::OnLButtonUp(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	pt.y = HIWORD(lParam);
 	::GetClientRect(GetHwnd(), &rc);
 
-	if (::GetCapture() == GetHwnd()) // ©ƒEƒBƒ“ƒhƒE‚ªƒ}ƒEƒXƒLƒƒƒvƒ`ƒƒ[‚µ‚Ä‚¢‚é?
+	if (::GetCapture() == GetHwnd()) // è‡ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒãƒã‚¦ã‚¹ã‚­ãƒ£ãƒ—ãƒãƒ£ãƒ¼ã—ã¦ã„ã‚‹?
 	{
-		// ƒLƒƒƒvƒ`ƒƒ[‰ğœ
+		// ã‚­ãƒ£ãƒ—ãƒãƒ£ãƒ¼è§£é™¤
 		m_eCaptureSrc = CaptureSrc::NONE;
 		::ReleaseCapture();
 	}
@@ -664,8 +664,8 @@ LRESULT CTabWnd::OnRButtonDown(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 
 LRESULT CTabWnd::OnMouseMove(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	// ƒJ[ƒ\ƒ‹‚ªƒEƒBƒ“ƒhƒE“à‚É“ü‚Á‚½‚çƒ^ƒCƒ}[‹N“®
-	// ƒEƒBƒ“ƒhƒEŠO‚Éo‚½‚çƒ^ƒCƒ}[íœ
+	// ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å†…ã«å…¥ã£ãŸã‚‰ã‚¿ã‚¤ãƒãƒ¼èµ·å‹•
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å¤–ã«å‡ºãŸã‚‰ã‚¿ã‚¤ãƒãƒ¼å‰Šé™¤
 	POINT pt = {0};
 	RECT rc = {0};
 	BOOL bHovering = {0};
@@ -689,7 +689,7 @@ LRESULT CTabWnd::OnTimer(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (wParam == 1)
 	{
-		// ƒJ[ƒ\ƒ‹‚ªƒEƒBƒ“ƒhƒEŠO‚É‚ ‚éê‡‚É‚à WM_MOUSEMOVE ‚ğ‘—‚é
+		// ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å¤–ã«ã‚ã‚‹å ´åˆã«ã‚‚ WM_MOUSEMOVE ã‚’é€ã‚‹
 		POINT pt = {0};
 		RECT rc = {0};
 
@@ -713,7 +713,7 @@ LRESULT CTabWnd::OnMouseWheel(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 		m_WheelDCnt = 0;
 	if (m_WheelDCnt > 0)
 	{
-		//120’PˆÊ‚È‚Ì‚Å2‰ñ“]‚É1‰ñ
+		//120å˜ä½ãªã®ã§2å›è»¢ã«1å›
 		//if(m_WheelDCnt >= 120*2)
 		if (m_WheelDCnt >= 120)
 		{
@@ -739,10 +739,10 @@ LRESULT CTabWnd::OnEraseBkgnd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	PAINTSTRUCT ps = {0};
 	RECT rc = {0};
 
-	//•`‰æ‘ÎÛ
+	//æç”»å¯¾è±¡
 	hdc = ::BeginPaint(hwnd, &ps);
 
-	// ”wŒi‚ğ•`‰æ‚·‚é
+	// èƒŒæ™¯ã‚’æç”»ã™ã‚‹
 	::GetClientRect(hwnd, &rc);
 	::FillRect(hdc, &rc, (HBRUSH)(COLOR_WINDOW));
 	::EndPaint(hwnd, &ps);
@@ -755,7 +755,7 @@ LRESULT CTabWnd::OnPaint(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps = {0};
 	RECT rc = {0};
 
-	//•`‰æ‘ÎÛ
+	//æç”»å¯¾è±¡
 	hdc = ::BeginPaint(hwnd, &ps);
 	int nCurSel = TabCtrl_GetCurSel(m_hwndTab);
 	nCurSel = FindTabIndexByHWND(this->m_pwndFrame->GetSafeHwnd());
@@ -775,7 +775,7 @@ LRESULT CTabWnd::OnPaint(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		rcCurSel.bottom = rc.top + TAB_MARGIN_TOP;
 
 		if (rcCurSel.left < rc.left + TAB_MARGIN_LEFT)
-			rcCurSel.left = rc.left + TAB_MARGIN_LEFT; // ¶’[ŒÀŠE’l
+			rcCurSel.left = rc.left + TAB_MARGIN_LEFT; // å·¦ç«¯é™ç•Œå€¤
 
 		RECT rcTabTop = {0};
 		::GetClientRect(this->GetHwnd(), &rcTabTop);
@@ -805,7 +805,7 @@ LRESULT CTabWnd::OnNotify(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		switch (pnmh->code)
 		{
 		case TTN_GETDISPINFO:
-			// ƒc[ƒ‹ƒ`ƒbƒv•\¦î•ñ‚ğİ’è‚·‚é
+			// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—è¡¨ç¤ºæƒ…å ±ã‚’è¨­å®šã™ã‚‹
 			TCITEM tcitem = {0};
 			tcitem.mask = TCIF_PARAM;
 			tcitem.lParam = (LPARAM)NULL;
@@ -828,7 +828,7 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 {
 	if (NULL == m_hwndTab) return;
 
-	bool bFlag = false; //‘O‰ñ‰½‚àƒ^ƒu‚ª‚È‚©‚Á‚½‚©H
+	bool bFlag = false; //å‰å›ä½•ã‚‚ã‚¿ãƒ–ãŒãªã‹ã£ãŸã‹ï¼Ÿ
 	int nCount = {0};
 	int nIndex = {0};
 	HWND hwndUpDown = {0};
@@ -840,15 +840,15 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 	if (nCount <= 0)
 	{
 		bFlag = true;
-		//Å‰‚Ì‚Æ‚«‚Í‚·‚Å‚É‘¶İ‚·‚éƒEƒCƒ“ƒhƒE‚Ìî•ñ‚à“o˜^‚·‚é•K—v‚ª‚ ‚éB
-		// ‹N“®ACTabWnd::Open()“à‚ÌRefresh()‚Å‚Í‚Ü‚¾ƒOƒ‹[ƒv“ü‚è‘O‚Ì‚½‚ßŠù‚É•ÊƒEƒBƒ“ƒhƒE‚ª‚ ‚Á‚Ä‚àƒ^ƒu‚Í‹ó
+		//æœ€åˆã®ã¨ãã¯ã™ã§ã«å­˜åœ¨ã™ã‚‹ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®æƒ…å ±ã‚‚ç™»éŒ²ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
+		// èµ·å‹•æ™‚ã€CTabWnd::Open()å†…ã®Refresh()ã§ã¯ã¾ã ã‚°ãƒ«ãƒ¼ãƒ—å…¥ã‚Šå‰ã®ãŸã‚æ—¢ã«åˆ¥ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒã‚ã£ã¦ã‚‚ã‚¿ãƒ–ã¯ç©º
 		if (wParam == TWNT_ADD)
-			Refresh(); // ‘±‚¯‚ÄTWNT_ADDˆ—‚Å©•ªˆÈŠO‚ÌƒEƒBƒ“ƒhƒE‚ğ‰B‚·
+			Refresh(); // ç¶šã‘ã¦TWNT_ADDå‡¦ç†ã§è‡ªåˆ†ä»¥å¤–ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’éš ã™
 	}
 
 	switch (wParam)
 	{
-	case TWNT_ADD: //ƒEƒCƒ“ƒhƒE“o˜^
+	case TWNT_ADD: //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç™»éŒ²
 		nIndex = FindTabIndexByHWND((HWND)lParam);
 		if (-1 == nIndex)
 		{
@@ -864,19 +864,19 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 			TabCtrl_InsertItem(m_hwndTab, nCount, &tcitem);
 			nIndex = nCount;
 		}
-		//©•ª‚È‚çƒAƒNƒeƒBƒu‚É
+		//è‡ªåˆ†ãªã‚‰ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«
 		if (!theApp.IsWndVisible(m_pwndFrame->m_hWnd))
 		{
 			ShowTabWindow(m_pwndFrame->m_hWnd);
-			//‚±‚±‚É—ˆ‚½‚Æ‚¢‚¤‚±‚Æ‚Í‚·‚Å‚ÉƒAƒNƒeƒBƒu
-			//ƒRƒ}ƒ“ƒhÀs‚ÌƒAƒEƒgƒvƒbƒg‚Å–â‘è‚ª‚ ‚é‚Ì‚ÅƒAƒNƒeƒBƒu‚É‚·‚é
+			//ã“ã“ã«æ¥ãŸã¨ã„ã†ã“ã¨ã¯ã™ã§ã«ã‚¢ã‚¯ãƒ†ã‚£ãƒ–
+			//ã‚³ãƒãƒ³ãƒ‰å®Ÿè¡Œæ™‚ã®ã‚¢ã‚¦ãƒˆãƒ—ãƒƒãƒˆã§å•é¡ŒãŒã‚ã‚‹ã®ã§ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
 		}
 		TabCtrl_SetCurSel(m_hwndTab, nIndex);
-		// ©•ªˆÈŠO‚ğ‰B‚·
+		// è‡ªåˆ†ä»¥å¤–ã‚’éš ã™
 		HideOtherWindows(m_pwndFrame->m_hWnd);
 		break;
 
-	case TWNT_DEL: //ƒEƒCƒ“ƒhƒEíœ
+	case TWNT_DEL: //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦å‰Šé™¤
 		nIndex = FindTabIndexByHWND((HWND)lParam);
 		if (-1 != nIndex)
 		{
@@ -887,22 +887,22 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 				::InvalidateRect(GetHwnd(), NULL, FALSE);
 			}
 
-			// i‰E’[‚Ì‚Ù‚¤‚Ìƒ^ƒuƒAƒCƒeƒ€‚ğíœ‚µ‚½‚Æ‚«AƒXƒNƒ[ƒ‹‰Â”\‚È‚Ì‚É‰E‚É—]”’‚ª‚Å‚«‚é‚±‚Æ‚Ö‚Ì‘Îôj
-			hwndUpDown = ::FindWindowEx(m_hwndTab, NULL, UPDOWN_CLASS, 0); // ƒ^ƒu“à‚Ì Up-Down ƒRƒ“ƒgƒ[ƒ‹
+			// ï¼ˆå³ç«¯ã®ã»ã†ã®ã‚¿ãƒ–ã‚¢ã‚¤ãƒ†ãƒ ã‚’å‰Šé™¤ã—ãŸã¨ãã€ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å¯èƒ½ãªã®ã«å³ã«ä½™ç™½ãŒã§ãã‚‹ã“ã¨ã¸ã®å¯¾ç­–ï¼‰
+			hwndUpDown = ::FindWindowEx(m_hwndTab, NULL, UPDOWN_CLASS, 0); // ã‚¿ãƒ–å†…ã® Up-Down ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
 			if (hwndUpDown != NULL && ::IsWindowVisible(hwndUpDown))
 			{
 				nScrollPos = LOWORD(UpDown_GetPos(hwndUpDown));
-				// Œ»İˆÊ’u nScrollPos ‚Æ‰æ–Ê•\¦‚Æ‚ğˆê’v‚³‚¹‚é
-				::SendMessage(m_hwndTab, WM_HSCROLL, MAKEWPARAM(SB_THUMBPOSITION, LOWORD(nScrollPos)), (LPARAM)NULL); // İ’èˆÊ’u‚Éƒ^ƒu‚ğƒXƒNƒ[ƒ‹
+				// ç¾åœ¨ä½ç½® nScrollPos ã¨ç”»é¢è¡¨ç¤ºã¨ã‚’ä¸€è‡´ã•ã›ã‚‹
+				::SendMessage(m_hwndTab, WM_HSCROLL, MAKEWPARAM(SB_THUMBPOSITION, LOWORD(nScrollPos)), (LPARAM)NULL); // è¨­å®šä½ç½®ã«ã‚¿ãƒ–ã‚’ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
 			}
 		}
 		break;
 
-	case TWNT_ORDER: //ƒEƒCƒ“ƒhƒE‡˜•ÏX
+	case TWNT_ORDER: //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦é †åºå¤‰æ›´
 		nIndex = FindTabIndexByHWND((HWND)lParam);
 		if (-1 != nIndex)
 		{
-			//©•ª‚È‚çƒAƒNƒeƒBƒu‚É
+			//è‡ªåˆ†ãªã‚‰ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«
 			if (!theApp.IsWndVisible(m_pwndFrame->m_hWnd))
 			{
 				ShowTabWindow(m_pwndFrame->m_hWnd);
@@ -923,24 +923,24 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 
 				TabCtrl_SetItemSize(m_hwndTab, cx, m_TAB_ITEM_HEIGHT);
 			}
-			// ©ƒ^ƒuƒAƒCƒeƒ€‚ğ‹­§“I‚É‰Â‹ˆÊ’u‚É‚·‚é‚½‚ß‚ÉA
-			// ©ƒ^ƒuƒAƒCƒeƒ€‘I‘ğ‘O‚Éˆê“I‚É‰æ–Ê¶’[‚Ìƒ^ƒuƒAƒCƒeƒ€‚ğ‘I‘ğ‚·‚é
+			// è‡ªã‚¿ãƒ–ã‚¢ã‚¤ãƒ†ãƒ ã‚’å¼·åˆ¶çš„ã«å¯è¦–ä½ç½®ã«ã™ã‚‹ãŸã‚ã«ã€
+			// è‡ªã‚¿ãƒ–ã‚¢ã‚¤ãƒ†ãƒ é¸æŠå‰ã«ä¸€æ™‚çš„ã«ç”»é¢å·¦ç«¯ã®ã‚¿ãƒ–ã‚¢ã‚¤ãƒ†ãƒ ã‚’é¸æŠã™ã‚‹
 			nScrollPos = (hwndUpDown != NULL && ::IsWindowVisible(hwndUpDown)) ? LOWORD(UpDown_GetPos(hwndUpDown)) : 0;
 			TabCtrl_SetCurSel(m_hwndTab, nScrollPos);
 			TabCtrl_SetCurSel(m_hwndTab, nIndex);
-			// ©•ªˆÈŠO‚ğ‰B‚·
-			// i˜A‘±Ø‘Ö‚É TWNT_ORDER ‚ª‘å—Ê”­¶EŒğö‚µ‚ÄH‰æ–Ê‚ª‚·‚×‚ÄÁ‚¦‚Ä‚µ‚Ü‚Á‚½‚è‚·‚é‚Ì‚ğ–h‚®j
+			// è‡ªåˆ†ä»¥å¤–ã‚’éš ã™
+			// ï¼ˆé€£ç¶šåˆ‡æ›¿æ™‚ã« TWNT_ORDER ãŒå¤§é‡ç™ºç”Ÿãƒ»äº¤éŒ¯ã—ã¦ï¼Ÿç”»é¢ãŒã™ã¹ã¦æ¶ˆãˆã¦ã—ã¾ã£ãŸã‚Šã™ã‚‹ã®ã‚’é˜²ãï¼‰
 			HideOtherWindows(m_pwndFrame->m_hWnd);
 		}
 		break;
 
-	case TWNT_REFRESH: //Ä•\¦
+	case TWNT_REFRESH: //å†è¡¨ç¤º
 		Refresh((BOOL)lParam);
 		if (lParam)
 			::InvalidateRect(this->GetHwnd(), NULL, FALSE);
 		break;
 
-	case TWNT_WNDPL_ADJUST: // ƒEƒBƒ“ƒhƒEˆÊ’u‡‚í‚¹
+	case TWNT_WNDPL_ADJUST: // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®åˆã‚ã›
 		AdjustWindowPlacement();
 		LayoutTab();
 		::InvalidateRect(this->GetHwnd(), NULL, FALSE);
@@ -994,7 +994,7 @@ void CTabWnd::Refresh(BOOL bEnsureVisible /* = TRUE*/, BOOL bRebuild /* = FALSE*
 	nCount = m_pwndMainFrame->Get_TabWindowCount();
 
 	if (bRebuild)
-		TabCtrl_DeleteAllItems(m_hwndTab); // ì¬‚µ‚È‚¨‚·
+		TabCtrl_DeleteAllItems(m_hwndTab); // ä½œæˆã—ãªãŠã™
 
 	nTab = nCount;
 	nSel = m_pwndMainFrame->Get_TabWindowIndex(this->m_pwndFrame);
@@ -1011,40 +1011,40 @@ void CTabWnd::Refresh(BOOL bEnsureVisible /* = TRUE*/, BOOL bRebuild /* = FALSE*
 		TabCtrl_SetCurSel(m_hwndTab, 0);
 	}
 
-	// ‘I‘ğƒ^ƒu‚æ‚è‚à‘O‚Ì‰ß•s‘«‚ğ’²®‚·‚é
-	// i‘I‘ğƒ^ƒu‚Ì’¼‘OˆÊ’u‚Ö‚Ì’Ç‰Á^íœ‚ğŒJ‚è•Ô‚·‚±‚Æ‚ÅƒXƒNƒ[ƒ‹”­¶‚ğ’áŒ¸j
-	nCurSel = TabCtrl_GetCurSel(m_hwndTab); // Œ»İ‚Ì‘I‘ğƒ^ƒuˆÊ’u
+	// é¸æŠã‚¿ãƒ–ã‚ˆã‚Šã‚‚å‰ã®éä¸è¶³ã‚’èª¿æ•´ã™ã‚‹
+	// ï¼ˆé¸æŠã‚¿ãƒ–ã®ç›´å‰ä½ç½®ã¸ã®è¿½åŠ ï¼å‰Šé™¤ã‚’ç¹°ã‚Šè¿”ã™ã“ã¨ã§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç™ºç”Ÿã‚’ä½æ¸›ï¼‰
+	nCurSel = TabCtrl_GetCurSel(m_hwndTab); // ç¾åœ¨ã®é¸æŠã‚¿ãƒ–ä½ç½®
 	if (nCurSel > nSel)
 	{
 		for (i = 0; i < nCurSel - nSel; i++)
-			TabCtrl_DeleteItem(m_hwndTab, nCurSel - 1 - i); // —]•ª‚ğíœ
+			TabCtrl_DeleteItem(m_hwndTab, nCurSel - 1 - i); // ä½™åˆ†ã‚’å‰Šé™¤
 	}
 	else
 	{
 		for (i = 0; i < nSel - nCurSel; i++)
 		{
 			tcitem.iImage = nCurSel + i;
-			TabCtrl_InsertItem(m_hwndTab, nCurSel + i, &tcitem); // •s‘«‚ğ’Ç‰Á
+			TabCtrl_InsertItem(m_hwndTab, nCurSel + i, &tcitem); // ä¸è¶³ã‚’è¿½åŠ 
 		}
 	}
 
-	// ‘I‘ğƒ^ƒu‚æ‚è‚àŒã‚Ì‰ß•s‘«‚ğ’²®‚·‚é
-	nCurTab = TabCtrl_GetItemCount(m_hwndTab); // Œ»İ‚Ìƒ^ƒu”
+	// é¸æŠã‚¿ãƒ–ã‚ˆã‚Šã‚‚å¾Œã®éä¸è¶³ã‚’èª¿æ•´ã™ã‚‹
+	nCurTab = TabCtrl_GetItemCount(m_hwndTab); // ç¾åœ¨ã®ã‚¿ãƒ–æ•°
 	if (nCurTab > nTab)
 	{
 		for (i = 0; i < nCurTab - nTab; i++)
-			TabCtrl_DeleteItem(m_hwndTab, nSel + 1); // —]•ª‚ğíœ
+			TabCtrl_DeleteItem(m_hwndTab, nSel + 1); // ä½™åˆ†ã‚’å‰Šé™¤
 	}
 	else
 	{
 		for (i = 0; i < nTab - nCurTab; i++)
 		{
 			tcitem.iImage = nSel + 1;
-			TabCtrl_InsertItem(m_hwndTab, nSel + 1, &tcitem); // •s‘«‚ğ’Ç‰Á
+			TabCtrl_InsertItem(m_hwndTab, nSel + 1, &tcitem); // ä¸è¶³ã‚’è¿½åŠ 
 		}
 	}
 
-	// ì¬‚µ‚½ƒ^ƒu‚ÉŠeƒEƒBƒ“ƒhƒEî•ñ‚ğİ’è‚·‚é
+	// ä½œæˆã—ãŸã‚¿ãƒ–ã«å„ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æƒ…å ±ã‚’è¨­å®šã™ã‚‹
 	CStringArray strATitle;
 	CPtrArray ptrAWnd;
 	m_pwndMainFrame->Get_TabWindowInfoArray(strATitle, ptrAWnd);
@@ -1061,7 +1061,7 @@ void CTabWnd::Refresh(BOOL bEnsureVisible /* = TRUE*/, BOOL bRebuild /* = FALSE*
 			tcitem.mask = TCIF_TEXT | TCIF_PARAM | TCIF_IMAGE;
 			CString strTempTitle = strATitle.GetAt(i);
 			strTempTitle.Replace(_T("&"), _T("&&"));
-			//•¶š‚ÌƒJƒbƒg
+			//æ–‡å­—ã®ã‚«ãƒƒãƒˆ
 			SBUtil::GetDivChar(strTempTitle, 24, strTempTitle, FALSE);
 			lstrcpyn(szName, strTempTitle, _countof(szName) - 1);
 
@@ -1101,9 +1101,9 @@ void CTabWnd::Refresh(BOOL bEnsureVisible /* = TRUE*/, BOOL bRebuild /* = FALSE*
 
 void CTabWnd::AdjustWindowPlacement(void)
 {
-	HWND hwnd = m_pwndFrame->m_hWnd; // ©g‚Ì•ÒWƒEƒBƒ“ƒhƒE
+	HWND hwnd = m_pwndFrame->m_hWnd; // è‡ªèº«ã®ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
 	WINDOWPLACEMENT wp = {0};
-	if (!theApp.IsWndVisible(hwnd)) // ‰Â‹‰»‚·‚é‚Æ‚«‚¾‚¯ˆø‚«Œp‚®
+	if (!theApp.IsWndVisible(hwnd)) // å¯è¦–åŒ–ã™ã‚‹ã¨ãã ã‘å¼•ãç¶™ã
 	{
 		theApp.ShowWnd(hwnd);
 		wp.length = sizeof(wp);
@@ -1113,8 +1113,8 @@ void CTabWnd::AdjustWindowPlacement(void)
 		//HWND hwndInsertAfter={0};
 		//hwndInsertAfter = theApp.GetActiveBFramePtrHWND();
 		//::SetWindowPos(hwnd, hwndInsertAfter, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-		SetCarmWindowPlacement(hwnd, &wp); // ˆÊ’u‚ğ•œŒ³‚·‚é
-		//::UpdateWindow(hwnd);	// ‹­§•`‰æ
+		SetCarmWindowPlacement(hwnd, &wp); // ä½ç½®ã‚’å¾©å…ƒã™ã‚‹
+		//::UpdateWindow(hwnd);	// å¼·åˆ¶æç”»
 	}
 }
 
@@ -1134,7 +1134,7 @@ int CTabWnd::SetCarmWindowPlacement(HWND hwnd, const WINDOWPLACEMENT* pWndpl)
 		}
 		else
 		{
-			wp.showCmd = SW_SHOWNA; // ‚»‚Ì‚Ü‚ÜÅ‘å•\¦
+			wp.showCmd = SW_SHOWNA; // ãã®ã¾ã¾æœ€å¤§è¡¨ç¤º
 		}
 	}
 	else if (wp.showCmd != SW_SHOWMAXIMIZED)
@@ -1150,13 +1150,13 @@ void CTabWnd::ShowTabWindow(HWND hwnd)
 	if (NULL == hwnd) return;
 
 	if (theApp.m_bTabWndChanging)
-		return;			 // Ø‘Ö‚ÌÅ’†(busy)‚Í—v‹‚ğ–³‹‚·‚é
-	theApp.m_bTabWndChanging = TRUE; //ƒEƒBƒ“ƒhƒEØ‘Ö’†ON
+		return;			 // åˆ‡æ›¿ã®æœ€ä¸­(busy)ã¯è¦æ±‚ã‚’ç„¡è¦–ã™ã‚‹
+	theApp.m_bTabWndChanging = TRUE; //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åˆ‡æ›¿ä¸­ON
 	DWORD_PTR dwResult = {0};
 	::SendMessageTimeout(hwnd, MYWM_TAB_WINDOW_NOTIFY, TWNT_WNDPL_ADJUST, (LPARAM)NULL,
 			     SMTO_NORMAL, 10000, &dwResult);
 	TabWnd_ActivateFrameWindow(hwnd);
-	theApp.m_bTabWndChanging = FALSE; // ƒEƒBƒ“ƒhƒEØ‘Ö’†OFF
+	theApp.m_bTabWndChanging = FALSE; // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åˆ‡æ›¿ä¸­OFF
 	return;
 }
 
@@ -1184,7 +1184,7 @@ void CTabWnd::ForceActiveWindow(HWND hwnd)
 	::SystemParametersInfo(SPI_SETFOREGROUNDLOCKTIMEOUT, 0, (LPVOID)0, 0);
 
 	theApp.ShowWnd(hwnd);
-	//ƒEƒBƒ“ƒhƒE‚ğƒtƒHƒAƒOƒ‰ƒEƒ“ƒh‚É‚·‚é
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã«ã™ã‚‹
 	::SetForegroundWindow(hwnd);
 	::BringWindowToTop(hwnd);
 
@@ -1195,7 +1195,7 @@ void CTabWnd::ForceActiveWindow(HWND hwnd)
 
 void CTabWnd::TabWnd_ActivateFrameWindow(HWND hwnd)
 {
-	// ‘ÎÛ‚ªdisable‚Ì‚Æ‚«‚ÍÅ‹ß‚Ìƒ|ƒbƒvƒAƒbƒv‚ğƒtƒHƒAƒOƒ‰ƒEƒ“ƒh‰»‚·‚é
+	// å¯¾è±¡ãŒdisableã®ã¨ãã¯æœ€è¿‘ã®ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã‚’ãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰åŒ–ã™ã‚‹
 	HWND hwndActivate = {0};
 	hwndActivate = ::IsWindowEnabled(hwnd) ? hwnd : ::GetLastActivePopup(hwnd);
 

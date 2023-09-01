@@ -24,15 +24,15 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 {
 	PROC_TIME(OnBeforeCommandLineProcessing)
 
-	//GetAuthCredentials‚ª“®‚©‚È‚­‚È‚Á‚½‚Ì‚Å2019-06-13
+	//GetAuthCredentialsãŒå‹•ã‹ãªããªã£ãŸã®ã§2019-06-13
 	//command_line->AppendSwitchWithValue(_T("disable-features"), _T("NetworkService"));
-	//2019-07-24 “®‚­‚æ‚¤‚É‚È‚Á‚½B
+	//2019-07-24 å‹•ãã‚ˆã†ã«ãªã£ãŸã€‚
 	//Chromium Embedded Framework Version 75.1.4+g4210896+chromium-75.0.3770.100
 
 	//2020-09-16
 	//https://bitbucket.org/chromiumembedded/cef/issues/2989/m85-print-preview-fails-to-load-pdf-file
 	//CEF 85.3.6+gacfac2f+chromium-85.0.4183.102 / Chromium 85.0.4183.102
-	//CEF 84‚Ü‚Å‚ÍOK‚¾‚Á‚½B
+	//CEF 84ã¾ã§ã¯OKã ã£ãŸã€‚
 	//--enable-print-preview
 	command_line->AppendSwitch(_T("enable-print-preview"));
 
@@ -44,7 +44,7 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//	command_line->AppendSwitch(_T("enable-net-security-expiration"));
 
 	//"enable-media-stream"
-	//localhost‚¾‚¯‚ÍOKA‚»‚Ì‘¼‚Í‹–‰Â‚·‚é•û–@‚ª•s–¾
+	//localhostã ã‘ã¯OKã€ãã®ä»–ã¯è¨±å¯ã™ã‚‹æ–¹æ³•ãŒä¸æ˜
 	//command_line->AppendSwitch(_T("enable-media-stream"));
 
 	//	m_Command_line = CefCommandLine::CreateCommandLine();
@@ -95,13 +95,13 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//Proxy Settings
 	CString strProxyName;
 
-	//“Æ©‚ÌProxyƒ‹[ƒ‹‚ğƒZƒbƒg
+	//ç‹¬è‡ªã®Proxyãƒ«ãƒ¼ãƒ«ã‚’ã‚»ãƒƒãƒˆ
 	//Direct
 	if (theApp.m_AppSettings.GetProxyType() == CSG_PROXY_NA)
 	{
 		command_line->AppendSwitch(_T("no-proxy-server"));
 	}
-	//IEˆË‘¶
+	//IEä¾å­˜
 	else if (theApp.m_AppSettings.GetProxyType() == CSG_PROXY_IE)
 	{
 		;
@@ -112,7 +112,7 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 		strProxyName = theApp.m_AppSettings.GetProxyAddress();
 		if (!strProxyName.IsEmpty())
 		{
-			//pac‚ğ—˜—p
+			//pacã‚’åˆ©ç”¨
 			if (SBUtil::IsURL_HTTP(strProxyName) || SBUtil::IsURL_FILE(strProxyName))
 			{
 				command_line->AppendSwitchWithValue(_T("proxy-pac-url"), (LPCTSTR)strProxyName);
@@ -159,10 +159,10 @@ void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
 		{
 			hr = pIStream->Write(&data[0], (ULONG)iSize, NULL);
 			CImage pngImage_src;
-			// ƒƒ‚ƒŠã‚©‚çƒrƒbƒgƒ}ƒbƒvƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
+			// ãƒ¡ãƒ¢ãƒªä¸Šã‹ã‚‰ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€
 			pngImage_src.Load(pIStream);
 
-			//// Šm”F—pSave
+			//// ç¢ºèªç”¨Save
 			if (theApp.m_AppSettings.IsAdvancedLogMode())
 			{
 				CefURLParts cfURLparts;
@@ -179,7 +179,7 @@ void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
 					//strFileName += _T("");
 					strFileName += strPath;
 					strFileName += _T(".png");
-					//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
+					//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
 					strFileName = SBUtil::GetValidFileName(strFileName);
 					CString strFullPath;
 					strFullPath = theApp.m_strFaviconCachePath;

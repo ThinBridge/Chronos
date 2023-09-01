@@ -10,7 +10,7 @@ public:
 	BOOL m_bEnable;
 	UINT m_ActionType;
 	void SetState();
-// ダイアログ データ
+// 繝繧､繧｢繝ｭ繧ｰ 繝�繝ｼ繧ｿ
 #ifdef AFX_DESIGN_TIME
 	enum
 	{
@@ -38,7 +38,7 @@ public:
 	CString m_strFileName;
 	BOOL m_bEnable;
 	void SetState();
-	// ダイアログ データ
+	// 繝繧､繧｢繝ｭ繧ｰ 繝�繝ｼ繧ｿ
 #ifdef AFX_DESIGN_TIME
 	enum
 	{

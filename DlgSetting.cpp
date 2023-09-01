@@ -183,7 +183,7 @@ void CSettingsDialog::DoDataExchange(CDataExchange* pDX)
 }
 
 #pragma warning(push, 0)
-//Œx C26454 ‰‰Z‚ÌƒI[ƒo[ƒtƒ[ : '-' ‚Ì‘€ì‚Å‚ÍAƒRƒ“ƒpƒCƒ‹‚É•‰‚Ì•„†‚È‚µ‚ÌŒ‹‰Ê‚ª¶¬‚³‚ê‚Ü‚·(io .5)B
+//è­¦å‘Š C26454 æ¼”ç®—ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼ : '-' ã®æ“ä½œã§ã¯ã€ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ™‚ã«è² ã®ç¬¦å·ãªã—ã®çµæœãŒç”Ÿæˆã•ã‚Œã¾ã™(io .5)ã€‚
 #pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
 	//{{AFX_MSG_MAP(CSettingsDialog)
@@ -479,7 +479,7 @@ void CSettingsDialog::OnOK()
 		}
 	}
 
-	//î•ñ‚ğ•Û‘¶
+	//æƒ…å ±ã‚’ä¿å­˜
 	theApp.m_AppSettingsDlgCurrent.CopyData(theApp.m_AppSettings);
 	if (!theApp.m_AppSettings.SaveDataToFileEx(theApp.m_strSettingFileFullPath))
 	{
@@ -505,7 +505,7 @@ void CSettingsDialog::OnOK()
 		}
 	}
 
-	//ƒLƒƒƒbƒVƒ…Œn‚ğ‰Šú‰»
+	//ã‚­ãƒ£ãƒƒã‚·ãƒ¥ç³»ã‚’åˆæœŸåŒ–
 	theApp.m_CacheRedirectFilter_None.RemoveAll();
 	theApp.m_CacheURLFilter_Deny.RemoveAll();
 	theApp.m_CacheURLFilter_Allow.RemoveAll();
@@ -513,7 +513,7 @@ void CSettingsDialog::OnOK()
 	theApp.m_cDomainFilterList.RefreshData();
 	theApp.m_cCustomScriptList.RefreshData();
 
-	//Script‚ğ“Ç‚İ‚İ’¼‚µ
+	//Scriptã‚’èª­ã¿è¾¼ã¿ç›´ã—
 	theApp.m_cScriptSrc.RefreshData();
 	DestroyPages();
 	CDialog::OnOK();
@@ -635,7 +635,7 @@ void CSettingsDialog::OnSize(UINT nType, int cx, int cy)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetLog ƒ_ƒCƒAƒƒO
+// CDlgSetLog ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgSetLog, CPropertyPage)
 CDlgSetLog::CDlgSetLog() : CPropertyPage(CDlgSetLog::IDD)
@@ -662,7 +662,7 @@ BEGIN_MESSAGE_MAP(CDlgSetLog, CPropertyPage)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetLog ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetLog ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CDlgSetLog::OnEnableLog()
 {
 	BOOL bChk = FALSE;
@@ -714,13 +714,13 @@ void CDlgSetLog::OnEnableLogging()
 BOOL CDlgSetLog::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
-	//DebugLogo—Í‚ğ—LŒø‚É‚·‚é
+	//DebugLogå‡ºåŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 	if (theApp.m_AppSettingsDlgCurrent.IsAdvancedLogMode())
 		((CButton*)GetDlgItem(IDC_CHECK_ENABLE_LOG))->SetCheck(1);
 	else
 		((CButton*)GetDlgItem(IDC_CHECK_ENABLE_LOG))->SetCheck(0);
 
-	//ƒƒOo—Íí•Ê
+	//ãƒ­ã‚°å‡ºåŠ›ç¨®åˆ¥
 	int iLogLevel = theApp.m_AppSettingsDlgCurrent.GetAdvancedLogLevel();
 	if (iLogLevel == DEBUG_LOG_LEVEL_OUTPUT_ALL)
 		((CButton*)GetDlgItem(IDC_RADIO_LOG_ALL))->SetCheck(1);
@@ -796,13 +796,13 @@ void CDlgSetLog::OnDestroy()
 }
 LRESULT CDlgSetLog::Set_OK(WPARAM wParam, LPARAM lParam)
 {
-	//DebugLogo—Í‚ğ—LŒø‚É‚·‚é
+	//DebugLogå‡ºåŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 	if (((CButton*)GetDlgItem(IDC_CHECK_ENABLE_LOG))->GetCheck() == 1)
 		theApp.m_AppSettingsDlgCurrent.SetAdvancedLogMode(1);
 	else
 		theApp.m_AppSettingsDlgCurrent.SetAdvancedLogMode(0);
 
-	//ƒƒOo—Íí•Ê
+	//ãƒ­ã‚°å‡ºåŠ›ç¨®åˆ¥
 	int iLogLevel = GetCheckedRadioButton(IDC_RADIO_LOG_ALL, IDC_RADIO_LOG_GE_URL);
 	if (iLogLevel == IDC_RADIO_LOG_ALL)
 		theApp.m_AppSettingsDlgCurrent.SetAdvancedLogLevel(DEBUG_LOG_LEVEL_OUTPUT_ALL);
@@ -857,7 +857,7 @@ LRESULT CDlgSetLog::Set_OK(WPARAM wParam, LPARAM lParam)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetDSP ƒ_ƒCƒAƒƒO
+// CDlgSetDSP ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgSetDSP, CPropertyPage)
 CDlgSetDSP::CDlgSetDSP() : CPropertyPage(CDlgSetDSP::IDD)
@@ -891,7 +891,7 @@ BOOL CDlgSetDSP::OnInitDialog()
 	else
 		((CButton*)GetDlgItem(IDC_CHECK_LOGO))->SetCheck(0);
 
-	//GPUƒŒƒ“ƒ_ƒŠƒ“ƒO
+	//GPUãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	if (theApp.m_AppSettingsDlgCurrent.IsGPURendering())
 		((CButton*)GetDlgItem(IDC_CHECK_GPU))->SetCheck(1);
 	else
@@ -909,23 +909,23 @@ BOOL CDlgSetDSP::OnInitDialog()
 	else
 		((CButton*)GetDlgItem(IDC_CHECK_DISABLE_REBAR))->SetCheck(0);
 
-	//ƒXƒe[ƒ^ƒXƒo[
+	//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼
 	if (theApp.m_AppSettingsDlgCurrent.IsStatusbar())
 		((CButton*)GetDlgItem(IDC_CHECK_DISABLE_STATUSBAR))->SetCheck(1);
 	else
 		((CButton*)GetDlgItem(IDC_CHECK_DISABLE_STATUSBAR))->SetCheck(0);
 
-	//•ƒ}[ƒWƒ“
+	//å¹…ãƒãƒ¼ã‚¸ãƒ³
 	int iW = 25;
 	iW = theApp.m_AppSettingsDlgCurrent.GetWideMargin();
 	SetDlgItemInt(IDC_EDIT_W, iW);
 
-	//‚‚³ƒ}[ƒWƒ“
+	//é«˜ã•ãƒãƒ¼ã‚¸ãƒ³
 	int iH = 48;
 	iH = theApp.m_AppSettingsDlgCurrent.GetHeightMargin();
 	SetDlgItemInt(IDC_EDIT_H, iH);
 
-	//Šg‘åEk¬
+	//æ‹¡å¤§ãƒ»ç¸®å°
 	int iZoom = 100;
 	iZoom = theApp.m_AppSettingsDlgCurrent.GetZoomSize();
 	if (!(25 <= iZoom && iZoom <= 500))
@@ -952,7 +952,7 @@ LRESULT CDlgSetDSP::Set_OK(WPARAM wParam, LPARAM lParam)
 	else
 		theApp.m_AppSettingsDlgCurrent.SetShowLogo(0);
 
-	//GPUƒŒƒ“ƒ_ƒŠƒ“ƒO
+	//GPUãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	if (((CButton*)GetDlgItem(IDC_CHECK_GPU))->GetCheck() == 1)
 		theApp.m_AppSettingsDlgCurrent.SetGPURendering(1);
 	else
@@ -970,27 +970,27 @@ LRESULT CDlgSetDSP::Set_OK(WPARAM wParam, LPARAM lParam)
 	else
 		theApp.m_AppSettingsDlgCurrent.SetRebar(0);
 
-	//ƒXƒe[ƒ^ƒXƒo[
+	//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼
 	if (((CButton*)GetDlgItem(IDC_CHECK_DISABLE_STATUSBAR))->GetCheck() == 1)
 		theApp.m_AppSettingsDlgCurrent.SetStatusbar(1);
 	else
 		theApp.m_AppSettingsDlgCurrent.SetStatusbar(0);
 
-	//•ƒ}[ƒWƒ“
+	//å¹…ãƒãƒ¼ã‚¸ãƒ³
 	int iW = 25;
 	iW = GetDlgItemInt(IDC_EDIT_W);
 	if (iW < -50 || iW > 150)
 		iW = 25;
 	theApp.m_AppSettingsDlgCurrent.SetWideMargin(iW);
 
-	//‚‚³ƒ}[ƒWƒ“
+	//é«˜ã•ãƒãƒ¼ã‚¸ãƒ³
 	int iH = 48;
 	iH = GetDlgItemInt(IDC_EDIT_H);
 	if (iH < -50 || iH > 150)
 		iH = 48;
 	theApp.m_AppSettingsDlgCurrent.SetHeightMargin(iH);
 
-	//Šg‘åEk¬
+	//æ‹¡å¤§ãƒ»ç¸®å°
 	int iZoom = 100;
 	iZoom = GetDlgItemInt(IDC_EDIT_ZOOM);
 	if (!(25 <= iZoom && iZoom <= 500))
@@ -1001,7 +1001,7 @@ LRESULT CDlgSetDSP::Set_OK(WPARAM wParam, LPARAM lParam)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetGen ƒ_ƒCƒAƒƒO
+// CDlgSetGen ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 IMPLEMENT_DYNCREATE(CDlgSetGen, CPropertyPage)
 CDlgSetGen::CDlgSetGen() : CPropertyPage(CDlgSetGen::IDD)
 {
@@ -1041,22 +1041,22 @@ void CDlgSetGen::OnKeyCombiTest()
 	if (((CButton*)GetDlgItem(IDC_CHK_LEFT))->GetCheck() == 1)
 	{
 		dSetting = dSetting | KEY_COMB_LEFT;
-		strSettingKey += _T("© ");
+		strSettingKey += _T("â† ");
 	}
 	if (((CButton*)GetDlgItem(IDC_CHK_UP))->GetCheck() == 1)
 	{
 		dSetting = dSetting | KEY_COMB_UP;
-		strSettingKey += _T("ª ");
+		strSettingKey += _T("â†‘ ");
 	}
 	if (((CButton*)GetDlgItem(IDC_CHK_RIGHT))->GetCheck() == 1)
 	{
 		dSetting = dSetting | KEY_COMB_RIGHT;
-		strSettingKey += _T("¨ ");
+		strSettingKey += _T("â†’ ");
 	}
 	if (((CButton*)GetDlgItem(IDC_CHK_DOWN))->GetCheck() == 1)
 	{
 		dSetting = dSetting | KEY_COMB_DOWN;
-		strSettingKey += _T("«");
+		strSettingKey += _T("â†“");
 	}
 	if (strSettingKey.IsEmpty())
 	{
@@ -1080,13 +1080,13 @@ void CDlgSetGen::OnKeyCombiTest()
 		if ((dwKC & KEY_COMB_ALT) == KEY_COMB_ALT)
 			strResult += _T("Alt ");
 		if ((dwKC & KEY_COMB_LEFT) == KEY_COMB_LEFT)
-			strResult += _T("© ");
+			strResult += _T("â† ");
 		if ((dwKC & KEY_COMB_UP) == KEY_COMB_UP)
-			strResult += _T("ª ");
+			strResult += _T("â†‘ ");
 		if ((dwKC & KEY_COMB_RIGHT) == KEY_COMB_RIGHT)
-			strResult += _T("¨ ");
+			strResult += _T("â†’ ");
 		if ((dwKC & KEY_COMB_DOWN) == KEY_COMB_DOWN)
-			strResult += _T("«");
+			strResult += _T("â†“");
 		if (strResult.IsEmpty())
 		{
 			return;
@@ -1203,7 +1203,7 @@ LRESULT CDlgSetGen::Set_OK(WPARAM wParam, LPARAM lParam)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetSEC ƒ_ƒCƒAƒƒO
+// CDlgSetSEC ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgSetSEC, CPropertyPage)
 CDlgSetSEC::CDlgSetSEC() : CPropertyPage(CDlgSetSEC::IDD)
@@ -1380,7 +1380,7 @@ LRESULT CDlgSetSEC::Set_OK(WPARAM wParam, LPARAM lParam)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetINIT ƒ_ƒCƒAƒƒO
+// CDlgSetINIT ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgSetINIT, CPropertyPage)
 CDlgSetINIT::CDlgSetINIT() : CPropertyPage(CDlgSetINIT::IDD)
@@ -1402,12 +1402,12 @@ BOOL CDlgSetINIT::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
 
-	//‹N“®‚Ì‹­§ƒpƒ‰ƒ[ƒ^‚ğŠm”F
+	//èµ·å‹•æ™‚ã®å¼·åˆ¶ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ç¢ºèª
 	CString strEnforceInitURL;
 	CString strEnforceInitParam;
 	strEnforceInitURL = theApp.m_AppSettingsDlgCurrent.GetStartURL();
 	strEnforceInitParam = theApp.m_AppSettingsDlgCurrent.GetEnforceInitParam();
-	//®Œ`
+	//æ•´å½¢
 	strEnforceInitURL.TrimLeft();
 	strEnforceInitURL.TrimRight();
 	strEnforceInitURL.Replace(_T("\""), _T(""));
@@ -1441,13 +1441,13 @@ void CDlgSetINIT::OnDestroy()
 LRESULT CDlgSetINIT::Set_OK(WPARAM wParam, LPARAM lParam)
 {
 
-	//‹N“®‚Ì‹­§ƒpƒ‰ƒ[ƒ^‚ğŠm”F
+	//èµ·å‹•æ™‚ã®å¼·åˆ¶ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ç¢ºèª
 	CString strEnforceInitURL;
 	CString strEnforceInitParam;
 	GetDlgItemText(IDC_EDIT_INIT_URL_PARAM, strEnforceInitURL);
 	GetDlgItemText(IDC_EDIT_INIT_OP_PARAM, strEnforceInitParam);
 
-	//®Œ`
+	//æ•´å½¢
 	strEnforceInitURL.TrimLeft();
 	strEnforceInitURL.TrimRight();
 	strEnforceInitURL.Replace(_T("\""), _T(""));
@@ -1469,7 +1469,7 @@ LRESULT CDlgSetINIT::Set_OK(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetCAP ƒ_ƒCƒAƒƒO
+// CDlgSetCAP ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgSetCAP, CPropertyPage)
 CDlgSetCAP::CDlgSetCAP() : CPropertyPage(CDlgSetCAP::IDD)
@@ -1551,13 +1551,13 @@ BOOL CDlgSetCAP::OnInitDialog()
 	this->ChangeStateLimitTime();
 
 	int iW = 0;
-	//ƒƒ‚ƒŠ[ Å‘å’l(MB)
+	//ãƒ¡ãƒ¢ãƒªãƒ¼ æœ€å¤§å€¤(MB)
 	iW = theApp.m_AppSettingsDlgCurrent.GetMemoryUsageLimit();
 	if (iW < 1)
 		iW = 1224;
 	SetDlgItemInt(IDC_MemoryUsageLimit, iW);
 
-	//ƒEƒBƒ“ƒhƒE” Å‘å’l
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æ•° æœ€å¤§å€¤
 	iW = theApp.m_AppSettingsDlgCurrent.GetWindowCountLimit();
 	if (iW < 1)
 		iW = 999;
@@ -1605,13 +1605,13 @@ LRESULT CDlgSetCAP::Set_OK(WPARAM wParam, LPARAM lParam)
 	theApp.m_AppSettingsDlgCurrent.SetRunningLimitTime(iLimitTime);
 
 	int iW = 0;
-	//ƒƒ‚ƒŠ[ Å‘å’l(MB)
+	//ãƒ¡ãƒ¢ãƒªãƒ¼ æœ€å¤§å€¤(MB)
 	iW = GetDlgItemInt(IDC_MemoryUsageLimit);
 	if (iW < 1)
 		iW = 1224;
 	theApp.m_AppSettingsDlgCurrent.SetMemoryUsageLimit(iW);
 
-	//ƒEƒBƒ“ƒhƒE” Å‘å’l
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æ•° æœ€å¤§å€¤
 	iW = GetDlgItemInt(IDC_WindowCountLimit);
 	if (iW < 1)
 		iW = 999;
@@ -1621,7 +1621,7 @@ LRESULT CDlgSetCAP::Set_OK(WPARAM wParam, LPARAM lParam)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetConnectionSetting ƒ_ƒCƒAƒƒO
+// CDlgSetConnectionSetting ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgSetConnectionSetting, CPropertyPage)
 CDlgSetConnectionSetting::CDlgSetConnectionSetting() : CPropertyPage(CDlgSetConnectionSetting::IDD)
@@ -1760,7 +1760,7 @@ LRESULT CDlgSetConnectionSetting::Set_OK(WPARAM wParam, LPARAM lParam)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetDomainFilter ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgSetDomainFilter ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 #include "DlgDomainDetail.h"
 IMPLEMENT_DYNCREATE(CDlgSetDomainFilter, CPropertyPage)
 CDlgSetDomainFilter::CDlgSetDomainFilter() : CPropertyPage(CDlgSetDomainFilter::IDD)
@@ -1778,7 +1778,7 @@ void CDlgSetDomainFilter::DoDataExchange(CDataExchange* pDX)
 }
 
 #pragma warning(push, 0)
-//Œx C26454 ‰‰Z‚ÌƒI[ƒo[ƒtƒ[ : '-' ‚Ì‘€ì‚Å‚ÍAƒRƒ“ƒpƒCƒ‹‚É•‰‚Ì•„†‚È‚µ‚ÌŒ‹‰Ê‚ª¶¬‚³‚ê‚Ü‚·(io .5)B
+//è­¦å‘Š C26454 æ¼”ç®—ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼ : '-' ã®æ“ä½œã§ã¯ã€ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ™‚ã«è² ã®ç¬¦å·ãªã—ã®çµæœãŒç”Ÿæˆã•ã‚Œã¾ã™(io .5)ã€‚
 #pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CDlgSetDomainFilter, CPropertyPage)
 	//{{AFX_MSG_MAP(CDlgSetDomainFilter)
@@ -1797,7 +1797,7 @@ END_MESSAGE_MAP()
 #pragma warning(pop)
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetDomainFilter ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetDomainFilter ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CDlgSetDomainFilter::OnEnableCtrl()
 {
 	BOOL bChk = FALSE;
@@ -1824,7 +1824,7 @@ void CDlgSetDomainFilter::OnEnableCtrl()
 
 int CDlgSetDomainFilter::DuplicateChk(LPCTSTR sURL)
 {
-	int iRet = -1; //d•¡‚È‚µ‚ÍA-1‚ğ•Ô‚·B
+	int iRet = -1; //é‡è¤‡ãªã—ã¯ã€-1ã‚’è¿”ã™ã€‚
 	CString strURL;
 	int iSelCount = -1;
 	while ((iSelCount = m_List.GetNextItem(iSelCount, LVNI_ALL)) != -1)
@@ -1852,7 +1852,7 @@ void CDlgSetDomainFilter::InsertDlgShow(LPCTSTR sURL)
 		if (Dlg.m_strDomainName.IsEmpty())
 			return;
 		int iRet = DuplicateChk(Dlg.m_strDomainName);
-		//d•¡‚È‚µB
+		//é‡è¤‡ãªã—ã€‚
 		if (iRet == -1)
 		{
 			int index = m_List.GetItemCount();
@@ -1863,7 +1863,7 @@ void CDlgSetDomainFilter::InsertDlgShow(LPCTSTR sURL)
 			m_List.SetItemText(iItem, ACTION, strMode);
 
 			CString strTemp;
-			strTemp = Dlg.m_bEnable ? _T("›") : _T("|");
+			strTemp = Dlg.m_bEnable ? _T("â—‹") : _T("ï¼");
 			m_List.SetItemText(iItem, ENABLE, strTemp);
 		}
 		else
@@ -1915,7 +1915,7 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 		strURL = m_List.GetItemText(iSelCount, URL);
 		strMode = m_List.GetItemText(iSelCount, ACTION);
 		strTemp = m_List.GetItemText(iSelCount, ENABLE);
-		bEnable = strTemp == _T("›") ? TRUE : FALSE;
+		bEnable = strTemp == _T("â—‹") ? TRUE : FALSE;
 		Dlg.m_strDomainName = strURL;
 		CString allowLabel;
 		allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
@@ -1927,7 +1927,7 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 				return;
 
 			int iRet = DuplicateChk(Dlg.m_strDomainName);
-			//d•¡‚È‚µB
+			//é‡è¤‡ãªã—ã€‚
 			if (iRet == -1 || iRet == iSelCount)
 			{
 				m_List.SetItemText(iSelCount, URL, Dlg.m_strDomainName);
@@ -1936,7 +1936,7 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 				m_List.SetItemText(iSelCount, ACTION, strMode);
 
 				CString strTemp;
-				strTemp = Dlg.m_bEnable ? _T("›") : _T("|");
+				strTemp = Dlg.m_bEnable ? _T("â—‹") : _T("ï¼");
 				m_List.SetItemText(iSelCount, ENABLE, strTemp);
 			}
 			else
@@ -2088,7 +2088,7 @@ BOOL CDlgSetDomainFilter::OnInitDialog()
 					continue;
 
 				int iRet = DuplicateChk(strTemp2);
-				//d•¡‚È‚µB
+				//é‡è¤‡ãªã—ã€‚
 				if (iRet == -1)
 				{
 					int index = m_List.GetItemCount();
@@ -2100,7 +2100,7 @@ BOOL CDlgSetDomainFilter::OnInitDialog()
 					strMode.LoadString(strTemp3 == _T("A") ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
 					m_List.SetItemText(iItem, ACTION, strMode);
 
-					strLowString = bEnable ? _T("›") : _T("|");
+					strLowString = bEnable ? _T("â—‹") : _T("ï¼");
 					m_List.SetItemText(iItem, ENABLE, strLowString);
 				}
 			}
@@ -2151,12 +2151,12 @@ LRESULT CDlgSetDomainFilter::Set_OK(WPARAM wParam, LPARAM lParam)
 			bEnable = FALSE;
 			strURL = m_List.GetItemText(iSelCount, URL);
 			int iRet = DuplicateChk(strURL);
-			//d•¡‚È‚µB
+			//é‡è¤‡ãªã—ã€‚
 			if (iRet == -1 || iRet == iSelCount)
 			{
 				strMode = m_List.GetItemText(iSelCount, ACTION);
 				strEnable = m_List.GetItemText(iSelCount, ENABLE);
-				bEnable = strEnable == _T("›") ? TRUE : FALSE;
+				bEnable = strEnable == _T("â—‹") ? TRUE : FALSE;
 				CString allowLabel;
 				allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
 				if (bEnable)
@@ -2251,7 +2251,7 @@ void CDlgSetDSP::OnBnClickedButton1()
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetFileMgr ƒ_ƒCƒAƒƒO
+// CDlgSetFileMgr ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
 IMPLEMENT_DYNCREATE(CDlgSetFileMgr, CPropertyPage)
 CDlgSetFileMgr::CDlgSetFileMgr() : CPropertyPage(CDlgSetFileMgr::IDD)
@@ -2399,7 +2399,7 @@ LRESULT CDlgSetFileMgr::Set_OK(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetCustomScript ƒvƒƒpƒeƒB ƒy[ƒW
+// CDlgSetCustomScript ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ ãƒšãƒ¼ã‚¸
 IMPLEMENT_DYNCREATE(CDlgSetCustomScript, CPropertyPage)
 CDlgSetCustomScript::CDlgSetCustomScript() : CPropertyPage(CDlgSetCustomScript::IDD)
 {
@@ -2416,7 +2416,7 @@ void CDlgSetCustomScript::DoDataExchange(CDataExchange* pDX)
 }
 
 #pragma warning(push, 0)
-//Œx C26454 ‰‰Z‚ÌƒI[ƒo[ƒtƒ[ : '-' ‚Ì‘€ì‚Å‚ÍAƒRƒ“ƒpƒCƒ‹‚É•‰‚Ì•„†‚È‚µ‚ÌŒ‹‰Ê‚ª¶¬‚³‚ê‚Ü‚·(io .5)B
+//è­¦å‘Š C26454 æ¼”ç®—ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼ : '-' ã®æ“ä½œã§ã¯ã€ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ™‚ã«è² ã®ç¬¦å·ãªã—ã®çµæœãŒç”Ÿæˆã•ã‚Œã¾ã™(io .5)ã€‚
 #pragma warning(disable : 26454)
 BEGIN_MESSAGE_MAP(CDlgSetCustomScript, CPropertyPage)
 	//{{AFX_MSG_MAP(CDlgSetCustomScript)
@@ -2437,7 +2437,7 @@ END_MESSAGE_MAP()
 #pragma warning(pop)
 
 /////////////////////////////////////////////////////////////////////////////
-// CDlgSetCustomScript ƒƒbƒZ[ƒW ƒnƒ“ƒhƒ‰
+// CDlgSetCustomScript ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ ãƒãƒ³ãƒ‰ãƒ©
 void CDlgSetCustomScript::OnEnableCtrl()
 {
 	BOOL bChk = FALSE;
@@ -2464,7 +2464,7 @@ void CDlgSetCustomScript::OnEnableCtrl()
 
 int CDlgSetCustomScript::DuplicateChk(LPCTSTR sURL, LPCTSTR sFileName)
 {
-	int iRet = -1; //d•¡‚È‚µ‚ÍA-1‚ğ•Ô‚·B
+	int iRet = -1; //é‡è¤‡ãªã—ã¯ã€-1ã‚’è¿”ã™ã€‚
 	CString strURL;
 	CString strFileName;
 	int iSelCount = -1;
@@ -2496,7 +2496,7 @@ void CDlgSetCustomScript::InsertDlgShow()
 		if (Dlg.m_strFileName.IsEmpty())
 			return;
 		int iRet = DuplicateChk(Dlg.m_strURL, Dlg.m_strFileName);
-		//d•¡‚È‚µB
+		//é‡è¤‡ãªã—ã€‚
 		if (iRet == -1)
 		{
 			int index = m_List.GetItemCount();
@@ -2505,7 +2505,7 @@ void CDlgSetCustomScript::InsertDlgShow()
 			m_List.SetItemText(iItem, FILENAME, Dlg.m_strFileName);
 
 			CString strTemp;
-			strTemp = Dlg.m_bEnable ? _T("›") : _T("|");
+			strTemp = Dlg.m_bEnable ? _T("â—‹") : _T("ï¼");
 			m_List.SetItemText(iItem, ENABLE, strTemp);
 		}
 		else
@@ -2557,7 +2557,7 @@ void CDlgSetCustomScript::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 		strURL = m_List.GetItemText(iSelCount, URL);
 		strFILENAME = m_List.GetItemText(iSelCount, FILENAME);
 		strTemp = m_List.GetItemText(iSelCount, ENABLE);
-		bEnable = strTemp == _T("›") ? TRUE : FALSE;
+		bEnable = strTemp == _T("â—‹") ? TRUE : FALSE;
 		Dlg.m_strURL = strURL;
 		Dlg.m_strFileName = strFILENAME;
 		Dlg.m_bEnable = bEnable;
@@ -2569,14 +2569,14 @@ void CDlgSetCustomScript::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 				return;
 
 			int iRet = DuplicateChk(Dlg.m_strURL, Dlg.m_strFileName);
-			//d•¡‚È‚µB
+			//é‡è¤‡ãªã—ã€‚
 			if (iRet == -1 || iRet == iSelCount)
 			{
 				m_List.SetItemText(iSelCount, URL, Dlg.m_strURL);
 				m_List.SetItemText(iSelCount, FILENAME, Dlg.m_strFileName);
 
 				CString strTemp;
-				strTemp = Dlg.m_bEnable ? _T("›") : _T("|");
+				strTemp = Dlg.m_bEnable ? _T("â—‹") : _T("ï¼");
 				m_List.SetItemText(iSelCount, ENABLE, strTemp);
 			}
 			else
@@ -2734,11 +2734,11 @@ BOOL CDlgSetCustomScript::OnInitDialog()
 				if (strTemp3.IsEmpty())
 					continue;
 
-				//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
+				//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
 				strTemp3 = SBUtil::GetValidFileName(strTemp3);
 
 				int iRet = DuplicateChk(strTemp2, strTemp3);
-				//d•¡‚È‚µB
+				//é‡è¤‡ãªã—ã€‚
 				if (iRet == -1)
 				{
 					int index = m_List.GetItemCount();
@@ -2746,7 +2746,7 @@ BOOL CDlgSetCustomScript::OnInitDialog()
 					m_List.SetItemText(iItem, URL, strTemp2);
 					m_List.SetItemText(iItem, FILENAME, strTemp3);
 					CString strLowString;
-					strLowString = bEnable ? _T("›") : _T("|");
+					strLowString = bEnable ? _T("â—‹") : _T("ï¼");
 					m_List.SetItemText(iItem, ENABLE, strLowString);
 				}
 			}
@@ -2797,15 +2797,15 @@ LRESULT CDlgSetCustomScript::Set_OK(WPARAM wParam, LPARAM lParam)
 			bEnable = FALSE;
 			strURL = m_List.GetItemText(iSelCount, URL);
 			strFileName = m_List.GetItemText(iSelCount, FILENAME);
-			//ƒtƒ@ƒCƒ‹–¼‚Ég‚¦‚È‚¢•¶š‚ğ’u‚«Š·‚¦‚éB
+			//ãƒ•ã‚¡ã‚¤ãƒ«åã«ä½¿ãˆãªã„æ–‡å­—ã‚’ç½®ãæ›ãˆã‚‹ã€‚
 			strFileName = SBUtil::GetValidFileName(strFileName);
 
 			int iRet = DuplicateChk(strURL, strFileName);
-			//d•¡‚È‚µB
+			//é‡è¤‡ãªã—ã€‚
 			if (iRet == -1 || iRet == iSelCount)
 			{
 				strEnable = m_List.GetItemText(iSelCount, ENABLE);
-				bEnable = strEnable == _T("›") ? TRUE : FALSE;
+				bEnable = strEnable == _T("â—‹") ? TRUE : FALSE;
 				if (bEnable)
 					strLineData.Format(_T("%s\t%s\n"), (LPCTSTR)strURL, (LPCTSTR)strFileName);
 				else

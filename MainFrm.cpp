@@ -225,27 +225,27 @@ BOOL CMainFrame::CheckRecovery()
 			{
 				i = fnd.FindNextFile();
 				strChkFile.Empty();
-				// �t�@�C������"."��".."�̏ꍇ�͎�������
+				// ファイル名が"."か".."の場合は次を検索
 				if (fnd.IsDots())
 					continue;
 
-				// �t�@�C�����擾
+				// ファイル名取得
 				CString strChkFile = theApp.m_strDBL_EXE_FolderPath;
 				strChkFile.TrimRight('\\');
 				strChkFile += _T("\\") + fnd.GetFileName();
-				// �t�H���_�������ꍇ�A�ċA�Ăяo���ł��̃t�H���_���폜
+				// フォルダだった場合、再帰呼び出しでそのフォルダを削除
 				if (fnd.IsDirectory())
 				{
 					;
 				}
-				//�t�@�C��
+				//ファイル
 				else
 				{
-					//���O�t�@�C��
+					//除外ファイル
 					CString strFileName(fnd.GetFileName());
 					CString FileExt;
 					FileExt = strFileName.Mid(strFileName.ReverseFind('.'));
-					//���O�t�@�C��
+					//除外ファイル
 					if (strFileName.CompareNoCase(_T("DBLC.exe")) == 0)
 					{
 						continue;
@@ -268,7 +268,7 @@ BOOL CMainFrame::CheckRecovery()
 								dPID = _ttoi(strFileName);
 								CString strProcName;
 								strProcName = theApp.IsProcessExistsName(dPID);
-								//���݂��Ȃ��v���Z�X
+								//存在しないプロセス
 								if (strProcName.IsEmpty())
 								{
 									if (bTraceLog)
@@ -339,7 +339,7 @@ BOOL CMainFrame::CheckRecovery()
 		if (!theApp.m_AppSettings.IsCrashRecovery())
 			return FALSE;
 
-		//���J�o���[�\�ȏꍇ
+		//リカバリー可能な場合
 		if (bExecFlg)
 		{
 			//msg
@@ -365,7 +365,7 @@ BOOL CMainFrame::CheckRecovery()
 					strTemp = strArrayURL.GetAt(i);
 					strTemp.TrimLeft();
 					strTemp.TrimRight();
-					//�V�K�u���E�UWindow�̍쐬
+					//新規ブラウザWindowの作成
 					CreateNewWindow(strTemp);
 				}
 				return TRUE;
@@ -422,7 +422,7 @@ void CMainFrame::RestoreWnd(LPCTSTR lpFile)
 					{
 						if (theApp.m_bTabEnable_Init)
 						{
-							//�V�K�u���E�UWindow�̍쐬(��A�N�e�B�u)
+							//新規ブラウザWindowの作成(非アクティブ)
 							CreateNewWindow(strURL, FALSE);
 						}
 						else
@@ -467,10 +467,10 @@ BOOL CMainFrame::CreateNewWindow(LPCTSTR pURL, BOOL bActive)
 				bRet = TRUE;
 				pCreateView->Navigate(strURL);
 
-				//Tab�Ȃ�
+				//Tabなし
 				if (!theApp.m_bTabEnable_Init)
 				{
-					//�����I�v�V�����̏�Ԃ�K�p
+					//強制オプションの状態を適用
 					CString OptionParam;
 					OptionParam = theApp.m_AppSettings.GetEnforceInitParam();
 					if (!OptionParam.IsEmpty())
@@ -545,7 +545,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 
 	if (!str1.IsEmpty())
 	{
-		//URL��FilePath�̏ꍇ�́A�����I��CommandParam�Ƃ���B
+		//URLかFilePathの場合は、強制的にCommandParamとする。
 		if (SBUtil::IsURL(str1))
 		{
 			CommandParam = str1;
@@ -567,7 +567,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 
 	if (!str2.IsEmpty())
 	{
-		//URL��FilePath�̏ꍇ�́A�����I��CommandParam�Ƃ���B
+		//URLかFilePathの場合は、強制的にCommandParamとする。
 		if (SBUtil::IsURL(str2))
 		{
 			CommandParam = str2;
@@ -592,7 +592,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
-	//�N���b�V�����J�o���[
+	//クラッシュリカバリー
 	if (!theApp.m_bNewInstanceParam)
 	{
 		if (this->CheckRecovery())
@@ -608,7 +608,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 			dwFlags = NWMF_SUGGESTWINDOW;
 		}
 	}
-	//�V�K�u���E�UWindow�̍쐬
+	//新規ブラウザWindowの作成
 	pCreateView = NewBrowserWindow(dwFlags);
 	if (!pCreateView)
 	{
@@ -625,14 +625,14 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		return FALSE;
 	}
 
-	//��̏ꍇ�́A�z�[�����J���B
+	//空の場合は、ホームを開く。
 	if (CommandParam.IsEmpty())
 	{
 		pCreateView->GoHomeFirstCall();
 	}
 	else
 	{
-		//URL�t�@�C���̔���
+		//URLファイルの判定
 		CString strFileNameTemp;
 		CString FileExt;
 		CString strURL;
@@ -654,7 +654,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		}
 	}
 
-	//ThinDirect��R�}���h���C������̋N���̏ꍇ�́A�J����Window��K���A�N�e�B�u(�O��)�ɕ\������B
+	//ThinDirectやコマンドラインからの起動の場合は、開いたWindowを必ずアクティブ(前面)に表示する。
 	if (m_bAtomOpen)
 	{
 		SBUtil::SetAbsoluteForegroundWindow(pFrame->m_hWnd, TRUE);
@@ -685,7 +685,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 	{
 		;
 	}
-	//New�A�N�e�B�u(�O��)�ɕ\������B
+	//Newアクティブ(前面)に表示する。
 	if (theApp.m_bNewInstanceParam && !minMode)
 		SBUtil::SetAbsoluteForegroundWindow(pFrame->m_hWnd, TRUE);
 
@@ -731,7 +731,7 @@ void CMainFrame::CleanUP()
 			m_iTabTimerID = 0;
 			m_bTabTimerProcLock = FALSE;
 		}
-		//2�d�N����������B�I�����̂��߁B
+		//2重起動を許可する。終了中のため。
 		this->SetWindowText(theApp.m_strThisAppName);
 
 		if (m_colBrowserWindows.GetCount() > 0)
@@ -752,7 +752,7 @@ void CMainFrame::CleanUP()
 				m_colBrowserWindows.GetNext(pos1);
 			}
 		}
-		//RecoveryFile���폜����B
+		//RecoveryFileを削除する。
 		if (!theApp.m_strRecoveryFileFullPath.IsEmpty())
 		{
 			if (!theApp.m_bAbortFlg)
@@ -874,11 +874,11 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 
 		if (iMemSize > (unsigned long long)iMemL * 1024 * 1024)
 		{
-			//��U���[�L���O�Z�b�g���N���A���ĊJ�����Ă��܂��B
+			//一旦ワーキングセットをクリアして開放してしまう。
 			theApp.EmptyWorkingSetAll();
 			return;
 		}
-		//�N�����Ԑ���
+		//起動時間制限
 		if (theApp.m_AppSettings.IsEnableRunningTime())
 		{
 			int iLimitTimeBase = 0;
@@ -989,7 +989,7 @@ void CMainFrame::CheckBrowserWnd()
 
 		if (m_colBrowserWindows.GetCount() == 0)
 		{
-			//2�d�N����������B�I�����̂��߁B
+			//2重起動を許可する。終了中のため。
 			this->SetWindowText(theApp.m_strThisAppName);
 			PostMessage(WM_CLOSE);
 		}
@@ -1027,7 +1027,7 @@ LRESULT CMainFrame::DeleteWindowList(WPARAM wParam, LPARAM lParam)
 					logmsg.Format(_T("DeleteWindowList:%s"), _T("WM_CLOSE"));
 					theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_CL);
 				}
-				//2�d�N����������B�I�����̂��߁B
+				//2重起動を許可する。終了中のため。
 				this->SetWindowText(theApp.m_strThisAppName);
 				PostMessage(WM_CLOSE);
 			}
@@ -1044,10 +1044,10 @@ void CMainFrame::SetWindowPlacementFrm(WINDOWPLACEMENT tFramePracementMFrm, CBro
 {
 	try
 	{
-		//Tab�Ȃ��́A���̌�̏������s���K�v�Ȃ��B
+		//Tabなしは、この後の処理を行う必要なし。
 		if (!theApp.m_bTabEnable_Init)
 			return;
-		//tab��p�̏���
+		//tab専用の処理
 		CRect rcResult(0, 0, 0, 0);
 		if (tFramePracementMFrm.showCmd == SW_MAXIMIZE)
 		{
@@ -1058,7 +1058,7 @@ void CMainFrame::SetWindowPlacementFrm(WINDOWPLACEMENT tFramePracementMFrm, CBro
 			if (hWnd == NULL)
 				hWnd = ::GetDesktopWindow();
 			SBUtil::GetMonitorWorkRect(hWnd, &rcDesktop);
-			//Win10��7px����
+			//Win10の7px調整
 			if (theApp.m_iWinOSVersion >= 100)
 			{
 				CRect rectAdj;
@@ -1330,7 +1330,7 @@ void CMainFrame::Tab_HScrollSync(HWND hWnd, DWORD dw1, DWORD dw2, DWORD dw3)
 							{
 								HWND hwndUpDown = {0};
 								DWORD nScrollPos = {0};
-								hwndUpDown = ::FindWindowEx(ptd->m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // �^�u���� Up-Down �R���g���[��
+								hwndUpDown = ::FindWindowEx(ptd->m_cTabWnd->m_hwndTab, NULL, UPDOWN_CLASS, 0); // タブ内の Up-Down コントロール
 								if (hwndUpDown != NULL)
 								{
 									DWORD nScrollPos = {0};
@@ -1472,7 +1472,7 @@ BOOL CMainFrame::SetActiveFramePtr(CBrowserFrame* pTarget)
 			{
 				if (iPID_Prev != iPID_New)
 				{
-					//��
+					//低
 					if (!theApp.SetPriority(iPID_Prev, IDLE_PRIORITY_CLASS))
 					{
 						m_pActiveWindow->m_RendererPID = 0;
@@ -1481,7 +1481,7 @@ BOOL CMainFrame::SetActiveFramePtr(CBrowserFrame* pTarget)
 							m_pActiveWindow->m_wndView.ReSetRendererPID();
 						}
 					}
-					//��
+					//中
 					if (!theApp.SetPriority(iPID_New, NORMAL_PRIORITY_CLASS))
 					{
 						pTarget->m_RendererPID = 0;
@@ -1513,7 +1513,7 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 		if (pFrmActiveNow != NULL && pFrmActiveNow == pTarget)
 			bCloseWinActiveWin = TRUE;
 
-		//�����ʂƃA�N�e�B�u��ʂ���v���Ȃ��ꍇ�́A�A�N�e�B�u�E�C���h�E��ύX���Ȃ��B
+		//閉じる画面とアクティブ画面が一致しない場合は、アクティブウインドウを変更しない。
 		if (!bCloseWinActiveWin)
 		{
 			if (theApp.IsWnd(pFrmActiveNow))
@@ -1528,7 +1528,7 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 			return m_pPrevActiveWindow;
 		}
 
-		//����^�u�̉E��(��)
+		//閉じるタブの右側(次)
 		CBrowserFrame* pRet = NULL;
 		POSITION pos1 = {0};
 		CBrowserFrame* pFrm = NULL;
@@ -1537,7 +1537,7 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 		CBrowserFrame* pFrmTaPrev = NULL;
 		CBrowserFrame* pFrmTaNext = NULL;
 
-		//�擪�����Ă���
+		//先頭を入れておく
 		pos1 = m_colBrowserTabList.GetHeadPosition();
 		if (pos1)
 		{
@@ -1548,7 +1548,7 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 			}
 		}
 
-		//�Ō�������Ă���
+		//最後尾を入れておく
 		pos1 = m_colBrowserTabList.GetTailPosition();
 		if (pos1)
 		{
@@ -1565,7 +1565,7 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 			pFrm = (CBrowserFrame*)m_colBrowserTabList.GetAt(pos1);
 			if (theApp.IsWnd(pFrm))
 			{
-				//��v�����B
+				//一致した。
 				if (pTarget == pFrm)
 				{
 					bFind = TRUE;
@@ -1584,10 +1584,10 @@ CBrowserFrame* CMainFrame::GetNextGenerationActiveWindow(CBrowserFrame* pTarget)
 			pFrm = NULL;
 			m_colBrowserTabList.GetNext(pos1);
 		}
-		//�^�[�Q�b�g�̎��������B
+		//ターゲットの次が無い。
 		if (pFrmTaNext == NULL)
 		{
-			//�^�[�Q�b�g�̑O������
+			//ターゲットの前が無い
 			if (pFrmTaPrev == NULL)
 			{
 				pRet = pFrmTail;
@@ -1622,7 +1622,7 @@ void CMainFrame::CloseTabWindowLeft(CBrowserFrame* pTarget)
 			pFrm = (CBrowserFrame*)m_colBrowserTabList.GetAt(pos1);
 			if (theApp.IsWnd(pFrm))
 			{
-				//��v�����B
+				//一致した。
 				if (pTarget == pFrm)
 				{
 					break;
@@ -1667,7 +1667,7 @@ void CMainFrame::CloseTabWindowRight(CBrowserFrame* pTarget)
 			pFrm = (CBrowserFrame*)m_colBrowserTabList.GetAt(pos1);
 			if (theApp.IsWnd(pFrm))
 			{
-				//��v�����B
+				//一致した。
 				if (pTarget == pFrm)
 				{
 					break;
@@ -1702,13 +1702,13 @@ void CMainFrame::CloseTabWindowRight(CBrowserFrame* pTarget)
 }
 void CMainFrame::TabWindowChk()
 {
-	//�S��Hide�ɂȂ��Ă���ƃ}�Y�C�̂Ń`�F�b�N����B�~�Ϗ���
+	//全てHideになっているとマズイのでチェックする。救済処理
 	try
 	{
 		CBrowserFrame* pFrmActiveNow = NULL;
 		pFrmActiveNow = theApp.GetActiveBFramePtr();
 
-		//ActiveWnd���\������Ă���B��������
+		//ActiveWndが表示されている。即抜ける
 		if (theApp.IsWnd(pFrmActiveNow) &&
 		    theApp.IsWndVisible(pFrmActiveNow->m_hWnd) &&
 		    pFrmActiveNow->m_cTabWnd)
@@ -1716,7 +1716,7 @@ void CMainFrame::TabWindowChk()
 			return;
 		}
 
-		//ActiveWnd���\������Ă���B��������
+		//ActiveWndが表示されている。即抜ける
 		if (theApp.IsWnd(m_pActiveWindow) &&
 		    theApp.IsWndVisible(m_pActiveWindow->m_hWnd) &&
 		    m_pActiveWindow->m_cTabWnd)
@@ -1865,10 +1865,10 @@ void CMainFrame::InitFunc(CWnd* pFrame)
 			bTraceLog = TRUE;
 		}
 
-		//�N�����̃J�X�^�����b�Z�[�W��\������B
+		//起動時のカスタムメッセージを表示する。
 		if (theApp.IsFirstInstance())
 		{
-			//-NEW�ŋN�����ꂽ�ꍇ�͔�\��
+			//-NEWで起動された場合は非表示
 			if (!theApp.m_bNewInstanceParam)
 			{
 				CString strCustomMessage;
@@ -1889,7 +1889,7 @@ void CMainFrame::InitFunc(CWnd* pFrame)
 			}
 		}
 
-		//���[�h����Ă��郂�W���[���ꗗ�o��
+		//ロードされているモジュール一覧出力
 		if (bTraceLog)
 			theApp.WriteDebugTraceDateTime(theApp.GetAllModules(), DEBUG_LOG_TYPE_DE);
 	}
@@ -1906,7 +1906,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 	PROC_TIME(OnNewBrowserWindow)
 	try
 	{
-		//�����l�̃`�F�b�N
+		//制限値のチェック
 		if (theApp.IsLimitChkEx())
 			return NULL;
 
@@ -1940,7 +1940,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			pView = NULL;
 			BOOL bGetFlg = FALSE;
 
-			//Tab�Ȃ�
+			//Tabなし
 			if (!theApp.m_bTabEnable_Init)
 			{
 				for (pos1 = m_colBrowserWindows.GetTailPosition(); pos1 != NULL;)
@@ -1957,7 +1957,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 								{
 									bGetFlg = TRUE;
 									pFrm->GetWindowPlacement(&zFramePracement);
-									//�|�b�v�A�b�v�ł͖���Window�̃T�C�Y���L���b�V��
+									//ポップアップでは無いWindowのサイズをキャッシュ
 									theApp.m_NomalWindow_FramePracementCache = zFramePracement;
 									break;
 								}
@@ -1968,18 +1968,18 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 					pView = NULL;
 					m_colBrowserWindows.GetPrev(pos1);
 				}
-				//�ʏ�̃E�B���h�E�̃T�C�Y���擾�ł��Ă��Ȃ��B�|�b�v�A�b�v�����Ȃ��B
+				//通常のウィンドウのサイズを取得できていない。ポップアップしかない。
 				if (bGetFlg == FALSE)
 				{
-					//�L���b�V�������T�C�Y���Z�b�g����B
+					//キャッシュしたサイズをセットする。
 					zFramePracement = theApp.m_NomalWindow_FramePracementCache;
-					//Normalsize���w��
+					//Normalsizeを指定
 					zFramePracement.showCmd = SW_NORMAL;
 				}
 			}
 		}
 
-		//�ʏ��Window�쐬(��^�u)
+		//通常のWindow作成(非タブ)
 		if (!theApp.m_bTabEnable_Init)
 		{
 			pFrame->LoadFrame(IDR_MAINFRAME,
@@ -1988,14 +1988,14 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 		}
 		else
 		{
-			//Tab���[�h�ŏ���́A�ʏ��Window�쐬����
+			//Tabモードで初回は、通常のWindow作成処理
 			if (bFirstCall)
 			{
 				pFrame->LoadFrame(IDR_MAINFRAME,
 						  WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, NULL,
 						  NULL);
 			}
-			//Tab���[�h�̏ꍇ�ɍ쐬����Window�̃T�C�Y�ʒu�́A�����̕��ɍ��킹�Ă���(�`���c�L��}�����)
+			//Tabモードの場合に作成するWindowのサイズ位置は、既存の物に合わせておく(チラツキを抑える為)
 			else
 			{
 				CRect cRect = {10, 10, 800, 600};
@@ -2019,7 +2019,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 						if (hWnd == NULL)
 							hWnd = ::GetDesktopWindow();
 						SBUtil::GetMonitorWorkRect(hWnd, &rcDesktop);
-						//Win10 7px����
+						//Win10 7px調整
 						if (theApp.m_iWinOSVersion >= 100)
 						{
 							CRect rectAdj;
@@ -2041,7 +2041,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			}
 		}
 
-		//Window�쐬�Ɏ��s���Ă���B
+		//Window作成に失敗している。
 		if (!theApp.IsWnd(pFrame))
 		{
 			if (pFrame)
@@ -2050,12 +2050,12 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			return NULL;
 		}
 
-		//�Ǘ����X�g�ɒǉ�����
+		//管理リストに追加する
 		m_colBrowserWindows.AddTail(pFrame);
 
 		CBrowserFrame* ptd = NULL;
 
-		//�N�����珉�߂Ă�Window�쐬�̏ꍇ
+		//起動から初めてのWindow作成の場合
 		if (bFirstCall)
 		{
 			if (theApp.IsFirstInstance())
@@ -2076,7 +2076,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			rcNormalSize2.OffsetRect(30, 30);
 			zFramePracement.rcNormalPosition = rcNormalSize2;
 
-			//Tab����
+			//Tabあり
 			if (theApp.m_bTabEnable_Init)
 			{
 				zFramePracement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
@@ -2097,7 +2097,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 						if (hWnd == NULL)
 							hWnd = ::GetDesktopWindow();
 						SBUtil::GetMonitorWorkRect(hWnd, &rcDesktop);
-						//Win10 7px����
+						//Win10 7px調整
 						if (theApp.m_iWinOSVersion >= 100)
 						{
 							CRect rectAdj;
@@ -2125,7 +2125,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 					pFrame->SetWindowPlacement(&zFramePracement);
 				}
 			}
-			//Tab����
+			//Tab無し
 			else
 			{
 				BOOL bTabNoActiveate = FALSE;
@@ -2164,7 +2164,7 @@ void CMainFrame::AppExitExBT(CWnd* ptrW)
 	PROC_TIME(AppExitExBT)
 	try
 	{
-		//Tab���[�h�̏ꍇ
+		//Tabモードの場合
 		if (theApp.m_bTabEnable_Init)
 		{
 			this->SetWindowText(theApp.m_strThisAppName);
@@ -2186,13 +2186,13 @@ void CMainFrame::AppExitExBT(CWnd* ptrW)
 			ptd = NULL;
 			m_colBrowserWindows.GetNext(pos1);
 		}
-		//Tab���[�h�̏ꍇ�́A���̃C���X�^���X�͏I�����Ȃ��B
+		//Tabモードの場合は、他のインスタンスは終了しない。
 		if (theApp.m_bTabEnable_Init)
 		{
 			this->SetWindowText(theApp.m_FrmWndClassName);
 			return;
 		}
-		//�����v���Z�X�𗎂Ƃ��B
+		//同じプロセスを落とす。
 		CloseMultiProcess(::GetDesktopWindow());
 	}
 	catch (...)
@@ -2206,7 +2206,7 @@ void CMainFrame::OnAppExitEx()
 	POSITION pos1 = {0};
 	CBrowserFrame* ptd = NULL;
 
-	//2�d�N����������B�I�����̂��߁B
+	//2重起動を許可する。終了中のため。
 	this->SetWindowText(theApp.m_strThisAppName);
 	for (pos1 = m_colBrowserWindows.GetHeadPosition(); pos1 != NULL;)
 	{
@@ -2221,10 +2221,10 @@ void CMainFrame::OnAppExitEx()
 		ptd = NULL;
 		m_colBrowserWindows.GetNext(pos1);
 	}
-	//Tab���[�h�̏ꍇ�́A���̃C���X�^���X�͏I�����Ȃ��B
+	//Tabモードの場合は、他のインスタンスは終了しない。
 	if (theApp.m_bTabEnable_Init)
 		return;
-	//�����v���Z�X�𗎂Ƃ��B
+	//同じプロセスを落とす。
 	CloseMultiProcess(::GetDesktopWindow());
 }
 void CMainFrame::CloseMultiProcess(HWND hWndParent)
@@ -2242,7 +2242,7 @@ void CMainFrame::CloseMultiProcess(HWND hWndParent)
 		::GetWindowText(hWndChild, szTitleMultipleInstance, 259);
 		CString strTitleMultiple;
 		strTitleMultiple = szTitleMultipleInstance;
-		//window�����m�F����B
+		//window名を確認する。
 		if (strTitleMultiple == theApp.m_FrmWndClassName)
 		{
 			if (hWndChild != this->m_hWnd)
@@ -2273,7 +2273,7 @@ CBrowserFrame* CMainFrame::GetPrevFrmWnd(CBrowserFrame* ptdCurrent)
 				if (pFrmTail == NULL)
 					pFrmTail = pFrm;
 
-				//��v�����B
+				//一致した。
 				if (ptdCurrent == pFrm)
 				{
 					bFind = TRUE;
@@ -2308,7 +2308,7 @@ CBrowserFrame* CMainFrame::GetPrevFrmWnd(CBrowserFrame* ptdCurrent)
 				if (pFrmTail == NULL)
 					pFrmTail = pFrm;
 
-				//��v�����B
+				//一致した。
 				if (ptdCurrent == pFrm)
 				{
 					bFind = TRUE;
@@ -2342,7 +2342,7 @@ CBrowserFrame* CMainFrame::GetPrevFrmWnd(CBrowserFrame* ptdCurrent)
 					::GetWindowText(hWndChild, szTitleMultipleInstance, 259);
 					CString strTitleMultiple;
 					strTitleMultiple = szTitleMultipleInstance;
-					//window�����m�F����B
+					//window名を確認する。
 					if (strTitleMultiple == theApp.m_FrmWndClassName)
 					{
 						if (bFind)
@@ -2399,7 +2399,7 @@ CBrowserFrame* CMainFrame::GetNextFrmWnd(CBrowserFrame* ptdCurrent)
 			{
 				if (pFrmHead == NULL)
 					pFrmHead = pFrm;
-				//��v�����B
+				//一致した。
 				if (ptdCurrent == pFrm)
 				{
 					bFind = TRUE;
@@ -2434,7 +2434,7 @@ CBrowserFrame* CMainFrame::GetNextFrmWnd(CBrowserFrame* ptdCurrent)
 			{
 				if (pFrmHead == NULL)
 					pFrmHead = pFrm;
-				//��v�����B
+				//一致した。
 				if (ptdCurrent == pFrm)
 				{
 					bFind = TRUE;
@@ -2467,7 +2467,7 @@ CBrowserFrame* CMainFrame::GetNextFrmWnd(CBrowserFrame* ptdCurrent)
 					::GetWindowText(hWndChild, szTitleMultipleInstance, 259);
 					CString strTitleMultiple;
 					strTitleMultiple = szTitleMultipleInstance;
-					//window�����m�F����B
+					//window名を確認する。
 					if (strTitleMultiple == theApp.m_FrmWndClassName)
 					{
 						if (hWndChild == this->m_hWnd)
@@ -2556,7 +2556,7 @@ void CMainFrame::GetMultiProcessWnd(HWND hWndParent)
 		::GetWindowText(hWndChild, szTitleMultipleInstance, 259);
 		CString strTitleMultiple;
 		strTitleMultiple = szTitleMultipleInstance;
-		//window�����m�F����B
+		//window名を確認する。
 		if (strTitleMultiple == theApp.m_FrmWndClassName)
 		{
 			m_MultiProcessHWND.Add(hWndChild);
@@ -2577,7 +2577,7 @@ void CMainFrame::OnAppExitTimeLimit()
 	POSITION pos1 = {0};
 	CBrowserFrame* ptd = NULL;
 
-	//2�d�N����������B�I�����̂��߁B
+	//2重起動を許可する。終了中のため。
 	this->SetWindowText(theApp.m_strThisAppName);
 	CBrowserFrame* ptdFirst = NULL;
 
@@ -2635,7 +2635,7 @@ void CMainFrame::OnAppExitMaxMem()
 	POSITION pos1 = {0};
 	CBrowserFrame* ptd = NULL;
 
-	//2�d�N����������B�I�����̂��߁B
+	//2重起動を許可する。終了中のため。
 	this->SetWindowText(theApp.m_strThisAppName);
 	CBrowserFrame* ptdFirst = NULL;
 
@@ -2740,7 +2740,7 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 				pView = &(pFrm->m_wndView);
 				if (!theApp.IsWnd(pView))
 					continue;
-				//Popup�͏���
+				//Popupは除く
 				if (pView->IsPopupWindow())
 					continue;
 				strURL = pView->GetLocationURL();
@@ -2750,13 +2750,13 @@ void CMainFrame::SaveWindowList(LPCTSTR strPath, BOOL bAppendMode /*=FALSE*/)
 				{
 					if (iCnt == 0)
 					{
-						//���������߂̍s�ɏo�͂���B
+						//日時を初めの行に出力する。
 						out.WriteString(strWriteTime);
 					}
 
-					//CStdioFile��MBCS�ŏ����������Ƃ������A���͒l��Unicode�Ȃ̂ŁA
-					//�^�C�g���ɓ��ꕶ�����܂܂�Ă���ƕ����ϊ��Ɏ��s���ď�肭�������߂Ȃ��ꍇ������B
-					//���̂��߁A�^�C�g���͏������܂�URL�݂̂Ƃ���
+					//CStdioFileはMBCSで書き込もうとする一方、入力値はUnicodeなので、
+					//タイトルに特殊文字が含まれていると文字変換に失敗して上手く書き込めない場合がある。
+					//そのため、タイトルは書きこまずURLのみとする
 					strData.Format(_T("%s\n"), (LPCTSTR)strURL);
 
 					out.WriteString(strData);

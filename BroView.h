@@ -189,7 +189,7 @@ public:
 	{
 		try
 		{
-			//‰‚ß‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚Ìê‡
+			//åˆã‚ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å ´åˆ
 			if (theApp.IsFirstInstance())
 			{
 				m_bFirstCallDontClose = TRUE;
