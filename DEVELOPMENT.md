@@ -1,8 +1,14 @@
 # Development Guidelines
 
+* Git config guidelines
 * Branch guidelines
 * Issue guidelines
 * Release guidelines
+
+## Git config guidelines
+
+* Set `git config diff.cp932.textconv "iconv -f CP932 -t UTF-8"` to avoid diffs due to character code
+  * E.g. Execute `git clone --config diff.cp932.textconv="iconv -f CP932 -t UTF-8" git@github.com:ThinBridge/Chronos.git` when cloning.
 
 ## Branch guidelines
 

@@ -1,5 +1,5 @@
-*.cpp working-tree-encoding=cp932 eol=CRLF
-*.h working-tree-encoding=cp932 eol=CRLF
-*.rc working-tree-encoding=cp932 eol=CRLF
-minhook/*.h working-tree-encoding=utf-8 eol=CRLF
-minhook/*/*.h working-tree-encoding=utf-8 eol=CRLF
+*.cpp working-tree-encoding=cp932 eol=CRLF diff=cp932
+*.h working-tree-encoding=cp932 eol=CRLF diff=cp932
+*.rc working-tree-encoding=cp932 eol=CRLF diff=cp932
+minhook/*.h working-tree-encoding=utf-8 eol=CRLF diff=utf-8
+minhook/*/*.h working-tree-encoding=utf-8 eol=CRLF diff=utf-8
