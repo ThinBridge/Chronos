@@ -3321,7 +3321,7 @@ public:
 				CString strHelper;
 				CString strURL;
 				strURL = sURL;
-				CString TB_Global_SCHME;
+				CString TB_Global_SCHEME;
 				CString TB_Global_HOSTNAME;
 				CString TB_Global_PORT;
 				CString TB_Global_URL_PATH;
@@ -3349,8 +3349,8 @@ public:
 				urlcomponents.dwExtraInfoLength = URLBUFFER_SIZE;
 
 				InternetCrackUrl(strURL, 0, 0, &urlcomponents);
-				TB_Global_SCHME = urlcomponents.lpszScheme;
-				TB_Global_SCHME.Replace(_T("\""), _T("\"\""));
+				TB_Global_SCHEME = urlcomponents.lpszScheme;
+				TB_Global_SCHEME.Replace(_T("\""), _T("\"\""));
 				TB_Global_HOSTNAME = urlcomponents.lpszHostName;
 				TB_Global_HOSTNAME.Replace(_T("\""), _T("\"\""));
 				TB_Global_PORT.Format(_T("%d"), urlcomponents.nPort);
@@ -3360,8 +3360,11 @@ public:
 				TB_Global_URL_EXTRAINFO = urlcomponents.lpszExtraInfo;
 				TB_Global_URL_EXTRAINFO.Replace(_T("\""), _T("\"\""));
 
-				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"),
-						 (LPCTSTR)TB_Global_SCHME,
+				//We had mis-spelled TB_Global_SCHEME as TB_Global_SCHME in v13.1.112.0 or ealier.
+				//So we accept not only TB_Global_SCHME but also TB_Global_SCHME for backward compatibility.
+				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_SCHEME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"),
+						 (LPCTSTR)TB_Global_SCHEME,
+						 (LPCTSTR)TB_Global_SCHEME,
 						 (LPCTSTR)TB_Global_HOSTNAME,
 						 (LPCTSTR)TB_Global_PORT,
 						 (LPCTSTR)TB_Global_URL_PATH,
