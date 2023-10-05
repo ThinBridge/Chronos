@@ -1741,6 +1741,12 @@ bool ClientHandler::OnSelectClientCertificate(
 	if (certificates.empty())
 		return false;
 
+	if (certificates.size() == 1)
+	{
+		callback->Select(certificates[0]);
+		return true;
+	}
+
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (SafeWnd(hWindow))
 	{
