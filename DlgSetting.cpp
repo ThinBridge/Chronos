@@ -1863,7 +1863,7 @@ void CDlgSetDomainFilter::InsertDlgShow(LPCTSTR sURL)
 			m_List.SetItemText(iItem, ACTION, strMode);
 
 			CString strTemp;
-			strTemp = Dlg.m_bEnable ? _T("○") : _T("－");
+			strTemp = Dlg.m_bEnable ? _T("o") : _T("-");
 			m_List.SetItemText(iItem, ENABLE, strTemp);
 		}
 		else
@@ -1915,7 +1915,7 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 		strURL = m_List.GetItemText(iSelCount, URL);
 		strMode = m_List.GetItemText(iSelCount, ACTION);
 		strTemp = m_List.GetItemText(iSelCount, ENABLE);
-		bEnable = strTemp == _T("○") ? TRUE : FALSE;
+		bEnable = strTemp == _T("o") ? TRUE : FALSE;
 		Dlg.m_strDomainName = strURL;
 		CString allowLabel;
 		allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
@@ -1936,7 +1936,7 @@ void CDlgSetDomainFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 				m_List.SetItemText(iSelCount, ACTION, strMode);
 
 				CString strTemp;
-				strTemp = Dlg.m_bEnable ? _T("○") : _T("－");
+				strTemp = Dlg.m_bEnable ? _T("o") : _T("-");
 				m_List.SetItemText(iSelCount, ENABLE, strTemp);
 			}
 			else
@@ -2100,7 +2100,7 @@ BOOL CDlgSetDomainFilter::OnInitDialog()
 					strMode.LoadString(strTemp3 == _T("A") ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
 					m_List.SetItemText(iItem, ACTION, strMode);
 
-					strLowString = bEnable ? _T("○") : _T("－");
+					strLowString = bEnable ? _T("o") : _T("-");
 					m_List.SetItemText(iItem, ENABLE, strLowString);
 				}
 			}
@@ -2156,7 +2156,7 @@ LRESULT CDlgSetDomainFilter::Set_OK(WPARAM wParam, LPARAM lParam)
 			{
 				strMode = m_List.GetItemText(iSelCount, ACTION);
 				strEnable = m_List.GetItemText(iSelCount, ENABLE);
-				bEnable = strEnable == _T("○") ? TRUE : FALSE;
+				bEnable = strEnable == _T("o") ? TRUE : FALSE;
 				CString allowLabel;
 				allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
 				if (bEnable)
@@ -2505,7 +2505,7 @@ void CDlgSetCustomScript::InsertDlgShow()
 			m_List.SetItemText(iItem, FILENAME, Dlg.m_strFileName);
 
 			CString strTemp;
-			strTemp = Dlg.m_bEnable ? _T("○") : _T("－");
+			strTemp = Dlg.m_bEnable ? _T("o") : _T("-");
 			m_List.SetItemText(iItem, ENABLE, strTemp);
 		}
 		else
@@ -2557,7 +2557,7 @@ void CDlgSetCustomScript::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 		strURL = m_List.GetItemText(iSelCount, URL);
 		strFILENAME = m_List.GetItemText(iSelCount, FILENAME);
 		strTemp = m_List.GetItemText(iSelCount, ENABLE);
-		bEnable = strTemp == _T("○") ? TRUE : FALSE;
+		bEnable = strTemp == _T("o") ? TRUE : FALSE;
 		Dlg.m_strURL = strURL;
 		Dlg.m_strFileName = strFILENAME;
 		Dlg.m_bEnable = bEnable;
@@ -2576,7 +2576,7 @@ void CDlgSetCustomScript::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 				m_List.SetItemText(iSelCount, FILENAME, Dlg.m_strFileName);
 
 				CString strTemp;
-				strTemp = Dlg.m_bEnable ? _T("○") : _T("－");
+				strTemp = Dlg.m_bEnable ? _T("o") : _T("-");
 				m_List.SetItemText(iSelCount, ENABLE, strTemp);
 			}
 			else
@@ -2746,7 +2746,7 @@ BOOL CDlgSetCustomScript::OnInitDialog()
 					m_List.SetItemText(iItem, URL, strTemp2);
 					m_List.SetItemText(iItem, FILENAME, strTemp3);
 					CString strLowString;
-					strLowString = bEnable ? _T("○") : _T("－");
+					strLowString = bEnable ? _T("o") : _T("-");
 					m_List.SetItemText(iItem, ENABLE, strLowString);
 				}
 			}
@@ -2805,7 +2805,7 @@ LRESULT CDlgSetCustomScript::Set_OK(WPARAM wParam, LPARAM lParam)
 			if (iRet == -1 || iRet == iSelCount)
 			{
 				strEnable = m_List.GetItemText(iSelCount, ENABLE);
-				bEnable = strEnable == _T("○") ? TRUE : FALSE;
+				bEnable = strEnable == _T("o") ? TRUE : FALSE;
 				if (bEnable)
 					strLineData.Format(_T("%s\t%s\n"), (LPCTSTR)strURL, (LPCTSTR)strFileName);
 				else
