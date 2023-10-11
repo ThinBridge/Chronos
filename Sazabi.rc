@@ -1318,7 +1318,7 @@ BEGIN
                             "キーコンビネーションの確認画面\n設定したキーコンビネーションを押したまま、\nEnterキーを押すかOKボタンをクリックして下さい。\n設定値：%s"
     ID_KEY_COMBINATION_SUCCEEDED "成功\nキーコンビネーションを確認しました。\n設定値：%s\n入力値：%s"
     ID_KEY_COMBINATION_FAILED "失敗\nキーコンビネーションの確認に失敗しました。\n設定値：%s\n入力値：%s"
-    ID_ACTION_LABEL_ALLOW   "○ 許可"
+    ID_ACTION_LABEL_ALLOW   "o 許可"
 END
 
 STRINGTABLE
