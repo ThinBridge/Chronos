@@ -2266,7 +2266,6 @@ void CDlgSetFileMgr::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CDlgSetFileMgr, CPropertyPage)
 	ON_WM_DESTROY()
-	ON_BN_CLICKED(IDC_EnableUploadSync, &CDlgSetFileMgr::OnBnClickedULS)
 	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 END_MESSAGE_MAP()
 
@@ -2304,35 +2303,15 @@ BOOL CDlgSetFileMgr::OnInitDialog()
 	else
 		((CButton*)GetDlgItem(IDC_ShowUploadTab))->SetCheck(0);
 
-	if (theApp.m_AppSettingsDlgCurrent.IsEnableUploadSync())
-		((CButton*)GetDlgItem(IDC_EnableUploadSync))->SetCheck(1);
-	else
-		((CButton*)GetDlgItem(IDC_EnableUploadSync))->SetCheck(0);
-
 	if (theApp.m_AppSettingsDlgCurrent.IsEnableUploadSyncMirror())
 		((CButton*)GetDlgItem(IDC_EnableUploadSyncMirror))->SetCheck(1);
 	else
 		((CButton*)GetDlgItem(IDC_EnableUploadSyncMirror))->SetCheck(0);
 
-	this->ChangeStateULS();
+	GetDlgItem(IDC_UploadSyncInterval)->EnableWindow(TRUE);
+	GetDlgItem(IDC_EnableUploadSyncMirror)->EnableWindow(TRUE);
+
 	return FALSE;
-}
-void CDlgSetFileMgr::OnBnClickedULS()
-{
-	this->ChangeStateULS();
-}
-void CDlgSetFileMgr::ChangeStateULS()
-{
-	if (((CButton*)GetDlgItem(IDC_EnableUploadSync))->GetCheck() == 1)
-	{
-		GetDlgItem(IDC_UploadSyncInterval)->EnableWindow(TRUE);
-		GetDlgItem(IDC_EnableUploadSyncMirror)->EnableWindow(TRUE);
-	}
-	else
-	{
-		GetDlgItem(IDC_UploadSyncInterval)->EnableWindow(FALSE);
-		GetDlgItem(IDC_EnableUploadSyncMirror)->EnableWindow(FALSE);
-	}
 }
 
 LRESULT CDlgSetFileMgr::Set_OK(WPARAM wParam, LPARAM lParam)
@@ -2386,11 +2365,6 @@ LRESULT CDlgSetFileMgr::Set_OK(WPARAM wParam, LPARAM lParam)
 		theApp.m_AppSettingsDlgCurrent.SetShowUploadTab(1);
 	else
 		theApp.m_AppSettingsDlgCurrent.SetShowUploadTab(0);
-
-	if (((CButton*)GetDlgItem(IDC_EnableUploadSync))->GetCheck() == 1)
-		theApp.m_AppSettingsDlgCurrent.SetEnableUploadSync(1);
-	else
-		theApp.m_AppSettingsDlgCurrent.SetEnableUploadSync(0);
 
 	if (((CButton*)GetDlgItem(IDC_EnableUploadSyncMirror))->GetCheck() == 1)
 		theApp.m_AppSettingsDlgCurrent.SetEnableUploadSyncMirror(1);

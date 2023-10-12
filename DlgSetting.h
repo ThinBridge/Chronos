@@ -579,7 +579,6 @@ protected:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnPaint();
 	afx_msg void OnEnableCtrl();
-	afx_msg void OnBnClickedULS();
 	LRESULT Set_OK(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 	void ChangeStateULS();
