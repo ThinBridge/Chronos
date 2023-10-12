@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 resources
+// 日本語 (ニュートラル) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
@@ -96,7 +96,7 @@ BEGIN
     END
 END
 
-#endif    // 日本語 resources
+#endif    // 日本語 (ニュートラル) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -362,8 +362,7 @@ BEGIN
     CONTROL         "「開封済みにする」を行った場合に、確認メッセージを表示しない",IDC_DisableOpendOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
     LTEXT           "※拡張子を複数設定する場合は、|で区切ります。例）|.elf|.lnk|",IDC_STATIC,12,74,187,8
-    CONTROL         "アップロードアイテムを自動更新する",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
-    CONTROL         "ミラーリングモードを有効にする",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
+    CONTROL         "ミラーリングモードを有効にする",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,103,10
     LTEXT           "自動更新間隔(ミリ秒)",IDC_STATIC,17,220,68,8
     EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
 END
@@ -1380,7 +1379,7 @@ END
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 英語 resources
+// 英語 (ニュートラル) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
@@ -1716,9 +1715,8 @@ BEGIN
     CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpendOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
     LTEXT           "*Separate multiple file extensions with a pipe |. For example: |.elf|.lnk|",IDC_STATIC,12,74,187,8
-    CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
     CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,103,10
     LTEXT           "Interval of auto-sync (in milliseconds)",IDC_STATIC,17,220,68,8
     EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
 END
@@ -2758,7 +2756,7 @@ BEGIN
     ID_CERTIFICATION_VALID_PERIOD "Valid period: "
 END
 
-#endif    // 英語 resources
+#endif    // 英語 (ニュートラル) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
