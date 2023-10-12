@@ -9,10 +9,12 @@ jobs:
     strategy:
       matrix:
         version: [current, stable, beta]
-    runs-on: [ windows-2019 ]
+    runs-on: [ windows-2022 ]
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/setup-msbuild@v1
+      - uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: '[17, 18)'
       - if: matrix.version == 'stable'
         name: Use stable version of CEF
         run: |

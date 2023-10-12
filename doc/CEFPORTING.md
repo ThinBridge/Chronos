@@ -7,7 +7,7 @@ Chronosで採用しているCEFを継続的に更新していくために必要�
 ## 移植の基本的な流れ
 
 1. [HOWTOBUILD](../HOWTOBUILD.md)を参考に、setup-cef.batを更新し、採用すべきビルド済みバイナリを変更する。
-2. Visual Studio 2019を起動しソリューションをビルドするか、Developer Command Prompt for VS 2019を起動し、msbuildでビルドする。参考:[build.yaml](../.github/workflows/build.yaml)
+2. Visual Studio 2022を起動しソリューションをビルドするか、Developer Command Prompt for VS 2022を起動し、msbuildでビルドする。参考:[build.yaml](../.github/workflows/build.yaml)
 
 ```
 msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG
