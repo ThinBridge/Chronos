@@ -672,7 +672,7 @@ BOOL CDlgSCEditor::PreTranslateMessage(MSG* pMsg)
 
 			dwLineIndex = (DWORD)m_Edit.SendMessage(EM_LINEFROMCHAR, -1, 0);
 			CString strLineCount;
-			strLineCount.LoadString(ID_DEBUG_ITEMS_COUNT);
+			strLineCount.LoadString(ID_DEBUG_LINES_COUNT);
 			strLine.Format(strLineCount, dwLineIndex + 1);
 			SetDlgItemText(IDC_STATIC_LINE, strLine);
 			return lr;
