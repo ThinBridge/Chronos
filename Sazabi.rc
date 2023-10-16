@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 resources
+// 日本語 (ニュートラル) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
@@ -96,7 +96,7 @@ BEGIN
     END
 END
 
-#endif    // 日本語 resources
+#endif    // 日本語 (ニュートラル) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -249,7 +249,7 @@ BEGIN
                     "Button",BS_AUTORADIOBUTTON,27,46,171,10
     CONTROL         "2:一般情報[GE]とURL情報[URL]のみファイル出力",IDC_RADIO_LOG_GE_URL,
                     "Button",BS_AUTORADIOBUTTON,27,58,173,10
-    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,8,76,100,14
+    PUSHBUTTON      "TRACE Log Monitor Windowを開く...",IDC_BUTTON1,8,76,124,14
     GROUPBOX        "監査ログ設定",IDC_STATIC,10,97,350,185,WS_GROUP
     CONTROL         "監査ログ出力を有効にする",IDC_CHECK_EnableLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
     LTEXT           "ログサーバーURL",IDC_STATIC,26,125,283,8
@@ -531,8 +531,8 @@ BEGIN
     PUSHBUTTON      "削除",IDC_BUTTON_DEL,46,271,33,14
     PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
     PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
-    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,142,271,100,14
-    PUSHBUTTON      "Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
+    PUSHBUTTON      "TRACE Log Monitor Windowを開く...",IDC_BUTTON1,119,271,123,14
+    PUSHBUTTON      "Developer Toolsを開く...",IDC_SHOW_DEV_TOOLS,246,271,100,14
 END
 
 IDD_DIALOG6 DIALOGEX 0, 0, 415, 89
@@ -1069,7 +1069,7 @@ BEGIN
     ID_INFO_OPEN_OPTION_SHOW_TRANSFER "「転送する」を表示する"
     ID_MISSING_PROXY_CONFIG "[インターネット接続設定]\n[インターネット接続設定]-「マニュアル設定」を選択した場合\nプロキシ サーバー/自動構成スクリプトを登録して下さい。(空白不可)"
     ID_URL_REDIRECT_SCRIPT_HELP 
-                            "'##################################################################################\r\n'URLリダイレクト スクリプト ヘルプ\r\n'ファンクション　OnRedirectにリダイレクト処理を記述します。\r\n'スクリプト言語は、VBScriptベースになります。\r\n'戻り値として、起動したいブラウザーを記述します。\r\n\r\n'  既定のブラウザーで表示する場合\r\n'    OnRedirect=""Default""\r\n'  Microsoft Internet Explorerにリダイレクトする場合\r\n'    OnRedirect=""IE""\r\n'  Mozilla Firefoxにリダイレクトする場合\r\n'    OnRedirect=""Firefox""\r\n'  Google Chromeにリダイレクトする場合\r\n'    OnRedirect=""Chrome""\r\n'  Microsoft Edgeにリダイレクトする場合\r\n'    OnRedirect=""Edge""\r\n'  指定ブラウザー1にリダイレクトする場合\r\n'    OnRedirect=""Custom1""\r\n'  指定ブラウザー2にリダイレクトする場合\r\n'    OnRedirect=""Custom2""\r\n'  指定ブラウザー3にリダイレクトする場合\r\n'    OnRedirect=""Custom3""\r\n'  指定ブラウザー4にリダイレクトする場合\r\n'    OnRedirect=""Custom4""\r\n'  指定ブラウザー5にリダイレクトする場合\r\n'    OnRedirect=""Custom5""\r\n'  表示を禁止する場合\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'グローバル変数(予約語)：\r\n'以下のグローバル変数を利用することが可能です。\r\n\r\n'TB_Global_URL\t(文字列値)\r\n'  画面遷移先のURL情報\r\n\r\n'TB_Global_SCHME\t(文字列値)\r\n'  画面遷移先のURLスキーマ情報 http/https\r\n\r\n'TB_Global_HOSTNAME\t(文字列値)\r\n'  画面遷移先のURLホスト情報\r\n\r\n'TB_Global_PORT\t(文字列値)\r\n'  画面遷移先のURLポート情報\r\n\r\n'TB_Global_URL_PATH\t(文字列値)\r\n'  画面遷移先のURLパス情報\r\n\r\n'例)「https://www.google.co.jp/search?q=Chronos」を開く場合\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(真偽値)\r\n'  トップURLかサブURL(Frame/iFrame)かの情報：True(トップURL)　False(サブURL)\r\n\r\n'TB_TRACE_LOG(文字列値)\r\n'  Debug TRACE Windowにログ出力を行います。\r\n'------------------------------------------------------------\r\n'例)https://www.yahoo.co.jpの場合は、IEにリダイレクトする。\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
+                            "'##################################################################################\r\n'URLリダイレクト スクリプト ヘルプ\r\n'ファンクション　OnRedirectにリダイレクト処理を記述します。\r\n'スクリプト言語は、VBScriptベースになります。\r\n'戻り値として、起動したいブラウザーを記述します。\r\n\r\n'  既定のブラウザーで表示する場合\r\n'    OnRedirect=""Default""\r\n'  Microsoft Internet Explorerにリダイレクトする場合\r\n'    OnRedirect=""IE""\r\n'  Mozilla Firefoxにリダイレクトする場合\r\n'    OnRedirect=""Firefox""\r\n'  Google Chromeにリダイレクトする場合\r\n'    OnRedirect=""Chrome""\r\n'  Microsoft Edgeにリダイレクトする場合\r\n'    OnRedirect=""Edge""\r\n'  指定ブラウザー1にリダイレクトする場合\r\n'    OnRedirect=""Custom1""\r\n'  指定ブラウザー2にリダイレクトする場合\r\n'    OnRedirect=""Custom2""\r\n'  指定ブラウザー3にリダイレクトする場合\r\n'    OnRedirect=""Custom3""\r\n'  指定ブラウザー4にリダイレクトする場合\r\n'    OnRedirect=""Custom4""\r\n'  指定ブラウザー5にリダイレクトする場合\r\n'    OnRedirect=""Custom5""\r\n'  表示を禁止する場合\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'グローバル変数(予約語)：\r\n'以下のグローバル変数を利用することが可能です。\r\n\r\n'TB_Global_URL\t(文字列値)\r\n'  画面遷移先のURL情報\r\n\r\n'TB_Global_SCHME\t(文字列値)\r\n'  画面遷移先のURLスキーマ情報 http/https\r\n\r\n'TB_Global_HOSTNAME\t(文字列値)\r\n'  画面遷移先のURLホスト情報\r\n\r\n'TB_Global_PORT\t(文字列値)\r\n'  画面遷移先のURLポート情報\r\n\r\n'TB_Global_URL_PATH\t(文字列値)\r\n'  画面遷移先のURLパス情報\r\n\r\n'例)「https://www.google.co.jp/search?q=Chronos」を開く場合\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(真偽値)\r\n'  トップURLかサブURL(Frame/iFrame)かの情報：True(トップURL)　False(サブURL)\r\n\r\n'TB_TRACE_LOG(文字列値)\r\n'  TRACE Log Monitor Windowにログ出力を行います。\r\n'------------------------------------------------------------\r\n'例)https://www.yahoo.co.jpの場合は、IEにリダイレクトする。\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
     ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "ログ出力："
     ID_AUTH_ALERT_EMPTY_USER "ユーザー名を入力して下さい。"
     ID_AUTH_REQUIRED        "認証が必要です。"
@@ -1380,7 +1380,7 @@ END
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 英語 resources
+// 英語 (ニュートラル) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
@@ -1600,7 +1600,7 @@ BEGIN
                     "Button",BS_AUTORADIOBUTTON,27,46,171,10
     CONTROL         "2:Output only general information [GE] and URL [URL] to a log file",IDC_RADIO_LOG_GE_URL,
                     "Button",BS_AUTORADIOBUTTON,27,58,173,10
-    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,8,76,100,14
+    PUSHBUTTON      "Open TRACE Log Monitor Window...",IDC_BUTTON1,8,76,117,14
     GROUPBOX        "Audit log options",IDC_STATIC,10,97,350,185,WS_GROUP
     CONTROL         "Enable audit logs output",IDC_CHECK_EnableLogging,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,110,145,10
@@ -1890,8 +1890,8 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
     PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
     PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
-    PUSHBUTTON      "Debug TRACE Window...",IDC_BUTTON1,142,271,100,14
-    PUSHBUTTON      "Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
+    PUSHBUTTON      "Open TRACE Log Monitor Window...",IDC_BUTTON1,119,271,123,14
+    PUSHBUTTON      "Open Developer Tools...",IDC_SHOW_DEV_TOOLS,246,271,100,14
 END
 
 IDD_DIALOG6 DIALOGEX 0, 0, 415, 89
@@ -2436,7 +2436,7 @@ BEGIN
     ID_INFO_OPEN_OPTION_SHOW_TRANSFER "Show ""Transfer"""
     ID_MISSING_PROXY_CONFIG "[Internet connection]\n[Internet connection]-""Manual settings"" requires any proxy server or PAC file. It cannot be blank."
     ID_URL_REDIRECT_SCRIPT_HELP 
-                            "'##################################################################################\r\n'Help for URL Redirection Scripts\r\n'The script needs to be written in the VBScript syntax.\r\n'You should put codes to define redirection logic into the function OnRedirect,\r\n'and it needs to return the browser name which you want the URL to be loaded by.\r\n\r\n'  To load the URL by the system default browser:\r\n'    OnRedirect=""Default""\r\n'  For the case by Microsoft Internet Explorer:\r\n'    OnRedirect=""IE""\r\n'  For the case by Mozilla Firefox:\r\n'    OnRedirect=""Firefox""\r\n'  For the case by Google Chrome:\r\n'    OnRedirect=""Chrome""\r\n'  For the case by Microsoft Edge:\r\n'    OnRedirect=""Edge""\r\n'  For the case by the custom browser 1:\r\n'    OnRedirect=""Custom1""\r\n'  For the case by the custom browser 2:\r\n'    OnRedirect=""Custom2""\r\n'  For the case by the custom browser 3:\r\n'    OnRedirect=""Custom3""\r\n'  For the case by the custom browser 4:\r\n'    OnRedirect=""Custom4""\r\n'  For the case by the custom browser 5:\r\n'    OnRedirect=""Custom5""\r\n'  To block loading of the URL:\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'Global variables (reserved):\r\n'Here is a list of available global variables.\r\n\r\n'TB_Global_URL\t(String)\r\n'  The loading URL.\r\n\r\n'TB_Global_SCHME\t(String)\r\n'  The scheme of the loading URL (http or https)\r\n\r\n'TB_Global_HOSTNAME\t(String)\r\n'  The hostname of the loading URL.\r\n\r\n'TB_Global_PORT\t(String)\r\n'  The port number of the loading URL.\r\n\r\n'TB_Global_URL_PATH\t(String)\r\n'  The path of the loading URL.\r\n\r\n'For example: if the loading URL is https://www.google.co.jp/search?q=Chronos ,\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(Boolean)\r\n'  Which the URL is the one of the top frame or a sub frame. True = top frame, False = sub frame.\r\n\r\n'TB_TRACE_LOG(String)\r\n'  Prints a log line to the Debug TRACE Window.\r\n'------------------------------------------------------------\r\n'For example: setting https://www.yahoo.co.jp to be loaded by IE.\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
+                            "'##################################################################################\r\n'Help for URL Redirection Scripts\r\n'The script needs to be written in the VBScript syntax.\r\n'You should put codes to define redirection logic into the function OnRedirect,\r\n'and it needs to return the browser name which you want the URL to be loaded by.\r\n\r\n'  To load the URL by the system default browser:\r\n'    OnRedirect=""Default""\r\n'  For the case by Microsoft Internet Explorer:\r\n'    OnRedirect=""IE""\r\n'  For the case by Mozilla Firefox:\r\n'    OnRedirect=""Firefox""\r\n'  For the case by Google Chrome:\r\n'    OnRedirect=""Chrome""\r\n'  For the case by Microsoft Edge:\r\n'    OnRedirect=""Edge""\r\n'  For the case by the custom browser 1:\r\n'    OnRedirect=""Custom1""\r\n'  For the case by the custom browser 2:\r\n'    OnRedirect=""Custom2""\r\n'  For the case by the custom browser 3:\r\n'    OnRedirect=""Custom3""\r\n'  For the case by the custom browser 4:\r\n'    OnRedirect=""Custom4""\r\n'  For the case by the custom browser 5:\r\n'    OnRedirect=""Custom5""\r\n'  To block loading of the URL:\r\n'    OnRedirect=""Block""\r\n'------------------------------------------------------------\r\n'Global variables (reserved):\r\n'Here is a list of available global variables.\r\n\r\n'TB_Global_URL\t(String)\r\n'  The loading URL.\r\n\r\n'TB_Global_SCHME\t(String)\r\n'  The scheme of the loading URL (http or https)\r\n\r\n'TB_Global_HOSTNAME\t(String)\r\n'  The hostname of the loading URL.\r\n\r\n'TB_Global_PORT\t(String)\r\n'  The port number of the loading URL.\r\n\r\n'TB_Global_URL_PATH\t(String)\r\n'  The path of the loading URL.\r\n\r\n'For example: if the loading URL is https://www.google.co.jp/search?q=Chronos ,\r\n'TB_Global_URL           :https://www.google.co.jp/search\r\n'TB_Global_SCHME         :https\r\n'TB_Global_HOSTNAME      :www.google.co.jp\r\n'TB_Global_PORT          :443\r\n'TB_Global_URL_PATH      :/search\r\n'TB_TRACE_LOG(""TB_Global_URL：""&TB_Global_URL)\r\n'TB_TRACE_LOG(""TB_Global_SCHME：""&TB_Global_SCHME)\r\n'TB_TRACE_LOG(""TB_Global_HOSTNAME：""&TB_Global_HOSTNAME)\r\n'TB_TRACE_LOG(""TB_Global_PORT：""&TB_Global_PORT)\r\n'TB_TRACE_LOG(""TB_Global_URL_PATH：""&TB_Global_URL_PATH)\r\n\r\n'TB_Global_TOP_PAGE\t(Boolean)\r\n'  Which the URL is the one of the top frame or a sub frame. True = top frame, False = sub frame.\r\n\r\n'TB_TRACE_LOG(String)\r\n'  Prints a log line to the TRACE Log Monitor Window.\r\n'------------------------------------------------------------\r\n'For example: setting https://www.yahoo.co.jp to be loaded by IE.\r\n'Function OnRedirect()\r\n'  IF TB_Global_URL=""https://www.yahoo.co.jp/"" Then\r\n'    OnRedirect=""IE""\r\n'  End IF\r\n'End Function\r\n'##################################################################################\r\n"
     ID_URL_REDIRECT_SCRIPT_TRACE_LOG_DEFAULT "Log: "
     ID_AUTH_ALERT_EMPTY_USER "Please input the username."
     ID_AUTH_REQUIRED        "Authentication required."
@@ -2758,7 +2758,7 @@ BEGIN
     ID_CERTIFICATION_VALID_PERIOD "Valid period: "
 END
 
-#endif    // 英語 resources
+#endif    // 英語 (ニュートラル) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
