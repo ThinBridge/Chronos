@@ -4209,7 +4209,10 @@ void CSazabi::InitializeCef()
 	}
 	settings.persist_session_cookies = true;
 	CefString(&settings.root_cache_path) = m_strCEFCachePath;
-	CefString(&settings.cache_path) = m_strCEFCachePath;
+	if (!this->m_AppSettings.IsEnableMemcache())
+	{
+		CefString(&settings.cache_path) = m_strCEFCachePath;
+	}
 
 	CString strUserDataPath;
 	strUserDataPath = m_strCEFCachePath;
