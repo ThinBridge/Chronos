@@ -946,6 +946,36 @@ void CBrowserFrame::CreateRebars()
 			}
 		}
 	}
+	else
+	{
+		// Even though IsRebar option is disabled (EnableRebar=0), create rebar as a
+		// container for only packing cTabWnd purpose.
+		// It fixes the issue (When rebar is disabled, the top of website content 
+		// in tab is hidden unexpectedly, in other words,
+		// the content rendering is clipped and can't access hidden parts)
+		if (m_cTabWnd)
+		{
+			PROC_TIME_S(CreateRebars_REBAR_NEW_AsContainer)
+			m_pwndReBar = new CMyReBar;
+			m_pwndReBar->m_bMultiThreaded = TRUE;
+			PROC_TIME_E(CreateRebars_REBAR_NEW_AsContainer)
+
+			PROC_TIME_S(CreateRebars_REBAR_CreateFlgForContainer)
+			if (!m_pwndReBar->Create(this, 0))
+			{
+				TRACE0("Failed to create rebar as a container of tab\n");
+				return;
+			}
+			m_pwndReBarCreateFlg = TRUE;
+			PROC_TIME_E(CreateRebars_REBAR_CreateFlgForContainer)
+
+			EnableDocking(CBRS_ALIGN_TOP);
+			m_pwndReBar->EnableDocking(CBRS_TOP);
+			DockPane(m_pwndReBar);
+			m_pwndReBar->AddBar(CWnd::FromHandle(m_cTabWnd->GetHwnd()), NULL, NULL,
+								RBBS_NOGRIPPER | RBBS_BREAK);
+		}
+	}
 	PROC_TIME_E(CreateRebars_REBAR)
 }
 void CBrowserFrame::CreateStatusbar()
