@@ -251,7 +251,7 @@ public:
 		if (dwBytesRead < 1)
 		{
 			CString undeterminedMsg;
-			undeterminedMsg.LoadString(ID_TRANSFER_SIZE_UNDEFERMINED);
+			undeterminedMsg.LoadString(ID_TRANSFER_SIZE_UNDETERMINED);
 			szSize.Format(undeterminedMsg);
 		}
 		else if (dwBytesRead < 1024)
@@ -265,7 +265,7 @@ public:
 		if (dwFileSize < 1)
 		{
 			CString undeterminedMsg;
-			undeterminedMsg.LoadString(ID_TRANSFER_SIZE_UNDEFERMINED);
+			undeterminedMsg.LoadString(ID_TRANSFER_SIZE_UNDETERMINED);
 			szSize.Format(undeterminedMsg);
 		}
 		else if (dwFileSize < 1024)
