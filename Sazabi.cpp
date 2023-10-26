@@ -3517,7 +3517,7 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDomainFilter), titleURLFilter, IDD_SETTINGS_DLG_URL_FILTER, titleURLFilter);
 	//CustomScript設定
 	CString titleCustomScript;
-	titleCustomScript.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_SUSTOM_SCRIPT);
+	titleCustomScript.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CUSTOM_SCRIPT);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetCustomScript), titleCustomScript, IDD_SETTINGS_DLG_CUSTOM_SCRIPT, titleCustomScript);
 
 	//ログ出力設定
