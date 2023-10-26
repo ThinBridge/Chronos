@@ -1,7 +1,7 @@
 #pragma once
 #include "resource.h"
 #define ConstWidth	  800
-#define tbHeigth	  20
+#define tbHeight	  20
 #define tbcxPicture	  16
 #define tbcyPicture	  14
 #define tbTopSpace	  3
