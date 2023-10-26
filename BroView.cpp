@@ -1545,9 +1545,11 @@ void CChildView::ShowDevTools()
 		{
 			CefWindowInfo windowInfo;
 			CefBrowserSettings settings;
-			OnNewWindow((WPARAM)WND_TYPE_DEV_TOOLS, (LPARAM)&windowInfo);
 			CefRefPtr<CefClient> client;
 			CefPoint inspect_element_at;
+			// Show DevTools window as popup
+			// See https://www.magpcss.org/ceforum/viewtopic.php?f=6&t=17820
+			windowInfo.SetAsPopup(theApp.SafeWnd(this->m_hWnd), "ChronosDevTools");
 			m_cefBrowser->GetHost()->ShowDevTools(windowInfo, client, settings, inspect_element_at);
 		}
 	}
