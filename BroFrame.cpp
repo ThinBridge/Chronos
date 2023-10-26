@@ -2891,9 +2891,9 @@ void CBrowserFrame::OnCloseDelay()
 	this->EnableWindow(FALSE);
 	ShowWindow(SW_HIDE);
 }
-int CBrowserFrame::OnMouseActivate(CWnd* pDetelnetopWnd, UINT nHitTest, UINT message)
+int CBrowserFrame::OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message)
 {
-	int iRet = CFrameWnd::OnMouseActivate(pDetelnetopWnd, nHitTest, message);
+	int iRet = CFrameWnd::OnMouseActivate(pDesktopWnd, nHitTest, message);
 	return iRet;
 }
 
