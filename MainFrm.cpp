@@ -2080,9 +2080,9 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			if (theApp.m_bTabEnable_Init)
 			{
 				zFramePracement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
-				BOOL bTabNoActiveate = FALSE;
-				bTabNoActiveate = (dwFlags & NWMF_FORCETAB) == NWMF_FORCETAB ? TRUE : FALSE;
-				if (bTabNoActiveate)
+				BOOL bTabNoActivate = FALSE;
+				bTabNoActivate = (dwFlags & NWMF_FORCETAB) == NWMF_FORCETAB ? TRUE : FALSE;
+				if (bTabNoActivate)
 				{
 					if (zFramePracement.showCmd == SW_MAXIMIZE)
 					{
@@ -2128,9 +2128,9 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			//Tab無し
 			else
 			{
-				BOOL bTabNoActiveate = FALSE;
-				bTabNoActiveate = (dwFlags & NWMF_FORCETAB) == NWMF_FORCETAB ? TRUE : FALSE;
-				if (bTabNoActiveate)
+				BOOL bTabNoActivate = FALSE;
+				bTabNoActivate = (dwFlags & NWMF_FORCETAB) == NWMF_FORCETAB ? TRUE : FALSE;
+				if (bTabNoActivate)
 				{
 					zFramePracement.showCmd = SW_SHOWNOACTIVATE;
 					pFrame->SetWindowPlacement(&zFramePracement);
