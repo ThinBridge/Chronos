@@ -64,7 +64,7 @@ public:
 
 	CString Get_TabWindowInfo_Title(HWND hWnd);
 	void TabWindowMsgBSend(int iCommand, HWND hWnd);
-	void SetWindowPlacementFrm(WINDOWPLACEMENT tFramePracementMFrm, CBrowserFrame* Target);
+	void SetWindowPlacementFrm(WINDOWPLACEMENT tFramePlacementMFrm, CBrowserFrame* Target);
 	CBrowserFrame* GetNextGenerationActiveWindow(CBrowserFrame* pTarget);
 	BOOL SetActiveFramePtr(CBrowserFrame* pTarget);
 	void Tab_HScrollSync(HWND hWnd, DWORD dw1, DWORD dw2, DWORD dw3);

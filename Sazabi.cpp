@@ -20,8 +20,8 @@ CSazabi::CSazabi()
 	m_iWinOSBuildVersion = 0;
 	::ZeroMemory(m_FrmWndClassName, sizeof(TCHAR) * 512);
 	m_dwProcessId = 0;
-	::ZeroMemory(&m_NomalWindow_FramePracementCache, sizeof(WINDOWPLACEMENT));
-	m_NomalWindow_FramePracementCache.length = sizeof(WINDOWPLACEMENT);
+	::ZeroMemory(&m_NomalWindow_FramePlacementCache, sizeof(WINDOWPLACEMENT));
+	m_NomalWindow_FramePlacementCache.length = sizeof(WINDOWPLACEMENT);
 	m_pSettingDlg = NULL;
 	m_bUseApp = FALSE;
 	m_pDebugDlg = NULL;
@@ -38,8 +38,8 @@ CSazabi::CSazabi()
 	m_hEventURLFilterAllow = NULL;
 	m_hEventURLFilterDeny = NULL;
 	m_bTabWndChanging = FALSE;
-	::ZeroMemory(&m_ActiveFramePracement, sizeof(WINDOWPLACEMENT));
-	m_ActiveFramePracement.length = sizeof(WINDOWPLACEMENT);
+	::ZeroMemory(&m_ActiveFramePlacement, sizeof(WINDOWPLACEMENT));
+	m_ActiveFramePlacement.length = sizeof(WINDOWPLACEMENT);
 	m_wndpClose = NULL;
 	m_wndpActiveTabLine = NULL;
 	m_wndpNewTab = NULL;

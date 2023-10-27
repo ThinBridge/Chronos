@@ -483,12 +483,12 @@ int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//Tabあり
 	if (theApp.m_bTabEnable_Init)
 	{
-		WINDOWPLACEMENT zFramePracement = {0};
-		zFramePracement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
-		if (zFramePracement.rcNormalPosition.bottom > 0)
+		WINDOWPLACEMENT zFramePlacement = {0};
+		zFramePlacement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePlacement;
+		if (zFramePlacement.rcNormalPosition.bottom > 0)
 		{
-			CRect rcNormal(zFramePracement.rcNormalPosition);
-			if (zFramePracement.showCmd == SW_MAXIMIZE)
+			CRect rcNormal(zFramePlacement.rcNormalPosition);
+			if (zFramePlacement.showCmd == SW_MAXIMIZE)
 			{
 				CRect rcDesktop;
 				CWnd* pView = NULL;
@@ -514,7 +514,7 @@ int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 				lpCreateStruct->cx = rcDesktop.Width();
 				lpCreateStruct->cy = rcDesktop.Height();
 			}
-			else if (zFramePracement.showCmd == SW_NORMAL)
+			else if (zFramePlacement.showCmd == SW_NORMAL)
 			{
 				lpCreateStruct->x = rcNormal.left;
 				lpCreateStruct->y = rcNormal.top;
@@ -1081,12 +1081,12 @@ BOOL CBrowserFrame::PreCreateWindow(CREATESTRUCT& cs)
 	//Tabあり
 	if (theApp.m_bTabEnable_Init)
 	{
-		WINDOWPLACEMENT zFramePracement = {0};
-		zFramePracement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
-		if (zFramePracement.rcNormalPosition.bottom > 0)
+		WINDOWPLACEMENT zFramePlacement = {0};
+		zFramePlacement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePlacement;
+		if (zFramePlacement.rcNormalPosition.bottom > 0)
 		{
-			CRect rcNormal(zFramePracement.rcNormalPosition);
-			if (zFramePracement.showCmd == SW_MAXIMIZE)
+			CRect rcNormal(zFramePlacement.rcNormalPosition);
+			if (zFramePlacement.showCmd == SW_MAXIMIZE)
 			{
 				CRect rcDesktop;
 				CWnd* pView = NULL;
@@ -1111,7 +1111,7 @@ BOOL CBrowserFrame::PreCreateWindow(CREATESTRUCT& cs)
 				cs.cx = rcDesktop.Width();
 				cs.cy = rcDesktop.Height();
 			}
-			else if (zFramePracement.showCmd == SW_NORMAL)
+			else if (zFramePlacement.showCmd == SW_NORMAL)
 			{
 				cs.x = rcNormal.left;
 				cs.y = rcNormal.top;
@@ -3331,10 +3331,10 @@ void CBrowserFrame::OnSize(UINT nType, int cx, int cy)
 		if (this->m_wndView.IsPopupWindow())
 			return;
 
-		WINDOWPLACEMENT zFramePracement = {0};
-		zFramePracement.length = sizeof(WINDOWPLACEMENT);
-		this->GetWindowPlacement(&zFramePracement);
-		if (zFramePracement.showCmd == SW_SHOWNORMAL)
+		WINDOWPLACEMENT zFramePlacement = {0};
+		zFramePlacement.length = sizeof(WINDOWPLACEMENT);
+		this->GetWindowPlacement(&zFramePlacement);
+		if (zFramePlacement.showCmd == SW_SHOWNORMAL)
 		{
 			//タスクバーを除く画面サイズを取得
 			RECT rcDisp = {0};
@@ -3354,13 +3354,13 @@ void CBrowserFrame::OnSize(UINT nType, int cx, int cy)
 				rc.left -= rcDisp.left;
 				rc.right -= rcDisp.left;
 			}
-			CRect rcCurrent = zFramePracement.rcNormalPosition;
-			CRect rc2(zFramePracement.rcNormalPosition);
+			CRect rcCurrent = zFramePlacement.rcNormalPosition;
+			CRect rc2(zFramePlacement.rcNormalPosition);
 			//aerosnap
 			if (rc != rc2)
 			{
-				zFramePracement.rcNormalPosition = rc;
-				this->SetWindowPlacement(&zFramePracement);
+				zFramePlacement.rcNormalPosition = rc;
+				this->SetWindowPlacement(&zFramePlacement);
 			}
 		}
 	}
@@ -3401,9 +3401,9 @@ void CBrowserFrame::OnExitSizeMove()
 		if (theApp.GetActiveBFramePtr() != this)
 			return;
 
-		WINDOWPLACEMENT zFramePracement = {0};
-		zFramePracement.length = sizeof(WINDOWPLACEMENT);
-		this->GetWindowPlacement(&zFramePracement);
+		WINDOWPLACEMENT zFramePlacement = {0};
+		zFramePlacement.length = sizeof(WINDOWPLACEMENT);
+		this->GetWindowPlacement(&zFramePlacement);
 
 		//タスクバーを除く画面サイズを取得
 		RECT rcDisp = {0};
@@ -3423,18 +3423,18 @@ void CBrowserFrame::OnExitSizeMove()
 			rc.left -= rcDisp.left;
 			rc.right -= rcDisp.left;
 		}
-		CRect rcCurrent = zFramePracement.rcNormalPosition;
-		if (zFramePracement.showCmd == SW_SHOWNORMAL)
+		CRect rcCurrent = zFramePlacement.rcNormalPosition;
+		if (zFramePlacement.showCmd == SW_SHOWNORMAL)
 		{
-			CRect rc2(zFramePracement.rcNormalPosition);
+			CRect rc2(zFramePlacement.rcNormalPosition);
 			//aerosnap
 			if (rc != rc2)
 			{
-				zFramePracement.rcNormalPosition = rc;
-				this->SetWindowPlacement(&zFramePracement);
+				zFramePlacement.rcNormalPosition = rc;
+				this->SetWindowPlacement(&zFramePlacement);
 			}
 		}
-		((CMainFrame*)theApp.m_pMainWnd)->SetWindowPlacementFrm(zFramePracement, this);
+		((CMainFrame*)theApp.m_pMainWnd)->SetWindowPlacementFrm(zFramePlacement, this);
 	}
 	return;
 }
