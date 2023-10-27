@@ -1599,7 +1599,7 @@ BEGIN
     CONTROL         "1:Output to OutputDebugString only (no file output)",IDC_RADIO_LOG_NOFILE,
                     "Button",BS_AUTORADIOBUTTON,27,46,171,10
     CONTROL         "2:Output only general information [GE] and URL [URL] to a log file",IDC_RADIO_LOG_GE_URL,
-                    "Button",BS_AUTORADIOBUTTON,27,58,173,10
+                    "Button",BS_AUTORADIOBUTTON,27,58,231,10
     PUSHBUTTON      "Open TRACE Log Monitor Window...",IDC_BUTTON1,8,76,117,14
     GROUPBOX        "Audit log options",IDC_STATIC,10,97,350,185,WS_GROUP
     CONTROL         "Enable audit logs output",IDC_CHECK_EnableLogging,
