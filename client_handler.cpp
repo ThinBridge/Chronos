@@ -1567,15 +1567,15 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	CString errorPageHeadingName;
 	errorPageHeadingName.LoadString(ID_ERROR_PAGE_HEADING_NAME);
 
-	CString strFaildUrl((LPCWSTR)failedUrl.c_str());
-	strFaildUrl.Replace(_T("<"), _T(""));
-	strFaildUrl.Replace(_T(">"), _T(""));
-	strFaildUrl.Replace(_T("&"), _T(""));
-	strFaildUrl.Replace(_T("\""), _T(""));
-	strFaildUrl.Replace(_T("'"), _T(""));
-	strFaildUrl.Replace(_T("`"), _T(""));
-	strFaildUrl.Replace(_T("javascript"), _T(""));
-	strFaildUrl.Replace(_T("eval("), _T(""));
+	CString strFailedUrl((LPCWSTR)failedUrl.c_str());
+	strFailedUrl.Replace(_T("<"), _T(""));
+	strFailedUrl.Replace(_T(">"), _T(""));
+	strFailedUrl.Replace(_T("&"), _T(""));
+	strFailedUrl.Replace(_T("\""), _T(""));
+	strFailedUrl.Replace(_T("'"), _T(""));
+	strFailedUrl.Replace(_T("`"), _T(""));
+	strFailedUrl.Replace(_T("javascript"), _T(""));
+	strFailedUrl.Replace(_T("eval("), _T(""));
 	strErrorHTMLFmt = _T("<html><head><meta http-equiv='Content-Type' content='text/html; charset=Shift_JIS'/><title>");
 	strErrorHTMLFmt += errorPageTitle;
 	strErrorHTMLFmt += _T("</title>");
@@ -1605,9 +1605,9 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	strErrorHTMLFmt += _T("<h4>");
 	strErrorHTMLFmt += errorPageHeadingURL;
 	strErrorHTMLFmt += _T("<a href='");
-	strErrorHTMLFmt += strFaildUrl;
+	strErrorHTMLFmt += strFailedUrl;
 	strErrorHTMLFmt += _T("'/>");
-	strErrorHTMLFmt += strFaildUrl;
+	strErrorHTMLFmt += strFailedUrl;
 	strErrorHTMLFmt += _T("</a></h4>");
 	strErrorHTMLFmt += _T("<h4>");
 	strErrorHTMLFmt += errorPageHeadingCode;
