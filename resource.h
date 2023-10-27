@@ -16,7 +16,7 @@
 #define IDR_HTML_DLGEULA                136
 #define IDS_STRING_FRM3                 137
 #define IDS_STRING_CEF_LIC              138
-#define IDS_STRING_FAV_NANE             139
+#define IDS_STRING_FAV_NAME             139
 #define IDS_STRING_CEF_LOCALE           140
 #define IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST 141
 #define IDD_DIALOG1                     142

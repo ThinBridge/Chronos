@@ -1655,7 +1655,7 @@ void CBrowserFrame::CrateFavoriteMenu(CMenu* pMenu, CFavoriteItem* parentItem)
 					if (iSubCnt <= 0)
 					{
 						CString strNone;
-						strNone.LoadString(IDS_STRING_FAV_NANE);
+						strNone.LoadString(IDS_STRING_FAV_NAME);
 						pSubMenu->AppendMenu(MF_BYPOSITION | MF_STRING | MF_DISABLED, ID_FAV_START - 1, strNone);
 					}
 					pSubMenu->Detach();
@@ -2211,7 +2211,7 @@ BOOL CBrowserFrame::OnShowPopupMenu(CMFCPopupMenu* pMenuPopup)
 			}
 			if (iCnt == 0)
 			{
-				strTitle.LoadString(IDS_STRING_FAV_NANE);
+				strTitle.LoadString(IDS_STRING_FAV_NAME);
 				Menu.AppendMenu(MF_BYPOSITION | MF_STRING | MF_GRAYED, ID_CLOSE_WND_HISTORY_DUMMY, strTitle);
 			}
 			pMenuBar->ImportFromMenu(Menu);
@@ -2503,7 +2503,7 @@ BOOL CBrowserFrame::IsFavoritesMenu(const CMFCToolBarMenuButton* pMenuButton, BO
 	if (pMenuButton->m_nID != (UINT)-1)
 	{
 		CString strNone;
-		strNone.LoadString(IDS_STRING_FAV_NANE);
+		strNone.LoadString(IDS_STRING_FAV_NAME);
 		if (bReflect && pMenuButton->m_strText == strNone)
 			return TRUE;
 		return FALSE;
