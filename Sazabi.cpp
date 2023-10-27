@@ -1939,7 +1939,7 @@ void CSazabi::CloseVOSProcessOther()
 				continue;
 			HWND hWndTop = {0};
 			hWndTop = GetTopWindowHandle(pid);
-			//filenamagerは特別な対応
+			//filemanagerは特別な対応
 			if (strValue.CompareNoCase(strThinFilerPath) == 0)
 			{
 				CString strFWM;
@@ -4383,7 +4383,7 @@ BOOL CSazabi::IsLimitChkEx()
 		//check max limit
 		unsigned long long iMemSize = GetMemoryUsageSize();
 		size_t iMemL = m_AppSettings.GetMemoryUsageLimit();
-		//GDI/ User /Mamory Limits
+		//GDI/ User /Memory Limits
 		if (iMemSize > (unsigned long long)iMemL * 1024 * 1024)
 		{
 			CString alertMsg;

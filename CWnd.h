@@ -158,7 +158,7 @@ protected:
 	virtual DECLH(OnSize);		  // WM_SIZE
 	virtual DECLH(OnMove);		  // WM_MOVE
 	virtual DECLH(OnClose);		  // WM_CLOSE
-	virtual DECLH(OnDestroy);	  // WM_DSESTROY
+	virtual DECLH(OnDestroy);	  // WM_DESTROY
 	virtual DECLH(OnQueryEndSession); // WM_QUERYENDSESSION
 
 	virtual DECLH(OnMeasureItem);	 // WM_MEASUREITEM
