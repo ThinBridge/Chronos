@@ -282,7 +282,7 @@ public:
 	afx_msg void OnFavoriteOrganize();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnFullScreen();
-	afx_msg int OnMouseActivate(CWnd* pDetelnetopWnd, UINT nHitTest, UINT message);
+	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 	afx_msg void OnPrevWnd();
 	afx_msg void OnNextWnd();
