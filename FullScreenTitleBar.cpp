@@ -81,7 +81,7 @@ void CTitleBar::CreateDisplay()
 	SBUtil::GetMonitorWorkRect(hWnd, &rcDesktop);
 	m_tbWidth = rcDesktop.Width();
 	int CenterX = rcDesktop.left;
-	int HeightPlacement = -tbHeigth + 1;
+	int HeightPlacement = -tbHeight + 1;
 
 	WNDCLASS wndclass = {0};
 	wndclass.style = CS_DBLCLKS;
@@ -108,7 +108,7 @@ void CTitleBar::CreateDisplay()
 			      CenterX,
 			      HeightPlacement,
 			      m_tbWidth,
-			      tbHeigth,
+			      tbHeight,
 			      Parent,
 			      NULL,
 			      hInstance,
@@ -118,9 +118,9 @@ void CTitleBar::CreateDisplay()
 	Points[0].x = 0;
 	Points[0].y = 0;
 	Points[1].x = tbTriangularPoint;
-	Points[1].y = tbHeigth;
+	Points[1].y = tbHeight;
 	Points[2].x = m_tbWidth - tbTriangularPoint;
-	Points[2].y = tbHeigth;
+	Points[2].y = tbHeight;
 	Points[3].x = m_tbWidth;
 	Points[3].y = 0;
 	Range = ::CreatePolygonRgn(Points, 4, ALTERNATE);
@@ -255,7 +255,7 @@ LRESULT CALLBACK CTitleBar::WndProc(HWND hwnd, UINT iMsg,
 			::GetWindowRect(TitleBarThis->m_hWnd, &lpRect);
 
 			if (((lpRect.top == 0) && (TitleBarThis->SlideDown)) ||
-			    ((lpRect.top == -tbHeigth + 1) && (TitleBarThis->SlideDown == FALSE)))
+			    ((lpRect.top == -tbHeight + 1) && (TitleBarThis->SlideDown == FALSE)))
 			{
 				KillTimer(TitleBarThis->m_hWnd, TitleBarThis->ScrollTimerID);
 
@@ -344,7 +344,7 @@ void CTitleBar::Draw()
 			Rect.left = x;
 			Rect.top = 0;
 			Rect.right = x + 1;
-			Rect.bottom = tbHeigth;
+			Rect.bottom = tbHeight;
 			HBRUSH Brush = CreateSolidBrush(RGB(r1 * (m_tbWidth - x) / m_tbWidth + r2 * x / m_tbWidth,
 							    g1 * (m_tbWidth - x) / m_tbWidth + g2 * x / m_tbWidth, b1 * (m_tbWidth - x) / m_tbWidth + b2 * x / m_tbWidth));
 
@@ -354,7 +354,7 @@ void CTitleBar::Draw()
 	}
 	else
 	{
-		for (int y = 0; y < tbHeigth; y++)
+		for (int y = 0; y < tbHeight; y++)
 		{
 			RECT Rect = {0};
 			Rect.left = 0;
@@ -362,8 +362,8 @@ void CTitleBar::Draw()
 			Rect.right = m_tbWidth;
 			Rect.bottom = y + 1;
 
-			HBRUSH Brush = CreateSolidBrush(RGB(r1 * (tbHeigth - y) / tbHeigth + r2 * y / tbHeigth,
-							    g1 * (tbHeigth - y) / tbHeigth + g2 * y / tbHeigth, b1 * (tbHeigth - y) / tbHeigth + b2 * y / tbHeigth));
+			HBRUSH Brush = CreateSolidBrush(RGB(r1 * (tbHeight - y) / tbHeight + r2 * y / tbHeight,
+							    g1 * (tbHeight - y) / tbHeight + g2 * y / tbHeight, b1 * (tbHeight - y) / tbHeight + b2 * y / tbHeight));
 
 			::FillRect(hdc, &Rect, Brush);
 			DeleteObject(Brush);
@@ -372,20 +372,20 @@ void CTitleBar::Draw()
 	HPEN Border = ::CreatePen(PS_SOLID, tbBorderWidth, tbBorderPenColor);
 	::SelectObject(hdc, Border);
 	::MoveToEx(hdc, 0, 0, NULL);
-	::LineTo(hdc, tbTriangularPoint, tbHeigth);
-	::LineTo(hdc, m_tbWidth - tbTriangularPoint, tbHeigth);
+	::LineTo(hdc, tbTriangularPoint, tbHeight);
+	::LineTo(hdc, m_tbWidth - tbTriangularPoint, tbHeight);
 	::LineTo(hdc, m_tbWidth, 0);
 	::LineTo(hdc, 0, 0);
 	DeleteObject(Border);
 	Border = ::CreatePen(PS_SOLID, tbBorderWidth, tbBorderPenShadow);
 	::SelectObject(hdc, Border);
-	::MoveToEx(hdc, tbTriangularPoint + 1, tbHeigth - 1, NULL);
-	::LineTo(hdc, m_tbWidth - tbTriangularPoint - 1, tbHeigth - 1);
+	::MoveToEx(hdc, tbTriangularPoint + 1, tbHeight - 1, NULL);
+	::LineTo(hdc, m_tbWidth - tbTriangularPoint - 1, tbHeight - 1);
 	RECT lpRect = {0};
 	lpRect.left = tbLeftSpace + tbcxPicture + tbButtonSpace;
 	lpRect.top = tbBorderWidth;
 	lpRect.right = m_tbWidth - tbRightSpace - (tbcxPicture * 3) - (tbButtonSpace * 3);
-	lpRect.bottom = tbHeigth - tbBorderWidth;
+	lpRect.bottom = tbHeight - tbBorderWidth;
 	::SelectObject(hdc, m_Font);
 	::SetBkMode(hdc, TRANSPARENT);
 	::SetTextColor(hdc, tbTextColor);
