@@ -3872,7 +3872,7 @@ public:
 			}
 		}
 	}
-	void DLComp_DLDlg(UINT nBrowserId, LPCTSTR strFilePaht)
+	void DLComp_DLDlg(UINT nBrowserId, LPCTSTR strFilePath)
 	{
 		CDlgDL* pDLDlg = NULL;
 		for (int i = 0; i < m_ptrArrDlgBrowserID.GetCount(); i++)
@@ -3883,7 +3883,7 @@ public:
 				pDLDlg = (CDlgDL*)m_ptrArrDlgPtr.GetAt(i);
 				if (pDLDlg)
 				{
-					pDLDlg->SetCompST(TRUE, strFilePaht);
+					pDLDlg->SetCompST(TRUE, strFilePath);
 					break;
 				}
 			}
