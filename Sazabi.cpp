@@ -1704,7 +1704,7 @@ int CSazabi::GetOSVersion()
 		m_iWinOSVersion = 100;
 		DWORD dwDummy = 0;
 		DWORD dwSize = 0;
-		DWORD dwMajar = 0;
+		DWORD dwMajor = 0;
 		DWORD dwMinor = 0;
 		DWORD dwBuild = 0;
 		DWORD dwPrivate = 0;
@@ -1719,12 +1719,12 @@ int CSazabi::GetOSVersion()
 				UINT nLen = 0;
 				if (::VerQueryValue(pData, _T("\\"), (PVOID*)&pFileInfo, &nLen))
 				{
-					dwMajar = HIWORD(pFileInfo->dwFileVersionMS);
+					dwMajor = HIWORD(pFileInfo->dwFileVersionMS);
 					dwMinor = LOWORD(pFileInfo->dwFileVersionMS);
 					dwBuild = HIWORD(pFileInfo->dwFileVersionLS);
 					dwPrivate = LOWORD(pFileInfo->dwFileVersionLS);
 					m_iWinOSBuildVersion = dwBuild;
-					m_iWinOSVersion = dwMajar * 10; //メジャーを10倍
+					m_iWinOSVersion = dwMajor * 10; //メジャーを10倍
 					m_iWinOSVersion += dwMinor;
 					//想定
 					//WinXP 5.1->51
@@ -3589,7 +3589,7 @@ CString CSazabi::GetCefVersionStr()
 	CString strRet;
 	DWORD dwDummy = 0;
 	DWORD dwSize = 0;
-	DWORD dwMajar = 0;
+	DWORD dwMajor = 0;
 	DWORD dwMinor = 0;
 	DWORD dwBuild = 0;
 	DWORD dwPrivate = 0;
@@ -3638,7 +3638,7 @@ CString CSazabi::GetChromiumVersionStr()
 	CString strRet;
 	DWORD dwDummy = 0;
 	DWORD dwSize = 0;
-	DWORD dwMajar = 0;
+	DWORD dwMajor = 0;
 	DWORD dwMinor = 0;
 	DWORD dwBuild = 0;
 	DWORD dwPrivate = 0;
@@ -3684,7 +3684,7 @@ CString CSazabi::GetVOSVersionFromNT0_DLLStr()
 	CString strRet;
 	DWORD dwDummy = 0;
 	DWORD dwSize = 0;
-	DWORD dwMajar = 0;
+	DWORD dwMajor = 0;
 	DWORD dwMinor = 0;
 	DWORD dwBuild = 0;
 	DWORD dwPrivate = 0;
@@ -3708,11 +3708,11 @@ CString CSazabi::GetVOSVersionFromNT0_DLLStr()
 			UINT nLen = 0;
 			if (::VerQueryValue(pData, _T("\\"), (PVOID*)&pFileInfo, &nLen))
 			{
-				dwMajar = HIWORD(pFileInfo->dwFileVersionMS);
+				dwMajor = HIWORD(pFileInfo->dwFileVersionMS);
 				dwMinor = LOWORD(pFileInfo->dwFileVersionMS);
 				dwBuild = HIWORD(pFileInfo->dwFileVersionLS);
 				dwPrivate = LOWORD(pFileInfo->dwFileVersionLS);
-				strRet.Format(_T("VOS_NT0_DLL Version %d.%d.%d.%d"), dwMajar, dwMinor, dwBuild, dwPrivate);
+				strRet.Format(_T("VOS_NT0_DLL Version %d.%d.%d.%d"), dwMajor, dwMinor, dwBuild, dwPrivate);
 			}
 		}
 		delete[] pData;
@@ -3725,7 +3725,7 @@ CString CSazabi::GetOSKernelVersion()
 	CString strRet;
 	DWORD dwDummy = 0;
 	DWORD dwSize = 0;
-	DWORD dwMajar = 0;
+	DWORD dwMajor = 0;
 	DWORD dwMinor = 0;
 	DWORD dwBuild = 0;
 	DWORD dwPrivate = 0;
@@ -3743,11 +3743,11 @@ CString CSazabi::GetOSKernelVersion()
 			UINT nLen = 0;
 			if (::VerQueryValue(pData, _T("\\"), (PVOID*)&pFileInfo, &nLen))
 			{
-				dwMajar = HIWORD(pFileInfo->dwFileVersionMS);
+				dwMajor = HIWORD(pFileInfo->dwFileVersionMS);
 				dwMinor = LOWORD(pFileInfo->dwFileVersionMS);
 				dwBuild = HIWORD(pFileInfo->dwFileVersionLS);
 				dwPrivate = LOWORD(pFileInfo->dwFileVersionLS);
-				strRet.Format(_T("Kernel Version %d.%d.%d.%d"), dwMajar, dwMinor, dwBuild, dwPrivate);
+				strRet.Format(_T("Kernel Version %d.%d.%d.%d"), dwMajor, dwMinor, dwBuild, dwPrivate);
 			}
 		}
 		delete[] pData;
@@ -3759,7 +3759,7 @@ CString CSazabi::GetTurboVMInfo()
 	CString strRet;
 	DWORD dwDummy = 0;
 	DWORD dwSize = 0;
-	DWORD dwMajar = 0;
+	DWORD dwMajor = 0;
 	DWORD dwMinor = 0;
 	DWORD dwBuild = 0;
 	DWORD dwPrivate = 0;
@@ -3775,11 +3775,11 @@ CString CSazabi::GetTurboVMInfo()
 			UINT nLen = 0;
 			if (::VerQueryValue(pData, _T("\\"), (PVOID*)&pFileInfo, &nLen))
 			{
-				dwMajar = HIWORD(pFileInfo->dwFileVersionMS);
+				dwMajor = HIWORD(pFileInfo->dwFileVersionMS);
 				dwMinor = LOWORD(pFileInfo->dwFileVersionMS);
 				dwBuild = HIWORD(pFileInfo->dwFileVersionLS);
 				dwPrivate = LOWORD(pFileInfo->dwFileVersionLS);
-				strRet.Format(_T("VMX Version %d.%d.%d.%d"), dwMajar, dwMinor, dwBuild, dwPrivate);
+				strRet.Format(_T("VMX Version %d.%d.%d.%d"), dwMajor, dwMinor, dwBuild, dwPrivate);
 			}
 		}
 		delete[] pData;
