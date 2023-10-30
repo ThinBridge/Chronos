@@ -1040,7 +1040,7 @@ LRESULT CMainFrame::DeleteWindowList(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CMainFrame::SetWindowPlacementFrm(WINDOWPLACEMENT tFramePracementMFrm, CBrowserFrame* Target)
+void CMainFrame::SetWindowPlacementFrm(WINDOWPLACEMENT tFramePlacementMFrm, CBrowserFrame* Target)
 {
 	try
 	{
@@ -1049,9 +1049,9 @@ void CMainFrame::SetWindowPlacementFrm(WINDOWPLACEMENT tFramePracementMFrm, CBro
 			return;
 		//tab専用の処理
 		CRect rcResult(0, 0, 0, 0);
-		if (tFramePracementMFrm.showCmd == SW_MAXIMIZE)
+		if (tFramePlacementMFrm.showCmd == SW_MAXIMIZE)
 		{
-			CRect rcNormal(tFramePracementMFrm.rcNormalPosition);
+			CRect rcNormal(tFramePlacementMFrm.rcNormalPosition);
 			CRect rcDesktop;
 			HWND hWnd = {0};
 			hWnd = Target->m_hWnd;
@@ -1069,9 +1069,9 @@ void CMainFrame::SetWindowPlacementFrm(WINDOWPLACEMENT tFramePracementMFrm, CBro
 			}
 			rcResult = rcDesktop;
 		}
-		else if (tFramePracementMFrm.showCmd == SW_NORMAL)
+		else if (tFramePlacementMFrm.showCmd == SW_NORMAL)
 		{
-			rcResult = tFramePracementMFrm.rcNormalPosition;
+			rcResult = tFramePlacementMFrm.rcNormalPosition;
 		}
 		if (rcResult.Width() > 100)
 		{
@@ -1926,8 +1926,8 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 
 		CBrowserFrame* pFrame2 = NULL;
 		BOOL bFirstCall = TRUE;
-		WINDOWPLACEMENT zFramePracement = {0};
-		zFramePracement.length = sizeof(WINDOWPLACEMENT);
+		WINDOWPLACEMENT zFramePlacement = {0};
+		zFramePlacement.length = sizeof(WINDOWPLACEMENT);
 		POSITION pos1 = {0};
 
 		if (m_colBrowserWindows.GetCount() > 0)
@@ -1956,9 +1956,9 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 								if (!pView->IsPopupWindow())
 								{
 									bGetFlg = TRUE;
-									pFrm->GetWindowPlacement(&zFramePracement);
+									pFrm->GetWindowPlacement(&zFramePlacement);
 									//ポップアップでは無いWindowのサイズをキャッシュ
-									theApp.m_NomalWindow_FramePracementCache = zFramePracement;
+									theApp.m_NomalWindow_FramePlacementCache = zFramePlacement;
 									break;
 								}
 							}
@@ -1972,9 +1972,9 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 				if (bGetFlg == FALSE)
 				{
 					//キャッシュしたサイズをセットする。
-					zFramePracement = theApp.m_NomalWindow_FramePracementCache;
+					zFramePlacement = theApp.m_NomalWindow_FramePlacementCache;
 					//Normalsizeを指定
-					zFramePracement.showCmd = SW_NORMAL;
+					zFramePlacement.showCmd = SW_NORMAL;
 				}
 			}
 		}
@@ -1999,14 +1999,14 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			else
 			{
 				CRect cRect = {10, 10, 800, 600};
-				WINDOWPLACEMENT zFramePracement = {0};
-				zFramePracement.length = sizeof(WINDOWPLACEMENT);
-				zFramePracement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
+				WINDOWPLACEMENT zFramePlacement = {0};
+				zFramePlacement.length = sizeof(WINDOWPLACEMENT);
+				zFramePlacement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePlacement;
 				DWORD dwCreateStyle = WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE;
-				if (zFramePracement.rcNormalPosition.bottom > 0)
+				if (zFramePlacement.rcNormalPosition.bottom > 0)
 				{
-					CRect rcNormal(zFramePracement.rcNormalPosition);
-					if (zFramePracement.showCmd == SW_MAXIMIZE)
+					CRect rcNormal(zFramePlacement.rcNormalPosition);
+					if (zFramePlacement.showCmd == SW_MAXIMIZE)
 					{
 						CRect rcDesktop;
 						CWnd* pView = NULL;
@@ -2029,7 +2029,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 						}
 						cRect = rcDesktop;
 					}
-					else if (zFramePracement.showCmd == SW_NORMAL)
+					else if (zFramePlacement.showCmd == SW_NORMAL)
 					{
 						cRect = rcNormal;
 					}
@@ -2062,8 +2062,8 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			{
 				this->InitFunc(pFrame);
 			}
-			pFrame->GetWindowPlacement(&theApp.m_NomalWindow_FramePracementCache);
-			SetWindowPlacementFrm(theApp.m_NomalWindow_FramePracementCache, pFrame);
+			pFrame->GetWindowPlacement(&theApp.m_NomalWindow_FramePlacementCache);
+			SetWindowPlacementFrm(theApp.m_NomalWindow_FramePlacementCache, pFrame);
 			if (!theApp.m_bNewInstanceParam)
 			{
 				pFrame->ShowWindow(SW_NORMAL);
@@ -2072,19 +2072,19 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 		else
 		{
 			CRect rcNormalSize2;
-			rcNormalSize2 = zFramePracement.rcNormalPosition;
+			rcNormalSize2 = zFramePlacement.rcNormalPosition;
 			rcNormalSize2.OffsetRect(30, 30);
-			zFramePracement.rcNormalPosition = rcNormalSize2;
+			zFramePlacement.rcNormalPosition = rcNormalSize2;
 
 			//Tabあり
 			if (theApp.m_bTabEnable_Init)
 			{
-				zFramePracement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
+				zFramePlacement = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePlacement;
 				BOOL bTabNoActivate = FALSE;
 				bTabNoActivate = (dwFlags & NWMF_FORCETAB) == NWMF_FORCETAB ? TRUE : FALSE;
 				if (bTabNoActivate)
 				{
-					if (zFramePracement.showCmd == SW_MAXIMIZE)
+					if (zFramePlacement.showCmd == SW_MAXIMIZE)
 					{
 						CRect rcDesktop;
 						CWnd* pView = NULL;
@@ -2106,10 +2106,10 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 							rcDesktop.bottom += 7;
 						}
 
-						zFramePracement.rcNormalPosition = rcDesktop;
+						zFramePlacement.rcNormalPosition = rcDesktop;
 					}
-					zFramePracement.showCmd = SW_SHOWNA;
-					pFrame->SetWindowPlacement(&zFramePracement);
+					zFramePlacement.showCmd = SW_SHOWNA;
+					pFrame->SetWindowPlacement(&zFramePlacement);
 					pFrame2 = theApp.GetActiveBFramePtr();
 					HWND hwndInsertAfter = {0};
 					if (theApp.IsWnd(pFrame2))
@@ -2122,7 +2122,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 				}
 				else
 				{
-					pFrame->SetWindowPlacement(&zFramePracement);
+					pFrame->SetWindowPlacement(&zFramePlacement);
 				}
 			}
 			//Tab無し
@@ -2132,8 +2132,8 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 				bTabNoActivate = (dwFlags & NWMF_FORCETAB) == NWMF_FORCETAB ? TRUE : FALSE;
 				if (bTabNoActivate)
 				{
-					zFramePracement.showCmd = SW_SHOWNOACTIVATE;
-					pFrame->SetWindowPlacement(&zFramePracement);
+					zFramePlacement.showCmd = SW_SHOWNOACTIVATE;
+					pFrame->SetWindowPlacement(&zFramePlacement);
 					pFrame2 = (CBrowserFrame*)this->GetActiveWindow();
 					HWND hwndInsertAfter = {0};
 					if (theApp.IsWnd(pFrame2))
@@ -2145,7 +2145,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 				}
 				else
 				{
-					pFrame->SetWindowPlacement(&zFramePracement);
+					pFrame->SetWindowPlacement(&zFramePlacement);
 				}
 			}
 		}

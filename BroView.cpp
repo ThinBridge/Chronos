@@ -709,15 +709,15 @@ void CChildView::ResizeFrmWindow(RECT& rectClient)
 		{
 			//フルスクリーンモードの場合は、無効
 			if (FRM->m_bFullScreen) return;
-			WINDOWPLACEMENT zFramePracement = {0};
-			zFramePracement.length = sizeof(WINDOWPLACEMENT);
+			WINDOWPLACEMENT zFramePlacement = {0};
+			zFramePlacement.length = sizeof(WINDOWPLACEMENT);
 			// 現在取得
-			FRM->GetWindowPlacement(&zFramePracement);
-			zFramePracement.showCmd = SW_NORMAL;
+			FRM->GetWindowPlacement(&zFramePlacement);
+			zFramePlacement.showCmd = SW_NORMAL;
 
-			zFramePracement.rcNormalPosition = rectClient;
+			zFramePlacement.rcNormalPosition = rectClient;
 
-			FRM->SetWindowPlacement(&zFramePracement);
+			FRM->SetWindowPlacement(&zFramePlacement);
 
 			if (bResizeAndCenter)
 			{
@@ -791,12 +791,12 @@ void CChildView::ResizeWindowPopupInpl()
 			}
 		}
 
-		WINDOWPLACEMENT zFramePracement = {0};
-		zFramePracement.length = sizeof(WINDOWPLACEMENT);
+		WINDOWPLACEMENT zFramePlacement = {0};
+		zFramePlacement.length = sizeof(WINDOWPLACEMENT);
 
-		m_pwndFrame->GetWindowPlacement(&zFramePracement);
-		zFramePracement.showCmd = SW_NORMAL;
-		CRect rcCurrent = zFramePracement.rcNormalPosition;
+		m_pwndFrame->GetWindowPlacement(&zFramePlacement);
+		zFramePlacement.showCmd = SW_NORMAL;
+		CRect rcCurrent = zFramePlacement.rcNormalPosition;
 
 		if (m_popupFeatures)
 		{
@@ -884,8 +884,8 @@ void CChildView::ResizeWindowPopupInpl()
 			//最終的な値をセット
 			rcCurrent = rcFeature;
 		}
-		zFramePracement.rcNormalPosition = rcCurrent;
-		m_pwndFrame->SetWindowPlacement(&zFramePracement);
+		zFramePlacement.rcNormalPosition = rcCurrent;
+		m_pwndFrame->SetWindowPlacement(&zFramePlacement);
 	}
 	catch (...)
 	{

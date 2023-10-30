@@ -537,10 +537,10 @@ public:
 	CScriptHost* m_pScHost;
 	CDLManager m_DlMgr;
 
-	WINDOWPLACEMENT m_NomalWindow_FramePracementCache;
+	WINDOWPLACEMENT m_NomalWindow_FramePlacementCache;
 
 protected:
-	WINDOWPLACEMENT m_ActiveFramePracement;
+	WINDOWPLACEMENT m_ActiveFramePlacement;
 
 public:
 	WINDOWPLACEMENT GetActiveFrameWindowPlacement();

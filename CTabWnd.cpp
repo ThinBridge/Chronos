@@ -1107,7 +1107,7 @@ void CTabWnd::AdjustWindowPlacement(void)
 	{
 		theApp.ShowWnd(hwnd);
 		wp.length = sizeof(wp);
-		wp = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePracement;
+		wp = theApp.GetActiveFrameWindowPlacement(); //m_ActiveFramePlacement;
 		if (wp.showCmd == SW_SHOWMINIMIZED)
 			wp.showCmd = SW_RESTORE;
 		//HWND hwndInsertAfter={0};
