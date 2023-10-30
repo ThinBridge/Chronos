@@ -28,8 +28,8 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "ファイル(&F)"
     BEGIN
-        MENUITEM "新規作成-ウィンドウ(&N)\tCtrl+N",      ID_NEW_BLANK
-        MENUITEM "新規作成-ウィンドウ(現在のページ)",          ID_NEW
+        MENUITEM "新規作成-タブ(&N)\tCtrl+N",         ID_NEW_BLANK
+        MENUITEM "新規作成-タブ(現在のページ)",             ID_NEW
         MENUITEM "新規セッション",                     ID_NEW_SESSION
         MENUITEM SEPARATOR
         MENUITEM "ウィンドウの復元",                    ID_RESTORE_WND
@@ -40,7 +40,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "閉じる(&C)",                     ID_W_CLOSE
         MENUITEM SEPARATOR
-        POPUP "最近閉じたウィンドウ"
+        POPUP "最近閉じたタブ"
         BEGIN
             MENUITEM "なし",                          ID_CLOSE_WND_HISTORY_DUMMY
         END
@@ -81,10 +81,10 @@ BEGIN
     POPUP "ウィンドウ(&W)"
     BEGIN
         MENUITEM "閉じる(&C)",                     ID_W_CLOSE
-        MENUITEM "全てのウィンドウを閉じる(&X)",            IDC_APP_EXIT
-        MENUITEM "このウィンドウ以外を閉じる",               IDC_APP_EXIT_BUT_THIS
-        MENUITEM "次のウィンドウ\tCtrl+Tab",           ID_NEXT_WND
-        MENUITEM "前のウィンドウ\tShift+Ctrl+Tab",     ID_PREV_WND
+        MENUITEM "全てのタブを閉じる(&X)",               IDC_APP_EXIT
+        MENUITEM "このタブ以外を閉じる",                  IDC_APP_EXIT_BUT_THIS
+        MENUITEM "次のタブ\tCtrl+Tab",              ID_NEXT_WND
+        MENUITEM "前のタブ\tShift+Ctrl+Tab",        ID_PREV_WND
         MENUITEM SEPARATOR
         MENUITEM "DUMMY",                       ID_WINDOW_DUMMY
     END
@@ -144,7 +144,7 @@ BEGIN
         MENUITEM "タブを複製",                       ID_NEW
         MENUITEM SEPARATOR
         MENUITEM "タブを閉じる",                      ID_W_CLOSE
-        MENUITEM "全てのウィンドウを閉じる(&X)",            IDC_APP_EXIT
+        MENUITEM "全てのタブを閉じる(&X)",               IDC_APP_EXIT
         MENUITEM "他のタブを全て閉じる",                  IDC_APP_EXIT_BUT_THIS
         MENUITEM "右のタブを全て閉じる",                  ID_TAB_CLOSE_RIGHT
         MENUITEM "左のタブを全て閉じる",                  ID_TAB_CLOSE_LEFT
@@ -500,7 +500,7 @@ BEGIN
     LTEXT           "分 ( 8時間=480分 / 12時間=720分 / 24時間=1440分)",IDC_STATIC,76,93,232,8
     LTEXT           "メモリー 最大値(MB)",IDC_STATIC,11,121,64,8
     EDITTEXT        IDC_MemoryUsageLimit,83,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "ウィンドウ数 最大値",IDC_STATIC,11,142,64,8
+    LTEXT           "タブ数 最大値",IDC_STATIC,11,142,64,8
     EDITTEXT        IDC_WindowCountLimit,84,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
 END
 
@@ -985,7 +985,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_CLOSE_ALL_WINDOW "全てのウィンドウを閉じますか?"
+    IDS_STRING_CLOSE_ALL_WINDOW "全てのタブを閉じますか?"
     IDS_STRING_ADMIN_LOCK_FEATURE "この機能へのアクセスは、システム管理者により制限されています。 "
     IDS_STRING_ZONE_MSG_DBL "要求されたページを既定のブラウザで表示します。"
     IDS_STRING_ZONE_MSG_NG  "要求されたページは許可されていないため表示できません。"
@@ -1049,7 +1049,7 @@ BEGIN
     IDS_STRING_CLEARING_CACHE "ブラウザーキャッシュ クリア中..."
     IDS_STRING_CONFIRM_CLOSE_APPLICATION "%sを終了してもよろしいですか？"
     IDS_STRING_TOO_MANY_WINDOWS_MSG 
-                            "ウィンドウの数が上限値(%d)に達しています。\n他の不要なウィンドウを閉じてから再度実行して下さい。(%s)"
+                            "タブの数が上限値(%d)に達しています。\n他の不要なタブを閉じてから再度実行して下さい。(%s)"
     IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT 
                             "ご迷惑をおかけして申し訳ありません。\nシステムリソースが不足しているため\nアプリケーション(%s)を終了します。"
     IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN 
@@ -1198,10 +1198,10 @@ END
 STRINGTABLE
 BEGIN
     ID_W_CLOSE              "閉じる"
-    ID_PREV_WND             "前のウィンドウ\tShift+Ctrl+Tab"
-    ID_NEXT_WND             "次のウィンドウ\tCtrl+Tab"
-    IDC_APP_EXIT            "全てのウィンドウを閉じる"
-    IDC_APP_EXIT_BUT_THIS   "このウィンドウ以外を閉じる"
+    ID_PREV_WND             "前のタブ\tShift+Ctrl+Tab"
+    ID_NEXT_WND             "次のタブ\tCtrl+Tab"
+    IDC_APP_EXIT            "全てのタブを閉じる"
+    IDC_APP_EXIT_BUT_THIS   "このタブ以外を閉じる"
 END
 
 STRINGTABLE
@@ -1395,8 +1395,8 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "&New Window\tCtrl+N",         ID_NEW_BLANK
-        MENUITEM "New Window (with Current Page)", ID_NEW
+        MENUITEM "&New Tab\tCtrl+N",            ID_NEW_BLANK
+        MENUITEM "New Tab (with Current Page)", ID_NEW
         MENUITEM "New Session",                 ID_NEW_SESSION
         MENUITEM SEPARATOR
         MENUITEM "Restore Window",              ID_RESTORE_WND
@@ -1407,7 +1407,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "&Close",                      ID_W_CLOSE
         MENUITEM SEPARATOR
-        POPUP "Recently Closed Windows"
+        POPUP "Recently Closed Tabs"
         BEGIN
             MENUITEM "No Item",                     ID_CLOSE_WND_HISTORY_DUMMY
         END
@@ -1448,10 +1448,10 @@ BEGIN
     POPUP "&Window"
     BEGIN
         MENUITEM "&Close",                      ID_W_CLOSE
-        MENUITEM "Close All Winodws (&X)",      IDC_APP_EXIT
-        MENUITEM "Close All Windows But this",  IDC_APP_EXIT_BUT_THIS
-        MENUITEM "Next Window\tCtrl+Tab",       ID_NEXT_WND
-        MENUITEM "Previous Window\tShift+Ctrl+Tab", ID_PREV_WND
+        MENUITEM "Close All Tabs (&X)",         IDC_APP_EXIT
+        MENUITEM "Close All Tabs But this",     IDC_APP_EXIT_BUT_THIS
+        MENUITEM "Next Tab\tCtrl+Tab",          ID_NEXT_WND
+        MENUITEM "Previous Tab\tShift+Ctrl+Tab", ID_PREV_WND
         MENUITEM SEPARATOR
         MENUITEM "DUMMY",                       ID_WINDOW_DUMMY
     END
@@ -1495,7 +1495,7 @@ BEGIN
         MENUITEM "Suplicate Tab",               ID_NEW
         MENUITEM SEPARATOR
         MENUITEM "Close Tab",                   ID_W_CLOSE
-        MENUITEM "Close All Windows But this (&X)", IDC_APP_EXIT
+        MENUITEM "Close All Tabs (&X)",         IDC_APP_EXIT
         MENUITEM "Close All Tabs But this",     IDC_APP_EXIT_BUT_THIS
         MENUITEM "Close Tabs to Right",         ID_TAB_CLOSE_RIGHT
         MENUITEM "Close Tabs to Left",          ID_TAB_CLOSE_LEFT
@@ -1857,9 +1857,9 @@ BEGIN
     EDITTEXT        IDC_EDIT_LIMIT_TIME,18,91,52,14,ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "min. (8 hours = 480 min. / 12 hours = 720 min. / 24 hours = 1440 min.)",IDC_STATIC,76,93,232,8
     LTEXT           "Maximum allocated RAM (MB)",IDC_STATIC,11,121,64,8
-    EDITTEXT        IDC_MemoryUsageLimit,83,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "Maximum count of windows",IDC_STATIC,11,142,64,8
-    EDITTEXT        IDC_WindowCountLimit,84,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_MemoryUsageLimit,89,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Maximum count of tabs",IDC_STATIC,11,142,77,8
+    EDITTEXT        IDC_WindowCountLimit,89,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
 END
 
 IDD_DIALOG5 DIALOGEX 0, 0, 297, 109
@@ -2344,7 +2344,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_STRING_CLOSE_ALL_WINDOW "Are you sure to close all windows?"
+    IDS_STRING_CLOSE_ALL_WINDOW "Are you sure to close all tabs?"
     IDS_STRING_ADMIN_LOCK_FEATURE 
                             "System administrator restricted access to this feature. "
     IDS_STRING_ZONE_MSG_DBL "The requested page is opened by the default browser."
@@ -2415,7 +2415,7 @@ BEGIN
     IDS_STRING_CLEARING_CACHE "Clearing browser caches..."
     IDS_STRING_CONFIRM_CLOSE_APPLICATION "Do you want %s to be closed?"
     IDS_STRING_TOO_MANY_WINDOWS_MSG 
-                            "Too many windows (maximum count = %d): Please close obsolete windows. (%s)"
+                            "Too many tabs (maximum count = %d): Please close obsolete tabs. (%s)"
     IDS_STRING_LOW_SYSTEM_RESOURCE_EXIT 
                             "We are sorry for causing you trouble.\nClosing application (%s) due to low system resource."
     IDS_STRING_LOW_SYSTEM_RESOURCE_SHUTDOWN 
@@ -2568,10 +2568,10 @@ END
 STRINGTABLE
 BEGIN
     ID_W_CLOSE              "Close"
-    ID_PREV_WND             "Previous Window\tShift+Ctrl+Tab"
-    ID_NEXT_WND             "Next Window\tCtrl+Tab"
-    IDC_APP_EXIT            "Close All Windows"
-    IDC_APP_EXIT_BUT_THIS   "Close Other Windows"
+    ID_PREV_WND             "Previous Tab\tShift+Ctrl+Tab"
+    ID_NEXT_WND             "Next Tab\tCtrl+Tab"
+    IDC_APP_EXIT            "Close All Tabs"
+    IDC_APP_EXIT_BUT_THIS   "Close Other Tabs"
 END
 
 STRINGTABLE
