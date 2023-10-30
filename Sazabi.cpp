@@ -20,8 +20,8 @@ CSazabi::CSazabi()
 	m_iWinOSBuildVersion = 0;
 	::ZeroMemory(m_FrmWndClassName, sizeof(TCHAR) * 512);
 	m_dwProcessId = 0;
-	::ZeroMemory(&m_NomalWindow_FramePlacementCache, sizeof(WINDOWPLACEMENT));
-	m_NomalWindow_FramePlacementCache.length = sizeof(WINDOWPLACEMENT);
+	::ZeroMemory(&m_NormalWindow_FramePlacementCache, sizeof(WINDOWPLACEMENT));
+	m_NormalWindow_FramePlacementCache.length = sizeof(WINDOWPLACEMENT);
 	m_pSettingDlg = NULL;
 	m_bUseApp = FALSE;
 	m_pDebugDlg = NULL;

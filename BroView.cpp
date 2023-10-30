@@ -1876,7 +1876,7 @@ void CChildView::OnFullScreen(BOOL bFlg)
 	{
 		if (theApp.IsWnd(FRM))
 		{
-			FRM->ChangeNomalWindow();
+			FRM->ChangeNormalWindow();
 		}
 	}
 }

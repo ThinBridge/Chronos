@@ -1958,7 +1958,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 									bGetFlg = TRUE;
 									pFrm->GetWindowPlacement(&zFramePlacement);
 									//ポップアップでは無いWindowのサイズをキャッシュ
-									theApp.m_NomalWindow_FramePlacementCache = zFramePlacement;
+									theApp.m_NormalWindow_FramePlacementCache = zFramePlacement;
 									break;
 								}
 							}
@@ -1972,7 +1972,7 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 				if (bGetFlg == FALSE)
 				{
 					//キャッシュしたサイズをセットする。
-					zFramePlacement = theApp.m_NomalWindow_FramePlacementCache;
+					zFramePlacement = theApp.m_NormalWindow_FramePlacementCache;
 					//Normalsizeを指定
 					zFramePlacement.showCmd = SW_NORMAL;
 				}
@@ -2062,8 +2062,8 @@ CChildView* CMainFrame::NewBrowserWindow(DWORD dwFlags)
 			{
 				this->InitFunc(pFrame);
 			}
-			pFrame->GetWindowPlacement(&theApp.m_NomalWindow_FramePlacementCache);
-			SetWindowPlacementFrm(theApp.m_NomalWindow_FramePlacementCache, pFrame);
+			pFrame->GetWindowPlacement(&theApp.m_NormalWindow_FramePlacementCache);
+			SetWindowPlacementFrm(theApp.m_NormalWindow_FramePlacementCache, pFrame);
 			if (!theApp.m_bNewInstanceParam)
 			{
 				pFrame->ShowWindow(SW_NORMAL);

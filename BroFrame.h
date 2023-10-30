@@ -109,7 +109,7 @@ public:
 				     const CRect& rectImage);
 	BOOL IsFavoritesMenu(const CMFCToolBarMenuButton* pMenuButton, BOOL bReflect);
 	void ChangeFullScreenWindow();
-	void ChangeNomalWindow();
+	void ChangeNormalWindow();
 	UINT GetWindowStyleSB();
 	void SetWindowStyleSB(UINT iParam);
 

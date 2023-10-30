@@ -1843,7 +1843,7 @@ void CBrowserFrame::OnFullScreen()
 	//fullscreen mode 解除
 	if (m_bFullScreen)
 	{
-		ChangeNomalWindow();
+		ChangeNormalWindow();
 		logmsg.Format(_T("BF_WND:0x%08p OnFullScreen_OFF"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	}
@@ -1933,7 +1933,7 @@ void CBrowserFrame::ChangeFullScreenWindow()
 	::SetWindowPos(this->m_hWnd, HWND_TOP, -1, -1, cx + 3, cy + 3, SWP_FRAMECHANGED);
 	::InvalidateRect(this->m_hWnd, NULL, TRUE);
 }
-void CBrowserFrame::ChangeNomalWindow()
+void CBrowserFrame::ChangeNormalWindow()
 {
 	m_bFullScreen = FALSE;
 	SIZE_T style = GetWindowLongPtr(m_hWnd, GWL_STYLE);
