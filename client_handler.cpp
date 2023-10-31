@@ -1839,50 +1839,60 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 {
 	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
 		return false;
-	if (!theApp.m_AppSettings.IsMediaAccessByApproval())
-		return false;
-
-	std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);
-	std::map<std::tuple<CefString, uint32>, bool>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
-	if (cachedPermissions != m_originAndPermissionsCache.end())
+	if (!theApp.m_AppSettings.GetMediaAccessPermission())
 	{
-		bool accepted = cachedPermissions->second;
-		if (accepted)
-		{
-			callback->Continue(requested_permissions);
-		}
-		return accepted;
+		// Do not permit media access.
+		return false;
 	}
 
-	CString confirmMessage;
-	CString enableMediaConfirmation;
+	HWND hWindow = GetSafeParentWnd(browser);
 	CString requestOrigin = (LPCWSTR)requesting_origin.c_str();
-	enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
-	confirmMessage.Format(enableMediaConfirmation, (LPCTSTR)requestOrigin);
-	confirmMessage += "\n";
+	if (theApp.m_AppSettings.GetMediaAccessPermission() == AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL)
+	{
+		std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);
+		std::map<std::tuple<CefString, uint32>, bool>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
+		if (cachedPermissions != m_originAndPermissionsCache.end())
+		{
+			bool accepted = cachedPermissions->second;
+			if (accepted)
+			{
+				callback->Continue(requested_permissions);
+			}
+			return accepted;
+		}
+
+		CString confirmMessage;
+		CString enableMediaConfirmation;
+		enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
+		confirmMessage.Format(enableMediaConfirmation, (LPCTSTR)requestOrigin);
+		confirmMessage += "\n";
 
 #define ADD_PERMISSION_MESSAGE(permission, messageId) \
-	if (requested_permissions & permission)      \
-	{                                            \
-		confirmMessage += "\n";              \
-		CString mediaType;                   \
-		mediaType.LoadString(messageId);     \
-		confirmMessage += mediaType;         \
-	}
+		if (requested_permissions & permission)      \
+		{                                            \
+			confirmMessage += "\n";              \
+			CString mediaType;                   \
+			mediaType.LoadString(messageId);     \
+			confirmMessage += mediaType;         \
+		}
 
-	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC);
-	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO);
-	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO);
-	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO);
+		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC);
+		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO);
+		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO);
+		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO);
 
 #undef ADD_PERMISSION_MESSAGE
 
-	HWND hWindow = GetSafeParentWnd(browser);
-	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
-	if (iRet == IDNO)
-	{
-		m_originAndPermissionsCache[permissionInfo] = false;
-		return false;
+		int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
+		if (iRet == IDNO)
+		{
+			m_originAndPermissionsCache[permissionInfo] = false;
+			return false;
+		}
+		else
+		{
+			m_originAndPermissionsCache[permissionInfo] = true;
+		}
 	}
 
 	DebugWndLogData dwLogData;
@@ -1894,7 +1904,6 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	theApp.AppendDebugViewLog(dwLogData);
 	theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_URL);
 
-	m_originAndPermissionsCache[permissionInfo] = true;
 	callback->Continue(requested_permissions);
 	return true;
 }
