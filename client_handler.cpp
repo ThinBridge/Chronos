@@ -2115,7 +2115,7 @@ bool MyV8Handler::Execute(const CefString& name,
 		else
 		{
 			CString exceptionMsg;
-			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMTER);
+			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMETER);
 			exception = CefString(exceptionMsg);
 			return false;
 		}
@@ -2186,7 +2186,7 @@ bool MyV8Handler::Execute(const CefString& name,
 		else
 		{
 			CString exceptionMsg;
-			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMTER);
+			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMETER);
 			exception = CefString(exceptionMsg);
 			return false;
 		}
