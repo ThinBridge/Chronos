@@ -128,7 +128,7 @@ void CMainFrame::View_InitOK()
 		theApp.m_ScaleDPI = dScaleDPI;
 
 		ProgressDlg DlgMsgP(this);
-		DlgMsgP.Create(MAKEINTRESOURCE(IDD_DIALOG1), this);
+		DlgMsgP.Create(MAKEINTRESOURCE(IDD_DLG_PROGRESS), this);
 		DlgMsgP.ShowWindow(SW_SHOW);
 		CString startingMsg;
 		startingMsg.LoadString(IDS_STRING_STARTING_BROWSER);

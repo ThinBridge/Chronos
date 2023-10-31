@@ -1600,7 +1600,7 @@ int CSazabi::ExitInstance()
 		if (m_bEnforceDeleteCache)
 		{
 			ProgressDlg DlgMsgP(NULL);
-			DlgMsgP.Create(MAKEINTRESOURCE(IDD_DIALOG1), NULL);
+			DlgMsgP.Create(MAKEINTRESOURCE(IDD_DLG_PROGRESS), NULL);
 			DlgMsgP.ShowWindow(SW_SHOW);
 			CString statusMsg;
 			statusMsg.LoadString(IDS_STRING_CLEARING_CACHE);

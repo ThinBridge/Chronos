@@ -15,7 +15,7 @@ public:
 #ifdef AFX_DESIGN_TIME
 	enum
 	{
-		IDD = IDD_DIALOG4
+		IDD = IDD_DLG_DOWNLOAD
 	};
 #endif
 	CIconHelper m_hIcon;
@@ -94,7 +94,7 @@ public:
 	UINT m_iCntg;
 	enum
 	{
-		IDD = IDD_DIALOG1
+		IDD = IDD_DLG_PROGRESS
 	};
 
 protected:
