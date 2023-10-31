@@ -19,7 +19,7 @@
 #define IDS_STRING_FAV_NAME             139
 #define IDS_STRING_CEF_LOCALE           140
 #define IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST 141
-#define IDD_DIALOG1                     142
+#define IDD_DLG_PROGRESS                142
 #define IDS_PROPRIETARY_CODEC_LICENSES  142
 #define IDS_STRING_PROPRIETARY_CODEC_LICENSES 142
 #define IDR_MENU_BACK                   143
@@ -55,7 +55,7 @@
 #define IDB_BMP_KEY                     190
 #define IDS_STRING_ZONE_MSG_CHR         191
 #define IDS_STRING_ZONE_MSG_EDG         193
-#define IDD_DIALOG4                     194
+#define IDD_DLG_DOWNLOAD                194
 #define IDD_DLG_DEBUG_WND               195
 #define IDB_BMP_DL                      196
 #define IDS_STRING_ZONE_MSG_CUSTOM      197
@@ -82,9 +82,9 @@
 #define IDS_STRING_SEL_SEARCH           218
 #define IDS_STRING_OPEN_NOACTIVE        219
 #define IDS_STRING_SETTINGS             220
-#define IDD_DIALOG5                     221
+#define IDD_DLG_DOMAIN                  221
 #define IDD_SETTINGS_DLG_CUSTOM_SCRIPT  222
-#define IDD_DIALOG6                     223
+#define IDD_DLG_CUSTOMSCRIPT            223
 #define IDD_DLG_AUTH_PWC                224
 #define IDI_ICON2                       225
 #define IDI_ICON3                       226

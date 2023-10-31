@@ -203,7 +203,7 @@ public:
 	{
 		Release_MsgDlg();
 		m_pDlgMsgP = new ProgressDlg(this);
-		m_pDlgMsgP->Create(MAKEINTRESOURCE(IDD_DIALOG1), this);
+		m_pDlgMsgP->Create(MAKEINTRESOURCE(IDD_DLG_PROGRESS), this);
 		if (bShow)
 		{
 			if (IsIconic())

@@ -5,7 +5,7 @@
 
 IMPLEMENT_DYNAMIC(CDlgDL, CDialogEx)
 CDlgDL::CDlgDL(CWnd* pParent, UINT nBrowserId)
-    : CDialogEx(IDD_DIALOG4, pParent)
+    : CDialogEx(IDD_DLG_DOWNLOAD, pParent)
 {
 	m_pParent = pParent;
 	m_bDLCancel = FALSE;

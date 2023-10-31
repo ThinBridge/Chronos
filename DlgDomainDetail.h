@@ -14,7 +14,7 @@ public:
 #ifdef AFX_DESIGN_TIME
 	enum
 	{
-		IDD = IDD_DIALOG5
+		IDD = IDD_DLG_DOMAIN
 	};
 #endif
 
@@ -42,7 +42,7 @@ public:
 #ifdef AFX_DESIGN_TIME
 	enum
 	{
-		IDD = IDD_DIALOG6
+		IDD = IDD_DLG_CUSTOMSCRIPT
 	};
 #endif
 

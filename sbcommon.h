@@ -4008,7 +4008,7 @@ protected:
 		ReleaseDLCompDlg();
 		CDlgDL* pDLDlg = NULL;
 		pDLDlg = new CDlgDL(pCWnd, nBrowserId);
-		pDLDlg->Create(MAKEINTRESOURCE(IDD_DIALOG4), pCWnd);
+		pDLDlg->Create(MAKEINTRESOURCE(IDD_DLG_DOWNLOAD), pCWnd);
 		m_ptrArrDlgPtr.Add(pDLDlg);
 		m_ptrArrDlgBrowserID.Add(nBrowserId);
 		m_taskbarList3.Initialize(pDLDlg->m_hWnd);
