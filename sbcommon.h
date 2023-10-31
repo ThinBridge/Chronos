@@ -3904,7 +3904,7 @@ public:
 			}
 		}
 	}
-	BOOL IsCanceld(UINT nBrowserId)
+	BOOL IsCanceled(UINT nBrowserId)
 	{
 		CDlgDL* pDLDlg = NULL;
 		for (int i = 0; i < m_ptrArrDlgBrowserID.GetCount(); i++)

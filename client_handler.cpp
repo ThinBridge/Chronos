@@ -986,7 +986,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 						}
 						theApp.m_DlMgr.Set_DLDlgState(nBrowserId, values.nProgress, values.szFullPath, szStatus, strSpeed);
 
-						if (theApp.m_DlMgr.IsCanceld(nBrowserId))
+						if (theApp.m_DlMgr.IsCanceled(nBrowserId))
 						{
 							theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
 							::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
@@ -999,7 +999,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 						}
 					}
 				}
-				if (theApp.m_DlMgr.IsCanceld(nBrowserId))
+				if (theApp.m_DlMgr.IsCanceled(nBrowserId))
 				{
 					theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
 					::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
@@ -1013,7 +1013,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 
 				//else
 				//{
-				//	if (theApp.m_DlMgr.IsCanceld(nBrowserId))
+				//	if (theApp.m_DlMgr.IsCanceled(nBrowserId))
 				//	{
 				//		theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
 				//		::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
