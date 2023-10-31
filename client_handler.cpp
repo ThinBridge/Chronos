@@ -986,7 +986,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 						}
 						theApp.m_DlMgr.Set_DLDlgState(nBrowserId, values.nProgress, values.szFullPath, szStatus, strSpeed);
 
-						if (theApp.m_DlMgr.IsCanceld(nBrowserId))
+						if (theApp.m_DlMgr.IsCanceled(nBrowserId))
 						{
 							theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
 							::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
@@ -999,7 +999,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 						}
 					}
 				}
-				if (theApp.m_DlMgr.IsCanceld(nBrowserId))
+				if (theApp.m_DlMgr.IsCanceled(nBrowserId))
 				{
 					theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
 					::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
@@ -1013,7 +1013,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 
 				//else
 				//{
-				//	if (theApp.m_DlMgr.IsCanceld(nBrowserId))
+				//	if (theApp.m_DlMgr.IsCanceled(nBrowserId))
 				//	{
 				//		theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
 				//		::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_UPDATE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
@@ -1861,7 +1861,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	confirmMessage.Format(enableMediaConfirmation, (LPCTSTR)requestOrigin);
 	confirmMessage += "\n";
 
-#define ADD_PERMISSON_MESSAGE(permission, messageId) \
+#define ADD_PERMISSION_MESSAGE(permission, messageId) \
 	if (requested_permissions & permission)      \
 	{                                            \
 		confirmMessage += "\n";              \
@@ -1870,12 +1870,12 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 		confirmMessage += mediaType;         \
 	}
 
-	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC);
-	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO);
-	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO);
-	ADD_PERMISSON_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO);
+	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC);
+	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO);
+	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO);
+	ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO);
 
-#undef ADD_PERMISSON_MESSAGE
+#undef ADD_PERMISSION_MESSAGE
 
 	HWND hWindow = GetSafeParentWnd(browser);
 	int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
@@ -2115,7 +2115,7 @@ bool MyV8Handler::Execute(const CefString& name,
 		else
 		{
 			CString exceptionMsg;
-			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMTER);
+			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMETER);
 			exception = CefString(exceptionMsg);
 			return false;
 		}
@@ -2186,7 +2186,7 @@ bool MyV8Handler::Execute(const CefString& name,
 		else
 		{
 			CString exceptionMsg;
-			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMTER);
+			exceptionMsg.LoadString(ID_ERROR_MISMATCHED_PARAMETER);
 			exception = CefString(exceptionMsg);
 			return false;
 		}

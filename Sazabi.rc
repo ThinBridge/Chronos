@@ -1310,7 +1310,7 @@ BEGIN
     ID_ERROR_PAGE_HEADING_CODE "エラーコード："
     ID_ERROR_PAGE_HEADING_MSG "エラー内容："
     ID_ERROR_PAGE_HEADING_NAME "エラー名称："
-    ID_ERROR_MISMATCHED_PARAMTER "パラメータが不一致です。"
+    ID_ERROR_MISMATCHED_PARAMETER "パラメータが不一致です。"
     ID_ALERT_CANNOT_SAVE_CONFIGS 
                             "設定ファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。"
     ID_KEY_COMBINATION_EMPTY "キーコンビネーションを設定して下さい。"
@@ -2691,7 +2691,7 @@ BEGIN
     ID_ERROR_PAGE_HEADING_CODE "Error Code: "
     ID_ERROR_PAGE_HEADING_MSG "Error Message: "
     ID_ERROR_PAGE_HEADING_NAME "Error Name: "
-    ID_ERROR_MISMATCHED_PARAMTER "Mismatched parameters."
+    ID_ERROR_MISMATCHED_PARAMETER "Mismatched parameters."
     ID_ALERT_CANNOT_SAVE_CONFIGS 
                             "Failed to save configurations to the file.\nIt may be held by some other applications.\nPlease retry after closing other applications."
     ID_KEY_COMBINATION_EMPTY "Please set any key combination."

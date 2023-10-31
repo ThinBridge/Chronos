@@ -189,7 +189,7 @@ BOOL CSazabi::InitFunc_Events()
 	DWORD pidCurrent = GetCurrentProcessId();
 	m_strEventLogName.Format(_T("CSG_EventLog%08x"), pidCurrent);
 	m_strEventLogScriptName.Format(_T("CSG_EventLogScript%08x"), pidCurrent);
-	m_strEventRecoveryName.Format(_T("CSG_EventRecoverty%08x"), pidCurrent);
+	m_strEventRecoveryName.Format(_T("CSG_EventRecovery%08x"), pidCurrent);
 	m_strEventURLFilterAllow.Format(_T("CSG_EventURLAllow%08x"), pidCurrent);
 	m_strEventURLFilterDeny.Format(_T("CSG_EventURLDeny%08x"), pidCurrent);
 
