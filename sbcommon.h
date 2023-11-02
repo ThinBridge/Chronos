@@ -875,6 +875,13 @@ public:
 		Clear();
 	}
 	~AppSettings() {}
+
+	enum MediaAccessPermission
+	{
+		NO_MEDIA_ACCESS,
+		MANUAL_MEDIA_APPROVAL,
+		DEFAULT_MEDIA_APPROVAL
+	};
 	void Clear()
 	{
 		EnableAdvancedLogMode = 0;
@@ -911,7 +918,7 @@ public:
 
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
-		EnableMediaAccessByApproval = 0;
+		EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
@@ -995,7 +1002,7 @@ public:
 
 		Data.MemoryUsageLimit = MemoryUsageLimit;
 		Data.WindowCountLimit = WindowCountLimit;
-		Data.EnableMediaAccessByApproval = EnableMediaAccessByApproval;
+		Data.EnableMediaAccessPermission = EnableMediaAccessPermission;
 
 		Data.EnableDownloadRestriction = EnableDownloadRestriction;
 		Data.EnableUploadRestriction = EnableUploadRestriction;
@@ -1082,7 +1089,7 @@ private:
 	int RunningLimitTime;
 	int MemoryUsageLimit;
 	int WindowCountLimit;
-	int EnableMediaAccessByApproval;
+	int EnableMediaAccessPermission;
 
 	//リダイレクト設定
 	int EnableURLRedirect;
@@ -1189,7 +1196,7 @@ public:
 		RunningLimitTime = 1440;
 		MemoryUsageLimit = 2040;
 		WindowCountLimit = 60;
-		EnableMediaAccessByApproval = FALSE;
+		EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//リダイレクト設定
@@ -1586,7 +1593,31 @@ public:
 				}
 				if (strTemp2.CompareNoCase(_T("EnableMediaAccessByApproval")) == 0)
 				{
-					EnableMediaAccessByApproval = strTemp3 == _T("1") ? TRUE : FALSE;
+					if (strTemp3 == _T("1"))
+					{
+						// EnableMediaAccessByApproval was deprecated.
+						// 1: means manual approval, so migrate EnableMediaAccessPermission = 1
+						EnableMediaAccessPermission = AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL;
+					}
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("EnableMediaAccessPermission")) == 0)
+				{
+					int iW = 0;
+					iW = _ttoi(strTemp3);
+					if (AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS <= iW &&
+						iW <= AppSettings::MediaAccessPermission::DEFAULT_MEDIA_APPROVAL)
+					{
+						// 0: None
+						// 1: Manual Approval
+						// 2: Approval by default  
+						EnableMediaAccessPermission = iW;
+					}
+					else
+					{
+						// Regard as no permission for invalid value
+						EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
+					}
 					continue;
 				}
 
@@ -1892,7 +1923,7 @@ public:
 		strRet += EXTVAL(RunningLimitTime);
 		strRet += EXTVAL(MemoryUsageLimit);
 		strRet += EXTVAL(WindowCountLimit);
-		strRet += EXTVAL(EnableMediaAccessByApproval);
+		strRet += EXTVAL(EnableMediaAccessPermission);
 
 		//リダイレクト設定
 		strRet += EXTVAL(EnableURLRedirect);
@@ -1992,7 +2023,7 @@ public:
 
 	inline int GetMemoryUsageLimit() { return MemoryUsageLimit; }
 	inline int GetWindowCountLimit() { return WindowCountLimit; }
-	inline BOOL IsMediaAccessByApproval() { return EnableMediaAccessByApproval; }
+	inline int GetMediaAccessPermission() { return EnableMediaAccessPermission; }
 
 	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
 	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
@@ -2075,7 +2106,6 @@ public:
 
 	inline void SetMemoryUsageLimit(DWORD dVal) { MemoryUsageLimit = dVal; }
 	inline void SetWindowCountLimit(DWORD dVal) { WindowCountLimit = dVal; }
-	inline void SetEnableMediaAccessByApproval(DWORD dVal) { EnableMediaAccessByApproval = dVal ? 1 : 0; }
 
 	inline void SetStartURL(LPCTSTR str) { StartURL = str; }
 	inline void SetEnforceInitParam(LPCTSTR str) { EnforceInitParam = str; }
