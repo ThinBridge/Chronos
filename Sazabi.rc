@@ -361,7 +361,7 @@ BEGIN
     COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     CONTROL         "「開封済みにする」を行った場合に、確認メッセージを表示しない",IDC_DisableOpendOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
-    LTEXT           "※拡張子を複数設定する場合は、|で区切ります。例）|.elf|.lnk|",IDC_STATIC,12,74,187,8
+    LTEXT           "※拡張子を複数設定する場合は、|で区切ります。例）.elf|.lnk",IDC_STATIC,12,74,187,8
     CONTROL         "アップロードアイテムを自動更新する",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
     CONTROL         "ミラーリングモードを有効にする",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
     LTEXT           "自動更新間隔(ミリ秒)",IDC_STATIC,17,220,68,8
@@ -1715,7 +1715,7 @@ BEGIN
     COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpendOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
-    LTEXT           "*Separate multiple file extensions with a pipe |. For example: |.elf|.lnk|",IDC_STATIC,12,74,187,8
+    LTEXT           "*Separate multiple file extensions with a pipe |. For example: .elf|.lnk",IDC_STATIC,12,74,187,8
     CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
     CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
