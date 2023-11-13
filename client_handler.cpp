@@ -28,6 +28,14 @@
 #include "client_util.h"
 #include "DlgAuth.h"
 #include "sbcommon.h"
+
+// Required for selecting client certificates
+#pragma comment(lib, "Crypt32")
+#pragma comment(lib, "cryptui")
+
+// For backward compatibility, use custom dialog for Windows 10
+// Because there is a bug that new tab can't be opened after accessing certstore.
+// See https://github.com/ThinBridge/Chronos/pull/141
 #include "DlgCertification.h"
 
 #pragma warning(push, 0)
@@ -1747,8 +1755,10 @@ bool ClientHandler::OnSelectClientCertificate(
 		return true;
 	}
 
+	// Use default certification select dialog only for Windows 11 or later.
 	HWND hWindow = GetSafeParentWnd(browser);
-	if (SafeWnd(hWindow))
+	bool bUseDefaultCertDialog = SBUtil::IsWindows11OrLater();
+	if (!bUseDefaultCertDialog)
 	{
 		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
 		CDlgCertification dlg(host, certificates, CWnd::FromHandle(hWindow));
@@ -1756,6 +1766,84 @@ bool ClientHandler::OnSelectClientCertificate(
 		if (iResult == IDOK)
 		{
 			callback->Select(certificates[dlg.SelectedIndex()]);
+			return true;
+		}
+	}
+	else
+	{
+		DebugWndLogData dwLogData;
+		dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
+		dwLogData.mFUNCTION_NAME = _T("OnSelectClientCertificate");
+
+		HCERTSTORE hCertStore;
+		hCertStore = CertOpenSystemStore(0, L"MY");
+		if (!hCertStore)
+		{
+			// Failed to open personal cert store.
+			dwLogData.mMESSAGE1.Format(_T("Failed to open personal certificate store."));
+			theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_DE);
+			return false;
+		}
+
+		PCCERT_CONTEXT pCertContext;
+		pCertContext = CryptUIDlgSelectCertificateFromStore(hCertStore,
+								    hWindow,
+								    NULL, // default title
+								    NULL, // default explanation
+								    0,	  // show default columns
+								    0,	  // reserved dwFlags
+								    NULL);
+		if (!pCertContext)
+		{
+			// Failed to select certificate or canceled or closed dialog.
+			// In such a case, it seems that the first certificate will be used.
+			dwLogData.mMESSAGE1.Format(_T("Failed to open certificate selection dialog."));
+			theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_DE);
+			CertCloseStore(hCertStore, 0);
+			return false;
+		}
+
+		// Find mapped index between cef given certificates and win32 API call results.
+		CString selectedSerialNumber = GetSerialNumberAsHexString(pCertContext->pCertInfo);
+		int selectedIndex = -1;
+		for (int index = 0; index < certificates.size(); index++)
+		{
+			CefRefPtr<CefX509Certificate> certificate = certificates[index];
+			CString serialNumber = GetSerialNumberAsHexString(certificate);
+			if (selectedSerialNumber == serialNumber)
+			{
+				selectedIndex = index;
+				break;
+			}
+		}
+
+		CertFreeCertificateContext(pCertContext);
+		boolean bClosedStore = CertCloseStore(hCertStore, CERT_CLOSE_STORE_CHECK_FLAG);
+		if (!bClosedStore)
+		{
+			DWORD dwResult = GetLastError();
+			dwLogData.mMESSAGE1.Format(_T("Checked with CERT_CLOSE_STORE_CHECK_FLAG. not freed yet."));
+			theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_DE);
+			if (dwResult == CRYPT_E_PENDING_CLOSE)
+			{
+				dwLogData.mMESSAGE1.Format(_T("Some certificate context is not freed, but closed certificate store."));
+				theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_DE);
+			}
+			else
+			{
+				dwLogData.mMESSAGE1.Format(_T("Certificate context is not freed, but not pending close yet."));
+				theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_DE);
+			}
+		}
+		else
+		{
+			dwLogData.mMESSAGE1.Format(_T("All certificate context and store is closed successfully."));
+			theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_DE);
+		}
+
+		if (selectedIndex >= 0)
+		{
+			callback->Select(certificates[selectedIndex]);
 			return true;
 		}
 	}
@@ -2062,6 +2150,40 @@ bool ClientHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
 		return true;
 	}
 	return false;
+}
+
+CString ClientHandler::GetSerialNumberAsHexString(const CefRefPtr<CefX509Certificate> certificate)
+{
+	auto serialNumber = certificate->GetSerialNumber();
+	auto size = serialNumber->GetSize();
+
+	CString serialNumberAsHexString;
+	for (size_t i = 0; i < size; i++)
+	{
+		short buf = 0;
+		int gotSize = serialNumber->GetData(&buf, 1, i);
+		if (gotSize == 0)
+			break;
+
+		CString hex;
+		hex.Format(_T("%02X"), buf);
+		serialNumberAsHexString += hex;
+	}
+	return serialNumberAsHexString;
+}
+
+CString ClientHandler::GetSerialNumberAsHexString(PCERT_INFO pCertInfo)
+{
+	BYTE* pbBuf = pCertInfo->SerialNumber.pbData;
+	CString serialNumber;
+	// Must retrieve in reverse order for SerialNumber field correctly
+	for (INT i = pCertInfo->SerialNumber.cbData - 1; i >= 0; i--)
+	{
+		CString hex;
+		hex.Format(L"%02X", pbBuf[i]);
+		serialNumber += hex;
+	}
+	return serialNumber;
 }
 
 bool MyV8Handler::Execute(const CefString& name,

@@ -699,6 +699,33 @@ namespace SBUtil
 		AttachThreadInput(nTargetID, nForegroundID, FALSE); // FALSE で切り離し
 	}
 
+	// Usually IsWindowsXXOrGreater version helper API should be used,
+	// but there is no IsWindows11OrGreater API yet.
+	// NOTE: GetVersionEx return information which depends on manifest,
+	// so use RtlGetVersion API.
+	static inline bool IsWindows11OrLater()
+	{
+		auto versionInfo = RTL_OSVERSIONINFOW{sizeof(RTL_OSVERSIONINFOW), 0, 0, 0, 0, 0};
+		auto hModule = GetModuleHandle(L"ntdll.dll");
+		if (!hModule)
+		{
+			return false;
+		}
+
+		typedef NTSTATUS(WINAPI * RtlGetVersionPtr)(PRTL_OSVERSIONINFOW lpVersionInformation);
+		auto RtlGetVersion = (RtlGetVersionPtr)GetProcAddress(hModule, "RtlGetVersion");
+		if (!RtlGetVersion)
+		{
+			return false;
+		}
+		if (RtlGetVersion(&versionInfo))
+		{
+			return false;
+		}
+		return (versionInfo.dwMajorVersion >= 11 || // for future version
+			(versionInfo.dwMajorVersion == 10 && versionInfo.dwBuildNumber >= 22000)); // for Windows 11
+	}
+
 	/////////////////////////////////////////////////////////////////
 	struct RTL_USER_PROCESS_PARAMETERS_I
 	{

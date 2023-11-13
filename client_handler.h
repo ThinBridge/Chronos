@@ -17,6 +17,8 @@
 #pragma warning(pop)
 #include "resource.h"
 
+#include <cryptuiapi.h>
+
 #pragma warning(push, 0)
 #pragma warning(disable : 26812)
 #if CHROME_VERSION_MAJOR >= 115
@@ -286,6 +288,9 @@ public:
 					      CefRefPtr<CefFrame> frame,
 					      CefProcessId source_process,
 					      CefRefPtr<CefProcessMessage> message) override;
+
+	CString GetSerialNumberAsHexString(const CefRefPtr<CefX509Certificate> certificate);
+	CString GetSerialNumberAsHexString(PCERT_INFO pCertInfo);
 
 protected:
 	BOOL m_bDownLoadStartFlg;
