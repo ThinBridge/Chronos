@@ -1715,7 +1715,7 @@ BEGIN
     COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpendOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
-    LTEXT           "*Separate multiple file extensions with a pipe |. For example: .elf|.lnk",IDC_STATIC,12,74,187,8
+    LTEXT           "*Separate multiple file extensions with a pipe |. For example: .elf|.lnk",IDC_STATIC,12,74,267,8
     CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
     CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
