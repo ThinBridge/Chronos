@@ -918,6 +918,7 @@ public:
 
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
+		EnableMediaAccessByApproval = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
 		EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
 
 		EnableDownloadRestriction = 0;
@@ -1089,6 +1090,7 @@ private:
 	int RunningLimitTime;
 	int MemoryUsageLimit;
 	int WindowCountLimit;
+	int EnableMediaAccessByApproval; // deprecated
 	int EnableMediaAccessPermission;
 
 	//リダイレクト設定
@@ -1290,6 +1292,7 @@ public:
 		CString strTemp2;
 		CString strTemp3;
 		CStringArray strArray;
+		boolean bEnabledMediaAccessPermission = false;
 		while (in.ReadString(strTemp))
 		{
 			strTemp.TrimLeft();
@@ -1596,8 +1599,9 @@ public:
 					if (strTemp3 == _T("1"))
 					{
 						// EnableMediaAccessByApproval was deprecated.
-						// 1: means manual approval, so migrate EnableMediaAccessPermission = 1
-						EnableMediaAccessPermission = AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL;
+						// 1: means manual approval, so it should be migrated to
+						// equivalent EnableMediaAccessPermission = 1 when EnableMediaAccessPermission is not set.
+						EnableMediaAccessByApproval = AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL;
 					}
 					continue;
 				}
@@ -1618,6 +1622,7 @@ public:
 						// Regard as no permission for invalid value
 						EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
 					}
+					bEnabledMediaAccessPermission = true;
 					continue;
 				}
 
@@ -1804,6 +1809,13 @@ public:
 					continue;
 				}
 			}
+		}
+		if (!bEnabledMediaAccessPermission)
+		{
+			// If EnableMediaAccessPermission is not set, migrate configuration from
+			// EnableMediaAccessByApproval. Not to depend on described order in ChronosDefault.conf,
+			// delay overriding here.
+			EnableMediaAccessPermission = EnableMediaAccessByApproval;
 		}
 		in.Close();
 
