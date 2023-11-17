@@ -4512,7 +4512,7 @@ void CSazabi::CreateNewWindow(LPCTSTR lpURL, BOOL bActive)
 		if (IsWnd(pCView))
 		{
 			if (pCView->m_hWnd)
-				::SendMessageTimeout(pCView->m_hWnd, WM_NEW_WINDOW_URL, (WPARAM)bActive ? cef_window_open_disposition_t::WOD_NEW_WINDOW : cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB, (LPARAM) _T("chrome://version/"), SMTO_NORMAL, 1000, NULL);
+				::SendMessageTimeout(pCView->m_hWnd, WM_NEW_WINDOW_URL, (WPARAM)bActive ? cef_window_open_disposition_t::CEF_WOD_NEW_WINDOW : cef_window_open_disposition_t::CEF_WOD_NEW_BACKGROUND_TAB, (LPARAM) _T("chrome://version/"), SMTO_NORMAL, 1000, NULL);
 		}
 	}
 }

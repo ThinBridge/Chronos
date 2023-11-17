@@ -140,17 +140,17 @@ bool ClientHandler::OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
 		pszURL = (LPCWSTR)target_url.c_str();
 		switch (target_disposition)
 		{
-		case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
+		case cef_window_open_disposition_t::CEF_WOD_NEW_FOREGROUND_TAB:
 		{
 			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
-		case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
+		case cef_window_open_disposition_t::CEF_WOD_NEW_BACKGROUND_TAB:
 		{
 			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
-		case cef_window_open_disposition_t::WOD_NEW_WINDOW:
+		case cef_window_open_disposition_t::CEF_WOD_NEW_WINDOW:
 		{
 			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)target_disposition, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
@@ -192,12 +192,12 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 		LRESULT lRet = 0;
 		switch (target_disposition)
 		{
-		case cef_window_open_disposition_t::WOD_NEW_POPUP:
+		case cef_window_open_disposition_t::CEF_WOD_NEW_POPUP:
 		{
 			lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)&popupFeatures, (LPARAM)&windowInfo);
 			return false;
 		}
-		case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
+		case cef_window_open_disposition_t::CEF_WOD_NEW_FOREGROUND_TAB:
 		{
 #if CHROME_VERSION_MAJOR >= 110
 			if (popupFeatures.isPopup)
@@ -222,13 +222,13 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 			lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
 			return false;
 		}
-		case cef_window_open_disposition_t::WOD_CURRENT_TAB:
-		case cef_window_open_disposition_t::WOD_SINGLETON_TAB:
-		case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
-		case cef_window_open_disposition_t::WOD_NEW_WINDOW:
-		case cef_window_open_disposition_t::WOD_SAVE_TO_DISK:
-		case cef_window_open_disposition_t::WOD_OFF_THE_RECORD:
-		case cef_window_open_disposition_t::WOD_IGNORE_ACTION:
+		case cef_window_open_disposition_t::CEF_WOD_CURRENT_TAB:
+		case cef_window_open_disposition_t::CEF_WOD_SINGLETON_TAB:
+		case cef_window_open_disposition_t::CEF_WOD_NEW_BACKGROUND_TAB:
+		case cef_window_open_disposition_t::CEF_WOD_NEW_WINDOW:
+		case cef_window_open_disposition_t::CEF_WOD_SAVE_TO_DISK:
+		case cef_window_open_disposition_t::CEF_WOD_OFF_THE_RECORD:
+		case cef_window_open_disposition_t::CEF_WOD_IGNORE_ACTION:
 		{
 			lRet = ::SendMessage(hWindow, WM_APP_CEF_NEW_WINDOW, (WPARAM)NULL, (LPARAM)&windowInfo);
 			return false;
@@ -406,7 +406,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			strURLC = params->GetLinkUrl();
 			LPCWSTR pszURL = {0};
 			pszURL = (LPCWSTR)strURLC.c_str();
-			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_WINDOW, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
+			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::CEF_WOD_NEW_WINDOW, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
 		else if (command_id == CEF_MENU_ID_OPEN_LINK_NEW_NOACTIVE)
@@ -415,7 +415,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			strURLC = params->GetLinkUrl();
 			LPCWSTR pszURL = {0};
 			pszURL = (LPCWSTR)strURLC.c_str();
-			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
+			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::CEF_WOD_NEW_BACKGROUND_TAB, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
 		else if (command_id == CEF_MENU_ID_OPEN_IMG)
@@ -424,7 +424,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			strURLC = params->GetSourceUrl();
 			LPCWSTR pszURL = {0};
 			pszURL = (LPCWSTR)strURLC.c_str();
-			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_WINDOW, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
+			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::CEF_WOD_NEW_WINDOW, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
 		else if (command_id == CEF_MENU_ID_OPEN_IMG_NOACTIVE)
@@ -433,7 +433,7 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			strURLC = params->GetSourceUrl();
 			LPCWSTR pszURL = {0};
 			pszURL = (LPCWSTR)strURLC.c_str();
-			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
+			::SendMessageTimeout(hWindow, WM_NEW_WINDOW_URL, (WPARAM)cef_window_open_disposition_t::CEF_WOD_NEW_BACKGROUND_TAB, (LPARAM)pszURL, SMTO_NORMAL, 1000, NULL);
 			return true;
 		}
 		else if (command_id == CEF_MENU_ID_SAVE_IMG)
