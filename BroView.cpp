@@ -2194,17 +2194,17 @@ LRESULT CChildView::OnCreateNewBrowserWindow(WPARAM wParam, LPARAM lParam)
 			{
 				switch (wParam)
 				{
-				case cef_window_open_disposition_t::WOD_NEW_FOREGROUND_TAB:
+				case cef_window_open_disposition_t::CEF_WOD_NEW_FOREGROUND_TAB:
 				{
 					bActive = true;
 					break;
 				}
-				case cef_window_open_disposition_t::WOD_NEW_BACKGROUND_TAB:
+				case cef_window_open_disposition_t::CEF_WOD_NEW_BACKGROUND_TAB:
 				{
 					bActive = false;
 					break;
 				}
-				case cef_window_open_disposition_t::WOD_NEW_WINDOW:
+				case cef_window_open_disposition_t::CEF_WOD_NEW_WINDOW:
 				{
 					bActive = true;
 					break;
