@@ -1927,15 +1927,17 @@ public:
 		CString strRet;
 
 		//全般設定
+		strRet += _T("# General\n");
 		strRet += EXTVAL(EnableMultipleInstance);
 		strRet += EXTVAL(EnableMemcache);
 		strRet += EXTVAL(EnableCrashRecovery);
 		strRet += EXTVAL(KeyCombination);
 
 		//画面表示設定
+		strRet += _T("# Appearance\n");
 		strRet += EXTVAL(EnableTab);
-		strRet += EXTVAL(EnablePDFExtension);
 		strRet += EXTVAL(EnableGPURendering);
+		strRet += EXTVAL(EnablePDFExtension);
 		strRet += EXTVAL(EnableRebar);
 		strRet += EXTVAL(ShowLogo);
 		strRet += EXTVAL(EnableStatusbar);
@@ -1944,17 +1946,20 @@ public:
 		strRet += EXTVAL(DefaultZoomSize);
 
 		//起動関連設定
+		strRet += _T("# Startup\n");
 		strRet += EXTVAL(StartURL);
 		strRet += EXTVAL(EnforceInitParam);
 		strRet += EXTVAL(InitMessage);
 
 		//インターネット接続設定
+		strRet += _T("# Internet Connection\n");
 		strRet += EXTVAL(ProxyType);
 		strRet += EXTVAL(ProxyAddress);
 		strRet += EXTVAL(ProxyBypassAddress);
 		strRet += EXTVAL(UserAgentAppendStr);
 
 		//制限設定
+		strRet += _T("# Restriction\n");
 		strRet += EXTVAL(EnableDownloadRestriction);
 		strRet += EXTVAL(EnableUploadRestriction);
 		strRet += EXTVAL(EnableDeleteCache);
@@ -1962,9 +1967,9 @@ public:
 		strRet += EXTVAL(RunningLimitTime);
 		strRet += EXTVAL(MemoryUsageLimit);
 		strRet += EXTVAL(WindowCountLimit);
-		strRet += EXTVAL(EnableMediaAccessPermission);
 
 		//リダイレクト設定
+		strRet += _T("# Redirection\n");
 		strRet += EXTVAL(EnableURLRedirect);
 		strRet += EXTVAL(RedirectMsgTimeout);
 		strRet += EXTVAL(CustomBrowser);
@@ -1974,49 +1979,56 @@ public:
 		strRet += EXTVAL(CustomBrowser5);
 
 		//URLフィルター設定
+		strRet += _T("# URL Filtering\n");
 		strRet += EXTVAL(EnableURLFilter);
 
 		//CustomScript設定
+		strRet += _T("# Custom Scripts\n");
 		strRet += EXTVAL(EnableCustomScript);
 
 		//ログ出力設定
+		strRet += _T("# Logging\n");
 		strRet += EXTVAL(EnableAdvancedLogMode);
 		strRet += EXTVAL(EnableAdvancedLogVerboseMode);
 		strRet += EXTVAL(AdvancedLogLevel);
 		strRet += EXTVAL(EnableLogging);
-		strRet += EXTVAL(EnableUploadLogging);
-		strRet += EXTVAL(EnableDownloadLogging);
-		strRet += EXTVAL(EnableBrowsingLogging);
-		strRet += EXTVAL(EnableAccessAllLogging);
 		strRet += EXTVAL(LogServerURL);
 		strRet += EXTVAL(RequestHeader);
 		strRet += EXTVAL(LogMethod);
-
+		strRet += EXTVAL(EnableDownloadLogging);
+		strRet += EXTVAL(EnableUploadLogging);
+		strRet += EXTVAL(EnableBrowsingLogging);
+		strRet += EXTVAL(EnableAccessAllLogging);
+	
 		//ChFiler---------------------------------
+		strRet += _T("# File Manager\n");
 		strRet += EXTVAL(RootPath);
-		strRet += EXTVAL(UploadBasePath);
 		strRet += EXTVAL(ExtFilter);
-		strRet += EXTVAL(EnableOpendOp);
-		strRet += EXTVAL(EnableTransferLog);
-		strRet += EXTVAL(DisableOpendOpAlert);
-		strRet += EXTVAL(DisableExitOpAlert);
-		strRet += EXTVAL(ConfirmAutoRefresh);
+		strRet += EXTVAL(DisallowExt);
 		strRet += EXTVAL(TransferPath);
 		strRet += EXTVAL(TransferSubFolder);
-		strRet += EXTVAL(ShowUploadTab);
 		strRet += EXTVAL(UploadPath);
-		strRet += EXTVAL(DisallowExt);
-		strRet += EXTVAL(unZipMessage);
-		strRet += EXTVAL(ExitMessage);
+		strRet += EXTVAL(ShowUploadTab);
 		strRet += EXTVAL(EnableUploadSync);
 		strRet += EXTVAL(EnableUploadSyncMirror);
 		strRet += EXTVAL(UploadSyncInterval);
+		strRet += EXTVAL(EnableOpendOp);
+		strRet += EXTVAL(DisableOpendOpAlert);
+
+		strRet += _T("# non GUI parameters\n");
+		strRet += EXTVAL(EnableMediaAccessPermission);
+		strRet += EXTVAL(UploadBasePath);
+		strRet += EXTVAL(ExitMessage);
+		strRet += EXTVAL(unZipMessage);
+		strRet += EXTVAL(EnableTransferLog);
+		strRet += EXTVAL(DisableExitOpAlert);
+		strRet += EXTVAL(ConfirmAutoRefresh);
 		//ChTaskMGR---------------------------------
+		strRet += EXTVAL(TASK_LIST_TYPE);
+		strRet += EXTVAL(TASK_LIST_MODE_DETAIL);
 		strRet += EXTVAL(LABEL_TYPE);
 		strRet += EXTVAL(LABEL_CHK_INTERVAL);
 		strRet += EXTVAL(LABEL_ALPHA_BLEND);
-		strRet += EXTVAL(TASK_LIST_TYPE);
-		strRet += EXTVAL(TASK_LIST_MODE_DETAIL);
 
 		return strRet;
 	}
