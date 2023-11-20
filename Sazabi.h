@@ -30,9 +30,9 @@
 #define CEF_PROC_GPU	  2
 #define CEF_PROC_OTHER	  3
 
-#if CHROME_VERSION_MAJOR < 119
-// Since CEF 119, cef_window_open_disposition_t was changed to
-// add CEF_ prefix.
+#if CHROME_VERSION_MAJOR < 119 || (CHROME_VERSION_MAJOR == 119 && CHROME_VERSION_PATCH < 124)
+// Since CEF 119.4.2, cef_window_open_disposition_t was changed to
+// add CEF_ prefix. (chromium-119.0.6045.124)
 #define CEF_WOD_CURRENT_TAB			WOD_CURRENT_TAB
 #define CEF_WOD_SINGLETON_TAB		WOD_SINGLETON_TAB
 #define CEF_WOD_NEW_FOREGROUND_TAB	WOD_NEW_FOREGROUND_TAB
