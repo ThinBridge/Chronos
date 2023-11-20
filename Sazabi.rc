@@ -342,7 +342,7 @@ FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
     GROUPBOX        "全体設定",IDC_STATIC,8,6,343,79
     LTEXT           "ダウンロード/アップロードアイテムの既定のパス",IDC_STATIC,12,18,132,8
-    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED
     LTEXT           "表示するアイテムの拡張子",IDC_STATIC,12,37,79,8
     EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
     LTEXT           "実行、開封、転送を禁止する拡張子",IDC_STATIC,12,56,111,8
@@ -1700,7 +1700,7 @@ FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
     GROUPBOX        "General options",IDC_STATIC,8,6,343,79
     LTEXT           "Default path of downloaded and uploaded items",IDC_STATIC,12,18,132,8
-    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED
     LTEXT           "File extensions for visible items",IDC_STATIC,12,37,79,8
     EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
     LTEXT           "File extensions to forbid running, opening and transferring",IDC_STATIC,12,56,111,8
