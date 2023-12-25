@@ -1052,46 +1052,48 @@ void APIHookC::DoHookComDlgAPI()
 	}
 
 	hModule = GetModuleHandleW(L"comdlg32.dll");
-
-	if (!pORG_GetSaveFileNameW)
+	if (hModule)
 	{
-		if (hModule)
+		if (!pORG_GetSaveFileNameW)
+		{
 			pTargetW = GetProcAddress(hModule, "GetSaveFileNameW");
-		if (MH_CreateHookApiEx(
-			L"comdlg32.dll", "GetSaveFileNameW", &Hook_GetSaveFileNameW, &pORG_GetSaveFileNameW) != MH_OK)
-			return;
+			if (MH_CreateHookApiEx(
+				L"comdlg32.dll", "GetSaveFileNameW", &Hook_GetSaveFileNameW, &pORG_GetSaveFileNameW) != MH_OK)
+				return;
 
-		if (pTargetW == NULL) return;
-		if (MH_EnableHook(pTargetW) != MH_OK)
-			return;
-	}
+			if (pTargetW == NULL) return;
+			if (MH_EnableHook(pTargetW) != MH_OK)
+				return;
+		}
 
-	if (!pORG_GetOpenFileNameW)
-	{
-		if (hModule)
+		if (!pORG_GetOpenFileNameW)
+		{
 			pTargetW = GetProcAddress(hModule, "GetOpenFileNameW");
-		if (MH_CreateHookApiEx(
-			L"comdlg32.dll", "GetOpenFileNameW", &Hook_GetOpenFileNameW, &pORG_GetOpenFileNameW) != MH_OK)
-			return;
+			if (MH_CreateHookApiEx(
+				L"comdlg32.dll", "GetOpenFileNameW", &Hook_GetOpenFileNameW, &pORG_GetOpenFileNameW) != MH_OK)
+				return;
 
-		if (pTargetW == NULL) return;
-		if (MH_EnableHook(pTargetW) != MH_OK)
-			return;
+			if (pTargetW == NULL) return;
+			if (MH_EnableHook(pTargetW) != MH_OK)
+				return;
+		}
 	}
 
 	////////////////////////////////////////////////////////////
 	hModule = GetModuleHandleW(L"shell32.dll");
-	if (!pORG_SHBrowseForFolderW)
+	if (hModule)
 	{
-		if (hModule)
+		if (!pORG_SHBrowseForFolderW)
+		{
 			pTargetW = GetProcAddress(hModule, "SHBrowseForFolderW");
-		if (MH_CreateHookApiEx(
-			L"shell32.dll", "SHBrowseForFolderW", &Hook_SHBrowseForFolderW, &pORG_SHBrowseForFolderW) != MH_OK)
-			return;
+			if (MH_CreateHookApiEx(
+				L"shell32.dll", "SHBrowseForFolderW", &Hook_SHBrowseForFolderW, &pORG_SHBrowseForFolderW) != MH_OK)
+				return;
 
-		if (pTargetW == NULL) return;
-		if (MH_EnableHook(pTargetW) != MH_OK)
-			return;
+			if (pTargetW == NULL) return;
+			if (MH_EnableHook(pTargetW) != MH_OK)
+				return;
+		}
 	}
 	if (!pORG_CoCreateInstance)
 	{
