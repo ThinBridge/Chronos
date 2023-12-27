@@ -1641,7 +1641,8 @@ int CSazabi::ExitInstance()
 						}
 						else
 						{
-							iRt = ::MessageBox(NULL, strMsg, m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL);
+							//settings.external_message_pump = trueを指定した状態では、Exit処理中にはMB_DEFAULT_DESKTOP_ONLYがないとダイアログが表示されない
+							iRt = ::MessageBox(NULL, strMsg, m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL | MB_DEFAULT_DESKTOP_ONLY);
 						}
 
 						if (iRt == IDCANCEL || iRt == IDNO || iRt == IDTIMEOUT)
@@ -4154,6 +4155,7 @@ void CSazabi::InitializeCef()
 	// (CefDoMessageLoopWork()をメインプログラムから呼び出す)
 	m_bMultiThreadedMessageLoop = FALSE;
 	settings.multi_threaded_message_loop = m_bMultiThreadedMessageLoop;
+	settings.external_message_pump = true;
 
 	settings.no_sandbox = true;
 	if (!m_IsSGMode)
