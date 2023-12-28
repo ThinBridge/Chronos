@@ -1052,6 +1052,10 @@ void APIHookC::DoHookComDlgAPI()
 	}
 
 	hModule = GetModuleHandleW(L"comdlg32.dll");
+	if (!hModule)
+	{
+		hModule = LoadLibrary(L"comdlg32.dll");
+	}	
 	if (hModule)
 	{
 		if (!pORG_GetSaveFileNameW)
@@ -1081,6 +1085,10 @@ void APIHookC::DoHookComDlgAPI()
 
 	////////////////////////////////////////////////////////////
 	hModule = GetModuleHandleW(L"shell32.dll");
+	if (!hModule)
+	{
+		hModule = LoadLibrary(L"shell32.dll");
+	}	
 	if (hModule)
 	{
 		if (!pORG_SHBrowseForFolderW)
