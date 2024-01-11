@@ -818,6 +818,10 @@ void CChildView::ResizeWindowPopupInpl()
 			//初期値(アクティブウインドウの幅)
 			rcFeature.right = rcCurrent.Width();
 
+			//タスクバーを除く画面サイズ
+			RECT rcDisp = {0};
+			SystemParametersInfo(SPI_GETWORKAREA, NULL, &rcDisp, NULL);
+
 			//高さを指定している場合はセット
 			if (m_popupFeatures->height)
 			{
@@ -832,6 +836,10 @@ void CChildView::ResizeWindowPopupInpl()
 					dScale = rcFeature.bottom * theApp.m_ScaleDPI;
 					iScale = (int)dScale;
 					rcFeature.bottom = iScale;
+				}
+				if (rcFeature.bottom > rcDisp.bottom)
+				{
+					rcFeature.bottom = rcDisp.bottom;
 				}
 			}
 
@@ -849,6 +857,10 @@ void CChildView::ResizeWindowPopupInpl()
 					dScale = rcFeature.right * theApp.m_ScaleDPI;
 					iScale = (int)dScale;
 					rcFeature.right = iScale;
+				}
+				if (rcFeature.right > rcDisp.right)
+				{
+					rcFeature.right = rcDisp.right;
 				}
 			}
 
