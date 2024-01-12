@@ -820,7 +820,8 @@ void CChildView::ResizeWindowPopupInpl()
 
 			//タスクバーを除く画面サイズ
 			RECT rcDisp = {0};
-			SystemParametersInfo(SPI_GETWORKAREA, NULL, &rcDisp, NULL);
+			SystemParametersInfo(SPI_GETWORKAREA, 0, &rcDisp, 0);
+
 
 			//高さを指定している場合はセット
 			if (m_popupFeatures->height)
