@@ -24,7 +24,7 @@ jobs:
         run: |
           bash .github/rewrite-cef-version.sh ${{ matrix.version }}
       - name: Setup cache for CEF
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: cef-cache/*/
           key: cef-${{ runner.os }}-${{ hashFiles('setup-cef.bat') }}
