@@ -1,6 +1,12 @@
 #include "pch.h"
 #include "..\..\StdAfx.h"
 #include "..\..\sbcommon.h"
+#include "gtest/gtest.h"
+
+class Test_Sbcommon : public ::testing::Test
+{
+};
+
 TEST(Test_Sbcommon, CLogDispatcher_GetOpStr)
 {
 	CLogDispatcher clogDispatcher;
