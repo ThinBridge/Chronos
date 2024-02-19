@@ -74,12 +74,15 @@
     </Link>
     <PreBuildEvent>
       <Command>xcopy /Y $(SolutionDir)lib $(ProjectDir)lib\
-move $(SolutionDir)ChronosDebug\Main.obj $(SolutionDir)ChronosDebug\Main.obj.backup
+
 </Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>move $(SolutionDir)ChronosDebug\Main.obj.backup $(SolutionDir)ChronosDebug\Main.obj</Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>move $(SolutionDir)ChronosDebug\Main.obj $(SolutionDir)ChronosDebug\Main.obj.backup</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,14 +113,17 @@ move $(SolutionDir)ChronosDebug\Main.obj $(SolutionDir)ChronosDebug\Main.obj.bac
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalDependencies>C:\gitdir\Chronos\ChronosRelease\*.obj;$(MSBuildThisFileDirectory)..\..\lib\native\v140\windesktop\msvcstl\static\rt-static\x86\Release\gtest_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /Y $(SolutionDir)rlib $(ProjectDir)rlib\
-move $(SolutionDir)ChronosRelease\Main.obj $(SolutionDir)ChronosRelease\Main.obj.backup</Command>
+      <Command>xcopy /Y $(SolutionDir)rlib $(ProjectDir)rlib\</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>move $(SolutionDir)ChronosRelease\Main.obj.backup $(SolutionDir)ChronosRelease\Main.obj</Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>move $(SolutionDir)ChronosRelease\Main.obj $(SolutionDir)ChronosRelease\Main.obj.backup</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
