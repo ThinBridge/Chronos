@@ -2202,6 +2202,16 @@ BOOL CSazabi::PumpMessage()
 			return FALSE;
 		}
 
+		// Output TRACE logs for debug
+		if (::PeekMessage(&msg, NULL, WM_KEYFIRST, WM_KEYLAST, PM_NOREMOVE))
+		{
+			if (msg.hwnd)
+			{
+				::GetClassName(msg.hwnd, classname, 31);
+				TRACE(_T("PumpMessage[0x%08x] %s (0x%x)\n"), msg.hwnd, classname, msg.message);
+			}
+		}
+
 		//SZB
 		if (m_bCEFInitialized)
 		{
@@ -4153,9 +4163,9 @@ void CSazabi::InitializeCef()
 
 	// 別スレッドでメッセージループを管理しない
 	// (CefDoMessageLoopWork()をメインプログラムから呼び出す)
-	m_bMultiThreadedMessageLoop = FALSE;
+	m_bMultiThreadedMessageLoop = TRUE;
 	settings.multi_threaded_message_loop = m_bMultiThreadedMessageLoop;
-	settings.external_message_pump = true;
+	settings.external_message_pump = false;
 
 	settings.no_sandbox = true;
 	if (!m_IsSGMode)
