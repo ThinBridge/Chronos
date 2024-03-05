@@ -2186,6 +2186,32 @@ CString ClientHandler::GetSerialNumberAsHexString(PCERT_INFO pCertInfo)
 	return serialNumber;
 }
 
+bool ClientHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser,
+		   const CefKeyEvent& event,
+		   CefEventHandle os_event,
+		   bool* is_keyboard_shortcut)
+{
+	CWnd* hWindow = theApp.m_pMainWnd;
+	if (SafeWnd(hWindow->m_hWnd))
+	{
+		int keyType = 0;
+		switch (event.type)
+		{
+		case 0: // KEYEVENT_RAWKEYDOWN
+		case 1: // KEYEVENT_KEYDOWN
+			keyType = WM_KEYDOWN;
+			break;
+		case 2: // KEYEVENT_KEYUP
+			keyType = WM_KEYUP;
+			break;
+		case 3: // KEYEVENT_CHAR
+			return false;
+		}
+		hWindow->SendMessage(keyType, event.windows_key_code, NULL);
+	}
+	return false;
+}
+
 bool MyV8Handler::Execute(const CefString& name,
 			  CefRefPtr<CefV8Value> object,
 			  const CefV8ValueList& arguments,

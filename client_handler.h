@@ -48,7 +48,8 @@ class ClientHandler : public CefClient,
 		      public CefResourceRequestHandler,
 		      public CefJSDialogHandler,
 		      public CefDragHandler,
-		      public CefPermissionHandler
+		      public CefPermissionHandler,
+		      public CefKeyboardHandler
 {
 public:
 	// Interface implemented to handle off-screen rendering.
@@ -78,6 +79,7 @@ public:
 	virtual CefRefPtr<CefJSDialogHandler> GetJSDialogHandler() override { return this; }
 	virtual CefRefPtr<CefDragHandler> GetDragHandler() override { return this; }
 	virtual CefRefPtr<CefPermissionHandler> GetPermissionHandler() override { return this; }
+	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() override { return this; }
 
 	// CefLifeSpanHandler methods
 	virtual bool DoClose(CefRefPtr<CefBrowser> browser) override;
@@ -180,6 +182,11 @@ public:
 						    const CefString& requesting_origin,
 						    uint32 requested_permissions,
 						    CefRefPtr<CefMediaAccessCallback> callback) override;
+
+	virtual bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser,
+			   const CefKeyEvent& event,
+			   CefEventHandle os_event,
+			   bool* is_keyboard_shortcut) override;
 
 	void EmptyWindowClose(CefRefPtr<CefBrowser> browser)
 	{
