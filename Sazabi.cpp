@@ -4163,7 +4163,7 @@ void CSazabi::InitializeCef()
 
 	// 別スレッドでメッセージループを管理しない
 	// (CefDoMessageLoopWork()をメインプログラムから呼び出す)
-	m_bMultiThreadedMessageLoop = TRUE;
+	m_bMultiThreadedMessageLoop = true;
 	settings.multi_threaded_message_loop = m_bMultiThreadedMessageLoop;
 	settings.external_message_pump = false;
 
