@@ -33,15 +33,15 @@
 #if CHROME_VERSION_MAJOR < 119 || (CHROME_VERSION_MAJOR == 119 && CHROME_VERSION_PATCH < 124)
 // Since CEF 119.4.2, cef_window_open_disposition_t was changed to
 // add CEF_ prefix. (chromium-119.0.6045.124)
-#define CEF_WOD_CURRENT_TAB			WOD_CURRENT_TAB
-#define CEF_WOD_SINGLETON_TAB		WOD_SINGLETON_TAB
-#define CEF_WOD_NEW_FOREGROUND_TAB	WOD_NEW_FOREGROUND_TAB
-#define CEF_WOD_NEW_BACKGROUND_TAB	WOD_NEW_BACKGROUND_TAB
-#define CEF_WOD_NEW_POPUP			WOD_NEW_POPUP
-#define CEF_WOD_NEW_WINDOW			WOD_NEW_WINDOW
-#define CEF_WOD_SAVE_TO_DISK		WOD_SAVE_TO_DISK
-#define CEF_WOD_OFF_THE_RECORD		WOD_OFF_THE_RECORD
-#define CEF_WOD_IGNORE_ACTION		WOD_IGNORE_ACTION
+#define CEF_WOD_CURRENT_TAB	   WOD_CURRENT_TAB
+#define CEF_WOD_SINGLETON_TAB	   WOD_SINGLETON_TAB
+#define CEF_WOD_NEW_FOREGROUND_TAB WOD_NEW_FOREGROUND_TAB
+#define CEF_WOD_NEW_BACKGROUND_TAB WOD_NEW_BACKGROUND_TAB
+#define CEF_WOD_NEW_POPUP	   WOD_NEW_POPUP
+#define CEF_WOD_NEW_WINDOW	   WOD_NEW_WINDOW
+#define CEF_WOD_SAVE_TO_DISK	   WOD_SAVE_TO_DISK
+#define CEF_WOD_OFF_THE_RECORD	   WOD_OFF_THE_RECORD
+#define CEF_WOD_IGNORE_ACTION	   WOD_IGNORE_ACTION
 #endif
 
 class CChildView;
@@ -57,13 +57,13 @@ class CLogDispatcher;
 class CSazabi : public CWinApp
 {
 public:
-	//func
+	// func
 	CSazabi();
 	virtual ~CSazabi();
 	BOOL PumpMessage();
 	CStringW m_strAppIDw;
 
-	//SZB
+	// SZB
 	BOOL m_bCEFInitialized;
 	BOOL m_bToBeShutdown;
 	BOOL m_bMultiThreadedMessageLoop;
@@ -85,11 +85,11 @@ public:
 	BOOL m_bTabEnable_Init;
 	BOOL m_bShutdownFlg;
 
-	//setting//////////////////////////
+	// setting//////////////////////////
 	AppSettings m_AppSettings;
 	CScriptSrcMgr m_cScriptSrc;
 
-	//Path///////////////////////////////
+	// Path///////////////////////////////
 	CString m_strExeFullPath;
 	CString m_strExeFileName;
 	CString m_strExeFolderPath;
@@ -109,7 +109,7 @@ public:
 	CString m_strCEFCachePath;
 	CString m_strFaviconCachePath;
 
-	//StringInfo/////////////////////////////////////
+	// StringInfo/////////////////////////////////////
 	CString m_strThisAppName;
 	CString m_strThisAppVersionString;
 	CString m_strAtomParam;
@@ -118,7 +118,7 @@ public:
 
 	BOOL m_bNewInstanceParam;
 	BOOL m_bTabWndChanging;
-	//ConstString
+	// ConstString
 	CString m_strZoneMessageDBL;
 	CString m_strZoneMessageNG;
 	CString m_strZoneMessageIE;
@@ -130,7 +130,7 @@ public:
 	CString m_strLastSelectFolderPath;
 	CString m_strLastSelectUploadFolderPath;
 
-	//funcutil
+	// funcutil
 	TCHAR m_FrmWndClassName[512];
 
 	/* CBrowserFrame::OnCloseDelay */
@@ -192,9 +192,9 @@ public:
 	BOOL IsExistsAnotherInstance()
 	{
 		BOOL bRet = FALSE;
-		//既に起動しているか？
-		HWND hWndCap = FindWindow(m_FrmWndClassName, NULL); //APのハンドル取得
-								    //起動している。
+		// 既に起動しているか？
+		HWND hWndCap = FindWindow(m_FrmWndClassName, NULL); // APのハンドル取得
+								    // 起動している。
 		if (hWndCap != NULL)
 		{
 			TCHAR szTitleMultipleInstance[260] = {0};
@@ -215,7 +215,7 @@ public:
 		return bRet;
 	}
 
-	//ChildViewのポインタをリストから返す。
+	// ChildViewのポインタをリストから返す。
 	CChildView* GetChildViewPtr(HWND hWnd);
 
 	DWORD m_dwProcessId;
@@ -262,14 +262,14 @@ public:
 	CString IsProcessExistsName(DWORD dPID);
 	CString GetCefVersionStr();
 	CString GetChromiumVersionStr();
-	//Setting Dlg///////////////////////////////////
+	// Setting Dlg///////////////////////////////////
 	void ShowSettingDlg(CWnd* pParentWnd);
 	CString m_strCurrentURL4DlgSetting;
 	CSettingsDialog* m_pSettingDlg;
 	AppSettings m_AppSettingsDlgCurrent;
 	////////////////////////////////////////////////
 
-	//DebugTrace Dlg///////////////////////////////
+	// DebugTrace Dlg///////////////////////////////
 	CDlgDebugWnd* m_pDebugDlg;
 	void ShowDebugTraceDlg();
 	void ShowDevTools();
@@ -334,6 +334,7 @@ public:
 	void ExitKillZombieProcess();
 	void OpenChFiler(LPCTSTR lpOpenPath);
 	void OpenChTaskMgr();
+	HWND p_mMessageWnd;
 
 	//{{AFX_VIRTUAL(CSazabi)
 public:
@@ -510,9 +511,9 @@ public:
 			HMODULE hMods = NULL;
 #ifndef _WIN64
 			hMods = ::GetModuleHandle(_T("NT0_DLL.DLL"));
-#else  //WIN64
+#else  // WIN64
 			hMods = ::GetModuleHandle(_T("NT0_DLL64.DLL"));
-#endif //WIN64
+#endif // WIN64
 			if (hMods)
 				m_VEcache = VE_THINAPP;
 			else
@@ -536,9 +537,9 @@ public:
 				HMODULE hMods = NULL;
 #ifndef _WIN64
 				hMods = ::GetModuleHandle(_T("VMToolsHook.DLL"));
-#else  //WIN64
+#else  // WIN64
 				hMods = ::GetModuleHandle(_T("VMToolsHook64.DLL"));
-#endif //WIN64
+#endif // WIN64
 				if (hMods)
 					m_tRDS = RDS_VMWARE;
 			}
@@ -570,7 +571,7 @@ public:
 	{
 		if (!ptrPath) return FALSE;
 		BOOL bFolderExists = FALSE;
-		//フォルダーの存在チェック
+		// フォルダーの存在チェック
 		if (::PathFileExists(ptrPath) && !::PathIsDirectory(ptrPath))
 		{
 			// 指定されたパスにファイルが存在、かつディレクトリでない
@@ -688,13 +689,13 @@ public:
 		CString strRet;
 		if (InVirtualEnvironment() != VE_THINAPP)
 			return strRet;
-		//現実的にファイルを保存する先のみに絞る。
+		// 現実的にファイルを保存する先のみに絞る。
 		CString strDesktopPath;
 		CString strPersonalPath;
 		CString strProfilePath;
 		CString strDrive;
 		TCHAR szFolder[1024] = {0};
-		//Desktop
+		// Desktop
 		memset(szFolder, 0x00, sizeof(szFolder));
 		if (::SHGetSpecialFolderPath(NULL, szFolder, CSIDL_DESKTOP, FALSE))
 		{
@@ -706,7 +707,7 @@ public:
 			}
 		}
 
-		//Personal
+		// Personal
 		memset(szFolder, 0x00, sizeof(szFolder));
 		if (::SHGetSpecialFolderPath(NULL, szFolder, CSIDL_PERSONAL, FALSE))
 		{
@@ -718,7 +719,7 @@ public:
 			}
 		}
 
-		//Profile
+		// Profile
 		memset(szFolder, 0x00, sizeof(szFolder));
 		if (::SHGetSpecialFolderPath(NULL, szFolder, CSIDL_PROFILE, FALSE))
 		{
@@ -729,18 +730,18 @@ public:
 				strProfilePath += _T("\\");
 			}
 		}
-		//Drive
+		// Drive
 		strDrive = GetDriveName(strFile);
 		strDrive.MakeLower();
 
-		//Pathがどの項目に該当するかチェック
+		// Pathがどの項目に該当するかチェック
 		TCHAR szBuffer[MAX_PATH] = {0};
 		CString strBuffer;
 		CString strTemp;
 		BOOL bFindSB = FALSE;
 		for (;;)
 		{
-			//Desktop
+			// Desktop
 			if (PathCommonPrefix(strDesktopPath, strFile, szBuffer))
 			{
 				strBuffer = szBuffer;
@@ -754,7 +755,7 @@ public:
 					break;
 				}
 			}
-			//Personal
+			// Personal
 			if (PathCommonPrefix(strPersonalPath, strFile, szBuffer))
 			{
 				strBuffer = szBuffer;
@@ -769,7 +770,7 @@ public:
 				}
 			}
 
-			//Profile
+			// Profile
 			if (PathCommonPrefix(strProfilePath, strFile, szBuffer))
 			{
 				strBuffer = szBuffer;
@@ -783,7 +784,7 @@ public:
 					break;
 				}
 			}
-			//Drive
+			// Drive
 			strTemp = strFile;
 			strTemp.MakeLower();
 			CString strDriveMac;
@@ -798,7 +799,7 @@ public:
 			}
 			else
 			{
-				//DosDeviceChk
+				// DosDeviceChk
 				CString strDiskPath;
 				CString strDosDrive;
 				strDosDrive = strDrive[0];
@@ -902,7 +903,7 @@ public:
 					if (!CreateProcess(NULL, (LPTSTR)(LPCTSTR)strCommand, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
 					{
 						SetLastError(NO_ERROR);
-						//Retry
+						// Retry
 						if (!CreateProcess(strTempPath, (LPTSTR)(LPCTSTR)strParam, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi))
 						{
 							SetLastError(NO_ERROR);
@@ -934,25 +935,25 @@ public:
 	BOOL m_bEnforceDeleteCache;
 	void DeleteCEFCache()
 	{
-		//CEFCacheを削除する。
+		// CEFCacheを削除する。
 		if (!m_strCEFCachePath.IsEmpty())
 		{
 			DeleteDirectory(m_strCEFCachePath, _T("*.*"));
 		}
 	}
-	//Windows10 1903環境で問題発生。対策コード2019-10-15
+	// Windows10 1903環境で問題発生。対策コード2019-10-15
 	BOOL DeleteFileFix(LPCTSTR ptrPath)
 	{
 		if (!ptrPath)
 			return FALSE;
 
-		//ファイルが存在しない。
+		// ファイルが存在しない。
 		if (!::PathFileExists(ptrPath))
 			return FALSE;
-		//Win32APIのDeleteFileをCall
-		//Windows 10 1903 VOSでは、削除されない場合がある。2019-10-18
+		// Win32APIのDeleteFileをCall
+		// Windows 10 1903 VOSでは、削除されない場合がある。2019-10-18
 		::DeleteFile(ptrPath);
-		//ファイルが存在しない＝削除された。
+		// ファイルが存在しない＝削除された。
 		if (!::PathFileExists(ptrPath))
 			return TRUE;
 
@@ -960,8 +961,8 @@ public:
 		strLog.Format(_T("##ChWin32API_DeleteFile FailBack: %s\n"), ptrPath);
 		::OutputDebugString(strLog);
 
-		//Windows 10 1903 VOSでは、削除されない場合がある。2019-10-18
-		//IFileOperationで消す。
+		// Windows 10 1903 VOSでは、削除されない場合がある。2019-10-18
+		// IFileOperationで消す。
 		BOOL bRet = FALSE;
 		CStringW strDeleteFilePath(ptrPath);
 		HRESULT hr = {0};
@@ -984,7 +985,7 @@ public:
 					if (SUCCEEDED(hr))
 					{
 						bRet = TRUE;
-						//削除成功したのに存在している。。。
+						// 削除成功したのに存在している。。。
 						if (::PathFileExists(ptrPath))
 						{
 							strLog.Format(_T("##ChWin32API_DeleteFile(FAILED) FailBack: %s\n"), ptrPath);
@@ -1001,6 +1002,74 @@ public:
 		}
 		return bRet;
 	}
+
+	//int id = 0;
+
+	//// static
+	//HWND CreateMessageWindow(HINSTANCE hInstance)
+	//{
+	//	id = RegisterWindowMessage(_T("Client_MessageWindow"));
+	//	WNDCLASSEX wc = {0};
+	//	wc.cbSize = sizeof(wc);
+	//	wc.lpfnWndProc = MessageWndProc;
+	//	wc.hInstance = hInstance;
+	//	wc.lpszClassName = _T("Client_MessageWindow");
+	//	RegisterClassEx(&wc);
+
+	//	return CreateWindow(_T("Client_MessageWindow"), 0, 0, 0, 0, 0, 0, HWND_MESSAGE, 0, hInstance,
+	//			    0);
+	//}
+
+
+	//static LRESULT CALLBACK
+	//MessageWndProc(HWND hWnd,
+	//	       UINT message,
+	//	       WPARAM wParam,
+	//	       LPARAM lParam)
+	//{
+	//	//// Execute the task.
+	//	// CefTask* task = reinterpret_cast<CefTask*>(wParam);
+	//	// task->Execute();
+
+	//	//// Release the reference added in PostTaskInternal. This will likely result
+	//	//// in |task| being deleted.
+	//	// task->Release();
+	//	CSazabi* self =
+	//	    reinterpret_cast<CSazabi*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+
+	//	TRACE(_T("message[%d]\n"), message);
+	//	if (self && self->id == message)
+	//	{
+	//		auto b = "";
+	//	}
+	//	switch (message)
+	//	{
+	//	case WM_NCDESTROY:
+	//		break;
+	//	}
+
+	//	return DefWindowProc(hWnd, message, wParam, lParam);
+	//}
+
+	// BOOL PreTranslateMessage(MSG* pMsg)
+	//{
+	//	// Output TRACE logs for debug
+	//	TCHAR classname[32] = {0};
+	//	if (pMsg->hwnd)
+	//	{
+	//		::GetClassName(pMsg->hwnd, classname, 31);
+	//		TRACE(_T("PreTranslateMessage[0x%08x] %s (0x%x)\n"), pMsg->hwnd, classname, pMsg->message);
+	//	}
+	//
+	//	// TODO: Add your specialized code here and/or call the base class
+	//	return CWinApp::PreTranslateMessage(pMsg);
+	//}
+
+	//static UINT MyThreadFunction(LPVOID lpParam)
+	//{
+	//	CefDoMessageLoopWork();
+	//	return 0;
+	//} 
 
 	DECLARE_MESSAGE_MAP()
 };

@@ -21,11 +21,10 @@ public:
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override { return this; }
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line);
 	virtual void OnContextInitialized() override;
-
 	
 	virtual void OnScheduleMessagePumpWork(int64_t delay_ms) override
 	{
-		//// when delay <= 0 queue the Task up for execution on the UI thread.
+		//// when delay <= 0 queue the Task up for execution on the UI rthead.
 		if (delay_ms <= 0)
 		{
 			// Update the timer to execute almost immediately

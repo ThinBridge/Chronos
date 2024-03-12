@@ -41,6 +41,8 @@
 #pragma warning(push, 0)
 #pragma warning(disable : 26812)
 
+CWnd* ClientHandler::myMainWnd = NULL;
+
 ClientHandler::ClientHandler()
 {
 	m_bDownLoadStartFlg = FALSE;
@@ -106,6 +108,8 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 				if (pChild->m_hWnd == hWindow)
 					((CChildView*)pChild)->SetBrowserPtr(nBrowserId, browser);
 			}
+			ClientHandler::myMainWnd = theApp.m_pMainWnd;
+			auto hHook = SetWindowsHookEx(WH_GETMESSAGE, (HOOKPROC)MessageProc, NULL, GetCurrentThreadId());
 		}
 	}
 	//// assign new browser

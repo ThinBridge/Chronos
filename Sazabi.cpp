@@ -2203,7 +2203,7 @@ BOOL CSazabi::PumpMessage()
 		}
 
 		// Output TRACE logs for debug
-		if (::PeekMessage(&msg, NULL, WM_KEYFIRST, WM_KEYLAST, PM_NOREMOVE))
+		if (::PeekMessage(&msg, NULL, NULL, NULL, PM_NOREMOVE))
 		{
 			if (msg.hwnd)
 			{
@@ -2260,6 +2260,15 @@ BOOL CSazabi::PumpMessage()
 						}
 					}
 				}
+				//DWORD dwThreadIdArray[100];
+				//HANDLE hThreadArray[100];
+				//auto a = AfxBeginThread(
+				//    MyThreadFunction,	  // thread function name
+				//    0,
+				//    THREAD_PRIORITY_NORMAL,			  // use default creation flags
+				//    0, 
+				//    0, 
+				//    0); // returns the thread identifier 
 				CefDoMessageLoopWork();
 			}
 		}
@@ -4147,6 +4156,7 @@ void CSazabi::HideRebar(CWnd* pWnd)
 	}
 	pFrame->ShowWindow(SW_MAXIMIZE);
 }
+
 void CSazabi::InitializeCef()
 {
 	PROC_TIME(InitializeCef)
@@ -4268,6 +4278,11 @@ void CSazabi::InitializeCef()
 	}
 
 	m_bCEFInitialized = CefInitialize(mainargs, settings, m_cefApp.get(), sandbox_info);
+	//HINSTANCE hInstance = ::GetModuleHandle(nullptr);
+	//p_mMessageWnd = CreateMessageWindow(hInstance);
+	//::SetWindowLongPtr(p_mMessageWnd, GWLP_USERDATA, (LONG_PTR)this);
+	//HACCEL hAccelTable =
+	//    LoadAccelerators(this->m_hInstance, MAKEINTRESOURCE(IDR_MAINFRAME));
 }
 
 /*
