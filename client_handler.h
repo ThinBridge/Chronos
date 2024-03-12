@@ -317,13 +317,11 @@ public:
 			{
 				TCHAR classname[32] = {0};
 				::GetClassName(msg->hwnd, classname, 31);
-				TRACE(_T("PumpMessage[0x%08x] %s (0x%x)\n"), msg->hwnd, classname, msg->message);
+				TRACE(_T("MessageProc[0x%08x] %s (0x%x)\n"), msg->hwnd, classname, msg->message);
+				CWnd* wnd = myMainWnd;
+				wnd->PostMessage(msg->message, msg->wParam, msg->lParam);
 			}
-			CWnd* wnd = myMainWnd;
-			TRACE("MessageProc: [%x]", msg->message);
-			wnd->PostMessage(msg->message, msg->wParam, msg->lParam);
 		}
-		//auto a = "called";
 		return CallNextHookEx(NULL, code, wParam, lParam);
 	}
 
