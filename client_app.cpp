@@ -131,6 +131,15 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	}
 }
 
+void ClientApp::OnScheduleMessagePumpWork(int64_t delay_ms) {
+	if (!theApp.m_pMainWnd)
+		return;
+	if (!theApp.SafeWnd(theApp.m_pMainWnd->m_hWnd))
+		return;
+
+	theApp.m_pMainWnd->PostMessage(WM_DO_CEF_WORK, NULL, static_cast<LPARAM>(delay_ms));
+}
+
 void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
 						int http_status_code,
 						CefRefPtr<CefImage> image)
