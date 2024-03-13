@@ -137,7 +137,7 @@ void ClientApp::OnScheduleMessagePumpWork(int64_t delay_ms) {
 	if (!theApp.SafeWnd(theApp.m_pMainWnd->m_hWnd))
 		return;
 
-	theApp.m_pMainWnd->PostMessage(WM_DO_CEF_WORK, NULL, static_cast<LPARAM>(delay_ms));
+	theApp.m_pMainWnd->PostMessage(WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delay_ms));
 }
 
 void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,

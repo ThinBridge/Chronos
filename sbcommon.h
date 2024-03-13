@@ -41,13 +41,13 @@ private:
 
 #pragma warning(disable : 4996)
 
-#define WM_NEWINSTANCE WM_USER + 16
-#define WM_ACTIVE_HEAD WM_USER + 40
-#define WM_ACTIVE_TAIL WM_USER + 44
-#define WM_SAVE_WND_M  WM_USER + 48
-#define WM_AUTH_DBL    WM_USER + 56
-#define WM_ACTIVE_FRM  WM_USER + 60
-#define WM_DO_CEF_WORK WM_USER + 61
+#define WM_NEWINSTANCE       WM_USER + 16
+#define WM_ACTIVE_HEAD       WM_USER + 40
+#define WM_ACTIVE_TAIL       WM_USER + 44
+#define WM_SAVE_WND_M        WM_USER + 48
+#define WM_AUTH_DBL          WM_USER + 56
+#define WM_ACTIVE_FRM        WM_USER + 60
+#define WM_SCHEDULE_CEF_WORK WM_USER + 61
 
 #define WND_TYPE_DEV_TOOLS 324929
 

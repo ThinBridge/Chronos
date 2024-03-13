@@ -50,6 +50,8 @@ CSazabi::CSazabi()
 	m_hwndTaskDlg = NULL;
 	m_bTabEnable_Init = FALSE;
 	m_bShutdownFlg = FALSE;
+	m_nCefMessageLoopWorkerTimerId = 0;
+	m_pCefMessageLoopWorker = NULL;
 	m_ScaleDPI = 0.0;
 	m_IsSGMode = TRUE;
 	m_bFirstInstance = FALSE;
@@ -584,6 +586,8 @@ BOOL CSazabi::InitInstance()
 	::GetWindowThreadProcessId(pFrame->m_hWnd, &m_dwProcessId);
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
+	m_nCefMessageLoopWorkerTimerId = 1;
+	m_pCefMessageLoopWorker = new SazabiCefMassageLoopWorker(m_pMainWnd->m_hWnd, m_nCefMessageLoopWorkerTimerId);
 	return TRUE;
 }
 
@@ -1572,6 +1576,11 @@ void CSazabi::UnInitializeObjects()
 	{
 		m_pLogDisp->m_bStop = TRUE;
 	}
+	if (m_pCefMessageLoopWorker)
+	{
+		delete m_pCefMessageLoopWorker;
+		m_pCefMessageLoopWorker = NULL;
+	}
 }
 int CSazabi::ExitInstance()
 {
@@ -2212,9 +2221,9 @@ BOOL CSazabi::PumpMessage()
 				//KEYボード系のイベント発生時にEditコントロールなどでは、CefDoMessageLoopWorkをCallしなければ問題ないことが
 				//判明したため、フィルタリングする。multi_threaded_message_loopを有効にすれば問題ないことも判明したが
 				//キーボード、マウス系のイベントがBroViewやBroFrameに飛んでこない弊害あり
-				if (::PeekMessage(&msg, NULL, WM_KEYFIRST, WM_KEYLAST, PM_NOREMOVE))
+				if (::PeekMessage(&msg, NULL, NULL, NULL, PM_NOREMOVE))
 				{
-					if (msg.hwnd)
+					if (msg.hwnd && msg.message >= WM_KEYFIRST && msg.message <= WM_KEYLAST)
 					{
 						::GetClassName(msg.hwnd, classname, 31);
 						TRACE(_T("PumpMessage[0x%08x] %s (0x%x)\n"), msg.hwnd, classname, msg.message);
@@ -2250,7 +2259,22 @@ BOOL CSazabi::PumpMessage()
 						}
 					}
 				}
-				CefDoMessageLoopWork();
+
+				if (msg.message == WM_SCHEDULE_CEF_WORK)
+				{
+					int64_t delay_ms = msg.lParam;
+					m_pCefMessageLoopWorker->OnScheduleWork(delay_ms);
+				}
+				else if (msg.message == WM_TIMER && 
+				         msg.hwnd == m_pMainWnd->m_hWnd && 
+				         msg.wParam == m_nCefMessageLoopWorkerTimerId)
+				{
+					m_pCefMessageLoopWorker->OnTimerTimeout();
+				}
+				else
+				{
+					m_pCefMessageLoopWorker->DoWork();
+				}
 			}
 		}
 		return CWinApp::PumpMessage();
