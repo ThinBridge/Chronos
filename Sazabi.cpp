@@ -4306,7 +4306,14 @@ void CSazabi::UnInitializeCef()
 		m_bCEFInitialized = FALSE;
 		m_cefApp = nullptr;
 		if (!m_bMultiThreadedMessageLoop)
-			CefDoMessageLoopWork();
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				CefDoMessageLoopWork();
+				// Sleep to allow the CEF proc to do work.
+				Sleep(50);
+			}
+		}
 		// shutdown CEF
 		CefShutdown();
 	}
