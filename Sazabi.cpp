@@ -2262,8 +2262,8 @@ BOOL CSazabi::PumpMessage()
 
 				if (msg.message == WM_SCHEDULE_CEF_WORK)
 				{
-					int64_t delay_ms = msg.lParam;
-					m_pCefMessageLoopWorker->OnScheduleWork(delay_ms);
+					int64_t delayMs = msg.lParam;
+					m_pCefMessageLoopWorker->OnScheduleWork(delayMs);
 				}
 				else if (msg.message == WM_TIMER && 
 				         msg.hwnd == m_pMainWnd->m_hWnd && 
