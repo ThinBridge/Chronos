@@ -8,6 +8,7 @@
 #include "BroFrame.h"
 #include "MyComboBoxEx.h"
 #include "APIHook.h"
+#include "MessageLoopWorker.h"
 
 class CMainFrame : public CFrameWnd
 {
@@ -19,7 +20,6 @@ public:
 	BOOL m_bGlobalMsgFlg;
 	BOOL m_bGlobalMsgFlgMem;
 	BOOL m_bCleanUPFinish;
-	INT_PTR m_iMessageLoopTimerID;
 	void CleanUP();
 
 protected:
@@ -29,6 +29,7 @@ public:
 	//{{AFX_VIRTUAL(CMainFrame)
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	//}}AFX_VIRTUAL
 	void AppExitExBT(CWnd* ptrW);
 	void OnAppExitEx();
@@ -105,8 +106,10 @@ public:
 	INT_PTR m_iTimerID;
 	INT_PTR m_iRecoveryTimerID;
 	INT_PTR m_iTabTimerID;
+	INT_PTR m_iMessageLoopTimerID;
 	BOOL m_bTabTimerProcLock;
 	BOOL ParseCommandLineAndNewWnd(CString strCommandLine);
 	void InitFunc(CWnd* pFrame);
 	void HideRebar(CBrowserFrame* pFrame);
+	MessageLoopWorker* m_pMessageLoopWorker;
 };

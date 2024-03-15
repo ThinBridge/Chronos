@@ -50,7 +50,6 @@ CSazabi::CSazabi()
 	m_hwndTaskDlg = NULL;
 	m_bTabEnable_Init = FALSE;
 	m_bShutdownFlg = FALSE;
-	m_pMessageLoopWorker = NULL;
 	m_ScaleDPI = 0.0;
 	m_IsSGMode = TRUE;
 	m_bFirstInstance = FALSE;
@@ -585,7 +584,6 @@ BOOL CSazabi::InitInstance()
 	::GetWindowThreadProcessId(pFrame->m_hWnd, &m_dwProcessId);
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
-	m_pMessageLoopWorker = new MassageLoopWorker(pFrame->m_hWnd, pFrame->m_iMessageLoopTimerID);
 	return TRUE;
 }
 
@@ -1574,11 +1572,6 @@ void CSazabi::UnInitializeObjects()
 	{
 		m_pLogDisp->m_bStop = TRUE;
 	}
-	if (m_pMessageLoopWorker)
-	{
-		delete m_pMessageLoopWorker;
-		m_pMessageLoopWorker = NULL;
-	}
 }
 int CSazabi::ExitInstance()
 {
@@ -2256,19 +2249,7 @@ BOOL CSazabi::PumpMessage()
 							return CWinApp::PumpMessage();
 						}
 					}
-					if (msg.message == WM_SCHEDULE_CEF_WORK)
-					{
-						int64_t delayMs = msg.lParam;
-						m_pMessageLoopWorker->OnScheduleWork(delayMs);
-					}
-					else if (msg.message == WM_TIMER &&
-						 msg.hwnd == m_pMainWnd->m_hWnd &&
-						 msg.wParam == ((CMainFrame*)m_pMainWnd)->m_iMessageLoopTimerID)
-					{
-						m_pMessageLoopWorker->OnTimerTimeout();
-					}
 				}
-				m_pMessageLoopWorker->DoWork();
 			}
 		}
 		return CWinApp::PumpMessage();

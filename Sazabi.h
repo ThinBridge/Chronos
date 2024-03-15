@@ -20,7 +20,6 @@
 #include "sbcommon.h"
 #include "DlgSetting.h"
 #include "DlgDebugWnd.h"
-#include "MessageLoopWorker.h"
 #include "include\cef_parser.h"
 /////////////////////////////////////////////////////////////////////////////
 // CSazabi:
@@ -85,7 +84,6 @@ public:
 	HWND GetActiveBFramePtrHWND();
 	BOOL m_bTabEnable_Init;
 	BOOL m_bShutdownFlg;
-	MassageLoopWorker* m_pMessageLoopWorker;
 
 	//setting//////////////////////////
 	AppSettings m_AppSettings;
