@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "MessageLoopWorker.h"
 
-MassageLoopWorker::MassageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerID)
+MessageLoopWorker::MessageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerID)
 {
 	m_bTimerPending_ = false;
 	m_bIsActive_ = false;
@@ -15,12 +15,12 @@ MassageLoopWorker::MassageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerID)
 	m_hWnd_ = hTargetWnd;
 }
 
-MassageLoopWorker::~MassageLoopWorker()
+MessageLoopWorker::~MessageLoopWorker()
 {
 	KillTimer();
 }
 
-void MassageLoopWorker::OnScheduleWork(int64_t delayMs)
+void MessageLoopWorker::OnScheduleWork(int64_t delayMs)
 {
 	if (delayMs == m_nTimerDelayPlaceholder && m_bTimerPending_)
 	{
@@ -47,19 +47,19 @@ void MassageLoopWorker::OnScheduleWork(int64_t delayMs)
 	}
 }
 
-void MassageLoopWorker::OnTimerTimeout()
+void MessageLoopWorker::OnTimerTimeout()
 {
 	KillTimer();
 	DoWork();
 }
 
-void MassageLoopWorker::SetTimer(int64_t delayMs)
+void MessageLoopWorker::SetTimer(int64_t delayMs)
 {
 	m_bTimerPending_ = true;
 	::SetTimer(m_hWnd_, m_nTimerID, static_cast<UINT>(delayMs), nullptr);
 }
 
-void MassageLoopWorker::KillTimer()
+void MessageLoopWorker::KillTimer()
 {
 	if (m_bTimerPending_)
 	{
@@ -68,7 +68,7 @@ void MassageLoopWorker::KillTimer()
 	}
 }
 
-void MassageLoopWorker::DoWork()
+void MessageLoopWorker::DoWork()
 {
 	if (m_bIsActive_)
 	{
