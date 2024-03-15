@@ -20,5 +20,4 @@ private:
 
 	void SetTimer(int64_t delayMs);
 	void KillTimer();
-	bool PerformMessageLoopWork();
 };

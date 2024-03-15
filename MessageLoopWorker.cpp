@@ -53,16 +53,6 @@ void MassageLoopWorker::KillTimer()
 
 void MassageLoopWorker::DoWork()
 {
-	const bool was_reentrant = PerformMessageLoopWork();
-	if (was_reentrant)
-	{
-		// Execute the remaining work as soon as possible.
-		PostMessage(m_hWnd_, WM_SCHEDULE_CEF_WORK, NULL, 0);
-	}
-}
-
-bool MassageLoopWorker::PerformMessageLoopWork()
-{
 	if (m_bIsActive_)
 	{
 		// When CefDoMessageLoopWork() is called there may be various callbacks
@@ -70,16 +60,22 @@ bool MassageLoopWorker::PerformMessageLoopWork()
 		// method. If re-entrancy is detected we must repost a request again to the
 		// owner thread to ensure that the discarded call is executed in the future.
 		m_bReentrancyDetected_ = true;
-		return false;
+	}
+	else
+	{
+		m_bReentrancyDetected_ = false;
+
+		m_bIsActive_ = true;
+		CefDoMessageLoopWork();
+		m_bIsActive_ = false;
+		
+		// Note: |m_bReentrancy_detected_| may have changed due to re-entrant calls to 
+		// this method.
 	}
 
-	m_bReentrancyDetected_ = false;
-
-	m_bIsActive_ = true;
-	CefDoMessageLoopWork();
-	m_bIsActive_ = false;
-
-	// |m_bReentrancy_detected_| may have changed due to re-entrant calls to this
-	// method.
-	return m_bReentrancyDetected_;
+	if (m_bReentrancyDetected_)
+	{
+		// Execute the remaining work as soon as possible.
+		PostMessage(m_hWnd_, WM_SCHEDULE_CEF_WORK, NULL, 0);
+	}
 }
