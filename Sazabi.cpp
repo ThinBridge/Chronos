@@ -2201,57 +2201,6 @@ BOOL CSazabi::PumpMessage()
 			UnInitializeCef();
 			return FALSE;
 		}
-
-		//SZB
-		if (m_bCEFInitialized)
-		{
-			if (!m_bMultiThreadedMessageLoop)
-			{
-				//Windows 10 (2004)以降に搭載されているMS-IMEでアドレスバーでEnterキーが効かない問題が発生
-				//IMEを「以前のバージョンのMicrosoft IMEを使う」にすると問題なくなるが
-				//KEYボード系のイベント発生時にEditコントロールなどでは、CefDoMessageLoopWorkをCallしなければ問題ないことが
-				//判明したため、フィルタリングする。multi_threaded_message_loopを有効にすれば問題ないことも判明したが
-				//キーボード、マウス系のイベントがBroViewやBroFrameに飛んでこない弊害あり
-				if (::PeekMessage(&msg, NULL, NULL, NULL, PM_NOREMOVE))
-				{
-					if (msg.hwnd && msg.message >= WM_KEYFIRST && msg.message <= WM_KEYLAST)
-					{
-						::GetClassName(msg.hwnd, classname, 31);
-						TRACE(_T("PumpMessage[0x%08x] %s (0x%x)\n"), msg.hwnd, classname, msg.message);
-						if (_tcscmp(classname, WC_EDIT) == 0 ||
-						    _tcscmp(classname, WC_COMBOBOXEX) == 0 ||
-						    _tcscmp(classname, WC_COMBOBOX) == 0 ||
-						    _tcscmp(classname, WC_BUTTON) == 0 ||
-						    _tcscmp(classname, WC_STATIC) == 0 ||
-						    _tcscmp(classname, _T("#32770")) == 0 ||
-						    _tcscmp(classname, REBARCLASSNAME) == 0 ||
-						    _tcscmp(classname, WC_TABCONTROL) == 0 ||
-						    _tcscmp(classname, WC_TREEVIEW) == 0 ||
-						    _tcscmp(classname, WC_LISTVIEW) == 0 ||
-						    _tcscmp(classname, WC_LISTBOX) == 0
-						    //|| _tcscmp(classname, WC_HEADER) == 0
-						    //|| _tcscmp(classname, TOOLBARCLASSNAME) == 0
-						    //|| _tcscmp(classname, TOOLTIPS_CLASS) == 0
-						    //|| _tcscmp(classname, STATUSCLASSNAME) == 0
-						    //|| _tcscmp(classname, TRACKBAR_CLASS) == 0
-						    //|| _tcscmp(classname, UPDOWN_CLASS) == 0
-						    //|| _tcscmp(classname, PROGRESS_CLASS) == 0
-						    //|| _tcscmp(classname, HOTKEY_CLASS) == 0
-						    //|| _tcscmp(classname, ANIMATE_CLASS) == 0
-						    //|| _tcscmp(classname, MONTHCAL_CLASS) == 0
-						    //|| _tcscmp(classname, DATETIMEPICK_CLASS) == 0
-						    //|| _tcscmp(classname, WC_IPADDRESS) == 0
-						    //|| _tcscmp(classname, WC_PAGESCROLLER) == 0
-						    //|| _tcscmp(classname, WC_NATIVEFONTCTL) == 0
-						    //|| _tcscmp(classname, WC_SCROLLBAR) == 0
-						)
-						{
-							return CWinApp::PumpMessage();
-						}
-					}
-				}
-			}
-		}
 		return CWinApp::PumpMessage();
 	}
 	__except (EXCEPTION_EXECUTE_HANDLER)
