@@ -2865,6 +2865,7 @@ BOOL CMainFrame::PreTranslateMessage(MSG* pMsg) {
 					m_pMessageLoopWorker->OnScheduleWork(delayMs);
 				}
 			}
+			return TRUE;
 		}
 	}
 	return CFrameWnd::PreTranslateMessage(pMsg);
