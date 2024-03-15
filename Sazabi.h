@@ -85,7 +85,7 @@ public:
 	HWND GetActiveBFramePtrHWND();
 	BOOL m_bTabEnable_Init;
 	BOOL m_bShutdownFlg;
-	MassageLoopWorker* m_pCefMessageLoopWorker;
+	MassageLoopWorker* m_pMessageLoopWorker;
 
 	//setting//////////////////////////
 	AppSettings m_AppSettings;
