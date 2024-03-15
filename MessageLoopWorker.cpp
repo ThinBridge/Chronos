@@ -17,6 +17,13 @@ MassageLoopWorker::~MassageLoopWorker()
 
 void MassageLoopWorker::OnScheduleWork(int64_t delayMs)
 {
+	if (delayMs == m_nTimerDelayPlaceholder && m_bTimerPending_)
+	{
+		// Don't set the maximum timer requested from DoWork() if a timer event is
+		// currently pending.
+		return;
+	}
+
 	if (delayMs <= 0)
 	{
 		DoWork();
@@ -26,6 +33,11 @@ void MassageLoopWorker::OnScheduleWork(int64_t delayMs)
 		// If | delayMs | is > 0 then the call should be scheduled to happen after the specified delay 
 		// and any currently pending scheduled call should be cancelled. 
 		KillTimer();
+
+		if (delayMs > m_nMaxTimerDelay)
+		{
+			delayMs = m_nMaxTimerDelay;
+		}
 		SetTimer(delayMs);
 	}
 }
@@ -77,5 +89,9 @@ void MassageLoopWorker::DoWork()
 	{
 		// Execute the remaining work as soon as possible.
 		PostMessage(m_hWnd_, WM_SCHEDULE_CEF_WORK, NULL, 0);
+	}
+	else if (!m_bTimerPending_)
+	{
+		PostMessage(m_hWnd_, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(m_nTimerDelayPlaceholder));
 	}
 }
