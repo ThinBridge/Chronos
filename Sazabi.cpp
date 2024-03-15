@@ -2256,23 +2256,19 @@ BOOL CSazabi::PumpMessage()
 							return CWinApp::PumpMessage();
 						}
 					}
+					if (msg.message == WM_SCHEDULE_CEF_WORK)
+					{
+						int64_t delayMs = msg.lParam;
+						m_pMessageLoopWorker->OnScheduleWork(delayMs);
+					}
+					else if (msg.message == WM_TIMER &&
+						 msg.hwnd == m_pMainWnd->m_hWnd &&
+						 msg.wParam == ((CMainFrame*)m_pMainWnd)->m_iMessageLoopTimerID)
+					{
+						m_pMessageLoopWorker->OnTimerTimeout();
+					}
 				}
-
-				if (msg.message == WM_SCHEDULE_CEF_WORK)
-				{
-					int64_t delayMs = msg.lParam;
-					m_pMessageLoopWorker->OnScheduleWork(delayMs);
-				}
-				else if (msg.message == WM_TIMER && 
-				         msg.hwnd == m_pMainWnd->m_hWnd && 
-				         msg.wParam == ((CMainFrame*)m_pMainWnd)->m_iMessageLoopTimerID)
-				{
-					m_pMessageLoopWorker->OnTimerTimeout();
-				}
-				else
-				{
-					m_pMessageLoopWorker->DoWork();
-				}
+				m_pMessageLoopWorker->DoWork();
 			}
 		}
 		return CWinApp::PumpMessage();
