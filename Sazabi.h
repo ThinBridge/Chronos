@@ -20,7 +20,7 @@
 #include "sbcommon.h"
 #include "DlgSetting.h"
 #include "DlgDebugWnd.h"
-#include "SazabiCefMessageLoopWorker.h"
+#include "MessageLoopWorker.h"
 #include "include\cef_parser.h"
 /////////////////////////////////////////////////////////////////////////////
 // CSazabi:
@@ -85,7 +85,7 @@ public:
 	HWND GetActiveBFramePtrHWND();
 	BOOL m_bTabEnable_Init;
 	BOOL m_bShutdownFlg;
-	SazabiCefMassageLoopWorker* m_pCefMessageLoopWorker;
+	MassageLoopWorker* m_pCefMessageLoopWorker;
 	UINT_PTR m_nCefMessageLoopWorkerTimerId;
 
 	//setting//////////////////////////

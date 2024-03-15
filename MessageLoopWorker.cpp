@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "SazabiCefMessageLoopWorker.h"
+#include "MessageLoopWorker.h"
 
-SazabiCefMassageLoopWorker::SazabiCefMassageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerID)
+MassageLoopWorker::MassageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerID)
 {
 	m_bTimerPending_ = false;
 	m_bIsActive_ = false;
@@ -10,12 +10,12 @@ SazabiCefMassageLoopWorker::SazabiCefMassageLoopWorker(HWND hTargetWnd, UINT_PTR
 	m_hWnd_ = hTargetWnd;
 }
 
-SazabiCefMassageLoopWorker::~SazabiCefMassageLoopWorker()
+MassageLoopWorker::~MassageLoopWorker()
 {
 	KillTimer();
 }
 
-void SazabiCefMassageLoopWorker::OnScheduleWork(int64_t delayMs)
+void MassageLoopWorker::OnScheduleWork(int64_t delayMs)
 {
 	if (delayMs <= 0)
 	{
@@ -30,19 +30,19 @@ void SazabiCefMassageLoopWorker::OnScheduleWork(int64_t delayMs)
 	}
 }
 
-void SazabiCefMassageLoopWorker::OnTimerTimeout()
+void MassageLoopWorker::OnTimerTimeout()
 {
 	KillTimer();
 	DoWork();
 }
 
-void SazabiCefMassageLoopWorker::SetTimer(int64_t delayMs)
+void MassageLoopWorker::SetTimer(int64_t delayMs)
 {
 	m_bTimerPending_ = true;
 	::SetTimer(m_hWnd_, m_nTimerID, static_cast<UINT>(delayMs), nullptr);
 }
 
-void SazabiCefMassageLoopWorker::KillTimer()
+void MassageLoopWorker::KillTimer()
 {
 	if (m_bTimerPending_)
 	{
@@ -51,7 +51,7 @@ void SazabiCefMassageLoopWorker::KillTimer()
 	}
 }
 
-void SazabiCefMassageLoopWorker::DoWork()
+void MassageLoopWorker::DoWork()
 {
 	const bool was_reentrant = PerformMessageLoopWork();
 	if (was_reentrant)
@@ -61,7 +61,7 @@ void SazabiCefMassageLoopWorker::DoWork()
 	}
 }
 
-bool SazabiCefMassageLoopWorker::PerformMessageLoopWork()
+bool MassageLoopWorker::PerformMessageLoopWork()
 {
 	if (m_bIsActive_)
 	{

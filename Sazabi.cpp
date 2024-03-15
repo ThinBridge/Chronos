@@ -587,7 +587,7 @@ BOOL CSazabi::InitInstance()
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
 	m_nCefMessageLoopWorkerTimerId = 1;
-	m_pCefMessageLoopWorker = new SazabiCefMassageLoopWorker(m_pMainWnd->m_hWnd, m_nCefMessageLoopWorkerTimerId);
+	m_pCefMessageLoopWorker = new MassageLoopWorker(m_pMainWnd->m_hWnd, m_nCefMessageLoopWorkerTimerId);
 	return TRUE;
 }
 

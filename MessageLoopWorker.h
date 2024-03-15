@@ -1,13 +1,13 @@
 #pragma once
 #include "sbcommon.h"
 
-class SazabiCefMassageLoopWorker
+class MassageLoopWorker
 {
 public:
 	UINT_PTR m_nTimerID;
 
-	SazabiCefMassageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerId);
-	~SazabiCefMassageLoopWorker();
+	MassageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerId);
+	~MassageLoopWorker();
 	void OnScheduleWork(int64_t delayMs);
 	void OnTimerTimeout();
 	void DoWork();
