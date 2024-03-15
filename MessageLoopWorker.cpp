@@ -1,3 +1,8 @@
+// This class is based on CEF's main_message_loop_external_pump_win.cc.
+// https://github.com/chromiumembedded/cef/blob/master/tests/shared/browser/main_message_loop_external_pump_win.cc
+// main_message_loop_external_pump_win.cc is governed by a BSD-style license.
+// https://github.com/chromiumembedded/cef/blob/master/LICENSE.txt
+
 #include "stdafx.h"
 #include "MessageLoopWorker.h"
 
