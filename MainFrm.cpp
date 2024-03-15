@@ -43,6 +43,7 @@ CMainFrame::CMainFrame()
 	m_pPrevActiveWindow = NULL;
 	m_iTabTimerID = 0;
 	m_bTabTimerProcLock = FALSE;
+	m_iMessageLoopTimerID = 0;
 }
 
 CMainFrame::~CMainFrame()
@@ -167,7 +168,6 @@ void CMainFrame::View_InitOK()
 			m_iRecoveryTimerID = (INT_PTR)this + 40;
 			this->SetTimer(m_iRecoveryTimerID, 15 * 1000, 0);
 		}
-
 		if (theApp.m_bTabEnable_Init)
 		{
 			m_bTabTimerProcLock = FALSE;
@@ -176,6 +176,10 @@ void CMainFrame::View_InitOK()
 				m_iTabTimerID = (INT_PTR)this + 48;
 				this->SetTimer(m_iTabTimerID, 5 * 1000, 0);
 			}
+		}
+		if (!m_iMessageLoopTimerID)
+		{
+			m_iMessageLoopTimerID = (INT_PTR)this + 64;
 		}
 	}
 	catch (...)
@@ -724,13 +728,17 @@ void CMainFrame::CleanUP()
 			this->KillTimer(m_iRecoveryTimerID);
 			m_iRecoveryTimerID = 0;
 		}
-
 		if (m_iTabTimerID)
 		{
 			this->KillTimer(m_iTabTimerID);
 			m_iTabTimerID = 0;
 			m_bTabTimerProcLock = FALSE;
 		}
+		if (m_iMessageLoopTimerID)
+		{
+			m_iMessageLoopTimerID = 0;
+		}
+		
 		//2重起動を許可する。終了中のため。
 		this->SetWindowText(theApp.m_strThisAppName);
 

@@ -19,6 +19,7 @@ public:
 	BOOL m_bGlobalMsgFlg;
 	BOOL m_bGlobalMsgFlgMem;
 	BOOL m_bCleanUPFinish;
+	INT_PTR m_iMessageLoopTimerID;
 	void CleanUP();
 
 protected:

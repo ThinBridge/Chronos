@@ -86,7 +86,6 @@ public:
 	BOOL m_bTabEnable_Init;
 	BOOL m_bShutdownFlg;
 	MassageLoopWorker* m_pCefMessageLoopWorker;
-	UINT_PTR m_nCefMessageLoopWorkerTimerId;
 
 	//setting//////////////////////////
 	AppSettings m_AppSettings;
