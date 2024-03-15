@@ -926,12 +926,9 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 	}
 	else if (m_iMessageLoopTimerID == nIDEvent)
 	{
-		if (theApp.m_bCEFInitialized)
+		if (theApp.m_bCEFInitialized && !theApp.m_bMultiThreadedMessageLoop)
 		{
-			if (!theApp.m_bMultiThreadedMessageLoop)
-			{
-				m_pMessageLoopWorker->OnTimerTimeout();
-			}
+			m_pMessageLoopWorker->OnTimerTimeout();
 		}
 	}
 	CFrameWnd::OnTimer(nIDEvent);
@@ -2852,21 +2849,16 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 	afxGlobalData.SetMenuFont(&lf, true);
 }
 
-BOOL CMainFrame::PreTranslateMessage(MSG* pMsg) {
-	if (pMsg)
+BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
+{
+	if (pMsg && pMsg->message == WM_SCHEDULE_CEF_WORK)
 	{
-		if (pMsg->message == WM_SCHEDULE_CEF_WORK)
+		if (theApp.m_bCEFInitialized && !theApp.m_bMultiThreadedMessageLoop)
 		{
-			if (theApp.m_bCEFInitialized)
-			{
-				if (!theApp.m_bMultiThreadedMessageLoop)
-				{
-					int64_t delayMs = pMsg->lParam;
-					m_pMessageLoopWorker->OnScheduleWork(delayMs);
-				}
-			}
-			return TRUE;
+			int64_t delayMs = pMsg->lParam;
+			m_pMessageLoopWorker->OnScheduleWork(delayMs);
 		}
+		return TRUE;
 	}
 	return CFrameWnd::PreTranslateMessage(pMsg);
 }
