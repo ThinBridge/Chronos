@@ -744,6 +744,11 @@ void CMainFrame::CleanUP()
 		{
 			m_iMessageLoopTimerID = 0;
 		}
+		if (m_pMessageLoopWorker)
+		{
+			delete (m_pMessageLoopWorker);
+			m_pMessageLoopWorker = NULL;
+		}
 		
 		//2重起動を許可する。終了中のため。
 		this->SetWindowText(theApp.m_strThisAppName);
