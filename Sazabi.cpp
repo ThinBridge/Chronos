@@ -1589,7 +1589,6 @@ void CSazabi::UnInitializeObjects()
 		delete m_pMessageLoopWorker;
 		m_pMessageLoopWorker = NULL;
 	}
-
 }
 int CSazabi::ExitInstance()
 {
