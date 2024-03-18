@@ -4259,7 +4259,6 @@ void CSazabi::UnInitializeCef()
 		CefShutdown();
 	}
 }
-
 BOOL CSazabi::IsURLFilterAllow(LPCTSTR sURL,
 			       LPCTSTR sSchme,
 			       LPCTSTR sHost,

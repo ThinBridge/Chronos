@@ -10,7 +10,6 @@ public:
 	void Run();
 
 private:
-
 	static const UINT_PTR m_nTimerID = 1;
 	static const int32_t m_nTimerDelayPlaceholder = INT_MAX;
 	// The maximum number of milliseconds we're willing to wait between calls to
