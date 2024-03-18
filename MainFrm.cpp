@@ -43,8 +43,6 @@ CMainFrame::CMainFrame()
 	m_pPrevActiveWindow = NULL;
 	m_iTabTimerID = 0;
 	m_bTabTimerProcLock = FALSE;
-	m_iMessageLoopTimerID = 0;
-	m_pMessageLoopWorker = NULL;
 }
 
 CMainFrame::~CMainFrame()
@@ -177,15 +175,6 @@ void CMainFrame::View_InitOK()
 				m_iTabTimerID = (INT_PTR)this + 48;
 				this->SetTimer(m_iTabTimerID, 5 * 1000, 0);
 			}
-		}
-		if (!m_iMessageLoopTimerID)
-		{
-			m_iMessageLoopTimerID = (INT_PTR)this + 64;
-		}
-		if (!m_pMessageLoopWorker)
-		{
-			m_pMessageLoopWorker = new MessageLoopWorker(m_hWnd, m_iMessageLoopTimerID);
-			m_pMessageLoopWorker->OnScheduleWork(0);
 		}
 	}
 	catch (...)
@@ -740,15 +729,6 @@ void CMainFrame::CleanUP()
 			m_iTabTimerID = 0;
 			m_bTabTimerProcLock = FALSE;
 		}
-		if (m_iMessageLoopTimerID)
-		{
-			m_iMessageLoopTimerID = 0;
-		}
-		if (m_pMessageLoopWorker)
-		{
-			delete (m_pMessageLoopWorker);
-			m_pMessageLoopWorker = NULL;
-		}
 		
 		//2重起動を許可する。終了中のため。
 		this->SetWindowText(theApp.m_strThisAppName);
@@ -922,13 +902,6 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 			m_bTabTimerProcLock = TRUE;
 			TabWindowChk();
 			m_bTabTimerProcLock = FALSE;
-		}
-	}
-	else if (m_iMessageLoopTimerID == nIDEvent)
-	{
-		if (theApp.m_bCEFInitialized && !theApp.m_bMultiThreadedMessageLoop)
-		{
-			m_pMessageLoopWorker->OnTimerTimeout();
 		}
 	}
 	CFrameWnd::OnTimer(nIDEvent);
@@ -2847,18 +2820,4 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 	LOGFONT lf = {0};
 	SystemParametersInfo(SPI_GETICONTITLELOGFONT, sizeof(LOGFONT), &lf, 0);
 	afxGlobalData.SetMenuFont(&lf, true);
-}
-
-BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
-{
-	if (pMsg && pMsg->message == WM_SCHEDULE_CEF_WORK)
-	{
-		if (theApp.m_bCEFInitialized && !theApp.m_bMultiThreadedMessageLoop)
-		{
-			int64_t delayMs = pMsg->lParam;
-			m_pMessageLoopWorker->OnScheduleWork(delayMs);
-		}
-		return TRUE;
-	}
-	return CFrameWnd::PreTranslateMessage(pMsg);
 }

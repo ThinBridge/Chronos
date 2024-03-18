@@ -21,6 +21,7 @@
 #include "DlgSetting.h"
 #include "DlgDebugWnd.h"
 #include "include\cef_parser.h"
+#include "MessageLoopWorker.h"
 /////////////////////////////////////////////////////////////////////////////
 // CSazabi:
 //
@@ -60,13 +61,15 @@ public:
 	//func
 	CSazabi();
 	virtual ~CSazabi();
-	BOOL PumpMessage();
 	CStringW m_strAppIDw;
 
 	//SZB
 	BOOL m_bCEFInitialized;
 	BOOL m_bToBeShutdown;
 	BOOL m_bMultiThreadedMessageLoop;
+	HWND m_hMessageLoop;
+	MessageLoopWorker* m_pMessageLoopWorker;
+	INT_PTR m_iMessageLoopTimerID;
 
 	CefRefPtr<ClientApp> m_cefApp;
 
@@ -242,6 +245,11 @@ public:
 	virtual int ExitInstance();
 	void UnInitializeObjects();
 	void UnInitializeCef();
+	void InitMessageLoopWindow();
+	static LRESULT CALLBACK MessageLoopWindowHandler(HWND hwnd,
+							 UINT msg,
+							 WPARAM wparam,
+							 LPARAM lparam);
 	////////////////////////////////////////////////
 
 	void SetThisAppVersionString();
