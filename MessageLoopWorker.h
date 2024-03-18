@@ -8,6 +8,7 @@ public:
 	~MessageLoopWorker();
 	BOOL PostScheduleMessage(int64_t delayMs);
 	void Run();
+	void Quit();
 
 private:
 	static const UINT_PTR m_nTimerID = 1;
@@ -21,6 +22,7 @@ private:
 	bool m_bIsActive_;
 	bool m_bReentrancyDetected_;
 	HINSTANCE m_hInstance_;
+	bool m_bRunning_;
 
 	void SetTimer(int64_t delayMs);
 	void KillTimer();

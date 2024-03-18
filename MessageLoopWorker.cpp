@@ -13,20 +13,34 @@ MessageLoopWorker::MessageLoopWorker(HINSTANCE hInstance)
 	m_bReentrancyDetected_ = false;
 	m_hWnd_ = NULL;
 	m_hInstance_ = hInstance;
+	m_bRunning_ = false;
 }
 
 MessageLoopWorker::~MessageLoopWorker()
 {
-	KillTimer();
-	::SetWindowLongPtr(m_hWnd_, GWLP_USERDATA, NULL);
-	DestroyWindow(m_hWnd_);
-	m_hWnd_ = NULL;
+	Quit();
 }
 
 void MessageLoopWorker::Run()
 {
 	InitWindow();
 	OnScheduleWork(0);
+	m_bRunning_ = true;
+}
+
+void MessageLoopWorker::Quit()
+{
+	if (!m_bRunning_)
+	{
+		return;
+	}
+	KillTimer();
+	::SetWindowLongPtr(m_hWnd_, GWLP_USERDATA, NULL);
+	DestroyWindow(m_hWnd_);
+	m_hWnd_ = NULL;
+	//Process rest CEF messages.
+	CefDoMessageLoopWork();
+	m_bRunning_ = false;
 }
 
 BOOL MessageLoopWorker::PostScheduleMessage(int64_t delayMs)

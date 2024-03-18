@@ -585,11 +585,6 @@ BOOL CSazabi::InitInstance()
 	::GetWindowThreadProcessId(pFrame->m_hWnd, &m_dwProcessId);
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
-	if (!m_bMultiThreadedMessageLoop)
-	{
-		m_pMessageLoopWorker = new MessageLoopWorker(m_hInstance);
-		m_pMessageLoopWorker->Run();
-	}
 	return TRUE;
 }
 
@@ -1577,11 +1572,6 @@ void CSazabi::UnInitializeObjects()
 	if (m_pLogDisp)
 	{
 		m_pLogDisp->m_bStop = TRUE;
-	}
-	if (m_pMessageLoopWorker)
-	{
-		delete m_pMessageLoopWorker;
-		m_pMessageLoopWorker = NULL;
 	}
 }
 int CSazabi::ExitInstance()
@@ -4199,6 +4189,11 @@ void CSazabi::InitializeCef()
 	}
 
 	m_bCEFInitialized = CefInitialize(mainargs, settings, m_cefApp.get(), sandbox_info);
+	if (!m_bMultiThreadedMessageLoop)
+	{
+		m_pMessageLoopWorker = new MessageLoopWorker(m_hInstance);
+		m_pMessageLoopWorker->Run();
+	}
 }
 
 /*
@@ -4246,14 +4241,11 @@ void CSazabi::UnInitializeCef()
 	{
 		m_bCEFInitialized = FALSE;
 		m_cefApp = nullptr;
-		if (!m_bMultiThreadedMessageLoop)
+		if (m_pMessageLoopWorker)
 		{
-			for (int i = 0; i < 10; i++)
-			{
-				CefDoMessageLoopWork();
-				// Sleep to allow the CEF proc to do work.
-				Sleep(50);
-			}
+			m_pMessageLoopWorker->Quit();
+			delete m_pMessageLoopWorker;
+			m_pMessageLoopWorker = NULL;
 		}
 		// shutdown CEF
 		CefShutdown();
