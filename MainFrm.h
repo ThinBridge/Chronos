@@ -98,7 +98,6 @@ public:
 	LRESULT OnSaveWindowListMSG(WPARAM wParam, LPARAM lParam);
 	CChildView* NewBrowserWindow(DWORD dwFlags);
 	void HideOtherTabWindows(HWND hwndExclude);
-
 	DECLARE_MESSAGE_MAP()
 	void CheckBrowserWnd();
 

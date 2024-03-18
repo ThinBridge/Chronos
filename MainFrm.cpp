@@ -167,6 +167,7 @@ void CMainFrame::View_InitOK()
 			m_iRecoveryTimerID = (INT_PTR)this + 40;
 			this->SetTimer(m_iRecoveryTimerID, 15 * 1000, 0);
 		}
+
 		if (theApp.m_bTabEnable_Init)
 		{
 			m_bTabTimerProcLock = FALSE;
@@ -723,13 +724,13 @@ void CMainFrame::CleanUP()
 			this->KillTimer(m_iRecoveryTimerID);
 			m_iRecoveryTimerID = 0;
 		}
+
 		if (m_iTabTimerID)
 		{
 			this->KillTimer(m_iTabTimerID);
 			m_iTabTimerID = 0;
 			m_bTabTimerProcLock = FALSE;
 		}
-		
 		//2重起動を許可する。終了中のため。
 		this->SetWindowText(theApp.m_strThisAppName);
 
