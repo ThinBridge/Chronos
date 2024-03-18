@@ -243,11 +243,6 @@ public:
 	virtual int ExitInstance();
 	void UnInitializeObjects();
 	void UnInitializeCef();
-	void InitMessageLoopWindow();
-	static LRESULT CALLBACK MessageLoopWindowHandler(HWND hwnd,
-							 UINT msg,
-							 WPARAM wparam,
-							 LPARAM lparam);
 	////////////////////////////////////////////////
 
 	void SetThisAppVersionString();
