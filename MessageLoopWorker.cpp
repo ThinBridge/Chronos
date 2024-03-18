@@ -11,16 +11,16 @@ MessageLoopWorker::MessageLoopWorker(HINSTANCE hInstance)
 	m_bTimerPending_ = false;
 	m_bIsActive_ = false;
 	m_bReentrancyDetected_ = false;
-	m_hWnd = NULL;
+	m_hWnd_ = NULL;
 	m_hInstance_ = hInstance;
 }
 
 MessageLoopWorker::~MessageLoopWorker()
 {
 	KillTimer();
-	::SetWindowLongPtr(m_hWnd, GWLP_USERDATA, NULL);
-	DestroyWindow(m_hWnd);
-	m_hWnd = NULL;
+	::SetWindowLongPtr(m_hWnd_, GWLP_USERDATA, NULL);
+	DestroyWindow(m_hWnd_);
+	m_hWnd_ = NULL;
 }
 
 void MessageLoopWorker::Run()
@@ -31,11 +31,11 @@ void MessageLoopWorker::Run()
 
 BOOL MessageLoopWorker::PostScheduleMessage(int64_t delayMs)
 {
-	if (!m_hWnd)
+	if (!m_hWnd_)
 	{
 		return FALSE;
 	}
-	return PostMessage(m_hWnd, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delayMs));
+	return PostMessage(m_hWnd_, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delayMs));
 }
 
 void MessageLoopWorker::OnScheduleWork(int64_t delayMs)
@@ -74,14 +74,14 @@ void MessageLoopWorker::OnTimerTimeout()
 void MessageLoopWorker::SetTimer(int64_t delayMs)
 {
 	m_bTimerPending_ = true;
-	::SetTimer(m_hWnd, m_nTimerID, static_cast<UINT>(delayMs), nullptr);
+	::SetTimer(m_hWnd_, m_nTimerID, static_cast<UINT>(delayMs), nullptr);
 }
 
 void MessageLoopWorker::KillTimer()
 {
 	if (m_bTimerPending_)
 	{
-		::KillTimer(m_hWnd, m_nTimerID);
+		::KillTimer(m_hWnd_, m_nTimerID);
 		m_bTimerPending_ = false;
 	}
 }
@@ -130,8 +130,8 @@ void MessageLoopWorker::InitWindow()
 	wcex.lpszClassName = className;
 	RegisterClassEx(&wcex);
 
-	m_hWnd = CreateWindow(className, nullptr, WS_OVERLAPPEDWINDOW, 0, 0, 0, 0, HWND_MESSAGE, nullptr, hInstance, nullptr);
-	::SetWindowLongPtr(m_hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
+	m_hWnd_ = CreateWindow(className, nullptr, WS_OVERLAPPEDWINDOW, 0, 0, 0, 0, HWND_MESSAGE, nullptr, hInstance, nullptr);
+	::SetWindowLongPtr(m_hWnd_, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 }
 
 // static
