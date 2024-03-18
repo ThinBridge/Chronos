@@ -137,7 +137,7 @@ void ClientApp::OnScheduleMessagePumpWork(int64_t delayMs)
 	if (!messageLoopWorker)
 		return;
 	HWND hWnd = messageLoopWorker->m_hWnd;
-	if (hWnd)
+	if (!hWnd)
 		return;
 	PostMessage(hWnd, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delayMs));
 }
