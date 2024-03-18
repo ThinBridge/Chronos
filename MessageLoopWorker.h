@@ -27,8 +27,8 @@ private:
 	void OnTimerTimeout();
 	void DoWork();
 	void InitWindow();
-	static LRESULT CALLBACK MessageLoopWindowHandler(HWND hwnd,
-							 UINT msg,
-							 WPARAM wparam,
-							 LPARAM lparam);
+	static LRESULT CALLBACK WindowProcesser(HWND hwnd,
+						UINT msg,
+						WPARAM wparam,
+						LPARAM lparam);
 };

@@ -127,10 +127,10 @@ void MessageLoopWorker::InitWindow()
 }
 
 // static
-LRESULT CALLBACK MessageLoopWorker::MessageLoopWindowHandler(HWND hwnd,
-							     UINT msg,
-							     WPARAM wparam,
-							     LPARAM lparam)
+LRESULT CALLBACK MessageLoopWorker::WindowProcesser(HWND hwnd,
+						    UINT msg,
+						    WPARAM wparam,
+						    LPARAM lparam)
 {
 	if (!theApp)
 	{
