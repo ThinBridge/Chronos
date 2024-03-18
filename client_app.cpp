@@ -133,12 +133,13 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 
 void ClientApp::OnScheduleMessagePumpWork(int64_t delayMs)
 {
-	if (!theApp.m_pMainWnd)
+	MessageLoopWorker* messageLoopWorker = theApp.m_pMessageLoopWorker;
+	if (!messageLoopWorker)
 		return;
-	if (!theApp.SafeWnd(theApp.m_pMainWnd->m_hWnd))
+	HWND hWnd = messageLoopWorker->m_hWnd;
+	if (hWnd)
 		return;
-
-	theApp.m_pMainWnd->PostMessage(WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delayMs));
+	PostMessage(hWnd, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delayMs));
 }
 
 void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
