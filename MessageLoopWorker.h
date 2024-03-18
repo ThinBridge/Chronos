@@ -6,7 +6,7 @@ class MessageLoopWorker
 public:
 	MessageLoopWorker(HINSTANCE hInstance);
 	~MessageLoopWorker();
-	BOOL PostScheduleMessage(int64_t delayMs);
+	bool PostScheduleMessage(int64_t delayMs);
 	void Run();
 	void Quit();
 

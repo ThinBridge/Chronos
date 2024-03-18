@@ -43,7 +43,7 @@ void MessageLoopWorker::Quit()
 	m_bRunning_ = false;
 }
 
-BOOL MessageLoopWorker::PostScheduleMessage(int64_t delayMs)
+bool MessageLoopWorker::PostScheduleMessage(int64_t delayMs)
 {
 	if (!m_hWnd_)
 	{
