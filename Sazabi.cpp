@@ -587,7 +587,7 @@ BOOL CSazabi::InitInstance()
 	InitProcessSetting();
 	if (!m_bMultiThreadedMessageLoop)
 	{
-		m_pMessageLoopWorker = new MessageLoopWorker();
+		m_pMessageLoopWorker = new MessageLoopWorker(m_hInstance);
 		m_pMessageLoopWorker->Run();
 	}
 	return TRUE;

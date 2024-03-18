@@ -4,15 +4,15 @@
 // https://github.com/chromiumembedded/cef/blob/master/LICENSE.txt
 
 #include "stdafx.h"
-#include "Sazabi.h"
 #include "MessageLoopWorker.h"
 
-MessageLoopWorker::MessageLoopWorker()
+MessageLoopWorker::MessageLoopWorker(HINSTANCE hInstance)
 {
 	m_bTimerPending_ = false;
 	m_bIsActive_ = false;
 	m_bReentrancyDetected_ = false;
 	m_hWnd = NULL;
+	m_hInstance_ = hInstance;
 }
 
 MessageLoopWorker::~MessageLoopWorker()
@@ -27,6 +27,15 @@ void MessageLoopWorker::Run()
 {
 	InitWindow();
 	OnScheduleWork(0);
+}
+
+BOOL MessageLoopWorker::PostScheduleMessage(int64_t delayMs)
+{
+	if (!m_hWnd)
+	{
+		return FALSE;
+	}
+	return PostMessage(m_hWnd, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delayMs));
 }
 
 void MessageLoopWorker::OnScheduleWork(int64_t delayMs)
@@ -102,18 +111,18 @@ void MessageLoopWorker::DoWork()
 	if (m_bReentrancyDetected_)
 	{
 		// Execute the remaining work as soon as possible.
-		PostMessage(m_hWnd, WM_SCHEDULE_CEF_WORK, NULL, 0);
+		PostScheduleMessage(0);
 	}
 	else if (!m_bTimerPending_)
 	{
-		PostMessage(m_hWnd, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(m_nTimerDelayPlaceholder));
+		PostScheduleMessage(m_nTimerDelayPlaceholder);
 	}
 }
 
 void MessageLoopWorker::InitWindow()
 {
 	const wchar_t* className = _T("MessageLoopWindow");
-	HINSTANCE hInstance = theApp.m_hInstance;
+	HINSTANCE hInstance = m_hInstance_;
 	WNDCLASSEX wcex = {};
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.lpfnWndProc = MessageLoopWorker::WindowProcesser;
@@ -121,8 +130,7 @@ void MessageLoopWorker::InitWindow()
 	wcex.lpszClassName = className;
 	RegisterClassEx(&wcex);
 
-	m_hWnd = CreateWindowW(className, nullptr, WS_OVERLAPPEDWINDOW, 0, 0, 0, 0,
-					  HWND_MESSAGE, nullptr, hInstance, nullptr);
+	m_hWnd = CreateWindow(className, nullptr, WS_OVERLAPPEDWINDOW, 0, 0, 0, 0, HWND_MESSAGE, nullptr, hInstance, nullptr);
 	::SetWindowLongPtr(m_hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 }
 
@@ -132,14 +140,6 @@ LRESULT CALLBACK MessageLoopWorker::WindowProcesser(HWND hwnd,
 						    WPARAM wparam,
 						    LPARAM lparam)
 {
-	if (!theApp)
-	{
-		return DefWindowProc(hwnd, msg, wparam, lparam);
-	}
-	if (!theApp.m_bCEFInitialized)
-	{
-		return DefWindowProc(hwnd, msg, wparam, lparam);
-	}
 	MessageLoopWorker* messageLoopWorker = reinterpret_cast<MessageLoopWorker*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 	if (!messageLoopWorker)
 	{

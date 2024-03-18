@@ -4,9 +4,9 @@
 class MessageLoopWorker
 {
 public:
-	MessageLoopWorker();
+	MessageLoopWorker(HINSTANCE hInstance);
 	~MessageLoopWorker();
-	HWND m_hWnd;
+	BOOL PostScheduleMessage(int64_t delayMs);
 	void Run();
 
 private:
@@ -16,9 +16,11 @@ private:
 	// DoWork().
 	static const int64_t m_nMaxTimerDelay = 1000 / 30; // 30fps
 
+	HWND m_hWnd;
 	bool m_bTimerPending_;
 	bool m_bIsActive_;
 	bool m_bReentrancyDetected_;
+	HINSTANCE m_hInstance_;
 
 	void SetTimer(int64_t delayMs);
 	void KillTimer();

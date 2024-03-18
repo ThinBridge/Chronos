@@ -136,10 +136,7 @@ void ClientApp::OnScheduleMessagePumpWork(int64_t delayMs)
 	MessageLoopWorker* messageLoopWorker = theApp.m_pMessageLoopWorker;
 	if (!messageLoopWorker)
 		return;
-	HWND hWnd = messageLoopWorker->m_hWnd;
-	if (!hWnd)
-		return;
-	PostMessage(hWnd, WM_SCHEDULE_CEF_WORK, NULL, static_cast<LPARAM>(delayMs));
+	messageLoopWorker->PostScheduleMessage(delayMs);
 }
 
 void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
