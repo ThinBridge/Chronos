@@ -55,8 +55,6 @@ CSazabi::CSazabi()
 	m_bFirstInstance = FALSE;
 	m_bEnforceDeleteCache = FALSE;
 	m_bMultiThreadedMessageLoop = FALSE;
-	m_hMessageLoop = NULL;
-	m_iMessageLoopTimerID = 0;
 	m_pMessageLoopWorker = NULL;
 }
 CSazabi::~CSazabi()
@@ -589,7 +587,8 @@ BOOL CSazabi::InitInstance()
 	InitProcessSetting();
 	if (!m_bMultiThreadedMessageLoop)
 	{
-		InitMessageLoopWindow();
+		m_pMessageLoopWorker = new MessageLoopWorker();
+		m_pMessageLoopWorker->Run();
 	}
 	return TRUE;
 }
@@ -1578,11 +1577,6 @@ void CSazabi::UnInitializeObjects()
 	if (m_pLogDisp)
 	{
 		m_pLogDisp->m_bStop = TRUE;
-	}
-	if (m_hMessageLoop)
-	{
-		DestroyWindow(m_hMessageLoop);
-		m_hMessageLoop = NULL;
 	}
 	if (m_pMessageLoopWorker)
 	{
@@ -4264,64 +4258,6 @@ void CSazabi::UnInitializeCef()
 		// shutdown CEF
 		CefShutdown();
 	}
-}
-
-void CSazabi::InitMessageLoopWindow()
-{
-	const wchar_t* className = _T("MessageLoopWindow");
-	HINSTANCE hInstance = theApp.m_hInstance;
-	WNDCLASSEX wcex = {};
-	wcex.cbSize = sizeof(WNDCLASSEX);
-	wcex.lpfnWndProc = MessageLoopWindowHandler;
-	wcex.hInstance = hInstance;
-	wcex.lpszClassName = className;
-	RegisterClassEx(&wcex);
-
-	m_hMessageLoop = CreateWindowW(className, nullptr, WS_OVERLAPPEDWINDOW, 0, 0, 0, 0,
-			  HWND_MESSAGE, nullptr, hInstance, nullptr);
-	m_iMessageLoopTimerID = 1;
-	m_pMessageLoopWorker = new MessageLoopWorker(m_hMessageLoop, m_iMessageLoopTimerID);
-	m_pMessageLoopWorker->OnScheduleWork(0);
-}
-
-// static
-LRESULT CALLBACK CSazabi::MessageLoopWindowHandler(HWND hwnd,
-						   UINT msg,
-						   WPARAM wparam,
-						   LPARAM lparam)
-{
-	if (!theApp)
-	{
-		return DefWindowProc(hwnd, msg, wparam, lparam);
-	}
-	if (!theApp.m_bCEFInitialized)
-	{
-		return DefWindowProc(hwnd, msg, wparam, lparam);
-	}
-
-	MessageLoopWorker* messageLoopWorker = theApp.m_pMessageLoopWorker;
-	if (!messageLoopWorker)
-	{
-		return DefWindowProc(hwnd, msg, wparam, lparam);
-	}
-
-	switch (msg)
-	{
-	case WM_TIMER:
-		// Timer timed out.
-		if (wparam == messageLoopWorker->m_nTimerID)
-		{
-			messageLoopWorker->OnTimerTimeout();
-			return 0;
-		}
-		break;
-	case WM_SCHEDULE_CEF_WORK:
-		// OnScheduleMessagePumpWork() request.
-		const int64_t delayMs = static_cast<int64_t>(lparam);
-		messageLoopWorker->OnScheduleWork(delayMs);
-		return 0;
-	}
-	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
 BOOL CSazabi::IsURLFilterAllow(LPCTSTR sURL,

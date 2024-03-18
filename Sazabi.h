@@ -67,9 +67,7 @@ public:
 	BOOL m_bCEFInitialized;
 	BOOL m_bToBeShutdown;
 	BOOL m_bMultiThreadedMessageLoop;
-	HWND m_hMessageLoop;
 	MessageLoopWorker* m_pMessageLoopWorker;
-	INT_PTR m_iMessageLoopTimerID;
 
 	CefRefPtr<ClientApp> m_cefApp;
 

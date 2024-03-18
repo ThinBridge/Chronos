@@ -4,19 +4,17 @@
 class MessageLoopWorker
 {
 public:
-	UINT_PTR m_nTimerID;
-
-	MessageLoopWorker(HWND hTargetWnd, UINT_PTR nTimerId);
+	MessageLoopWorker();
 	~MessageLoopWorker();
-	void OnScheduleWork(int64_t delayMs);
-	void OnTimerTimeout();
-	void DoWork();
+	void Run();
 
 private:
-	const int32_t m_nTimerDelayPlaceholder = INT_MAX;
+
+	static const UINT_PTR m_nTimerID = 1;
+	static const int32_t m_nTimerDelayPlaceholder = INT_MAX;
 	// The maximum number of milliseconds we're willing to wait between calls to
 	// DoWork().
-	const int64_t m_nMaxTimerDelay = 1000 / 30; // 30fps
+	static const int64_t m_nMaxTimerDelay = 1000 / 30; // 30fps
 
 	HWND m_hWnd_;
 	bool m_bTimerPending_;
@@ -25,4 +23,12 @@ private:
 
 	void SetTimer(int64_t delayMs);
 	void KillTimer();
+	void OnScheduleWork(int64_t delayMs);
+	void OnTimerTimeout();
+	void DoWork();
+	void InitWindow();
+	static LRESULT CALLBACK MessageLoopWindowHandler(HWND hwnd,
+							 UINT msg,
+							 WPARAM wparam,
+							 LPARAM lparam);
 };
