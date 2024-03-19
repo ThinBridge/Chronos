@@ -131,6 +131,14 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	}
 }
 
+void ClientApp::OnScheduleMessagePumpWork(int64_t delayMs)
+{
+	MessageLoopWorker* messageLoopWorker = theApp.m_pMessageLoopWorker;
+	if (!messageLoopWorker)
+		return;
+	messageLoopWorker->PostScheduleMessage(delayMs);
+}
+
 void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
 						int http_status_code,
 						CefRefPtr<CefImage> image)

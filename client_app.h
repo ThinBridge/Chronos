@@ -21,6 +21,7 @@ public:
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override { return this; }
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line);
 	virtual void OnContextInitialized() override;
+	virtual void OnScheduleMessagePumpWork(int64_t delayMs) override;
 
 private:
 	IMPLEMENT_REFCOUNTING(ClientApp);

@@ -193,6 +193,7 @@
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MyComboBoxEx.cpp" />
     <ClCompile Include="Sazabi.cpp" />
+    <ClCompile Include="MessageLoopWorker.cpp" />
     <ClCompile Include="sbcommon.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">Create</PrecompiledHeader>
@@ -234,6 +235,7 @@
     <ClInclude Include="minhook\trampoline.h" />
     <ClInclude Include="MyComboBoxEx.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="MessageLoopWorker.h" />
     <ClInclude Include="sbcommon.h" />
     <ClInclude Include="Sazabi.h" />
     <ClInclude Include="StdAfx.h" />

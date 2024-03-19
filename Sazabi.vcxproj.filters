@@ -56,6 +56,9 @@
     <ClCompile Include="DlgCertification.cpp">
       <Filter>DLG</Filter>
     </ClCompile>
+    <ClCompile Include="MessageLoopWorker.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
@@ -149,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="DlgCertification.h">
       <Filter>DLG</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageLoopWorker.h">
+      <Filter>SB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
