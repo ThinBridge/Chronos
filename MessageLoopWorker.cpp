@@ -61,6 +61,7 @@ void MessageLoopWorker::OnScheduleWork(int64_t delayMs)
 		return;
 	}
 
+	KillTimer();
 	if (delayMs <= 0)
 	{
 		DoWork();
@@ -69,8 +70,6 @@ void MessageLoopWorker::OnScheduleWork(int64_t delayMs)
 	{
 		// If | delayMs | is > 0 then the call should be scheduled to happen after the specified delay 
 		// and any currently pending scheduled call should be cancelled. 
-		KillTimer();
-
 		if (delayMs > m_nMaxTimerDelay)
 		{
 			delayMs = m_nMaxTimerDelay;
