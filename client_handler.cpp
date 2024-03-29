@@ -1847,7 +1847,12 @@ bool ClientHandler::OnSelectClientCertificate(
 			return true;
 		}
 	}
-	return false;
+	// When it returns false here without selecting client certicate file, 
+	// it works as if the first certificate was selected by default.
+	// As client certificate is not selected, above behavior is not suitable
+	// and it should be canceled correctly (as same as the other Browser raise error.)
+	// This is incompatible change since 14.1.119.0.
+	return true;
 }
 
 void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution)
