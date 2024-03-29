@@ -1800,7 +1800,12 @@ bool ClientHandler::OnSelectClientCertificate(
 			dwLogData.mMESSAGE1.Format(_T("Failed to open certificate selection dialog."));
 			theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_DE);
 			CertCloseStore(hCertStore, 0);
-			return false;
+			// When it returns false here without selecting client certicate file,
+			// it works as if the first certificate was selected by default.
+			// As client certificate is not selected, above behavior is not suitable
+			// and it should be canceled correctly (as same as the other Browser raise error.)
+			// This is incompatible change since 14.1.119.0.
+			return true;
 		}
 
 		// Find mapped index between cef given certificates and win32 API call results.
