@@ -267,24 +267,24 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 			if (theApp.m_bTabEnable_Init)
 			{
 				CString contextMenuOpenLinkTabLabel;
-				contextMenuOpenLinkTabLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_TAB);
+				contextMenuOpenLinkTabLabel.LoadString(ID_CONTEXT_MENU_OPEN_LINK_TAB);
 				CefString cefContextMenuOpenLinkTabLabel(contextMenuOpenLinkTabLabel);
 				model->InsertItemAt(0, CEF_MENU_ID_OPEN_LINK_NEW, cefContextMenuOpenLinkTabLabel);
 
 				CString contextMenuOpenLinkTabInactiveLabel;
-				contextMenuOpenLinkTabInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_TAB_INACTIVE);
+				contextMenuOpenLinkTabInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_LINK_TAB_INACTIVE);
 				CefString cefContextMenuOpenLinkTabInactiveLabel(contextMenuOpenLinkTabInactiveLabel);
 				model->InsertItemAt(1, CEF_MENU_ID_OPEN_LINK_NEW_NOACTIVE, cefContextMenuOpenLinkTabInactiveLabel);
 			}
 			else
 			{
 				CString contextMenuOpenLinkWindowLabel;
-				contextMenuOpenLinkWindowLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_WINDOW);
+				contextMenuOpenLinkWindowLabel.LoadString(ID_CONTEXT_MENU_OPEN_LINK_WINDOW);
 				CefString cefContextMenuOpenLinkWindowLabel(contextMenuOpenLinkWindowLabel);
 				model->InsertItemAt(0, CEF_MENU_ID_OPEN_LINK_NEW, cefContextMenuOpenLinkWindowLabel);
 
 				CString contextMenuOpenLinkWindowInactiveLabel;
-				contextMenuOpenLinkWindowInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_IMG_WINDOW_INACTIVE);
+				contextMenuOpenLinkWindowInactiveLabel.LoadString(ID_CONTEXT_MENU_OPEN_LINK_WINDOW_INACTIVE);
 				CefString cefContextMenuOpenLinkWindowInactiveLabel(contextMenuOpenLinkWindowInactiveLabel);
 				model->InsertItemAt(1, CEF_MENU_ID_OPEN_LINK_NEW_NOACTIVE, cefContextMenuOpenLinkWindowInactiveLabel);
 			}
