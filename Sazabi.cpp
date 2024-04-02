@@ -3180,7 +3180,7 @@ BOOL CSazabi::IsCacheRedirectFilterNone(LPCTSTR pURL)
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventLogScriptName);
 		if (!hEvent)
-			throw std::runtime_error("Failed to execute OpenEvent");
+			throw std::runtime_error("Failed to execute OpenEvent at " __FUNCTION__ " : " MAKE_STRING(__LINE__));
 
 		DWORD waitRes = WaitForSingleObject(hEvent, 50);
 		if (waitRes == WAIT_TIMEOUT)
@@ -3215,7 +3215,7 @@ void CSazabi::AddCacheRedirectFilterNone(LPCTSTR pURL)
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventLogScriptName);
 		if (!hEvent)
-			throw std::runtime_error("Failed to execute OpenEvent");
+			throw std::runtime_error("Failed to execute OpenEvent at " __FUNCTION__ " : " MAKE_STRING(__LINE__));
 
 		DWORD waitRes = WaitForSingleObject(hEvent, 100);
 		if (waitRes == WAIT_TIMEOUT)
@@ -3259,7 +3259,7 @@ BOOL CSazabi::IsCacheURLFilterAllow(LPCTSTR pURL)
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterAllow);
 		if (!hEvent)
-			throw std::runtime_error("Failed to execute OpenEvent");
+			throw std::runtime_error("Failed to execute OpenEvent at " __FUNCTION__ " : " MAKE_STRING(__LINE__));
 
 		DWORD waitRes = WaitForSingleObject(hEvent, 50);
 		if (waitRes == WAIT_TIMEOUT)
@@ -3294,7 +3294,7 @@ BOOL CSazabi::IsCacheURLFilterDeny(LPCTSTR pURL)
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterDeny);
 		if (!hEvent)
-			throw std::runtime_error("Failed to execute OpenEvent");
+			throw std::runtime_error("Failed to execute OpenEvent at " __FUNCTION__ " : " MAKE_STRING(__LINE__));
 
 		DWORD waitRes = WaitForSingleObject(hEvent, 50);
 		if (waitRes == WAIT_TIMEOUT)
@@ -3330,7 +3330,7 @@ void CSazabi::AddCacheURLFilterAllow(LPCTSTR pURL)
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterAllow);
 		if (!hEvent)
-			throw std::runtime_error("Failed to execute OpenEvent");
+			throw std::runtime_error("Failed to execute OpenEvent at " __FUNCTION__ " : " MAKE_STRING(__LINE__));
 
 		DWORD waitRes = WaitForSingleObject(hEvent, 100);
 		if (waitRes == WAIT_TIMEOUT)
@@ -3373,7 +3373,7 @@ void CSazabi::AddCacheURLFilterDeny(LPCTSTR pURL)
 	{
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventURLFilterDeny);
 		if (!hEvent)
-			throw std::runtime_error("Failed to execute OpenEvent");
+			throw std::runtime_error("Failed to execute OpenEvent at " __FUNCTION__ " : " MAKE_STRING(__LINE__));
 
 		DWORD waitRes = WaitForSingleObject(hEvent, 100);
 		if (waitRes == WAIT_TIMEOUT)

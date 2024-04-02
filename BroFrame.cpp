@@ -2776,7 +2776,7 @@ void CBrowserFrame::OnCloseDelay()
 			{
 				hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, theApp.m_strEventLogName);
 				if (!hEvent)
-					throw std::runtime_error("Failed to execute OpenEvent");
+					throw std::runtime_error("Failed to execute OpenEvent at " __FUNCTION__ " : " MAKE_STRING(__LINE__));
 
 				DWORD waitRes = WaitForSingleObject(hEvent, 100);
 				if (waitRes == WAIT_TIMEOUT)
