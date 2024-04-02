@@ -91,6 +91,11 @@ public:
 	CString mMESSAGE6;
 };
 
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはリスト用に自動生成されたenumなのか、独自定義したものなのか不明。
+// そのため、警告の抑止により対応する。
+#pragma warning(disable : 26812)
 enum
 {
 	LIST_INDEX,
@@ -105,6 +110,7 @@ enum
 	LIST_MESSAGE6,
 	LIST_MAX,
 };
+#pragma warning(pop)
 
 class CDlgDebugWnd : public CDialogEx
 {
@@ -118,10 +124,15 @@ public:
 	CString m_strEventLogDebugWnd;
 
 	// ダイアログ データ
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_DLG_DEBUG_WND
 	};
+#pragma warning(pop)
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV サポート
@@ -186,10 +197,15 @@ public:
 	autoresize::CAutoResize m_autoResize;
 	CString m_strFilePath;
 	// ダイアログ データ
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_DLG_SC_EDITOR
 	};
+#pragma warning(pop)
 
 protected:
 	BOOL bFirstFlg;

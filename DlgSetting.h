@@ -291,10 +291,15 @@ public:
 	WNDTREE_MAP m_wndMap;
 	CWnd* m_pParent;
 	//{{AFX_DATA(CSettingsDialog)
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG
 	};
+#pragma warning(pop)
 	CStatic m_PageFrame;
 	CTreeCtrl m_TreeCtrl;
 	CPrefsStatic m_CaptionBarCtrl;
@@ -338,10 +343,15 @@ class CDlgSetLog : public CPropertyPage
 public:
 	CDlgSetLog();
 	//{{AFX_DATA(CDlgSetTab1)
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_LOG
 	};
+#pragma warning(pop)
 	//}}AFX_DATA
 
 	// オーバーライド
@@ -371,10 +381,15 @@ class CDlgSetDSP : public CPropertyPage
 	DECLARE_DYNCREATE(CDlgSetDSP)
 public:
 	CDlgSetDSP();
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_DSP
 	};
+#pragma warning(pop)
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
@@ -393,10 +408,15 @@ class CDlgSetGen : public CPropertyPage
 	DECLARE_DYNCREATE(CDlgSetGen)
 public:
 	CDlgSetGen();
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_GEN
 	};
+#pragma warning(pop)
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
@@ -414,10 +434,15 @@ class CDlgSetSEC : public CPropertyPage
 	DECLARE_DYNCREATE(CDlgSetSEC)
 public:
 	CDlgSetSEC();
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_SEC
 	};
+#pragma warning(pop)
 	CComboBox m_ComboEmu;
 	void ChangeStateScriptEdit();
 
@@ -445,10 +470,15 @@ class CDlgSetConnectionSetting : public CPropertyPage
 	DECLARE_DYNCREATE(CDlgSetConnectionSetting)
 public:
 	CDlgSetConnectionSetting();
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_CONNECTION
 	};
+#pragma warning(pop)
 	void ChangeStateProxyEdit();
 
 protected:
@@ -469,12 +499,16 @@ class CDlgSetCAP : public CPropertyPage
 	DECLARE_DYNCREATE(CDlgSetCAP)
 public:
 	CDlgSetCAP();
+#pragma warning(push)
+//C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+//これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_CAP
 	};
 	void ChangeStateLimitTime();
-
+#pragma warning(pop)
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 
@@ -491,12 +525,16 @@ class CDlgSetINIT : public CPropertyPage
 	DECLARE_DYNCREATE(CDlgSetINIT)
 public:
 	CDlgSetINIT();
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_INIT
 	};
+#pragma warning(pop)
 	CComboBox m_Combo;
-
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 
@@ -514,17 +552,22 @@ public:
 	CDlgSetDomainFilter();
 	virtual ~CDlgSetDomainFilter();
 	autoresize::CAutoResize m_autoResize;
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum LIST_INDEX
 	{
 		URL,
 		ACTION,
 		ENABLE
 	};
-	int DuplicateChk(LPCTSTR sURL);
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_URL_FILTER
 	};
+#pragma warning(pop)
+	int DuplicateChk(LPCTSTR sURL);
 	CListCtrl m_List;
 	//	CComboBox	m_Combo;
 
@@ -557,6 +600,10 @@ public:
 	CDlgSetFileMgr();
 	virtual ~CDlgSetFileMgr(){};
 	autoresize::CAutoResize m_autoResize;
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum LIST_INDEX
 	{
 		URL,
@@ -567,6 +614,7 @@ public:
 	{
 		IDD = IDD_SETTINGS_DLG_FILEMGR
 	};
+#pragma warning(pop)
 	CComboBox m_Combo;
 
 protected:
@@ -592,17 +640,22 @@ public:
 	CDlgSetCustomScript();
 	virtual ~CDlgSetCustomScript();
 	autoresize::CAutoResize m_autoResize;
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum LIST_INDEX
 	{
 		URL,
 		FILENAME,
 		ENABLE
 	};
-	int DuplicateChk(LPCTSTR sURL, LPCTSTR sFileName);
 	enum
 	{
 		IDD = IDD_SETTINGS_DLG_CUSTOM_SCRIPT
 	};
+#pragma warning(pop)
+	int DuplicateChk(LPCTSTR sURL, LPCTSTR sFileName);
 	CListCtrl m_List;
 
 protected:
