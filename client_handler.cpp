@@ -1952,7 +1952,7 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 
 	HWND hWindow = GetSafeParentWnd(browser);
 	CString requestOrigin = (LPCWSTR)requesting_origin.c_str();
-	if (theApp.m_AppSettings.GetMediaAccessPermission() == AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL)
+	if (theApp.m_AppSettings.GetMediaAccessPermission() == static_cast<int>(AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL))
 	{
 		std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);
 		std::map<std::tuple<CefString, uint32>, bool>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
