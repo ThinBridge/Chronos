@@ -3477,7 +3477,7 @@ public:
 				pSource = VBSource;
 
 				//スクリプトコードのロードと解析。
-#pragma warning(push, 0)
+#pragma warning(push)
 //ParseScriptTextの各引数とGetScriptDispatchの第一引数はNULL許容なので、「NULLの可能性がある」警告は無視する。
 #pragma warning(disable : 6387)
 				if (FAILED(hRes = pASP->ParseScriptText(pSource,
@@ -3638,7 +3638,7 @@ public:
 				LPCWSTR pSource = NULL;
 				pSource = VBSource;
 
-#pragma warning(push, 0)
+#pragma warning(push)
 //ParseScriptTextの各引数とGetScriptDispatchの第一引数はNULL許容なので、「NULLの可能性がある」警告は無視する。
 #pragma warning(disable : 6387)
 				//スクリプトコードのロードと解析。
