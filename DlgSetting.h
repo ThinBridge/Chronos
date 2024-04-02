@@ -14,16 +14,14 @@ public:
 };
 namespace autoresize
 {
-	enum ResizeSpecifier
-	{
-		LEFT = 0x01,
-		RIGHT = 0x02,
-		TOP = 0x04,
-		BOTTOM = 0x08,
-		NO_HOR_RESIZE = 0x10,
-		NO_VERT_RESIZE = 0x20,
-	};
-
+	//ResizeSpecifier definitions
+	const UINT LEFT = 0x01;
+	const UINT RIGHT = 0x02;
+	const UINT TOP = 0x04;
+	const UINT BOTTOM = 0x08;
+	const UINT NO_HOR_RESIZE = 0x10;
+	const UINT NO_VERT_RESIZE = 0x20;
+	
 	struct ResizeSpec
 	{
 		HWND m_hwnd = nullptr;
