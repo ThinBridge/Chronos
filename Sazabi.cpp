@@ -3181,7 +3181,7 @@ BOOL CSazabi::IsCacheRedirectFilterNone(LPCTSTR pURL)
 		hEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, m_strEventLogScriptName);
 		if (!hEvent)
 			throw std::runtime_error("Failed to execute OpenEvent");
-		
+
 		DWORD waitRes = WaitForSingleObject(hEvent, 50);
 		if (waitRes == WAIT_TIMEOUT)
 		{
