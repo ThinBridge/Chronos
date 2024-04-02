@@ -1537,7 +1537,7 @@ void CBrowserFrame::OnFavMenu(UINT nID)
 	if (!tmp1)
 		return;
 
-	if (tmp1->GetType() == IEFavURL)
+	if (tmp1->GetType() == FAV_TYPE::IEFavURL)
 	{
 		strURL = tmp1->strURL;
 
@@ -1630,8 +1630,8 @@ void CBrowserFrame::CrateFavoriteMenu(CMenu* pMenu, CFavoriteItem* parentItem)
 	if (!parentItem) return;
 	CString strTitle;
 
-	if (parentItem->GetType() == IEFavDIR ||
-	    parentItem->GetType() == IEFavROOT)
+	if (parentItem->GetType() == FAV_TYPE::IEFavDIR ||
+	    parentItem->GetType() == FAV_TYPE::IEFavROOT)
 	{
 		INT_PTR iMax = parentItem->GetSize();
 		for (INT_PTR i = 0; i < iMax; i++)
@@ -1640,7 +1640,7 @@ void CBrowserFrame::CrateFavoriteMenu(CMenu* pMenu, CFavoriteItem* parentItem)
 			tmp = (CFavoriteItem*)parentItem->GetItem(i);
 			if (tmp)
 			{
-				if (tmp->GetType() == IEFavDIR)
+				if (tmp->GetType() == FAV_TYPE::IEFavDIR)
 				{
 					SBUtil::GetDivChar(tmp->strTitle, 60, strTitle);
 					strTitle.Replace(_T("&"), _T("&&"));
@@ -1671,11 +1671,11 @@ void CBrowserFrame::CrateFavoriteMenu(CMenu* pMenu, CFavoriteItem* parentItem)
 	else
 	{
 		strTitle = parentItem->strTitle;
-		if (parentItem->GetType() == IEFavURL)
+		if (parentItem->GetType() == FAV_TYPE::IEFavURL)
 		{
 			strTitle = strTitle.Mid(0, strTitle.ReverseFind(_T('.')));
 		}
-		else if (parentItem->GetType() == IEFavFILE)
+		else if (parentItem->GetType() == FAV_TYPE::IEFavFILE)
 		{
 			strTitle = strTitle.Mid(0, strTitle.ReverseFind(_T('.')));
 		}

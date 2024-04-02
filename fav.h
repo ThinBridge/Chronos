@@ -5,7 +5,7 @@
 #ifdef _DEBUG
 #include <locale.h>
 #endif
-enum TYPE
+enum class FAV_TYPE
 {
 	IEFavERR,
 	IEFavROOT,
@@ -172,9 +172,9 @@ public:
 class CFavoriteItem
 {
 public:
-	CFavoriteItem(int iType = IEFavURL)
+	CFavoriteItem(FAV_TYPE type = FAV_TYPE::IEFavURL)
 	{
-		bType = iType;
+		m_type = type;
 		commandID = 0;
 	}
 	virtual ~CFavoriteItem()
@@ -197,9 +197,9 @@ public:
 		}
 		m_aFavItems.RemoveAll();
 	}
-	CFavoriteItem* AddChild(LPCTSTR strTitle, LPCTSTR strURL, int iType)
+	CFavoriteItem* AddChild(LPCTSTR strTitle, LPCTSTR strURL, FAV_TYPE iType)
 	{
-		if (bType == IEFavDIR || bType == IEFavROOT)
+		if (m_type == FAV_TYPE::IEFavDIR || m_type == FAV_TYPE::IEFavROOT)
 		{
 			CFavoriteItem* tmp = NULL;
 			tmp = new CFavoriteItem;
@@ -207,20 +207,20 @@ public:
 			{
 				tmp->strTitle = strTitle;
 				tmp->strURL = strURL;
-				tmp->bType = iType;
+				tmp->m_type = iType;
 				m_aFavItems.Add(tmp);
 			}
 			return tmp;
 		}
 		return NULL;
 	}
-	int GetType()
+	FAV_TYPE GetType()
 	{
-		return bType;
+		return m_type;
 	}
 	void SortItem(CFavoritesOrder& order)
 	{
-		if (bType != IEFavDIR && bType != IEFavROOT)
+		if (m_type != FAV_TYPE::IEFavDIR && m_type != FAV_TYPE::IEFavROOT)
 			return;
 		INT_PTR iColSize = m_aFavItems.GetSize();
 		INT_PTR iOrderSize = order.GetCount();
@@ -292,7 +292,7 @@ public:
 	}
 	void SortItem()
 	{
-		if (bType != IEFavDIR && bType != IEFavROOT)
+		if (m_type != FAV_TYPE::IEFavDIR && m_type != FAV_TYPE::IEFavROOT)
 			return;
 		INT_PTR iColSize = m_aFavItems.GetSize();
 		if (iColSize <= 1)
@@ -313,12 +313,12 @@ public:
 			pFavTmp = (CFavoriteItem*)m_aFavItems.GetAt(i);
 			if (pFavTmp)
 			{
-				if (pFavTmp->bType == IEFavDIR)
+				if (pFavTmp->m_type == FAV_TYPE::IEFavDIR)
 				{
 					SortedItemArray1[iIndex1] = (INT_PTR)pFavTmp;
 					iIndex1++;
 				}
-				else if (pFavTmp->bType == IEFavURL || pFavTmp->bType == IEFavFILE)
+				else if (pFavTmp->m_type == FAV_TYPE::IEFavURL || pFavTmp->m_type == FAV_TYPE::IEFavFILE)
 				{
 					SortedItemArray2[iIndex2] = (INT_PTR)pFavTmp;
 					iIndex2++;
@@ -399,7 +399,7 @@ public:
 	{
 		this->commandID = ptraFavItem->GetSize();
 		ptraFavItem->Add(this);
-		if (bType == IEFavDIR || bType == IEFavROOT)
+		if (m_type == FAV_TYPE::IEFavDIR || m_type == FAV_TYPE::IEFavROOT)
 		{
 			for (int i = 0; i < m_aFavItems.GetSize(); i++)
 			{
@@ -415,7 +415,7 @@ public:
 
 protected:
 	CPtrArray m_aFavItems;
-	BOOL bType;
+	FAV_TYPE m_type;
 };
 class CFavoriteItemManager
 {
@@ -436,7 +436,7 @@ public:
 	{
 		CleanUP();
 		bIEOrder = IEOrder;
-		m_FavRootItem = new CFavoriteItem(IEFavROOT);
+		m_FavRootItem = new CFavoriteItem(FAV_TYPE::IEFavROOT);
 		m_FavRootItem->strURL = strPath;
 		m_FavRootItem->strTitle = _T("FAVROOT");
 		m_ptraFavItemDir.RemoveAll();
@@ -452,13 +452,13 @@ public:
 		}
 	}
 
-	CFavoriteItem* AddChild(CFavoriteItem* parentItem, LPCTSTR strTitle, LPCTSTR strURL, int iType)
+	CFavoriteItem* AddChild(CFavoriteItem* parentItem, LPCTSTR strTitle, LPCTSTR strURL, FAV_TYPE iType)
 	{
 		if (!parentItem) return NULL;
 
 		CFavoriteItem* tmp = NULL;
 		tmp = parentItem->AddChild(strTitle, strURL, iType);
-		if (iType == IEFavDIR)
+		if (iType == FAV_TYPE::IEFavDIR)
 		{
 			m_ptraFavItemDir.Add(tmp);
 		}
@@ -544,7 +544,7 @@ public:
 				strDirectoryPath = strPath + wfd.cFileName;
 				ord.MtlMakeSureTrailingBackSlash(strDirectoryPath);
 				CFavoriteItem* parentItemSub = NULL;
-				parentItemSub = this->AddChild(parentItem, wfd.cFileName, strDirectoryPath, IEFavDIR);
+				parentItemSub = this->AddChild(parentItem, wfd.cFileName, strDirectoryPath, FAV_TYPE::IEFavDIR);
 				if (parentItemSub)
 					this->Reflect(parentItemSub, strDirectoryPath);
 			}
@@ -560,13 +560,13 @@ public:
 					GetInternetShortcutUrl(URLPATH, URLString);
 					if (!URLString.IsEmpty())
 					{
-						this->AddChild(parentItem, strFileNameTemp, URLString, IEFavURL);
+						this->AddChild(parentItem, strFileNameTemp, URLString, FAV_TYPE::IEFavURL);
 					}
 				}
 				else
 				{
 					URLPATH = strPath + wfd.cFileName;
-					this->AddChild(parentItem, strFileNameTemp, URLPATH, IEFavFILE);
+					this->AddChild(parentItem, strFileNameTemp, URLPATH, FAV_TYPE::IEFavFILE);
 				}
 			}
 
