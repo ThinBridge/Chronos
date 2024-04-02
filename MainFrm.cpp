@@ -1297,7 +1297,7 @@ void CMainFrame::Add_TabWindow(CBrowserFrame* Target)
 				ICoHelper = theApp.LoadIcon(IDI_ICON2);
 				theApp.m_imgFavIcons.Add(ICoHelper);
 
-				TabWindowMsgBSend(TWNT_ORDER, Target->GetSafeHwnd());
+				TabWindowMsgBSend(TWNT_ORDER_COMMAND, Target->GetSafeHwnd());
 			}
 		}
 	}
@@ -1367,12 +1367,12 @@ void CMainFrame::TabWindowMsgBSend(int iCommand, HWND hWnd)
 				if (ptd->IsWindowEnabled())
 				{
 					DWORD_PTR dwResult = {0};
-					if (iCommand == TWNT_REFRESH)
+					if (iCommand == TWNT_REFRESH_COMMAND)
 					{
 						::SendMessageTimeout(ptd->m_hWnd, MYWM_TAB_WINDOW_NOTIFY, iCommand,
 								     (LPARAM)(ptdActive == ptd) ? TRUE : NULL, SMTO_NORMAL, 5000, &dwResult);
 					}
-					else if (iCommand == TWNT_WNDPL_ADJUST)
+					else if (iCommand == TWNT_WNDPL_ADJUST_COMMAND)
 					{
 						if (hWnd == ptd->GetSafeHwnd())
 						{
@@ -1381,7 +1381,7 @@ void CMainFrame::TabWindowMsgBSend(int iCommand, HWND hWnd)
 							break;
 						}
 					}
-					else if (iCommand == TWNT_DEL)
+					else if (iCommand == TWNT_DEL_COMMAND)
 					{
 						if (hWnd == ptd->GetSafeHwnd())
 						{
@@ -1390,7 +1390,7 @@ void CMainFrame::TabWindowMsgBSend(int iCommand, HWND hWnd)
 							break;
 						}
 					}
-					else if (iCommand == TWNT_ORDER)
+					else if (iCommand == TWNT_ORDER_COMMAND)
 					{
 						if (hWnd == ptd->GetSafeHwnd())
 						{

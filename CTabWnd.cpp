@@ -211,7 +211,7 @@ LRESULT CTabWnd::OnTabLButtonUp(WPARAM wParam, LPARAM lParam)
 		break;
 	}
 	case DragState::DRAG:
-		m_pwndMainFrame->TabWindowMsgBSend(TWNT_REFRESH, NULL);
+		m_pwndMainFrame->TabWindowMsgBSend(TWNT_REFRESH_COMMAND, NULL);
 
 		if (m_nTabBorderArray)
 		{
@@ -848,13 +848,13 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 		bFlag = true;
 		//最初のときはすでに存在するウインドウの情報も登録する必要がある。
 		// 起動時、CTabWnd::Open()内のRefresh()ではまだグループ入り前のため既に別ウィンドウがあってもタブは空
-		if (wParam == TWNT_ADD)
+		if (wParam == TWNT_ADD_COMMAND)
 			Refresh(); // 続けてTWNT_ADD処理で自分以外のウィンドウを隠す
 	}
 
 	switch (wParam)
 	{
-	case TWNT_ADD: //ウインドウ登録
+	case TWNT_ADD_COMMAND: //ウインドウ登録
 		nIndex = FindTabIndexByHWND((HWND)lParam);
 		if (-1 == nIndex)
 		{
@@ -882,7 +882,7 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 		HideOtherWindows(m_pwndFrame->m_hWnd);
 		break;
 
-	case TWNT_DEL: //ウインドウ削除
+	case TWNT_DEL_COMMAND: //ウインドウ削除
 		nIndex = FindTabIndexByHWND((HWND)lParam);
 		if (-1 != nIndex)
 		{
@@ -904,7 +904,7 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 		}
 		break;
 
-	case TWNT_ORDER: //ウインドウ順序変更
+	case TWNT_ORDER_COMMAND: //ウインドウ順序変更
 		nIndex = FindTabIndexByHWND((HWND)lParam);
 		if (-1 != nIndex)
 		{
@@ -940,13 +940,13 @@ void CTabWnd::TabWindowNotify(WPARAM wParam, LPARAM lParam)
 		}
 		break;
 
-	case TWNT_REFRESH: //再表示
+	case TWNT_REFRESH_COMMAND: //再表示
 		Refresh((BOOL)lParam);
 		if (lParam)
 			::InvalidateRect(this->GetHwnd(), NULL, FALSE);
 		break;
 
-	case TWNT_WNDPL_ADJUST: // ウィンドウ位置合わせ
+	case TWNT_WNDPL_ADJUST_COMMAND: // ウィンドウ位置合わせ
 		AdjustWindowPlacement();
 		LayoutTab();
 		::InvalidateRect(this->GetHwnd(), NULL, FALSE);
@@ -1159,7 +1159,7 @@ void CTabWnd::ShowTabWindow(HWND hwnd)
 		return;			 // 切替の最中(busy)は要求を無視する
 	theApp.m_bTabWndChanging = TRUE; //ウィンドウ切替中ON
 	DWORD_PTR dwResult = {0};
-	::SendMessageTimeout(hwnd, MYWM_TAB_WINDOW_NOTIFY, TWNT_WNDPL_ADJUST, (LPARAM)NULL,
+	::SendMessageTimeout(hwnd, MYWM_TAB_WINDOW_NOTIFY, TWNT_WNDPL_ADJUST_COMMAND, (LPARAM)NULL,
 			     SMTO_NORMAL, 10000, &dwResult);
 	TabWnd_ActivateFrameWindow(hwnd);
 	theApp.m_bTabWndChanging = FALSE; // ウィンドウ切替中OFF

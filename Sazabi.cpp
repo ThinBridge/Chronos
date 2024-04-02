@@ -4419,7 +4419,7 @@ void CSazabi::SetFavicon(CImage* img, CBrowserFrame* pwndFrame)
 		}
 		else
 			m_imgFavIcons.Add(ICoHelper);
-		((CMainFrame*)m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH, NULL);
+		((CMainFrame*)m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH_COMMAND, NULL);
 	}
 }
 void CSazabi::SetDefaultFavicon(CBrowserFrame* pwndFrame)
@@ -4437,7 +4437,7 @@ void CSazabi::SetDefaultFavicon(CBrowserFrame* pwndFrame)
 	}
 	else
 		m_imgFavIcons.Add(ICoHelper);
-	((CMainFrame*)m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH, NULL);
+	((CMainFrame*)m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH_COMMAND, NULL);
 }
 
 void CSazabi::SetWarmFavicon(HWND hwndF)
@@ -4458,7 +4458,7 @@ void CSazabi::SetWarmFavicon(HWND hwndF)
 		}
 		else
 			m_imgFavIcons.Add(ICoHelper);
-		((CMainFrame*)m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH, NULL);
+		((CMainFrame*)m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH_COMMAND, NULL);
 	}
 }
 
