@@ -91,6 +91,11 @@ public:
 	CString mMESSAGE6;
 };
 
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはリスト用に自動生成されたenumなのか、独自定義したものなのか不明。
+// そのため、警告の抑止により対応する。
+#pragma warning(disable : 26812)
 enum
 {
 	LIST_INDEX,
@@ -105,6 +110,7 @@ enum
 	LIST_MESSAGE6,
 	LIST_MAX,
 };
+#pragma warning(pop)
 
 class CDlgDebugWnd : public CDialogEx
 {
