@@ -199,8 +199,11 @@ LRESULT CTabWnd::OnTabLButtonUp(WPARAM wParam, LPARAM lParam)
 				tcitem.mask = TCIF_PARAM;
 				tcitem.lParam = 0;
 				TabCtrl_GetItem(m_hwndTab, nDstTab, &tcitem);
-				ShowTabWindow((HWND)tcitem.lParam);
-				SendMessage((HWND)tcitem.lParam, WM_SETREDRAW, true, 0);
+				if (tcitem.lParam)
+				{
+					ShowTabWindow((HWND)tcitem.lParam);
+					SendMessage((HWND)tcitem.lParam, WM_SETREDRAW, true, 0);
+				}
 				BreakDrag();
 				return 1;
 			}
@@ -385,12 +388,15 @@ LRESULT CTabWnd::OnTabRButtonUp(WPARAM wParam, LPARAM lParam)
 		menu.LoadMenu(IDR_MENU_TAB);
 		CMenu* menuSub = NULL;
 		menuSub = menu.GetSubMenu(0);
-		int lResult = TrackPopupMenuEx(menu.GetSubMenu(0)->m_hMenu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON,
-					       rcOver.left, rcOver.bottom - 4,
-					       (HWND)tcitem.lParam, NULL);
-		if (lResult > 0)
+		if (tcitem.lParam)
 		{
-			SendMessage((HWND)tcitem.lParam, WM_COMMAND, MAKEWPARAM(LOWORD(lResult), 0x0), 0);
+			int lResult = TrackPopupMenuEx(menu.GetSubMenu(0)->m_hMenu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON,
+						       rcOver.left, rcOver.bottom - 4,
+						       (HWND)tcitem.lParam, NULL);
+			if (lResult > 0)
+			{
+				SendMessage((HWND)tcitem.lParam, WM_COMMAND, MAKEWPARAM(LOWORD(lResult), 0x0), 0);
+			}
 		}
 		return 1;
 	}

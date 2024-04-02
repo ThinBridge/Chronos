@@ -1786,6 +1786,10 @@ bool ClientHandler::OnSelectClientCertificate(
 			return false;
 		}
 
+#pragma warning(push)
+// CryptUIDlgSelectCertificateFromStoreの第7引数は実際にはNULL許容だが、_In_で定義されているので
+//C6387: 「_Param_(7)は'0'である可能性があります」の警告が出る。仕方がないのでこの警告は無視する。
+#pragma warning(disable : 6387)
 		PCCERT_CONTEXT pCertContext;
 		pCertContext = CryptUIDlgSelectCertificateFromStore(hCertStore,
 								    hWindow,
@@ -1794,6 +1798,8 @@ bool ClientHandler::OnSelectClientCertificate(
 								    0,	  // show default columns
 								    0,	  // reserved dwFlags
 								    NULL);
+#pragma warning(pop)
+
 		if (!pCertContext)
 		{
 			// Failed to select certificate or canceled or closed dialog.
