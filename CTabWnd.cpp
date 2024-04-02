@@ -281,7 +281,7 @@ LRESULT CTabWnd::OnTabMouseMove(WPARAM wParam, LPARAM lParam)
 			m_nTabBorderArray[i] = rc.right;
 		}
 		m_nTabBorderArray[i] = 0; // 最後の要素は番兵
-					  // ここに来たらドラッグ開始なので break しないでそのまま DRAG_DRAG 処理に入る
+		[[fallthrough]];	  // ここに来たらドラッグ開始なので break しないでそのまま DRAG_DRAG 処理に入る
 
 	case DragState::DRAG:
 		// ドラッグ中のマウスカーソルを表示する
