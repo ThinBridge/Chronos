@@ -1283,12 +1283,12 @@ void CBrowserFrame::OnClose()
 							pWnd = theApp.GetNextGenerationActiveWindow(this);
 							if (theApp.IsWnd(pWnd))
 							{
-								((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_DEL, pWnd->GetSafeHwnd());
+								((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_DEL_COMMAND, pWnd->GetSafeHwnd());
 							}
 						}
 					}
 					((CMainFrame*)theApp.m_pMainWnd)->Delete_TabWindow(this);
-					((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH, NULL);
+					((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH_COMMAND, NULL);
 
 					delete m_cTabWnd;
 					m_cTabWnd = NULL;
@@ -1311,7 +1311,7 @@ void CBrowserFrame::SetWindowTitle(LPCTSTR ptr)
 	}
 	if (m_cTabWnd)
 	{
-		((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH, NULL);
+		((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH_COMMAND, NULL);
 	}
 }
 void CBrowserFrame::OnActiveFrm()
@@ -1337,7 +1337,7 @@ void CBrowserFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 		{
 			if (((CMainFrame*)theApp.m_pMainWnd)->SetActiveFramePtr(this))
 			{
-				((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_ORDER, this->GetSafeHwnd());
+				((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_ORDER_COMMAND, this->GetSafeHwnd());
 			}
 		}
 		if (::IsWindow(theApp.m_hwndTaskDlg) && ::IsWindowEnabled(theApp.m_hwndTaskDlg))
@@ -2878,13 +2878,13 @@ void CBrowserFrame::OnCloseDelay()
 #ifdef _DEBUG
 						TRACE(_T("##TWNT_DEL##  Close[%s] NGen[%s]\n"), this->m_wndView.m_strTitle, pWnd->m_wndView.m_strTitle);
 #endif
-						((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_DEL, pWnd->GetSafeHwnd());
+						((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_DEL_COMMAND, pWnd->GetSafeHwnd());
 					}
 				}
 			}
 		}
 		((CMainFrame*)theApp.m_pMainWnd)->Delete_TabWindow(this);
-		((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH, NULL);
+		((CMainFrame*)theApp.m_pMainWnd)->TabWindowMsgBSend(TWNT_REFRESH_COMMAND, NULL);
 
 		delete m_cTabWnd;
 		m_cTabWnd = NULL;

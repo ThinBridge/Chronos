@@ -5,14 +5,12 @@
 #define MYWM_TAB_WINDOW_NOTIFY (WM_APP + 213)
 
 //タブウインドウ用メッセージサブコマンド
-enum ETabWndNotifyType
-{
-	TWNT_REFRESH = 0,      //再表示
-	TWNT_ADD = 1,	       //ウインドウ登録
-	TWNT_DEL = 2,	       //ウインドウ削除
-	TWNT_ORDER = 3,	       //ウインドウ順序変更
-	TWNT_WNDPL_ADJUST = 4, //ウィンドウ位置合わせ
-};
+#define	TWNT_REFRESH_COMMAND		0 //再表示
+#define	TWNT_ADD_COMMAND		1 //ウインドウ登録
+#define	TWNT_DEL_COMMAND		2 //ウインドウ削除
+#define	TWNT_ORDER_COMMAND		3 //ウインドウ順序変更
+#define	TWNT_WNDPL_ADJUST_COMMAND	4 //ウィンドウ位置合わせ
+
 inline LRESULT UpDown_SetRange(HWND hwndCtl, int upper, int lower) { return (LRESULT)(ULONG_PTR)::SendMessage(hwndCtl, UDM_SETRANGE, 0L, MAKELPARAM(upper, lower)); }
 inline LRESULT UpDown_GetPos(HWND hwndCtl) { return (LRESULT)(ULONG_PTR)::SendMessage(hwndCtl, UDM_GETPOS, 0L, 0L); }
 inline LRESULT UpDown_SetPos(HWND hwndCtl, DWORD value) { return (LRESULT)(ULONG_PTR)::SendMessage(hwndCtl, UDM_SETPOS, 0L, MAKELONG(value, 0)); }
@@ -31,7 +29,7 @@ static void ActivateFrameWindow(HWND hwnd)
 	::SendMessageTimeout(
 	    hwnd,
 	    MYWM_TAB_WINDOW_NOTIFY,
-	    TWNT_WNDPL_ADJUST,
+	    TWNT_WNDPL_ADJUST_COMMAND,
 	    (LPARAM)NULL,
 	    SMTO_NORMAL,
 	    10000,
