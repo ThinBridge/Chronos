@@ -14,16 +14,14 @@ public:
 };
 namespace autoresize
 {
-	enum ResizeSpecifier
-	{
-		LEFT = 0x01,
-		RIGHT = 0x02,
-		TOP = 0x04,
-		BOTTOM = 0x08,
-		NO_HOR_RESIZE = 0x10,
-		NO_VERT_RESIZE = 0x20,
-	};
-
+	//ResizeSpecifier definitions
+	const UINT RESIZE_LEFT = 0x01;
+	const UINT RESIZE_RIGHT = 0x02;
+	const UINT RESIZE_TOP = 0x04;
+	const UINT RESIZE_BOTTOM = 0x08;
+	const UINT NO_HOR_RESIZE = 0x10;
+	const UINT NO_VERT_RESIZE = 0x20;
+	
 	struct ResizeSpec
 	{
 		HWND m_hwnd = nullptr;
@@ -71,11 +69,11 @@ namespace autoresize
 				return false;
 			}
 
-			if ((resizeSpec & (LEFT | RIGHT)) == (LEFT | RIGHT) && (resizeSpec & NO_HOR_RESIZE))
+			if ((resizeSpec & (RESIZE_LEFT | RESIZE_RIGHT)) == (RESIZE_LEFT | RESIZE_RIGHT) && (resizeSpec & NO_HOR_RESIZE))
 			{
 				return false;
 			}
-			if ((resizeSpec & (TOP | BOTTOM)) == (TOP | BOTTOM) && (resizeSpec & NO_VERT_RESIZE))
+			if ((resizeSpec & (RESIZE_TOP | RESIZE_BOTTOM)) == (RESIZE_TOP | RESIZE_BOTTOM) && (resizeSpec & NO_VERT_RESIZE))
 			{
 				return false;
 			}
@@ -124,19 +122,19 @@ namespace autoresize
 
 		bool AddSnapToRight(CWnd* wnd, UINT opt = 0, int cx = INT_MIN)
 		{
-			return AddSnap(wnd, CRect(INT_MIN, INT_MIN, cx, INT_MIN), RIGHT | opt);
+			return AddSnap(wnd, CRect(INT_MIN, INT_MIN, cx, INT_MIN), RESIZE_RIGHT | opt);
 		}
 		bool AddSnapToBottom(CWnd* wnd, UINT opt = 0, int cy = INT_MIN)
 		{
-			return AddSnap(wnd, CRect(INT_MIN, INT_MIN, INT_MIN, cy), BOTTOM | opt);
+			return AddSnap(wnd, CRect(INT_MIN, INT_MIN, INT_MIN, cy), RESIZE_BOTTOM | opt);
 		}
 		bool AddSnapToRightBottom(CWnd* wnd, int cx = INT_MIN, int cy = INT_MIN)
 		{
-			return AddSnap(wnd, CRect(INT_MIN, INT_MIN, cx, cy), RIGHT | BOTTOM);
+			return AddSnap(wnd, CRect(INT_MIN, INT_MIN, cx, cy), RESIZE_RIGHT | RESIZE_BOTTOM);
 		}
 		bool AddSnapToFullBottom(CWnd* wnd)
 		{
-			return AddSnap(wnd, CRect(INT_MAX, INT_MAX, INT_MAX, INT_MAX), RIGHT | BOTTOM);
+			return AddSnap(wnd, CRect(INT_MAX, INT_MAX, INT_MAX, INT_MAX), RESIZE_RIGHT | RESIZE_BOTTOM);
 		}
 		void Resize(CWnd* parent)
 		{
@@ -162,7 +160,7 @@ namespace autoresize
 				int width = rcNew.Width();
 				int height = rcNew.Height();
 
-				if (spec.m_resizeSpec & LEFT)
+				if (spec.m_resizeSpec & RESIZE_LEFT)
 				{
 					rcNew.left = rc.left + spec.m_rc.left;
 					if (spec.m_resizeSpec & NO_HOR_RESIZE)
@@ -170,7 +168,7 @@ namespace autoresize
 						rcNew.right = rcNew.left + width;
 					}
 				}
-				if (spec.m_resizeSpec & RIGHT)
+				if (spec.m_resizeSpec & RESIZE_RIGHT)
 				{
 					rcNew.right = rc.right - spec.m_rc.right;
 					if (spec.m_resizeSpec & NO_HOR_RESIZE)
@@ -178,7 +176,7 @@ namespace autoresize
 						rcNew.left = rcNew.right - width;
 					}
 				}
-				if (spec.m_resizeSpec & TOP)
+				if (spec.m_resizeSpec & RESIZE_TOP)
 				{
 					rcNew.top = rc.top + spec.m_rc.right;
 					if (spec.m_resizeSpec & NO_VERT_RESIZE)
@@ -186,7 +184,7 @@ namespace autoresize
 						rcNew.bottom = rcNew.top + height;
 					}
 				}
-				if (spec.m_resizeSpec & BOTTOM)
+				if (spec.m_resizeSpec & RESIZE_BOTTOM)
 				{
 					rcNew.bottom = rc.bottom - spec.m_rc.bottom;
 					if (spec.m_resizeSpec & NO_VERT_RESIZE)
