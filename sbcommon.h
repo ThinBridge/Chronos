@@ -906,7 +906,7 @@ public:
 	}
 	~AppSettings() {}
 
-	enum MediaAccessPermission
+	enum class MediaAccessPermission
 	{
 		NO_MEDIA_ACCESS,
 		MANUAL_MEDIA_APPROVAL,
@@ -948,8 +948,8 @@ public:
 
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
-		EnableMediaAccessByApproval = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
-		EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
+		EnableMediaAccessByApproval = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
+		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
@@ -1228,7 +1228,7 @@ public:
 		RunningLimitTime = 1440;
 		MemoryUsageLimit = 2040;
 		WindowCountLimit = 60;
-		EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
+		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//リダイレクト設定
@@ -1631,7 +1631,7 @@ public:
 						// EnableMediaAccessByApproval was deprecated.
 						// 1: means manual approval, so it should be migrated to
 						// equivalent EnableMediaAccessPermission = 1 when EnableMediaAccessPermission is not set.
-						EnableMediaAccessByApproval = AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL;
+						EnableMediaAccessByApproval = static_cast<int>(AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL);
 					}
 					continue;
 				}
@@ -1639,8 +1639,8 @@ public:
 				{
 					int iW = 0;
 					iW = _ttoi(strTemp3);
-					if (AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS <= iW &&
-						iW <= AppSettings::MediaAccessPermission::DEFAULT_MEDIA_APPROVAL)
+					if (static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS) <= iW &&
+						iW <= static_cast<int>(AppSettings::MediaAccessPermission::DEFAULT_MEDIA_APPROVAL))
 					{
 						// 0: None
 						// 1: Manual Approval
@@ -1650,7 +1650,7 @@ public:
 					else
 					{
 						// Regard as no permission for invalid value
-						EnableMediaAccessPermission = AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS;
+						EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
 					}
 					bEnabledMediaAccessPermission = true;
 					continue;
