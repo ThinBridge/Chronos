@@ -92,10 +92,15 @@ public:
 	void SetMsg(const CString& str);
 	void SetMsgExec(const CString& str);
 	UINT m_iCntg;
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_DLG_PROGRESS
 	};
+#pragma warning(pop)
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);

@@ -1011,10 +1011,15 @@ class CAboutDlg : public CDialog
 public:
 	CAboutDlg(CWnd* pParent = NULL);
 	CWnd* pParentFrm;
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
 	enum
 	{
 		IDD = IDD_ABOUTBOX
 	};
+#pragma warning(pop)
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
