@@ -274,7 +274,7 @@ BEGIN
     CONTROL         "GPUレンダリングを有効にする",IDC_CHECK_GPU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,161,10
     CONTROL         "Rebar(メニュー、ツールバー、アドレスバー)を表示する",IDC_CHECK_DISABLE_REBAR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,55,238,10
-    CONTROL         "Rebarにロゴを表示する",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,161,10
+    CONTROL         "Rebarにロゴを表示する",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,70,161,10
     CONTROL         "ステータスバーを表示する",IDC_CHECK_DISABLE_STATUSBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,85,153,10
     GROUPBOX        "ポップアップウィンドウ",IDC_STATIC,8,133,265,45
     LTEXT           "幅マージン",IDC_STATIC,15,145,45,8
@@ -1632,7 +1632,7 @@ BEGIN
     CONTROL         "Enable GPU rendering",IDC_CHECK_GPU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,25,161,10
     CONTROL         "Show Rebar (menubar, toolbar and address bar)",IDC_CHECK_DISABLE_REBAR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,55,238,10
-    CONTROL         "Show logo on the Rebar",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,161,10
+    CONTROL         "Show logo on the Rebar",IDC_CHECK_LOGO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,70,161,10
     CONTROL         "Show status bar",IDC_CHECK_DISABLE_STATUSBAR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,85,153,10
     GROUPBOX        "Popup windows",IDC_STATIC,8,133,265,45
     LTEXT           "Horizontal margin",IDC_STATIC,15,145,45,8

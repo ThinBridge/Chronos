@@ -873,6 +873,7 @@ BEGIN_MESSAGE_MAP(CDlgSetDSP, CPropertyPage)
 	ON_WM_DESTROY()
 	ON_MESSAGE(ID_SETTING_OK, Set_OK)
 	ON_BN_CLICKED(IDC_BUTTON1, &CDlgSetDSP::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_CHECK_DISABLE_REBAR, &CDlgSetDSP::OnBnClickedCheckDisableRebar)
 END_MESSAGE_MAP()
 
 BOOL CDlgSetDSP::OnInitDialog()
@@ -905,9 +906,15 @@ BOOL CDlgSetDSP::OnInitDialog()
 
 	//Rebar
 	if (theApp.m_AppSettingsDlgCurrent.IsRebar())
+	{
 		((CButton*)GetDlgItem(IDC_CHECK_DISABLE_REBAR))->SetCheck(1);
+		GetDlgItem(IDC_CHECK_LOGO)->EnableWindow(TRUE);
+	}
 	else
+	{
 		((CButton*)GetDlgItem(IDC_CHECK_DISABLE_REBAR))->SetCheck(0);
+		GetDlgItem(IDC_CHECK_LOGO)->EnableWindow(FALSE);
+	}
 
 	//ステータスバー
 	if (theApp.m_AppSettingsDlgCurrent.IsStatusbar())
@@ -2847,4 +2854,10 @@ void CDlgSetCustomScript::OnBnClickedButton1()
 void CDlgSetCustomScript::OnBnClickedShowDevTools()
 {
 	theApp.ShowDevTools();
+}
+
+void CDlgSetDSP::OnBnClickedCheckDisableRebar()
+{
+	BOOL checked = ((CButton*)GetDlgItem(IDC_CHECK_DISABLE_REBAR))->GetCheck();
+	GetDlgItem(IDC_CHECK_LOGO)->EnableWindow(checked);
 }
