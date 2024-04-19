@@ -23,6 +23,7 @@ CChildView::CChildView()
 	m_bFirstCallDontClose = FALSE;
 	m_nBrowserID = 0;
 	m_bDevToolsWnd = FALSE;
+	m_bFindNext = FALSE;
 }
 
 CChildView::~CChildView()
