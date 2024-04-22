@@ -475,6 +475,9 @@ CTabWnd::CTabWnd()
 	m_TAB_WINDOW_HEIGHT = TAB_WINDOW_HEIGHT;
 	m_MAX_TABITEM_WIDTH = MAX_TABITEM_WIDTH;
 	m_MIN_TABITEM_WIDTH = MIN_TABITEM_WIDTH;
+	m_nTabHover = 0;
+	m_hDefaultCursor = NULL;
+	m_ptSrcCursor = {0};
 	return;
 }
 
