@@ -633,7 +633,7 @@ public:
 
 		CString strParam(lpPath);
 		TCHAR szPath[MAX_PATH] = {0};
-		lstrcpyn(szPath, strParam, MAX_PATH);
+		StringCchCopy(szPath, MAX_PATH, strParam);
 
 		if (PathStripToRoot(szPath))
 			strRet = szPath;

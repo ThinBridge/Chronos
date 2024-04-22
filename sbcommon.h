@@ -5,6 +5,7 @@
 #include "locale.h"
 #include <sddl.h>
 #include <VersionHelpers.h>
+#include <strsafe.h>
 #include "include/cef_version.h"
 
 #include "mmsystem.h"
@@ -1892,7 +1893,7 @@ public:
 			iSize += 1; //+1=null
 			pVal = new TCHAR[iSize];
 			memset(pVal, 0x00, sizeof(TCHAR) * iSize);
-			lstrcpyn(pVal, strVal, iSize);
+			StringCchCopy(pVal, iSize, strVal);
 			RegSetValueEx(hKey, lpRegSub, 0, REG_SZ, (LPBYTE)pVal, sizeof(TCHAR) * iSize);
 			RegCloseKey(hKey);
 			delete[] pVal;
@@ -2906,10 +2907,9 @@ public:
 				delete[] m_pstrData_UTF8;
 				m_pstrData_UTF8 = NULL;
 			}
-			long size = src.GetLength() * 2 + 2;
-			wchar_t* lpWideString = new wchar_t[size];
-			memset(lpWideString, 0x00, size);
-			lstrcpyn(lpWideString, src, size);
+			long size = src.GetLength() + 1;
+			wchar_t* lpWideString = new wchar_t[size]{0};
+			StringCchCopy(lpWideString, size, src);
 			long size2 = src.GetLength() * 3 + 2;
 			m_pstrData_UTF8 = new char[size2];
 			memset(m_pstrData_UTF8, 0x00, size2);
@@ -4036,8 +4036,8 @@ public:
 					pDLDlg->m_Msg.SetWindowText(strMsg);
 					pDLDlg->m_Tf.SetWindowText(strTf);
 					pDLDlg->m_strFileFullPath = strFileName;
-					TCHAR szFolder[MAX_PATH * 2 + 1] = {0};
-					lstrcpyn(szFolder, strFileName, MAX_PATH * 2);
+					TCHAR szFolder[MAX_PATH] = {0};
+					StringCchCopy(szFolder, MAX_PATH, strFileName);
 					PathRemoveFileSpec(szFolder);
 					pDLDlg->m_strFileFolderPath = szFolder;
 					m_taskbarList3.SetProgress((ULONGLONG)nProgress, (ULONGLONG)100, TBPF_NORMAL);
