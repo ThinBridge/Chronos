@@ -1266,7 +1266,7 @@ public:
 		//ChFiler---------------------------------
 		RootPath = _T("B:\\");
 		UploadBasePath = _T("O:\\");
-		ExtFilter = _T("*.*");
+		ExtFilter = _T(".*");
 		EnableOpendOp = 1;
 		EnableTransferLog = 0;
 		EnableUploadSync = 0;
