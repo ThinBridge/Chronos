@@ -1483,9 +1483,9 @@ void CChildView::OnPrintPDF()
 		if (bRet == IDOK)
 		{
 			memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
-			lstrcpynW(szSelPath, pFileDlg->GetPathName(), MAX_PATH);
-			WCHAR szSelFolderPath[MAX_PATH + 1] = {0};
-			lstrcpynW(szSelFolderPath, pFileDlg->GetPathName(), MAX_PATH);
+			StringCchCopy(szSelPath, MAX_PATH, pFileDlg->GetPathName());
+			WCHAR szSelFolderPath[MAX_PATH] = {0};
+			StringCchCopy(szSelFolderPath, MAX_PATH, pFileDlg->GetPathName());
 			PathRemoveFileSpec(szSelFolderPath);
 			theApp.m_strLastSelectFolderPath = szSelFolderPath;
 			strPath = pFileDlg->GetPathName();

@@ -861,10 +861,10 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		if (bRet == IDOK)
 		{
 			memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
-			lstrcpynW(szSelPath, pFileDlg->GetPathName(), MAX_PATH);
+			StringCchCopy(szSelPath, MAX_PATH, pFileDlg->GetPathName());
 
-			WCHAR szSelFolderPath[MAX_PATH + 1] = {0};
-			lstrcpynW(szSelFolderPath, pFileDlg->GetPathName(), MAX_PATH);
+			WCHAR szSelFolderPath[MAX_PATH] = {0};
+			StringCchCopy(szSelFolderPath, MAX_PATH, pFileDlg->GetPathName());
 			PathRemoveFileSpec(szSelFolderPath);
 			theApp.m_strLastSelectFolderPath = szSelFolderPath;
 
@@ -939,7 +939,7 @@ void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<C
 		CefString cefFulPath = download_item->GetFullPath();
 		LPCWSTR fullPath = (LPCWSTR)cefFulPath.c_str();
 		if (fullPath)
-			lstrcpyn(values.szFullPath, fullPath, 512);
+			StringCchCopy(values.szFullPath, 512, fullPath);
 	}
 	HWND hWindow = GetSafeParentWnd(browser);
 	UINT nBrowserId = browser->GetIdentifier();

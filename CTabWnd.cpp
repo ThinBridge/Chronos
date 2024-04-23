@@ -822,7 +822,7 @@ LRESULT CTabWnd::OnNotify(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				CString strRet;
 				strRet = this->m_pwndMainFrame->Get_TabWindowInfo_Title((HWND)tcitem.lParam);
-				lstrcpyn(m_szTextTip, strRet, _countof(m_szTextTip) - 1);
+				StringCchCopy(m_szTextTip, _countof(m_szTextTip), strRet);
 
 				((NMTTDISPINFO*)pnmh)->lpszText = m_szTextTip;
 				((NMTTDISPINFO*)pnmh)->hinst = NULL;
@@ -1072,7 +1072,7 @@ void CTabWnd::Refresh(BOOL bEnsureVisible /* = TRUE*/, BOOL bRebuild /* = FALSE*
 			strTempTitle.Replace(_T("&"), _T("&&"));
 			//文字のカット
 			SBUtil::GetDivChar(strTempTitle, 24, strTempTitle, FALSE);
-			lstrcpyn(szName, strTempTitle, _countof(szName) - 1);
+			StringCchCopy(szName, _countof(szName), strTempTitle);
 
 			tcitem.pszText = szName;
 			tcitem.iImage = j;

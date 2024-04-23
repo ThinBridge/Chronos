@@ -400,7 +400,7 @@ BOOL CSazabi::InitFunc_SGMode()
 		TCHAR szTargetPath[4096] = {0};
 		CString strDrive;
 		TCHAR szPath[MAX_PATH] = {0};
-		lstrcpyn(szPath, m_AppSettings.GetRootPath(), MAX_PATH);
+		StringCchCopy(szPath, MAX_PATH, m_AppSettings.GetRootPath());
 		if (PathStripToRoot(szPath))
 			strDrive = szPath;
 		if (strDrive.IsEmpty())
@@ -795,7 +795,7 @@ BOOL CSazabi::InitMultipleInstance()
 	strFrmWndClass.Replace(_T("."), _T(""));
 	strFrmWndClass.Replace(_T("--"), _T("-"));
 	strFrmWndClass.Replace(_T(" "), _T("_"));
-	lstrcpyn(m_FrmWndClassName, strFrmWndClass, 512);
+	StringCchCopy(m_FrmWndClassName, 512, strFrmWndClass);
 
 	SetAppID(m_FrmWndClassName);
 
@@ -1354,7 +1354,7 @@ void CSazabi::OpenChTaskMgr()
 	CString strFndWndChk;
 	strFndWndChk = _T("ChTaskMGR:");
 	strFndWndChk += m_FrmWndClassName;
-	lstrcpyn(FrmWndClassName, strFndWndChk, 255);
+	StringCchCopy(FrmWndClassName, _countof(FrmWndClassName), strFndWndChk);
 
 	HWND hWndCap = ::FindWindow(FrmWndClassName, NULL); //APのハンドル取得
 	//起動している。
@@ -2445,7 +2445,7 @@ void CSazabi::OpenDefaultBrowser(const CString& strURL, DWORD iType, const CStri
 			strFrmWndClass.Replace(_T("."), _T(""));
 			strFrmWndClass.Replace(_T("--"), _T("-"));
 			strFrmWndClass.Replace(_T(" "), _T("_"));
-			lstrcpyn(FrmWndClassName, strFrmWndClass, 255);
+			StringCchCopy(FrmWndClassName, _countof(FrmWndClassName), strFrmWndClass);
 
 			HWND hWndCap = FindWindow(FrmWndClassName, NULL); //APのハンドル取得
 			//起動している。

@@ -32,8 +32,8 @@ public:
 		if (m_bDLComp)
 		{
 			m_strFileFullPath = strFileFullPath;
-			TCHAR szFolder[MAX_PATH * 2 + 1] = {0};
-			lstrcpyn(szFolder, strFileFullPath, MAX_PATH * 2);
+			TCHAR szFolder[MAX_PATH] = {0};
+			StringCchCopy(szFolder, MAX_PATH, strFileFullPath);
 			PathRemoveFileSpec(szFolder);
 			m_strFileFolderPath = szFolder;
 			m_FileName.SetWindowText(strFileFullPath);
