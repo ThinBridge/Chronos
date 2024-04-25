@@ -90,7 +90,7 @@ BEGIN
     END
     POPUP "ヘルプ(&H)"
     BEGIN
-        MENUITEM "バージョン情報(&A)...",              ID_APP_ABOUT
+        MENUITEM "システム情報(&A)...",              ID_APP_ABOUT
         MENUITEM SEPARATOR
         MENUITEM "ブラウザーキャッシュを削除する(&X)",         IDC_APP_DELETE_CACHE
     END
