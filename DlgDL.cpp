@@ -76,6 +76,11 @@ void CDlgDL::OnBnClickedCancel()
 			this->KillTimer(m_iTimerID);
 			m_iTimerID = 0;
 		}
+		if (::PathFileExists(m_strFileFolderPath))
+		{
+			theApp.OpenChFiler(m_strFileFolderPath);
+			CDialog::OnOK();
+		}
 		CDialogEx::OnCancel();
 		return;
 	}

@@ -1188,7 +1188,7 @@ void CSazabi::ExitKillZombieProcess()
 		}
 	}
 }
-void CSazabi::OpenChFiler(LPCTSTR lpOpenPath)
+void CSazabi::OpenChFiler(CHFILER_INIT_MODE initMode, LPCTSTR lpOpenPath)
 {
 	PROC_TIME(OpenChFiler)
 	try
@@ -1994,7 +1994,7 @@ void CSazabi::CloseVOSProcessOther()
 	RegCloseKey(hKey);
 	if (!bThinFilerExecFlg)
 	{
-		OpenChFiler(_T("/ExitChk"));
+		OpenChFiler(CHFILER_INIT_MODE::EXIT_CHECK);
 	}
 }
 
