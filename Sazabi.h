@@ -45,6 +45,13 @@
 #define CEF_WOD_IGNORE_ACTION		WOD_IGNORE_ACTION
 #endif
 
+enum class CHFILER_INIT_MODE
+{
+	OPEN,
+	TRANSFER,
+	EXIT_CHECK
+};
+
 class CChildView;
 class CScriptHost;
 class CBrowserFrame;
@@ -333,7 +340,7 @@ public:
 	BOOL DeleteDirectoryTempFolder(LPCTSTR lpPathName);
 
 	void ExitKillZombieProcess();
-	void OpenChFiler(LPCTSTR lpOpenPath);
+	void OpenChFiler(CHFILER_INIT_MODE initMode, LPCTSTR lpOpenPath = NULL);
 	void OpenChTaskMgr();
 
 	//{{AFX_VIRTUAL(CSazabi)
