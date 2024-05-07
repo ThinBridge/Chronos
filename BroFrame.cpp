@@ -3092,7 +3092,7 @@ void CBrowserFrame::OpenThinFiler()
 		CString startingMsg;
 		startingMsg.LoadString(IDS_STRING_STARTING_FILEMGR);
 		SetMessage_MsgDlg(startingMsg);
-		theApp.OpenChFiler(NULL);
+		theApp.OpenChFiler(CHFILER_INIT_MODE::OPEN, NULL);
 		Release_MsgDlg();
 	}
 }
