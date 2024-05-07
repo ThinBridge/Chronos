@@ -3084,7 +3084,7 @@ void CBrowserFrame::OpenThinFiler()
 	//起動している。
 	if (hWndCap)
 	{
-		SBUtil::SetAbsoluteForegroundWindow(hWndCap, FALSE);
+		theApp.OpenChFiler(CHFILER_INIT_MODE::OPEN, NULL);
 	}
 	else
 	{
