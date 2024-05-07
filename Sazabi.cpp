@@ -1312,7 +1312,7 @@ void CSazabi::OpenChFiler(CHFILER_INIT_MODE initMode, LPCTSTR lpOpenPath)
 					}
 					else
 					{
-						nAtom = ::GlobalAddAtom(strParam);
+						nAtom = ::GlobalAddAtom(strOpenPath);
 						LRESULT lr = SendMessageTimeout(hWndCap, WM_USER + 58, (WPARAM)nAtom, static_cast<LPARAM>(initMode), SMTO_BLOCK, 3 * 1000, NULL);
 					}
 					return;
