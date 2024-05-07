@@ -1803,11 +1803,7 @@ public:
 				}
 				if (strTemp2.CompareNoCase(_T("EnableAutoTransfer")) == 0)
 				{
-					int iW = 0;
-					iW = _ttoi(strTemp3);
-					if (iW < 0)
-						iW = 0;
-					UploadSyncInterval = iW;
+					EnableAutoTransfer = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
