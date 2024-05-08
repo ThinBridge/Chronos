@@ -980,6 +980,7 @@ public:
 		EnableUploadSync = 0;
 		EnableUploadSyncMirror = 0;
 		UploadSyncInterval = 0;
+		EnableAutoTransfer = 0;
 		DisableOpendOpAlert = 0;
 		DisableExitOpAlert = 0;
 		ConfirmAutoRefresh = 0;
@@ -1064,6 +1065,7 @@ public:
 		Data.EnableUploadSync = EnableUploadSync;
 		Data.EnableUploadSyncMirror = EnableUploadSyncMirror;
 		Data.UploadSyncInterval = UploadSyncInterval;
+		Data.EnableAutoTransfer = EnableAutoTransfer;
 		Data.DisableOpendOpAlert = DisableOpendOpAlert;
 		Data.DisableExitOpAlert = DisableExitOpAlert;
 		Data.ConfirmAutoRefresh = ConfirmAutoRefresh;
@@ -1172,6 +1174,7 @@ private:
 	int EnableUploadSync;
 	int EnableUploadSyncMirror;
 	int UploadSyncInterval;
+	int EnableAutoTransfer;
 	CString UploadBasePath;
 	//ChTaskMGR---------------------------------
 	int LABEL_TYPE;
@@ -1273,6 +1276,7 @@ public:
 		EnableUploadSync = 0;
 		EnableUploadSyncMirror = 0;
 		UploadSyncInterval = 5000;
+		EnableAutoTransfer = 0;
 		DisableOpendOpAlert = 0;
 		DisableExitOpAlert = 2;
 		ConfirmAutoRefresh = 2;
@@ -1797,6 +1801,11 @@ public:
 					UploadSyncInterval = iW;
 					continue;
 				}
+				if (strTemp2.CompareNoCase(_T("EnableAutoTransfer")) == 0)
+				{
+					EnableAutoTransfer = (strTemp3 == _T("1")) ? TRUE : FALSE;
+					continue;
+				}
 
 				//ChTaskMGR---------------------------------
 				if (strTemp2.CompareNoCase(_T("LABEL_TYPE")) == 0)
@@ -2016,6 +2025,7 @@ public:
 		strRet += EXTVAL(EnableUploadSync);
 		strRet += EXTVAL(EnableUploadSyncMirror);
 		strRet += EXTVAL(UploadSyncInterval);
+		strRet += EXTVAL(EnableAutoTransfer);
 		strRet += EXTVAL(EnableOpendOp);
 		strRet += EXTVAL(DisableOpendOpAlert);
 
@@ -2116,6 +2126,7 @@ public:
 	inline BOOL IsEnableUploadSync() { return EnableUploadSync; }
 	inline BOOL IsEnableUploadSyncMirror() { return EnableUploadSyncMirror; }
 	inline int GetUploadSyncInterval() { return UploadSyncInterval; }
+	inline BOOL IsEnableAutoTransfer() { return EnableAutoTransfer; }
 	inline BOOL IsDisableOpendOpAlert() { return DisableOpendOpAlert; }
 	inline BOOL IsDisableExitOpAlert() { return DisableExitOpAlert; }
 	inline int GetConfirmAutoRefresh() { return ConfirmAutoRefresh; }
@@ -2228,6 +2239,7 @@ public:
 	inline void SetEnableUploadSync(DWORD dVal) { EnableUploadSync = dVal; }
 	inline void SetEnableUploadSyncMirror(DWORD dVal) { EnableUploadSyncMirror = dVal; }
 	inline void SetUploadSyncInterval(DWORD dVal) { UploadSyncInterval = dVal; }
+	inline void SetEnableAutoTransfer(DWORD dVal) { EnableAutoTransfer = dVal; }
 	inline void SetDisableOpendOpAlert(DWORD dVal) { DisableOpendOpAlert = dVal; }
 	inline void SetDisableExitOpAlert(DWORD dVal) { DisableExitOpAlert = dVal; }
 	inline void SetConfirmAutoRefresh(DWORD dVal) { ConfirmAutoRefresh = dVal; }

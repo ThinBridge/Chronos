@@ -1188,33 +1188,21 @@ void CSazabi::ExitKillZombieProcess()
 		}
 	}
 }
-void CSazabi::OpenChFiler(LPCTSTR lpOpenPath)
+void CSazabi::OpenChFiler(CHFILER_INIT_MODE initMode, LPCTSTR lpOpenPath)
 {
 	PROC_TIME(OpenChFiler)
 	try
 	{
 		if (!theApp.IsSGMode()) return;
 
-		CString strExecCommand;
-		CString strCommand;
-		CString strParam;
-		CString strOpenPath;
-		if (lpOpenPath)
+		if (initMode == CHFILER_INIT_MODE::EXIT_CHECK)
 		{
-			strOpenPath = lpOpenPath;
+			CString strExecCommand;
+			CString strCommand;
+			LPCTSTR strParam = _T("/ExitChk");
 			strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
-			strExecCommand.Format(_T("\"%sChFiler.exe\" \"%s\""), (LPCTSTR)m_strExeFolderPath, (LPCTSTR)strOpenPath);
-			strParam.Format(_T("\"%s\""), (LPCTSTR)strOpenPath);
-		}
-		else
-		{
-			strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
-			strExecCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
-			strParam = _T("");
-		}
+			strExecCommand.Format(_T("\"%sChFiler.exe\" %s"), (LPCTSTR)m_strExeFolderPath, strParam);
 
-		if (strOpenPath == _T("/ExitChk"))
-		{
 			STARTUPINFO si = {0};
 			PROCESS_INFORMATION pi = {0};
 			si.cb = sizeof(si);
@@ -1284,6 +1272,24 @@ void CSazabi::OpenChFiler(LPCTSTR lpOpenPath)
 		}
 		else
 		{
+			CString strExecCommand;
+			CString strCommand;
+			CString strParam;
+			CString strOpenPath;
+			if (lpOpenPath)
+			{
+				strOpenPath = lpOpenPath;
+				strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
+				LPCTSTR mode = initMode == CHFILER_INIT_MODE::OPEN ? _T("") : _T("/Transfer");
+				strParam.Format(_T("%s \"%s\""), mode, (LPCTSTR)strOpenPath);
+				strExecCommand.Format(_T("\"%sChFiler.exe\" %s"), (LPCTSTR)m_strExeFolderPath, (LPCTSTR)strParam);
+			}
+			else
+			{
+				strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
+				strExecCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
+				strParam = _T("");
+			}
 			CString strFrmWnd;
 			strFrmWnd = _T("CFiler:");
 			strFrmWnd += m_FrmWndClassName;
@@ -1302,12 +1308,12 @@ void CSazabi::OpenChFiler(LPCTSTR lpOpenPath)
 					ATOM nAtom = {0};
 					if (strParam.IsEmpty())
 					{
-						LRESULT lr = SendMessageTimeout(hWndCap, WM_USER + 58, (WPARAM)0, 0, SMTO_BLOCK, 3 * 1000, NULL);
+						LRESULT lr = SendMessageTimeout(hWndCap, WM_USER + 58, (WPARAM)0, static_cast<LPARAM>(CHFILER_INIT_MODE::OPEN), SMTO_BLOCK, 3 * 1000, NULL);
 					}
 					else
 					{
-						nAtom = ::GlobalAddAtom(strParam);
-						LRESULT lr = SendMessageTimeout(hWndCap, WM_USER + 58, (WPARAM)nAtom, 0, SMTO_BLOCK, 3 * 1000, NULL);
+						nAtom = ::GlobalAddAtom(strOpenPath);
+						LRESULT lr = SendMessageTimeout(hWndCap, WM_USER + 58, (WPARAM)nAtom, static_cast<LPARAM>(initMode), SMTO_BLOCK, 3 * 1000, NULL);
 					}
 					return;
 				}
@@ -1994,7 +2000,7 @@ void CSazabi::CloseVOSProcessOther()
 	RegCloseKey(hKey);
 	if (!bThinFilerExecFlg)
 	{
-		OpenChFiler(_T("/ExitChk"));
+		OpenChFiler(CHFILER_INIT_MODE::EXIT_CHECK, NULL);
 	}
 }
 

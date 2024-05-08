@@ -76,6 +76,11 @@ void CDlgDL::OnBnClickedCancel()
 			this->KillTimer(m_iTimerID);
 			m_iTimerID = 0;
 		}
+		if (theApp.m_AppSettings.IsEnableAutoTransfer() &&
+		    ::PathFileExists(m_strFileFullPath))
+		{
+			theApp.OpenChFiler(CHFILER_INIT_MODE::TRANSFER, m_strFileFullPath);
+		}
 		CDialogEx::OnCancel();
 		return;
 	}
@@ -125,7 +130,11 @@ void CDlgDL::OnBnClickedButton1()
 			this->KillTimer(m_iTimerID);
 			m_iTimerID = 0;
 		}
-
+		if (theApp.m_AppSettings.IsEnableAutoTransfer() &&
+		    ::PathFileExists(m_strFileFullPath))
+		{
+			theApp.OpenChFiler(CHFILER_INIT_MODE::TRANSFER, m_strFileFullPath);
+		}
 		return;
 	}
 	CString confirmMsg;
@@ -281,7 +290,7 @@ void CDlgDL::OnBnClickedButtonFo()
 	{
 		if (::PathFileExists(m_strFileFullPath))
 		{
-			theApp.OpenChFiler(m_strFileFullPath);
+			theApp.OpenChFiler(CHFILER_INIT_MODE::OPEN, m_strFileFullPath);
 			CDialog::OnOK();
 		}
 	}
@@ -316,7 +325,7 @@ void CDlgDL::OnBnClickedButtonDiro()
 		}
 		else if (::PathFileExists(m_strFileFolderPath))
 		{
-			theApp.OpenChFiler(m_strFileFolderPath);
+			theApp.OpenChFiler(CHFILER_INIT_MODE::OPEN, m_strFileFolderPath);
 			CDialog::OnOK();
 		}
 	}
