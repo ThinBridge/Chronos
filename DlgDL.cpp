@@ -52,7 +52,45 @@ void CDlgDL::OnBnClickedOk()
 {
 	//	CDialogEx::OnOK();
 }
-
+void CDlgDL::SetCompST(BOOL bComp, LPCTSTR strFileFullPath)
+{
+	m_bDLComp = bComp;
+	if (m_bDLComp)
+	{
+		m_strFileFullPath = strFileFullPath;
+		TCHAR szFolder[MAX_PATH] = {0};
+		StringCchCopy(szFolder, MAX_PATH, strFileFullPath);
+		PathRemoveFileSpec(szFolder);
+		m_strFileFolderPath = szFolder;
+		m_FileName.SetWindowText(strFileFullPath);
+		m_Prog.SetPos(100);
+		m_Tf.SetWindowText(_T(""));
+		if (!theApp.m_AppSettings.IsEnableAutoTransfer())
+		{
+			GetDlgItem(IDC_BUTTON_FO)->EnableWindow(TRUE);
+			GetDlgItem(IDC_BUTTON_FO)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_BUTTON_DIRO)->EnableWindow(TRUE);
+			GetDlgItem(IDC_BUTTON_DIRO)->ShowWindow(SW_SHOW);
+		}
+		CString closeButtonLabel;
+		closeButtonLabel.LoadString(ID_DOWNLOAD_COMPLETE_DIALOG_CLOSE);
+		GetDlgItem(IDC_BUTTON1)->SetWindowText(closeButtonLabel);
+		CString windowTitle;
+		windowTitle.LoadString(ID_DOWNLOAD_COMPLETE_DIALOG_TITLE);
+		this->SetWindowText(windowTitle);
+		m_Msg.SetWindowText(windowTitle);
+		if (!this->IsWindowVisible())
+		{
+			this->ShowWindow(SW_SHOW);
+		}
+		::SetWindowPos(this->m_hWnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+		if (!m_iTimerID)
+		{
+			m_iTimerID = (INT_PTR)this;
+			this->SetTimer(m_iTimerID, 30 * 1000, 0);
+		}
+	}
+}
 void CDlgDL::OnTimer(UINT_PTR nIDEvent)
 {
 	if (m_iTimerID == nIDEvent)
