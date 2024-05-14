@@ -838,9 +838,17 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 	return TRUE;
 }
 
+#if CHROME_VERSION_MAJOR < 125
+#define BEFORE_DOWNLOAD_RETURN return
 void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 				     CefRefPtr<CefDownloadItem> download_item,
 				     const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
+#else
+#define BEFORE_DOWNLOAD_RETURN return true
+bool ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
+				     CefRefPtr<CefDownloadItem> download_item,
+				     const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
+#endif
 {
 	REQUIRE_UI_THREAD();
 
@@ -858,7 +866,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 			theApp.SB_MessageBox(hWindow, alertMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
 		}
 		EmptyWindowClose(browser);
-		return;
+		BEFORE_DOWNLOAD_RETURN;
 	}
 
 	m_bDownLoadStartFlg = TRUE;
@@ -914,7 +922,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 			CString inProgressDownloadMessage;
 			inProgressDownloadMessage.LoadString(ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS);
 			int iRet = theApp.SB_MessageBox(hWindowFrm, inProgressDownloadMessage, NULL, MB_OK | MB_ICONWARNING, TRUE);
-			return;
+			BEFORE_DOWNLOAD_RETURN;
 		}
 
 		CString szFilter;
@@ -992,10 +1000,12 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 			delete pFileDlg;
 			pFileDlg = NULL;
 		}
-		return;
+		BEFORE_DOWNLOAD_RETURN;
 	}
 	callback->Continue(_T(""), false);
+	BEFORE_DOWNLOAD_RETURN;
 }
+#undef BEFORE_DOWNLOAD_RETURN
 
 void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, CefRefPtr<CefDownloadItemCallback> callback)
 {
