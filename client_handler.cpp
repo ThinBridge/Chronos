@@ -753,6 +753,7 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
 	return TRUE;
 }
 
+#if CHROME_VERSION_MAJOR < 125
 void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 				     CefRefPtr<CefDownloadItem> download_item,
 				     const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
@@ -774,6 +775,165 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		}
 		EmptyWindowClose(browser);
 		return;
+	}
+
+	m_bDownLoadStartFlg = TRUE;
+	CString strFileName;
+	strFileName = (LPCWSTR)suggested_name.c_str();
+	strFileName.TrimLeft();
+	strFileName.TrimRight();
+	// ファイル名に使えない文字を置き換える。
+	strFileName = SBUtil::GetValidFileName(strFileName);
+
+	CString strPath;
+	if (theApp.IsSGMode())
+	{
+		strPath = theApp.m_AppSettings.GetRootPath();
+		if (strPath.IsEmpty())
+			strPath = _T("B:\\");
+	}
+	else
+	{
+		strPath = SBUtil::GetDownloadFolderPath();
+	}
+	strPath = strPath.TrimRight('\\');
+	strPath += _T("\\");
+
+	if (!theApp.m_strLastSelectFolderPath.IsEmpty())
+	{
+		if (theApp.IsFolderExists(theApp.m_strLastSelectFolderPath))
+		{
+			strPath = theApp.m_strLastSelectFolderPath;
+		}
+	}
+	HWND hWindow = GetSafeParentWnd(browser);
+	if (SafeWnd(hWindow))
+	{
+		UINT nBrowserId = browser->GetIdentifier();
+		CWnd* pCWnd = CWnd::FromHandle(hWindow);
+
+		CString strURL;
+		CefString strURLC;
+		strURLC = browser->GetMainFrame()->GetURL();
+		strURL = (LPCWSTR)strURLC.c_str();
+		if (strURL.IsEmpty())
+			::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_BLANK_PAGE, (WPARAM)TRUE, NULL, SMTO_NORMAL, 1000, NULL);
+		else
+			::SendMessageTimeout(hWindow, WM_APP_CEF_DOWNLOAD_BLANK_PAGE, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
+
+		SendMessageTimeout(hWindow, WM_APP_CEF_WINDOW_ACTIVATE, (WPARAM)NULL, (LPARAM)NULL, SMTO_NORMAL, 1000, NULL);
+
+		// ダウンロード中の場合は、警告を表示する。
+		if (theApp.m_DlMgr.IsDlProgress(nBrowserId))
+		{
+			HWND hWindowFrm = GetParent(hWindow);
+			CString inProgressDownloadMessage;
+			inProgressDownloadMessage.LoadString(ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS);
+			int iRet = theApp.SB_MessageBox(hWindowFrm, inProgressDownloadMessage, NULL, MB_OK | MB_ICONWARNING, TRUE);
+			return;
+		}
+
+		CString szFilter;
+		szFilter.LoadString(ID_FILE_TYPE_ALL);
+		CString strTitle;
+		strTitle.LoadString(ID_DOWNLOAD_FILE_CHOOSER_TITLE);
+		CStringW strCaption(theApp.m_strThisAppName);
+		CStringW strRootDrive(theApp.m_AppSettings.GetRootPath());
+		CStringW strMsg;
+		INT_PTR bRet = FALSE;
+
+		CFileDialog* pFileDlg = NULL;
+		if (theApp.IsSGMode())
+		{
+			// SGModeの場合は、Classicダイアログを使用
+			pFileDlg = new CFileDialog(FALSE,
+						   NULL, strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, pCWnd, 0, FALSE);
+		}
+		else
+		{
+			pFileDlg = new CFileDialog(FALSE,
+						   NULL, strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, pCWnd);
+		}
+		pFileDlg->m_ofn.lpstrTitle = strTitle.GetString();
+		pFileDlg->m_ofn.lpstrInitialDir = strPath;
+
+		WCHAR szSelPath[MAX_PATH + 1] = {0};
+		bRet = pFileDlg->DoModal();
+		if (bRet == IDOK)
+		{
+			memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
+			StringCchCopy(szSelPath, MAX_PATH, pFileDlg->GetPathName());
+
+			WCHAR szSelFolderPath[MAX_PATH] = {0};
+			StringCchCopy(szSelFolderPath, MAX_PATH, pFileDlg->GetPathName());
+			PathRemoveFileSpec(szSelFolderPath);
+			theApp.m_strLastSelectFolderPath = szSelFolderPath;
+
+			strPath = pFileDlg->GetPathName();
+			if (!strPath.IsEmpty())
+			{
+				CefString strcfPath(strPath);
+				callback->Continue(strcfPath, false);
+
+				if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableDownloadLogging())
+				{
+					CString strFileName;
+					TCHAR* ptrFile = NULL;
+					ptrFile = PathFindFileName(strPath);
+					if (ptrFile)
+					{
+						strFileName = ptrFile;
+					}
+					if (strURL.IsEmpty())
+					{
+						strURL = (LPCWSTR)download_item->GetURL().c_str();
+					}
+					theApp.m_pLogDisp->SendLog(LOG_DOWNLOAD, strFileName, strURL);
+				}
+				::SendMessageTimeout(hWindow, WM_APP_CEF_BEFORE_DOWNLOAD, (WPARAM)TRUE, NULL, SMTO_NORMAL, 1000, NULL);
+				theApp.m_DlMgr.Init_DLDlg(theApp.m_pMainWnd, nBrowserId);
+				theApp.m_DlMgr.SetDlProgress(nBrowserId, TRUE);
+			}
+		}
+		else
+		{
+			theApp.m_DlMgr.SetDlProgress(nBrowserId, FALSE);
+			theApp.m_DlMgr.Cancel(nBrowserId);
+			::SendMessageTimeout(hWindow, WM_APP_CEF_BEFORE_DOWNLOAD, (WPARAM)FALSE, NULL, SMTO_NORMAL, 1000, NULL);
+			EmptyWindowClose(browser);
+			callback->Continue(_T(""), false);
+		}
+		if (pFileDlg)
+		{
+			delete pFileDlg;
+			pFileDlg = NULL;
+		}
+		return;
+	}
+	callback->Continue(_T(""), false);
+}
+#else
+bool ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
+				     CefRefPtr<CefDownloadItem> download_item,
+				     const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
+{
+	REQUIRE_UI_THREAD();
+
+	//Download禁止
+	if (theApp.m_AppSettings.IsEnableDownloadRestriction())
+	{
+		HWND hWindow = GetSafeParentWnd(browser);
+		if (SafeWnd(hWindow))
+		{
+			HWND hWindowFrm = GetParent(hWindow);
+			if (SafeWnd(hWindowFrm))
+				hWindow = hWindowFrm;
+			CString alertMsg;
+			alertMsg.LoadString(ID_MSG_FILE_DOWNLOAD_RESTRICTED);
+			theApp.SB_MessageBox(hWindow, alertMsg, NULL, MB_OK | MB_ICONWARNING, TRUE);
+		}
+		EmptyWindowClose(browser);
+		return true;
 	}
 
 	m_bDownLoadStartFlg = TRUE;
@@ -829,7 +989,7 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 			CString inProgressDownloadMessage;
 			inProgressDownloadMessage.LoadString(ID_MSG_ANOTHER_DOWNLOAD_IN_PROGRESS);
 			int iRet = theApp.SB_MessageBox(hWindowFrm, inProgressDownloadMessage, NULL, MB_OK | MB_ICONWARNING, TRUE);
-			return;
+			return true;
 		}
 
 		CString szFilter;
@@ -907,10 +1067,12 @@ void ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 			delete pFileDlg;
 			pFileDlg = NULL;
 		}
-		return;
+		return true;
 	}
 	callback->Continue(_T(""), false);
+	return true;
 }
+#endif
 
 void ClientHandler::OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, CefRefPtr<CefDownloadItemCallback> callback)
 {

@@ -106,7 +106,11 @@ public:
 	virtual void OnLoadingProgressChange(CefRefPtr<CefBrowser> browser, double progress) override;
 
 	// CefDownloadHandler methods
+#if CHROME_VERSION_MAJOR < 125
 	virtual void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback) override;
+#else
+	virtual bool OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback) override;
+#endif
 	virtual void OnDownloadUpdated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, CefRefPtr<CefDownloadItemCallback> callback) override;
 
 	// CefLoadHandler methods
