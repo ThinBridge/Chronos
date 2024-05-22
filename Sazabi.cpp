@@ -4112,6 +4112,9 @@ void CSazabi::InitializeCef()
 	m_bMultiThreadedMessageLoop = FALSE;
 	settings.multi_threaded_message_loop = m_bMultiThreadedMessageLoop;
 	settings.external_message_pump = true;
+#if CHROME_VERSION_MAJOR >= 125
+	settings.chrome_runtime = true;
+#endif
 
 	settings.no_sandbox = true;
 	if (!m_IsSGMode)
