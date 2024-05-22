@@ -1061,7 +1061,14 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 
 	CefRequest::HeaderMap cefHeaders;
 	request->GetHeaderMap(cefHeaders);
-	cefHeaders.insert(std::make_pair("DNT", "1"));
+    // cefHeaders.insert(std::make_pair("DNT", "1"));
+	request->GetHeaderMap(cefHeaders);
+	cefHeaders.erase("User-Agent");
+	cefHeaders.erase("dnt");
+	cefHeaders.erase("accept-encoding");
+	cefHeaders.insert(std::make_pair("accept-encoding", "gzip, deflate, br, zstd"));
+	cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"));
+	cefHeaders.insert(std::make_pair("priority", "u=0, i"));
 	request->SetHeaderMap(cefHeaders);
 
 	CefString cefURL = request->GetURL();
@@ -1145,8 +1152,11 @@ cef_return_value_t ClientHandler::OnBeforeResourceLoad(
 			request->GetHeaderMap(cefHeaders);
 			cefHeaders.erase("User-Agent");
 			cefHeaders.erase("dnt");
-			cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"));
-			cefHeaders.insert(std::make_pair("sec-ch-ua", "\"Google Chrome\";v=\"125\", \"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\""));
+			cefHeaders.erase("accept-encoding");
+			cefHeaders.insert(std::make_pair("accept-encoding", "gzip, deflate, br, zstd"));
+			cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"));
+			cefHeaders.insert(std::make_pair("priority", "u=0, i"));
+			// cefHeaders.insert(std::make_pair("sec-ch-ua", "\"Google Chrome\";v=\"125\", \"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\""));
 			// cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0"));
 			// cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66"));
 			// cefHeaders.insert(std::make_pair("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.0.0"));

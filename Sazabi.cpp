@@ -4132,7 +4132,7 @@ void CSazabi::InitializeCef()
 	strCefLocale = strLocale;
 	CefString(&settings.locale) = strCefLocale;
 
-	CString strLAcceptLanguageList(_T("ja, en-US, en"));
+	CString strLAcceptLanguageList(_T("en-US, en"));
 	//strLAcceptLanguageList.LoadString(IDS_STRING_CEF_ACCEPT_LANGUAGE_LIST);
 	CefString strCefAcceptLanguageList;
 	strCefAcceptLanguageList = strLAcceptLanguageList;
