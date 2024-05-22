@@ -28,6 +28,7 @@
 #include "client_util.h"
 #include "DlgAuth.h"
 #include "sbcommon.h"
+#include "chrome_command_ids.h"
 
 // Required for selecting client certificates
 #pragma comment(lib, "Crypt32")
@@ -49,6 +50,44 @@ ClientHandler::ClientHandler()
 
 ClientHandler::~ClientHandler()
 {
+}
+
+bool IsUsableCommand(int id)
+{
+	switch (id)
+	{
+		case IDC_BACK:
+		case IDC_FORWARD:
+		case IDC_RELOAD:
+		case IDC_RELOAD_BYPASSING_CACHE:
+		case IDC_RELOAD_CLEARING_CACHE:
+		case IDC_STOP:
+		case IDC_BOOKMARK_BAR_UNDO:
+		case IDC_CONTENT_CONTEXT_UNDO:
+		case IDC_BOOKMARK_BAR_REDO:
+		case IDC_CONTENT_CONTEXT_REDO:
+		case IDC_CUT:
+		case IDC_CONTENT_CONTEXT_CUT:
+		case IDC_COPY:
+		case IDC_CONTENT_CONTEXT_COPY:
+		case IDC_PASTE:
+		case IDC_CONTENT_CONTEXT_PASTE:
+		case IDC_CONTENT_CONTEXT_DELETE:
+		case IDC_CONTENT_CONTEXT_SELECTALL:
+		case IDC_FIND:
+		case IDC_PRINT:
+		case IDC_VIEW_SOURCE:
+	    case IDC_SPELLCHECK_SUGGESTION_0:
+		case IDC_SPELLCHECK_SUGGESTION_1:
+		case IDC_SPELLCHECK_SUGGESTION_2:
+		case IDC_SPELLCHECK_SUGGESTION_3:
+		case IDC_SPELLCHECK_SUGGESTION_4:
+		case IDC_CONTENT_CONTEXT_NO_SPELLING_SUGGESTIONS:
+		case IDC_SPELLCHECK_ADD_TO_DICTIONARY:
+			return true;
+		default:
+			return false;
+	}
 }
 
 bool ClientHandler::DoClose(CefRefPtr<CefBrowser> browser)
@@ -256,8 +295,30 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 					CefRefPtr<CefContextMenuParams> params,
 					CefRefPtr<CefMenuModel> model)
 {
-	model->Remove(MENU_ID_VIEW_SOURCE);
-	model->Remove(MENU_ID_PRINT);
+	//model->Clear();
+	model->Remove(IDC_VIEW_SOURCE);
+	model->Remove(IDC_PRINT);
+	size_t count = model->GetCount();
+	std::vector<int> removeCommandIds = {};
+	CString msg = CString(_T("ids = "));
+	for (size_t i = 0; i < count; i++)
+	{
+		int commandId = model->GetCommandIdAt(i);
+		if (!IsUsableCommand(commandId))
+		{
+			removeCommandIds.push_back(commandId);
+		}
+	}
+	for (int commandId : removeCommandIds)
+	{
+		CString msg2 = CString();
+		msg2.Format(_T("%d,"), commandId);
+		msg.Append(msg2);
+		model->Remove(commandId);
+	}
+	msg.Append(_T("\n"));
+	TRACE(msg);
+	removeCommandIds.clear();
 	cef_context_menu_type_flags_t Flg = CM_TYPEFLAG_NONE;
 	Flg = params->GetTypeFlags();
 	if ((Flg & (CM_TYPEFLAG_PAGE | CM_TYPEFLAG_FRAME)) != 0)
@@ -372,7 +433,7 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	CString contextMenuReloadLabel;
 	contextMenuReloadLabel.LoadString(ID_CONTEXT_MENU_RELOAD);
 	CefString cefContextMenuReloadLabel(contextMenuReloadLabel);
-	model->AddItem(MENU_ID_RELOAD, cefContextMenuReloadLabel);
+	model->AddItem(IDC_RELOAD, cefContextMenuReloadLabel);
 
 	CString contextMenuPrintPDFLabel;
 	contextMenuPrintPDFLabel.LoadString(ID_CONTEXT_MENU_PRINT_PDF);
@@ -382,7 +443,7 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	CString contextMenuPrintLabel;
 	contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
 	CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
-	model->AddItem(MENU_ID_PRINT, cefContextMenuPrintLabel);
+	model->AddItem(IDC_PRINT, cefContextMenuPrintLabel);
 
 	// call parent
 	CefContextMenuHandler::OnBeforeContextMenu(browser, frame, params, model);
