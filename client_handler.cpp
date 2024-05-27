@@ -42,6 +42,8 @@
 #pragma warning(push, 0)
 #pragma warning(disable : 26812)
 
+#define CH_MENU_INVALID_OR_SEPARATOR (-1)
+
 ClientHandler::ClientHandler()
 {
 	m_bDownLoadStartFlg = FALSE;
@@ -56,8 +58,10 @@ bool IsUsableCommand(int id)
 {
 	switch (id)
 	{
+		case CH_MENU_INVALID_OR_SEPARATOR:
 		case IDC_BACK:
 		case IDC_FORWARD:
+		case IDC_CONTENT_CONTEXT_RELOADFRAME:
 		case IDC_RELOAD:
 		case IDC_RELOAD_BYPASSING_CACHE:
 		case IDC_RELOAD_CLEARING_CACHE:
@@ -300,7 +304,6 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	model->Remove(IDC_PRINT);
 	size_t count = model->GetCount();
 	std::vector<int> removeCommandIds = {};
-	CString msg = CString(_T("ids = "));
 	for (size_t i = 0; i < count; i++)
 	{
 		int commandId = model->GetCommandIdAt(i);
@@ -311,14 +314,10 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	}
 	for (int commandId : removeCommandIds)
 	{
-		CString msg2 = CString();
-		msg2.Format(_T("%d,"), commandId);
-		msg.Append(msg2);
 		model->Remove(commandId);
 	}
-	msg.Append(_T("\n"));
-	TRACE(msg);
 	removeCommandIds.clear();
+
 	cef_context_menu_type_flags_t Flg = CM_TYPEFLAG_NONE;
 	Flg = params->GetTypeFlags();
 	if ((Flg & (CM_TYPEFLAG_PAGE | CM_TYPEFLAG_FRAME)) != 0)
@@ -444,6 +443,31 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
 	CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
 	model->AddItem(IDC_PRINT, cefContextMenuPrintLabel);
+
+	// メニュー項目調整後、Separatorが連続することがあるので、連続している場合は削除する。
+	count = model->GetCount();
+	int beforeCommandId = CH_MENU_INVALID_OR_SEPARATOR;
+	for (size_t i = count - 1; i > 0; i--)
+	{
+		int commandId = model->GetCommandIdAt(i);
+		if (commandId == CH_MENU_INVALID_OR_SEPARATOR && beforeCommandId == CH_MENU_INVALID_OR_SEPARATOR)
+		{
+			model->RemoveAt(i);
+		}
+		beforeCommandId = commandId;
+	}
+	for (size_t i = 0; i < count; i++)
+	{
+		int commandId = model->GetCommandIdAt(0);
+		if (commandId == CH_MENU_INVALID_OR_SEPARATOR)
+		{
+			model->RemoveAt(0);
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	// call parent
 	CefContextMenuHandler::OnBeforeContextMenu(browser, frame, params, model);
