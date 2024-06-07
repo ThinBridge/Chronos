@@ -4138,8 +4138,8 @@ void CSazabi::InitializeCef()
 
 	// キャッシュフォルダのパスを取得する。
 	//
-	// * C:\Program Files\Chronos\CEFCache (SGモード)
-	// * C:\Users\<user>\AppData\Local\ChronosCache (通常モード)
+	// * C:\Users\<user>\AppData\Local\Thinstall\ChronosSG\%drive_C%\Chronos\CEFCache\{pid} (SGモード)
+	// * C:\Users\<user>\AppData\Local\ChronosCache\{pid} (通常モード)
 	//
 	if (this->IsSGMode())
 	{
