@@ -946,6 +946,7 @@ public:
 		if (!m_strCEFCachePath.IsEmpty())
 		{
 			DeleteDirectory(m_strCEFCachePath, _T("*.*"));
+			::RemoveDirectory(m_strCEFCachePath);
 		}
 	}
 	//Windows10 1903環境で問題発生。対策コード2019-10-15
