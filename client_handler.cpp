@@ -41,6 +41,9 @@
 #pragma warning(push, 0)
 #pragma warning(disable : 26812)
 
+// https://magpcss.org/ceforum/apidocs3/projects/(default)/CefMenuModel.html#GetCommandIdAt(int)
+#define CH_MENU_INVALID_OR_SEPARATOR (-1)
+
 ClientHandler::ClientHandler()
 {
 	m_bDownLoadStartFlg = FALSE;
@@ -383,6 +386,27 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
 	CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
 	model->AddItem(MENU_ID_PRINT, cefContextMenuPrintLabel);
+
+	
+	// メニュー項目調整後、Separatorが連続することがあるので、連続している場合は削除する。
+	size_t count = model->GetCount();
+	int beforeCommandId = CH_MENU_INVALID_OR_SEPARATOR;
+	int commandId;
+	for (size_t i = count - 1; i > 0; i--)
+	{
+		commandId = model->GetCommandIdAt(i);
+		if (commandId == CH_MENU_INVALID_OR_SEPARATOR && beforeCommandId == CH_MENU_INVALID_OR_SEPARATOR)
+		{
+			model->RemoveAt(i);
+		}
+		beforeCommandId = commandId;
+	}
+	// 先頭がSeparatorだった場合、まだ残存している。
+	commandId = model->GetCommandIdAt(0);
+	if (commandId == CH_MENU_INVALID_OR_SEPARATOR)
+	{
+		model->RemoveAt(0);
+	}
 
 	// call parent
 	CefContextMenuHandler::OnBeforeContextMenu(browser, frame, params, model);
