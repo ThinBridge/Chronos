@@ -1674,11 +1674,8 @@ int CSazabi::ExitInstance()
 				}
 				else
 				{
-					if (this->m_AppSettings.IsEnableDeleteCache())
-					{
-						this->UnInitializeCef();
-						this->DeleteCEFCache();
-					}
+					this->UnInitializeCef();
+					this->DeleteCEFCache();
 				}
 				//ゾンビプロセス化を防ぐ。
 				ExitKillZombieProcess();
