@@ -1531,16 +1531,6 @@ BOOL CDlgSetCAP::OnInitDialog()
 		((CButton*)GetDlgItem(IDC_EnableUploadRestriction))->SetCheck(0);
 	}
 
-	//EnableEnableDeleteCache
-	if (theApp.m_AppSettingsDlgCurrent.IsEnableDeleteCache())
-	{
-		((CButton*)GetDlgItem(IDC_EnableDeleteCache))->SetCheck(1);
-	}
-	else
-	{
-		((CButton*)GetDlgItem(IDC_EnableDeleteCache))->SetCheck(0);
-	}
-
 	//running
 	if (theApp.m_AppSettingsDlgCurrent.IsEnableRunningTime())
 	{
@@ -1591,12 +1581,6 @@ LRESULT CDlgSetCAP::Set_OK(WPARAM wParam, LPARAM lParam)
 		theApp.m_AppSettingsDlgCurrent.SetEnableUploadRestriction(1);
 	else
 		theApp.m_AppSettingsDlgCurrent.SetEnableUploadRestriction(0);
-
-	//EnableDeleteCache
-	if (((CButton*)GetDlgItem(IDC_EnableDeleteCache))->GetCheck() == 1)
-		theApp.m_AppSettingsDlgCurrent.SetEnableDeleteCache(1);
-	else
-		theApp.m_AppSettingsDlgCurrent.SetEnableDeleteCache(0);
 
 	//running
 	if (((CButton*)GetDlgItem(IDC_Enable_ProcessRunTime))->GetCheck() == 1)

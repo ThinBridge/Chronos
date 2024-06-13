@@ -954,7 +954,6 @@ public:
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
-		EnableDeleteCache = 0;
 		EnableRunningTime = 0;
 		RunningLimitTime = 0;
 		EnableURLRedirect = 0;
@@ -1039,7 +1038,6 @@ public:
 
 		Data.EnableDownloadRestriction = EnableDownloadRestriction;
 		Data.EnableUploadRestriction = EnableUploadRestriction;
-		Data.EnableDeleteCache = EnableDeleteCache;
 		Data.EnableRunningTime = EnableRunningTime;
 		Data.RunningLimitTime = RunningLimitTime;
 		Data.EnableURLRedirect = EnableURLRedirect;
@@ -1118,7 +1116,6 @@ private:
 	//制限設定
 	int EnableDownloadRestriction;
 	int EnableUploadRestriction;
-	int EnableDeleteCache;
 	int EnableRunningTime;
 	int RunningLimitTime;
 	int MemoryUsageLimit;
@@ -1226,7 +1223,6 @@ public:
 		//制限設定
 		EnableDownloadRestriction = FALSE;
 		EnableUploadRestriction = FALSE;
-		EnableDeleteCache = FALSE;
 
 		EnableRunningTime = FALSE;
 		RunningLimitTime = 1440;
@@ -1673,12 +1669,6 @@ public:
 					continue;
 				}
 
-				if (strTemp2.CompareNoCase(_T("EnableDeleteCache")) == 0)
-				{
-					EnableDeleteCache = (strTemp3 == _T("1")) ? TRUE : FALSE;
-					continue;
-				}
-
 				if (strTemp2.CompareNoCase(_T("EnableRunningTime")) == 0)
 				{
 					EnableRunningTime = (strTemp3 == _T("1")) ? TRUE : FALSE;
@@ -1975,7 +1965,6 @@ public:
 		strRet += _T("# Restriction\n");
 		strRet += EXTVAL(EnableDownloadRestriction);
 		strRet += EXTVAL(EnableUploadRestriction);
-		strRet += EXTVAL(EnableDeleteCache);
 		strRet += EXTVAL(EnableRunningTime);
 		strRet += EXTVAL(RunningLimitTime);
 		strRet += EXTVAL(MemoryUsageLimit);
@@ -2092,7 +2081,6 @@ public:
 
 	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
 	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
-	inline BOOL IsEnableDeleteCache() { return EnableDeleteCache; }
 	inline BOOL IsEnableRunningTime() { return EnableRunningTime; }
 	inline int GetRunningLimitTime() { return RunningLimitTime; }
 
@@ -2184,7 +2172,6 @@ public:
 
 	inline void SetEnableDownloadRestriction(DWORD dVal) { EnableDownloadRestriction = dVal ? 1 : 0; }
 	inline void SetEnableUploadRestriction(DWORD dVal) { EnableUploadRestriction = dVal ? 1 : 0; }
-	inline void SetEnableDeleteCache(DWORD dVal) { EnableDeleteCache = dVal ? 1 : 0; }
 	inline void SetEnableRunningTime(DWORD dVal) { EnableRunningTime = dVal ? 1 : 0; }
 	inline void SetRunningLimitTime(DWORD dVal) { RunningLimitTime = dVal; }
 

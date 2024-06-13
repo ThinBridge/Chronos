@@ -492,8 +492,6 @@ FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
     CONTROL         "ファイルのダウンロードを禁止する",IDC_EnableDownloadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
     CONTROL         "ファイルのアップロードを禁止する",IDC_EnableUploadRestriction,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
-    CONTROL         "ブラウザーキャッシュ(インターネット一時ファイル)を起動/終了時に削除する",IDC_EnableDeleteCache,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,44,277,10
     GROUPBOX        "リソース制限",IDC_STATIC,5,60,355,111
     CONTROL         "起動時間を制限する",IDC_Enable_ProcessRunTime,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,76,90,10
     EDITTEXT        IDC_EDIT_LIMIT_TIME,18,91,52,14,ES_AUTOHSCROLL | ES_NUMBER
@@ -1854,8 +1852,6 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,12,177,10
     CONTROL         "Forbid to upload files",IDC_EnableUploadRestriction,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,28,177,10
-    CONTROL         "Clear browser caches (internet temporary files) on every startup and shutdown",IDC_EnableDeleteCache,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,44,277,10
     GROUPBOX        "Resource restrictions",IDC_STATIC,5,60,355,111
     CONTROL         "Restrict running time",IDC_Enable_ProcessRunTime,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,76,90,10
     EDITTEXT        IDC_EDIT_LIMIT_TIME,18,91,52,14,ES_AUTOHSCROLL | ES_NUMBER
