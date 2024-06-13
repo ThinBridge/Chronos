@@ -4159,10 +4159,7 @@ void CSazabi::InitializeCef()
 
 	if (IsFirstInstance())
 	{
-		if (this->m_AppSettings.IsEnableDeleteCache())
-		{
-			DeleteCEFCache();
-		}
+		DeleteCEFCache();
 	}
 	settings.persist_session_cookies = true;
 	CefString(&settings.root_cache_path) = m_strCEFCachePath;
