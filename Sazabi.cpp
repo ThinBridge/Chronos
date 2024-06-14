@@ -1663,7 +1663,7 @@ int CSazabi::ExitInstance()
 								CloseVOSProcessOther();
 
 							this->UnInitializeCef();
-							this->DeleteCEFCache();
+							this->DeleteCEFCacheAll();
 						}
 					}
 					if (hMutex)
@@ -1675,7 +1675,7 @@ int CSazabi::ExitInstance()
 				else
 				{
 					this->UnInitializeCef();
-					this->DeleteCEFCache();
+					this->DeleteCEFCacheAll();
 				}
 				//ゾンビプロセス化を防ぐ。
 				ExitKillZombieProcess();
@@ -4143,6 +4143,7 @@ void CSazabi::InitializeCef()
 	//
 	if (this->IsSGMode())
 	{
+		m_strCEFCachePathBase.Format(_T("%s\\CEFCache"), (LPCTSTR)m_strExeFolderPath);
 		m_strCEFCachePath.Format(_T("%s\\CEFCache\\%d"), (LPCTSTR)m_strExeFolderPath, pidCurrent);
 	}
 	else
@@ -4154,12 +4155,13 @@ void CSazabi::InitializeCef()
 			strLocalAppPath = m_strExeFolderPath;
 		}
 		strLocalAppPath = strLocalAppPath.TrimRight('\\');
+		m_strCEFCachePathBase.Format(_T("%s\\ChronosCache"), (LPCTSTR)strLocalAppPath);
 		m_strCEFCachePath.Format(_T("%s\\ChronosCache\\%d"), (LPCTSTR)strLocalAppPath, pidCurrent);
 	}
 
 	if (IsFirstInstance())
 	{
-		DeleteCEFCache();
+		DeleteCEFCacheAll();
 	}
 	settings.persist_session_cookies = true;
 	CefString(&settings.root_cache_path) = m_strCEFCachePath;

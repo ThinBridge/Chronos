@@ -114,6 +114,7 @@ public:
 	CString m_strDBL_EXE_FolderPath;
 	CString m_strSettingFileFullPath;
 
+	CString m_strCEFCachePathBase;
 	CString m_strCEFCachePath;
 	CString m_strFaviconCachePath;
 
@@ -947,6 +948,14 @@ public:
 		{
 			DeleteDirectory(m_strCEFCachePath, _T("*.*"));
 			::RemoveDirectory(m_strCEFCachePath);
+		}
+	}
+	void DeleteCEFCacheAll()
+	{
+		// CEFCacheを削除する。
+		if (!m_strCEFCachePathBase.IsEmpty())
+		{
+			DeleteDirectory(m_strCEFCachePathBase, _T("*.*"));
 		}
 	}
 	//Windows10 1903環境で問題発生。対策コード2019-10-15
