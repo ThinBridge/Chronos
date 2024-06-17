@@ -35,7 +35,7 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//Chromeが3rd party cookiesをサポート外としたのは2024/1からだが、CEF119は2023/11のリリース。
 	//そのため、CEF119ではまだthird party cookiesをサポートしているので、first party setsを無効化して問題ない。
 	//https://cloud.google.com/looker/docs/best-practices/chrome-third-party-cookie-deprecation?hl=en
-	//TODO: CEF122以降でこの問題は解消している
+	//CEF122以降でこの問題は解消している
 	command_line->AppendSwitchWithValue(_T("disable-features"), _T("FirstPartySets"));
 #endif
 
