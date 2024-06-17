@@ -22,6 +22,9 @@ public:
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line);
 	virtual void OnContextInitialized() override;
 	virtual void OnScheduleMessagePumpWork(int64_t delayMs) override;
+#if CHROME_VERSION_MAJOR >= 120
+	virtual bool OnAlreadyRunningAppRelaunch(CefRefPtr<CefCommandLine> command_line, const CefString& current_directory) override;
+#endif
 
 private:
 	IMPLEMENT_REFCOUNTING(ClientApp);

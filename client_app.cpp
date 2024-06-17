@@ -147,6 +147,20 @@ void ClientApp::OnScheduleMessagePumpWork(int64_t delayMs)
 	messageLoopWorker->PostScheduleMessage(delayMs);
 }
 
+#if CHROME_VERSION_MAJOR >= 120
+// CEF120以降で、複数のCEFのインスタンスが重複した`CefSettings.root_cache_path`を設定していた場合に呼び出されるハンドラー。 
+// https://cef-builds.spotifycdn.com/docs/121.0/classCefBrowserProcessHandler.html#a052a91639483467c0b546d57a05c2f06
+// このハンドラーでfalseを返すか、未実装の場合、Chromeスタイルの新しいウィンドウが起動する。それを避けるため、ここでは
+// trueを返している。
+// 
+// インスタンスごとに固有の`CefSettings.root_cache_path value`を使用するようになっているため、このハンドラーが呼ばれる
+// ことはないので、念のための処理である。
+bool ClientApp::OnAlreadyRunningAppRelaunch(CefRefPtr<CefCommandLine> command_line, const CefString& current_directory)
+{
+	return true;
+}
+#endif
+
 void DownloadFaviconCB::OnDownloadImageFinished(const CefString& image_url,
 						int http_status_code,
 						CefRefPtr<CefImage> image)

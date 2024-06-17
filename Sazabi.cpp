@@ -1663,7 +1663,7 @@ int CSazabi::ExitInstance()
 								CloseVOSProcessOther();
 
 							this->UnInitializeCef();
-							this->DeleteCEFCache();
+							this->DeleteCEFCacheAll();
 						}
 					}
 					if (hMutex)
@@ -1674,11 +1674,8 @@ int CSazabi::ExitInstance()
 				}
 				else
 				{
-					if (this->m_AppSettings.IsEnableDeleteCache())
-					{
-						this->UnInitializeCef();
-						this->DeleteCEFCache();
-					}
+					this->UnInitializeCef();
+					this->DeleteCEFCacheAll();
 				}
 				//ゾンビプロセス化を防ぐ。
 				ExitKillZombieProcess();
@@ -4137,16 +4134,17 @@ void CSazabi::InitializeCef()
 	CefString strCefAcceptLanguageList;
 	strCefAcceptLanguageList = strLAcceptLanguageList;
 	CefString(&settings.accept_language_list) = strCefAcceptLanguageList;
+	DWORD pidCurrent = GetCurrentProcessId();
 
 	// キャッシュフォルダのパスを取得する。
 	//
-	// * C:\Program Files\Chronos\CEFCache (SGモード)
-	// * C:\Users\<user>\AppData\Local\ChronosCache (通常モード)
+	// * C:\Users\<user>\AppData\Local\Thinstall\ChronosSG\%drive_C%\Chronos\CEFCache\{pid} (SGモード)
+	// * C:\Users\<user>\AppData\Local\ChronosCache\{pid} (通常モード)
 	//
 	if (this->IsSGMode())
 	{
-		m_strCEFCachePath = m_strExeFolderPath;
-		m_strCEFCachePath += _T("CEFCache");
+		m_strCEFCachePathBase.Format(_T("%s\\CEFCache"), (LPCTSTR)m_strExeFolderPath);
+		m_strCEFCachePath.Format(_T("%s\\CEFCache\\%d"), (LPCTSTR)m_strExeFolderPath, pidCurrent);
 	}
 	else
 	{
@@ -4154,19 +4152,16 @@ void CSazabi::InitializeCef()
 		strLocalAppPath = SBUtil::GetLocalAppDataPath();
 		if (strLocalAppPath.IsEmpty())
 		{
-			m_strCEFCachePath = m_strExeFolderPath;
+			strLocalAppPath = m_strExeFolderPath;
 		}
 		strLocalAppPath = strLocalAppPath.TrimRight('\\');
-		m_strCEFCachePath = strLocalAppPath;
-		m_strCEFCachePath += _T("\\ChronosCache");
+		m_strCEFCachePathBase.Format(_T("%s\\ChronosCache"), (LPCTSTR)strLocalAppPath);
+		m_strCEFCachePath.Format(_T("%s\\ChronosCache\\%d"), (LPCTSTR)strLocalAppPath, pidCurrent);
 	}
 
 	if (IsFirstInstance())
 	{
-		if (this->m_AppSettings.IsEnableDeleteCache())
-		{
-			DeleteCEFCache();
-		}
+		DeleteCEFCacheAll();
 	}
 	settings.persist_session_cookies = true;
 	CefString(&settings.root_cache_path) = m_strCEFCachePath;
