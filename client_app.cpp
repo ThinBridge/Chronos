@@ -29,13 +29,15 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//2019-07-24 動くようになった。
 	//Chromium Embedded Framework Version 75.1.4+g4210896+chromium-75.0.3770.100
 	
+#if CHROME_VERSION_MAJOR < 122
 	//CEF119: FirstPartySetsが有効だとYouTubeの検索窓にカーソルを合わせるとクラッシュする問題への対処。
 	//https://github.com/chromiumembedded/cef/issues/3643
 	//Chromeが3rd party cookiesをサポート外としたのは2024/1からだが、CEF119は2023/11のリリース。
 	//そのため、CEF119ではまだthird party cookiesをサポートしているので、first party setsを無効化して問題ない。
 	//https://cloud.google.com/looker/docs/best-practices/chrome-third-party-cookie-deprecation?hl=en
-	//TODO: CEF122以降でこの問題は解消しているため、CEF122以降になったらこの記載は削除する。
+	//CEF122以降でこの問題は解消している
 	command_line->AppendSwitchWithValue(_T("disable-features"), _T("FirstPartySets"));
+#endif
 
 	//2020-09-16
 	//https://bitbucket.org/chromiumembedded/cef/issues/2989/m85-print-preview-fails-to-load-pdf-file
