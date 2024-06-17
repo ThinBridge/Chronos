@@ -493,7 +493,7 @@ void CDlgDebugWnd::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 			case LIST_INDEX:
 			{
 				this->DWToString(pData->iIndex, m_strTemp);
-				StringCchCopy(item->pszText, m_strTemp.GetLength() + 1, m_strTemp);
+				StringCchCopy(item->pszText, item->cchTextMax, m_strTemp);
 				break;
 			}
 			case LIST_DATE_TIME:
