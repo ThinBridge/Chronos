@@ -28,6 +28,7 @@ private:
 	void KillTimer();
 	void OnScheduleWork(int64_t delayMs);
 	void OnTimerTimeout();
+	bool PerformMessageLoopWork();
 	void DoWork();
 	void InitWindow();
 	static LRESULT CALLBACK WindowProcesser(HWND hwnd,
