@@ -90,7 +90,7 @@ BEGIN
     END
     POPUP "ヘルプ(&H)"
     BEGIN
-        MENUITEM "システム情報(&A)...",              ID_APP_ABOUT
+        MENUITEM "システム情報(&A)...",               ID_APP_ABOUT
         MENUITEM SEPARATOR
         MENUITEM "ブラウザーキャッシュを削除する(&X)",         IDC_APP_DELETE_CACHE
     END
@@ -590,8 +590,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 14,1,119,0
- PRODUCTVERSION 14,1,119,0
+ FILEVERSION 14,1,119,1
+ PRODUCTVERSION 14,1,119,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -607,12 +607,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "14.1.119.0"
+            VALUE "FileVersion", "14.1.119.1"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "14.1.119.0"
+            VALUE "ProductVersion", "14.1.119.1"
         END
     END
     BLOCK "VarFileInfo"
@@ -1953,8 +1953,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 14,1,119,0
- PRODUCTVERSION 14,1,119,0
+ FILEVERSION 14,1,119,1
+ PRODUCTVERSION 14,1,119,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -1970,12 +1970,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "14.1.119.0"
+            VALUE "FileVersion", "14.1.119.1"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "14.1.119.0"
+            VALUE "ProductVersion", "14.1.119.1"
         END
     END
     BLOCK "VarFileInfo"
