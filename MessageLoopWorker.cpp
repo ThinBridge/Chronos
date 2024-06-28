@@ -99,7 +99,7 @@ void MessageLoopWorker::KillTimer()
 	}
 }
 
-void MessageLoopWorker::DoWork()
+bool MessageLoopWorker::PerformMessageLoopWork()
 {
 	if (m_bIsActive_)
 	{
@@ -108,20 +108,23 @@ void MessageLoopWorker::DoWork()
 		// method. If re-entrancy is detected we must repost a request again to the
 		// owner thread to ensure that the discarded call is executed in the future.
 		m_bReentrancyDetected_ = true;
+		return false;
 	}
-	else
-	{
-		m_bReentrancyDetected_ = false;
+	m_bReentrancyDetected_ = false;
 
-		m_bIsActive_ = true;
-		CefDoMessageLoopWork();
-		m_bIsActive_ = false;
-		
-		// Note: |m_bReentrancy_detected_| may have changed due to re-entrant calls to 
-		// this method.
-	}
+	m_bIsActive_ = true;
+	CefDoMessageLoopWork();
+	m_bIsActive_ = false;
 
-	if (m_bReentrancyDetected_)
+	// Note: |m_bReentrancy_detected_| may have changed due to re-entrant calls to
+	// this method.
+	return m_bReentrancyDetected_;
+}
+
+void MessageLoopWorker::DoWork()
+{
+	const bool bWasReentrant = PerformMessageLoopWork();
+	if (bWasReentrant)
 	{
 		// Execute the remaining work as soon as possible.
 		PostScheduleMessage(0);
