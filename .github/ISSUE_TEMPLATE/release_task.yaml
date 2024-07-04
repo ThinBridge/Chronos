@@ -27,7 +27,9 @@ body:
     id: build-assets
     attributes:
       label: Create new assets for release
-      description: Build binary files to upload.
+      description: |
+        * Build binary files to upload.
+        * Sign modules and installers.
       options:
         - label: Asset files has been built!
           required: false
