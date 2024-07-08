@@ -338,6 +338,7 @@ public:
 			}
 
 			CString strSelPath(wstrSelPath);
+			CString strSelPathOriginal(wstrSelPath);
 			CoTaskMemFree(wstrSelPath);
 			strSelPath.MakeUpper();
 			if (strSelPath.IsEmpty())
@@ -362,8 +363,8 @@ public:
 			if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableUploadLogging())
 			{
 				WCHAR* ptrFile = NULL;
-				ptrFile = PathFindFileNameW(strSelPath);
-				CString strFileName(ptrFile ? ptrFile : strSelPath);
+				ptrFile = PathFindFileNameW(strSelPathOriginal);
+				CString strFileName(ptrFile ? ptrFile : strSelPathOriginal);
 				theApp.SendLoggingMsg(LOG_UPLOAD, strFileName, hwndOwner);
 			}
 
