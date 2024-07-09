@@ -254,6 +254,17 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 	return CefLifeSpanHandler::OnBeforePopup(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, extra_info, no_javascript_access);
 }
 
+#if CHROME_VERSION_MAJOR > 125
+void ClientHandler::OnBeforeDevToolsPopup(CefRefPtr<CefBrowser> browser,
+					  CefWindowInfo& windowInfo,
+					  CefRefPtr<CefClient>& client,
+					  CefBrowserSettings& settings,
+					  CefRefPtr<CefDictionaryValue>& extra_info,
+					  bool* use_default_window)
+{
+}
+#endif
+
 void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 					CefRefPtr<CefFrame> frame,
 					CefRefPtr<CefContextMenuParams> params,
@@ -2103,6 +2114,8 @@ bool ClientHandler::OnBeforeUnloadDialog(CefRefPtr<CefBrowser> browser,
 	callback->Continue(iRet == IDYES ? true : false, str);
 	return TRUE;
 }
+
+
 
 bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 				CefRefPtr<CefDragData> dragData,

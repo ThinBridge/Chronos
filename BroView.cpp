@@ -1561,9 +1561,17 @@ void CChildView::ShowDevTools()
 			CefBrowserSettings settings;
 			CefRefPtr<CefClient> client;
 			CefPoint inspect_element_at;
+			// We use Chrome bootstrap + Alloy runtime style since CEF125.
+			// On that case, we should specify DevTools behaviour at 
+			// ClientHandler::OnBeforeDevToolsPopup
+			// https://github.com/chromiumembedded/cef/issues/3685
+			// https://cef-builds.spotifycdn.com/docs/120.1/classCefLifeSpanHandler.html#a42d853d18238d79d2b17d04277bd636a
+			// https://magpcss.org/ceforum/viewtopic.php?f=6&t=19792&p=55334&hilit=Devtools+SetAsPopup#p55334
+#if CHROME_VERSION_MAJOR < 125
 			// Show DevTools window as popup
 			// See https://www.magpcss.org/ceforum/viewtopic.php?f=6&t=17820
 			windowInfo.SetAsPopup(theApp.SafeWnd(this->m_hWnd), "ChronosDevTools");
+#endif
 			m_cefBrowser->GetHost()->ShowDevTools(windowInfo, client, settings, inspect_element_at);
 		}
 	}
