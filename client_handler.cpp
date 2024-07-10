@@ -2115,8 +2115,6 @@ bool ClientHandler::OnBeforeUnloadDialog(CefRefPtr<CefBrowser> browser,
 	return TRUE;
 }
 
-
-
 bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 				CefRefPtr<CefDragData> dragData,
 				DragOperationsMask mask)
