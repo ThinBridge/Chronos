@@ -19,6 +19,14 @@ IF NOT DEFINED CEFVER (
 )
 set CEFHOST=https://cef-builds.spotifycdn.com
 
+setlocal
+
+if exist "C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat" (
+  call "C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat"
+) else if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat" (
+  call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+)
+
 @REM -----------------
 @REM Cleanup directory
 @REM -----------------
@@ -62,3 +70,5 @@ cmake -E copy_directory "cef-cache\%CEFVER%\Release" D32
 cmake -E copy_directory "cef-cache\%CEFVER%\Release" R32
 cmake -E copy_directory "cef-cache\%CEFVER%\Resources" D32
 cmake -E copy_directory "cef-cache\%CEFVER%\Resources" R32
+
+endlocal
