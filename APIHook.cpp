@@ -7,6 +7,7 @@
 #include "minhook\hook.hh"
 #pragma warning(pop)
 #include "Windows.h"
+#include "Winspool.h"
 
 #define API_H_TRY \
 	try       \
@@ -1020,6 +1021,106 @@ static PIDLIST_ABSOLUTE WINAPI Hook_SHBrowseForFolderW(
 	return NULL;
 }
 
+
+typedef BOOL(WINAPI* ORG_EnumPrintersW)(
+    DWORD Flags,
+    LPWSTR Name,
+    DWORD Level,
+    LPBYTE pPrinterEnum,
+    DWORD cbBuf,
+    LPDWORD pcbNeeded,
+    LPDWORD pcReturned);
+
+static ORG_EnumPrintersW pORG_EnumPrintersW = NULL;
+
+BOOL WINAPI Hook_EnumPrintersW(
+    DWORD Flags,
+    LPWSTR Name,
+    DWORD Level,
+    LPBYTE pPrinterEnum,
+    DWORD cbBuf,
+    LPDWORD pcbNeeded,
+    LPDWORD pcReturned)
+{
+	BOOL result = pORG_EnumPrintersW(Flags, Name, Level, pPrinterEnum, cbBuf, pcbNeeded, pcReturned);
+	if (!theApp.IsSGMode())
+	{
+		return result;
+	}
+	if (result)
+	{
+		if (Level == 1)
+		{
+			PRINTER_INFO_1* pInfo = (PRINTER_INFO_1*)pPrinterEnum;
+			DWORD newReturned = 0;
+			for (DWORD i = 0; i < *pcReturned; i++)
+			{
+				if (wcscmp(pInfo[i].pName, L"Microsoft Print to PDF") != 0)
+				{
+					if (i != newReturned)
+					{
+						memcpy(&pInfo[newReturned], &pInfo[i], sizeof(PRINTER_INFO_1));
+					}
+					newReturned++;
+				}
+			}
+			*pcReturned = newReturned;
+		}
+		if (Level == 2)
+		{
+			PRINTER_INFO_2* pInfo = (PRINTER_INFO_2*)pPrinterEnum;
+			DWORD newReturned = 0;
+			for (DWORD i = 0; i < *pcReturned; i++)
+			{
+				if (wcscmp(pInfo[i].pPrinterName, L"Microsoft Print to PDF") != 0)
+				{
+					if (i != newReturned)
+					{
+						memcpy(&pInfo[newReturned], &pInfo[i], sizeof(PRINTER_INFO_2));
+					}
+					newReturned++;
+				}
+			}
+			*pcReturned = newReturned;
+		}
+		if (Level == 4)
+		{
+			PRINTER_INFO_4* pInfo = (PRINTER_INFO_4*)pPrinterEnum;
+			DWORD newReturned = 0;
+			for (DWORD i = 0; i < *pcReturned; i++)
+			{
+				if (wcscmp(pInfo[i].pPrinterName, L"Microsoft Print to PDF") != 0)
+				{
+					if (i != newReturned)
+					{
+						memcpy(&pInfo[newReturned], &pInfo[i], sizeof(PRINTER_INFO_4));
+					}
+					newReturned++;
+				}
+			}
+			*pcReturned = newReturned;
+		}
+		if (Level == 5)
+		{
+			PRINTER_INFO_5* pInfo = (PRINTER_INFO_5*)pPrinterEnum;
+			DWORD newReturned = 0;
+			for (DWORD i = 0; i < *pcReturned; i++)
+			{
+				if (wcscmp(pInfo[i].pPrinterName, L"Microsoft Print to PDF") != 0)
+				{
+					if (i != newReturned)
+					{
+						memcpy(&pInfo[newReturned], &pInfo[i], sizeof(PRINTER_INFO_5));
+					}
+					newReturned++;
+				}
+			}
+			*pcReturned = newReturned;
+		}
+	}
+	return result;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //@@APIHook////////////////////////////////////////////////////////////////////////////////////
 APIHookC::APIHookC()
@@ -1112,5 +1213,26 @@ void APIHookC::DoHookComDlgAPI()
 
 		if (MH_EnableHook(&CoCreateInstance) != MH_OK)
 			return;
+	}
+
+	hModule = GetModuleHandle(L"winspool.drv");
+	if (!hModule)
+	{
+		hModule = LoadLibrary(L"winspool.drv");
+	}	
+	if (hModule)
+	{
+		if (!pORG_EnumPrintersW)
+		{
+			pTargetW = GetProcAddress(hModule, "EnumPrintersW");
+			if (MH_CreateHookApiEx(L"winspool.drv", "EnumPrintersW",  &Hook_EnumPrintersW, &pORG_EnumPrintersW) != MH_OK)
+				return;
+
+			if (pTargetW == NULL) return;
+			if (MH_EnableHook(pTargetW) != MH_OK)
+			{
+				return;
+			}
+		}
 	}
 }
