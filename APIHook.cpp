@@ -555,6 +555,11 @@ public:
 	HRESULT STDMETHODCALLTYPE SetTitle(
 	    /* [string][in] */ __RPC__in_string LPCWSTR pszTitle)
 	{
+		if (lstrcmpW(pszTitle, _T("印刷結果を名前を付けて保存")) ||
+			lstrcmpW(pszTitle, _T("Save Print Output As")))
+		{
+			m_calledByPrinter = true;
+		}
 		return m_originalDialog->SetTitle(pszTitle);
 	}
 
@@ -618,6 +623,14 @@ public:
 	{
 		if (theApp.m_AppSettings.IsEnableDownloadRestriction())
 		{
+			return E_ACCESSDENIED;
+		}
+
+		if (m_calledByPrinter)
+		{
+			CString strMsg;
+			strMsg.Format(L"プリンターからのファイル保存はサポートしていません。");
+			::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 			return E_ACCESSDENIED;
 		}
 
@@ -717,6 +730,7 @@ public:
 private:
 	CComPtr<IFileSaveDialog> m_originalDialog;
 	ULONG m_referenceCount = 0;
+	bool m_calledByPrinter = false;
 };
 
 ////////////////////////////////////////////////////////////////
@@ -1021,6 +1035,20 @@ static PIDLIST_ABSOLUTE WINAPI Hook_SHBrowseForFolderW(
 	return NULL;
 }
 
+typedef DWORD(WINAPI* ORG_StartDocPrinterW)(
+    HANDLE hPrinter,
+    DWORD Level,
+    LPBYTE pDocInfo);
+
+static ORG_StartDocPrinterW pORG_StartDocPrinterW = NULL;
+
+BOOL WINAPI Hook_StartDocPrinterW(
+    HANDLE hPrinter,
+    DWORD Level,
+    LPBYTE pDocInfo)
+{
+	return pORG_StartDocPrinterW(hPrinter, Level, pDocInfo);
+}
 
 typedef BOOL(WINAPI* ORG_EnumPrintersW)(
     DWORD Flags,
@@ -1215,24 +1243,36 @@ void APIHookC::DoHookComDlgAPI()
 			return;
 	}
 
-	hModule = GetModuleHandle(L"winspool.drv");
-	if (!hModule)
-	{
-		hModule = LoadLibrary(L"winspool.drv");
-	}	
-	if (hModule)
-	{
-		if (!pORG_EnumPrintersW)
-		{
-			pTargetW = GetProcAddress(hModule, "EnumPrintersW");
-			if (MH_CreateHookApiEx(L"winspool.drv", "EnumPrintersW",  &Hook_EnumPrintersW, &pORG_EnumPrintersW) != MH_OK)
-				return;
+	//hModule = GetModuleHandle(L"winspool.drv");
+	//if (!hModule)
+	//{
+	//	hModule = LoadLibrary(L"winspool.drv");
+	//}	
+	//if (hModule)
+	//{
+	//	if (!pORG_EnumPrintersW)
+	//	{
+	//		pTargetW = GetProcAddress(hModule, "EnumPrintersW");
+	//		if (MH_CreateHookApiEx(L"winspool.drv", "EnumPrintersW",  &Hook_EnumPrintersW, &pORG_EnumPrintersW) != MH_OK)
+	//			return;
 
-			if (pTargetW == NULL) return;
-			if (MH_EnableHook(pTargetW) != MH_OK)
-			{
-				return;
-			}
-		}
-	}
+	//		if (pTargetW == NULL) return;
+	//		if (MH_EnableHook(pTargetW) != MH_OK)
+	//		{
+	//			return;
+	//		}
+	//	}
+	//	if (!pORG_StartDocPrinterW)
+	//	{
+	//		pTargetW = GetProcAddress(hModule, "StartDocPrinterW");
+	//		if (MH_CreateHookApiEx(L"winspool.drv", "StartDocPrinterW", &Hook_StartDocPrinterW, &pORG_StartDocPrinterW) != MH_OK)
+	//			return;
+
+	//		if (pTargetW == NULL) return;
+	//		if (MH_EnableHook(pTargetW) != MH_OK)
+	//		{
+	//			return;
+	//		}
+	//	}
+	//}
 }
