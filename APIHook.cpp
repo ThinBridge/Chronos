@@ -427,6 +427,7 @@ public:
 
 	HRESULT SetUp()
 	{
+		HRESULT hresult = S_OK;
 		FILEOPENDIALOGOPTIONS option = 0;
 
 		this->GetOptions(&option);
@@ -434,7 +435,60 @@ public:
 		option |= FOS_OVERWRITEPROMPT;
 		option |= FOS_HIDEPINNEDPLACES;
 
-		return this->SetOptions(option);
+		hresult = this->SetOptions(option);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+
+		//ダイアログオープン時に指定されているフォルダがRootPath配下でなければ
+		//RootPathとなるように指定しなおす
+		LPWSTR wstrFolderPath;
+		CComPtr<IShellItem> getFolderPsi;
+		hresult = this->GetFolder(&getFolderPsi);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+		hresult = getFolderPsi->GetDisplayName(SIGDN_DESKTOPABSOLUTEEDITING, &wstrFolderPath);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+		CString strFolderPathUpper(wstrFolderPath);
+		CoTaskMemFree(wstrFolderPath);
+		strFolderPathUpper.MakeUpper();
+
+		CString strRootPath(theApp.m_AppSettings.GetRootPath());
+		if (strRootPath.IsEmpty())
+		{
+			strRootPath = _T("B:\\");
+		}
+		strRootPath = strRootPath.TrimRight('\\');
+		strRootPath += _T("\\");
+		CString strRootPathUpper(strRootPath);
+		strRootPathUpper.MakeUpper();
+		
+		if (strFolderPathUpper.Find(strRootPathUpper) == 0)
+		{
+			return S_OK;
+		}
+
+		PIDLIST_ABSOLUTE pidl;
+		hresult = ::SHParseDisplayName(strRootPath, 0, &pidl, SFGAO_FOLDER, 0);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+
+		CComPtr<IShellItem> setFolderPsi;
+		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &setFolderPsi);
+		if (SUCCEEDED(hresult))
+		{
+			this->SetFolder(setFolderPsi);
+		}
+		ILFree(pidl);
+		return hresult;
 	}
 
 	HRESULT STDMETHODCALLTYPE SetSaveAsItem(
