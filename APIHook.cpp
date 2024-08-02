@@ -7,6 +7,7 @@
 #include "minhook\hook.hh"
 #pragma warning(pop)
 #include "Windows.h"
+#include <mutex>
 
 #define API_H_TRY \
 	try       \
@@ -14,6 +15,9 @@
 #define API_H_CATCH \
 	}           \
 	catch (...) { ATLASSERT(0); }
+
+static std::mutex ChronosDCMutex;
+static std::set<HDC> ChronosMicrosoftPrintToPdfHDCSet;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //@@COM
@@ -1020,6 +1024,72 @@ static PIDLIST_ABSOLUTE WINAPI Hook_SHBrowseForFolderW(
 	return NULL;
 }
 
+typedef HDC(WINAPI* ORG_CreateDCW)(
+    LPCWSTR pwszDriver,
+    LPCWSTR pwszDevice,
+    LPCWSTR pszPort,
+    const DEVMODEW* pdm);
+
+static ORG_CreateDCW pORG_CreateDCW = nullptr;
+
+static HDC WINAPI Hook_CreateDCW(LPCWSTR pwszDriver, LPCWSTR pwszDevice, LPCWSTR pszPort, const DEVMODEW* pdm)
+{
+	HDC result = pORG_CreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
+	if (theApp.IsSGMode() &&
+		lstrcmpW(pwszDevice, L"Microsoft Print to PDF") == 0)
+	{
+		ChronosDCMutex.lock();
+		ChronosMicrosoftPrintToPdfHDCSet.insert(result);
+		ChronosDCMutex.unlock();
+	}
+	return result;
+}
+
+typedef BOOL(WINAPI* ORG_DeleteDCW)(
+    HDC hdc);
+
+static ORG_DeleteDCW pORG_DeleteDC = nullptr;
+
+static BOOL WINAPI Hook_DeleteDC(HDC hdc)
+{
+	if (theApp.IsSGMode())
+	{
+		ChronosDCMutex.lock();
+		if (ChronosMicrosoftPrintToPdfHDCSet.find(hdc) != ChronosMicrosoftPrintToPdfHDCSet.end())
+		{
+			ChronosMicrosoftPrintToPdfHDCSet.erase(hdc);
+		}
+		ChronosDCMutex.unlock();
+	}
+	return pORG_DeleteDC(hdc);
+}
+
+typedef int(WINAPI* ORG_StartDocW)(HDC hdc, const DOCINFOW* lpdi);
+
+static ORG_StartDocW pORG_StartDocW = nullptr;
+
+static int WINAPI Hook_StartDocW(HDC hdc, const DOCINFOW* lpdi)
+{
+	// Since Chronos v13.0.112.1(CEF v112), ThinApp-ed Chronos crashes on executing Microsoft Print to PDF,
+	// so we prevent to execute Microsoft Print to PDF.
+	// Note that the following code requires CEF127+.
+	// The code is unstable with CEF126 and below.
+	if (theApp.IsSGMode())
+	{
+		ChronosDCMutex.lock();
+		const bool isMicrosoftPrintToPDF = ChronosMicrosoftPrintToPdfHDCSet.find(hdc) != ChronosMicrosoftPrintToPdfHDCSet.end();
+		ChronosDCMutex.unlock();
+		if (isMicrosoftPrintToPDF)
+		{
+			::MessageBoxW(theApp.m_pMainWnd->m_hWnd, _T("「Microsoft Print to PDF」は使用できません。代わりに「PDF に保存」を使用してください。"), (LPCWSTR)theApp.m_strThisAppName, MB_OK | MB_ICONWARNING | MB_SYSTEMMODAL);
+			//If the last error is not ERROR_CANCELLED, CEF is crashed.
+			SetLastError(ERROR_CANCELLED);
+			return 0;
+		}
+	}
+	return pORG_StartDocW(hdc, lpdi);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //@@APIHook////////////////////////////////////////////////////////////////////////////////////
 APIHookC::APIHookC()
@@ -1112,5 +1182,44 @@ void APIHookC::DoHookComDlgAPI()
 
 		if (MH_EnableHook(&CoCreateInstance) != MH_OK)
 			return;
+	}
+
+	hModule = GetModuleHandle(L"gdi32.dll");
+	if (hModule == NULL)
+	{
+		hModule = LoadLibrary(L"gdi32.dll");
+	}
+	if (hModule)
+	{
+		if (!pORG_CreateDCW)
+		{
+			pTargetW = GetProcAddress(hModule, "CreateDCW");
+			if (MH_CreateHookApiEx(
+				L"gdi32.dll", "CreateDCW", &Hook_CreateDCW, &pORG_CreateDCW) != MH_OK)
+				return;
+
+			if (pTargetW == NULL) return;
+			if (MH_EnableHook(pTargetW) != MH_OK) return;
+		}
+		if (!pORG_DeleteDC)
+		{
+			pTargetW = GetProcAddress(hModule, "DeleteDC");
+			if (MH_CreateHookApiEx(
+				L"gdi32.dll", "DeleteDC", &Hook_DeleteDC, &pORG_DeleteDC) != MH_OK)
+				return;
+
+			if (pTargetW == NULL) return;
+			if (MH_EnableHook(pTargetW) != MH_OK) return;
+		}
+		if (!pORG_StartDocW)
+		{
+			pTargetW = GetProcAddress(hModule, "StartDocW");
+			if (MH_CreateHookApiEx(
+				L"gdi32.dll", "StartDocW", &Hook_StartDocW, &pORG_StartDocW) != MH_OK)
+				return;
+
+			if (pTargetW == NULL) return;
+			if (MH_EnableHook(pTargetW) != MH_OK) return;
+		}
 	}
 }
