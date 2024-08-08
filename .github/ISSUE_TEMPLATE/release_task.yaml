@@ -29,7 +29,7 @@ body:
       label: Create new assets for release
       description: |
         * Build binary files to upload.
-        * Sign modules and installers.
+        * Sign the modules and the installer.
       options:
         - label: Asset files has been built!
           required: false
