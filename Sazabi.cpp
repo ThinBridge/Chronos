@@ -4112,7 +4112,10 @@ void CSazabi::InitializeCef()
 	m_bMultiThreadedMessageLoop = FALSE;
 	settings.multi_threaded_message_loop = m_bMultiThreadedMessageLoop;
 	settings.external_message_pump = true;
-#if CHROME_VERSION_MAJOR >= 125
+#if CHROME_VERSION_MAJOR >= 125 && CHROME_VERSION_MAJOR <= 127
+	// CEF 124まではchrome_runtime = false（デフォルト値）を使用。
+	// CEF 128からは常にChrome runtimeを使用するため、chrome_runtimeオプションは削除された。
+	// https://github.com/chromiumembedded/cef/commit/a461a89728054d40eb8ad4c609eaa391cf4ea52e#diff-447d40892c51b4ffc870cf1a28bab2ae2d411752216be4750a17193e6675b26bL244
 	settings.chrome_runtime = true;
 #endif
 
@@ -4181,7 +4184,12 @@ void CSazabi::InitializeCef()
 #else
 	CefString(&settings.user_data_path) = strUserDataPath;
 #endif
+#if CHROME_VERSION_MAJOR <= 127
+	// CEF128からChrome runtimeが常に有効になったことに合わせて、persist_user_preferencesも常に有効になったため削除された。
+	// https://github.com/chromiumembedded/cef/commit/a461a89728054d40eb8ad4c609eaa391cf4ea52e#diff-447d40892c51b4ffc870cf1a28bab2ae2d411752216be4750a17193e6675b26bL347
+	// https://github.com/chromiumembedded/cef/issues/3685
 	settings.persist_user_preferences = true;
+#endif
 
 	// ログを有効化する (ChronosDefault.conf > EnableAdvancedLogMode)
 	if (m_AppSettings.IsAdvancedLogMode())
