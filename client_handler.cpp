@@ -173,6 +173,21 @@ bool ClientHandler::OnOpenURLFromTab(CefRefPtr<CefBrowser> browser,
 	return false;
 }
 
+#if CHROME_VERSION_MAJOR > 130
+bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
+				  CefRefPtr<CefFrame> frame,
+				  int popup_id,
+				  const CefString& target_url,
+				  const CefString& target_frame_name,
+				  WindowOpenDisposition target_disposition,
+				  bool user_gesture,
+				  const CefPopupFeatures& popupFeatures,
+				  CefWindowInfo& windowInfo,
+				  CefRefPtr<CefClient>& client,
+				  CefBrowserSettings& settings,
+				  CefRefPtr<CefDictionaryValue>& extra_info,
+				  bool* no_javascript_access)
+#else
 bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 				  CefRefPtr<CefFrame> frame,
 				  const CefString& target_url,
@@ -185,6 +200,7 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 				  CefBrowserSettings& settings,
 				  CefRefPtr<CefDictionaryValue>& extra_info,
 				  bool* no_javascript_access)
+#endif
 {
 	PROC_TIME(OnBeforePopup)
 
@@ -251,7 +267,11 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 		if (lRet == 0)
 			return false;
 	}
+#if CHROME_VERSION_MAJOR > 130
+	return CefLifeSpanHandler::OnBeforePopup(browser, frame, popup_id, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, extra_info, no_javascript_access);
+#else
 	return CefLifeSpanHandler::OnBeforePopup(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, extra_info, no_javascript_access);
+#endif
 }
 
 #if CHROME_VERSION_MAJOR > 125
