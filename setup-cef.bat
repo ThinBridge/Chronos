@@ -15,7 +15,7 @@ set BASEDIR=%~dp0
 IF NOT DEFINED CEFVER (
   echo Use the default CEF version.
   echo To build with a newer CEF version, set CEFVER explicitly.
-  set CEFVER=cef_binary_127.1.4+ge71a509+chromium-127.0.6533.89_windows32_minimal
+  set CEFVER=cef_binary_131.2.4+gb7543e4+chromium-131.0.6778.70_windows32_minimal
 )
 set CEFHOST=https://cef-builds.spotifycdn.com
 
