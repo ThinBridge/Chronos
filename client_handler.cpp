@@ -884,18 +884,7 @@ bool ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		CStringW strMsg;
 		INT_PTR bRet = FALSE;
 
-		CFileDialog* pFileDlg = NULL;
-		if (theApp.IsSGMode())
-		{
-			//SGModeの場合は、Classicダイアログを使用
-			pFileDlg = new CFileDialog(FALSE,
-						   NULL, strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, pCWnd, 0, FALSE);
-		}
-		else
-		{
-			pFileDlg = new CFileDialog(FALSE,
-						   NULL, strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, pCWnd);
-		}
+		CFileDialog* pFileDlg = new CFileDialog(FALSE, NULL, strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, pCWnd);
 		pFileDlg->m_ofn.lpstrTitle = strTitle.GetString();
 		pFileDlg->m_ofn.lpstrInitialDir = strPath;
 

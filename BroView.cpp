@@ -1463,17 +1463,7 @@ void CChildView::OnPrintPDF()
 		CStringW strRootDrive(theApp.m_AppSettings.GetRootPath());
 		CStringW strMsg;
 
-		CFileDialog* pFileDlg = NULL;
-		if (theApp.IsSGMode())
-		{
-			//SGModeの場合は、Classicダイアログを使用
-			pFileDlg = new CFileDialog(FALSE, _T("pdf"), strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, this, 0, FALSE);
-		}
-		else
-		{
-			pFileDlg = new CFileDialog(FALSE, _T("pdf"), strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, this);
-		}
-
+		CFileDialog* pFileDlg = pFileDlg = new CFileDialog(FALSE, _T("pdf"), strFileName, OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_NONETWORKBUTTON | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST, szFilter, this);
 		pFileDlg->m_ofn.lpstrTitle = strTitle.GetString();
 		pFileDlg->m_ofn.lpstrInitialDir = strPath;
 
