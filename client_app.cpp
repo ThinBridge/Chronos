@@ -69,9 +69,15 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//	command_line->AppendSwitch(_T("disable-extensions"));
 	//command_line->AppendSwitchWithValue(_T("proxy-server"),_T("127.0.0.1:8080"));
 
+#if CHROME_VERSION_MAJOR < 126
 	//pdf
+	//CEF126.2.7以降、disable-pdf-extensionオプションが非サポートになった。
+	//そのため、CEF126以降では、ClientHandler::OnAfterCreatedでPreferenceを指定することで同等の処理を行う。
+	//https://github.com/cefsharp/CefSharp/issues/4880
 	if (!theApp.m_AppSettings.IsEnablePDFExtension())
 		command_line->AppendSwitch(_T("disable-pdf-extension"));
+#endif
+
 
 	////flash
 	//2020-12-31 EOL
