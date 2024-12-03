@@ -46,6 +46,12 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//--enable-print-preview
 	command_line->AppendSwitch(_T("enable-print-preview"));
 
+	//--disable-popup-blocking
+	//CEF 128以降、runtime_styleにCEF_RUNTIME_STYLE_ALLOYを指定すると、デフォルトではポップアップが表示されない。
+	//disable-popup-blockingを指定してポップアップブロック機能を無効化する必要がある。
+	//https://www.magpcss.org/ceforum/viewtopic.php?f=6&t=19988
+	command_line->AppendSwitch(_T("disable-popup-blocking"));
+
 	//--disk-cache-size=536870912 512MB
 	command_line->AppendSwitchWithValue(_T("disk-cache-size"), _T("536870912"));  //512MB
 	command_line->AppendSwitchWithValue(_T("media-cache-size"), _T("209715200")); //200MB
