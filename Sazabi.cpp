@@ -4176,12 +4176,10 @@ void CSazabi::InitializeCef()
 		CefString(&settings.cache_path) = m_strCEFCachePath;
 	}
 
+#if CHROME_VERSION_MAJOR < 115
 	CString strUserDataPath;
 	strUserDataPath = m_strCEFCachePath;
 	strUserDataPath += _T("\\UserData");
-#if CHROME_VERSION_MAJOR >= 115
-	CefString(&settings.root_cache_path) = strUserDataPath;
-#else
 	CefString(&settings.user_data_path) = strUserDataPath;
 #endif
 #if CHROME_VERSION_MAJOR <= 127
