@@ -1436,33 +1436,6 @@ void CSazabi::OpenChTaskMgr()
 		pi.hProcess = 0;
 	}
 }
-void CSazabi::CheckChronosVersionMismatch()
-{
-	if (!this->IsSGMode())
-	{
-		return;
-	}
-
-	CString chronosExePath = m_strExeFolderPath + _T("Chronos.exe");
-	CString chronosNExePath = m_strExeFolderPath + _T("ChronosN.exe");
-	std::tuple<WORD, WORD, WORD, WORD> chronosVersion = GetFileVersion(chronosExePath);
-	std::tuple<WORD, WORD, WORD, WORD> chronosNVersion = GetFileVersion(chronosNExePath);
-	if (chronosVersion != chronosNVersion)
-	{
-		CString alertMsg;
-		alertMsg.LoadString(IDS_EXE_VERSION_MISMATCH);
-		alertMsg.Format(alertMsg,
-						std::get<0>(chronosVersion),
-						std::get<1>(chronosVersion),
-						std::get<2>(chronosVersion),
-						std::get<3>(chronosVersion),
-						std::get<0>(chronosNVersion),
-						std::get<1>(chronosNVersion),
-						std::get<2>(chronosNVersion),
-						std::get<3>(chronosNVersion));
-		::MessageBox(NULL, alertMsg, m_strThisAppName, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
-	}
-}
 void CSazabi::InitLogWrite()
 {
 	PROC_TIME(InitLogWrite)
@@ -3697,6 +3670,34 @@ std::tuple<WORD, WORD, WORD, WORD> CSazabi::GetFileVersion(CString filePath)
 	}
 
 	return std::make_tuple(0, 0, 0, 0);
+}
+
+void CSazabi::CheckChronosVersionMismatch()
+{
+	if (!this->IsSGMode())
+	{
+		return;
+	}
+
+	CString chronosExePath = m_strExeFolderPath + _T("Chronos.exe");
+	CString chronosNExePath = m_strExeFolderPath + _T("ChronosN.exe");
+	std::tuple<WORD, WORD, WORD, WORD> chronosVersion = GetFileVersion(chronosExePath);
+	std::tuple<WORD, WORD, WORD, WORD> chronosNVersion = GetFileVersion(chronosNExePath);
+	if (chronosVersion != chronosNVersion)
+	{
+		CString alertMsg;
+		alertMsg.LoadString(IDS_EXE_VERSION_MISMATCH);
+		alertMsg.Format(alertMsg,
+				std::get<0>(chronosVersion),
+				std::get<1>(chronosVersion),
+				std::get<2>(chronosVersion),
+				std::get<3>(chronosVersion),
+				std::get<0>(chronosNVersion),
+				std::get<1>(chronosNVersion),
+				std::get<2>(chronosNVersion),
+				std::get<3>(chronosNVersion));
+		::MessageBox(NULL, alertMsg, m_strThisAppName, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
+	}
 }
 
 CString CSazabi::GetVOSVersionFromNT0_DLLStr()
