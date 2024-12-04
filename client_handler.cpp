@@ -91,6 +91,20 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	REQUIRE_UI_THREAD();
 	PROC_TIME(OnAfterCreated)
 
+#if CHROME_VERSION_MAJOR >= 126
+	//CEF126.2.7以降、disable-pdf-extensionオプションが非サポートになった。
+	//そのため、CEF126以降では、ClientHandler::OnAfterCreatedでPreferenceを指定することで同等の処理を行う。
+	//https://github.com/cefsharp/CefSharp/issues/4880
+	if (!theApp.m_AppSettings.IsEnablePDFExtension())
+	{
+		CefRefPtr<CefRequestContext> requestContext = browser->GetHost()->GetRequestContext();
+		CefString error;
+		CefRefPtr<CefValue> value = CefValue::Create();
+		value->SetBool(true);
+		requestContext->SetPreference("plugins.always_open_pdf_externally", value, error);
+	}
+#endif
+
 	// get browser ID
 	INT nBrowserId = browser->GetIdentifier();
 
