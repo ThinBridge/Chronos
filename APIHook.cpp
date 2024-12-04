@@ -364,6 +364,23 @@ public:
 				}
 			}
 
+			int maxFileLength = theApp.m_AppSettings.GetMaxUploadFileLength();
+			if (maxFileLength > 0)
+			{
+				WCHAR* ptrFile = NULL;
+				ptrFile = PathFindFileNameW((LPCWSTR)strSelPathOriginal);
+				CString fileName(ptrFile);
+				int fileLength = fileName.GetLength();
+				if (fileLength > maxFileLength)
+				{
+					CString strCaption(theApp.m_strThisAppName);
+					CString strMsg;
+					strMsg.Format(L"ファイル名が長すぎるためアップロードできません。\n\n選択したファイルの名前: %d文字\n指定可能なファイル名の最大値: %d文字", fileLength, maxFileLength);
+					::MessageBoxW(hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
+					continue;
+				}
+			}
+
 			if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableUploadLogging())
 			{
 				WCHAR* ptrFile = NULL;
@@ -992,6 +1009,21 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				if (strSelPath.Find(strRoot) != 0)
 				{
 					strMsg.Format(L"アップロードフォルダー[%s]以外からはアップロードできません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strRootPath, (LPCWSTR)lpofn->lpstrFile);
+					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
+					continue;
+				}
+			}
+
+			int maxFileLength = theApp.m_AppSettings.GetMaxUploadFileLength();
+			if (maxFileLength > 0)
+			{
+				WCHAR* ptrFile = NULL;
+				ptrFile = PathFindFileNameW(lpofn->lpstrFile);
+				CString fileName(ptrFile);
+				int fileLength = fileName.GetLength();
+				if (fileLength > maxFileLength)
+				{
+					strMsg.Format(L"ファイル名が長すぎるためアップロードできません。\n\n選択したファイルの名前: %d文字\n指定可能なファイル名の最大値: %d文字", fileLength, maxFileLength);
 					::MessageBoxW(lpofn->hwndOwner, strMsg, strCaption, MB_OK | MB_ICONWARNING);
 					continue;
 				}
