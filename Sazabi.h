@@ -271,6 +271,8 @@ public:
 	CString IsProcessExistsName(DWORD dPID);
 	CString GetCefVersionStr();
 	CString GetChromiumVersionStr();
+	std::tuple<WORD, WORD, WORD, WORD> GetFileVersion(CString filePath);
+	void CheckChronosVersionMismatch();
 	//Setting Dlg///////////////////////////////////
 	void ShowSettingDlg(CWnd* pParentWnd);
 	CString m_strCurrentURL4DlgSetting;

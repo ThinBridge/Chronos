@@ -479,6 +479,9 @@ BOOL CSazabi::InitInstance()
 	if (InitMultipleInstance())
 		return TRUE;
 
+	// Chronos.exeのバージョンとChronosN.exeのバージョンが異なる場合、警告する
+	CheckChronosVersionMismatch();
+
 	// 保存 (ChronosDefault.conf)
 	this->m_AppSettings.SaveDataToFileEx(this->m_strSettingFileFullPath);
 
@@ -1431,6 +1434,33 @@ void CSazabi::OpenChTaskMgr()
 	{
 		CloseHandle(pi.hProcess); // もうプロセスのハンドルは使わないので破棄
 		pi.hProcess = 0;
+	}
+}
+void CSazabi::CheckChronosVersionMismatch()
+{
+	if (!this->IsSGMode())
+	{
+		return;
+	}
+
+	CString chronosExePath = m_strExeFolderPath + _T("Chronos.exe");
+	CString chronosNExePath = m_strExeFolderPath + _T("ChronosN.exe");
+	std::tuple<WORD, WORD, WORD, WORD> chronosVersion = GetFileVersion(chronosExePath);
+	std::tuple<WORD, WORD, WORD, WORD> chronosNVersion = GetFileVersion(chronosNExePath);
+	if (chronosVersion != chronosNVersion)
+	{
+		CString alertMsg;
+		alertMsg.LoadString(IDS_EXE_VERSION_MISMATCH);
+		alertMsg.Format(alertMsg,
+						std::get<0>(chronosVersion),
+						std::get<1>(chronosVersion),
+						std::get<2>(chronosVersion),
+						std::get<3>(chronosVersion),
+						std::get<0>(chronosNVersion),
+						std::get<1>(chronosNVersion),
+						std::get<2>(chronosNVersion),
+						std::get<3>(chronosNVersion));
+		::MessageBox(NULL, alertMsg, m_strThisAppName, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
 	}
 }
 void CSazabi::InitLogWrite()
@@ -3634,6 +3664,39 @@ CString CSazabi::GetChromiumVersionStr()
 		delete[] pData;
 	}
 	return strRet;
+}
+
+std::tuple<WORD, WORD, WORD, WORD> CSazabi::GetFileVersion(CString filePath)
+{
+	if (!::PathFileExists(filePath))
+	{
+		return std::make_tuple(0, 0, 0, 0);
+	}
+
+	DWORD handle = 0;
+	DWORD versionSize = ::GetFileVersionInfoSize((LPCWSTR)filePath, &handle);
+
+	if (versionSize == 0)
+	{
+		return std::make_tuple(0, 0, 0, 0);
+	}
+
+	PBYTE pData = new BYTE[versionSize];
+	memset(pData, 0x00, versionSize);
+	if (::GetFileVersionInfo((LPCWSTR)filePath, NULL, versionSize, pData))
+	{
+		VS_FIXEDFILEINFO* fileInfo = nullptr;
+		UINT len = 0;
+		if (VerQueryValue(pData, _T("\\"), (PVOID*)&fileInfo, &len))
+		{
+			return std::make_tuple(HIWORD(fileInfo->dwFileVersionMS),
+								   LOWORD(fileInfo->dwFileVersionMS),
+								   HIWORD(fileInfo->dwFileVersionLS),
+								   LOWORD(fileInfo->dwFileVersionLS));
+		}
+	}
+
+	return std::make_tuple(0, 0, 0, 0);
 }
 
 CString CSazabi::GetVOSVersionFromNT0_DLLStr()

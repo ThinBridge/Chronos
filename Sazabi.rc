@@ -1375,6 +1375,8 @@ BEGIN
     ID_CERTIFICATION_SUBJECT "発行先: "
     ID_CERTIFICATION_SERIAL_NUMBER "シリアル番号: "
     ID_CERTIFICATION_VALID_PERIOD "有効期間: "
+    IDS_EXE_VERSION_MISMATCH 
+                            "Chronos.exeとChronosN.exeのバージョンが異なります。\n\nChronos.exe: %d.%d.%d.%d\nChronosN.exe: %d.%d.%d.%d\n\nChronos.exeを再作成してください。"
 END
 
 #endif    // 日本語 (日本) resources
@@ -2760,6 +2762,8 @@ BEGIN
     ID_CERTIFICATION_SUBJECT "Subject: "
     ID_CERTIFICATION_SERIAL_NUMBER "Serial number: "
     ID_CERTIFICATION_VALID_PERIOD "Valid period: "
+    IDS_EXE_VERSION_MISMATCH 
+                            "The versions of Chronos.exe and ChronosN.exe are different.\n\nChronos.exe: %d.%d.%d.%d\nChronosN.exe: %d.%d.%d.%d\n\nPlease recreate Chronos.exe."
 END
 
 #endif    // 英語 (ニュートラル) resources
