@@ -298,6 +298,7 @@
 #define ID_CERTIFICATION_SUBJECT        436
 #define ID_CERTIFICATION_SERIAL_NUMBER  437
 #define ID_CERTIFICATION_VALID_PERIOD   438
+#define IDS_EXE_VERSION_MISMATCH        439
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002
