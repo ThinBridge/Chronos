@@ -3662,13 +3662,14 @@ std::tuple<WORD, WORD, WORD, WORD> CSazabi::GetFileVersion(CString filePath)
 		UINT len = 0;
 		if (VerQueryValue(pData, _T("\\"), (PVOID*)&fileInfo, &len))
 		{
+			delete[] pData;
 			return std::make_tuple(HIWORD(fileInfo->dwFileVersionMS),
 								   LOWORD(fileInfo->dwFileVersionMS),
 								   HIWORD(fileInfo->dwFileVersionLS),
 								   LOWORD(fileInfo->dwFileVersionLS));
 		}
 	}
-
+	delete[] pData;
 	return std::make_tuple(0, 0, 0, 0);
 }
 
