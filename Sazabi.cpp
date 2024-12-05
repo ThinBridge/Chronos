@@ -3641,19 +3641,13 @@ CString CSazabi::GetChromiumVersionStr()
 
 std::tuple<WORD, WORD, WORD, WORD> CSazabi::GetFileVersion(CString filePath)
 {
+	std::tuple<WORD, WORD, WORD, WORD> result = std::make_tuple(0, 0, 0, 0);
 	if (!::PathFileExists(filePath))
 	{
-		return std::make_tuple(0, 0, 0, 0);
+		return result;
 	}
-
 	DWORD handle = 0;
 	DWORD versionSize = ::GetFileVersionInfoSize((LPCWSTR)filePath, &handle);
-
-	if (versionSize == 0)
-	{
-		return std::make_tuple(0, 0, 0, 0);
-	}
-
 	PBYTE pData = new BYTE[versionSize];
 	memset(pData, 0x00, versionSize);
 	if (::GetFileVersionInfo((LPCWSTR)filePath, NULL, versionSize, pData))
@@ -3662,15 +3656,14 @@ std::tuple<WORD, WORD, WORD, WORD> CSazabi::GetFileVersion(CString filePath)
 		UINT len = 0;
 		if (VerQueryValue(pData, _T("\\"), (PVOID*)&fileInfo, &len))
 		{
-			delete[] pData;
-			return std::make_tuple(HIWORD(fileInfo->dwFileVersionMS),
-								   LOWORD(fileInfo->dwFileVersionMS),
-								   HIWORD(fileInfo->dwFileVersionLS),
-								   LOWORD(fileInfo->dwFileVersionLS));
+			result = std::make_tuple(HIWORD(fileInfo->dwFileVersionMS),
+								     LOWORD(fileInfo->dwFileVersionMS),
+								     HIWORD(fileInfo->dwFileVersionLS),
+								     LOWORD(fileInfo->dwFileVersionLS));
 		}
 	}
 	delete[] pData;
-	return std::make_tuple(0, 0, 0, 0);
+	return result;
 }
 
 void CSazabi::CheckChronosVersionMismatch()
