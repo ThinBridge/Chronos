@@ -350,7 +350,6 @@ protected:
 	afx_msg void OnNewSession();
 	afx_msg void OnPrint();
 	afx_msg void ShowDevTools();
-	afx_msg void OnPrintPDF();
 	afx_msg void OnGoBack();
 	afx_msg void OnUpdateGoBack(CCmdUI* pCmdUI);
 	afx_msg void OnGoForward();
