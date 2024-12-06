@@ -422,16 +422,10 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	CefString cefContextMenuReloadLabel(contextMenuReloadLabel);
 	model->AddItem(MENU_ID_RELOAD, cefContextMenuReloadLabel);
 
-	CString contextMenuPrintPDFLabel;
-	contextMenuPrintPDFLabel.LoadString(ID_CONTEXT_MENU_PRINT_PDF);
-	CefString cefContextMenuPrintPDFLabel(contextMenuPrintPDFLabel);
-	model->AddItem(CEF_MENU_ID_PRINT_PDF, cefContextMenuPrintPDFLabel);
-
 	CString contextMenuPrintLabel;
 	contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
 	CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
 	model->AddItem(MENU_ID_PRINT, cefContextMenuPrintLabel);
-
 	
 	// メニュー項目調整後、Separatorが連続することがあるので、連続している場合は削除する。
 	size_t count = model->GetCount();
@@ -521,11 +515,6 @@ bool ClientHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 		else if (command_id == CEF_MENU_ID_SAVE_FILE)
 		{
 			browser->GetHost()->StartDownload(params->GetLinkUrl());
-			return true;
-		}
-		else if (command_id == CEF_MENU_ID_PRINT_PDF)
-		{
-			::PostMessage(hWindow, WM_COMMAND, ID_PRINT_PDF, 0);
 			return true;
 		}
 		else if (command_id == CEF_MENU_ID_IMG_COPY_LINK)
