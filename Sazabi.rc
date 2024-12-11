@@ -35,7 +35,6 @@ BEGIN
         MENUITEM "ウィンドウの復元",                    ID_RESTORE_WND
         MENUITEM "ウィンドウの保存",                    ID_SAVE_WND
         MENUITEM SEPARATOR
-        MENUITEM "印刷(PDF出力)",                   ID_PRINT_PDF
         MENUITEM "印刷(&P)...\tCtrl+P",           ID_PRINT
         MENUITEM SEPARATOR
         MENUITEM "閉じる(&C)",                     ID_W_CLOSE
@@ -1406,7 +1405,6 @@ BEGIN
         MENUITEM "Restore Window",              ID_RESTORE_WND
         MENUITEM "Save Window",                 ID_SAVE_WND
         MENUITEM SEPARATOR
-        MENUITEM "Print to PDF",                ID_PRINT_PDF
         MENUITEM "&Print...\tCtrl+P",           ID_PRINT
         MENUITEM SEPARATOR
         MENUITEM "&Close",                      ID_W_CLOSE
