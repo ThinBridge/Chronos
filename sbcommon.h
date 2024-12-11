@@ -949,7 +949,6 @@ public:
 
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
-		EnableMediaAccessByApproval = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
 
 		EnableDownloadRestriction = 0;
@@ -1120,7 +1119,6 @@ private:
 	int RunningLimitTime;
 	int MemoryUsageLimit;
 	int WindowCountLimit;
-	int EnableMediaAccessByApproval; // deprecated
 	int EnableMediaAccessPermission;
 
 	//リダイレクト設定
@@ -1625,17 +1623,6 @@ public:
 						WindowCountLimit = 999;
 					continue;
 				}
-				if (strTemp2.CompareNoCase(_T("EnableMediaAccessByApproval")) == 0)
-				{
-					if (strTemp3 == _T("1"))
-					{
-						// EnableMediaAccessByApproval was deprecated.
-						// 1: means manual approval, so it should be migrated to
-						// equivalent EnableMediaAccessPermission = 1 when EnableMediaAccessPermission is not set.
-						EnableMediaAccessByApproval = static_cast<int>(AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL);
-					}
-					continue;
-				}
 				if (strTemp2.CompareNoCase(_T("EnableMediaAccessPermission")) == 0)
 				{
 					int iW = 0;
@@ -1839,13 +1826,6 @@ public:
 					continue;
 				}
 			}
-		}
-		if (!bEnabledMediaAccessPermission)
-		{
-			// If EnableMediaAccessPermission is not set, migrate configuration from
-			// EnableMediaAccessByApproval. Not to depend on described order in ChronosDefault.conf,
-			// delay overriding here.
-			EnableMediaAccessPermission = EnableMediaAccessByApproval;
 		}
 		in.Close();
 
