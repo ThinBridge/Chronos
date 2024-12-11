@@ -432,13 +432,57 @@ public:
 	HRESULT SetUp()
 	{
 		FILEOPENDIALOGOPTIONS option = 0;
+		CString strPath;
+		HRESULT hresult = S_OK;
 
-		this->GetOptions(&option);
-		option |= FOS_HIDEMRUPLACES;
-		option |= FOS_OVERWRITEPROMPT;
-		option |= FOS_HIDEPINNEDPLACES;
+		if (theApp.IsSGMode())
+		{
+			this->GetOptions(&option);
+			option |= FOS_HIDEMRUPLACES;
+			option |= FOS_OVERWRITEPROMPT;
+			option |= FOS_HIDEPINNEDPLACES;
 
-		return this->SetOptions(option);
+			hresult = this->SetOptions(option);
+			if (FAILED(hresult))
+			{
+				return hresult;
+			}
+			
+			strPath = theApp.m_AppSettings.GetRootPath();
+			if (strPath.IsEmpty())
+			{
+				strPath = _T("B:\\");
+			}
+		}
+		else
+		{
+			strPath = SBUtil::GetDownloadFolderPath();
+		}
+
+		if (!theApp.m_strLastSelectFolderPath.IsEmpty() && theApp.IsFolderExists(theApp.m_strLastSelectFolderPath))
+		{
+			strPath = theApp.m_strLastSelectFolderPath;
+		}
+
+		strPath = strPath.TrimRight('\\');
+		strPath += _T("\\");
+
+		PIDLIST_ABSOLUTE pidl;
+		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+
+		CComPtr<IShellItem> psi;
+		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
+		if (SUCCEEDED(hresult))
+		{
+			this->SetFolder(psi);
+			this->SetDefaultFolder(psi);
+		}
+		ILFree(pidl);
+		return hresult;
 	}
 
 	HRESULT STDMETHODCALLTYPE SetSaveAsItem(
@@ -624,11 +668,6 @@ public:
 			return E_ACCESSDENIED;
 		}
 
-		if (!theApp.IsSGMode())
-		{
-			return m_originalDialog->Show(hwndOwner);
-		}
-
 		HRESULT hresult = SetUp();
 		if (FAILED(hresult))
 			return hresult;
@@ -664,34 +703,40 @@ public:
 			}
 
 			CString strSelPath(wstrSelPath);
-			CString strSelPathUpper(wstrSelPath);
-			CoTaskMemFree(wstrSelPath);
-			strSelPathUpper.MakeUpper();
-			if (strSelPathUpper.IsEmpty())
+			if (theApp.IsSGMode())
 			{
-				return hresult;
+				CString strSelPathUpper(wstrSelPath);
+				CoTaskMemFree(wstrSelPath);
+				strSelPathUpper.MakeUpper();
+				if (strSelPathUpper.IsEmpty())
+				{
+					return hresult;
+				}
+				CString strRoot(strRootPath);
+				strRoot.MakeUpper();
+				if (strSelPathUpper.Find(strRoot) != 0)
+				{
+					CString strMsg;
+					strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strRootPath, (LPCWSTR)strRootPath, (LPCWSTR)strSelPath);
+					::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+					continue;
+				}
+
+				CStringW strTSG_Upload = strRootPath + L"Upload\\";
+				CStringW strTSG_UploadUpper(strTSG_Upload);
+				strTSG_UploadUpper.MakeUpper();
+				if (strSelPathUpper.Find(strTSG_UploadUpper) == 0)
+				{
+					CString strMsg;
+					strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
+					::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+					continue;
+				}
 			}
 
-			CString strRoot(strRootPath);
-			strRoot.MakeUpper();
-			if (strSelPathUpper.Find(strRoot) != 0)
-			{
-				CString strMsg;
-				strMsg.Format(L"%sドライブ以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strRootPath, (LPCWSTR)strRootPath, (LPCWSTR)strSelPath);
-				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
-				continue;
-			}
-
-			CStringW strTSG_Upload = strRootPath + L"Upload\\";
-			CStringW strTSG_UploadUpper(strTSG_Upload);
-			strTSG_UploadUpper.MakeUpper();
-			if (strSelPathUpper.Find(strTSG_UploadUpper) == 0)
-			{
-				CString strMsg;
-				strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
-				::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
-				continue;
-			}
+			PathRemoveFileSpec(strSelPath.GetBuffer());
+			strSelPath.ReleaseBuffer();
+			theApp.m_strLastSelectFolderPath = strSelPath;
 			return hresult;
 		}
 

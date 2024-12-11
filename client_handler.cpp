@@ -864,13 +864,6 @@ bool ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 	strPath = strPath.TrimRight('\\');
 	strPath += _T("\\");
 
-	if (!theApp.m_strLastSelectFolderPath.IsEmpty())
-	{
-		if (theApp.IsFolderExists(theApp.m_strLastSelectFolderPath))
-		{
-			strPath = theApp.m_strLastSelectFolderPath;
-		}
-	}
 	HWND hWindow = GetSafeParentWnd(browser);
 	if (SafeWnd(hWindow))
 	{
