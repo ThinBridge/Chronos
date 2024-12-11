@@ -904,18 +904,9 @@ bool ClientHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		pFileDlg->m_ofn.lpstrTitle = strTitle.GetString();
 		pFileDlg->m_ofn.lpstrInitialDir = strPath;
 
-		WCHAR szSelPath[MAX_PATH + 1] = {0};
 		bRet = pFileDlg->DoModal();
 		if (bRet == IDOK)
 		{
-			memset(szSelPath, 0x00, sizeof(WCHAR) * MAX_PATH);
-			StringCchCopy(szSelPath, MAX_PATH, pFileDlg->GetPathName());
-
-			WCHAR szSelFolderPath[MAX_PATH] = {0};
-			StringCchCopy(szSelFolderPath, MAX_PATH, pFileDlg->GetPathName());
-			PathRemoveFileSpec(szSelFolderPath);
-			theApp.m_strLastSelectFolderPath = szSelFolderPath;
-
 			strPath = pFileDlg->GetPathName();
 			if (!strPath.IsEmpty())
 			{
