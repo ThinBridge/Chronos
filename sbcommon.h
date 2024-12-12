@@ -3425,10 +3425,7 @@ public:
 				TB_Global_URL_EXTRAINFO = urlcomponents.lpszExtraInfo;
 				TB_Global_URL_EXTRAINFO.Replace(_T("\""), _T("\"\""));
 
-				//We had mis-spelled TB_Global_SCHEME as TB_Global_SCHME in v13.1.112.0 or earlier.
-				//So we accept not only TB_Global_SCHME but also TB_Global_SCHME for backward compatibility.
-				strHelper.Format(_T("Const TB_Global_SCHME=\"%s\"\r\nConst TB_Global_SCHEME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"),
-						 (LPCTSTR)TB_Global_SCHEME,
+				strHelper.Format(_T("Const TB_Global_SCHEME=\"%s\"\r\nConst TB_Global_HOSTNAME=\"%s\"\r\nConst TB_Global_PORT=\"%s\"\r\nConst TB_Global_URL_PATH=\"%s\"\r\nConst TB_Global_URL_EXTRAINFO=\"%s\"\r\n"),
 						 (LPCTSTR)TB_Global_SCHEME,
 						 (LPCTSTR)TB_Global_HOSTNAME,
 						 (LPCTSTR)TB_Global_PORT,
