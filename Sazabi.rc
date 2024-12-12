@@ -1133,7 +1133,6 @@ BEGIN
     ID_CONTEXT_MENU_COPY_IMG_LINK "画像アドレスをコピー"
     ID_CONTEXT_MENU_SEARCH  "Googleで検索：""%s"""
     ID_CONTEXT_MENU_RELOAD  "再読み込み"
-    ID_CONTEXT_MENU_PRINT_PDF "印刷(PDF出力)"
     ID_CONTEXT_MENU_PRINT   "印刷"
     ID_ERROR_MSG_FAILED     "一般的なネットワークエラー"
     ID_ERROR_MSG_NONE       "N/A"
@@ -1193,7 +1192,6 @@ END
 STRINGTABLE
 BEGIN
     ID_PRINT                "印刷(&P)..."
-    ID_PRINT_PDF            "印刷(PDF出力)"
 END
 
 STRINGTABLE
@@ -1218,9 +1216,7 @@ STRINGTABLE
 BEGIN
     ID_FILE_TYPE_JS         "JavaScriptファイル (*.js)|*.js||"
     ID_DOWNLOAD_FILE_CHOOSER_TITLE "ダウンロードファイルを保存"
-    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "名前を付けてPDF ドキュメントを保存"
     ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "ファイルダウンロード"
-    ID_PRINT_TO_PDF_FINISH_MSG "PDFドキュメントの作成が完了しました。"
     ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "ダウンロード(%d%%) %s"
     ID_TRANSFER_SPEED_B     "%I64u B / 秒"
     ID_TRANSFER_SPEED_KB    "%0.1f KB / 秒"
@@ -2506,7 +2502,6 @@ BEGIN
     ID_CONTEXT_MENU_COPY_IMG_LINK "Copy Image URL"
     ID_CONTEXT_MENU_SEARCH  "Search by Google: ""%s"""
     ID_CONTEXT_MENU_RELOAD  "Reload"
-    ID_CONTEXT_MENU_PRINT_PDF "Print as PDF"
     ID_CONTEXT_MENU_PRINT   "Print"
     ID_ERROR_MSG_FAILED     "Common network error"
     ID_ERROR_MSG_NONE       "N/A"
@@ -2566,7 +2561,6 @@ END
 STRINGTABLE
 BEGIN
     ID_PRINT                "&Print..."
-    ID_PRINT_PDF            "Print to PDF"
 END
 
 STRINGTABLE
@@ -2591,9 +2585,7 @@ STRINGTABLE
 BEGIN
     ID_FILE_TYPE_JS         "JavaScript files (*.js)|*.js||"
     ID_DOWNLOAD_FILE_CHOOSER_TITLE "Choose a file to be downloaded"
-    ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE "Choose a PDF document to be saved"
     ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE "File Download"
-    ID_PRINT_TO_PDF_FINISH_MSG "Printing as a PDF document finished."
     ID_DOWNLOAD_PROGRESS_DIALOG_TITLE "Download (%d%%) %s"
     ID_TRANSFER_SPEED_B     "%I64u B / Sec."
     ID_TRANSFER_SPEED_KB    "%0.1f KB / Sec."

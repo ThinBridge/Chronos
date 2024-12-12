@@ -118,9 +118,7 @@
 #define ID_FILE_TYPE_EXE                255
 #define ID_FILE_TYPE_JS                 256
 #define ID_DOWNLOAD_FILE_CHOOSER_TITLE  257
-#define ID_PRINT_TO_PDF_FILE_CHOOSER_TITLE 258
 #define ID_DEFAULT_FILE_DOWNLOAD_WINDOW_TITLE 259
-#define ID_PRINT_TO_PDF_FINISH_MSG      260
 #define ID_DOWNLOAD_PROGRESS_DIALOG_TITLE 261
 #define ID_TRANSFER_SPEED_B             262
 #define ID_TRANSFER_SPEED_KB            263
@@ -173,7 +171,6 @@
 #define ID_CONTEXT_MENU_COPY_IMG_LINK   311
 #define ID_CONTEXT_MENU_SEARCH          312
 #define ID_CONTEXT_MENU_RELOAD          313
-#define ID_CONTEXT_MENU_PRINT_PDF       314
 #define ID_CONTEXT_MENU_PRINT           315
 #define ID_ERROR_MSG_FAILED             316
 #define ID_ERROR_MSG_NONE               317
@@ -442,7 +439,6 @@
 #define ID_GO_START_PAGE                32780
 #define ID_OPEN                         32781
 #define ID_SHOW_DEVTOOLS                32782
-#define ID_PRINT_PDF                    32783
 #define ID_CUT                          32784
 #define ID_COPY                         32785
 #define ID_PASTE                        32786
