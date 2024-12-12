@@ -734,8 +734,6 @@ void CDlgSCEditor::OnBnClickedButtonFunc()
 	strText = _T("Function OnRedirect()\r\n");
 	strText += _T("  OnRedirect=\"Default\"\r\n");
 	strText += _T("  Exit Function\r\n\r\n");
-	strText += _T("  OnRedirect=\"IE\"\r\n");
-	strText += _T("  Exit Function\r\n\r\n");
 	strText += _T("  OnRedirect=\"Firefox\"\r\n");
 	strText += _T("  Exit Function\r\n\r\n");
 	strText += _T("  OnRedirect=\"Chrome\"\r\n");
