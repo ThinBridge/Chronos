@@ -950,6 +950,7 @@ public:
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
+		MaxUploadFileLength = 0;
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
@@ -1034,6 +1035,7 @@ public:
 		Data.MemoryUsageLimit = MemoryUsageLimit;
 		Data.WindowCountLimit = WindowCountLimit;
 		Data.EnableMediaAccessPermission = EnableMediaAccessPermission;
+		Data.MaxUploadFileLength = MaxUploadFileLength;
 
 		Data.EnableDownloadRestriction = EnableDownloadRestriction;
 		Data.EnableUploadRestriction = EnableUploadRestriction;
@@ -1120,6 +1122,7 @@ private:
 	int MemoryUsageLimit;
 	int WindowCountLimit;
 	int EnableMediaAccessPermission;
+	int MaxUploadFileLength;
 
 	//リダイレクト設定
 	int EnableURLRedirect;
@@ -1227,6 +1230,7 @@ public:
 		MemoryUsageLimit = 2040;
 		WindowCountLimit = 60;
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
+		MaxUploadFileLength = 0;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//リダイレクト設定
@@ -1644,6 +1648,17 @@ public:
 					continue;
 				}
 
+				if (strTemp2.CompareNoCase(_T("MaxUploadFileLength")) == 0)
+				{
+					int iW = 0;
+					iW = _ttoi(strTemp3);
+					if (0 <= iW && iW <= MAX_PATH - 1)
+						MaxUploadFileLength = iW;
+					else
+						MaxUploadFileLength = 0;
+					continue;
+				}
+
 				if (strTemp2.CompareNoCase(_T("EnableDownloadRestriction")) == 0)
 				{
 					EnableDownloadRestriction = (strTemp3 == _T("1")) ? TRUE : FALSE;
@@ -2000,6 +2015,7 @@ public:
 
 		strRet += _T("# non GUI parameters\n");
 		strRet += EXTVAL(EnableMediaAccessPermission);
+		strRet += EXTVAL(MaxUploadFileLength);
 		strRet += EXTVAL(UploadBasePath);
 		strRet += EXTVAL(ExitMessage);
 		strRet += EXTVAL(unZipMessage);
@@ -2058,6 +2074,7 @@ public:
 	inline int GetMemoryUsageLimit() { return MemoryUsageLimit; }
 	inline int GetWindowCountLimit() { return WindowCountLimit; }
 	inline int GetMediaAccessPermission() { return EnableMediaAccessPermission; }
+	inline int GetMaxUploadFileLength() { return MaxUploadFileLength; }
 
 	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
 	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
