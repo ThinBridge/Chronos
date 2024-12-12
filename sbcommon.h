@@ -9,7 +9,9 @@
 #include "include/cef_version.h"
 
 #include "mmsystem.h"
+#include <pathcch.h>
 #pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "Pathcch.lib")
 class CProcessingTimeMon
 {
 public:
@@ -4017,7 +4019,7 @@ public:
 					pDLDlg->m_strFileFullPath = strFileName;
 					TCHAR szFolder[MAX_PATH] = {0};
 					StringCchCopy(szFolder, MAX_PATH, strFileName);
-					PathRemoveFileSpec(szFolder);
+					PathCchRemoveFileSpec(szFolder, MAX_PATH);
 					pDLDlg->m_strFileFolderPath = szFolder;
 					m_taskbarList3.SetProgress((ULONGLONG)nProgress, (ULONGLONG)100, TBPF_NORMAL);
 					return;
