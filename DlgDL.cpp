@@ -60,7 +60,7 @@ void CDlgDL::SetCompST(BOOL bComp, LPCTSTR strFileFullPath)
 		m_strFileFullPath = strFileFullPath;
 		TCHAR szFolder[MAX_PATH] = {0};
 		StringCchCopy(szFolder, MAX_PATH, strFileFullPath);
-		PathRemoveFileSpec(szFolder);
+		PathCchRemoveFileSpec(szFolder, MAX_PATH);
 		m_strFileFolderPath = szFolder;
 		m_FileName.SetWindowText(strFileFullPath);
 		m_Prog.SetPos(100);

@@ -1761,8 +1761,8 @@ CString CSazabi::GetThinAppEntryPointFolderPath()
 	TCHAR szTargetPath[512] = {0};
 	if (GetEnvironmentVariable(_T("TS_ORIGIN"), szTargetPath, 512))
 	{
-		PathRemoveFileSpec(szTargetPath);
-		PathAddBackslash(szTargetPath);
+		PathCchRemoveFileSpec(szTargetPath, 512);
+		PathCchAddBackslash(szTargetPath, 512);
 		strPath = szTargetPath;
 	}
 	return strPath;

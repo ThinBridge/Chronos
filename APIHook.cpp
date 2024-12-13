@@ -119,7 +119,7 @@ public:
 		}
 
 		CComPtr<IShellItem> psi;
-		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
+		hresult = ::SHCreateItemFromIDList(pidl, IID_PPV_ARGS(&psi));
 		if (SUCCEEDED(hresult))
 		{
 			this->SetFolder(psi);
@@ -372,7 +372,7 @@ public:
 				theApp.SendLoggingMsg(LOG_UPLOAD, strFileName, hwndOwner);
 			}
 
-			PathRemoveFileSpec(strSelPath.GetBuffer());
+			PathCchRemoveFileSpec(strSelPath.GetBuffer(), strSelPath.GetLength() + 1);
 			strSelPath.ReleaseBuffer();
 			theApp.m_strLastSelectUploadFolderPath = strSelPath;
 
@@ -475,7 +475,7 @@ public:
 		}
 
 		CComPtr<IShellItem> psi;
-		hresult = ::SHCreateShellItem(NULL, NULL, pidl, &psi);
+		hresult = ::SHCreateItemFromIDList(pidl, IID_PPV_ARGS(&psi));
 		if (SUCCEEDED(hresult))
 		{
 			this->SetFolder(psi);
@@ -734,7 +734,7 @@ public:
 				}
 			}
 
-			PathRemoveFileSpec(strSelPath.GetBuffer());
+			PathCchRemoveFileSpec(strSelPath.GetBuffer(), strSelPath.GetLength() + 1);
 			strSelPath.ReleaseBuffer();
 			theApp.m_strLastSelectFolderPath = strSelPath;
 			return hresult;
@@ -1042,7 +1042,7 @@ static BOOL WINAPI Hook_GetOpenFileNameW(
 				}
 			}
 
-			PathRemoveFileSpec(strSelPath.GetBuffer());
+			PathCchRemoveFileSpec(strSelPath.GetBuffer(), strSelPath.GetLength() + 1);
 			strSelPath.ReleaseBuffer();
 			theApp.m_strLastSelectUploadFolderPath = strSelPath;
 
