@@ -2146,6 +2146,7 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 	if (wParam)
 	{
 		CString strURL((LPCTSTR)wParam);
+		m_strURL = strURL;
 		if (!strURL.IsEmpty())
 		{
 			BOOL bTopPage = FALSE;
