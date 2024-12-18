@@ -1226,7 +1226,7 @@ public:
 
 		EnableRunningTime = FALSE;
 		RunningLimitTime = 1440;
-		MemoryUsageLimit = 2040;
+		MemoryUsageLimit = 2048;
 		WindowCountLimit = 60;
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
 
