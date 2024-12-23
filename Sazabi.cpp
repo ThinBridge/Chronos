@@ -430,19 +430,47 @@ BOOL CSazabi::InitFunc_SGMode()
  */
 BOOL CSazabi::InitInstance()
 {
+	HANDLE hMutex = {0};
+	hMutex = ::CreateMutex(NULL, FALSE, _T("tfgszb_close"));
+	if (!hMutex)
+	{
+		return FALSE;
+	}
+	DWORD dwWaitResult = WaitForSingleObject(hMutex, INFINITE);
+	if (dwWaitResult != WAIT_OBJECT_0)
+	{
+		::CloseHandle(hMutex);
+		hMutex = NULL;
+		return FALSE;
+	}
 	PROC_TIME(InitInstance)
 	CString logmsg;
 
 	if (!InitFunc_Base())
+	{
+		ReleaseMutex(hMutex);
+		::CloseHandle(hMutex);
+		hMutex = NULL;
 		return FALSE;
+	}
 
 	m_strThisAppName = gstrThisAppNameR;
 
 	if (!InitFunc_Events())
+	{
+		ReleaseMutex(hMutex);
+		::CloseHandle(hMutex);
+		hMutex = NULL;
 		return FALSE;
+	}
 
 	if (!InitFunc_Paths())
+	{
+		ReleaseMutex(hMutex);
+		::CloseHandle(hMutex);
+		hMutex = NULL;
 		return FALSE;
+	}
 
 	this->GetOSVersion();
 	this->SetThisAppVersionString();
@@ -466,18 +494,33 @@ BOOL CSazabi::InitInstance()
 
 	// 設定ファイル初期読み込み
 	if (!InitFunc_Settings())
+	{
+		ReleaseMutex(hMutex);
+		::CloseHandle(hMutex);
+		hMutex = NULL;
 		return FALSE;
+	}
 
 	// コマンドラインオプションを解析する
 	this->InitParseCommandLine();
 
 	// VOS以外（物理環境で直接このEXEが起動された場合は、VOS環境で再実行）
 	if (!InitFunc_ExecOnVOS())
+	{
+		ReleaseMutex(hMutex);
+		::CloseHandle(hMutex);
+		hMutex = NULL;
 		return TRUE;
+	}
 
 	// 2重起動をチェックする。EXEのパスが違う場合は、起動を許可する。
 	if (InitMultipleInstance())
+	{
+		ReleaseMutex(hMutex);
+		::CloseHandle(hMutex);
+		hMutex = NULL;
 		return TRUE;
+	}
 
 	// Chronos.exeのバージョンとChronosN.exeのバージョンが異なる場合、警告する
 	CheckChronosVersionMismatch();
@@ -588,6 +631,9 @@ BOOL CSazabi::InitInstance()
 	::GetWindowThreadProcessId(pFrame->m_hWnd, &m_dwProcessId);
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
+	ReleaseMutex(hMutex);
+	::CloseHandle(hMutex);
+	hMutex = NULL;
 	return TRUE;
 }
 
@@ -1585,6 +1631,17 @@ void CSazabi::UnInitializeObjects()
 }
 int CSazabi::ExitInstance()
 {
+	HANDLE hMutex = {0};
+	hMutex = ::CreateMutex(NULL, FALSE, _T("tfgszb_close"));
+	if (!hMutex)
+	{
+		return FALSE;
+	}
+	DWORD dwWaitResult = WaitForSingleObject(hMutex, INFINITE);
+	if (dwWaitResult != WAIT_OBJECT_0)
+	{
+		return FALSE;
+	}
 	PROC_TIME_S(ExitInstance_p1)
 
 	WriteDebugTraceDateTime(_T("----------------------------------------------------------------------------------------------------"), DEBUG_LOG_TYPE_GE);
@@ -1621,7 +1678,6 @@ int CSazabi::ExitInstance()
 			this->UnInitializeCef();
 			this->DeleteCEFCache();
 			ExecNewInstance(_T(""));
-			::Sleep(1 * 5000);
 			m_bEnforceDeleteCache = FALSE;
 		}
 		else
@@ -1635,8 +1691,7 @@ int CSazabi::ExitInstance()
 				{
 					//CloseAllで複数のプロセスでこの部分を通ってしまうのでBlockする。
 					SetLastError(NO_ERROR);
-					HANDLE hMutex = {0};
-					hMutex = ::CreateMutex(NULL, FALSE, _T("tfgszb_close"));
+
 					if (::GetLastError() != ERROR_ALREADY_EXISTS)
 					{
 						CString confirmMsg;
@@ -1658,7 +1713,6 @@ int CSazabi::ExitInstance()
 						if (iRt == IDCANCEL || iRt == IDNO || iRt == IDTIMEOUT)
 						{
 							ExecNewInstance(_T(""));
-							::Sleep(1 * 1000);
 						}
 						else
 						{
@@ -1668,11 +1722,6 @@ int CSazabi::ExitInstance()
 							this->UnInitializeCef();
 							this->DeleteCEFCacheAll();
 						}
-					}
-					if (hMutex)
-					{
-						::CloseHandle(hMutex);
-						hMutex = NULL;
 					}
 				}
 				else
@@ -1698,6 +1747,9 @@ int CSazabi::ExitInstance()
 	AfxOleTerm(FALSE);
 	bRet = CWinApp::ExitInstance();
 	PROC_TIME_E(ExitInstance_p3)
+	ReleaseMutex(hMutex);
+	::CloseHandle(hMutex);
+	hMutex = NULL;
 	return bRet;
 }
 
@@ -4225,7 +4277,7 @@ void CSazabi::InitializeCef()
 
 	if (IsFirstInstance())
 	{
-		DeleteCEFCacheAll();
+		//DeleteCEFCacheAll();
 	}
 	settings.persist_session_cookies = true;
 	CefString(&settings.root_cache_path) = m_strCEFCachePath;
