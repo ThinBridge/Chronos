@@ -485,15 +485,15 @@ BOOL CSazabi::InitInstance()
 	// 保存 (ChronosDefault.conf)
 	this->m_AppSettings.SaveDataToFileEx(this->m_strSettingFileFullPath);
 
-	// SZB
-	InitializeCef();
-
 	// API Hook初期化
 	if (!m_pAPIHook)
 	{
 		m_pAPIHook = new APIHookC;
 		m_pAPIHook->DoHookComDlgAPI();
 	}
+
+	// SZB
+	InitializeCef();
 
 	// SystemGuard用の処理
 	if (this->IsSGMode())
