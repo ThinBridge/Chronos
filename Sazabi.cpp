@@ -434,6 +434,9 @@ BOOL CSazabi::InitInstance()
 {
 	PROC_TIME(InitInstance)
 	CString logmsg;
+	// 本メソッドのInitMultipleInstanceとExitInstanceのIsExistsAnotherInstanceが
+	// 並列実行されると、他のインスタンスの存在が正しく判定されない可能性がある
+	// ため、排他制御を行う。
 	HANDLE hMutex = {0};
 	DWORD dwWaitResult = WAIT_FAILED;
 	hMutex = ::CreateMutex(NULL, FALSE, CHRONOS_GLOCAL_MUTEX_NAME);
@@ -1679,6 +1682,10 @@ void CSazabi::UnInitializeObjects()
 int CSazabi::ExitInstance()
 {
 	PROC_TIME(ExitInstance)
+	// 以下の理由からここでは排他制御をおこなう
+	// * CloseAllで複数のプロセスでこの部分を通る可能性がある
+	// * InitInstanceでのInitMultipleInstanceと本メソッドのIsExistsAnotherInstanceが
+	//   並列実行されると、他のインスタンスの存在が正しく判定されない可能性がある。
 	HANDLE hMutex = {0};
 	DWORD dwWaitResult = WAIT_FAILED;
 	hMutex = ::CreateMutex(NULL, FALSE, CHRONOS_GLOCAL_MUTEX_NAME);
@@ -1743,7 +1750,6 @@ int CSazabi::ExitInstance()
 
 				if (InVirtualEnvironment() != VE_NA && this->IsSGMode())
 				{
-					//CloseAllで複数のプロセスでこの部分を通ってしまうのでBlockする。
 					SetLastError(NO_ERROR);
 
 					if (::GetLastError() != ERROR_ALREADY_EXISTS)
