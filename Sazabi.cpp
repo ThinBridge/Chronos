@@ -8,8 +8,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#define CHRONOS_GLOCAL_MUTEX_NAME _T("Chronos_Gobal_Mutex")
-
 BEGIN_MESSAGE_MAP(CSazabi, CWinApp)
 	//{{AFX_MSG_MAP(CSazabi)
 	//}}AFX_MSG_MAP
@@ -439,22 +437,10 @@ BOOL CSazabi::InitInstance()
 	// ため、排他制御を行う。
 	HANDLE hMutex = {0};
 	DWORD dwWaitResult = WAIT_FAILED;
-	hMutex = ::CreateMutex(NULL, FALSE, CHRONOS_GLOCAL_MUTEX_NAME);
-	if (hMutex)
-	{
-		dwWaitResult = WaitForSingleObject(hMutex, 30 * 1000);
-	}
+	CHRONOS_ENTER_CRITICAL_SECTION(hMutex, dwWaitResult, 30 * 1000);
 	if (!InitFunc_Base())
 	{
-		if (hMutex)
-		{
-			if (dwWaitResult == WAIT_OBJECT_0)
-			{
-				ReleaseMutex(hMutex);
-			}
-			::CloseHandle(hMutex);
-			hMutex = NULL;
-		}
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
 	}
 
@@ -462,29 +448,13 @@ BOOL CSazabi::InitInstance()
 
 	if (!InitFunc_Events())
 	{
-		if (hMutex)
-		{
-			if (dwWaitResult == WAIT_OBJECT_0)
-			{
-				ReleaseMutex(hMutex);
-			}
-			::CloseHandle(hMutex);
-			hMutex = NULL;
-		}
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
 	}
 
 	if (!InitFunc_Paths())
 	{
-		if (hMutex)
-		{
-			if (dwWaitResult == WAIT_OBJECT_0)
-			{
-				ReleaseMutex(hMutex);
-			}
-			::CloseHandle(hMutex);
-			hMutex = NULL;
-		}
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
 	}
 
@@ -511,15 +481,7 @@ BOOL CSazabi::InitInstance()
 	// 設定ファイル初期読み込み
 	if (!InitFunc_Settings())
 	{
-		if (hMutex)
-		{
-			if (dwWaitResult == WAIT_OBJECT_0)
-			{
-				ReleaseMutex(hMutex);
-			}
-			::CloseHandle(hMutex);
-			hMutex = NULL;
-		}
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
 	}
 
@@ -529,30 +491,14 @@ BOOL CSazabi::InitInstance()
 	// VOS以外（物理環境で直接このEXEが起動された場合は、VOS環境で再実行）
 	if (!InitFunc_ExecOnVOS())
 	{
-		if (hMutex)
-		{
-			if (dwWaitResult == WAIT_OBJECT_0)
-			{
-				ReleaseMutex(hMutex);
-			}
-			::CloseHandle(hMutex);
-			hMutex = NULL;
-		}
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return TRUE;
 	}
 
 	// 2重起動をチェックする。EXEのパスが違う場合は、起動を許可する。
 	if (InitMultipleInstance())
 	{
-		if (hMutex)
-		{
-			if (dwWaitResult == WAIT_OBJECT_0)
-			{
-				ReleaseMutex(hMutex);
-			}
-			::CloseHandle(hMutex);
-			hMutex = NULL;
-		}
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return TRUE;
 	}
 
@@ -675,15 +621,7 @@ BOOL CSazabi::InitInstance()
 	::GetWindowThreadProcessId(pFrame->m_hWnd, &m_dwProcessId);
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
-	if (hMutex)
-	{
-		if (dwWaitResult == WAIT_OBJECT_0)
-		{
-			ReleaseMutex(hMutex);
-		}
-		::CloseHandle(hMutex);
-		hMutex = NULL;
-	}
+	CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 	return TRUE;
 }
 
@@ -1688,20 +1626,16 @@ int CSazabi::ExitInstance()
 	//   並列実行されると、他のインスタンスの存在が正しく判定されない可能性がある。
 	HANDLE hMutex = {0};
 	DWORD dwWaitResult = WAIT_FAILED;
-	hMutex = ::CreateMutex(NULL, FALSE, CHRONOS_GLOCAL_MUTEX_NAME);
-	if (hMutex)
-	{
-		dwWaitResult = WaitForSingleObject(hMutex, 30 * 1000);
-		if (dwWaitResult != WAIT_OBJECT_0)
-		{
-			CString logmsg;
-			logmsg.Format(_T("Failed to aquire mutex: %lx"), dwWaitResult);
-			WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
-		}
-	}
-	else
+	CHRONOS_ENTER_CRITICAL_SECTION(hMutex, dwWaitResult, 30 * 1000);
+	if (!hMutex)
 	{
 		WriteDebugTraceDateTime(_T("Failed to CreateMutex"), DEBUG_LOG_TYPE_GE);
+	}
+	if (hMutex && dwWaitResult != WAIT_OBJECT_0)
+	{
+		CString logmsg;
+		logmsg.Format(_T("Failed to aquire mutex: %lx"), dwWaitResult);
+		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 	PROC_TIME_S(ExitInstance_p1)
 
@@ -1807,15 +1741,7 @@ int CSazabi::ExitInstance()
 	AfxOleTerm(FALSE);
 	bRet = CWinApp::ExitInstance();
 	PROC_TIME_E(ExitInstance_p3)
-	if (hMutex)
-	{
-		if (dwWaitResult == WAIT_OBJECT_0)
-		{
-			ReleaseMutex(hMutex);
-		}
-		::CloseHandle(hMutex);
-		hMutex = NULL;
-	}
+	CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 	return bRet;
 }
 
