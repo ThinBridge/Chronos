@@ -432,17 +432,31 @@ BOOL CSazabi::InitInstance()
 {
 	PROC_TIME(InitInstance)
 	CString logmsg;
-
+	// 本メソッドのInitMultipleInstanceとExitInstanceのIsExistsAnotherInstanceが
+	// 並列実行されると、他のインスタンスの存在が正しく判定されない可能性がある
+	// ため、排他制御を行う。
+	HANDLE hMutex = {0};
+	DWORD dwWaitResult = WAIT_FAILED;
+	CHRONOS_ENTER_CRITICAL_SECTION(hMutex, dwWaitResult, 30 * 1000);
 	if (!InitFunc_Base())
+	{
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
+	}
 
 	m_strThisAppName = gstrThisAppNameR;
 
 	if (!InitFunc_Events())
+	{
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
+	}
 
 	if (!InitFunc_Paths())
+	{
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
+	}
 
 	this->GetOSVersion();
 	this->SetThisAppVersionString();
@@ -466,18 +480,27 @@ BOOL CSazabi::InitInstance()
 
 	// 設定ファイル初期読み込み
 	if (!InitFunc_Settings())
+	{
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
+	}
 
 	// コマンドラインオプションを解析する
 	this->InitParseCommandLine();
 
 	// VOS以外（物理環境で直接このEXEが起動された場合は、VOS環境で再実行）
 	if (!InitFunc_ExecOnVOS())
+	{
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return TRUE;
+	}
 
 	// 2重起動をチェックする。EXEのパスが違う場合は、起動を許可する。
 	if (InitMultipleInstance())
+	{
+		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return TRUE;
+	}
 
 	// Chronos.exeのバージョンとChronosN.exeのバージョンが異なる場合、警告する
 	CheckChronosVersionMismatch();
@@ -509,6 +532,16 @@ BOOL CSazabi::InitInstance()
 	{
 		if (IsFirstInstance())
 			this->InitLogWrite();
+	}
+
+	if (!hMutex)
+	{
+		WriteDebugTraceDateTime(_T("InitInstance: Failed to CreateMutex"), DEBUG_LOG_TYPE_GE);
+	}
+	if (hMutex && dwWaitResult != WAIT_OBJECT_0)
+	{
+		logmsg.Format(_T("InitInstance: Failed to acquire mutex: %lx"), dwWaitResult);
+		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
 	// 各種confファイルの読込
@@ -588,6 +621,7 @@ BOOL CSazabi::InitInstance()
 	::GetWindowThreadProcessId(pFrame->m_hWnd, &m_dwProcessId);
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
+	CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 	return TRUE;
 }
 
@@ -1585,6 +1619,24 @@ void CSazabi::UnInitializeObjects()
 }
 int CSazabi::ExitInstance()
 {
+	PROC_TIME(ExitInstance)
+	// 以下の理由からここでは排他制御をおこなう
+	// * CloseAllで複数のプロセスでこの部分を通る可能性がある
+	// * InitInstanceでのInitMultipleInstanceと本メソッドのIsExistsAnotherInstanceが
+	//   並列実行されると、他のインスタンスの存在が正しく判定されない可能性がある。
+	HANDLE hMutex = {0};
+	DWORD dwWaitResult = WAIT_FAILED;
+	CHRONOS_ENTER_CRITICAL_SECTION(hMutex, dwWaitResult, 30 * 1000);
+	if (!hMutex)
+	{
+		WriteDebugTraceDateTime(_T("ExitInstance: Failed to CreateMutex"), DEBUG_LOG_TYPE_GE);
+	}
+	if (hMutex && dwWaitResult != WAIT_OBJECT_0)
+	{
+		CString logmsg;
+		logmsg.Format(_T("ExitInstance: Failed to acquire mutex: %lx"), dwWaitResult);
+		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
+	}
 	PROC_TIME_S(ExitInstance_p1)
 
 	WriteDebugTraceDateTime(_T("----------------------------------------------------------------------------------------------------"), DEBUG_LOG_TYPE_GE);
@@ -1621,7 +1673,6 @@ int CSazabi::ExitInstance()
 			this->UnInitializeCef();
 			this->DeleteCEFCache();
 			ExecNewInstance(_T(""));
-			::Sleep(1 * 5000);
 			m_bEnforceDeleteCache = FALSE;
 		}
 		else
@@ -1633,10 +1684,8 @@ int CSazabi::ExitInstance()
 
 				if (InVirtualEnvironment() != VE_NA && this->IsSGMode())
 				{
-					//CloseAllで複数のプロセスでこの部分を通ってしまうのでBlockする。
 					SetLastError(NO_ERROR);
-					HANDLE hMutex = {0};
-					hMutex = ::CreateMutex(NULL, FALSE, _T("tfgszb_close"));
+
 					if (::GetLastError() != ERROR_ALREADY_EXISTS)
 					{
 						CString confirmMsg;
@@ -1658,7 +1707,6 @@ int CSazabi::ExitInstance()
 						if (iRt == IDCANCEL || iRt == IDNO || iRt == IDTIMEOUT)
 						{
 							ExecNewInstance(_T(""));
-							::Sleep(1 * 1000);
 						}
 						else
 						{
@@ -1668,11 +1716,6 @@ int CSazabi::ExitInstance()
 							this->UnInitializeCef();
 							this->DeleteCEFCacheAll();
 						}
-					}
-					if (hMutex)
-					{
-						::CloseHandle(hMutex);
-						hMutex = NULL;
 					}
 				}
 				else
@@ -1698,6 +1741,7 @@ int CSazabi::ExitInstance()
 	AfxOleTerm(FALSE);
 	bRet = CWinApp::ExitInstance();
 	PROC_TIME_E(ExitInstance_p3)
+	CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 	return bRet;
 }
 

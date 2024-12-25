@@ -45,6 +45,27 @@
 #define CEF_WOD_IGNORE_ACTION		WOD_IGNORE_ACTION
 #endif
 
+#define CHRONOS_ENTER_CRITICAL_SECTION(hMutex, dwWaitResult, waitMilliSec) \
+	{                                                                      \
+		hMutex = {0};                                                      \
+		dwWaitResult = WAIT_FAILED;                                        \
+		hMutex = ::CreateMutex(NULL, FALSE, _T("Chronos_Gobal_Mutex"));    \
+		if (hMutex)                                                        \
+		{                                                                  \
+			dwWaitResult = WaitForSingleObject(hMutex, waitMilliSec);      \
+		}                                                                  \
+	}
+#define CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult) \
+	if (hMutex)                                              \
+	{                                                        \
+		if (dwWaitResult == WAIT_OBJECT_0)                   \
+		{                                                    \
+			ReleaseMutex(hMutex);                            \
+		}                                                    \
+		::CloseHandle(hMutex);                               \
+		hMutex = NULL;                                       \
+	}
+
 enum class CHFILER_INIT_MODE
 {
 	OPEN,
