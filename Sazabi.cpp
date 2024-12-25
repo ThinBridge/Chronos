@@ -536,11 +536,11 @@ BOOL CSazabi::InitInstance()
 
 	if (!hMutex)
 	{
-		WriteDebugTraceDateTime(_T("Failed to CreateMutex"), DEBUG_LOG_TYPE_GE);
+		WriteDebugTraceDateTime(_T("InitInstance: Failed to CreateMutex"), DEBUG_LOG_TYPE_GE);
 	}
 	if (hMutex && dwWaitResult != WAIT_OBJECT_0)
 	{
-		logmsg.Format(_T("Failed to aquire mutex: %lx"), dwWaitResult);
+		logmsg.Format(_T("InitInstance: Failed to aquire mutex: %lx"), dwWaitResult);
 		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
@@ -1629,12 +1629,12 @@ int CSazabi::ExitInstance()
 	CHRONOS_ENTER_CRITICAL_SECTION(hMutex, dwWaitResult, 30 * 1000);
 	if (!hMutex)
 	{
-		WriteDebugTraceDateTime(_T("Failed to CreateMutex"), DEBUG_LOG_TYPE_GE);
+		WriteDebugTraceDateTime(_T("ExitInstance: Failed to CreateMutex"), DEBUG_LOG_TYPE_GE);
 	}
 	if (hMutex && dwWaitResult != WAIT_OBJECT_0)
 	{
 		CString logmsg;
-		logmsg.Format(_T("Failed to aquire mutex: %lx"), dwWaitResult);
+		logmsg.Format(_T("ExitInstance: Failed to aquire mutex: %lx"), dwWaitResult);
 		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 	PROC_TIME_S(ExitInstance_p1)
