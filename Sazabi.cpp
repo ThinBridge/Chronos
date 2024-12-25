@@ -540,7 +540,7 @@ BOOL CSazabi::InitInstance()
 	}
 	if (hMutex && dwWaitResult != WAIT_OBJECT_0)
 	{
-		logmsg.Format(_T("InitInstance: Failed to aquire mutex: %lx"), dwWaitResult);
+		logmsg.Format(_T("InitInstance: Failed to acquire mutex: %lx"), dwWaitResult);
 		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
@@ -1634,7 +1634,7 @@ int CSazabi::ExitInstance()
 	if (hMutex && dwWaitResult != WAIT_OBJECT_0)
 	{
 		CString logmsg;
-		logmsg.Format(_T("ExitInstance: Failed to aquire mutex: %lx"), dwWaitResult);
+		logmsg.Format(_T("ExitInstance: Failed to acquire mutex: %lx"), dwWaitResult);
 		WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 	PROC_TIME_S(ExitInstance_p1)
