@@ -1531,7 +1531,11 @@ void CChildView::OnCut()
 {
 	HWND hwnd = NULL;
 	hwnd = ::GetFocus();
-	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
+	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_wndEditSearch) && (hwnd == FRM->m_wndEditSearch->m_hWnd))
+	{
+		FRM->m_wndEditSearch->Cut();
+	}
+	else if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
 	{
 		FRM->m_pwndAddress->m_Edit.Cut();
 	}
@@ -1546,7 +1550,11 @@ void CChildView::OnCopy()
 	HWND hwnd = NULL;
 	hwnd = ::GetFocus();
 
-	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
+	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_wndEditSearch) && (hwnd == FRM->m_wndEditSearch->m_hWnd))
+	{
+		FRM->m_wndEditSearch->Copy();
+	}
+	else if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
 	{
 		FRM->m_pwndAddress->m_Edit.Copy();
 	}
@@ -1562,7 +1570,11 @@ void CChildView::OnPaste()
 	HWND hwnd = NULL;
 	hwnd = ::GetFocus();
 
-	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
+	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_wndEditSearch) && (hwnd == FRM->m_wndEditSearch->m_hWnd))
+	{
+		FRM->m_wndEditSearch->Paste();
+	}
+	else if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
 	{
 		FRM->m_pwndAddress->m_Edit.Paste();
 	}
@@ -1577,7 +1589,14 @@ void CChildView::OnSelAll()
 	HWND hwnd = NULL;
 	hwnd = ::GetFocus();
 
-	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
+	 
+	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_wndEditSearch) && (hwnd == FRM->m_wndEditSearch->m_hWnd))
+	{
+		CString str;
+		FRM->m_wndEditSearch->GetWindowText(str);
+		FRM->m_wndEditSearch->SetSel(0, str.GetLength());
+	}
+	else if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndAddress) && (hwnd == FRM->m_pwndAddress->m_hWnd || hwnd == FRM->m_pwndAddress->m_Edit.m_hWnd))
 	{
 		CString str;
 		FRM->m_pwndAddress->m_Edit.GetWindowText(str);
