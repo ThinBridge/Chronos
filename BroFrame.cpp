@@ -704,7 +704,6 @@ void CBrowserFrame::CreateRebars()
 		{
 			CMFCPopupMenu::SetForceMenuFocus(FALSE);
 			EnableDocking(CBRS_ALIGN_TOP);
-			m_pwndMenuBar->EnableDocking(CBRS_TOP);
 			DockPane(m_pwndMenuBar);
 			//------------------------------------
 			// Remove menubar gripper and borders:
