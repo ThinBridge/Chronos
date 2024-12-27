@@ -698,18 +698,24 @@ void CBrowserFrame::CreateRebars()
 				//---------------------------------
 				m_pwndMenuBar->SetSizes(CSize(36, 30), CSize(23, 23));
 				m_pwndMenuBar->SetMenuSizes(CSize(22, 22), CSize(16, 16));
-
-				//------------------------------------
-				// Remove menubar gripper and borders:
-				//------------------------------------
-				m_pwndMenuBar->SetPaneStyle(m_pwndMenuBar->GetPaneStyle() &
-							    ~(CBRS_GRIPPER | CBRS_BORDER_TOP | CBRS_BORDER_BOTTOM | CBRS_BORDER_LEFT | CBRS_BORDER_RIGHT));
 			}
 		}
 		if (theApp.m_AppSettings.IsRebar())
-			;
+		{
+			CMFCPopupMenu::SetForceMenuFocus(FALSE);
+			EnableDocking(CBRS_ALIGN_TOP);
+			m_pwndMenuBar->EnableDocking(CBRS_TOP);
+			DockPane(m_pwndMenuBar);
+			//------------------------------------
+			// Remove menubar gripper and borders:
+			//------------------------------------
+			m_pwndMenuBar->SetPaneStyle(m_pwndMenuBar->GetPaneStyle() &
+						    ~(CBRS_GRIPPER | CBRS_BORDER_TOP | CBRS_BORDER_BOTTOM | CBRS_BORDER_LEFT | CBRS_BORDER_RIGHT));
+		}
 		else
+		{
 			m_pwndMenuBar->ShowPane(FALSE, 0, FALSE);
+		}
 	}
 	PROC_TIME_E(CreateRebars_MENUBAR)
 
@@ -873,15 +879,6 @@ void CBrowserFrame::CreateRebars()
 			}
 			m_pwndReBarCreateFlg = TRUE;
 			PROC_TIME_E(CreateRebars_REBAR_Create)
-
-			PROC_TIME_S(CreateRebars_REBAR_AddBar_MENU)
-			if (m_pwndMenuBar)
-			{
-				m_pwndMenuBar->ShowPane(TRUE, 0, FALSE);
-				m_pwndReBar->AddBar(m_pwndMenuBar, NULL, NULL,
-						    RBBS_NOGRIPPER | RBBS_BREAK);
-			}
-			PROC_TIME_E(CreateRebars_REBAR_AddBar_MENU)
 
 			PROC_TIME_S(CreateRebars_REBAR_AddBar_ToolBar)
 			if (m_pwndToolBar)
