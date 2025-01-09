@@ -427,6 +427,7 @@
 #define IDC_CHECK_EnableBrowsingLogging 1368
 #define IDC_CHECK_EnableAccessAllLogging 1369
 #define IDC_EDIT_RequestHeader          1370
+#define IDC_DisallowTransferringExt     1371
 #define ID_SETTINGS                     32609
 #define IDD_ABOUTBOX                    32771
 #define ID_NEW                          32772
