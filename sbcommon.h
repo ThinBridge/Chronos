@@ -989,6 +989,7 @@ public:
 		ShowUploadTab = 0;
 		UploadPath.Empty();
 		DisallowExt.Empty();
+		DisallowTransferringExt.Empty();
 		unZipMessage.Empty();
 		ExitMessage.Empty();
 
@@ -1073,6 +1074,7 @@ public:
 		Data.ShowUploadTab = ShowUploadTab;
 		Data.UploadPath = UploadPath;
 		Data.DisallowExt = DisallowExt;
+		Data.DisallowTransferringExt = DisallowTransferringExt;
 		Data.unZipMessage = unZipMessage;
 		Data.ExitMessage = ExitMessage;
 
@@ -1166,6 +1168,7 @@ private:
 	int ShowUploadTab;
 	CString UploadPath;
 	CString DisallowExt;
+	CString DisallowTransferringExt;
 	CString unZipMessage;
 	CString ExitMessage;
 	int EnableUploadSync;
@@ -1281,6 +1284,7 @@ public:
 		ShowUploadTab = 1;
 		UploadPath = _T("");
 		DisallowExt = _T("");
+		DisallowTransferringExt = _T("");
 		unZipMessage = _T("");
 		ExitMessage = _T("");
 
@@ -1444,6 +1448,11 @@ public:
 				if (strTemp2.CompareNoCase(_T("DisallowExt")) == 0)
 				{
 					DisallowExt = strTemp3;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("DisallowTransferringExt")) == 0)
+				{
+					DisallowTransferringExt = strTemp3;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("unZipMessage")) == 0)
@@ -1989,6 +1998,7 @@ public:
 		strRet += EXTVAL(RootPath);
 		strRet += EXTVAL(ExtFilter);
 		strRet += EXTVAL(DisallowExt);
+		strRet += EXTVAL(DisallowTransferringExt);
 		strRet += EXTVAL(TransferPath);
 		strRet += EXTVAL(TransferSubFolder);
 		strRet += EXTVAL(UploadPath);
@@ -2087,6 +2097,7 @@ public:
 	inline CString GetTransferSubFolder() { return TransferSubFolder; }
 	inline CString GetUploadPath() { return UploadPath; }
 	inline CString GetDisallowExt() { return DisallowExt; }
+	inline CString GetDisallowTransferringExt() { return DisallowTransferringExt; }
 	inline CString GetunZipMessage() { return unZipMessage; }
 	inline CString GetExitMessage() { return ExitMessage; }
 
@@ -2199,6 +2210,7 @@ public:
 	inline void SetTransferSubFolder(LPCTSTR str) { TransferSubFolder = str; }
 	inline void SetUploadPath(LPCTSTR str) { UploadPath = str; }
 	inline void SetDisallowExt(LPCTSTR str) { DisallowExt = str; }
+	inline void SetDisallowTransferringExt(LPCTSTR str) { DisallowTransferringExt = str; }
 	inline void SetunZipMessage(LPCTSTR str) { unZipMessage = str; }
 	inline void SetExitMessage(LPCTSTR str) { ExitMessage = str; }
 
