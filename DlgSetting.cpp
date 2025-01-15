@@ -2268,6 +2268,7 @@ BOOL CDlgSetFileMgr::OnInitDialog()
 	SetDlgItemText(IDC_RootPath, theApp.m_AppSettingsDlgCurrent.GetRootPath());
 	SetDlgItemText(IDC_ExtFilter, theApp.m_AppSettingsDlgCurrent.GetExtFilter());
 	SetDlgItemText(IDC_DisallowExt, theApp.m_AppSettingsDlgCurrent.GetDisallowExt());
+	SetDlgItemText(IDC_DisallowTransferringExt, theApp.m_AppSettingsDlgCurrent.GetDisallowTransferringExt());
 	SetDlgItemText(IDC_TransferPath, theApp.m_AppSettingsDlgCurrent.GetTransferPath());
 	SetDlgItemText(IDC_TransferSubFolder, theApp.m_AppSettingsDlgCurrent.GetTransferSubFolder());
 	SetDlgItemText(IDC_UploadPath, theApp.m_AppSettingsDlgCurrent.GetUploadPath());
@@ -2341,6 +2342,10 @@ LRESULT CDlgSetFileMgr::Set_OK(WPARAM wParam, LPARAM lParam)
 	strValue.Empty();
 	GetDlgItemText(IDC_DisallowExt, strValue);
 	theApp.m_AppSettingsDlgCurrent.SetDisallowExt(strValue);
+
+	strValue.Empty();
+	GetDlgItemText(IDC_DisallowTransferringExt, strValue);
+	theApp.m_AppSettingsDlgCurrent.SetDisallowTransferringExt(strValue);
 
 	strValue.Empty();
 	GetDlgItemText(IDC_TransferPath, strValue);

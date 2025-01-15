@@ -339,32 +339,34 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Dialog"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    GROUPBOX        "全体設定",IDC_STATIC,8,6,343,79
-    LTEXT           "ダウンロード/アップロードアイテムの既定のパス",IDC_STATIC,12,18,132,8
-    EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED
-    LTEXT           "表示するアイテムの拡張子",IDC_STATIC,12,37,79,8
-    EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
-    LTEXT           "実行、開封、転送を禁止する拡張子",IDC_STATIC,12,56,111,8
-    EDITTEXT        IDC_DisallowExt,160,56,179,14,ES_AUTOHSCROLL
-    GROUPBOX        "ダウンロード設定",IDC_STATIC,8,90,343,67
-    LTEXT           "ダウンロードアイテム転送先",IDC_STATIC,12,105,80,8
-    EDITTEXT        IDC_TransferPath,99,103,246,14,ES_AUTOHSCROLL
-    LTEXT           "サブフォルダー \n 環境変数・時間フォーマットを指定可能\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,138,27
-    EDITTEXT        IDC_TransferSubFolder,144,121,200,14,ES_AUTOHSCROLL
-    GROUPBOX        "アップロード設定",IDC_STATIC,8,161,343,74
-    LTEXT           "アップロードアイテム受入元",IDC_STATIC,12,174,79,8
-    EDITTEXT        IDC_UploadPath,99,171,246,14,ES_AUTOHSCROLL
-    CONTROL         "アップロードアイテムを表示する",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,189,104,10
-    GROUPBOX        "機能設定",IDC_STATIC,8,238,343,42
-    LTEXT           "右クリックメニュー設定",IDC_STATIC,12,251,64,8
-    COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "全体設定",IDC_STATIC,8,4,342,95
+    LTEXT           "ダウンロード/アップロードアイテムの既定のパス",IDC_STATIC,12,16,132,8
+    EDITTEXT        IDC_RootPath,160,16,179,14,ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED
+    LTEXT           "表示するアイテムの拡張子",IDC_STATIC,12,35,79,8
+    EDITTEXT        IDC_ExtFilter,160,36,179,14,ES_AUTOHSCROLL
+    LTEXT           "実行、開封、転送を禁止する拡張子",IDC_STATIC,12,54,111,8
+    EDITTEXT        IDC_DisallowExt,160,54,179,14,ES_AUTOHSCROLL
+    GROUPBOX        "ダウンロード設定",IDC_STATIC,8,101,343,67
+    LTEXT           "ダウンロードアイテム転送先",IDC_STATIC,12,117,80,8
+    EDITTEXT        IDC_TransferPath,99,115,246,14,ES_AUTOHSCROLL
+    LTEXT           "サブフォルダー \n 環境変数・時間フォーマットを指定可能\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,133,138,27
+    EDITTEXT        IDC_TransferSubFolder,144,133,200,14,ES_AUTOHSCROLL
+    GROUPBOX        "アップロード設定",IDC_STATIC,8,170,343,74
+    LTEXT           "アップロードアイテム受入元",IDC_STATIC,12,183,79,8
+    EDITTEXT        IDC_UploadPath,99,180,246,14,ES_AUTOHSCROLL
+    CONTROL         "アップロードアイテムを表示する",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,198,104,10
+    GROUPBOX        "機能設定",IDC_STATIC,8,245,343,42
+    LTEXT           "右クリックメニュー設定",IDC_STATIC,12,259,64,8
+    COMBOBOX        IDC_EnableOpendOp,87,257,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     CONTROL         "「開封済みにする」を行った場合に、確認メッセージを表示しない",IDC_DisableOpendOpAlert,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
-    LTEXT           "※拡張子を複数設定する場合は、|で区切ります。例）.elf|.lnk",IDC_STATIC,12,74,187,8
-    CONTROL         "アップロードアイテムを自動更新する",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
-    CONTROL         "ミラーリングモードを有効にする",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
-    LTEXT           "自動更新間隔(ミリ秒)",IDC_STATIC,17,220,68,8
-    EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,273,202,10
+    LTEXT           "※拡張子を複数設定する場合は、|で区切ります。例）.elf|.lnk",IDC_STATIC,12,87,187,8
+    CONTROL         "アップロードアイテムを自動更新する",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,213,119,10
+    CONTROL         "ミラーリングモードを有効にする",IDC_EnableUploadSyncMirror,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,213,103,10
+    LTEXT           "自動更新間隔(ミリ秒)",IDC_STATIC,17,229,68,8
+    EDITTEXT        IDC_UploadSyncInterval,104,227,109,14,ES_AUTOHSCROLL
+    LTEXT           "転送を禁止する拡張子",IDC_STATIC,12,71,111,8
+    EDITTEXT        IDC_DisallowTransferringExt,160,71,179,14,ES_AUTOHSCROLL
 END
 
 IDD_DLG_SC_EDITOR DIALOGEX 0, 0, 544, 376
@@ -1692,33 +1694,35 @@ STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
 CAPTION "Dialog"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    GROUPBOX        "General options",IDC_STATIC,8,6,343,79
-    LTEXT           "Default path of downloaded and uploaded items",IDC_STATIC,12,18,132,8
+    GROUPBOX        "General options",IDC_STATIC,6,3,343,95
+    LTEXT           "Default path of downloaded and uploaded items",IDC_STATIC,10,19,132,8
     EDITTEXT        IDC_RootPath,160,18,179,14,ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED
-    LTEXT           "File extensions for visible items",IDC_STATIC,12,37,79,8
-    EDITTEXT        IDC_ExtFilter,160,38,179,14,ES_AUTOHSCROLL
-    LTEXT           "File extensions to forbid running, opening and transferring",IDC_STATIC,12,56,111,8
-    EDITTEXT        IDC_DisallowExt,160,56,179,14,ES_AUTOHSCROLL
-    GROUPBOX        "Downlaod options",IDC_STATIC,8,90,343,67
-    LTEXT           "Transfer path for downloaded items",IDC_STATIC,12,105,80,8
-    EDITTEXT        IDC_TransferPath,99,103,246,14,ES_AUTOHSCROLL
-    LTEXT           "Sub folders \n Environment variables and time format are available.\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,12,122,162,27
-    EDITTEXT        IDC_TransferSubFolder,183,122,162,14,ES_AUTOHSCROLL
-    GROUPBOX        "Upload options",IDC_STATIC,8,161,343,74
-    LTEXT           "Accepted path for upload items",IDC_STATIC,12,174,79,8
-    EDITTEXT        IDC_UploadPath,99,171,246,14,ES_AUTOHSCROLL
-    CONTROL         "Show upload items",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,189,104,10
-    GROUPBOX        "Feature options",IDC_STATIC,8,238,343,42
-    LTEXT           "Context menu options",IDC_STATIC,12,251,64,8
-    COMBOBOX        IDC_EnableOpendOp,87,249,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "File extensions for visible items",IDC_STATIC,10,37,79,8
+    EDITTEXT        IDC_ExtFilter,161,35,179,14,ES_AUTOHSCROLL
+    LTEXT           "File extensions to forbid running, opening and transferring",IDC_STATIC,10,54,111,8
+    EDITTEXT        IDC_DisallowExt,160,52,179,14,ES_AUTOHSCROLL
+    GROUPBOX        "Downlaod options",IDC_STATIC,7,99,343,67
+    LTEXT           "Transfer path for downloaded items",IDC_STATIC,11,115,80,8
+    EDITTEXT        IDC_TransferPath,98,113,246,14,ES_AUTOHSCROLL
+    LTEXT           "Sub folders \n Environment variables and time format are available.\n   %Y-%m-%d %H-%M-%S",IDC_STATIC,11,131,162,27
+    EDITTEXT        IDC_TransferSubFolder,182,131,162,14,ES_AUTOHSCROLL
+    GROUPBOX        "Upload options",IDC_STATIC,7,168,343,74
+    LTEXT           "Accepted path for upload items",IDC_STATIC,11,181,79,8
+    EDITTEXT        IDC_UploadPath,98,178,246,14,ES_AUTOHSCROLL
+    CONTROL         "Show upload items",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,196,104,10
+    GROUPBOX        "Feature options",IDC_STATIC,7,245,343,42
+    LTEXT           "Context menu options",IDC_STATIC,11,259,64,8
+    COMBOBOX        IDC_EnableOpendOp,86,257,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpendOpAlert,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,266,202,10
-    LTEXT           "*Separate multiple file extensions with a pipe |. For example: .elf|.lnk",IDC_STATIC,12,74,267,8
-    CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,204,119,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,273,202,10
+    LTEXT           "*Separate multiple file extensions with a pipe |. For example: .elf|.lnk",IDC_STATIC,10,86,267,8
+    CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,211,119,10
     CONTROL         "Enable mirroring mode for upload items",IDC_EnableUploadSyncMirror,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,204,103,10
-    LTEXT           "Interval of auto-sync (in milliseconds)",IDC_STATIC,17,220,68,8
-    EDITTEXT        IDC_UploadSyncInterval,104,218,109,14,ES_AUTOHSCROLL
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,147,211,103,10
+    LTEXT           "Interval of auto-sync (in milliseconds)",IDC_STATIC,16,227,68,8
+    EDITTEXT        IDC_UploadSyncInterval,103,225,109,14,ES_AUTOHSCROLL
+    LTEXT           "File extensions to forbid transferring",IDC_STATIC,10,71,111,8
+    EDITTEXT        IDC_DisallowTransferringExt,160,69,179,14,ES_AUTOHSCROLL
 END
 
 IDD_DLG_SC_EDITOR DIALOGEX 0, 0, 544, 376
