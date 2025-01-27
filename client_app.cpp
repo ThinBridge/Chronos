@@ -24,6 +24,12 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 {
 	PROC_TIME(OnBeforeCommandLineProcessing)
 
+	//CEF131では、GoBackとGoForwardでキャッシュが有効だとFaviconが更新されない問題がある。
+	//そのため、キャッシュを無効化する。
+#if CHROME_VERSION_MAJOR >= 131
+	command_line->AppendSwitch(_T("disable-back-forward-cache"));
+#endif
+
 	//GetAuthCredentialsが動かなくなったので2019-06-13
 	//command_line->AppendSwitchWithValue(_T("disable-features"), _T("NetworkService"));
 	//2019-07-24 動くようになった。
@@ -45,7 +51,6 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//CEF 84まではOKだった。
 	//--enable-print-preview
 	command_line->AppendSwitch(_T("enable-print-preview"));
-	command_line->AppendSwitch(_T("disable-back-forward-cache"));
 
 	//--disable-popup-blocking
 	//CEF 128以降、runtime_styleにCEF_RUNTIME_STYLE_ALLOYを指定すると、デフォルトではポップアップが表示されない。
