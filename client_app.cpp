@@ -26,6 +26,7 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 
 	//CEF131では、GoBackとGoForwardでキャッシュが有効だとFaviconが更新されない問題がある。
 	//そのため、キャッシュを無効化する。
+	//https://github.com/chromiumembedded/cef/issues/3874
 #if CHROME_VERSION_MAJOR >= 131
 	command_line->AppendSwitch(_T("disable-back-forward-cache"));
 #endif
