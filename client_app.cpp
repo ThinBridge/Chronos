@@ -45,6 +45,7 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//CEF 84まではOKだった。
 	//--enable-print-preview
 	command_line->AppendSwitch(_T("enable-print-preview"));
+	command_line->AppendSwitch(_T("disable-back-forward-cache"));
 
 	//--disable-popup-blocking
 	//CEF 128以降、runtime_styleにCEF_RUNTIME_STYLE_ALLOYを指定すると、デフォルトではポップアップが表示されない。
