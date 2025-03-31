@@ -316,24 +316,12 @@ BOOL CBrowserFrame::PreTranslateMessage(MSG* pMsg)
 									this->m_wndView.bSetCefBrowserFocus();
 							}
 
-							if (m_nBrowserState & CEF_BIT_IS_LOADING)
+							theApp.m_wndpActiveTabLine->MoveWnd(rc);
+							BOOL bProgress = (m_nBrowserState & CEF_BIT_IS_LOADING) ? TRUE : FALSE;
+							if (theApp.m_wndpActiveTabLine->m_bProgress != bProgress)
 							{
-								rc.top -= 2;
-								theApp.m_wndpActiveTabLine->MoveWnd(rc);
-								if (!theApp.m_wndpActiveTabLine->m_bProgress)
-								{
-									theApp.m_wndpActiveTabLine->m_bProgress = TRUE;
-									theApp.m_wndpActiveTabLine->InvalidateRect(NULL);
-								}
-							}
-							else
-							{
-								theApp.m_wndpActiveTabLine->MoveWnd(rc);
-								if (theApp.m_wndpActiveTabLine->m_bProgress)
-								{
-									theApp.m_wndpActiveTabLine->m_bProgress = FALSE;
-									theApp.m_wndpActiveTabLine->InvalidateRect(NULL);
-								}
+								theApp.m_wndpActiveTabLine->m_bProgress = bProgress;
+								theApp.m_wndpActiveTabLine->InvalidateRect(NULL);
 							}
 						}
 					}
