@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "include\cef_command_ids.h"
 #include "Sazabi.h"
 #include "BroView.h"
 #include "MainFrm.h"
@@ -118,8 +119,6 @@ BEGIN_MESSAGE_MAP(CChildView, ViewBaseClass)
 	ON_MESSAGE(WM_APP_CEF_PROGRESS_CHANGE, &CChildView::OnProgressChange)
 	ON_MESSAGE(WM_APP_CEF_WINDOW_ACTIVATE, &CChildView::OnWindowActivate)
 	ON_MESSAGE(WM_APP_CEF_SET_RENDERER_PID, &CChildView::OnSetRendererPID)
-
-	ON_REGISTERED_MESSAGE(m_pFindDialogMessage, OnFindDialogMessage)
 END_MESSAGE_MAP()
 
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
@@ -1609,50 +1608,6 @@ void CChildView::OnSelAll()
 	}
 }
 
-LRESULT CChildView::OnFindDialogMessage(WPARAM wParam, LPARAM lParam)
-{
-	ASSERT(m_pFindDialog != NULL);
-	__analysis_assume(m_pFindDialog != NULL);
-	try
-	{
-		if (m_pFindDialog->IsTerminating())
-		{
-			if (m_cefBrowser)
-				m_cefBrowser->GetHost()->StopFinding(true);
-			m_pFindDialog = NULL;
-			m_bFindNext = FALSE;
-			return S_OK;
-		}
-
-		if (m_pFindDialog->FindNext())
-		{
-			CString FindName = m_pFindDialog->GetFindString();
-			bool bMatchCase = m_pFindDialog->MatchCase() == TRUE ? true : false;
-			bool bMatchWholeWord = m_pFindDialog->MatchWholeWord() == TRUE ? true : false;
-			bool bSearchDown = m_pFindDialog->SearchDown() == TRUE ? true : false;
-
-			CefString csFind = FindName;
-			if (m_cefBrowser)
-			{
-#if CHROME_VERSION_MAJOR >= 99
-				// Since CEF99, no need to specify identifier for Find API
-				m_cefBrowser->GetHost()->Find(csFind, bSearchDown, bMatchCase, m_bFindNext);
-#else
-				INT nBrowserId = m_cefBrowser->GetIdentifier();
-				m_cefBrowser->GetHost()->Find(nBrowserId, csFind, bSearchDown, bMatchCase, m_bFindNext);
-#endif
-			}
-			if (!m_bFindNext)
-				m_bFindNext = TRUE;
-		}
-	}
-	catch (...)
-	{
-		;
-	}
-	return S_OK;
-}
-
 void CChildView::OnFindPage()
 {
 	CString logmsg;
@@ -1660,9 +1615,7 @@ void CChildView::OnFindPage()
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
-		ASSERT(m_pFindDialog == NULL);
-		m_pFindDialog = new CFindReplaceDialog();
-		m_pFindDialog->Create(TRUE, _T(""), NULL, FR_DOWN, this);
+		m_cefBrowser->GetHost()->ExecuteChromeCommand(IDC_FIND, CEF_WOD_CURRENT_TAB);
 	}
 }
 
