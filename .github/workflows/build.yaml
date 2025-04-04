@@ -31,7 +31,7 @@ jobs:
       - name: Setup CEF
         run: .\setup-cef.bat
       - name: Compile Chronos
-        run: msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG
+        run: msbuild /m /p:Platform=Win32 /p:Configuration=R64_CSG /p:RunCodeAnalysis=true /p:CodeAnalysisRuleSet=Sazabi.ruleset /warnaserror
       - name: Prepare upload
         run: move R32 Chronos
       - name: Prepare Chronos.exe to launch easily
