@@ -1913,14 +1913,13 @@ bool ClientHandler::OnSelectClientCertificate(
 
 void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution)
 {
-	// Using CefBrowser->StopLoad() with allow_os_execution = true causes a crash on CEF128+.
+	// Using CefBrowser->StopLoad() with allow_os_execution = true causes a crash on CEF128 - 134.
 	// https://github.com/chromiumembedded/cef/issues/3851
 	//
 	// In order to avoid the crash, specifying allow_os_execution = false on CEF128+, but 
 	// this blocks to execute applications installed in OS. E.g. Zoom application for Windows.
-	// 
-	// We should specify allow_os_execution = true after the bug on CEF128+ is fixed.
-#if CHROME_VERSION_MAJOR >= 128
+
+#if CHROME_VERSION_MAJOR >= 128 && CHROME_VERSION_MAJOR < 135
 	allow_os_execution = false;
 #else
 	allow_os_execution = true;
