@@ -525,70 +525,40 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
-	CStringArray strA;
-	SBUtil::Split(&strA, strCommandLine, _T("|@@|"));
+	CStringArray strArrayCommandLine;
+	SBUtil::Split(&strArrayCommandLine, strCommandLine, _T("|@@|"));
+	size_t size = strArrayCommandLine.GetSize();
 
-	CString str1 = strCommandLine;
-	CString str2;
-
-	CString CommandParam;
-	CString OptionParam;
+	CString commandParam;
+	CString optionParamValue;
 
 	DWORD dwFlags = 0;
 	CChildView* pCreateView = NULL;
 
-	if (strA.GetCount() > 1)
+	for(int i = 0; i < size; i++)
 	{
-		str1 = strA.GetAt(0);
-		str2 = strA.GetAt(1);
-	}
-
-	if (!str1.IsEmpty())
-	{
-		//URLかFilePathの場合は、強制的にCommandParamとする。
-		if (SBUtil::IsURL(str1))
+		CString str = strArrayCommandLine.GetAt(i);
+		if (str.Find(_T("-")) == 0 || str.Find(_T("/")) == 0)
 		{
-			CommandParam = str1;
+			str.TrimLeft('-');
+			str.TrimLeft('/');
+			optionParamValue = str;
 		}
-		//filepath
-		else if (str1.Find(_T(":")) == 1)
+		// URLかFilePathの場合は、強制的にCommandParamとする。
+		else if (SBUtil::IsURL(str))
 		{
-			CommandParam = str1;
+			commandParam = str;
 		}
-		else if (str1.Find(_T("-")) == 0)
+		// filepath
+		else if (str.Find(_T(":")) == 1)
 		{
-			OptionParam = str1;
-		}
-		else if (str1.Find(_T("/")) == 0)
-		{
-			OptionParam = str1;
+			commandParam = str;
 		}
 	}
 
-	if (!str2.IsEmpty())
-	{
-		//URLかFilePathの場合は、強制的にCommandParamとする。
-		if (SBUtil::IsURL(str2))
-		{
-			CommandParam = str2;
-		}
-		//filepath
-		else if (str2.Find(_T(":")) == 1)
-		{
-			CommandParam = str2;
-		}
-		else if (str2.Find(_T("-")) == 0)
-		{
-			OptionParam = str2;
-		}
-		else if (str2.Find(_T("/")) == 0)
-		{
-			OptionParam = str2;
-		}
-	}
 	if (bTraceLog)
 	{
-		logmsg.Format(_T("MAIN_WND:0x%08p ParseCommandLineAndNewWnd CommandParam[%s] OptionParam[%s]"), theApp.SafeWnd(this), (LPCTSTR)CommandParam, (LPCTSTR)OptionParam);
+		logmsg.Format(_T("MAIN_WND:0x%08p ParseCommandLineAndNewWnd commandParam[%s] optionParamValue[%s]"), theApp.SafeWnd(this), (LPCTSTR)commandParam, (LPCTSTR)optionParamValue);
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_GE);
 	}
 
@@ -603,7 +573,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 
 	if (theApp.m_bTabEnable_Init)
 	{
-		if (OptionParam.CompareNoCase(_T("/View")) == 0)
+		if (optionParamValue.CompareNoCase(_T("View")) == 0)
 		{
 			dwFlags = NWMF_SUGGESTWINDOW;
 		}
@@ -626,7 +596,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 	}
 
 	//空の場合は、ホームを開く。
-	if (CommandParam.IsEmpty())
+	if (commandParam.IsEmpty())
 	{
 		pCreateView->GoHomeFirstCall();
 	}
@@ -636,21 +606,21 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		CString strFileNameTemp;
 		CString FileExt;
 		CString strURL;
-		strFileNameTemp = CommandParam;
+		strFileNameTemp = commandParam;
 		FileExt = strFileNameTemp.Mid(strFileNameTemp.ReverseFind('.'));
 		if (FileExt.CompareNoCase(_T(".url")) == 0 || FileExt.CompareNoCase(_T(".website")) == 0)
 		{
-			SBUtil::GetInternetShortcutUrl(CommandParam, strURL);
+			SBUtil::GetInternetShortcutUrl(commandParam, strURL);
 			if (!strURL.IsEmpty())
 				pCreateView->Navigate(strURL);
 		}
 		else
 		{
-			if (OptionParam.CompareNoCase(_T("/View")) == 0)
+			if (optionParamValue.CompareNoCase(_T("View")) == 0)
 			{
 				pFrame->m_bOLEViewer = TRUE;
 			}
-			pCreateView->Navigate(CommandParam);
+			pCreateView->Navigate(commandParam);
 		}
 	}
 
@@ -662,20 +632,20 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 	}
 
 	BOOL minMode = FALSE;
-	if (OptionParam.CompareNoCase(_T("/MIN")) == 0)
+	if (optionParamValue.CompareNoCase(_T("MIN")) == 0)
 	{
 		minMode = TRUE;
 		pFrame->ShowWindow(SW_MINIMIZE);
 	}
-	else if (OptionParam.CompareNoCase(_T("/MAX")) == 0)
+	else if (optionParamValue.CompareNoCase(_T("MAX")) == 0)
 	{
 		pFrame->ShowWindow(SW_MAXIMIZE);
 	}
-	else if (OptionParam.CompareNoCase(_T("/NORMAL")) == 0)
+	else if (optionParamValue.CompareNoCase(_T("NORMAL")) == 0)
 	{
 		pFrame->ShowWindow(SW_NORMAL);
 	}
-	else if (OptionParam.CompareNoCase(_T("/View")) == 0)
+	else if (optionParamValue.CompareNoCase(_T("View")) == 0)
 	{
 		theApp.HideRebar(pFrame);
 		pFrame->ShowWindow(SW_NORMAL);
