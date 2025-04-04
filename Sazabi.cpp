@@ -878,7 +878,8 @@ BOOL CSazabi::InitMultipleInstance()
 }
 
 /*
- * Chronos.exe [-NEW] [-View] [-NORMAL] [-MAX] [-MIN] URL
+ * Chronos.exe [-NEW] [-VIEW] [-NORMAL] [-MAX] [-MIN] URL
+
  * 
  * -NEW    ... 新しいインスタンスを起動する
  * -VIEW   ... タブを無効化して新しいインスタンスを起動する
