@@ -878,21 +878,82 @@ BOOL CSazabi::InitMultipleInstance()
 }
 
 /*
- * Chronos.exe [-NEW] [/View] [/NORMAL] [-MAX] [-MIN] URL
+ * Chronos.exe [-NEW] [-VIEW] [-NORMAL] [-MAX] [-MIN] URL
+
+ * 
+ * -NEW    ... 新しいインスタンスを起動する
+ * -VIEW   ... タブを無効化して新しいインスタンスを起動する
+ * -MAX    ... 最大化モード (MainFrm.cpp)
+ * -MIN    ... 最小化モード (MainFrm.cpp)
+ * -NORMAL ... ウィンドウモード
+ * 
+ * -の代わりに/も使用可能
+ */
+void CSazabi::ParseSingleParam(CString param) {
+	CString trimedParam(param);
+	trimedParam.Replace(_T("\""), _T(""));
+	trimedParam.TrimLeft();
+	trimedParam.TrimRight();
+
+	if (trimedParam.IsEmpty())
+	{
+		return;
+	}
+
+	if (trimedParam.Find(_T("-")) == 0 || trimedParam.Find(_T("/")) == 0)
+	{
+		//-または/で始まる値はオプション
+		CString paramValue(trimedParam);
+		paramValue.TrimLeft('-');
+		paramValue.TrimLeft('/');
+		// CEFのパラメータを解釈しないように、明示的にChronosのパラメータのみ確認する。
+		if (paramValue.CompareNoCase(_T("NEW")) == 0)
+		{
+			m_bNewInstanceParam = TRUE;
+		}
+		else if (paramValue.CompareNoCase(_T("VIEW")) == 0)
+		{
+			m_bNewInstanceParam = TRUE;
+		}
+		else if (paramValue.CompareNoCase(_T("MAX")) == 0)
+		{
+			m_strOptionParam = trimedParam;
+		}
+		else if (paramValue.CompareNoCase(_T("MIN")) == 0)
+		{
+			m_strOptionParam = trimedParam;
+		}
+		else if (paramValue.CompareNoCase(_T("NORMAL")) == 0)
+		{
+			m_strOptionParam = trimedParam;
+		}
+	}
+	else if (SBUtil::IsURL(trimedParam))
+	{
+		// URL。強制的にCommandParamとする。
+		m_strCommandParam = trimedParam;
+	}
+	else if (trimedParam.Find(_T(":")) == 1)
+	{
+		// ファイルパス。強制的にCommandParamとする。
+		m_strCommandParam = trimedParam;
+	}
+}
+
+/*
+ * Chronos.exe [-NEW] [-View] [-NORMAL] [-MAX] [-MIN] URL
  *
  * -NEW    ... 新しいインスタンスを起動する
  * -VIEW   ... タブを無効化して新しいインスタンスを起動する
  * -MAX    ... 最大化モード (MainFrm.cpp)
  * -MIN    ... 最小化モード (MainFrm.cpp)
- * -NORMAL ...
+ * -NORMAL ... ウィンドウモード
+ *
+ * -の代わりに/も使用可能
  */
 void CSazabi::InitParseCommandLine()
 {
 	PROC_TIME(InitParseCommandLine)
-
-	CString Command1;
-	CString Command2;
-	CString Command3;
 
 	m_strCommandParam.Empty();
 	m_strOptionParam.Empty();
@@ -914,274 +975,12 @@ void CSazabi::InitParseCommandLine()
 		m_strOptionParam = strEnforceInitParam;
 	}
 
-	//コマンドラインあり。
-	if (m_lpCmdLine[0] != '\0')
+	for (int i = 1; i < __argc; i++)
 	{
-		//パラメータが1つだけ
-		if (__argc == 2)
-		{
-			Command1 = CString(__wargv[1]);
-			Command1.Replace(_T("\""), _T(""));
-			Command1.TrimLeft();
-			Command1.TrimRight();
-
-			if (!Command1.IsEmpty())
-			{
-				//URLかFilePathの場合は、強制的にCommandParamとする。
-				if (SBUtil::IsURL(Command1))
-				{
-					m_strCommandParam = Command1;
-				}
-				//filepath
-				else if (Command1.Find(_T(":")) == 1)
-				{
-					m_strCommandParam = Command1;
-				}
-
-				if (Command1.CompareNoCase(_T("-NEW")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else if (Command1.CompareNoCase(_T("/View")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else
-				{
-					//-は、オプション
-					if (Command1.Find(_T("-")) == 0)
-					{
-						m_strOptionParam = Command1;
-					}
-					// /は、オプション
-					else if (Command1.Find(_T("/")) == 0)
-					{
-						m_strOptionParam = Command1;
-					}
-				}
-			}
-		}
-		//コマンドラインが3つ以上、0番は、EXEパス
-		else if (__argc == 3)
-		{
-			Command1 = CString(__wargv[1]);
-			Command2 = CString(__wargv[2]);
-			Command1.Replace(_T("\""), _T(""));
-			Command1.TrimLeft();
-			Command1.TrimRight();
-
-			Command2.Replace(_T("\""), _T(""));
-			Command2.TrimLeft();
-			Command2.TrimRight();
-
-			if (!Command1.IsEmpty())
-			{
-				//URLかFilePathの場合は、強制的にCommandParamとする。
-				if (SBUtil::IsURL(Command1))
-				{
-					m_strCommandParam = Command1;
-				}
-				//filepath
-				else if (Command1.Find(_T(":")) == 1)
-				{
-					m_strCommandParam = Command1;
-				}
-
-				if (Command1.CompareNoCase(_T("-NEW")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else if (Command1.CompareNoCase(_T("/View")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else
-				{
-					//-は、オプション
-					if (Command1.Find(_T("-")) == 0)
-					{
-						m_strOptionParam = Command1;
-					}
-					// /は、オプション
-					else if (Command1.Find(_T("/")) == 0)
-					{
-						m_strOptionParam = Command1;
-					}
-				}
-			}
-			if (!Command2.IsEmpty())
-			{
-				//URLかFilePathの場合は、強制的にCommandParamとする。
-				if (SBUtil::IsURL(Command2))
-				{
-					m_strCommandParam = Command2;
-				}
-				//filepath
-				else if (Command2.Find(_T(":")) == 1)
-				{
-					m_strCommandParam = Command2;
-				}
-
-				if (Command2.CompareNoCase(_T("-NEW")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else if (Command2.CompareNoCase(_T("/View")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else
-				{
-					//-は、オプション
-					if (Command2.Find(_T("-")) == 0)
-					{
-						m_strOptionParam = Command2;
-					}
-					// /は、オプション
-					else if (Command2.Find(_T("/")) == 0)
-					{
-						m_strOptionParam = Command2;
-					}
-				}
-			}
-		}
-		//コマンドラインが4つ以上、0番は、EXEパス
-		else if (__argc >= 4)
-		{
-			Command1 = CString(__wargv[1]);
-			Command2 = CString(__wargv[2]);
-			Command3 = CString(__wargv[3]);
-			Command1.Replace(_T("\""), _T(""));
-			Command1.TrimLeft();
-			Command1.TrimRight();
-
-			Command2.Replace(_T("\""), _T(""));
-			Command2.TrimLeft();
-			Command2.TrimRight();
-
-			Command3.Replace(_T("\""), _T(""));
-			Command3.TrimLeft();
-			Command3.TrimRight();
-
-			if (!Command1.IsEmpty())
-			{
-				//URLかFilePathの場合は、強制的にCommandParamとする。
-				if (SBUtil::IsURL(Command1))
-				{
-					m_strCommandParam = Command1;
-				}
-				//filepath
-				else if (Command1.Find(_T(":")) == 1)
-				{
-					m_strCommandParam = Command1;
-				}
-
-				if (Command1.CompareNoCase(_T("-NEW")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else if (Command1.CompareNoCase(_T("/View")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else
-				{
-					//-は、オプション
-					if (Command1.Find(_T("-")) == 0)
-					{
-						m_strOptionParam = Command1;
-					}
-					// /は、オプション
-					else if (Command1.Find(_T("/")) == 0)
-					{
-						m_strOptionParam = Command1;
-					}
-				}
-			}
-			if (!Command2.IsEmpty())
-			{
-				//URLかFilePathの場合は、強制的にCommandParamとする。
-				if (SBUtil::IsURL(Command2))
-				{
-					m_strCommandParam = Command2;
-				}
-				//filepath
-				else if (Command2.Find(_T(":")) == 1)
-				{
-					m_strCommandParam = Command2;
-				}
-				if (Command2.CompareNoCase(_T("-NEW")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else if (Command2.CompareNoCase(_T("/View")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else
-				{
-					//-は、オプション
-					if (Command2.Find(_T("-")) == 0)
-					{
-						m_strOptionParam = Command2;
-					}
-					// /は、オプション
-					else if (Command2.Find(_T("/")) == 0)
-					{
-						m_strOptionParam = Command2;
-					}
-				}
-			}
-			if (!Command3.IsEmpty())
-			{
-				//URLかFilePathの場合は、強制的にCommandParamとする。
-				if (SBUtil::IsURL(Command3))
-				{
-					m_strCommandParam = Command3;
-				}
-				//filepath
-				else if (Command3.Find(_T(":")) == 1)
-				{
-					m_strCommandParam = Command3;
-				}
-				if (Command3.CompareNoCase(_T("-NEW")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else if (Command3.CompareNoCase(_T("/View")) == 0)
-				{
-					m_bNewInstanceParam = TRUE;
-				}
-				else
-				{
-					//-は、オプション
-					if (Command3.Find(_T("-")) == 0)
-					{
-						m_strOptionParam = Command3;
-					}
-					// /は、オプション
-					else if (Command3.Find(_T("/")) == 0)
-					{
-						m_strOptionParam = Command3;
-					}
-				}
-			}
-		}
+		CString param(__wargv[i]);
+		ParseSingleParam(param);
 	}
 
-	if (!m_bNewInstanceParam)
-	{
-		if (m_strOptionParam.CompareNoCase(_T("-NEW")) == 0)
-		{
-			m_bNewInstanceParam = TRUE;
-			m_strOptionParam.Empty();
-		}
-		else if (m_strOptionParam.CompareNoCase(_T("/View")) == 0)
-		{
-			m_bNewInstanceParam = TRUE;
-			//OptionParam.Empty();
-		}
-	}
 	if (m_bNewInstanceParam)
 	{
 		if (m_strOptionParam.IsEmpty())

@@ -264,6 +264,7 @@ public:
 	BOOL InitFunc_SGMode();
 	void InitProcessSetting();
 	void InitLogWrite();
+	void ParseSingleParam(CString param);
 	void InitParseCommandLine();
 	BOOL InitMultipleInstance();
 	void InitReadConfSetting();
