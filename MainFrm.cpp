@@ -535,7 +535,7 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 	DWORD dwFlags = 0;
 	CChildView* pCreateView = NULL;
 
-	for(int i = 0; i < size; i++)
+	for(size_t i = 0; i < size; i++)
 	{
 		CString str = strArrayCommandLine.GetAt(i);
 		if (str.Find(_T("-")) == 0 || str.Find(_T("/")) == 0)
