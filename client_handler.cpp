@@ -28,6 +28,7 @@
 #include "client_util.h"
 #include "DlgAuth.h"
 #include "sbcommon.h"
+#include "chrome_command_ids.h"
 
 // Required for selecting client certificates
 #pragma comment(lib, "Crypt32")
@@ -304,8 +305,23 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 					CefRefPtr<CefContextMenuParams> params,
 					CefRefPtr<CefMenuModel> model)
 {
-	model->Remove(MENU_ID_VIEW_SOURCE);
-	model->Remove(MENU_ID_PRINT);
+	model->Remove(IDC_VIEW_SOURCE);
+	model->Remove(IDC_PRINT);
+	size_t count = model->GetCount();
+	std::vector<int> removeCommandIds = {};
+	for (size_t i = 0; i < count; i++)
+	{
+		int commandId = model->GetCommandIdAt(i);
+		if (!IsUsableCommand(commandId))
+		{
+			removeCommandIds.push_back(commandId);
+		}
+	}
+	for (int commandId : removeCommandIds)
+	{
+		model->Remove(commandId);
+	}
+	removeCommandIds.clear();
 	cef_context_menu_type_flags_t Flg = CM_TYPEFLAG_NONE;
 	Flg = params->GetTypeFlags();
 	if ((Flg & (CM_TYPEFLAG_PAGE | CM_TYPEFLAG_FRAME)) != 0)
@@ -420,15 +436,15 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 	CString contextMenuReloadLabel;
 	contextMenuReloadLabel.LoadString(ID_CONTEXT_MENU_RELOAD);
 	CefString cefContextMenuReloadLabel(contextMenuReloadLabel);
-	model->AddItem(MENU_ID_RELOAD, cefContextMenuReloadLabel);
+	model->AddItem(IDC_RELOAD, cefContextMenuReloadLabel);
 
 	CString contextMenuPrintLabel;
 	contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
 	CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
-	model->AddItem(MENU_ID_PRINT, cefContextMenuPrintLabel);
+	model->AddItem(IDC_PRINT, cefContextMenuPrintLabel);
 	
 	// メニュー項目調整後、Separatorが連続することがあるので、連続している場合は削除する。
-	size_t count = model->GetCount();
+	count = model->GetCount();
 	int beforeCommandId = CH_MENU_INVALID_OR_SEPARATOR;
 	int commandId;
 	for (size_t i = count - 1; i > 0; i--)
@@ -2253,6 +2269,45 @@ CString ClientHandler::GetSerialNumberAsHexString(PCERT_INFO pCertInfo)
 		serialNumber += hex;
 	}
 	return serialNumber;
+}
+
+bool ClientHandler::IsUsableCommand(int id)
+{
+	switch (id)
+	{
+	case CH_MENU_INVALID_OR_SEPARATOR:
+	case IDC_BACK:
+	case IDC_FORWARD:
+	case IDC_CONTENT_CONTEXT_RELOADFRAME:
+	case IDC_RELOAD_BYPASSING_CACHE:
+	case IDC_RELOAD_CLEARING_CACHE:
+	case IDC_STOP:
+	case IDC_BOOKMARK_BAR_UNDO:
+	case IDC_CONTENT_CONTEXT_UNDO:
+	case IDC_BOOKMARK_BAR_REDO:
+	case IDC_CONTENT_CONTEXT_REDO:
+	case IDC_CUT:
+	case IDC_CONTENT_CONTEXT_CUT:
+	case IDC_COPY:
+	case IDC_CONTENT_CONTEXT_COPY:
+	case IDC_PASTE:
+	case IDC_CONTENT_CONTEXT_PASTE:
+	case IDC_CONTENT_CONTEXT_DELETE:
+	case IDC_CONTENT_CONTEXT_SELECTALL:
+	case IDC_FIND:
+	case IDC_PRINT:
+	case IDC_VIEW_SOURCE:
+	case IDC_SPELLCHECK_SUGGESTION_0:
+	case IDC_SPELLCHECK_SUGGESTION_1:
+	case IDC_SPELLCHECK_SUGGESTION_2:
+	case IDC_SPELLCHECK_SUGGESTION_3:
+	case IDC_SPELLCHECK_SUGGESTION_4:
+	case IDC_CONTENT_CONTEXT_NO_SPELLING_SUGGESTIONS:
+	case IDC_SPELLCHECK_ADD_TO_DICTIONARY:
+		return true;
+	default:
+		return false;
+	}
 }
 
 bool MyV8Handler::Execute(const CefString& name,

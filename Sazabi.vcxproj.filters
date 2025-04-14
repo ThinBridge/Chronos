@@ -156,6 +156,9 @@
     <ClInclude Include="MessageLoopWorker.h">
       <Filter>SB</Filter>
     </ClInclude>
+    <ClInclude Include="chrome_command_ids.h">
+      <Filter>CEF</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\Sazabi.ico">

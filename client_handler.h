@@ -315,6 +315,7 @@ protected:
 	//IMPLEMENT_LOCKING(ClientHandler);
 private:
 	std::map<std::tuple<CefString, uint32>, bool> m_originAndPermissionsCache;
+	bool IsUsableCommand(int id);
 };
 class AppRenderer : public CefApp, public CefRenderProcessHandler
 {
