@@ -1988,9 +1988,6 @@ void CChildView::CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive)
 					CRect rect;
 					pCreateView->GetClientRect(rect);
 					CefWindowInfo info;
-#if CHROME_VERSION_MAJOR >= 125
-					info.runtime_style = CEF_RUNTIME_STYLE_ALLOY;
-#endif
 					CefRect windowBounds;
 					windowBounds.Set(rect.right, rect.top, rect.Width(), rect.Height());
 					info.SetAsChild(hWnd, windowBounds);
@@ -2585,9 +2582,6 @@ void CChildView::Navigate(LPCTSTR pszURL)
 		GetClientRect(&rect);
 
 		CefWindowInfo info;
-#if CHROME_VERSION_MAJOR >= 125
-		info.runtime_style = CEF_RUNTIME_STYLE_ALLOY;
-#endif
 		CefRect windowBounds;
 		windowBounds.Set(rect.right, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 		info.SetAsChild(GetSafeHwnd(), windowBounds);
