@@ -209,6 +209,7 @@
     <ClInclude Include="APIHook.h" />
     <ClInclude Include="BroFrame.h" />
     <ClInclude Include="BroView.h" />
+    <ClInclude Include="chrome_command_ids.h" />
     <ClInclude Include="client_app.h" />
     <ClInclude Include="client_handler.h" />
     <ClInclude Include="client_util.h" />
