@@ -49,7 +49,6 @@ protected:
 	afx_msg LRESULT OnAddressChange(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnStatusMessage(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSearchURL(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnFindDialogMessage(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCloseBrowser(WPARAM wParam, LPARAM lParam);
 	//afx_msg LRESULT OnNewBrowser(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnNewWindow(WPARAM wParam, LPARAM lParam);
