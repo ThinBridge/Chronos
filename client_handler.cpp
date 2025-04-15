@@ -2012,73 +2012,31 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 {
 	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
 		return false;
-	if (!theApp.m_AppSettings.GetMediaAccessPermission())
+
+    AppSettings::MediaAccessPermission permission = static_cast<AppSettings::MediaAccessPermission>(theApp.m_AppSettings.GetMediaAccessPermission());
+	switch (permission)
 	{
-		// Do not permit media access.
+	case AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL:
+		// 単にfalseでreturnすることでデフォルト動作をする。
+		// Chrome style runtimeモードでのデフォルト動作は「ユーザーによる承認」であり
+		// このパラメータの挙動と一致する。
+		// https://cef-builds.spotifycdn.com/docs/125.0/classCefPermissionHandler.html#a05723b8cdd0a3f410ea52d05e2a41e16
 		return false;
-	}
-
-	HWND hWindow = GetSafeParentWnd(browser);
-	CString requestOrigin = (LPCWSTR)requesting_origin.c_str();
-	if (theApp.m_AppSettings.GetMediaAccessPermission() == static_cast<int>(AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL))
-	{
-		std::tuple<CefString, uint32> permissionInfo = std::tie(requesting_origin, requested_permissions);
-		std::map<std::tuple<CefString, uint32>, bool>::iterator cachedPermissions = m_originAndPermissionsCache.find(permissionInfo);
-		if (cachedPermissions != m_originAndPermissionsCache.end())
+	case AppSettings::MediaAccessPermission::DEFAULT_MEDIA_APPROVAL:
+		if (requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE ||
+		    requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE)
 		{
-			bool accepted = cachedPermissions->second;
-			if (accepted)
-			{
-				callback->Continue(requested_permissions);
-			}
-			return accepted;
-		}
-
-		CString confirmMessage;
-		CString enableMediaConfirmation;
-		enableMediaConfirmation.LoadString(ID_ENABLE_MEDIA_CONFIRMATION);
-		confirmMessage.Format(enableMediaConfirmation, (LPCTSTR)requestOrigin);
-		confirmMessage += "\n";
-
-#define ADD_PERMISSION_MESSAGE(permission, messageId) \
-		if (requested_permissions & permission)      \
-		{                                            \
-			confirmMessage += "\n";              \
-			CString mediaType;                   \
-			mediaType.LoadString(messageId);     \
-			confirmMessage += mediaType;         \
-		}
-
-		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_AUDIO_CAPTURE, ID_ENABLE_MEDIA_MIC);
-		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DEVICE_VIDEO_CAPTURE, ID_ENABLE_MEDIA_VIDEO);
-		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_AUDIO);
-		ADD_PERMISSION_MESSAGE(CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE, ID_ENABLE_MEDIA_DESKTOP_VIDEO);
-
-#undef ADD_PERMISSION_MESSAGE
-
-		int iRet = theApp.SB_MessageBox(hWindow, confirmMessage, NULL, MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2, TRUE);
-		if (iRet == IDNO)
-		{
-			m_originAndPermissionsCache[permissionInfo] = false;
+			// callback->Continue(requested_permissions)すると、共有するウィンドウの選択ダイアログが表示されず
+			// 全画面が強制的に共有されてしまう。デフォルト動作であれば共有するウィンドウの選択がダイアログが
+			// 表示されるため、デスクトップオーディオまたはビデオのキャプチャを含む場合はデフォルト動作とする。
 			return false;
 		}
-		else
-		{
-			m_originAndPermissionsCache[permissionInfo] = true;
-		}
+		callback->Continue(requested_permissions);
+		return true;
+	default:
+		callback->Continue(CEF_MEDIA_PERMISSION_NONE);
+		return true;
 	}
-
-	DebugWndLogData dwLogData;
-	dwLogData.mHWND.Format(_T("CV_WND:0x%08p"), hWindow);
-	dwLogData.mFUNCTION_NAME = _T("OnRequestMediaAccessPermission");
-	dwLogData.mMESSAGE1 = requestOrigin;
-	dwLogData.mMESSAGE2.Format(_T("FrameName:%s"), (LPCWSTR)frame->GetName().c_str());
-	dwLogData.mMESSAGE3.Format(_T("Approved permission type:%d"), requested_permissions);
-	theApp.AppendDebugViewLog(dwLogData);
-	theApp.WriteDebugTraceDateTime(dwLogData.GetString(), DEBUG_LOG_TYPE_URL);
-
-	callback->Continue(requested_permissions);
-	return true;
 }
 
 bool ClientHandler::OnJSDialog(CefRefPtr<CefBrowser> browser,
