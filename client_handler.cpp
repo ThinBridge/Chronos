@@ -2013,14 +2013,14 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
 		return false;
 
-    AppSettings::MediaAccessPermission permission = static_cast<AppSettings::MediaAccessPermission>(theApp.m_AppSettings.GetMediaAccessPermission());
+	AppSettings::MediaAccessPermission permission = static_cast<AppSettings::MediaAccessPermission>(theApp.m_AppSettings.GetMediaAccessPermission());
 	switch (permission)
 	{
 	case AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL:
 		// 単にfalseでreturnすることでデフォルト動作をする。
-		// Chrome style runtimeモードでのデフォルト動作は「ユーザーによる承認」であり
+		// Chrome runtime styleモードでのデフォルト動作は「ユーザーによる承認」であり
 		// このパラメータの挙動と一致する。
-		// https://cef-builds.spotifycdn.com/docs/125.0/classCefPermissionHandler.html#a05723b8cdd0a3f410ea52d05e2a41e16
+		// https://cef-builds.spotifycdn.com/docs/135.0/classCefPermissionHandler.html#a05723b8cdd0a3f410ea52d05e2a41e16
 		return false;
 	case AppSettings::MediaAccessPermission::DEFAULT_MEDIA_APPROVAL:
 		if (requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE ||
@@ -2035,6 +2035,33 @@ bool ClientHandler::OnRequestMediaAccessPermission(
 		return true;
 	default:
 		callback->Continue(CEF_MEDIA_PERMISSION_NONE);
+		return true;
+	}
+}
+
+bool ClientHandler::OnShowPermissionPrompt(CefRefPtr<CefBrowser> browser,
+					   uint64_t prompt_id,
+					   const CefString& requesting_origin,
+					   uint32_t requested_permissions,
+					   CefRefPtr<CefPermissionPromptCallback> callback)
+{
+	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
+		return false;
+
+	AppSettings::MediaAccessPermission permission = static_cast<AppSettings::MediaAccessPermission>(theApp.m_AppSettings.GetMediaAccessPermission());
+	switch (permission)
+	{
+	case AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL:
+		// 単にfalseでreturnすることでデフォルト動作をする。
+		// Chrome runtime styleモードでのデフォルト動作は「ユーザーによる承認」であり
+		// このパラメータの挙動と一致する。
+		// https://cef-builds.spotifycdn.com/docs/135.0/classCefPermissionHandler.html#a749ce2a4fc34250d8fea3c64e687f58a
+		return false;
+	case AppSettings::MediaAccessPermission::DEFAULT_MEDIA_APPROVAL:
+		callback->Continue(CEF_PERMISSION_RESULT_ACCEPT);
+		return true;
+	default:
+		callback->Continue(CEF_PERMISSION_RESULT_DENY);
 		return true;
 	}
 }
