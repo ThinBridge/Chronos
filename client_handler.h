@@ -192,6 +192,11 @@ public:
 						    const CefString& requesting_origin,
 						    uint32 requested_permissions,
 						    CefRefPtr<CefMediaAccessCallback> callback) override;
+	virtual bool OnShowPermissionPrompt(CefRefPtr<CefBrowser> browser,
+					    uint64_t prompt_id,
+					    const CefString& requesting_origin,
+					    uint32_t requested_permissions,
+					    CefRefPtr<CefPermissionPromptCallback> callback) override;
 
 	void EmptyWindowClose(CefRefPtr<CefBrowser> browser)
 	{
