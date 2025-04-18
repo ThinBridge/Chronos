@@ -82,29 +82,26 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 		//Chronos.exeを実行する
 		if (PathFileExists(strChronosVirtAppPath))
 		{
-			CString strCommandParam;
-			if (!m_strCommandParam.IsEmpty() && !m_strOptionParam.IsEmpty())
+			CString strCommand;
+			strCommand.Format(_T("\"%s\""), (LPCTSTR)strChronosVirtAppPath);
+			if (!m_strCommandParam.IsEmpty())
 			{
-				strCommandParam.Format(_T("\"%s\" %s"), (LPCTSTR)m_strCommandParam, (LPCTSTR)m_strOptionParam);
+				strCommand.Format(_T("%s \"%s\""), (LPCTSTR)strCommand, (LPCTSTR)m_strCommandParam);
 			}
-			else
+			if (!m_strOptionParam.IsEmpty())
 			{
-				if (!m_strCommandParam.IsEmpty())
-					strCommandParam.Format(_T("\"%s\""), (LPCTSTR)m_strCommandParam);
-				if (!m_strOptionParam.IsEmpty())
-					strCommandParam.Format(_T("%s"), (LPCTSTR)m_strOptionParam);
+				strCommand.Format(_T("%s %s"), (LPCTSTR)strCommand, (LPCTSTR)m_strOptionParam);
 			}
-			CString strCommandC;
-			if (strCommandParam.IsEmpty())
-				strCommandC.Format(_T("\"%s\""), (LPCTSTR)strChronosVirtAppPath);
-			else
-				strCommandC.Format(_T("\"%s\" %s"), (LPCTSTR)strChronosVirtAppPath, (LPCTSTR)strCommandParam);
+			if (!m_strConfigParam.IsEmpty())
+			{
+				strCommand.Format(_T("%s %s"), (LPCTSTR)strCommand, (LPCTSTR)m_strConfigParam);
+			}
 
 			STARTUPINFO siC = {0};
 			PROCESS_INFORMATION piC = {0};
 			siC.cb = sizeof(siC);
 			unsigned long ecodeC = 0;
-			if (!CreateProcess(NULL, (LPTSTR)(LPCTSTR)strCommandC, NULL, NULL, FALSE, 0, NULL, NULL, &siC, &piC))
+			if (!CreateProcess(NULL, (LPTSTR)(LPCTSTR)strCommand, NULL, NULL, FALSE, 0, NULL, NULL, &siC, &piC))
 			{
 				SetLastError(NO_ERROR);
 				//Retry
@@ -113,7 +110,7 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 					SetLastError(NO_ERROR);
 					if (::ShellExecute(NULL, _T("open"), strChronosVirtAppPath, NULL, NULL, SW_SHOW) <= HINSTANCE(32))
 					{
-						::ShellExecute(NULL, NULL, strCommandC, NULL, NULL, SW_SHOW);
+						::ShellExecute(NULL, NULL, strCommand, NULL, NULL, SW_SHOW);
 					}
 				}
 			}
@@ -285,8 +282,24 @@ BOOL CSazabi::InitFunc_Settings()
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
 		CString strTS_Path;
-		strTS_Path = GetThinAppEntryPointFolderPath();
-		strTS_Path += _T("Chronos.conf");
+		if (m_strConfigParam.IsEmpty())
+		{
+			strTS_Path = GetThinAppEntryPointFolderPath();
+			strTS_Path += _T("Chronos.conf");
+		}
+		else
+		{
+			int pos = m_strConfigParam.Find(_T(':'));
+			if (pos != -1)
+			{
+				strTS_Path = m_strConfigParam.Right(pos);
+			}
+			else
+			{
+				strTS_Path = GetThinAppEntryPointFolderPath();
+				strTS_Path += _T("Chronos.conf");
+			}
+		}
 		if (PathFileExists(strTS_Path))
 		{
 			this->m_AppSettings.LoadDataFromFile(strTS_Path);
@@ -478,15 +491,17 @@ BOOL CSazabi::InitInstance()
 		m_strThisAppName = gstrThisAppNameR;
 	}
 
+	// コマンドラインオプションを解析する
+	this->InitParseCommandLine();
+
 	// 設定ファイル初期読み込み
 	if (!InitFunc_Settings())
 	{
 		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
 	}
-
-	// コマンドラインオプションを解析する
-	this->InitParseCommandLine();
+	RefrectEnforcedOptionParam();
+	InitAtomParam();
 
 	// VOS以外（物理環境で直接このEXEが起動された場合は、VOS環境で再実行）
 	if (!InitFunc_ExecOnVOS())
@@ -886,6 +901,7 @@ BOOL CSazabi::InitMultipleInstance()
  * -MAX    ... 最大化モード (MainFrm.cpp)
  * -MIN    ... 最小化モード (MainFrm.cpp)
  * -NORMAL ... ウィンドウモード
+ * -ChronosConfig:"path to config file" ... 設定ファイルを指定する
  * 
  * -の代わりに/も使用可能
  */
@@ -927,6 +943,10 @@ void CSazabi::ParseSingleParam(CString param) {
 		{
 			m_strOptionParam = trimedParam;
 		}
+		else if (paramValue.CompareNoCase(_T("ChronosConfig")) == 0)
+		{
+			m_strConfigParam = trimedParam;
+		}
 	}
 	else if (SBUtil::IsURL(trimedParam))
 	{
@@ -958,29 +978,15 @@ void CSazabi::InitParseCommandLine()
 	m_strCommandParam.Empty();
 	m_strOptionParam.Empty();
 
-	//起動時の強制パラメータを確認
-	CString strEnforceInitParam;
-	strEnforceInitParam = m_AppSettings.GetEnforceInitParam();
-
-	//整形
-	strEnforceInitParam.TrimLeft();
-	strEnforceInitParam.TrimRight();
-	strEnforceInitParam.Replace(_T("\""), _T(""));
-
-	//一旦クリア
-	m_strAtomParam.Empty();
-
-	if (!strEnforceInitParam.IsEmpty())
-	{
-		m_strOptionParam = strEnforceInitParam;
-	}
-
 	for (int i = 1; i < __argc; i++)
 	{
 		CString param(__wargv[i]);
 		ParseSingleParam(param);
 	}
+}
 
+void CSazabi::InitAtomParam()
+{
 	if (m_bNewInstanceParam)
 	{
 		if (m_strOptionParam.IsEmpty())
@@ -989,20 +995,55 @@ void CSazabi::InitParseCommandLine()
 		}
 	}
 
-	//両方セットされている場合
-	if (!m_strCommandParam.IsEmpty() && !m_strOptionParam.IsEmpty())
+	// 一旦クリア
+	m_strAtomParam.Empty();
+
+	if (!m_strCommandParam.IsEmpty())
 	{
-		m_strAtomParam.Format(_T("%s|@@|%s"), (LPCTSTR)m_strCommandParam, (LPCTSTR)m_strOptionParam);
+		m_strAtomParam = m_strCommandParam;
 	}
-	else
+
+	if (!m_strOptionParam.IsEmpty())
 	{
-		//Commandのみ
-		if (!m_strCommandParam.IsEmpty())
-			m_strAtomParam = m_strCommandParam;
-		//Optionのみ
-		if (!m_strOptionParam.IsEmpty())
-			m_strAtomParam = m_strOptionParam;
+		if (!m_strAtomParam.IsEmpty())
+		{
+			m_strAtomParam += _T("|@@|");
+		}
+		m_strAtomParam += m_strOptionParam;
 	}
+
+	if (!m_strConfigParam.IsEmpty())
+	{
+		if (!m_strAtomParam.IsEmpty())
+		{
+			m_strAtomParam += _T("|@@|");
+		}
+		m_strAtomParam += m_strConfigParam;
+	}
+}
+
+void CSazabi::RefrectEnforcedOptionParam()
+{
+	if (!m_strOptionParam.IsEmpty())
+	{
+		// 既にコマンドラインパラメータがある場合は、そちらを優先する
+		return;
+	}
+
+	// 起動時の強制パラメータを確認
+	CString strEnforceInitParam;
+	strEnforceInitParam = m_AppSettings.GetEnforceInitParam();
+
+	// 整形
+	strEnforceInitParam.TrimLeft();
+	strEnforceInitParam.TrimRight();
+	strEnforceInitParam.Replace(_T("\""), _T(""));
+
+	if (strEnforceInitParam.IsEmpty())
+	{
+		return;
+	}
+	m_strOptionParam = strEnforceInitParam;
 }
 
 void CSazabi::ExitKillZombieProcess()
