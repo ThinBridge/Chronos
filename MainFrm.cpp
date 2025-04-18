@@ -543,6 +543,16 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 			str.TrimLeft('-');
 			str.TrimLeft('/');
 			optionParamValue = str;
+			// Ignore the ChronosConfig option because it is not used
+			// in this function.
+			if (str.CompareNoCase(_T("NEW")) == 0 ||
+			    str.CompareNoCase(_T("VIEW")) == 0 ||
+			    str.CompareNoCase(_T("MAX")) == 0 ||
+			    str.CompareNoCase(_T("MIN")) == 0 ||
+			    str.CompareNoCase(_T("NORMAL")) == 0)
+			{
+				optionParamValue = str;
+			}
 		}
 		// URLかFilePathの場合は、強制的にCommandParamとする。
 		else if (SBUtil::IsURL(str))
