@@ -147,7 +147,25 @@ void ClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 {
 	REQUIRE_UI_THREAD();
 	PROC_TIME(OnBeforeClose)
-	// call parent
+	
+	// CEF135では、Chrome runtime styleのとき、JavaScriptのwindow.close()などで
+	// ウィンドウがクローズしたとき、ClientHandler::DoCloseは呼ばれず、またルート
+	// ウィンドウに対するWM_CLOSEなども送信されない。将来的にサポートの予定はある。
+	// 
+	// https://github.com/chromiumembedded/cef/issues/3761
+	// https://magpcss.org/ceforum/viewtopic.php?f=6&t=20229&p=57241&hilit=DoClose#p57241
+	// 
+	// そのため、暫定的に、手動でCBrowserFrameに対するクローズメッセージを送信する。
+	HWND hWindow = GetSafeParentWnd(browser);
+	if (SafeWnd(hWindow))
+	{
+		HWND parentWnd = {0};
+		parentWnd = GetParent(hWindow);
+		if (SafeWnd(parentWnd))
+		{
+			::PostMessage(parentWnd, WM_COMMAND, ID_W_CLOSE, 0);
+		}
+	}
 	CefLifeSpanHandler::OnBeforeClose(browser);
 }
 
