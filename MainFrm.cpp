@@ -542,7 +542,6 @@ BOOL CMainFrame::ParseCommandLineAndNewWnd(CString strCommandLine)
 		{
 			str.TrimLeft('-');
 			str.TrimLeft('/');
-			optionParamValue = str;
 			// Ignore the ChronosConfig option because it is not used
 			// in this function.
 			if (str.CompareNoCase(_T("NEW")) == 0 ||
