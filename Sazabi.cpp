@@ -505,7 +505,7 @@ BOOL CSazabi::InitInstance()
 		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
 	}
-	RefrectEnforcedOptionParam();
+	ReflectEnforcedOptionParam();
 	InitAtomParam();
 
 	// VOS以外（物理環境で直接このEXEが起動された場合は、VOS環境で再実行）
@@ -911,20 +911,20 @@ BOOL CSazabi::InitMultipleInstance()
  * -の代わりに/も使用可能
  */
 void CSazabi::ParseSingleParam(CString param) {
-	CString trimedParam(param);
-	trimedParam.Replace(_T("\""), _T(""));
-	trimedParam.TrimLeft();
-	trimedParam.TrimRight();
+	CString trimmedParam(param);
+	trimmedParam.Replace(_T("\""), _T(""));
+	trimmedParam.TrimLeft();
+	trimmedParam.TrimRight();
 
-	if (trimedParam.IsEmpty())
+	if (trimmedParam.IsEmpty())
 	{
 		return;
 	}
 
-	if (trimedParam.Find(_T("-")) == 0 || trimedParam.Find(_T("/")) == 0)
+	if (trimmedParam.Find(_T("-")) == 0 || trimmedParam.Find(_T("/")) == 0)
 	{
 		//-または/で始まる値はオプション
-		CString paramValue(trimedParam);
+		CString paramValue(trimmedParam);
 		paramValue.TrimLeft('-');
 		paramValue.TrimLeft('/');
 		paramValue.MakeLower();
@@ -939,30 +939,30 @@ void CSazabi::ParseSingleParam(CString param) {
 		}
 		else if (paramValue.CompareNoCase(_T("MAX")) == 0)
 		{
-			m_strOptionParam = trimedParam;
+			m_strOptionParam = trimmedParam;
 		}
 		else if (paramValue.CompareNoCase(_T("MIN")) == 0)
 		{
-			m_strOptionParam = trimedParam;
+			m_strOptionParam = trimmedParam;
 		}
 		else if (paramValue.CompareNoCase(_T("NORMAL")) == 0)
 		{
-			m_strOptionParam = trimedParam;
+			m_strOptionParam = trimmedParam;
 		}
 		else if (paramValue.Find(_T("chronosconfig")) == 0)
 		{
-			m_strConfigParam = trimedParam;
+			m_strConfigParam = trimmedParam;
 		}
 	}
-	else if (SBUtil::IsURL(trimedParam))
+	else if (SBUtil::IsURL(trimmedParam))
 	{
 		// URL。強制的にCommandParamとする。
-		m_strCommandParam = trimedParam;
+		m_strCommandParam = trimmedParam;
 	}
-	else if (trimedParam.Find(_T(":")) == 1)
+	else if (trimmedParam.Find(_T(":")) == 1)
 	{
 		// ファイルパス。強制的にCommandParamとする。
-		m_strCommandParam = trimedParam;
+		m_strCommandParam = trimmedParam;
 	}
 }
 
@@ -1028,7 +1028,7 @@ void CSazabi::InitAtomParam()
 	}
 }
 
-void CSazabi::RefrectEnforcedOptionParam()
+void CSazabi::ReflectEnforcedOptionParam()
 {
 	if (!m_strOptionParam.IsEmpty())
 	{

@@ -268,7 +268,7 @@ public:
 	void ParseSingleParam(CString param);
 	void InitParseCommandLine();
 	void InitAtomParam();
-	void RefrectEnforcedOptionParam();
+	void ReflectEnforcedOptionParam();
 	BOOL InitMultipleInstance();
 	void InitReadConfSetting();
 	void InitializeCef();
