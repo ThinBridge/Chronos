@@ -287,7 +287,7 @@ BOOL CSazabi::InitFunc_Settings()
 		// ネイティブ環境の場合、設定ファイルパスが指定されていればそちらから、
 		// 指定されていなければChronosDefault.confから設定データを読み込む
 		CString configPath = userConfigFilePath.IsEmpty() ? 
-			m_strSettingFileFullPath : 
+			m_strSettingFileFullPath :
 			userConfigFilePath;
 		if (PathFileExists(configPath))
 		{
@@ -301,13 +301,16 @@ BOOL CSazabi::InitFunc_Settings()
 		{
 			this->m_AppSettings.LoadDataFromFile(m_strSettingFileFullPath);
 		}
-		// 更にChronos.confまたは指定されたファイルから設定を追加で読み込む
-		CString additionalConfigPath = userConfigFilePath.IsEmpty() ?
-			GetThinAppEntryPointFolderPath() + _T("Chronos.conf") :
-			userConfigFilePath;
-		if (PathFileExists(additionalConfigPath))
+		if (theApp.IsEnableUserConfig())
 		{
-			this->m_AppSettings.LoadDataFromFile(additionalConfigPath);
+			// 更にChronos.confまたは指定されたファイルから設定を追加で読み込む
+			CString additionalConfigPath = userConfigFilePath.IsEmpty() ? 
+				GetThinAppEntryPointFolderPath() + _T("Chronos.conf") : 
+				userConfigFilePath;
+			if (PathFileExists(additionalConfigPath))
+			{
+				this->m_AppSettings.LoadDataFromFile(additionalConfigPath);
+			}
 		}
 	}
 
