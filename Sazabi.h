@@ -145,6 +145,7 @@ public:
 	CString m_strAtomParam;
 	CString m_strCommandParam;
 	CString m_strOptionParam;
+	CString m_strConfigParam;
 
 	BOOL m_bNewInstanceParam;
 	BOOL m_bTabWndChanging;
@@ -266,6 +267,8 @@ public:
 	void InitLogWrite();
 	void ParseSingleParam(CString param);
 	void InitParseCommandLine();
+	void InitAtomParam();
+	void ReflectEnforcedOptionParam();
 	BOOL InitMultipleInstance();
 	void InitReadConfSetting();
 	void InitializeCef();
