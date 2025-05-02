@@ -999,6 +999,9 @@ public:
 		LABEL_ALPHA_BLEND = 0;
 		TASK_LIST_TYPE = 0;
 		TASK_LIST_MODE_DETAIL = 0;
+
+		//Config file-------------------------------
+		EnableUserConfig = 0;
 	}
 	void CopyData(AppSettings& Data)
 	{
@@ -1084,6 +1087,9 @@ public:
 		Data.LABEL_ALPHA_BLEND = LABEL_ALPHA_BLEND;
 		Data.TASK_LIST_TYPE = TASK_LIST_TYPE;
 		Data.TASK_LIST_MODE_DETAIL = TASK_LIST_MODE_DETAIL;
+
+		//Config file-------------------------------
+		Data.EnableUserConfig = EnableUserConfig;
 	}
 
 private:
@@ -1182,6 +1188,9 @@ private:
 	int LABEL_ALPHA_BLEND;
 	int TASK_LIST_TYPE;
 	int TASK_LIST_MODE_DETAIL;
+	//Config file-------------------------------
+	int EnableUserConfig;
+
 
 public:
 	//SystemGuardModeの判定用
@@ -1294,6 +1303,9 @@ public:
 		LABEL_ALPHA_BLEND = 196;
 		TASK_LIST_TYPE = 1;
 		TASK_LIST_MODE_DETAIL = 1;
+
+		//Config file-------------------------------
+		EnableUserConfig = 1;
 	}
 
 	BOOL SaveDataToFileEx(LPCTSTR pstrFilePath)
@@ -1836,6 +1848,11 @@ public:
 					TASK_LIST_MODE_DETAIL = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
+				if (strTemp2.CompareNoCase(_T("EnableUserConfig")) == 0)
+				{
+					EnableUserConfig = (strTemp3 == _T("1")) ? TRUE : FALSE;
+					continue;
+				}
 			}
 		}
 		in.Close();
@@ -2024,6 +2041,8 @@ public:
 		strRet += EXTVAL(LABEL_TYPE);
 		strRet += EXTVAL(LABEL_CHK_INTERVAL);
 		strRet += EXTVAL(LABEL_ALPHA_BLEND);
+		//Config file-------------------------------
+		strRet += EXTVAL(EnableUserConfig);
 
 		return strRet;
 	}
@@ -2119,6 +2138,9 @@ public:
 	inline int GetLABEL_ALPHA_BLEND() { return LABEL_ALPHA_BLEND; }
 	inline int GetTASK_LIST_TYPE() { return TASK_LIST_TYPE; }
 	inline int GetTASK_LIST_MODE_DETAIL() { return TASK_LIST_MODE_DETAIL; }
+
+	//Config file-------------------------------
+	inline BOOL IsEnableUserConfig() { return EnableUserConfig; }
 
 	//Set Functions Setter##########################################################
 	inline void SetAdvancedLogMode(DWORD dVal) { EnableAdvancedLogMode = dVal ? 1 : 0; }
@@ -2232,6 +2254,9 @@ public:
 	inline void SetLABEL_ALPHA_BLEND(DWORD dVal) { LABEL_ALPHA_BLEND = dVal; }
 	inline void SetTASK_LIST_TYPE(DWORD dVal) { TASK_LIST_TYPE = dVal; }
 	inline void SetTASK_LIST_MODE_DETAIL(DWORD dVal) { TASK_LIST_MODE_DETAIL = dVal; }
+
+	// Config file-------------------------------
+	inline int SetEnableUserConfig(DWORD dVal) { EnableUserConfig = dVal; }
 };
 
 class CIconHelper
