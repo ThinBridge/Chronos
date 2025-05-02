@@ -972,6 +972,8 @@ public:
 		LogMethod.Empty();
 		RequestHeader.Empty();
 
+		AllowedProtocols.Empty();
+
 		//ChFiler---------------------------------
 		RootPath.Empty();
 		UploadBasePath.Empty();
@@ -1060,6 +1062,8 @@ public:
 		Data.LogServerURL = LogServerURL;
 		Data.RequestHeader = RequestHeader;
 		Data.LogMethod = LogMethod;
+
+		Data.AllowedProtocols = AllowedProtocols;
 
 		//ChFiler---------------------------------
 		Data.RootPath = RootPath;
@@ -1165,6 +1169,8 @@ private:
 	CString LogMethod;
 	CString RequestHeader;
 	//////////////////////////////////////////////////
+
+	CString AllowedProtocols;
 
 	//ChFiler---------------------------------
 	CString RootPath;
@@ -1283,6 +1289,8 @@ public:
 		LogServerURL.Empty();
 		LogMethod.Empty();
 		RequestHeader.Empty();
+
+		AllowedProtocols.Empty();
 
 		//ChFiler---------------------------------
 		RootPath = _T("B:\\");
@@ -1495,6 +1503,11 @@ public:
 				if (strTemp2.CompareNoCase(_T("RequestHeader")) == 0)
 				{
 					RequestHeader = strTemp3;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("AllowedProtocols")) == 0)
+				{
+					AllowedProtocols = strTemp3;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("LogMethod")) == 0)
@@ -2028,6 +2041,8 @@ public:
 		strRet += EXTVAL(EnableUploadLogging);
 		strRet += EXTVAL(EnableBrowsingLogging);
 		strRet += EXTVAL(EnableAccessAllLogging);
+
+		strRet += EXTVAL(AllowedProtocols);
 	
 		//ChFiler---------------------------------
 		strRet += _T("# File Manager\n");
@@ -2127,6 +2142,7 @@ public:
 	inline CString GetLogServerURL() { return LogServerURL; }
 	inline CString GetRequestHeader() { return RequestHeader; }
 	inline CString GetLogMethod() { return LogMethod; };
+	inline CString GetAllowedProtocols() { return AllowedProtocols; }
 
 	//ChFiler---------------------------------
 	inline CString GetRootPath() { return RootPath; }
@@ -2244,6 +2260,7 @@ public:
 	inline void SetLogServerURL(LPCTSTR str) { LogServerURL = str; }
 	inline void SetRequestHeader(LPCTSTR str) { RequestHeader = str; }
 	inline void SetLogMethod(LPCTSTR str) { LogMethod = str; }
+	inline void SetAllowedProtocols(LPCTSTR str) { AllowedProtocols = str; }
 
 	//ChFiler---------------------------------
 	inline void SetRootPath(LPCTSTR str) { RootPath = str; }

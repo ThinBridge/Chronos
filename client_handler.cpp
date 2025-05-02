@@ -1960,19 +1960,38 @@ bool ClientHandler::OnSelectClientCertificate(
 
 void ClientHandler::OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution)
 {
-	// Using CefBrowser->StopLoad() with allow_os_execution = true causes a crash on CEF128+.
-	// https://github.com/chromiumembedded/cef/issues/3851
-	//
-	// In order to avoid the crash, specifying allow_os_execution = false on CEF128+, but 
-	// this blocks to execute applications installed in OS. E.g. Zoom application for Windows.
-	// 
-	// We should specify allow_os_execution = true after the bug on CEF128+ is fixed.
-#if CHROME_VERSION_MAJOR >= 128
 	allow_os_execution = false;
-#else
-	allow_os_execution = true;
-#endif
-	browser->StopLoad();
+	CString url = (LPCWSTR)request->GetURL().c_str();
+	url.MakeLower();
+	CStringArray protocolArray;
+	CString strAllowedProtocols = theApp.m_AppSettings.GetAllowedProtocols();
+	SBUtil::Split(&protocolArray, strAllowedProtocols, _T("|"));
+	size_t size = protocolArray.GetSize();
+	for (size_t i = 0; i < size; i++)
+	{
+		CString allowedProtocol = protocolArray.GetAt(i);
+		if (allowedProtocol.IsEmpty())
+		{
+			continue;
+		}
+		if (allowedProtocol == _T("*"))
+		{
+			allow_os_execution = true;
+			break;
+		}
+		allowedProtocol.MakeLower();
+		if (url.Find(allowedProtocol) == 0)
+		{
+			allow_os_execution = true;
+			break;
+		}
+	}
+	if (!allow_os_execution)
+	{
+		// OS実行を許可しない場合、一部のサイトでStopLoadしないとエラーページに遷移してしまう
+		// 例: Zoom
+		browser->StopLoad();
+	}
 }
 void ClientHandler::OnRenderViewReady(CefRefPtr<CefBrowser> browser)
 {
