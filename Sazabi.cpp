@@ -389,8 +389,8 @@ BOOL CSazabi::InitFunc_SGMode()
 		CString strCommandC;
 		CString strParam;
 
-		strCommandC.Format(_T("\"%s\" \"%s\""), (LPCTSTR)strSpCAppPath, (LPCTSTR)m_AppSettings.GetRootPath());
-		strParam.Format(_T("\"%s\""), (LPCTSTR)m_AppSettings.GetRootPath());
+		strParam.Format(_T("\"%s\" %s"), (LPCTSTR)m_AppSettings.GetRootPath(), (LPCTSTR)m_strConfigParam);
+		strCommandC.Format(_T("\"%s\" %s"), (LPCTSTR)strSpCAppPath, (LPCTSTR)strParam);
 		STARTUPINFO siC = {0};
 		PROCESS_INFORMATION piC = {0};
 		siC.cb = sizeof(siC);
@@ -1171,14 +1171,14 @@ void CSazabi::OpenChFiler(CHFILER_INIT_MODE initMode, LPCTSTR lpOpenPath)
 				strOpenPath = lpOpenPath;
 				strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
 				LPCTSTR mode = initMode == CHFILER_INIT_MODE::OPEN ? _T("") : _T("/Transfer");
-				strParam.Format(_T("%s \"%s\""), mode, (LPCTSTR)strOpenPath);
+				strParam.Format(_T("%s %s \"%s\""), mode, (LPCTSTR)m_strConfigParam, (LPCTSTR)strOpenPath);
 				strExecCommand.Format(_T("\"%sChFiler.exe\" %s"), (LPCTSTR)m_strExeFolderPath, (LPCTSTR)strParam);
 			}
 			else
 			{
 				strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
-				strExecCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
-				strParam = _T("");
+				strParam = m_strConfigParam;
+				strExecCommand.Format(_T("\"%sChFiler.exe\" %s"), (LPCTSTR)m_strExeFolderPath, (LPCTSTR)strParam);
 			}
 			CString strFrmWnd;
 			strFrmWnd = _T("CFiler:");
@@ -1297,8 +1297,8 @@ void CSazabi::OpenChTaskMgr()
 	}
 	CString strCommand;
 	CString strParam;
-	strCommand.Format(_T("\"%s\" /RESIDENT"), (LPCTSTR)strtSGPathResult);
-	strParam = _T("/RESIDENT");
+	strParam.Format(_T("/RESIDENT %s"), (LPCTSTR)m_strConfigParam);
+	strCommand.Format(_T("\"%s\" %s"), (LPCTSTR)strtSGPathResult, (LPCTSTR)strParam);
 	STARTUPINFO si = {0};
 	PROCESS_INFORMATION pi = {0};
 	si.cb = sizeof(si);
