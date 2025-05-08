@@ -250,6 +250,13 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 		return true;
 	}
 
+	CString url(target_url.ToWString().c_str());
+	if (!IsAllowedPopup(url))
+	{
+		// Block to popup
+		return true;
+	}
+
 	// set client
 	client = this;
 	// The frame window will be the parent of the browser window
@@ -2318,6 +2325,60 @@ bool ClientHandler::IsUsableCommand(int id)
 	default:
 		return false;
 	}
+}
+
+bool ClientHandler::IsAllowedPopup(CString url) {
+	if (url.IsEmpty())
+	{
+		return false;
+	}
+	CString tempUrl = url;
+	tempUrl = SBUtil::Trim_URLOnly(tempUrl);
+	tempUrl.MakeLower();
+	int pos = tempUrl.Find(_T("://"));
+	int start = (pos == -1) ? 0 : pos + 3;
+	CString domain = tempUrl.Right(tempUrl.GetLength() - start).Trim(_T("/"));
+	pos = domain.Find(_T("/"));
+	if (pos > -1)
+	{
+		domain = domain.Left(pos);
+	}
+	
+	CStringArray blockUrlArray;
+	CString strBlockUrls = theApp.m_AppSettings.GetBlockedPopupUrls();
+	SBUtil::Split(&blockUrlArray, strBlockUrls, _T("|"));
+	size_t size = blockUrlArray.GetSize();
+	for (size_t i = 0; i < size; i++)
+	{
+		CString blockUrl = blockUrlArray.GetAt(i);
+		blockUrl.Trim();
+		if (blockUrl.IsEmpty())
+		{
+			continue;
+		}
+		if (blockUrl == _T("*"))
+		{
+			// block all
+			return false;
+		}
+		blockUrl.MakeLower();
+		// Chromiumのポップアップブロックの記法に倣う
+		// * example.com -> example.comのみ
+		// * [*.]example.com -> example.comとexample.comのサブドメイン
+		if (blockUrl.Find(_T("[*.]")) == 0)
+		{
+			blockUrl.Replace(_T("[*.]"), _T(""));
+			if (domain.Find(blockUrl) > -1)
+			{
+				return false;
+			}
+		}
+		else if (domain == blockUrl)
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 bool MyV8Handler::Execute(const CefString& name,
