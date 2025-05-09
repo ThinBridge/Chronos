@@ -930,6 +930,7 @@ public:
 		EnableRebar = 0;
 		EnableStatusbar = 0;
 
+		BlockedPopupUrls.Empty();
 		WideMargin = 0;
 		HeightMargin = 0;
 		DefaultZoomSize = 0;
@@ -1019,7 +1020,7 @@ public:
 		Data.ProxyType = ProxyType;
 		Data.EnableRebar = EnableRebar;
 		Data.EnableStatusbar = EnableStatusbar;
-
+		Data.BlockedPopupUrls = BlockedPopupUrls;
 		Data.WideMargin = WideMargin;
 		Data.HeightMargin = HeightMargin;
 		Data.DefaultZoomSize = DefaultZoomSize;
@@ -1107,6 +1108,7 @@ private:
 	int EnableGPURendering;
 	int EnableRebar;
 	int EnableStatusbar;
+	CString BlockedPopupUrls;
 	int WideMargin;
 	int HeightMargin;
 	int DefaultZoomSize;
@@ -1214,6 +1216,7 @@ public:
 		EnableRebar = TRUE;
 		ShowLogo = TRUE;
 		EnableStatusbar = TRUE;
+		BlockedPopupUrls = _T("");
 		WideMargin = 25;
 		HeightMargin = 48;
 		DefaultZoomSize = 100;
@@ -1566,6 +1569,11 @@ public:
 						AdvancedLogLevel = iW;
 					else
 						AdvancedLogLevel = 0;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("BlockedPopupUrls")) == 0)
+				{
+					BlockedPopupUrls = strTemp3;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("WideMargin")) == 0)
@@ -1952,6 +1960,7 @@ public:
 		strRet += EXTVAL(EnableRebar);
 		strRet += EXTVAL(ShowLogo);
 		strRet += EXTVAL(EnableStatusbar);
+		strRet += EXTVAL(BlockedPopupUrls);
 		strRet += EXTVAL(WideMargin);
 		strRet += EXTVAL(HeightMargin);
 		strRet += EXTVAL(DefaultZoomSize);
@@ -2067,6 +2076,7 @@ public:
 	inline int GetAdvancedLogLevel() { return AdvancedLogLevel; }
 	inline int GetWideMargin() { return WideMargin; }
 	inline int GetHeightMargin() { return HeightMargin; }
+	inline CString GetBlockedPopupUrls() { return BlockedPopupUrls; }
 	inline int GetZoomSize() { return DefaultZoomSize; }
 	inline int GetRedirectMsgTimeout() { return RedirectMsgTimeout; }
 	inline int GetKeyCombination() { return KeyCombination; }
@@ -2161,6 +2171,7 @@ public:
 	inline void SetAdvancedLogLevel(DWORD dVal) { AdvancedLogLevel = dVal; }
 	inline void SetWideMargin(DWORD dVal) { WideMargin = dVal; }
 	inline void SetHeightMargin(DWORD dVal) { HeightMargin = dVal; }
+	inline void SetBlockedPopupUrls(LPCTSTR str) { BlockedPopupUrls = str; }
 	inline void SetZoomSize(DWORD dVal) { DefaultZoomSize = dVal; }
 	inline void SetRedirectMsgTimeout(DWORD dVal) { RedirectMsgTimeout = dVal; }
 	inline void SetKeyCombination(DWORD dVal)
