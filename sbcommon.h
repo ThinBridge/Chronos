@@ -2747,6 +2747,109 @@ public:
 	CPtrArray m_arrURL_AD;
 };
 
+class CPopupFilterURLList : public CCustomURLList
+{
+public:
+	CPopupFilterURLList()
+	{
+	}
+	virtual ~CPopupFilterURLList()
+	{
+	}
+	void Clear()
+	{
+		m_arrURL_AD.RemoveAll();
+		CCustomURLList::Clear();
+	}
+	void SetArrayData(LPCTSTR lPath)
+	{
+		if (lPath == NULL) return;
+		this->Clear();
+		_wsetlocale(LC_ALL, _T("jpn"));
+		CStdioFile in;
+		if (in.Open(lPath, CFile::modeRead | CFile::shareDenyNone))
+		{
+			m_LogMsg.Format(_T("CPopupFilterURLList %s\n===============\n"), lPath);
+			CString strTemp;
+			CString strTemp2;
+			CString strTemp3;
+			CStringArray strArray;
+
+			while (in.ReadString(strTemp))
+			{
+				m_LogMsg += strTemp;
+				m_LogMsg += _T("\n");
+
+				strTemp2.Empty();
+				strTemp3.Empty();
+				strArray.RemoveAll();
+				strTemp.TrimLeft();
+				strTemp.TrimRight();
+				if (strTemp.IsEmpty())
+					continue;
+				SBUtil::Split(&strArray, strTemp, _T("\t"));
+				if (strArray.GetSize() >= 2)
+				{
+					strTemp2 = strArray.GetAt(0);
+					strTemp2.TrimLeft();
+					strTemp2.TrimRight();
+
+					strTemp3 = strArray.GetAt(1);
+					strTemp3.TrimLeft();
+					strTemp3.TrimRight();
+					if (strTemp2.Find(_T(";")) == 0)
+					{
+						;
+					}
+					else if (strTemp2.Find(_T("#")) == 0)
+					{
+						;
+					}
+					else
+					{
+						if (!strTemp2.IsEmpty())
+						{
+							m_arrURL.Add(strTemp2);
+							INT_PTR iMode = 0;
+							iMode = strTemp3 == _T("A") ? TF_ALLOW : TF_DENY;
+							m_arrURL_AD.Add((void*)iMode);
+						}
+					}
+				}
+			}
+			in.Close();
+			m_LogMsg += _T("---------------");
+		}
+	}
+	// TRUE HIT
+	INT_PTR HitWildCardURL(const CString& strSURL)
+	{
+		INT_PTR uiRet = TF_ALLOW;
+		CStringA strURLA(strSURL);
+		CString strTemp;
+		CStringA strTempA;
+
+		int imax = (int)m_arrURL.GetSize();
+		for (int i = 0; i < imax; i++)
+		{
+			strTemp.Empty();
+			strTemp = m_arrURL.GetAt(i);
+			strTempA = strTemp;
+
+			// ワイルドカード対応
+			if (wildcmp(strTempA, strURLA))
+			{
+				uiRet = (INT_PTR)m_arrURL_AD.GetAt(i);
+				break;
+			}
+			uiRet = TF_ALLOW;
+		}
+		return uiRet;
+	}
+	CPtrArray m_arrURL_AD;
+};
+
+
 class CCustomScriptList : public CCustomURLList
 {
 public:

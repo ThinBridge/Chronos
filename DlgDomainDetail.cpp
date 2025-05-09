@@ -92,6 +92,96 @@ BOOL CDlgDomainDetail::OnInitDialog()
 	return FALSE;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
+IMPLEMENT_DYNAMIC(CDlgPopupDetail, CDialogEx)
+CDlgPopupDetail::CDlgPopupDetail(CWnd* pParent /*=NULL*/)
+    : CDialogEx(IDD_DLG_POPUP, pParent)
+{
+	m_ActionType = 0;
+	m_bEnable = FALSE;
+}
+
+CDlgPopupDetail::~CDlgPopupDetail()
+{
+}
+
+void CDlgPopupDetail::DoDataExchange(CDataExchange* pDX)
+{
+	CDialogEx::DoDataExchange(pDX);
+}
+
+BEGIN_MESSAGE_MAP(CDlgPopupDetail, CDialogEx)
+	ON_BN_CLICKED(IDOK, &CDlgPopupDetail::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &CDlgPopupDetail::OnBnClickedCancel)
+	ON_BN_CLICKED(IDC_CHECK1, &CDlgPopupDetail::OnBnClickedCheck1)
+END_MESSAGE_MAP()
+
+void CDlgPopupDetail::OnBnClickedOk()
+{
+	GetDlgItemText(IDC_EDIT1, m_strDomainName);
+	m_strDomainName.TrimLeft();
+	m_strDomainName.TrimRight();
+	if (((CButton*)GetDlgItem(IDC_CHECK1))->GetCheck())
+		m_bEnable = TRUE;
+	else
+		m_bEnable = FALSE;
+
+	if (((CButton*)GetDlgItem(IDC_RADIO1))->GetCheck())
+		m_ActionType = TF_ALLOW;
+	else
+		m_ActionType = TF_DENY;
+
+	if (m_strDomainName.IsEmpty() && m_bEnable)
+	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_ALERT_EMPTY_DOMAIN);
+		::MessageBox(this->m_hWnd, alertMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+		((CButton*)GetDlgItem(IDC_EDIT1))->SetFocus();
+		return;
+	}
+	CDialogEx::OnOK();
+}
+
+void CDlgPopupDetail::OnBnClickedCancel()
+{
+	CDialogEx::OnCancel();
+}
+
+void CDlgPopupDetail::OnBnClickedCheck1()
+{
+	SetState();
+}
+
+void CDlgPopupDetail::SetState()
+{
+	BOOL bFlg = FALSE;
+	if (((CButton*)GetDlgItem(IDC_CHECK1))->GetCheck() == 1)
+		bFlg = TRUE;
+	else
+		bFlg = FALSE;
+	GetDlgItem(IDC_EDIT1)->EnableWindow(bFlg);
+	GetDlgItem(IDC_RADIO1)->EnableWindow(bFlg);
+	GetDlgItem(IDC_RADIO2)->EnableWindow(bFlg);
+}
+BOOL CDlgPopupDetail::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+	SetDlgItemText(IDC_EDIT1, m_strDomainName);
+	if (m_bEnable)
+	{
+		((CButton*)GetDlgItem(IDC_CHECK1))->SetCheck(1);
+		GetDlgItem(IDC_EDIT1)->SetFocus();
+	}
+	else
+		((CButton*)GetDlgItem(IDC_CHECK1))->SetCheck(0);
+
+	if (m_ActionType == TF_ALLOW)
+		((CButton*)GetDlgItem(IDC_RADIO1))->SetCheck(1);
+	else
+		((CButton*)GetDlgItem(IDC_RADIO2))->SetCheck(1);
+	SetState();
+	return FALSE;
+}
+////////////////////////////////////////////////////////////////////////////////////////////
 IMPLEMENT_DYNAMIC(CDlgCustomScriptDetail, CDialogEx)
 CDlgCustomScriptDetail::CDlgCustomScriptDetail(CWnd* pParent /*=NULL*/)
     : CDialogEx(IDD_DLG_CUSTOMSCRIPT, pParent)

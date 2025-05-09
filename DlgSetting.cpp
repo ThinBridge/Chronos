@@ -2183,6 +2183,436 @@ LRESULT CDlgSetDomainFilter::Set_OK(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+IMPLEMENT_DYNCREATE(CDlgSetPopupFilter, CPropertyPage)
+CDlgSetPopupFilter::CDlgSetPopupFilter() : CPropertyPage(CDlgSetPopupFilter::IDD)
+{
+}
+CDlgSetPopupFilter::~CDlgSetPopupFilter()
+{
+}
+void CDlgSetPopupFilter::DoDataExchange(CDataExchange* pDX)
+{
+	CPropertyPage::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CDlgSetPopupFilter)
+	DDX_Control(pDX, IDC_LIST1, m_List);
+	//}}AFX_DATA_MAP
+}
+
+#pragma warning(push, 0)
+// 警告 C26454 演算のオーバーフロー : '-' の操作では、コンパイル時に負の符号なしの結果が生成されます(io .5)。
+#pragma warning(disable : 26454)
+BEGIN_MESSAGE_MAP(CDlgSetPopupFilter, CPropertyPage)
+	//{{AFX_MSG_MAP(CDlgSetPopupFilter)
+	ON_BN_CLICKED(IDC_BUTTON_INS, OnButtonPopIns)
+	ON_BN_CLICKED(IDC_BUTTON_DEL, OnButtonPopDel)
+	ON_WM_DESTROY()
+	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, OnDblclkList1)
+	ON_BN_CLICKED(IDC_BUTTON_UP, OnButtonUp)
+	ON_BN_CLICKED(IDC_BUTTON_DOWN, OnButtonDown)
+	ON_WM_SIZE()
+	ON_WM_PAINT()
+	ON_BN_CLICKED(IDC_CHECK_ENABLE_POPUP_FILTER, OnEnableCtrl)
+	//}}AFX_MSG_MAP
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
+END_MESSAGE_MAP()
+#pragma warning(pop)
+
+/////////////////////////////////////////////////////////////////////////////
+// CDlgSetPopupFilter メッセージ ハンドラ
+void CDlgSetPopupFilter::OnEnableCtrl()
+{
+	BOOL bChk = FALSE;
+	bChk = ((CButton*)GetDlgItem(IDC_CHECK_ENABLE_POPUP_FILTER))->GetCheck();
+
+	if (bChk)
+	{
+		GetDlgItem(IDC_LIST1)->EnableWindow(TRUE);
+		GetDlgItem(IDC_BUTTON_INS)->EnableWindow(TRUE);
+		GetDlgItem(IDC_BUTTON_DEL)->EnableWindow(TRUE);
+		GetDlgItem(IDC_BUTTON_UP)->EnableWindow(TRUE);
+		GetDlgItem(IDC_BUTTON_DOWN)->EnableWindow(TRUE);
+	}
+	else
+	{
+		GetDlgItem(IDC_LIST1)->EnableWindow(FALSE);
+		GetDlgItem(IDC_BUTTON_INS)->EnableWindow(FALSE);
+		GetDlgItem(IDC_BUTTON_DEL)->EnableWindow(FALSE);
+		GetDlgItem(IDC_BUTTON_UP)->EnableWindow(FALSE);
+		GetDlgItem(IDC_BUTTON_DOWN)->EnableWindow(FALSE);
+	}
+	return;
+}
+
+int CDlgSetPopupFilter::DuplicateChk(LPCTSTR sURL)
+{
+	int iRet = -1; // 重複なしは、-1を返す。
+	CString strURL;
+	int iSelCount = -1;
+	while ((iSelCount = m_List.GetNextItem(iSelCount, LVNI_ALL)) != -1)
+	{
+		strURL.Empty();
+		strURL = m_List.GetItemText(iSelCount, URL);
+		if (strURL == sURL)
+		{
+			iRet = iSelCount;
+			break;
+		}
+	}
+	return iRet;
+}
+void CDlgSetPopupFilter::InsertDlgShow(LPCTSTR sURL)
+{
+	CDlgPopupDetail Dlg(this);
+	if (sURL)
+		Dlg.m_strDomainName = sURL;
+	Dlg.m_bEnable = TRUE;
+	Dlg.m_ActionType = TF_ALLOW;
+
+	if (Dlg.DoModal() == IDOK)
+	{
+		if (Dlg.m_strDomainName.IsEmpty())
+			return;
+		int iRet = DuplicateChk(Dlg.m_strDomainName);
+		// 重複なし。
+		if (iRet == -1)
+		{
+			int index = m_List.GetItemCount();
+			int iItem = m_List.InsertItem(index, _T(""));
+			m_List.SetItemText(iItem, URL, Dlg.m_strDomainName);
+			CString strMode;
+			strMode.LoadString(Dlg.m_ActionType == TF_ALLOW ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
+			m_List.SetItemText(iItem, ACTION, strMode);
+
+			CString strTemp;
+			strTemp = Dlg.m_bEnable ? _T("o") : _T("-");
+			m_List.SetItemText(iItem, ENABLE, strTemp);
+		}
+		else
+		{
+			m_List.SetFocus();
+			m_List.SetItemState(iRet, LVIS_SELECTED, LVIS_SELECTED);
+			CString alertMsg;
+			alertMsg.LoadString(ID_ALERT_ALREADY_ADDED_DOMAIN);
+			CString strErrMsg;
+			strErrMsg.Format(alertMsg, iRet + 1, Dlg.m_strDomainName);
+			::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+		}
+	}
+}
+void CDlgSetPopupFilter::OnButtonPopIns()
+{
+	InsertDlgShow(NULL);
+}
+void CDlgSetPopupFilter::OnButtonPopDel()
+{
+	int iSelCount = 0;
+	iSelCount = m_List.GetSelectedCount();
+	if (iSelCount == 0)
+		return;
+	int nItemCount = m_List.GetItemCount();
+	while (nItemCount--)
+	{
+		if (m_List.GetItemState(nItemCount, LVIS_SELECTED) == LVIS_SELECTED)
+		{
+			m_List.DeleteItem(nItemCount);
+		}
+	}
+}
+
+void CDlgSetPopupFilter::OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	int iSelCount = 0;
+	iSelCount = m_List.GetSelectedCount();
+	if (iSelCount != 1)
+		return;
+	iSelCount = m_List.GetNextItem(-1, LVNI_ALL | LVNI_FOCUSED | LVNI_SELECTED);
+	if (iSelCount != -1)
+	{
+		CDlgPopupDetail Dlg(this);
+		BOOL bEnable = FALSE;
+		CString strURL;
+		CString strMode;
+		CString strTemp;
+		strURL = m_List.GetItemText(iSelCount, URL);
+		strMode = m_List.GetItemText(iSelCount, ACTION);
+		strTemp = m_List.GetItemText(iSelCount, ENABLE);
+		bEnable = strTemp == _T("o") ? TRUE : FALSE;
+		Dlg.m_strDomainName = strURL;
+		CString allowLabel;
+		allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
+		Dlg.m_ActionType = strMode == allowLabel ? TF_ALLOW : TF_DENY;
+		Dlg.m_bEnable = bEnable;
+		if (Dlg.DoModal() == IDOK)
+		{
+			if (Dlg.m_strDomainName.IsEmpty())
+				return;
+
+			int iRet = DuplicateChk(Dlg.m_strDomainName);
+			// 重複なし。
+			if (iRet == -1 || iRet == iSelCount)
+			{
+				m_List.SetItemText(iSelCount, URL, Dlg.m_strDomainName);
+				CString strMode;
+				strMode.LoadString(Dlg.m_ActionType == TF_ALLOW ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
+				m_List.SetItemText(iSelCount, ACTION, strMode);
+
+				CString strTemp;
+				strTemp = Dlg.m_bEnable ? _T("o") : _T("-");
+				m_List.SetItemText(iSelCount, ENABLE, strTemp);
+			}
+			else
+			{
+				m_List.SetFocus();
+				m_List.SetItemState(iRet, LVIS_SELECTED, LVIS_SELECTED);
+				CString alertMsg;
+				alertMsg.LoadString(ID_ALERT_ALREADY_ADDED_DOMAIN);
+				CString strErrMsg;
+				strErrMsg.Format(alertMsg, iRet + 1, Dlg.m_strDomainName);
+				::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+			}
+		}
+	}
+	*pResult = 0;
+}
+
+void CDlgSetPopupFilter::OnButtonUp()
+{
+	int iSelCount = 0;
+	int iAfterPos = 0;
+	iSelCount = m_List.GetSelectedCount();
+	if (iSelCount != 1)
+		return;
+	iSelCount = m_List.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED);
+	if (iSelCount == -1)
+		return;
+
+	CString strURL;
+	CString strMode;
+	CString strEnable;
+	strURL = m_List.GetItemText(iSelCount, URL);
+	strMode = m_List.GetItemText(iSelCount, ACTION);
+	strEnable = m_List.GetItemText(iSelCount, ENABLE);
+	iAfterPos = iSelCount - 1;
+	if (iAfterPos < 0)
+		return;
+	m_List.DeleteItem(iSelCount);
+	int iItem = m_List.InsertItem(iAfterPos, _T(""));
+	m_List.SetItemText(iItem, URL, strURL);
+	m_List.SetItemText(iItem, ACTION, strMode);
+	m_List.SetItemText(iItem, ENABLE, strEnable);
+	m_List.SetItemState(iAfterPos, LVIS_SELECTED, LVIS_SELECTED);
+	m_List.SetFocus();
+}
+
+void CDlgSetPopupFilter::OnButtonDown()
+{
+	int iSelCount = 0;
+	int iAfterPos = 0;
+	iSelCount = m_List.GetSelectedCount();
+	if (iSelCount != 1)
+		return;
+	iSelCount = m_List.GetNextItem(-1, LVNI_ALL | LVNI_SELECTED);
+	if (iSelCount == -1)
+		return;
+
+	CString strURL;
+	CString strMode;
+	CString strEnable;
+	strURL = m_List.GetItemText(iSelCount, URL);
+	strMode = m_List.GetItemText(iSelCount, ACTION);
+	strEnable = m_List.GetItemText(iSelCount, ENABLE);
+	iAfterPos = iSelCount + 1;
+	if (iAfterPos >= m_List.GetItemCount())
+		return;
+	m_List.DeleteItem(iSelCount);
+	int iItem = m_List.InsertItem(iAfterPos, _T(""));
+	m_List.SetItemText(iItem, URL, strURL);
+	m_List.SetItemText(iItem, ACTION, strMode);
+	m_List.SetItemText(iItem, ENABLE, strEnable);
+	m_List.SetItemState(iAfterPos, LVIS_SELECTED, LVIS_SELECTED);
+	m_List.SetFocus();
+}
+
+void CDlgSetPopupFilter::OnSize(UINT nType, int cx, int cy)
+{
+	m_autoResize.Resize(this);
+	CPropertyPage::OnSize(nType, cx, cy);
+}
+void CDlgSetPopupFilter::OnPaint()
+{
+	CPaintDC dc(this);
+}
+
+BOOL CDlgSetPopupFilter::OnInitDialog()
+{
+	CPropertyPage::OnInitDialog();
+	CString columnLabelPopup;
+	CString columnLabelAction;
+	CString columnLabelEnable;
+	columnLabelPopup.LoadString(ID_SETTINGS_COLUMN_HEADER_DOMAIN);
+	columnLabelAction.LoadString(ID_SETTINGS_COLUMN_HEADER_ACTION);
+	columnLabelEnable.LoadString(ID_SETTINGS_COLUMN_HEADER_ENABLED);
+	m_List.InsertColumn(URL, columnLabelPopup, LVCFMT_LEFT, 480);
+	m_List.InsertColumn(ACTION, columnLabelAction, LVCFMT_LEFT, 120);
+	m_List.InsertColumn(ENABLE, columnLabelEnable, LVCFMT_CENTER, 50);
+	ListView_SetExtendedListViewStyle(m_List.m_hWnd, LVS_EX_FULLROWSELECT);
+
+	if (theApp.m_AppSettingsDlgCurrent.IsEnableURLFilter())
+		((CButton*)GetDlgItem(IDC_CHECK_ENABLE_POPUP_FILTER))->SetCheck(1);
+	else
+		((CButton*)GetDlgItem(IDC_CHECK_ENABLE_POPUP_FILTER))->SetCheck(0);
+
+	_wsetlocale(LC_ALL, _T("jpn"));
+	CStdioFile in;
+	CString strPath;
+	strPath = theApp.m_strPopupFilterFileFullPath;
+	if (in.Open(strPath, CFile::modeReadWrite | CFile::shareDenyWrite | CFile::modeCreate | CFile::modeNoTruncate))
+	{
+		CString strTemp;
+		CString strTemp2;
+		CString strTemp3;
+		CStringArray strArray;
+
+		while (in.ReadString(strTemp))
+		{
+			strTemp2.Empty();
+			strTemp3.Empty();
+			strArray.RemoveAll();
+			strTemp.TrimLeft();
+			strTemp.TrimRight();
+			if (strTemp.IsEmpty())
+				continue;
+
+			BOOL bEnable = TRUE;
+			SBUtil::Split(&strArray, strTemp, _T("\t"));
+			if (strArray.GetSize() >= 2)
+			{
+				strTemp2 = strArray.GetAt(0);
+				strTemp2.TrimLeft();
+				strTemp2.TrimRight();
+
+				strTemp3 = strArray.GetAt(1);
+				strTemp3.TrimLeft();
+				strTemp3.TrimRight();
+				if (strTemp2.Find(_T(";")) == 0)
+				{
+					bEnable = FALSE;
+					strTemp2 = strTemp2.Mid(1);
+				}
+				else if (strTemp2.Find(_T("#")) == 0)
+				{
+					bEnable = FALSE;
+					strTemp2 = strTemp2.Mid(1);
+				}
+
+				if (strTemp2.IsEmpty())
+					continue;
+
+				int iRet = DuplicateChk(strTemp2);
+				// 重複なし。
+				if (iRet == -1)
+				{
+					int index = m_List.GetItemCount();
+					int iItem = m_List.InsertItem(index, _T(""));
+					CString strLowString;
+					m_List.SetItemText(iItem, URL, strTemp2);
+
+					CString strMode;
+					strMode.LoadString(strTemp3 == _T("A") ? ID_ACTION_LABEL_ALLOW : ID_ACTION_LABEL_DENY);
+					m_List.SetItemText(iItem, ACTION, strMode);
+
+					strLowString = bEnable ? _T("o") : _T("-");
+					m_List.SetItemText(iItem, ENABLE, strLowString);
+				}
+			}
+		}
+		in.Close();
+	}
+	else
+	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_CANNOT_SAVE_POPUP_FILTER);
+		CString strErrMsg;
+		strErrMsg.Format(alertMsg, strPath);
+		::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
+	}
+	OnEnableCtrl();
+	return TRUE;
+}
+
+LRESULT CDlgSetPopupFilter::Set_OK(WPARAM wParam, LPARAM lParam)
+{
+	if (((CButton*)GetDlgItem(IDC_CHECK_ENABLE_POPUP_FILTER))->GetCheck() == 1)
+	{
+		theApp.m_AppSettingsDlgCurrent.SetEnableURLFilter(1);
+	}
+	else
+	{
+		theApp.m_AppSettingsDlgCurrent.SetEnableURLFilter(0);
+	}
+
+	_wsetlocale(LC_ALL, _T("jpn"));
+	CStdioFile out;
+	CString strPath;
+	strPath = theApp.m_strPopupFilterFileFullPath;
+	if (out.Open(strPath, CFile::modeWrite | CFile::modeCreate))
+	{
+		CString strURL;
+		CString strMode;
+		CString strEnable;
+		CString strLineData;
+		BOOL bEnable = FALSE;
+		int iSelCount = -1;
+		while ((iSelCount = m_List.GetNextItem(iSelCount, LVNI_ALL)) != -1)
+		{
+			strLineData.Empty();
+			strURL.Empty();
+			strMode.Empty();
+			strEnable.Empty();
+			bEnable = FALSE;
+			strURL = m_List.GetItemText(iSelCount, URL);
+			int iRet = DuplicateChk(strURL);
+			// 重複なし。
+			if (iRet == -1 || iRet == iSelCount)
+			{
+				strMode = m_List.GetItemText(iSelCount, ACTION);
+				strEnable = m_List.GetItemText(iSelCount, ENABLE);
+				bEnable = strEnable == _T("o") ? TRUE : FALSE;
+				CString allowLabel;
+				allowLabel.LoadString(ID_ACTION_LABEL_ALLOW);
+				if (bEnable)
+					strLineData.Format(_T("%s\t%s\n"), (LPCTSTR)strURL, strMode == allowLabel ? _T("A") : _T("D"));
+				else
+					strLineData.Format(_T(";%s\t%s\n"), (LPCTSTR)strURL, strMode == allowLabel ? _T("A") : _T("D"));
+				out.WriteString(strLineData);
+			}
+		}
+		out.Close();
+		if (theApp.InVirtualEnvironment() == VE_THINAPP)
+		{
+			CString strSBFilePath;
+			strSBFilePath = theApp.GetSandboxFilePath(theApp.m_strPopupFilterFileFullPath);
+			if (!strSBFilePath.IsEmpty())
+			{
+				CString strFilePathCnf;
+				strFilePathCnf = theApp.m_strPopupFilterFileFullPath;
+				strFilePathCnf.Replace(_T("Default.conf"), _T(".conf"));
+				theApp.Exec_SB2PYS_COPY(strSBFilePath, strFilePathCnf);
+			}
+		}
+	}
+	else
+	{
+		CString alertMsg;
+		alertMsg.LoadString(ID_CANNOT_SAVE_POPUP_FILTER);
+		CString strErrMsg;
+		strErrMsg.Format(alertMsg, strPath);
+		::MessageBox(this->m_hWnd, strErrMsg, theApp.m_strThisAppName, MB_OK | MB_ICONERROR);
+		return 1;
+	}
+	return 0;
+}
+
 void CDlgSetDSP::OnBnClickedButton1()
 {
 	CStringArray straMenu;

@@ -320,6 +320,7 @@ protected:
 	//IMPLEMENT_LOCKING(ClientHandler);
 private:
 	bool IsUsableCommand(int id);
+	bool IsAllowedPopup(CefString url);
 };
 class AppRenderer : public CefApp, public CefRenderProcessHandler
 {
