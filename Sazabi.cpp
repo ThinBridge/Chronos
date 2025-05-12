@@ -389,7 +389,7 @@ BOOL CSazabi::InitFunc_SGMode()
 		CString strCommandC;
 		CString strParam;
 
-		strParam.Format(_T("\"%s\" %s"), (LPCTSTR)m_AppSettings.GetRootPath(), (LPCTSTR)m_strConfigParam);
+		strParam.Format(_T("\"%s\" %s"), (LPCTSTR)m_AppSettings.GetRootPath().TrimRight(_T("\\")), (LPCTSTR)m_strConfigParam);
 		strCommandC.Format(_T("\"%s\" %s"), (LPCTSTR)strSpCAppPath, (LPCTSTR)strParam);
 		STARTUPINFO siC = {0};
 		PROCESS_INFORMATION piC = {0};
@@ -1169,6 +1169,7 @@ void CSazabi::OpenChFiler(CHFILER_INIT_MODE initMode, LPCTSTR lpOpenPath)
 			if (lpOpenPath)
 			{
 				strOpenPath = lpOpenPath;
+				strOpenPath.TrimRight(_T("\\"));
 				strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
 				LPCTSTR mode = initMode == CHFILER_INIT_MODE::OPEN ? _T("") : _T("/Transfer");
 				strParam.Format(_T("%s %s \"%s\""), mode, (LPCTSTR)m_strConfigParam, (LPCTSTR)strOpenPath);
