@@ -511,6 +511,7 @@ void CSettingsDialog::OnOK()
 	theApp.m_CacheURLFilter_Allow.RemoveAll();
 
 	theApp.m_cDomainFilterList.RefreshData();
+	theApp.m_cPopupFilterList.RefreshData();
 	theApp.m_cCustomScriptList.RefreshData();
 
 	//Scriptを読み込み直し
