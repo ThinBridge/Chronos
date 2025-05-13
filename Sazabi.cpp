@@ -272,16 +272,6 @@ BOOL CSazabi::InitFunc_Settings()
 	// 設定データの初期値を読み込む
 	this->m_AppSettings.LoadDefaultData();
 
-	CString userConfigFilePath;
-	if (!m_strConfigParam.IsEmpty())
-	{
-		int pos = m_strConfigParam.Find(_T('='));
-		if (pos != -1)
-		{
-			userConfigFilePath = m_strConfigParam.Right(m_strConfigParam.GetLength() - pos - 1).Trim(_T('"'));
-		}
-	}
-
 	if (InVirtualEnvironment() == VE_NA)
 	{
 		// ネイティブ環境の場合、設定ファイルパスが指定されていればそちらから、
@@ -292,10 +282,10 @@ BOOL CSazabi::InitFunc_Settings()
 			this->m_AppSettings.LoadDataFromFile(m_strSettingFileFullPath);
 		}
 		if (theApp.m_AppSettings.IsEnableUserConfig() && 
-		    PathFileExists(userConfigFilePath))
+		    PathFileExists(m_strUserConfigFilePath))
 		{
 			theApp.m_AppSettings.LoadDefaultData();
-			this->m_AppSettings.LoadDataFromFile(userConfigFilePath);
+			this->m_AppSettings.LoadDataFromFile(m_strUserConfigFilePath);
 		}
 	}
 	else if (InVirtualEnvironment() == VE_THINAPP)
@@ -308,9 +298,9 @@ BOOL CSazabi::InitFunc_Settings()
 		if (theApp.m_AppSettings.IsEnableUserConfig())
 		{
 			// 更にChronos.confまたは指定されたファイルから設定を追加で読み込む
-			CString additionalConfigPath = userConfigFilePath.IsEmpty() ? 
+			CString additionalConfigPath = m_strUserConfigFilePath.IsEmpty() ? 
 				GetThinAppEntryPointFolderPath() + _T("Chronos.conf") : 
-				userConfigFilePath;
+				m_strUserConfigFilePath;
 			if (PathFileExists(additionalConfigPath))
 			{
 				this->m_AppSettings.LoadDataFromFile(additionalConfigPath);
@@ -965,7 +955,14 @@ void CSazabi::ParseSingleParam(CString param) {
 		}
 		else if (paramValue.Find(_T("chronosconfig")) == 0)
 		{
-			m_strConfigParam = trimmedParam;
+			int pos = trimmedParam.Find(_T('='));
+			if (pos != -1)
+			{
+				m_strUserConfigFilePath = trimmedParam.Right(trimmedParam.GetLength() - pos - 1).Trim(_T('"'));
+				// 引数解析の際に、パラメータで使用している""が削除される。
+				// そのため、ここで明示的に""を足す。
+				m_strConfigParam.Format(_T("/ChronosConfig=\"%s\""), (LPCTSTR)m_strUserConfigFilePath);
+			}
 		}
 	}
 	else if (SBUtil::IsURL(trimmedParam))

@@ -146,6 +146,7 @@ public:
 	CString m_strCommandParam;
 	CString m_strOptionParam;
 	CString m_strConfigParam;
+	CString m_strUserConfigFilePath;
 
 	BOOL m_bNewInstanceParam;
 	BOOL m_bTabWndChanging;
