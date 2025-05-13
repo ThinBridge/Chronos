@@ -2458,7 +2458,7 @@ BOOL CDlgSetPopupFilter::OnInitDialog()
 	m_List.InsertColumn(ENABLE, columnLabelEnable, LVCFMT_CENTER, 50);
 	ListView_SetExtendedListViewStyle(m_List.m_hWnd, LVS_EX_FULLROWSELECT);
 
-	if (theApp.m_AppSettingsDlgCurrent.IsEnableURLFilter())
+	if (theApp.m_AppSettingsDlgCurrent.IsEnablePopupFilter())
 		((CButton*)GetDlgItem(IDC_CHECK_ENABLE_POPUP_FILTER))->SetCheck(1);
 	else
 		((CButton*)GetDlgItem(IDC_CHECK_ENABLE_POPUP_FILTER))->SetCheck(0);
@@ -2545,11 +2545,11 @@ LRESULT CDlgSetPopupFilter::Set_OK(WPARAM wParam, LPARAM lParam)
 {
 	if (((CButton*)GetDlgItem(IDC_CHECK_ENABLE_POPUP_FILTER))->GetCheck() == 1)
 	{
-		theApp.m_AppSettingsDlgCurrent.SetEnableURLFilter(1);
+		theApp.m_AppSettingsDlgCurrent.SetEnablePopupFilter(1);
 	}
 	else
 	{
-		theApp.m_AppSettingsDlgCurrent.SetEnableURLFilter(0);
+		theApp.m_AppSettingsDlgCurrent.SetEnablePopupFilter(0);
 	}
 
 	_wsetlocale(LC_ALL, _T("jpn"));

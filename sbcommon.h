@@ -959,6 +959,7 @@ public:
 		RunningLimitTime = 0;
 		EnableURLRedirect = 0;
 		EnableURLFilter = 0;
+		EnablePopupFilter = 0;
 		EnableCustomScript = 0;
 
 		EnableLogging = 0;
@@ -1047,6 +1048,7 @@ public:
 		Data.RunningLimitTime = RunningLimitTime;
 		Data.EnableURLRedirect = EnableURLRedirect;
 		Data.EnableURLFilter = EnableURLFilter;
+		Data.EnablePopupFilter = EnablePopupFilter;
 		Data.EnableCustomScript = EnableCustomScript;
 
 		Data.EnableLogging = EnableLogging;
@@ -1142,6 +1144,9 @@ private:
 
 	//URLフィルター設定
 	int EnableURLFilter;
+
+	//ポップアップフィルター設定
+	int EnablePopupFilter;
 
 	//CustomScript設定
 	int EnableCustomScript;
@@ -1255,6 +1260,10 @@ public:
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//URLフィルター設定
 		EnableURLFilter = FALSE;
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+		// ポップアップフィルター設定
+		EnablePopupFilter = FALSE;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//CustomScript設定
@@ -1704,6 +1713,12 @@ public:
 					continue;
 				}
 
+				if (strTemp2.CompareNoCase(_T("EnablePopupFilter")) == 0)
+				{
+					EnablePopupFilter = (strTemp3 == _T("1")) ? TRUE : FALSE;
+					continue;
+				}
+
 				if (strTemp2.CompareNoCase(_T("EnableCustomScript")) == 0)
 				{
 					EnableCustomScript = (strTemp3 == _T("1")) ? TRUE : FALSE;
@@ -1992,6 +2007,10 @@ public:
 		strRet += _T("# URL Filtering\n");
 		strRet += EXTVAL(EnableURLFilter);
 
+		//ポップアップフィルター設定
+		strRet += _T("# Popup Filtering\n");
+		strRet += EXTVAL(EnablePopupFilter);
+
 		//CustomScript設定
 		strRet += _T("# Custom Scripts\n");
 		strRet += EXTVAL(EnableCustomScript);
@@ -2097,6 +2116,7 @@ public:
 
 	inline BOOL IsEnableURLRedirect() { return EnableURLRedirect; }
 	inline BOOL IsEnableURLFilter() { return EnableURLFilter; }
+	inline BOOL IsEnablePopupFilter() { return EnablePopupFilter; }
 	inline BOOL IsEnableCustomScript() { return EnableCustomScript; }
 
 	inline BOOL IsEnableLogging() { return EnableLogging; }
@@ -2192,6 +2212,7 @@ public:
 
 	inline void SetEnableURLRedirect(DWORD dVal) { EnableURLRedirect = dVal ? 1 : 0; }
 	inline void SetEnableURLFilter(DWORD dVal) { EnableURLFilter = dVal ? 1 : 0; }
+	inline void SetEnablePopupFilter(DWORD dVal) { EnablePopupFilter = dVal ? 1 : 0; }
 	inline void SetEnableCustomScript(DWORD dVal) { EnableCustomScript = dVal ? 1 : 0; }
 
 	inline void SetEnableLogging(DWORD dVal)

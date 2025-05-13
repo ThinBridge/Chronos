@@ -2327,12 +2327,16 @@ bool ClientHandler::IsUsableCommand(int id)
 }
 
 bool ClientHandler::IsAllowedPopup(CefString url) {
-	CefURLParts cfURLparts;
-	if (!CefParseURL(url, cfURLparts))
+	if (!theApp.m_AppSettings.IsEnablePopupFilter())
 	{
 		return true;
 	}
-	CefString cfHost(&cfURLparts.host);
+	CefURLParts cfURLParts;
+	if (!CefParseURL(url, cfURLParts))
+	{
+		return true;
+	}
+	CefString cfHost(&cfURLParts.host);
 	CString strHost(cfHost.ToWString().c_str());
 
 	INT_PTR iAction = TF_ALLOW;
