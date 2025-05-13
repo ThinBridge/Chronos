@@ -759,16 +759,16 @@ void CSazabi::InitReadConfSetting()
 	m_cDomainFilterList.m_LogMsg.Empty();
 
 	// -------------------------
-	// URL_PopupFilter.conf
+	// PopupFilter.conf
 	// -------------------------
 	m_strPopupFilterFileFullPath = m_strExeFolderPath;
-	m_strPopupFilterFileFullPath += _T("URL_PopupFilterDefault.conf");
+	m_strPopupFilterFileFullPath += _T("PopupFilterDefault.conf");
 	// 一旦コピーする。
 	if (InVirtualEnvironment() == VE_THINAPP)
 	{
 		CString strTS_Path;
 		strTS_Path = GetThinAppEntryPointFolderPath();
-		strTS_Path += _T("URL_PopupFilter.conf");
+		strTS_Path += _T("PopupFilter.conf");
 		// Fileが存在する場合は、コピーする。
 		if (PathFileExists(strTS_Path))
 		{
