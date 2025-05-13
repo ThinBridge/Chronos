@@ -389,6 +389,13 @@ BOOL CSazabi::InitFunc_SGMode()
 		CString strCommandC;
 		CString strParam;
 
+		// https://github.com/ThinBridge/Chronos/pull/300
+		// 
+		// `SpC.exe "B:\" /ChronosConfig="path/to/config"`といったコマンドラインが作成された場合、`\"`がエスケープされ
+		// SpC.exeは`B:\" /ChronosConfig="path/to/config`という一つの引数を受け取る。先頭の`"`は文字列開始の`"`として
+		// 解釈され、対応する`"`がないので消えている。本来は`B:\`と`/ChronosConfig="path/to/config`という二つの引数となるべきである。
+		// これは、`\"`とならなければ回避可能である。そのため、フォルダーの末尾の`\`が存在すれば削除し、`\"`とならないようにしている。
+		// （なお、`\\"`としても回避可能ではある）
 		strParam.Format(_T("\"%s\" %s"), (LPCTSTR)m_AppSettings.GetRootPath().TrimRight(_T("\\")), (LPCTSTR)m_strConfigParam);
 		strCommandC.Format(_T("\"%s\" %s"), (LPCTSTR)strSpCAppPath, (LPCTSTR)strParam);
 		STARTUPINFO siC = {0};
@@ -1169,6 +1176,13 @@ void CSazabi::OpenChFiler(CHFILER_INIT_MODE initMode, LPCTSTR lpOpenPath)
 			if (lpOpenPath)
 			{
 				strOpenPath = lpOpenPath;
+				// https://github.com/ThinBridge/Chronos/pull/300
+				//
+				// `ChFiler.exe "B:\" /ChronosConfig="path/to/config"`といったコマンドラインが作成された場合、`\"`がエスケープされ
+				// ChFiler.exeは`B:\" /ChronosConfig="path/to/config`という一つの引数を受け取る。先頭の`"`は文字列開始の`"`として
+				// 解釈され、対応する`"`がないので消えている。本来は`B:\`と`/ChronosConfig="path/to/config`という二つの引数となるべきである。
+				// これは、`\"`とならなければ回避可能である。そのため、フォルダーの末尾の`\`が存在すれば削除し、`\"`とならないようにしている。
+				// （なお、`\\"`としても回避可能ではある）
 				strOpenPath.TrimRight(_T("\\"));
 				strCommand.Format(_T("\"%sChFiler.exe\""), (LPCTSTR)m_strExeFolderPath);
 				LPCTSTR mode = initMode == CHFILER_INIT_MODE::OPEN ? _T("") : _T("/Transfer");
