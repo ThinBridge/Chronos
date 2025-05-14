@@ -250,6 +250,12 @@ bool ClientHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 		return true;
 	}
 
+	if (!IsAllowedPopup(target_url))
+	{
+		// Block to popup
+		return true;
+	}
+
 	// set client
 	client = this;
 	// The frame window will be the parent of the browser window
@@ -2318,6 +2324,24 @@ bool ClientHandler::IsUsableCommand(int id)
 	default:
 		return false;
 	}
+}
+
+bool ClientHandler::IsAllowedPopup(CefString url) {
+	if (!theApp.m_AppSettings.IsEnablePopupFilter())
+	{
+		return true;
+	}
+	CefURLParts cfURLParts;
+	if (!CefParseURL(url, cfURLParts))
+	{
+		return true;
+	}
+	CefString cfHost(&cfURLParts.host);
+	CString strHost(cfHost.ToWString().c_str());
+
+	INT_PTR iAction = TF_ALLOW;
+	iAction = theApp.m_cPopupFilterList.HitWildCardURL(strHost);
+	return iAction == TF_ALLOW;
 }
 
 bool MyV8Handler::Execute(const CefString& name,

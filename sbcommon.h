@@ -959,6 +959,7 @@ public:
 		RunningLimitTime = 0;
 		EnableURLRedirect = 0;
 		EnableURLFilter = 0;
+		EnablePopupFilter = 0;
 		EnableCustomScript = 0;
 
 		EnableLogging = 0;
@@ -1047,6 +1048,7 @@ public:
 		Data.RunningLimitTime = RunningLimitTime;
 		Data.EnableURLRedirect = EnableURLRedirect;
 		Data.EnableURLFilter = EnableURLFilter;
+		Data.EnablePopupFilter = EnablePopupFilter;
 		Data.EnableCustomScript = EnableCustomScript;
 
 		Data.EnableLogging = EnableLogging;
@@ -1142,6 +1144,9 @@ private:
 
 	//URLフィルター設定
 	int EnableURLFilter;
+
+	//ポップアップフィルター設定
+	int EnablePopupFilter;
 
 	//CustomScript設定
 	int EnableCustomScript;
@@ -1255,6 +1260,10 @@ public:
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//URLフィルター設定
 		EnableURLFilter = FALSE;
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+		// ポップアップフィルター設定
+		EnablePopupFilter = FALSE;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//CustomScript設定
@@ -1704,6 +1713,12 @@ public:
 					continue;
 				}
 
+				if (strTemp2.CompareNoCase(_T("EnablePopupFilter")) == 0)
+				{
+					EnablePopupFilter = (strTemp3 == _T("1")) ? TRUE : FALSE;
+					continue;
+				}
+
 				if (strTemp2.CompareNoCase(_T("EnableCustomScript")) == 0)
 				{
 					EnableCustomScript = (strTemp3 == _T("1")) ? TRUE : FALSE;
@@ -1992,6 +2007,10 @@ public:
 		strRet += _T("# URL Filtering\n");
 		strRet += EXTVAL(EnableURLFilter);
 
+		//ポップアップフィルター設定
+		strRet += _T("# Popup Filtering\n");
+		strRet += EXTVAL(EnablePopupFilter);
+
 		//CustomScript設定
 		strRet += _T("# Custom Scripts\n");
 		strRet += EXTVAL(EnableCustomScript);
@@ -2097,6 +2116,7 @@ public:
 
 	inline BOOL IsEnableURLRedirect() { return EnableURLRedirect; }
 	inline BOOL IsEnableURLFilter() { return EnableURLFilter; }
+	inline BOOL IsEnablePopupFilter() { return EnablePopupFilter; }
 	inline BOOL IsEnableCustomScript() { return EnableCustomScript; }
 
 	inline BOOL IsEnableLogging() { return EnableLogging; }
@@ -2192,6 +2212,7 @@ public:
 
 	inline void SetEnableURLRedirect(DWORD dVal) { EnableURLRedirect = dVal ? 1 : 0; }
 	inline void SetEnableURLFilter(DWORD dVal) { EnableURLFilter = dVal ? 1 : 0; }
+	inline void SetEnablePopupFilter(DWORD dVal) { EnablePopupFilter = dVal ? 1 : 0; }
 	inline void SetEnableCustomScript(DWORD dVal) { EnableCustomScript = dVal ? 1 : 0; }
 
 	inline void SetEnableLogging(DWORD dVal)
@@ -2746,6 +2767,109 @@ public:
 	}
 	CPtrArray m_arrURL_AD;
 };
+
+class CPopupFilterURLList : public CCustomURLList
+{
+public:
+	CPopupFilterURLList()
+	{
+	}
+	virtual ~CPopupFilterURLList()
+	{
+	}
+	void Clear()
+	{
+		m_arrURL_AD.RemoveAll();
+		CCustomURLList::Clear();
+	}
+	void SetArrayData(LPCTSTR lPath)
+	{
+		if (lPath == NULL) return;
+		this->Clear();
+		_wsetlocale(LC_ALL, _T("jpn"));
+		CStdioFile in;
+		if (in.Open(lPath, CFile::modeRead | CFile::shareDenyNone))
+		{
+			m_LogMsg.Format(_T("CPopupFilterURLList %s\n===============\n"), lPath);
+			CString strTemp;
+			CString strTemp2;
+			CString strTemp3;
+			CStringArray strArray;
+
+			while (in.ReadString(strTemp))
+			{
+				m_LogMsg += strTemp;
+				m_LogMsg += _T("\n");
+
+				strTemp2.Empty();
+				strTemp3.Empty();
+				strArray.RemoveAll();
+				strTemp.TrimLeft();
+				strTemp.TrimRight();
+				if (strTemp.IsEmpty())
+					continue;
+				SBUtil::Split(&strArray, strTemp, _T("\t"));
+				if (strArray.GetSize() >= 2)
+				{
+					strTemp2 = strArray.GetAt(0);
+					strTemp2.TrimLeft();
+					strTemp2.TrimRight();
+
+					strTemp3 = strArray.GetAt(1);
+					strTemp3.TrimLeft();
+					strTemp3.TrimRight();
+					if (strTemp2.Find(_T(";")) == 0)
+					{
+						;
+					}
+					else if (strTemp2.Find(_T("#")) == 0)
+					{
+						;
+					}
+					else
+					{
+						if (!strTemp2.IsEmpty())
+						{
+							m_arrURL.Add(strTemp2);
+							INT_PTR iMode = 0;
+							iMode = strTemp3 == _T("A") ? TF_ALLOW : TF_DENY;
+							m_arrURL_AD.Add((void*)iMode);
+						}
+					}
+				}
+			}
+			in.Close();
+			m_LogMsg += _T("---------------");
+		}
+	}
+	// TRUE HIT
+	INT_PTR HitWildCardURL(const CString& strSURL)
+	{
+		INT_PTR uiRet = TF_ALLOW;
+		CStringA strURLA(strSURL);
+		CString strTemp;
+		CStringA strTempA;
+
+		int imax = (int)m_arrURL.GetSize();
+		for (int i = 0; i < imax; i++)
+		{
+			strTemp.Empty();
+			strTemp = m_arrURL.GetAt(i);
+			strTempA = strTemp;
+
+			// ワイルドカード対応
+			if (wildcmp(strTempA, strURLA))
+			{
+				uiRet = (INT_PTR)m_arrURL_AD.GetAt(i);
+				break;
+			}
+			uiRet = TF_ALLOW;
+		}
+		return uiRet;
+	}
+	CPtrArray m_arrURL_AD;
+};
+
 
 class CCustomScriptList : public CCustomURLList
 {

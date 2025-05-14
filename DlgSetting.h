@@ -592,6 +592,54 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
+class CDlgSetPopupFilter : public CPropertyPage
+{
+	DECLARE_DYNCREATE(CDlgSetPopupFilter)
+public:
+	CDlgSetPopupFilter();
+	virtual ~CDlgSetPopupFilter();
+	autoresize::CAutoResize m_autoResize;
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
+	enum LIST_INDEX
+	{
+		URL,
+		ACTION,
+		ENABLE
+	};
+	enum
+	{
+		IDD = IDD_SETTINGS_DLG_POPUP_FILTER
+	};
+#pragma warning(pop)
+	int DuplicateChk(LPCTSTR sURL);
+	CListCtrl m_List;
+	//	CComboBox	m_Combo;
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);
+	void InsertDlgShow(LPCTSTR sURL);
+
+protected:
+	//	afx_msg void OnButtonPopAdd();
+	afx_msg void OnButtonPopIns();
+	afx_msg void OnButtonPopDel();
+
+	virtual BOOL OnInitDialog();
+	afx_msg void OnDestroy() { CPropertyPage::OnDestroy(); }
+	afx_msg void OnDblclkList1(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnButtonUp();
+	afx_msg void OnButtonDown();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnPaint();
+	afx_msg void OnEnableCtrl();
+
+	LRESULT Set_OK(WPARAM wParam, LPARAM lParam);
+	DECLARE_MESSAGE_MAP()
+};
+
 class CDlgSetFileMgr : public CPropertyPage
 {
 	DECLARE_DYNCREATE(CDlgSetFileMgr)

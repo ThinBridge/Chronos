@@ -296,6 +296,10 @@
 #define ID_CERTIFICATION_SERIAL_NUMBER  437
 #define ID_CERTIFICATION_VALID_PERIOD   438
 #define IDS_EXE_VERSION_MISMATCH        439
+#define IDS_STRING_SETTINGS_DLG_TITLE_POPUP_FILTER 440
+#define ID_CANNOT_SAVE_POPUP_FILTER     441
+#define IDD_SETTINGS_DLG_POPUP_FILTER   442
+#define IDD_DLG_POPUP                   443
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002
@@ -360,6 +364,7 @@
 #define IDC_CERTIFICATION_EDIT          1094
 #define IDC_CERTIFICATION_COMBO         1095
 #define IDC_CERTIFICATE_STATIC_SITE_INFO 1096
+#define IDC_CHECK_ENABLE_POPUP_FILTER   1097
 #define IDC_PAGE_FRAME                  1200
 #define IDC_TREE_CTRL                   1201
 #define IDC_CAPTION_BAR                 1202
@@ -524,7 +529,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        439
 #define _APS_NEXT_COMMAND_VALUE         33015
-#define _APS_NEXT_CONTROL_VALUE         1097
+#define _APS_NEXT_CONTROL_VALUE         1098
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

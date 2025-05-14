@@ -27,6 +27,34 @@ public:
 	afx_msg void OnBnClickedCheck1();
 	virtual BOOL OnInitDialog();
 };
+class CDlgPopupDetail : public CDialogEx
+{
+	DECLARE_DYNAMIC(CDlgPopupDetail)
+
+public:
+	CDlgPopupDetail(CWnd* pParent = NULL);
+	virtual ~CDlgPopupDetail();
+	CString m_strDomainName;
+	BOOL m_bEnable;
+	UINT m_ActionType;
+	void SetState();
+// ダイアログ データ
+#ifdef AFX_DESIGN_TIME
+	enum
+	{
+		IDD = IDD_DLG_POPUP
+	};
+#endif
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedCancel();
+	afx_msg void OnBnClickedCheck1();
+	virtual BOOL OnInitDialog();
+};
 class CDlgCustomScriptDetail : public CDialogEx
 {
 	DECLARE_DYNAMIC(CDlgCustomScriptDetail)

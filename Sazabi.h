@@ -197,6 +197,9 @@ public:
 	CFilterURLList m_cDomainFilterList;
 	CString m_strDomainFilterFileFullPath;
 
+	CPopupFilterURLList m_cPopupFilterList;
+	CString m_strPopupFilterFileFullPath;
+
 	CCustomScriptList m_cCustomScriptList;
 	CString m_strCustomScriptConfFullPath;
 

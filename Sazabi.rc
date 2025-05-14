@@ -582,6 +582,35 @@ BEGIN
     LTEXT           "サイト情報",IDC_CERTIFICATE_STATIC_SITE_INFO,19,20,261,27,NOT WS_GROUP
 END
 
+IDD_SETTINGS_DLG_POPUP_FILTER DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "ポップアップフィルター設定"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "ポップアップフィルターを有効にする",IDC_CHECK_ENABLE_POPUP_FILTER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "指定したドメインのポップアップの読込を制限します。(未指定の場合は、許可)※パターンマッチングにワイルドカードを利用可能 *? ",IDC_STATIC,8,25,339,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "新規登録",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "削除",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+END
+
+IDD_DLG_POPUP DIALOGEX 0, 0, 297, 109
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ポップアップフィルター設定"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "有効にする",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "ドメイン",IDC_STATIC,18,33,33,8
+    EDITTEXT        IDC_EDIT1,56,32,233,14,ES_AUTOHSCROLL
+    GROUPBOX        "アクション",IDC_STATIC,18,52,271,24,WS_GROUP
+    CONTROL         "拒否",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,63,32,10
+    CONTROL         " 許可",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,63,34,10
+    DEFPUSHBUTTON   "OK",IDOK,187,86,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,240,86,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -737,6 +766,18 @@ BEGIN
         RIGHTMARGIN, 302
         TOPMARGIN, 6
         BOTTOMMARGIN, 169
+    END
+
+    IDD_SETTINGS_DLG_POPUP_FILTER, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_POPUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 102
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -941,6 +982,16 @@ BEGIN
 END
 
 IDD_DLG_CERTIFICATION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_POPUP_FILTER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_POPUP AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
@@ -1374,6 +1425,9 @@ BEGIN
     ID_CERTIFICATION_VALID_PERIOD "有効期間: "
     IDS_EXE_VERSION_MISMATCH 
                             "Chronos.exeとChronosN.exeのバージョンが異なります。\n\nChronos.exe: %d.%d.%d.%d\nChronosN.exe: %d.%d.%d.%d\n\nChronos.exeを再作成してください。"
+    IDS_STRING_SETTINGS_DLG_TITLE_POPUP_FILTER "ポップアップフィルター設定"
+    ID_CANNOT_SAVE_POPUP_FILTER 
+                            "[ポップアップフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
 END
 
 #endif    // 日本語 (日本) resources
@@ -1942,6 +1996,36 @@ BEGIN
     LTEXT           "Site info",IDC_CERTIFICATE_STATIC_SITE_INFO,19,20,261,27,NOT WS_GROUP
 END
 
+IDD_SETTINGS_DLG_POPUP_FILTER DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "URL Filtering"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable popup filters",IDC_CHECK_ENABLE_POPUP_FILTER,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,10,105,10
+    LTEXT           "Restricted domains to be popuped (default=allowed) / Wildcards (* and ?) are available in patterns",IDC_STATIC,8,25,339,8
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,8,40,352,224
+    PUSHBUTTON      "New",IDC_BUTTON_INS,8,271,35,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DEL,46,271,33,14
+    PUSHBUTTON      "↑",IDC_BUTTON_UP,83,271,12,14,BS_PUSHLIKE
+    PUSHBUTTON      "↓",IDC_BUTTON_DOWN,98,271,12,14,BS_PUSHLIKE
+END
+
+IDD_DLG_POPUP DIALOGEX 0, 0, 297, 109
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Popup filters"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Enable",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,14,51,10
+    LTEXT           "Domain",IDC_STATIC,18,33,33,8
+    EDITTEXT        IDC_EDIT1,56,32,233,14,ES_AUTOHSCROLL
+    GROUPBOX        "Action",IDC_STATIC,18,52,271,24,WS_GROUP
+    CONTROL         "Deny",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,63,32,10
+    CONTROL         " Allow",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,70,63,34,10
+    DEFPUSHBUTTON   "OK",IDOK,187,86,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,240,86,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -2097,6 +2181,18 @@ BEGIN
         RIGHTMARGIN, 302
         TOPMARGIN, 7
         BOTTOMMARGIN, 169
+    END
+
+    IDD_SETTINGS_DLG_POPUP_FILTER, DIALOG
+    BEGIN
+    END
+
+    IDD_DLG_POPUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 102
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -2301,6 +2397,16 @@ BEGIN
 END
 
 IDD_DLG_CERTIFICATION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_POPUP_FILTER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DLG_POPUP AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
@@ -2758,6 +2864,9 @@ BEGIN
     ID_CERTIFICATION_VALID_PERIOD "Valid period: "
     IDS_EXE_VERSION_MISMATCH 
                             "The versions of Chronos.exe and ChronosN.exe are different.\n\nChronos.exe: %d.%d.%d.%d\nChronosN.exe: %d.%d.%d.%d\n\nPlease recreate Chronos.exe."
+    IDS_STRING_SETTINGS_DLG_TITLE_POPUP_FILTER "Popup filtering"
+    ID_CANNOT_SAVE_POPUP_FILTER 
+                            "[Popup filter]\nCould not save the file.\nIt may be held by some other applications.\nPlease retry after closing other applications.\n%s"
 END
 
 #endif    // 英語 (ニュートラル) resources

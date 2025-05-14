@@ -759,6 +759,28 @@ void CSazabi::InitReadConfSetting()
 	m_cDomainFilterList.m_LogMsg.Empty();
 
 	// -------------------------
+	// PopupFilter.conf
+	// -------------------------
+	m_strPopupFilterFileFullPath = m_strExeFolderPath;
+	m_strPopupFilterFileFullPath += _T("PopupFilterDefault.conf");
+	// 一旦コピーする。
+	if (InVirtualEnvironment() == VE_THINAPP)
+	{
+		CString strTS_Path;
+		strTS_Path = GetThinAppEntryPointFolderPath();
+		strTS_Path += _T("PopupFilter.conf");
+		// Fileが存在する場合は、コピーする。
+		if (PathFileExists(strTS_Path))
+		{
+			// Fileから設定値を読み込む許可
+			::CopyFile(strTS_Path, m_strPopupFilterFileFullPath, FALSE);
+			SetLastError(NO_ERROR);
+		}
+	}
+	m_cPopupFilterList.SetFilePathAndCreateArrayData(m_strPopupFilterFileFullPath);
+	m_cPopupFilterList.m_LogMsg.Empty();
+
+	// -------------------------
 	// CustomScript.conf
 	// -------------------------
 	m_strCustomScriptConfFullPath = m_strExeFolderPath;
@@ -3384,6 +3406,10 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 	CString titleURLFilter;
 	titleURLFilter.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_URL_FILTER);
 	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetDomainFilter), titleURLFilter, IDD_SETTINGS_DLG_URL_FILTER, titleURLFilter);
+	//ポップアップフィルター設定
+	CString titlePopupFilter;
+	titlePopupFilter.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_POPUP_FILTER);
+	this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetPopupFilter), titlePopupFilter, IDD_SETTINGS_DLG_POPUP_FILTER, titlePopupFilter);
 	//CustomScript設定
 	CString titleCustomScript;
 	titleCustomScript.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_CUSTOM_SCRIPT);
