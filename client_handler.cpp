@@ -353,8 +353,8 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 		model->Remove(commandId);
 	}
 	removeCommandIds.clear();
-	bool needReload = true;
-	bool needPrint = true;
+	bool addReloadItem = true;
+	bool addPrintItem = true;
 	cef_context_menu_type_flags_t Flg = CM_TYPEFLAG_NONE;
 	Flg = params->GetTypeFlags();
 	if ((Flg & (CM_TYPEFLAG_PAGE | CM_TYPEFLAG_FRAME)) != 0)
@@ -395,8 +395,8 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 			CefString cefContextMenuSaveLinkLabel(contextMenuSaveLinkLabel);
 			model->InsertItemAt(3, CEF_MENU_ID_SAVE_FILE, cefContextMenuSaveLinkLabel);
 			
-			needReload = false;
-			needPrint = false;
+			addReloadItem = false;
+			addPrintItem = false;
 		}
 		if ((Flg & (CM_TYPEFLAG_MEDIA)) != 0)
 		{
@@ -447,8 +447,8 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 				CefString cefContextMenuCopyImgLinkLabel(contextMenuCopyImgLinkLabel);
 				model->AddItem(CEF_MENU_ID_IMG_COPY_LINK, cefContextMenuCopyImgLinkLabel);
 
-				needReload = false;
-				needPrint = false;
+				addReloadItem = false;
+				addPrintItem = false;
 			}
 		}
 		if (Flg & CM_TYPEFLAG_SELECTION)
@@ -470,18 +470,18 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 				model->InsertItemAt(0, CEF_MENU_ID_OPEN_SEARCH, strCFmt);
 			}
 
-			needReload = false;
-			needPrint = true;
+			addReloadItem = false;
+			addPrintItem = true;
 		}
 	}
-	if (needReload)
+	if (addReloadItem)
 	{
 		CString contextMenuReloadLabel;
 		contextMenuReloadLabel.LoadString(ID_CONTEXT_MENU_RELOAD);
 		CefString cefContextMenuReloadLabel(contextMenuReloadLabel);
 		model->AddItem(IDC_RELOAD, cefContextMenuReloadLabel);
 	}
-	if (needPrint)
+	if (addPrintItem)
 	{
 		CString contextMenuPrintLabel;
 		contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
