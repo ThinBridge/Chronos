@@ -393,7 +393,7 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 			CefString cefContextMenuSaveLinkLabel(contextMenuSaveLinkLabel);
 			model->InsertItemAt(3, CEF_MENU_ID_SAVE_FILE, cefContextMenuSaveLinkLabel);
 		}
-		if ((Flg & (CM_TYPEFLAG_MEDIA | CM_MEDIATYPE_IMAGE)) != 0)
+		if ((Flg & (CM_TYPEFLAG_MEDIA)) != 0)
 		{
 			if (!params->GetSourceUrl().empty())
 			{
