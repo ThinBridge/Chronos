@@ -353,6 +353,8 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 		model->Remove(commandId);
 	}
 	removeCommandIds.clear();
+	bool addReloadItem = true;
+	bool addPrintItem = true;
 	cef_context_menu_type_flags_t Flg = CM_TYPEFLAG_NONE;
 	Flg = params->GetTypeFlags();
 	if ((Flg & (CM_TYPEFLAG_PAGE | CM_TYPEFLAG_FRAME)) != 0)
@@ -392,6 +394,9 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 			contextMenuSaveLinkLabel.LoadString(ID_CONTEXT_MENU_SAVE_LINK);
 			CefString cefContextMenuSaveLinkLabel(contextMenuSaveLinkLabel);
 			model->InsertItemAt(3, CEF_MENU_ID_SAVE_FILE, cefContextMenuSaveLinkLabel);
+			
+			addReloadItem = false;
+			addPrintItem = false;
 		}
 		if ((Flg & (CM_TYPEFLAG_MEDIA)) != 0)
 		{
@@ -441,6 +446,9 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 				contextMenuCopyImgLinkLabel.LoadString(ID_CONTEXT_MENU_COPY_IMG_LINK);
 				CefString cefContextMenuCopyImgLinkLabel(contextMenuCopyImgLinkLabel);
 				model->AddItem(CEF_MENU_ID_IMG_COPY_LINK, cefContextMenuCopyImgLinkLabel);
+
+				addReloadItem = false;
+				addPrintItem = false;
 			}
 		}
 		if (Flg & CM_TYPEFLAG_SELECTION)
@@ -461,18 +469,25 @@ void ClientHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser,
 				CefString strCFmt(strFmt);
 				model->InsertItemAt(0, CEF_MENU_ID_OPEN_SEARCH, strCFmt);
 			}
+
+			addReloadItem = false;
+			addPrintItem = true;
 		}
 	}
-
-	CString contextMenuReloadLabel;
-	contextMenuReloadLabel.LoadString(ID_CONTEXT_MENU_RELOAD);
-	CefString cefContextMenuReloadLabel(contextMenuReloadLabel);
-	model->AddItem(IDC_RELOAD, cefContextMenuReloadLabel);
-
-	CString contextMenuPrintLabel;
-	contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
-	CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
-	model->AddItem(IDC_PRINT, cefContextMenuPrintLabel);
+	if (addReloadItem)
+	{
+		CString contextMenuReloadLabel;
+		contextMenuReloadLabel.LoadString(ID_CONTEXT_MENU_RELOAD);
+		CefString cefContextMenuReloadLabel(contextMenuReloadLabel);
+		model->AddItem(IDC_RELOAD, cefContextMenuReloadLabel);
+	}
+	if (addPrintItem)
+	{
+		CString contextMenuPrintLabel;
+		contextMenuPrintLabel.LoadString(ID_CONTEXT_MENU_PRINT);
+		CefString cefContextMenuPrintLabel(contextMenuPrintLabel);
+		model->AddItem(IDC_PRINT, cefContextMenuPrintLabel);
+	}
 	
 	// メニュー項目調整後、Separatorが連続することがあるので、連続している場合は削除する。
 	count = model->GetCount();
