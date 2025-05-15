@@ -952,6 +952,7 @@ public:
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
+		AllowedProtocols.Empty();
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
@@ -971,8 +972,6 @@ public:
 		LogServerURL.Empty();
 		LogMethod.Empty();
 		RequestHeader.Empty();
-
-		AllowedProtocols.Empty();
 
 		//ChFiler---------------------------------
 		RootPath.Empty();
@@ -1043,6 +1042,7 @@ public:
 		Data.MemoryUsageLimit = MemoryUsageLimit;
 		Data.WindowCountLimit = WindowCountLimit;
 		Data.EnableMediaAccessPermission = EnableMediaAccessPermission;
+		Data.AllowedProtocols = AllowedProtocols;
 
 		Data.EnableDownloadRestriction = EnableDownloadRestriction;
 		Data.EnableUploadRestriction = EnableUploadRestriction;
@@ -1062,8 +1062,6 @@ public:
 		Data.LogServerURL = LogServerURL;
 		Data.RequestHeader = RequestHeader;
 		Data.LogMethod = LogMethod;
-
-		Data.AllowedProtocols = AllowedProtocols;
 
 		//ChFiler---------------------------------
 		Data.RootPath = RootPath;
@@ -1136,6 +1134,7 @@ private:
 	int MemoryUsageLimit;
 	int WindowCountLimit;
 	int EnableMediaAccessPermission;
+	CString AllowedProtocols;
 
 	//リダイレクト設定
 	int EnableURLRedirect;
@@ -1169,8 +1168,6 @@ private:
 	CString LogMethod;
 	CString RequestHeader;
 	//////////////////////////////////////////////////
-
-	CString AllowedProtocols;
 
 	//ChFiler---------------------------------
 	CString RootPath;
@@ -1252,6 +1249,7 @@ public:
 		MemoryUsageLimit = 2048;
 		WindowCountLimit = 60;
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
+		AllowedProtocols.Empty();
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//リダイレクト設定
@@ -1289,8 +1287,6 @@ public:
 		LogServerURL.Empty();
 		LogMethod.Empty();
 		RequestHeader.Empty();
-
-		AllowedProtocols.Empty();
 
 		//ChFiler---------------------------------
 		RootPath = _T("B:\\");
@@ -1503,11 +1499,6 @@ public:
 				if (strTemp2.CompareNoCase(_T("RequestHeader")) == 0)
 				{
 					RequestHeader = strTemp3;
-					continue;
-				}
-				if (strTemp2.CompareNoCase(_T("AllowedProtocols")) == 0)
-				{
-					AllowedProtocols = strTemp3;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("LogMethod")) == 0)
@@ -1881,6 +1872,11 @@ public:
 					EnableUserConfig = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
+				if (strTemp2.CompareNoCase(_T("AllowedProtocols")) == 0)
+				{
+					AllowedProtocols = strTemp3;
+					continue;
+				}
 			}
 		}
 		in.Close();
@@ -2041,8 +2037,6 @@ public:
 		strRet += EXTVAL(EnableUploadLogging);
 		strRet += EXTVAL(EnableBrowsingLogging);
 		strRet += EXTVAL(EnableAccessAllLogging);
-
-		strRet += EXTVAL(AllowedProtocols);
 	
 		//ChFiler---------------------------------
 		strRet += _T("# File Manager\n");
@@ -2063,6 +2057,7 @@ public:
 
 		strRet += _T("# non GUI parameters\n");
 		strRet += EXTVAL(EnableMediaAccessPermission);
+		strRet += EXTVAL(AllowedProtocols);
 		strRet += EXTVAL(UploadBasePath);
 		strRet += EXTVAL(ExitMessage);
 		strRet += EXTVAL(unZipMessage);
@@ -2123,6 +2118,7 @@ public:
 	inline int GetMemoryUsageLimit() { return MemoryUsageLimit; }
 	inline int GetWindowCountLimit() { return WindowCountLimit; }
 	inline int GetMediaAccessPermission() { return EnableMediaAccessPermission; }
+	inline CString GetAllowedProtocols() { return AllowedProtocols; }
 
 	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
 	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
@@ -2142,7 +2138,6 @@ public:
 	inline CString GetLogServerURL() { return LogServerURL; }
 	inline CString GetRequestHeader() { return RequestHeader; }
 	inline CString GetLogMethod() { return LogMethod; };
-	inline CString GetAllowedProtocols() { return AllowedProtocols; }
 
 	//ChFiler---------------------------------
 	inline CString GetRootPath() { return RootPath; }
@@ -2211,6 +2206,7 @@ public:
 
 	inline void SetMemoryUsageLimit(DWORD dVal) { MemoryUsageLimit = dVal; }
 	inline void SetWindowCountLimit(DWORD dVal) { WindowCountLimit = dVal; }
+	inline void SetAllowedProtocols(LPCTSTR str) { AllowedProtocols = str; }
 
 	inline void SetStartURL(LPCTSTR str) { StartURL = str; }
 	inline void SetEnforceInitParam(LPCTSTR str) { EnforceInitParam = str; }
@@ -2260,7 +2256,6 @@ public:
 	inline void SetLogServerURL(LPCTSTR str) { LogServerURL = str; }
 	inline void SetRequestHeader(LPCTSTR str) { RequestHeader = str; }
 	inline void SetLogMethod(LPCTSTR str) { LogMethod = str; }
-	inline void SetAllowedProtocols(LPCTSTR str) { AllowedProtocols = str; }
 
 	//ChFiler---------------------------------
 	inline void SetRootPath(LPCTSTR str) { RootPath = str; }
