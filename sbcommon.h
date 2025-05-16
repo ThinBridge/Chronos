@@ -952,6 +952,7 @@ public:
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
+		AllowedProtocols.Empty();
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
@@ -1041,6 +1042,7 @@ public:
 		Data.MemoryUsageLimit = MemoryUsageLimit;
 		Data.WindowCountLimit = WindowCountLimit;
 		Data.EnableMediaAccessPermission = EnableMediaAccessPermission;
+		Data.AllowedProtocols = AllowedProtocols;
 
 		Data.EnableDownloadRestriction = EnableDownloadRestriction;
 		Data.EnableUploadRestriction = EnableUploadRestriction;
@@ -1132,6 +1134,7 @@ private:
 	int MemoryUsageLimit;
 	int WindowCountLimit;
 	int EnableMediaAccessPermission;
+	CString AllowedProtocols;
 
 	//リダイレクト設定
 	int EnableURLRedirect;
@@ -1246,6 +1249,7 @@ public:
 		MemoryUsageLimit = 2048;
 		WindowCountLimit = 60;
 		EnableMediaAccessPermission = static_cast<int>(AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS);
+		AllowedProtocols.Empty();
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//リダイレクト設定
@@ -1868,6 +1872,11 @@ public:
 					EnableUserConfig = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
+				if (strTemp2.CompareNoCase(_T("AllowedProtocols")) == 0)
+				{
+					AllowedProtocols = strTemp3;
+					continue;
+				}
 			}
 		}
 		in.Close();
@@ -2048,6 +2057,7 @@ public:
 
 		strRet += _T("# non GUI parameters\n");
 		strRet += EXTVAL(EnableMediaAccessPermission);
+		strRet += EXTVAL(AllowedProtocols);
 		strRet += EXTVAL(UploadBasePath);
 		strRet += EXTVAL(ExitMessage);
 		strRet += EXTVAL(unZipMessage);
@@ -2108,6 +2118,7 @@ public:
 	inline int GetMemoryUsageLimit() { return MemoryUsageLimit; }
 	inline int GetWindowCountLimit() { return WindowCountLimit; }
 	inline int GetMediaAccessPermission() { return EnableMediaAccessPermission; }
+	inline CString GetAllowedProtocols() { return AllowedProtocols; }
 
 	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
 	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
@@ -2195,6 +2206,7 @@ public:
 
 	inline void SetMemoryUsageLimit(DWORD dVal) { MemoryUsageLimit = dVal; }
 	inline void SetWindowCountLimit(DWORD dVal) { WindowCountLimit = dVal; }
+	inline void SetAllowedProtocols(LPCTSTR str) { AllowedProtocols = str; }
 
 	inline void SetStartURL(LPCTSTR str) { StartURL = str; }
 	inline void SetEnforceInitParam(LPCTSTR str) { EnforceInitParam = str; }
