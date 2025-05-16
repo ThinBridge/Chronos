@@ -406,6 +406,7 @@
 #define IDC_EnableUploadRestriction     1341
 #define IDC_Enable_ProcessRunTime       1342
 #define IDC_EnableDownloadRestriction   1343
+#define IDC_DisallowToChangeFileExtension 1344
 #define IDC_EDIT_LIMIT_TIME             1345
 #define IDC_VOS_CLOSE_PROCESS           1346
 #define IDC_SHOW_DEV_TOOLS              1347
