@@ -1916,6 +1916,8 @@ BEGIN
     EDITTEXT        IDC_MemoryUsageLimit,89,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "Maximum count of tabs",IDC_STATIC,11,142,77,8
     EDITTEXT        IDC_WindowCountLimit,89,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Forbid to change file extensions",IDC_DisallowToChangeFileExtension,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,43,177,10
 END
 
 IDD_DLG_DOMAIN DIALOGEX 0, 0, 297, 109
