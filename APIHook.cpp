@@ -751,7 +751,7 @@ public:
 				if (strSelExt.CompareNoCase(originalExt) != 0)
 				{
 					CString strMsg;
-					strMsg.Format(L"拡張子は変更できません。\n\n拡張子に[%s]を指定してください", (LPCWSTR)originalExt);
+					strMsg.Format(L"拡張子は変更できません。\n\n拡張子に[%s]を指定してください。", (LPCWSTR)originalExt);
 					::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 					// 原因は不明だが、SGモードでは繰り返しm_originalDialog->Show(hwndOwner)を実行しても問題ないが、ネイティブモードでは
 					// メモリアクセス違反が発生しクラッシュする。そのため、Nativeモードではダイアログ自体を閉じるようにする。
