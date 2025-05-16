@@ -102,6 +102,8 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	requestContext->SetPreference("credentials_enable_service", value, error);
 	value->SetBool(false);
 	requestContext->SetPreference("profile.password_manager_enabled", value, error);
+	value->SetBool(false);
+	requestContext->SetPreference("download_bubble.partial_view_enabled", value, error);
 
 	//CEF126.2.7以降、disable-pdf-extensionオプションが非サポートになった。
 	//そのため、CEF126以降では、ClientHandler::OnAfterCreatedでPreferenceを指定することで同等の処理を行う。
