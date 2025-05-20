@@ -680,6 +680,16 @@ public:
 		strRootPath = strRootPath.TrimRight('\\');
 		strRootPath += _T("\\");
 
+		LPWSTR wstrOriginalFileName = nullptr;
+		hresult = m_originalDialog->GetFileName(&wstrOriginalFileName);
+		if (FAILED(hresult))
+		{
+			return hresult;
+		}
+		CString strOriginalFileName(wstrOriginalFileName);
+		CoTaskMemFree(wstrOriginalFileName);
+		CString originalExt = SBUtil::GetFileExt(strOriginalFileName);
+
 		for (;;)
 		{
 			hresult = m_originalDialog->Show(hwndOwner);
@@ -703,10 +713,11 @@ public:
 			}
 
 			CString strSelPath(wstrSelPath);
+			CoTaskMemFree(wstrSelPath);
+
 			if (theApp.IsSGMode())
 			{
-				CString strSelPathUpper(wstrSelPath);
-				CoTaskMemFree(wstrSelPath);
+				CString strSelPathUpper(strSelPath);
 				strSelPathUpper.MakeUpper();
 				if (strSelPathUpper.IsEmpty())
 				{
@@ -731,6 +742,27 @@ public:
 					strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
 					::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 					continue;
+				}
+			}
+
+			if (!theApp.m_AppSettings.IsAllowToChangeFileExtension())
+			{
+				CString strSelExt = SBUtil::GetFileExt(strSelPath);
+				if (strSelExt.CompareNoCase(originalExt) != 0)
+				{
+					CString strMsg;
+					strMsg.Format(L"拡張子は変更できません。\n\n拡張子に[%s]を指定してください。", (LPCWSTR)originalExt);
+					::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+					// 原因は不明だが、SGモードでは繰り返しm_originalDialog->Show(hwndOwner)を実行しても問題ないが、ネイティブモードでは
+					// メモリアクセス違反が発生しクラッシュする。そのため、Nativeモードではダイアログ自体を閉じるようにする。
+					if (theApp.IsSGMode())
+					{
+						continue;
+					}
+					else
+					{
+						return E_FAIL;
+					}
 				}
 			}
 
