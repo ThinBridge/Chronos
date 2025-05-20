@@ -686,9 +686,9 @@ public:
 		{
 			return hresult;
 		}
-		CString strOriginalName(wstrOriginalFileName);
+		CString strOriginalFileName(wstrOriginalFileName);
 		CoTaskMemFree(wstrOriginalFileName);
-		CString originalExt = SBUtil::GetFileExt(strOriginalName);
+		CString originalExt = SBUtil::GetFileExt(strOriginalFileName);
 
 		for (;;)
 		{
