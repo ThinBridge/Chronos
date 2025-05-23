@@ -501,7 +501,7 @@ BEGIN
     EDITTEXT        IDC_MemoryUsageLimit,83,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "タブ数 最大値",IDC_STATIC,11,142,64,8
     EDITTEXT        IDC_WindowCountLimit,84,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "ファイルの拡張子の変更を禁止する",IDC_DisallowToChangeFileExtension,
+    CONTROL         "ファイルの拡張子の変更を禁止する",IDC_EnableFileExtChangeRestriction,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,43,177,10
 END
 
@@ -1916,7 +1916,7 @@ BEGIN
     EDITTEXT        IDC_MemoryUsageLimit,89,119,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "Maximum count of tabs",IDC_STATIC,11,142,77,8
     EDITTEXT        IDC_WindowCountLimit,89,140,52,14,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "Forbid to change file extensions",IDC_DisallowToChangeFileExtension,
+    CONTROL         "Forbid to change file extensions",IDC_EnableFileExtChangeRestriction,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,43,177,10
 END
 
