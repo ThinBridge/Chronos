@@ -1532,14 +1532,14 @@ BOOL CDlgSetCAP::OnInitDialog()
 		((CButton*)GetDlgItem(IDC_EnableUploadRestriction))->SetCheck(0);
 	}
 
-	// DisallowToChangeFileExtension
-	if (theApp.m_AppSettingsDlgCurrent.IsAllowToChangeFileExtension())
+	//EnableFileExtChangeRestriction
+	if (theApp.m_AppSettingsDlgCurrent.IsEnableFileExtChangeRestriction())
 	{
-		((CButton*)GetDlgItem(IDC_DisallowToChangeFileExtension))->SetCheck(0);
+		((CButton*)GetDlgItem(IDC_EnableFileExtChangeRestriction))->SetCheck(1);
 	}
 	else
 	{
-		((CButton*)GetDlgItem(IDC_DisallowToChangeFileExtension))->SetCheck(1);
+		((CButton*)GetDlgItem(IDC_EnableFileExtChangeRestriction))->SetCheck(0);
 	}
 
 	//running
@@ -1593,11 +1593,11 @@ LRESULT CDlgSetCAP::Set_OK(WPARAM wParam, LPARAM lParam)
 	else
 		theApp.m_AppSettingsDlgCurrent.SetEnableUploadRestriction(0);
 
-	// DisallowToChangeFileExtension
-	if (((CButton*)GetDlgItem(IDC_DisallowToChangeFileExtension))->GetCheck() == 1)
-		theApp.m_AppSettingsDlgCurrent.SetAllowToChangeFileExtension(0);
+	//EnableFileExtChangeRestriction
+	if (((CButton*)GetDlgItem(IDC_EnableFileExtChangeRestriction))->GetCheck() == 1)
+		theApp.m_AppSettingsDlgCurrent.SetEnableFileExtChangeRestriction(1);
 	else
-		theApp.m_AppSettingsDlgCurrent.SetAllowToChangeFileExtension(1);
+		theApp.m_AppSettingsDlgCurrent.SetEnableFileExtChangeRestriction(0);
 
 	//running
 	if (((CButton*)GetDlgItem(IDC_Enable_ProcessRunTime))->GetCheck() == 1)
