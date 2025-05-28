@@ -745,7 +745,7 @@ public:
 				}
 			}
 
-			if (!theApp.m_AppSettings.IsAllowToChangeFileExtension())
+			if (theApp.m_AppSettings.IsEnableFileExtChangeRestriction())
 			{
 				CString strSelExt = SBUtil::GetFileExt(strSelPath);
 				if (strSelExt.CompareNoCase(originalExt) != 0)

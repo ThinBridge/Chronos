@@ -972,7 +972,7 @@ public:
 
 		EnableDownloadRestriction = 0;
 		EnableUploadRestriction = 0;
-		AllowToChangeFileExtension = 0;
+		EnableFileExtChangeRestriction = 0;
 		EnableRunningTime = 0;
 		RunningLimitTime = 0;
 		EnableURLRedirect = 0;
@@ -1061,7 +1061,7 @@ public:
 
 		Data.EnableDownloadRestriction = EnableDownloadRestriction;
 		Data.EnableUploadRestriction = EnableUploadRestriction;
-		Data.AllowToChangeFileExtension = AllowToChangeFileExtension;
+		Data.EnableFileExtChangeRestriction = EnableFileExtChangeRestriction;
 		Data.EnableRunningTime = EnableRunningTime;
 		Data.RunningLimitTime = RunningLimitTime;
 		Data.EnableURLRedirect = EnableURLRedirect;
@@ -1145,7 +1145,7 @@ private:
 	//制限設定
 	int EnableDownloadRestriction;
 	int EnableUploadRestriction;
-	int AllowToChangeFileExtension;
+	int EnableFileExtChangeRestriction;
 	int EnableRunningTime;
 	int RunningLimitTime;
 	int MemoryUsageLimit;
@@ -1259,7 +1259,7 @@ public:
 		//制限設定
 		EnableDownloadRestriction = FALSE;
 		EnableUploadRestriction = FALSE;
-		AllowToChangeFileExtension = TRUE;
+		EnableFileExtChangeRestriction = FALSE;
 
 		EnableRunningTime = FALSE;
 		RunningLimitTime = 1440;
@@ -1708,9 +1708,9 @@ public:
 					continue;
 				}
 
-				if (strTemp2.CompareNoCase(_T("AllowToChangeFileExtension")) == 0)
+				if (strTemp2.CompareNoCase(_T("EnableFileExtChangeRestriction")) == 0)
 				{
-					AllowToChangeFileExtension = (strTemp3 == _T("1")) ? TRUE : FALSE;
+					EnableFileExtChangeRestriction = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 
@@ -2014,7 +2014,7 @@ public:
 		strRet += _T("# Restriction\n");
 		strRet += EXTVAL(EnableDownloadRestriction);
 		strRet += EXTVAL(EnableUploadRestriction);
-		strRet += EXTVAL(AllowToChangeFileExtension);
+		strRet += EXTVAL(EnableFileExtChangeRestriction);
 		strRet += EXTVAL(EnableRunningTime);
 		strRet += EXTVAL(RunningLimitTime);
 		strRet += EXTVAL(MemoryUsageLimit);
@@ -2138,7 +2138,7 @@ public:
 
 	inline BOOL IsEnableDownloadRestriction() { return EnableDownloadRestriction; }
 	inline BOOL IsEnableUploadRestriction() { return EnableUploadRestriction; }
-	inline BOOL IsAllowToChangeFileExtension() { return AllowToChangeFileExtension; }
+	inline BOOL IsEnableFileExtChangeRestriction() { return EnableFileExtChangeRestriction; }
 	inline BOOL IsEnableRunningTime() { return EnableRunningTime; }
 	inline int GetRunningLimitTime() { return RunningLimitTime; }
 
@@ -2235,7 +2235,7 @@ public:
 
 	inline void SetEnableDownloadRestriction(DWORD dVal) { EnableDownloadRestriction = dVal ? 1 : 0; }
 	inline void SetEnableUploadRestriction(DWORD dVal) { EnableUploadRestriction = dVal ? 1 : 0; }
-	inline void SetAllowToChangeFileExtension(DWORD dVal) { AllowToChangeFileExtension = dVal; }
+	inline void SetEnableFileExtChangeRestriction(DWORD dVal) { EnableFileExtChangeRestriction = dVal; }
 	inline void SetEnableRunningTime(DWORD dVal) { EnableRunningTime = dVal ? 1 : 0; }
 	inline void SetRunningLimitTime(DWORD dVal) { RunningLimitTime = dVal; }
 
