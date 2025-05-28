@@ -2058,33 +2058,14 @@ bool ClientHandler::OnRequestMediaAccessPermission(
     uint32 requested_permissions,
     CefRefPtr<CefMediaAccessCallback> callback)
 {
-	if (requested_permissions == CEF_MEDIA_PERMISSION_NONE)
-		return false;
-
 	AppSettings::MediaAccessPermission permission = static_cast<AppSettings::MediaAccessPermission>(theApp.m_AppSettings.GetMediaAccessPermission());
-	switch (permission)
+	if (permission == AppSettings::MediaAccessPermission::NO_MEDIA_ACCESS)
 	{
-	case AppSettings::MediaAccessPermission::MANUAL_MEDIA_APPROVAL:
-		// 単にfalseでreturnすることでデフォルト動作をする。
-		// Chrome runtime styleモードでのデフォルト動作は「ユーザーによる承認」であり
-		// このパラメータの挙動と一致する。
-		// https://cef-builds.spotifycdn.com/docs/135.0/classCefPermissionHandler.html#a05723b8cdd0a3f410ea52d05e2a41e16
-		return false;
-	case AppSettings::MediaAccessPermission::DEFAULT_MEDIA_APPROVAL:
-		if (requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_AUDIO_CAPTURE ||
-		    requested_permissions & CEF_MEDIA_PERMISSION_DESKTOP_VIDEO_CAPTURE)
-		{
-			// callback->Continue(requested_permissions)すると、共有するウィンドウの選択ダイアログが表示されず
-			// 全画面が強制的に共有されてしまう。デフォルト動作であれば共有するウィンドウの選択がダイアログが
-			// 表示されるため、デスクトップオーディオまたはビデオのキャプチャを含む場合はデフォルト動作とする。
-			return false;
-		}
-		callback->Continue(requested_permissions);
-		return true;
-	default:
+		//OnShowPermissionPromptではなくOnRequestMediaAccessPermission内で拒否しないと、デスクトップ画面の共有が許可されてしまう。
 		callback->Continue(CEF_MEDIA_PERMISSION_NONE);
 		return true;
 	}
+	return false;
 }
 
 bool ClientHandler::OnShowPermissionPrompt(CefRefPtr<CefBrowser> browser,
