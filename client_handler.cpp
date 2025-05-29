@@ -114,6 +114,24 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 		requestContext->SetPreference("plugins.always_open_pdf_externally", value, error);
 	}
 #endif
+#if CHROME_VERSION_MAJOR >= 135
+	//CEF135の採用時から、CSGではChrome Runtime Styleを使用している。Chrome Runtime Styleだと、OnDragEnterハンドラーが呼ばれない。
+	//そのため、MFCの仕組みでドラッグアンドロップを無効化する。
+	//元々、IsEnableDownloadRestrictionとIsEnableUploadRestrictionの場合は、ファイル種別により有効/無効を切り替えていたが
+	//MFCの仕組みではそこまで細かい切り替えができないので、それらの場合も常に完全に無効化する。
+	//また、OnDragEnterではドラッグアンドドロップをした場合に監査ログに出力していたが、CEF135以降では出力されなくなる。
+	//ただし、元々、実際にユーザーが使用するSGモードでは、常にドラッグアンドドロップが無効化されていたので問題ない。
+	HWND hWndHost = browser->GetHost()->GetWindowHandle();
+	if (theApp.IsSGMode() ||
+	    theApp.m_AppSettings.IsEnableDownloadRestriction() ||
+	    theApp.m_AppSettings.IsEnableUploadRestriction())
+	{
+		if (SafeWnd(hWndHost))
+		{
+			RevokeDragDrop(hWndHost);
+		}
+	}
+#endif
 
 	// get browser ID
 	INT nBrowserId = browser->GetIdentifier();
@@ -2171,6 +2189,7 @@ bool ClientHandler::OnBeforeUnloadDialog(CefRefPtr<CefBrowser> browser,
 	return TRUE;
 }
 
+#if CHROME_VERSION_MAJOR < 135
 bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 				CefRefPtr<CefDragData> dragData,
 				DragOperationsMask mask)
@@ -2242,6 +2261,7 @@ bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 	//}
 	return false;
 }
+#endif
 bool ClientHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
 					     CefRefPtr<CefFrame> frame,
 					     CefProcessId source_process,

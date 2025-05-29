@@ -181,9 +181,11 @@ public:
 				bool& suppress_message) override;
 
 	//CefDragHandler
+#if CHROME_VERSION_MAJOR < 135
 	virtual bool OnDragEnter(CefRefPtr<CefBrowser> browser,
 				 CefRefPtr<CefDragData> dragData,
 				 DragOperationsMask mask) override;
+#endif
 
 	virtual void OnResetDialogState(CefRefPtr<CefBrowser> browser) override;
 
