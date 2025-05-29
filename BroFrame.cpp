@@ -2641,66 +2641,9 @@ void CBrowserFrame::OnStatusBarZoomClick()
 			{
 				strRet.Replace(_T("%"), _T(""));
 				double dZoom = 0.0;
-				int iR = _tstoi(strRet);
-				switch (iR)
-				{
-				case 500:
-					dZoom = 9.0;
-					break;
-				case 400:
-					dZoom = 8.0;
-					break;
-				case 300:
-					dZoom = 6.0;
-					break;
-				case 250:
-					dZoom = 5.0;
-					break;
-				case 200:
-					dZoom = 4.0;
-					break;
-				case 175:
-					dZoom = 3.5;
-					break;
-				case 150:
-					dZoom = 2.5;
-					break;
-				case 125:
-					dZoom = 1.5;
-					break;
-				case 110:
-					dZoom = 0.5;
-					break;
-
-				case 100:
-					dZoom = 0.0;
-					break;
-
-				case 90:
-					dZoom = -0.5;
-					break;
-				case 80:
-					dZoom = -1.0;
-					break;
-				case 75:
-					dZoom = -1.5;
-					break;
-				case 67:
-					dZoom = -2.0;
-					break;
-				case 50:
-					dZoom = -3.5;
-					break;
-				case 33:
-					dZoom = -5.0;
-					break;
-				case 25:
-					dZoom = -6.0;
-					break;
-				default:
-					dZoom = 0.0;
-					break;
-				}
+				UINT iR = _tstoi(strRet);
+				//もし値が存在しなければ、doubleのデフォルト値の0.0が返る。
+				dZoom = m_wndView.m_mapScaleToZoomSize[iR];
 				m_wndView.ZoomTo(dZoom);
 				logmsg.Format(_T("BF_WND:0x%08p OnStatusBarZoomClick %s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strRet);
 				theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
