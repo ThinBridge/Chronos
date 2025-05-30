@@ -169,66 +169,8 @@ BOOL CChildView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwS
 		iZoomSizeReg = theApp.m_AppSettings.GetZoomSize();
 		if (iZoomSizeReg != 100 && m_dbZoomSize == 0.0)
 		{
-			double dZoom = 0.0;
-			switch (iZoomSizeReg)
-			{
-			case 500:
-				dZoom = 9.0;
-				break;
-			case 400:
-				dZoom = 8.0;
-				break;
-			case 300:
-				dZoom = 6.0;
-				break;
-			case 250:
-				dZoom = 5.0;
-				break;
-			case 200:
-				dZoom = 4.0;
-				break;
-			case 175:
-				dZoom = 3.5;
-				break;
-			case 150:
-				dZoom = 2.5;
-				break;
-			case 125:
-				dZoom = 1.5;
-				break;
-			case 110:
-				dZoom = 0.5;
-				break;
-			case 100:
-				dZoom = 0.0;
-				break;
-
-			case 90:
-				dZoom = -0.5;
-				break;
-			case 80:
-				dZoom = -1.0;
-				break;
-			case 75:
-				dZoom = -1.5;
-				break;
-			case 67:
-				dZoom = -2.0;
-				break;
-			case 50:
-				dZoom = -3.5;
-				break;
-			case 33:
-				dZoom = -5.0;
-				break;
-			case 25:
-				dZoom = -6.0;
-				break;
-			default:
-				dZoom = 0.0;
-				break;
-			}
-			m_dbZoomSizeDefault = dZoom;
+			// もし値が存在しなければ、doubleのデフォルト値の0.0が返る。
+			m_dbZoomSizeDefault = m_mapScaleToZoomSize[iZoomSizeReg];
 		}
 		CString logmsg;
 		logmsg.Format(_T("ChildView::Create BF_WND:0x%08p CV_WND:0x%08p"), theApp.SafeWnd(m_pwndFrame), theApp.SafeWnd(this->m_hWnd));
@@ -983,10 +925,10 @@ BOOL CChildView::ZoomTo(double lFactor)
 	try
 	{
 		if (!m_cefBrowser) return FALSE;
-		if (lFactor < -6.0)
-			lFactor = -6.0;
-		if (lFactor > 9.0)
-			lFactor = 9.0;
+		auto minPair = m_mapScaleToZoomSize.begin();
+		auto maxPair = m_mapScaleToZoomSize.rbegin();
+		lFactor = max(lFactor, minPair->second);
+		lFactor = min(lFactor, maxPair->second);
 		if (GetZoomSizeEx() != lFactor)
 		{
 			m_cefBrowser->GetHost()->SetZoomLevel(lFactor);
@@ -995,45 +937,15 @@ BOOL CChildView::ZoomTo(double lFactor)
 		bRet = TRUE;
 		if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
 		{
-			double dScale = 0.0;
-
-			if (m_dbZoomSize == 9.0)
-				dScale = 500;
-			else if (m_dbZoomSize == 8.0)
-				dScale = 400;
-			else if (m_dbZoomSize == 6.0)
-				dScale = 300;
-			else if (m_dbZoomSize == 5.0)
-				dScale = 250;
-			else if (m_dbZoomSize == 4.0)
-				dScale = 200;
-			else if (m_dbZoomSize == 3.5)
-				dScale = 175;
-			else if (m_dbZoomSize == 2.5)
-				dScale = 150;
-			else if (m_dbZoomSize == 1.5)
-				dScale = 125;
-			else if (m_dbZoomSize == 0.5)
-				dScale = 110;
-			else if (m_dbZoomSize == 0.0)
-				dScale = 100;
-			else if (m_dbZoomSize == -0.5)
-				dScale = 90;
-			else if (m_dbZoomSize == -1.0)
-				dScale = 80;
-			else if (m_dbZoomSize == -1.5)
-				dScale = 75;
-			else if (m_dbZoomSize == -2.0)
-				dScale = 67;
-			else if (m_dbZoomSize == -3.5)
-				dScale = 50;
-			else if (m_dbZoomSize == -5.0)
-				dScale = 33;
-			else if (m_dbZoomSize == -6.0)
-				dScale = 25;
-			else
-				dScale = 100;
-
+			double dScale = 100;
+			for (const auto& [key, value] : m_mapScaleToZoomSize)
+			{
+				if (value == m_dbZoomSize)
+				{
+					dScale = key;
+					break;
+				}
+			}
 			CString strZoomFmt;
 			strZoomFmt.Format(_T("%.0f%%"), dScale);
 			FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
@@ -1063,126 +975,35 @@ void CChildView::SetWheelZoom(int iDel)
 	try
 	{
 		double iZoom = GetZoomSizeEx();
-		double iZoomR = 0.0;
-		if (iZoom >= 9.0)
-			iZoomR = 9.0;
-		else if (iZoom >= 8.0)
-			iZoomR = 8.0;
-		else if (iZoom >= 6.0)
-			iZoomR = 6.0;
-		else if (iZoom >= 5.0)
-			iZoomR = 5.0;
-		else if (iZoom >= 4.0)
-			iZoomR = 4.0;
-		else if (iZoom >= 3.5)
-			iZoomR = 3.5;
-		else if (iZoom >= 2.5)
-			iZoomR = 2.5;
-		else if (iZoom >= 1.5)
-			iZoomR = 1.5;
-		else if (iZoom >= 0.5)
-			iZoomR = 0.5;
-		else if (iZoom >= 0.0)
-			iZoomR = 0.0;
-		else if (iZoom >= -0.5)
-			iZoomR = -0.5;
-		else if (iZoom >= -1.0)
-			iZoomR = -1.0;
-		else if (iZoom >= -1.5)
-			iZoomR = -1.5;
-		else if (iZoom >= -2.0)
-			iZoomR = -2.0;
-		else if (iZoom >= -3.5)
-			iZoomR = -3.5;
-		else if (iZoom >= -5.0)
-			iZoomR = -5.0;
-		else if (iZoom >= -6.0)
-			iZoomR = -6.0;
-		else if (iZoom < -6.0)
-			iZoomR = -6.0;
-		else
-			iZoomR = 0.0;
-
+		int index = 0;
+		for (const auto& [key, value] : m_mapScaleToZoomSize)
+		{
+			if (iZoom <= value)
+			{
+				break;
+			}
+			index++;
+		}
 		if (iDel > 0)
 		{
-			if (iZoomR == 9.0)
+			size_t size = m_mapScaleToZoomSize.size();
+			int lastIndex = size - 1;
+			if (index >= lastIndex)
+			{
 				return;
-			else if (iZoomR == 8.0)
-				iZoomR = 9.0;
-			else if (iZoomR == 6.0)
-				iZoomR = 8.0;
-			else if (iZoomR == 5.0)
-				iZoomR = 6.0;
-			else if (iZoomR == 4.0)
-				iZoomR = 5.0;
-			else if (iZoomR == 3.5)
-				iZoomR = 4.0;
-			else if (iZoomR == 2.5)
-				iZoomR = 3.5;
-			else if (iZoomR == 1.5)
-				iZoomR = 2.5;
-			else if (iZoomR == 0.5)
-				iZoomR = 1.5;
-			else if (iZoomR == 0.0)
-				iZoomR = 0.5;
-			else if (iZoomR == -0.5)
-				iZoomR = 0.0;
-			else if (iZoomR == -1.0)
-				iZoomR = -0.5;
-			else if (iZoomR == -1.5)
-				iZoomR = -1.0;
-			else if (iZoomR == -2.0)
-				iZoomR = -1.5;
-			else if (iZoomR == -3.5)
-				iZoomR = -2.0;
-			else if (iZoomR == -5.0)
-				iZoomR = -3.5;
-			else if (iZoomR == -6.0)
-				iZoomR = -5.0;
-			else
-				return;
-			ZoomTo(iZoomR);
+			}
+			index = min(index + 1, lastIndex);
 		}
 		else
 		{
-			if (iZoomR == 9.0)
-				iZoomR = 8.0;
-			else if (iZoomR == 8.0)
-				iZoomR = 6.0;
-			else if (iZoomR == 6.0)
-				iZoomR = 5.0;
-			else if (iZoomR == 5.0)
-				iZoomR = 4.0;
-			else if (iZoomR == 4.0)
-				iZoomR = 3.5;
-			else if (iZoomR == 3.5)
-				iZoomR = 2.5;
-			else if (iZoomR == 2.5)
-				iZoomR = 1.5;
-			else if (iZoomR == 1.5)
-				iZoomR = 0.5;
-			else if (iZoomR == 0.5)
-				iZoomR = 0.0;
-			else if (iZoomR == 0.0)
-				iZoomR = -0.5;
-			else if (iZoomR == -0.5)
-				iZoomR = -1.0;
-			else if (iZoomR == -1.0)
-				iZoomR = -1.5;
-			else if (iZoomR == -1.5)
-				iZoomR = -2.0;
-			else if (iZoomR == -2.0)
-				iZoomR = -3.5;
-			else if (iZoomR == -3.5)
-				iZoomR = -5.0;
-			else if (iZoomR == -5.0)
-				iZoomR = -6.0;
-			else if (iZoomR == -6.0)
+			if (index == 0)
+			{
 				return;
-			else
-				return;
-			ZoomTo(iZoomR);
+			}
+			index = max(index - 1, 0);
 		}
+		auto nextScaleZoomSize = std::next(m_mapScaleToZoomSize.begin(), index);
+		ZoomTo(nextScaleZoomSize->second);
 	}
 	catch (...)
 	{
