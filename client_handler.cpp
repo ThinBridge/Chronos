@@ -2278,6 +2278,32 @@ bool ClientHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
 	}
 	return false;
 }
+#if CHROME_VERSION_MAJOR >= 135
+//CEF135以降、CSGではChromeランタイムスタイルを使用している。
+//Chromeランタイムスタイルでは、Alt+F4をCEFが先に処理してしまい、BroFrameの「全てのタブを閉じる」
+//という動作より先に現在のタブが閉じてしまう。この問題に対処するため、Alt+F4が押されたとき、CEFに
+//よる処理はスキップしBroFrameにSC_CLOSEを投げる（「全てのタブを閉じる」処理を実行させる）。
+bool ClientHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser,
+				  const CefKeyEvent& event,
+				  CefEventHandle os_event,
+				  bool* is_keyboard_shortcut)
+{
+	if (event.type == KEYEVENT_RAWKEYDOWN &&
+	    event.windows_key_code == VK_F4 &&
+	    (event.modifiers & EVENTFLAG_ALT_DOWN))
+	{
+		*is_keyboard_shortcut = false;
+		HWND hBroView = GetSafeParentWnd(browser);
+		HWND hBroFrame = GetParent(hBroView);
+		if (SafeWnd(hBroFrame))
+		{
+			::PostMessage(hBroFrame, WM_SYSCOMMAND, SC_CLOSE, NULL);
+		}
+		return true;
+	}
+	return false;
+}
+#endif
 
 CString ClientHandler::GetSerialNumberAsHexString(const CefRefPtr<CefX509Certificate> certificate)
 {
