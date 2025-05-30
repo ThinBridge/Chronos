@@ -988,7 +988,7 @@ void CChildView::SetWheelZoom(int iDel)
 		{
 			size_t size = m_mapScaleToZoomSize.size();
 			int lastIndex = size - 1;
-			if (index == lastIndex)
+			if (index >= lastIndex)
 			{
 				return;
 			}
