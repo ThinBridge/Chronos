@@ -49,7 +49,7 @@ class ClientHandler : public CefClient,
 		      public CefJSDialogHandler,
 		      public CefDragHandler,
 		      public CefPermissionHandler,
-			  public CefKeyboardHandler
+		      public CefKeyboardHandler
 {
 public:
 	// Interface implemented to handle off-screen rendering.
