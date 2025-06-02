@@ -48,7 +48,8 @@ class ClientHandler : public CefClient,
 		      public CefResourceRequestHandler,
 		      public CefJSDialogHandler,
 		      public CefDragHandler,
-		      public CefPermissionHandler
+		      public CefPermissionHandler,
+		      public CefKeyboardHandler
 {
 public:
 	// Interface implemented to handle off-screen rendering.
@@ -78,6 +79,7 @@ public:
 	virtual CefRefPtr<CefJSDialogHandler> GetJSDialogHandler() override { return this; }
 	virtual CefRefPtr<CefDragHandler> GetDragHandler() override { return this; }
 	virtual CefRefPtr<CefPermissionHandler> GetPermissionHandler() override { return this; }
+	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() override { return this; }
 
 	// CefLifeSpanHandler methods
 	virtual bool DoClose(CefRefPtr<CefBrowser> browser) override;
@@ -199,6 +201,16 @@ public:
 					    const CefString& requesting_origin,
 					    uint32_t requested_permissions,
 					    CefRefPtr<CefPermissionPromptCallback> callback) override;
+	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
+					      CefRefPtr<CefFrame> frame,
+					      CefProcessId source_process,
+					      CefRefPtr<CefProcessMessage> message) override;
+#if CHROME_VERSION_MAJOR >= 135
+	virtual bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser,
+						  const CefKeyEvent& event,
+						  CefEventHandle os_event,
+						  bool* is_keyboard_shortcut) override;
+#endif
 
 	void EmptyWindowClose(CefRefPtr<CefBrowser> browser)
 	{
@@ -303,11 +315,6 @@ public:
 
 		return szText;
 	}
-	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
-					      CefRefPtr<CefFrame> frame,
-					      CefProcessId source_process,
-					      CefRefPtr<CefProcessMessage> message) override;
-
 	CString GetSerialNumberAsHexString(const CefRefPtr<CefX509Certificate> certificate);
 	CString GetSerialNumberAsHexString(PCERT_INFO pCertInfo);
 
