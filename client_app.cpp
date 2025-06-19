@@ -35,6 +35,11 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 	//command_line->AppendSwitchWithValue(_T("disable-features"), _T("NetworkService"));
 	//2019-07-24 動くようになった。
 	//Chromium Embedded Framework Version 75.1.4+g4210896+chromium-75.0.3770.100
+
+	//Chrome runtime modeではdisable-chrome-login-promptを指定しないとGetAuthCredentialsが呼ばれず、
+	//Chromeのデフォルトのログインプロンプトが表示される。
+	//https://github.com/chromiumembedded/cef/issues/3603
+	command_line->AppendSwitch(_T("disable-chrome-login-prompt"));
 	
 #if CHROME_VERSION_MAJOR < 122
 	//CEF119: FirstPartySetsが有効だとYouTubeの検索窓にカーソルを合わせるとクラッシュする問題への対処。
