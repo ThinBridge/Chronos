@@ -24,6 +24,19 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 {
 	PROC_TIME(OnBeforeCommandLineProcessing)
 
+	// 追加のコマンドラインオプションはこの時点で反映する。
+	// 値付きSwitchは後勝ちなので、Chronosの設定により指定された値付きSwitchが優先されるようにするため。
+	CString additionalCommandLine = theApp.m_AppSettings.GetAdditionalCefCommandLine();
+	if (!additionalCommandLine.IsEmpty())
+	{
+		CefString commandLineCefString = command_line->GetCommandLineString();
+		CString commandLineString((LPCWSTR)commandLineCefString.c_str());
+		commandLineString.Append(_T(" "));
+		commandLineString.Append(additionalCommandLine);
+		CefString newCommandLineCefString(commandLineString);
+		command_line->InitFromString(newCommandLineCefString);
+	}
+
 	//CEF131では、GoBackとGoForwardでキャッシュが有効だとFaviconが更新されない問題がある。
 	//そのため、キャッシュを無効化する。
 	//https://github.com/chromiumembedded/cef/issues/3874
