@@ -962,7 +962,7 @@ public:
 		CustomBrowser4.Empty();
 		CustomBrowser5.Empty();
 		InitMessage.Empty();
-		AdditionalCefCommandLine.Empty();
+		CEFCommandLine.Empty();
 		ProxyAddress.Empty();
 		ProxyBypassAddress.Empty();
 		UserAgentAppendStr.Empty();
@@ -1053,7 +1053,7 @@ public:
 		Data.CustomBrowser4 = CustomBrowser4;
 		Data.CustomBrowser5 = CustomBrowser5;
 		Data.InitMessage = InitMessage;
-		Data.AdditionalCefCommandLine = AdditionalCefCommandLine;
+		Data.CEFCommandLine = CEFCommandLine;
 		Data.ProxyAddress = ProxyAddress;
 		Data.ProxyBypassAddress = ProxyBypassAddress;
 		Data.UserAgentAppendStr = UserAgentAppendStr;
@@ -1137,7 +1137,7 @@ private:
 	CString StartURL;
 	CString EnforceInitParam;
 	CString InitMessage;
-	CString AdditionalCefCommandLine;
+	CString CEFCommandLine;
 
 	//インターネット接続設定
 	int ProxyType;
@@ -1250,7 +1250,7 @@ public:
 		StartURL = _T("https://www.google.co.jp/");
 		EnforceInitParam = _T("");
 		InitMessage = _T("");
-		AdditionalCefCommandLine = _T("");
+		CEFCommandLine = _T("");
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//インターネット接続設定
@@ -1458,9 +1458,9 @@ public:
 					InitMessage = strTemp3;
 					continue;
 				}
-				if (strTemp2.CompareNoCase(_T("AdditionalCefCommandLine")) == 0)
+				if (strTemp2.CompareNoCase(_T("CEFCommandLine")) == 0)
 				{
-					AdditionalCefCommandLine = strTemp3;
+					CEFCommandLine = strTemp3;
 					continue;
 				}
 				/////////////////////////////////////////////////////////
@@ -2082,7 +2082,7 @@ public:
 		strRet += EXTVAL(DisableOpendOpAlert);
 
 		strRet += _T("# non GUI parameters\n");
-		strRet += EXTVAL(AdditionalCefCommandLine);
+		strRet += EXTVAL(CEFCommandLine);
 		strRet += EXTVAL(EnableMediaAccessPermission);
 		strRet += EXTVAL(UploadBasePath);
 		strRet += EXTVAL(ExitMessage);
@@ -2134,7 +2134,7 @@ public:
 			return StartURL;
 	}
 	inline CString GetEnforceInitParam() { return EnforceInitParam; }
-	inline CString GetAdditionalCefCommandLine() { return AdditionalCefCommandLine; }
+	inline CString GetCEFCommandLine() { return CEFCommandLine; }
 	inline CString GetCustomBrowser() { return CustomBrowser; }
 	inline CString GetCustomBrowser2() { return CustomBrowser2; }
 	inline CString GetCustomBrowser3() { return CustomBrowser3; }
