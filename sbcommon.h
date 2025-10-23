@@ -940,6 +940,7 @@ public:
 		ShowLogo = 0;
 		EnableTab = 0;
 		EnablePDFExtension = 0;
+		EnablePDFApplicationSelection = 0;
 		EnableMemcache = 0;
 		EnableGPURendering = 0;
 		EnableCrashRecovery = 0;
@@ -1031,6 +1032,7 @@ public:
 		Data.ShowLogo = ShowLogo;
 		Data.EnableTab = EnableTab;
 		Data.EnablePDFExtension = EnablePDFExtension;
+		Data.EnablePDFApplicationSelection = EnablePDFApplicationSelection;
 		Data.EnableMemcache = EnableMemcache;
 		Data.EnableGPURendering = EnableGPURendering;
 		Data.EnableCrashRecovery = EnableCrashRecovery;
@@ -1124,6 +1126,7 @@ private:
 	//画面表示設定
 	int EnableTab;
 	int EnablePDFExtension;
+	int EnablePDFApplicationSelection;
 
 	int ShowLogo;
 	int EnableGPURendering;
@@ -1238,6 +1241,7 @@ public:
 		EnableTab = TRUE;
 		EnableGPURendering = TRUE;
 		EnablePDFExtension = TRUE;
+		EnablePDFApplicationSelection = FALSE;
 		EnableRebar = TRUE;
 		ShowLogo = TRUE;
 		EnableStatusbar = TRUE;
@@ -1563,6 +1567,11 @@ public:
 				if (strTemp2.CompareNoCase(_T("EnablePDFExtension")) == 0)
 				{
 					EnablePDFExtension = (strTemp3 == _T("1")) ? TRUE : FALSE;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("EnablePDFApplicationSelection")) == 0)
+				{
+					EnablePDFApplicationSelection = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableMemcache")) == 0)
@@ -1998,6 +2007,7 @@ public:
 		strRet += EXTVAL(EnableTab);
 		strRet += EXTVAL(EnableGPURendering);
 		strRet += EXTVAL(EnablePDFExtension);
+		strRet += EXTVAL(EnablePDFApplicationSelection);
 		strRet += EXTVAL(EnableRebar);
 		strRet += EXTVAL(ShowLogo);
 		strRet += EXTVAL(EnableStatusbar);
@@ -2109,6 +2119,7 @@ public:
 	inline BOOL IsShowLogo() { return ShowLogo; }
 	inline BOOL IsEnableTab() { return EnableTab; }
 	inline BOOL IsEnablePDFExtension() { return EnablePDFExtension; }
+	inline BOOL IsEnablePDFApplicationSelection() { return EnablePDFApplicationSelection; }
 	inline BOOL IsEnableMemcache() { return EnableMemcache; }
 	inline BOOL IsGPURendering() { return EnableGPURendering; }
 	inline BOOL IsCrashRecovery() { return EnableCrashRecovery; }
@@ -2206,6 +2217,7 @@ public:
 	inline void SetShowLogo(DWORD dVal) { ShowLogo = dVal ? 1 : 0; }
 	inline void SetEnableTab(DWORD dVal) { EnableTab = dVal ? 1 : 0; }
 	inline void SetEnablePDFExtension(DWORD dVal) { EnablePDFExtension = dVal ? 1 : 0; }
+	inline void SetEnablePDFApplicationSelection(DWORD dVal) { EnablePDFApplicationSelection = dVal ? 1 : 0; }
 	inline void SetEnableMemcache(DWORD dVal) { EnableMemcache = dVal ? 1 : 0; }
 	inline void SetGPURendering(DWORD dVal) { EnableGPURendering = dVal ? 1 : 0; }
 	inline void SetCrashRecovery(DWORD dVal) { EnableCrashRecovery = dVal ? 1 : 0; }
