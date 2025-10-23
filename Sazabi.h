@@ -49,7 +49,7 @@
 	{                                                                      \
 		hMutex = {0};                                                      \
 		dwWaitResult = WAIT_FAILED;                                        \
-		hMutex = ::CreateMutex(NULL, FALSE, _T("Chronos_Gobal_Mutex"));    \
+		hMutex = ::CreateMutex(NULL, FALSE, _T("Chronos_Global_Mutex"));    \
 		if (hMutex)                                                        \
 		{                                                                  \
 			dwWaitResult = WaitForSingleObject(hMutex, waitMilliSec);      \
