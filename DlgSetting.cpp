@@ -1567,7 +1567,7 @@ BOOL CDlgSetCAP::OnInitDialog()
 
 	//ウィンドウ数 最大値
 	iW = theApp.m_AppSettingsDlgCurrent.GetWindowCountLimit();
-	if (iW < 1)
+	if (iW < 1 || iW > 999)
 		iW = 999;
 	SetDlgItemInt(IDC_WindowCountLimit, iW);
 
@@ -1621,7 +1621,7 @@ LRESULT CDlgSetCAP::Set_OK(WPARAM wParam, LPARAM lParam)
 
 	//ウィンドウ数 最大値
 	iW = GetDlgItemInt(IDC_WindowCountLimit);
-	if (iW < 1)
+	if (iW < 1 || iW > 999)
 		iW = 999;
 	theApp.m_AppSettingsDlgCurrent.SetWindowCountLimit(iW);
 
