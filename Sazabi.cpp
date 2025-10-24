@@ -101,6 +101,9 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 			PROCESS_INFORMATION piC = {0};
 			siC.cb = sizeof(siC);
 			unsigned long ecodeC = 0;
+			HANDLE hMutex = {0};
+			DWORD dwWaitResult = WAIT_FAILED;
+			CHRONOS_ENTER_CRITICAL_SECTION(hMutex, dwWaitResult, 30 * 1000);
 			if (!CreateProcess(NULL, (LPTSTR)(LPCTSTR)strCommand, NULL, NULL, FALSE, 0, NULL, NULL, &siC, &piC))
 			{
 				SetLastError(NO_ERROR);
@@ -124,6 +127,12 @@ BOOL CSazabi::InitFunc_ExecOnVOS()
 				CloseHandle(piC.hProcess);
 				piC.hProcess = 0;
 			}
+			// 同一のサンドボックスを使用している、ThinApp仮想化されたアプリケーションが並列で起動すると、ThinApp
+			// の仕様でアプリケーションエラーが発生することがある。それを回避するため、ChronosN.exe経由でThinApp化さ
+			// れているChronos.exeを起動する際には、1秒間Critical Section内で待機し、並列でChronos.exeの起動が行われ
+			// ないようにする。
+			::Sleep(1000);
+			CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 			return FALSE;
 		}
 		else
