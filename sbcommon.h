@@ -1686,7 +1686,7 @@ public:
 				{
 					int iW = 0;
 					iW = _ttoi(strTemp3);
-					if (0 <= iW && iW <= 4096)
+					if (0 <= iW && iW <= 999)
 						WindowCountLimit = iW;
 					else
 						WindowCountLimit = 999;
