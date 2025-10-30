@@ -1561,7 +1561,7 @@ BOOL CDlgSetCAP::OnInitDialog()
 	int iW = 0;
 	//メモリー 最大値(MB)
 	iW = theApp.m_AppSettingsDlgCurrent.GetMemoryUsageLimit();
-	if (iW < 1)
+	if (iW < 1 || iW > 4096)
 		iW = 1224;
 	SetDlgItemInt(IDC_MemoryUsageLimit, iW);
 
@@ -1615,7 +1615,7 @@ LRESULT CDlgSetCAP::Set_OK(WPARAM wParam, LPARAM lParam)
 	int iW = 0;
 	//メモリー 最大値(MB)
 	iW = GetDlgItemInt(IDC_MemoryUsageLimit);
-	if (iW < 1)
+	if (iW < 1 || iW > 4096)
 		iW = 1224;
 	theApp.m_AppSettingsDlgCurrent.SetMemoryUsageLimit(iW);
 
