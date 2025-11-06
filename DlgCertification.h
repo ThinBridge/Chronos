@@ -38,7 +38,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnCbnSelchangeCertificationCombo();
+	afx_msg void OnCbnSelChangeCertificationCombo();
 	afx_msg void OnBnClickedOk();
 
 	CComboBox certificationComboBox;

@@ -218,7 +218,7 @@ public:
 	{
 		if (m_pDlgMsgP)
 		{
-			m_pDlgMsgP->m_iCntg = dCnt;
+			m_pDlgMsgP->m_iCnt = dCnt;
 		}
 	}
 	void SetMessage_MsgDlg(LPCTSTR lpStr)

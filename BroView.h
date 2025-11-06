@@ -204,7 +204,7 @@ public:
 		}
 	}
 
-	BOOL m_bFirstCallDontClose;
+	BOOL m_bFirstCallDoNotClose;
 	inline void GoHomeFirstCall()
 	{
 		try
@@ -212,11 +212,11 @@ public:
 			//初めのインスタンスの場合
 			if (theApp.IsFirstInstance())
 			{
-				m_bFirstCallDontClose = TRUE;
+				m_bFirstCallDoNotClose = TRUE;
 			}
 			else
 			{
-				m_bFirstCallDontClose = FALSE;
+				m_bFirstCallDoNotClose = FALSE;
 			}
 			this->GoHome();
 		}
