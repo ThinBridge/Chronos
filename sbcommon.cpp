@@ -546,7 +546,7 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 	CStringW strObjectName;
 	CStringW strHeaders;
 
-	CString logmsg;
+	CString logMsg;
 
 	//1回で抜ける gotoの変わり
 	while (1)
@@ -591,17 +591,17 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 		);
 
 		// URL解析
-		URL_COMPONENTS urlcomponents = {0};
-		ZeroMemory(&urlcomponents, sizeof(URL_COMPONENTS));
-		urlcomponents.dwStructSize = sizeof(URL_COMPONENTS);
+		URL_COMPONENTS urlComponents = {0};
+		ZeroMemory(&urlComponents, sizeof(URL_COMPONENTS));
+		urlComponents.dwStructSize = sizeof(URL_COMPONENTS);
 
 		std::unique_ptr<TCHAR> szHostName(new TCHAR[URLBUFFER_SIZE]());
 		std::unique_ptr<TCHAR> szUrlPath(new TCHAR[URLBUFFER_SIZE]());
 
-		urlcomponents.lpszHostName = szHostName.get();
-		urlcomponents.lpszUrlPath = szUrlPath.get();
-		urlcomponents.dwHostNameLength = URLBUFFER_SIZE;
-		urlcomponents.dwUrlPathLength = URLBUFFER_SIZE;
+		urlComponents.lpszHostName = szHostName.get();
+		urlComponents.lpszUrlPath = szUrlPath.get();
+		urlComponents.dwHostNameLength = URLBUFFER_SIZE;
+		urlComponents.dwUrlPathLength = URLBUFFER_SIZE;
 
 		SendLogDataUtil stUSERID;
 		stUSERID.SetData(this->GetUserNameData());
@@ -697,18 +697,18 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			}
 		}
 
-		if (!InternetCrackUrl(strURL, 0, 0, &urlcomponents))
+		if (!InternetCrackUrl(strURL, 0, 0, &urlComponents))
 		{
 			// URLの解析に失敗
 			iRet = ERR_SERVER_SETTINGS_INVALID;
 			break;
 		}
-		strServer = urlcomponents.lpszHostName;
-		strObjectName = urlcomponents.lpszUrlPath;
-		nPort = urlcomponents.nPort;
+		strServer = urlComponents.lpszHostName;
+		strObjectName = urlComponents.lpszUrlPath;
+		nPort = urlComponents.nPort;
 
 		// HTTPかHTTPSかそれ以外か
-		DWORD dwOpenRequestFlag = (/*INTERNET_SCHEME_HTTPS*/ 4 == urlcomponents.nScheme) ? WINHTTP_FLAG_SECURE : 0;
+		DWORD dwOpenRequestFlag = (/*INTERNET_SCHEME_HTTPS*/ 4 == urlComponents.nScheme) ? WINHTTP_FLAG_SECURE : 0;
 		dwOpenRequestFlag = dwOpenRequestFlag | WINHTTP_FLAG_REFRESH;
 		//GET or POST
 		strVerb = L"GET";
@@ -809,8 +809,8 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 			dwLogData.mMESSAGE1 = strURL;
 			dwLogData.mMESSAGE2 = strJSONSendFormat;
 			theApp.AppendDebugViewLog(dwLogData);
-			logmsg = dwLogData.GetString();
-			theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
+			logMsg = dwLogData.GetString();
+			theApp.WriteDebugTraceDateTime(logMsg, DEBUG_LOG_TYPE_URL);
 
 			SendLogDataUtil SendJSONData(strJSONSendFormat);
 			char* ptrStr = NULL;
@@ -930,8 +930,8 @@ int CLogDispatcher::SendLogThread(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTa
 	dwLogData.mMESSAGE1.Format(_T("ResultCode:%d"), iRet);
 	dwLogData.mMESSAGE2 = strServerErrMsg;
 	theApp.AppendDebugViewLog(dwLogData);
-	logmsg = dwLogData.GetString();
-	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_URL);
+	logMsg = dwLogData.GetString();
+	theApp.WriteDebugTraceDateTime(logMsg, DEBUG_LOG_TYPE_URL);
 
 	_wsetlocale(LC_ALL, _T(""));
 

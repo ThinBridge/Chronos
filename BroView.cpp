@@ -21,7 +21,7 @@ CChildView::CChildView()
 	m_popupFeatures = NULL;
 	m_pFindDialog = NULL;
 	m_pFocusWnd = NULL;
-	m_bFirstCallDontClose = FALSE;
+	m_bFirstCallDoNotClose = FALSE;
 	m_nBrowserID = 0;
 	m_bDevToolsWnd = FALSE;
 	m_bFindNext = FALSE;
@@ -580,9 +580,9 @@ void CChildView::IsRedirectWndAutoCloseChk()
 		return;
 	}
 	//初めの起動でゾーンフィルターに引っかかると、何もできないので。
-	if (m_bFirstCallDontClose)
+	if (m_bFirstCallDoNotClose)
 	{
-		m_bFirstCallDontClose = FALSE;
+		m_bFirstCallDoNotClose = FALSE;
 		logmsg.Format(_T("CV_WND:0x%08p IsRedirectWndAutoCloseChk :AutoClose First Call GoHome Skip"), theApp.SafeWnd(this->m_hWnd));
 		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_TR);
 		return;
@@ -1221,9 +1221,9 @@ void CChildView::OnNewSession()
 
 void CChildView::ShowDevTools()
 {
-	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08p ShowDevTools"), theApp.SafeWnd(this->m_hWnd));
-	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
+	CString logMsg;
+	logMsg.Format(_T("CV_WND:0x%08p ShowDevTools"), theApp.SafeWnd(this->m_hWnd));
+	theApp.WriteDebugTraceDateTime(logMsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
 		bool has_devtools = m_cefBrowser->GetHost()->HasDevTools();
@@ -1250,9 +1250,9 @@ void CChildView::ShowDevTools()
 }
 void CChildView::OnPrint()
 {
-	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08p OnPrint"), theApp.SafeWnd(this->m_hWnd));
-	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
+	CString logMsg;
+	logMsg.Format(_T("CV_WND:0x%08p OnPrint"), theApp.SafeWnd(this->m_hWnd));
+	theApp.WriteDebugTraceDateTime(logMsg, DEBUG_LOG_TYPE_AC);
 	if (m_cefBrowser)
 	{
 		m_cefBrowser->GetHost()->Print();
@@ -1260,9 +1260,9 @@ void CChildView::OnPrint()
 }
 void CChildView::OnGoBack()
 {
-	CString logmsg;
-	logmsg.Format(_T("CV_WND:0x%08p OnGoBack"), theApp.SafeWnd(this->m_hWnd));
-	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
+	CString logMsg;
+	logMsg.Format(_T("CV_WND:0x%08p OnGoBack"), theApp.SafeWnd(this->m_hWnd));
+	theApp.WriteDebugTraceDateTime(logMsg, DEBUG_LOG_TYPE_AC);
 	if (!IsBrowserNull())
 		GoBack();
 }

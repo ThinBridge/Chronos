@@ -849,7 +849,7 @@ void CMainFrame::OnTimer(UINT_PTR nIDEvent)
 		//check max limit
 		unsigned long long iMemSize = theApp.GetMemoryUsageSize();
 		size_t iMemL = theApp.m_AppSettings.GetMemoryUsageLimit();
-		CString logmsg;
+		CString logMsg;
 
 		if (iMemSize > (unsigned long long)iMemL * 1024 * 1024)
 		{
