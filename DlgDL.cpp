@@ -44,8 +44,8 @@ BEGIN_MESSAGE_MAP(CDlgDL, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CDlgDL::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CDlgDL::OnBnClickedCancel)
 	ON_BN_CLICKED(IDC_BUTTON1, &CDlgDL::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON_FO, &CDlgDL::OnBnClickedButtonFo)
-	ON_BN_CLICKED(IDC_BUTTON_DIRO, &CDlgDL::OnBnClickedButtonDiro)
+	ON_BN_CLICKED(IDC_BUTTON_FO, &CDlgDL::OnBnClickedButtonFileOpen)
+	ON_BN_CLICKED(IDC_BUTTON_DIRO, &CDlgDL::OnBnClickedButtonDirectoryOpen)
 END_MESSAGE_MAP()
 
 void CDlgDL::OnBnClickedOk()
@@ -185,7 +185,7 @@ IMPLEMENT_DYNAMIC(ProgressDlg, CDialogEx)
 ProgressDlg::ProgressDlg(CWnd* pParent /*=NULL*/)
     : CDialogEx(ProgressDlg::IDD, pParent)
 {
-	m_iCntg = 0;
+	m_iCnt = 0;
 	m_pParent = pParent;
 }
 
@@ -202,9 +202,9 @@ void ProgressDlg::SetMsg(const CString& str)
 {
 	SetDlgItemText(IDC_STATIC_MSG, str);
 	CString strCnt;
-	if (m_iCntg > 999999)
-		m_iCntg = 1;
-	m_iCntg++;
+	if (m_iCnt > 999999)
+		m_iCnt = 1;
+	m_iCnt++;
 }
 
 void ProgressDlg::SetMsgExec(const CString& str)
@@ -214,7 +214,7 @@ void ProgressDlg::SetMsgExec(const CString& str)
 	SetDlgItemText(IDC_STATIC_TX, startingMsg);
 	SetDlgItemText(IDC_STATIC_MSG, str);
 	CString strCnt;
-	m_iCntg++;
+	m_iCnt++;
 }
 BEGIN_MESSAGE_MAP(ProgressDlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &ProgressDlg::OnBnClickedOk)
@@ -242,7 +242,7 @@ BOOL ProgressDlg::OnInitDialog()
 	return TRUE;
 }
 
-void CDlgDL::OnBnClickedButtonFo()
+void CDlgDL::OnBnClickedButtonFileOpen()
 {
 	if (!theApp.IsSGMode())
 	{
@@ -329,7 +329,7 @@ void CDlgDL::OnBnClickedButtonFo()
 	}
 }
 
-void CDlgDL::OnBnClickedButtonDiro()
+void CDlgDL::OnBnClickedButtonDirectoryOpen()
 {
 	if (!theApp.IsSGMode())
 	{

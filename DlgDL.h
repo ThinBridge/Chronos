@@ -40,8 +40,8 @@ public:
 	BOOL m_bDownloadProgress;
 	afx_msg void OnBnClickedButton1();
 	BOOL m_bDLCancel;
-	afx_msg void OnBnClickedButtonFo();
-	afx_msg void OnBnClickedButtonDiro();
+	afx_msg void OnBnClickedButtonFileOpen();
+	afx_msg void OnBnClickedButtonDirectoryOpen();
 	CString m_strFileFullPath;
 	CString m_strFileFolderPath;
 	afx_msg void OnDestroy();
@@ -56,7 +56,7 @@ public:
 	virtual ~ProgressDlg();
 	void SetMsg(const CString& str);
 	void SetMsgExec(const CString& str);
-	UINT m_iCntg;
+	UINT m_iCnt;
 #pragma warning(push)
 // C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
 // これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。

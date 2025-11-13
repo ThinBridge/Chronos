@@ -136,13 +136,13 @@ int CDlgCertification::SelectedIndex()
 }
 
 BEGIN_MESSAGE_MAP(CDlgCertification, CDialogEx)
-	ON_CBN_SELCHANGE(IDC_CERTIFICATION_COMBO, &CDlgCertification::OnCbnSelchangeCertificationCombo)
+	ON_CBN_SELCHANGE(IDC_CERTIFICATION_COMBO, &CDlgCertification::OnCbnSelChangeCertificationCombo)
 	ON_BN_CLICKED(IDOK, &CDlgCertification::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 // CDlgCertification メッセージ ハンドラー
 
-void CDlgCertification::OnCbnSelchangeCertificationCombo()
+void CDlgCertification::OnCbnSelChangeCertificationCombo()
 {
 	int curSel = certificationComboBox.GetCurSel();
 	CefRefPtr<CefX509Certificate> certificate = m_certificates[curSel];
@@ -202,6 +202,6 @@ BOOL CDlgCertification::OnInitDialog()
 		certificationComboBox.AddString(displayItemName);
 	}
 	certificationComboBox.SetCurSel(0);
-	OnCbnSelchangeCertificationCombo();
+	OnCbnSelChangeCertificationCombo();
 	return superResult;
 }
