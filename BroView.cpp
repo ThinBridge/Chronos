@@ -1936,7 +1936,6 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 	if (wParam)
 	{
 		CString strURL((LPCTSTR)wParam);
-		m_strURL = strURL;
 		if (!strURL.IsEmpty())
 		{
 			BOOL bTopPage = FALSE;
@@ -1952,6 +1951,7 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 				if (*pbRet == 1)
 				{
 					bTopPage = TRUE;
+					m_strURL = strURL;
 				}
 			}
 			DebugWndLogData dwLogData;
