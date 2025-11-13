@@ -302,11 +302,11 @@ void CChildView::UpDateAddressBar()
 {
 	if (theApp.IsWnd(FRM))
 	{
-		if (this->m_UpDateAddressBarURL_Cache != m_strURL)
+		if (this->m_UpDateAddressBarURL_Cache != m_strTopPageURL)
 		{
-			if (FRM->OnSetUrlString((LPCTSTR)m_strURL))
+			if (FRM->OnSetUrlString((LPCTSTR)m_strTopPageURL))
 			{
-				this->m_UpDateAddressBarURL_Cache = m_strURL;
+				this->m_UpDateAddressBarURL_Cache = m_strTopPageURL;
 			}
 		}
 	}
@@ -1477,7 +1477,7 @@ void CChildView::OnUpdatePaste(CCmdUI* pCmdUI)
 }
 void CChildView::OnAppAbout()
 {
-	theApp.m_strCurrentURL4DlgSetting = m_strURL;
+	theApp.m_strCurrentURL4DlgSetting = m_strTopPageURL;
 	CAboutDlg aboutDlg(this);
 	aboutDlg.pParentFrm = m_pwndFrame;
 	aboutDlg.DoModal();
@@ -1488,7 +1488,7 @@ void CChildView::OnSettings()
 	CString logmsg;
 	logmsg.Format(_T("CV_WND:0x%08p OnSettings"), theApp.SafeWnd(this->m_hWnd));
 	theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_AC);
-	theApp.m_strCurrentURL4DlgSetting = m_strURL;
+	theApp.m_strCurrentURL4DlgSetting = m_strTopPageURL;
 	theApp.ShowSettingDlg(m_pwndFrame);
 }
 void CChildView::OnBroBack(UINT nID)
@@ -1936,11 +1936,11 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 	if (wParam)
 	{
 		CString strURL((LPCTSTR)wParam);
-		m_strURL = strURL;
 		if (!strURL.IsEmpty())
 		{
 			BOOL bTopPage = FALSE;
 			UINT* pbRet = NULL;
+			m_strLastBrowsedURL == strURL;
 
 			//TOPページ(Frameなし)
 			if (lParam)
@@ -1952,6 +1952,7 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 				if (*pbRet == 1)
 				{
 					bTopPage = TRUE;
+					m_strTopPageURL = strURL;
 				}
 			}
 			DebugWndLogData dwLogData;
@@ -2086,7 +2087,7 @@ LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 	}
 	if (theApp.m_AppSettings.IsEnableLogging() && theApp.m_AppSettings.IsEnableBrowsingLogging())
 	{
-		if (SBUtil::IsURL_HTTP(m_strURL))
+		if (SBUtil::IsURL_HTTP(m_strTopPageURL))
 		{
 			CString strHost;
 			strHost = m_strTitle;
@@ -2096,7 +2097,7 @@ LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 			if (strHost.IsEmpty())
 			{
 				CefURLParts cfURLpa;
-				CefString cefURL(m_strURL);
+				CefString cefURL(m_strTopPageURL);
 				if (CefParseURL(cefURL, cfURLpa))
 				{
 					CefString cfHost(&cfURLpa.host);
@@ -2104,7 +2105,7 @@ LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 				}
 			}
 			if (theApp.m_pLogDisp)
-				theApp.m_pLogDisp->SendLog(LOG_BROWSING, strHost, m_strURL);
+				theApp.m_pLogDisp->SendLog(LOG_BROWSING, strHost, m_strTopPageURL);
 		}
 	}
 
@@ -2268,7 +2269,7 @@ LRESULT CChildView::OnSetRendererPID(WPARAM wParam, LPARAM lParam)
 LRESULT CChildView::OnAddressChange(WPARAM wParam, LPARAM lParam)
 {
 	CString strURL((LPCTSTR)wParam);
-	m_strURL = strURL;
+	m_strTopPageURL = strURL;
 	UpDateAddressBar();
 	if (!strURL.IsEmpty())
 	{
