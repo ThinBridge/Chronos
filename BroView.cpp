@@ -1940,7 +1940,7 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 		{
 			BOOL bTopPage = FALSE;
 			UINT* pbRet = NULL;
-			m_strLastBrowsedURL == strURL;
+			m_strLastBrowsedURL = strURL;
 
 			//TOPページ(Frameなし)
 			if (lParam)
