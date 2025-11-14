@@ -1790,11 +1790,6 @@ public:
 				}
 				if (strTemp2.CompareNoCase(_T("UploadLoggingURLType")) == 0)
 				{
-					EnableUploadLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
-					continue;
-				}
-				if (strTemp2.CompareNoCase(_T("UploadLoggingURLType")) == 0)
-				{
 					int iW = 0;
 					iW = _ttoi(strTemp3);
 					if (static_cast<int>(AppSettings::EnumUploadLoggingURLType::LAST_BROWSED_URL) <= iW &&
@@ -2102,6 +2097,7 @@ public:
 		strRet += EXTVAL(LogMethod);
 		strRet += EXTVAL(EnableDownloadLogging);
 		strRet += EXTVAL(EnableUploadLogging);
+		strRet += EXTVAL(UploadLoggingURLType);
 		strRet += EXTVAL(EnableBrowsingLogging);
 		strRet += EXTVAL(EnableAccessAllLogging);
 	

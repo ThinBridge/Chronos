@@ -648,6 +648,7 @@ CDlgSetLog::CDlgSetLog() : CPropertyPage(CDlgSetLog::IDD)
 void CDlgSetLog::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyPage::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_UPLOAD_LOGGING_URL_TYPE_COMBO, m_ComboUploadLoggingType);
 	//{{AFX_DATA_MAP(CDlgSetLog)
 	//}}AFX_DATA_MAP
 }
@@ -698,6 +699,7 @@ void CDlgSetLog::OnEnableLogging()
 		GetDlgItem(IDC_CHECK_ENABLE_UPLOAD_LOG)->EnableWindow(TRUE);
 		GetDlgItem(IDC_CHECK_EnableBrowsingLogging)->EnableWindow(TRUE);
 		GetDlgItem(IDC_CHECK_EnableAccessAllLogging)->EnableWindow(TRUE);
+		m_ComboUploadLoggingType.EnableWindow(TRUE);
 	}
 	else
 	{
@@ -709,6 +711,7 @@ void CDlgSetLog::OnEnableLogging()
 		GetDlgItem(IDC_CHECK_ENABLE_UPLOAD_LOG)->EnableWindow(FALSE);
 		GetDlgItem(IDC_CHECK_EnableBrowsingLogging)->EnableWindow(FALSE);
 		GetDlgItem(IDC_CHECK_EnableAccessAllLogging)->EnableWindow(FALSE);
+		m_ComboUploadLoggingType.EnableWindow(FALSE);
 	}
 	return;
 }
@@ -782,6 +785,14 @@ BOOL CDlgSetLog::OnInitDialog()
 	else
 		((CButton*)GetDlgItem(IDC_CHECK_EnableAccessAllLogging))->SetCheck(0);
 
+	size_t labelIdArraySize = sizeof(kUploadLoggingTypeLabelIdArray) / sizeof(kUploadLoggingTypeLabelIdArray[0]);
+	for (size_t i = 0; i < labelIdArraySize; i++)
+	{
+		CString label;
+		label.LoadString(kUploadLoggingTypeLabelIdArray[i]);
+		m_ComboUploadLoggingType.AddString(label);
+	}
+	m_ComboUploadLoggingType.SetCurSel(theApp.m_AppSettingsDlgCurrent.GetUploadLoggingURLType());
 	OnEnableLog();
 	OnEnableLogging();
 	return FALSE;
@@ -854,6 +865,8 @@ LRESULT CDlgSetLog::Set_OK(WPARAM wParam, LPARAM lParam)
 		theApp.m_AppSettingsDlgCurrent.SetEnableLogging(1);
 	else
 		theApp.m_AppSettingsDlgCurrent.SetEnableLogging(0);
+
+	theApp.m_AppSettingsDlgCurrent.SetUploadLoggingURLType(m_ComboUploadLoggingType.GetCurSel());
 	return 0;
 }
 
