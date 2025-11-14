@@ -669,7 +669,23 @@ void CSazabi::SendLoggingMsg(int LOG_TYPE, LPCTSTR lpFileName, HWND hWnd)
 	{
 		if (IsWnd(&pFrame->m_wndView))
 		{
-			strURL = pFrame->m_wndView.m_strURL;
+			AppSettings::EnumUploadLoggingURLType urlType = static_cast<AppSettings::EnumUploadLoggingURLType>(m_AppSettings.GetUploadLoggingURLType());
+			if (urlType == AppSettings::EnumUploadLoggingURLType::LAST_BROWSED_URL)
+			{
+				strURL = pFrame->m_wndView.m_strLastBrowsedURL;
+			}
+			else if (urlType == AppSettings::EnumUploadLoggingURLType::MAIN_FRAME)
+			{
+				strURL = pFrame->m_wndView.m_strTopPageURL;
+			}
+			else if (urlType == AppSettings::EnumUploadLoggingURLType::ACTIVE_FRAME)
+			{
+				strURL = pFrame->m_wndView.GetFocusedFrameURL();
+			}
+			if (!strURL)
+			{
+				strURL = pFrame->m_wndView.m_strTopPageURL;
+			}
 			if (m_pLogDisp)
 			{
 				m_pLogDisp->SendLog(LOG_TYPE, strFileName, strURL);

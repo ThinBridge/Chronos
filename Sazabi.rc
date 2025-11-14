@@ -259,9 +259,10 @@ BEGIN
     CONTROL         "GET:URLクエリパラメータ形式",IDC_RADIO_LOG_GET,"Button",BS_AUTORADIOBUTTON,27,198,193,10
     CONTROL         "POST:JSON形式",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
     CONTROL         "ダウンロード操作を記録する",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
-    CONTROL         "アップロード操作を記録する",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
+    CONTROL         "アップロード操作を記録する：",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,88,10
     CONTROL         "閲覧履歴を記録する",IDC_CHECK_EnableBrowsingLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
     CONTROL         "詳細な閲覧履歴を記録する",IDC_CHECK_EnableAccessAllLogging,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
+    COMBOBOX        IDC_UPLOAD_LOGGING_URL_TYPE_COMBO,117,240,138,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_SETTINGS_DLG_DSP DIALOGEX 0, 0, 370, 291
@@ -1430,6 +1431,9 @@ BEGIN
     IDS_STRING_SETTINGS_DLG_TITLE_POPUP_FILTER "ポップアップフィルター設定"
     ID_CANNOT_SAVE_POPUP_FILTER 
                             "[ポップアップフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_LAST_BROWSED "最後に読み込んだURLを出力する"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "トップページのURLを出力する"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME "アクティブなフレームのURLを出力する"
 END
 
 #endif    // 日本語 (日本) resources
@@ -1668,11 +1672,12 @@ BEGIN
     CONTROL         "GET:as URL query parameters",IDC_RADIO_LOG_GET,"Button",BS_AUTORADIOBUTTON,27,198,193,10
     CONTROL         "POST:as JSON",IDC_RADIO_LOG_POST,"Button",BS_AUTORADIOBUTTON,27,211,193,10
     CONTROL         "Log downloads",IDC_CHECK_ENABLE_DOWNLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,226,135,10
-    CONTROL         "Log uploads",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,135,10
+    CONTROL         "Log uploads:",IDC_CHECK_ENABLE_UPLOAD_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,241,51,10
     CONTROL         "Log browsing histories",IDC_CHECK_EnableBrowsingLogging,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,256,135,10
     CONTROL         "Log detailed browsing histories",IDC_CHECK_EnableAccessAllLogging,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,271,135,10
+    COMBOBOX        IDC_UPLOAD_LOGGING_URL_TYPE_COMBO,80,240,138,30,CBS_DROPDOWNLIST | CBS_SORT | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_SETTINGS_DLG_DSP DIALOGEX 0, 0, 370, 291
@@ -2871,6 +2876,9 @@ BEGIN
     IDS_STRING_SETTINGS_DLG_TITLE_POPUP_FILTER "Popup filtering"
     ID_CANNOT_SAVE_POPUP_FILTER 
                             "[Popup filter]\nCould not save the file.\nIt may be held by some other applications.\nPlease retry after closing other applications.\n%s"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_LAST_BROWSED "Output last browsed URL"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "Output top page URL"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME "Output active frame URL"
 END
 
 #endif    // 英語 (ニュートラル) resources
