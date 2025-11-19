@@ -1313,7 +1313,7 @@ public:
 		AdvancedLogLevel = 0;
 		EnableLogging = 0;
 		EnableUploadLogging = 0;
-		UploadLoggingURLType = static_cast<int>(AppSettings::EnumUploadLoggingURLType::LAST_BROWSED_URL);
+		UploadLoggingURLType = static_cast<int>(AppSettings::EnumUploadLoggingURLType::MAIN_FRAME);
 		EnableDownloadLogging = 0;
 		EnableBrowsingLogging = 0;
 		EnableAccessAllLogging = 0;
@@ -1800,7 +1800,7 @@ public:
 					else
 					{
 						// Regard as no permission for invalid value
-						UploadLoggingURLType = static_cast<int>(AppSettings::EnumUploadLoggingURLType::LAST_BROWSED_URL);
+						UploadLoggingURLType = static_cast<int>(AppSettings::EnumUploadLoggingURLType::MAIN_FRAME);
 					}
 					continue;
 				}
