@@ -1432,7 +1432,7 @@ BEGIN
     ID_CANNOT_SAVE_POPUP_FILTER 
                             "[ポップアップフィルター設定]\nファイルの保存に失敗しました。\n他のプログラムがファイルを開いている可能性があります。\n他のプログラムを終了させ再度実行して下さい。\n%s"
     IDS_STRING_UPLOAD_LOGGING_TYPE_LAST_BROWSED "最後に読み込んだURLを出力する"
-    IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "トップページのURLを出力する"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "アドレスバーのURLを出力する"
     IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME "アクティブなフレームのURLを出力する"
 END
 
@@ -2877,8 +2877,8 @@ BEGIN
     ID_CANNOT_SAVE_POPUP_FILTER 
                             "[Popup filter]\nCould not save the file.\nIt may be held by some other applications.\nPlease retry after closing other applications.\n%s"
     IDS_STRING_UPLOAD_LOGGING_TYPE_LAST_BROWSED "Output last browsed URL"
-    IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "Output top page URL"
-    IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME "Output active frame URL"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "Output URL of address bar"
+    IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME "Output URL of active frame"
 END
 
 #endif    // 英語 (ニュートラル) resources
