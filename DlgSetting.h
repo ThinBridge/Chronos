@@ -339,6 +339,12 @@ class CDlgSetLog : public CPropertyPage
 {
 	DECLARE_DYNCREATE(CDlgSetLog)
 public:
+	static constexpr int kUploadLoggingTypeLabelIdArray[] = {
+		IDS_STRING_UPLOAD_LOGGING_TYPE_LAST_BROWSED,
+		IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE,
+		IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME
+	};
+
 	CDlgSetLog();
 	//{{AFX_DATA(CDlgSetTab1)
 #pragma warning(push)
@@ -351,6 +357,7 @@ public:
 	};
 #pragma warning(pop)
 	//}}AFX_DATA
+	CComboBox m_ComboUploadLoggingType;
 
 	// オーバーライド
 	// ClassWizard は仮想関数のオーバーライドを生成します。

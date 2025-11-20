@@ -932,6 +932,12 @@ public:
 		MANUAL_MEDIA_APPROVAL,
 		DEFAULT_MEDIA_APPROVAL
 	};
+	enum class EnumUploadLoggingURLType
+	{
+		LAST_BROWSED_URL,
+		MAIN_FRAME,
+		ACTIVE_FRAME
+	};
 	void Clear()
 	{
 		EnableAdvancedLogMode = 0;
@@ -984,6 +990,7 @@ public:
 
 		EnableLogging = 0;
 		EnableUploadLogging = 0;
+		UploadLoggingURLType = 0;
 		EnableDownloadLogging = 0;
 		EnableBrowsingLogging = 0;
 		EnableAccessAllLogging = 0;
@@ -1075,6 +1082,7 @@ public:
 
 		Data.EnableLogging = EnableLogging;
 		Data.EnableUploadLogging = EnableUploadLogging;
+		Data.UploadLoggingURLType = UploadLoggingURLType;
 		Data.EnableDownloadLogging = EnableDownloadLogging;
 		Data.EnableBrowsingLogging = EnableBrowsingLogging;
 		Data.EnableAccessAllLogging = EnableAccessAllLogging;
@@ -1183,6 +1191,7 @@ private:
 	//////////////////////////////////////////////////
 	int EnableLogging;
 	int EnableUploadLogging;
+	int UploadLoggingURLType;
 	int EnableDownloadLogging;
 	int EnableBrowsingLogging;
 	int EnableAccessAllLogging;
@@ -1304,6 +1313,7 @@ public:
 		AdvancedLogLevel = 0;
 		EnableLogging = 0;
 		EnableUploadLogging = 0;
+		UploadLoggingURLType = static_cast<int>(AppSettings::EnumUploadLoggingURLType::MAIN_FRAME);
 		EnableDownloadLogging = 0;
 		EnableBrowsingLogging = 0;
 		EnableAccessAllLogging = 0;
@@ -1778,6 +1788,22 @@ public:
 					EnableUploadLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
+				if (strTemp2.CompareNoCase(_T("UploadLoggingURLType")) == 0)
+				{
+					int iW = 0;
+					iW = _ttoi(strTemp3);
+					if (static_cast<int>(AppSettings::EnumUploadLoggingURLType::LAST_BROWSED_URL) <= iW &&
+					    iW <= static_cast<int>(AppSettings::EnumUploadLoggingURLType::ACTIVE_FRAME))
+					{
+						UploadLoggingURLType = iW;
+					}
+					else
+					{
+						// Regard as no permission for invalid value
+						UploadLoggingURLType = static_cast<int>(AppSettings::EnumUploadLoggingURLType::MAIN_FRAME);
+					}
+					continue;
+				}
 				if (strTemp2.CompareNoCase(_T("EnableDownloadLogging")) == 0)
 				{
 					EnableDownloadLogging = (strTemp3 == _T("1")) ? TRUE : FALSE;
@@ -2071,6 +2097,7 @@ public:
 		strRet += EXTVAL(LogMethod);
 		strRet += EXTVAL(EnableDownloadLogging);
 		strRet += EXTVAL(EnableUploadLogging);
+		strRet += EXTVAL(UploadLoggingURLType);
 		strRet += EXTVAL(EnableBrowsingLogging);
 		strRet += EXTVAL(EnableAccessAllLogging);
 	
@@ -2170,6 +2197,7 @@ public:
 
 	inline BOOL IsEnableLogging() { return EnableLogging; }
 	inline BOOL IsEnableUploadLogging() { return EnableUploadLogging; }
+	inline int GetUploadLoggingURLType() { return UploadLoggingURLType; }
 	inline BOOL IsEnableDownloadLogging() { return EnableDownloadLogging; }
 	inline BOOL IsEnableBrowsingLogging() { return EnableBrowsingLogging; }
 	inline BOOL IsEnableAccessAllLogging() { return EnableAccessAllLogging; }
@@ -2289,6 +2317,7 @@ public:
 		}
 	}
 	inline void SetEnableUploadLogging(DWORD dVal) { EnableUploadLogging = dVal ? 1 : 0; }
+	inline void SetUploadLoggingURLType(DWORD dVal) { UploadLoggingURLType = dVal; }
 	inline void SetEnableDownloadLogging(DWORD dVal) { EnableDownloadLogging = dVal ? 1 : 0; }
 	inline void SetEnableBrowsingLogging(DWORD dVal) { EnableBrowsingLogging = dVal ? 1 : 0; }
 	inline void SetEnableAccessAllLogging(DWORD dVal) { EnableAccessAllLogging = dVal ? 1 : 0; }

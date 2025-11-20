@@ -24,7 +24,8 @@ public:
 	void SetWheelZoom(int iDel);
 	double m_dbZoomSize;
 	double m_dbZoomSizeDefault;
-	CString m_strURL;
+	CString m_strTopPageURL;
+	CString m_strLastBrowsedURL;
 	//scale = 100 * 1.2^zoomSize -> zoomSize = log1.2_(scale / 100)
 	//https://www.magpcss.org/ceforum/viewtopic.php?f=6&t=11491
 	//ここでは敢えて昇順に宣言しているが、std::mapは実際の宣言順に関わらず昇順になる点に注意。
@@ -91,6 +92,19 @@ public:
 		{
 			CefString strURL;
 			strURL = m_cefBrowser->GetMainFrame()->GetURL();
+			strRet = (LPCWSTR)strURL.c_str();
+		}
+		return strRet;
+	}
+	CString GetFocusedFrameURL()
+	{
+		CString strRet;
+		if (IsBrowserNull())
+			return strRet;
+		if (m_cefBrowser->GetFocusedFrame())
+		{
+			CefString strURL;
+			strURL = m_cefBrowser->GetFocusedFrame()->GetURL();
 			strRet = (LPCWSTR)strURL.c_str();
 		}
 		return strRet;
