@@ -2712,7 +2712,7 @@ CDlgSetFileMgr::CDlgSetFileMgr() : CPropertyPage(CDlgSetFileMgr::IDD)
 void CDlgSetFileMgr::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyPage::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_EnableOpendOp, m_Combo);
+	DDX_Control(pDX, IDC_EnableOpenedOp, m_Combo);
 }
 
 BEGIN_MESSAGE_MAP(CDlgSetFileMgr, CPropertyPage)
@@ -2740,16 +2740,16 @@ BOOL CDlgSetFileMgr::OnInitDialog()
 		intoOpenOpLabel.LoadString(gInfoOpenOp[i]);
 		m_Combo.AddString(intoOpenOpLabel);
 	}
-	int iEnableOpendOp = 0;
-	iEnableOpendOp = theApp.m_AppSettingsDlgCurrent.GetEnableOpendOp();
-	if (iEnableOpendOp < 0 || iEnableOpendOp >= InfoOpenOpMaxCnt)
-		iEnableOpendOp = 0;
-	m_Combo.SetCurSel(iEnableOpendOp);
+	int iEnableOpenedOp = 0;
+	iEnableOpenedOp = theApp.m_AppSettingsDlgCurrent.GetEnableOpenedOp();
+	if (iEnableOpenedOp < 0 || iEnableOpenedOp >= InfoOpenOpMaxCnt)
+		iEnableOpenedOp = 0;
+	m_Combo.SetCurSel(iEnableOpenedOp);
 
-	if (theApp.m_AppSettingsDlgCurrent.IsDisableOpendOpAlert())
-		((CButton*)GetDlgItem(IDC_DisableOpendOpAlert))->SetCheck(1);
+	if (theApp.m_AppSettingsDlgCurrent.IsDisableOpenedOpAlert())
+		((CButton*)GetDlgItem(IDC_DisableOpenedOpAlert))->SetCheck(1);
 	else
-		((CButton*)GetDlgItem(IDC_DisableOpendOpAlert))->SetCheck(0);
+		((CButton*)GetDlgItem(IDC_DisableOpenedOpAlert))->SetCheck(0);
 
 	if (theApp.m_AppSettingsDlgCurrent.IsShowUploadTab())
 		((CButton*)GetDlgItem(IDC_ShowUploadTab))->SetCheck(1);
@@ -2831,12 +2831,12 @@ LRESULT CDlgSetFileMgr::Set_OK(WPARAM wParam, LPARAM lParam)
 
 	int iID = 0;
 	iID = m_Combo.GetCurSel();
-	theApp.m_AppSettingsDlgCurrent.SetEnableOpendOp(iID);
+	theApp.m_AppSettingsDlgCurrent.SetEnableOpenedOp(iID);
 
-	if (((CButton*)GetDlgItem(IDC_DisableOpendOpAlert))->GetCheck() == 1)
-		theApp.m_AppSettingsDlgCurrent.SetDisableOpendOpAlert(1);
+	if (((CButton*)GetDlgItem(IDC_DisableOpenedOpAlert))->GetCheck() == 1)
+		theApp.m_AppSettingsDlgCurrent.SetDisableOpenedOpAlert(1);
 	else
-		theApp.m_AppSettingsDlgCurrent.SetDisableOpendOpAlert(0);
+		theApp.m_AppSettingsDlgCurrent.SetDisableOpenedOpAlert(0);
 
 	if (((CButton*)GetDlgItem(IDC_ShowUploadTab))->GetCheck() == 1)
 		theApp.m_AppSettingsDlgCurrent.SetShowUploadTab(1);
