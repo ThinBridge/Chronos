@@ -320,7 +320,7 @@
 #define IDC_ShowUploadTab               1019
 #define IDC_CHECK_ENABLE_CUSTOM_SCRIPT  1020
 #define IDC_UploadSyncInterval          1021
-#define IDC_EnableOpendOp               1022
+#define IDC_EnableOpenedOp               1022
 #define IDC_EnableUploadSync            1023
 #define IDC_EDIT_PW_NEW                 1024
 #define IDC_EDIT_PW_NEW2                1025
@@ -342,7 +342,7 @@
 #define IDC_TransferSubFolder           1043
 #define IDC_UploadPath                  1044
 #define IDC_EDIT_SEARCH                 1045
-#define IDC_DisableOpendOpAlert         1046
+#define IDC_DisableOpenedOpAlert         1046
 #define IDC_SetShowUploadTab            1047
 #define IDC_EDIT_PW_CURRENT             1048
 #define IDC_CHECK_DISABLE_MULTIPLE_INSTANCE 1049

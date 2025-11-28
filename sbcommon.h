@@ -1003,13 +1003,13 @@ public:
 		RootPath.Empty();
 		UploadBasePath.Empty();
 		ExtFilter.Empty();
-		EnableOpendOp = 0;
+		EnableOpenedOp = 0;
 		EnableTransferLog = 0;
 		EnableUploadSync = 0;
 		EnableUploadSyncMirror = 0;
 		UploadSyncInterval = 0;
 		EnableAutoTransfer = 0;
-		DisableOpendOpAlert = 0;
+		DisableOpenedOpAlert = 0;
 		DisableExitOpAlert = 0;
 		ConfirmAutoRefresh = 0;
 		TransferPath.Empty();
@@ -1095,13 +1095,13 @@ public:
 		Data.RootPath = RootPath;
 		Data.UploadBasePath = UploadBasePath;
 		Data.ExtFilter = ExtFilter;
-		Data.EnableOpendOp = EnableOpendOp;
+		Data.EnableOpenedOp = EnableOpenedOp;
 		Data.EnableTransferLog = EnableTransferLog;
 		Data.EnableUploadSync = EnableUploadSync;
 		Data.EnableUploadSyncMirror = EnableUploadSyncMirror;
 		Data.UploadSyncInterval = UploadSyncInterval;
 		Data.EnableAutoTransfer = EnableAutoTransfer;
-		Data.DisableOpendOpAlert = DisableOpendOpAlert;
+		Data.DisableOpenedOpAlert = DisableOpenedOpAlert;
 		Data.DisableExitOpAlert = DisableExitOpAlert;
 		Data.ConfirmAutoRefresh = ConfirmAutoRefresh;
 		Data.TransferPath = TransferPath;
@@ -1203,9 +1203,9 @@ private:
 	//ChFiler---------------------------------
 	CString RootPath;
 	CString ExtFilter;
-	int EnableOpendOp;
+	int EnableOpenedOp;
 	int EnableTransferLog;
-	int DisableOpendOpAlert;
+	int DisableOpenedOpAlert;
 	int DisableExitOpAlert;
 	int ConfirmAutoRefresh;
 	CString TransferPath;
@@ -1326,13 +1326,13 @@ public:
 		RootPath = _T("B:\\");
 		UploadBasePath = _T("O:\\");
 		ExtFilter = _T(".*");
-		EnableOpendOp = 1;
+		EnableOpenedOp = 1;
 		EnableTransferLog = 0;
 		EnableUploadSync = 0;
 		EnableUploadSyncMirror = 0;
 		UploadSyncInterval = 5000;
 		EnableAutoTransfer = 0;
-		DisableOpendOpAlert = 0;
+		DisableOpenedOpAlert = 0;
 		DisableExitOpAlert = 2;
 		ConfirmAutoRefresh = 2;
 		TransferPath = _T("");
@@ -1821,14 +1821,15 @@ public:
 				}
 
 				//ChFiler---------------------------------
+				// OpendはOpenedの誤字だが、既に設定ファイルに記載されている値のため、下位互換性のために修正しない。
 				if (strTemp2.CompareNoCase(_T("EnableOpendOp")) == 0)
 				{
 					int iW = 0;
 					iW = _ttoi(strTemp3);
 					if (0 <= iW && iW <= 2)
-						EnableOpendOp = iW;
+						EnableOpenedOp = iW;
 					else
-						EnableOpendOp = 0;
+						EnableOpenedOp = 0;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("EnableTransferLog")) == 0)
@@ -1836,9 +1837,10 @@ public:
 					EnableTransferLog = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
+				// OpendはOpenedの誤字だが、既に設定ファイルに記載されている値のため、下位互換性のために修正しない。
 				if (strTemp2.CompareNoCase(_T("DisableOpendOpAlert")) == 0)
 				{
-					DisableOpendOpAlert = (strTemp3 == _T("1")) ? TRUE : FALSE;
+					DisableOpenedOpAlert = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("DisableExitOpAlert")) == 0)
@@ -2115,8 +2117,8 @@ public:
 		strRet += EXTVAL(EnableUploadSyncMirror);
 		strRet += EXTVAL(UploadSyncInterval);
 		strRet += EXTVAL(EnableAutoTransfer);
-		strRet += EXTVAL(EnableOpendOp);
-		strRet += EXTVAL(DisableOpendOpAlert);
+		strRet += EXTVAL(EnableOpenedOp);
+		strRet += EXTVAL(DisableOpenedOpAlert);
 
 		strRet += _T("# non GUI parameters\n");
 		strRet += EXTVAL(CEFCommandLine);
@@ -2218,13 +2220,13 @@ public:
 	inline CString GetExitMessage() { return ExitMessage; }
 
 	//ChFiler---------------------------------
-	inline int GetEnableOpendOp() { return EnableOpendOp; }
+	inline int GetEnableOpenedOp() { return EnableOpenedOp; }
 	inline BOOL IsEnableTransferLog() { return EnableTransferLog; }
 	inline BOOL IsEnableUploadSync() { return EnableUploadSync; }
 	inline BOOL IsEnableUploadSyncMirror() { return EnableUploadSyncMirror; }
 	inline int GetUploadSyncInterval() { return UploadSyncInterval; }
 	inline BOOL IsEnableAutoTransfer() { return EnableAutoTransfer; }
-	inline BOOL IsDisableOpendOpAlert() { return DisableOpendOpAlert; }
+	inline BOOL IsDisableOpenedOpAlert() { return DisableOpenedOpAlert; }
 	inline BOOL IsDisableExitOpAlert() { return DisableExitOpAlert; }
 	inline int GetConfirmAutoRefresh() { return ConfirmAutoRefresh; }
 	inline BOOL IsShowUploadTab() { return ShowUploadTab; }
@@ -2338,13 +2340,13 @@ public:
 	inline void SetExitMessage(LPCTSTR str) { ExitMessage = str; }
 
 	//ChFiler---------------------------------
-	inline void SetEnableOpendOp(DWORD dVal) { EnableOpendOp = dVal; }
+	inline void SetEnableOpenedOp(DWORD dVal) { EnableOpenedOp = dVal; }
 	inline void SetEnableTransferLog(DWORD dVal) { EnableTransferLog = dVal; }
 	inline void SetEnableUploadSync(DWORD dVal) { EnableUploadSync = dVal; }
 	inline void SetEnableUploadSyncMirror(DWORD dVal) { EnableUploadSyncMirror = dVal; }
 	inline void SetUploadSyncInterval(DWORD dVal) { UploadSyncInterval = dVal; }
 	inline void SetEnableAutoTransfer(DWORD dVal) { EnableAutoTransfer = dVal; }
-	inline void SetDisableOpendOpAlert(DWORD dVal) { DisableOpendOpAlert = dVal; }
+	inline void SetDisableOpenedOpAlert(DWORD dVal) { DisableOpenedOpAlert = dVal; }
 	inline void SetDisableExitOpAlert(DWORD dVal) { DisableExitOpAlert = dVal; }
 	inline void SetConfirmAutoRefresh(DWORD dVal) { ConfirmAutoRefresh = dVal; }
 	inline void SetShowUploadTab(DWORD dVal) { ShowUploadTab = dVal; }

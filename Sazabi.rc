@@ -358,8 +358,8 @@ BEGIN
     CONTROL         "アップロードアイテムを表示する",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,198,104,10
     GROUPBOX        "機能設定",IDC_STATIC,8,245,343,42
     LTEXT           "右クリックメニュー設定",IDC_STATIC,12,259,64,8
-    COMBOBOX        IDC_EnableOpendOp,87,257,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "「開封済みにする」を行った場合に、確認メッセージを表示しない",IDC_DisableOpendOpAlert,
+    COMBOBOX        IDC_EnableOpenedOp,87,257,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "「開封済みにする」を行った場合に、確認メッセージを表示しない",IDC_DisableOpenedOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,273,202,10
     LTEXT           "※拡張子を複数設定する場合は、|で区切ります。例）.elf|.lnk",IDC_STATIC,12,87,187,8
     CONTROL         "アップロードアイテムを自動更新する",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,213,119,10
@@ -621,8 +621,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 15,1,135,1
- PRODUCTVERSION 15,1,135,1
+ FILEVERSION 16,0,140,0
+ PRODUCTVERSION 16,0,140,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -638,12 +638,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "15.1.135.1"
+            VALUE "FileVersion", "16.0.140.0"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "15.1.135.1"
+            VALUE "ProductVersion", "16.0.140.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -1773,8 +1773,8 @@ BEGIN
     CONTROL         "Show upload items",IDC_ShowUploadTab,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,196,104,10
     GROUPBOX        "Feature options",IDC_STATIC,7,245,343,42
     LTEXT           "Context menu options",IDC_STATIC,11,259,64,8
-    COMBOBOX        IDC_EnableOpendOp,86,257,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpendOpAlert,
+    COMBOBOX        IDC_EnableOpenedOp,86,257,221,127,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Never confirm for ""mark as opened"" command",IDC_DisableOpenedOpAlert,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,273,202,10
     LTEXT           "*Separate multiple file extensions with a pipe |. For example: .elf|.lnk",IDC_STATIC,10,86,267,8
     CONTROL         "Auto-sync upload items",IDC_EnableUploadSync,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,211,119,10
@@ -2042,8 +2042,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 15,1,135,1
- PRODUCTVERSION 15,1,135,1
+ FILEVERSION 16,0,140,0
+ PRODUCTVERSION 16,0,140,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -2059,12 +2059,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "15.1.135.1"
+            VALUE "FileVersion", "16.0.140.0"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "15.1.135.1"
+            VALUE "ProductVersion", "16.0.140.0"
         END
     END
     BLOCK "VarFileInfo"
