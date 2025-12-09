@@ -1822,7 +1822,8 @@ public:
 
 				//ChFiler---------------------------------
 				// OpendはOpenedの誤字だが、既に設定ファイルに記載されている値のため、下位互換性のために修正しない。
-				if (strTemp2.CompareNoCase(_T("EnableOpendOp")) == 0)
+				if (strTemp2.CompareNoCase(_T("EnableOpendOp")) == 0 || 
+					strTemp2.CompareNoCase(_T("EnableOpenedOp")) == 0)
 				{
 					int iW = 0;
 					iW = _ttoi(strTemp3);
@@ -1838,7 +1839,8 @@ public:
 					continue;
 				}
 				// OpendはOpenedの誤字だが、既に設定ファイルに記載されている値のため、下位互換性のために修正しない。
-				if (strTemp2.CompareNoCase(_T("DisableOpendOpAlert")) == 0)
+				if (strTemp2.CompareNoCase(_T("DisableOpendOpAlert")) == 0 ||
+				    strTemp2.CompareNoCase(_T("DisableOpenedOpAlert")) == 0)
 				{
 					DisableOpenedOpAlert = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
