@@ -238,6 +238,9 @@ BOOL CSazabi::InitFunc_Paths()
 
 	m_strExeFullPath.Replace(_T("\\.\\"), _T("\\"));
 	m_strExeFolderPath.Replace(_T("\\.\\"), _T("\\"));
+	m_strUserDataFolderPath = SBUtil::GetLocalAppDataPath();
+	m_strUserDataFolderPath = m_strUserDataFolderPath.TrimRight('\\');
+	m_strUserDataFolderPath += _T("\\Chronos\\");
 	SetLastError(NO_ERROR);
 	m_strExeFileName = szFileName1;
 	m_strExeFileName += szExt1;
@@ -246,11 +249,25 @@ BOOL CSazabi::InitFunc_Paths()
 		m_strExeFileName = m_strThisAppName;
 	}
 
-	m_strSettingFileFullPath = m_strExeFolderPath;
-	m_strSettingFileFullPath += _T("ChronosDefault.conf");
+	m_strDefaultSettingFileFullPath = m_strExeFolderPath + _T("ChronosDefault.conf");
+	if (InVirtualEnvironment() == VE_NA)
+	{
+		m_strSettingFileFullPath = m_strUserDataFolderPath + _T("Chronos.conf");
+	}
+	else
+	{
+		m_strSettingFileFullPath = m_strDefaultSettingFileFullPath;
+	}
 
 	// Debug用のLogファイルを準備
-	m_strLogFileFullPath = m_strExeFolderPath;
+	if (InVirtualEnvironment() == VE_NA)
+	{
+		m_strLogFileFullPath = m_strUserDataFolderPath;
+	}
+	else
+	{
+		m_strLogFileFullPath = m_strExeFolderPath;
+	}
 	m_strLogFileFullPath += _T("Chronos_trace.log");
 
 	m_strDBL_EXE_FullPath = m_strExeFolderPath;
@@ -283,18 +300,35 @@ BOOL CSazabi::InitFunc_Settings()
 
 	if (InVirtualEnvironment() == VE_NA)
 	{
-		// ネイティブ環境の場合、設定ファイルパスが指定されていればそちらから、
-		// 指定されていなければChronosDefault.confから設定データを読み込む
-		CString configPath = m_strSettingFileFullPath;
-		if (PathFileExists(m_strSettingFileFullPath))
+		// ネイティブ環境の場合:
+		//   ユーザー設定の許可がOFFの場合: ChronosDefault.confからのみ設定データを読み込む。
+		//   ユーザー設定の許可がONの場合: 
+		//     まず、ChronosDefault.confから設定を読み込む
+		//     設定ファイルパスが指定されていない場合、ユーザーごとのChronos.confから設定データを読み込む。
+		//     設定ファイルパスが指定されている場合、そちらから設定データを読み込む。
+		if (PathFileExists(m_strDefaultSettingFileFullPath))
 		{
-			this->m_AppSettings.LoadDataFromFile(m_strSettingFileFullPath);
+			this->m_AppSettings.LoadDataFromFile(m_strDefaultSettingFileFullPath);
 		}
-		if (theApp.m_AppSettings.IsEnableUserConfig() && 
-		    PathFileExists(m_strUserConfigFilePath))
+		if (theApp.m_AppSettings.IsEnableUserConfig())
 		{
-			theApp.m_AppSettings.LoadDefaultData();
-			this->m_AppSettings.LoadDataFromFile(m_strUserConfigFilePath);
+			if (PathFileExists(m_strUserConfigFilePath))
+			{
+				theApp.m_AppSettings.LoadDefaultData();
+				this->m_AppSettings.LoadDataFromFile(m_strUserConfigFilePath);
+			}
+			else
+			{
+				if (PathFileExists(m_strSettingFileFullPath))
+				{
+					theApp.m_AppSettings.LoadDefaultData();
+					this->m_AppSettings.LoadDataFromFile(m_strSettingFileFullPath);
+				}
+				else
+				{
+					this->m_AppSettings.SaveDataToFileEx(m_strSettingFileFullPath);
+				}
+			}
 		}
 	}
 	else if (InVirtualEnvironment() == VE_THINAPP)
@@ -725,6 +759,54 @@ void CSazabi::InitProcessSetting()
 	}
 }
 
+CString CSazabi::InitConfFile(CString baseName)
+{
+	CString defaultConfPath = m_strExeFolderPath + baseName + _T("Default.conf");
+	if (InVirtualEnvironment() == VE_THINAPP)
+	{
+		// ThinApp環境では、必ず最初にChronos.exeと同じフォルダのDefault.confから設定データを読み込む
+
+		// 一旦コピーする。
+		CString strTS_Path;
+		strTS_Path = GetThinAppEntryPointFolderPath() + baseName + _T(".conf");
+		// Fileが存在する場合は、コピーする。
+		if (PathFileExists(strTS_Path))
+		{
+			// Fileから設定値を読み込む許可
+			::CopyFile(strTS_Path, defaultConfPath, FALSE);
+			SetLastError(NO_ERROR);
+		}
+		return defaultConfPath;
+	}
+	else
+	{
+		// ネイティブモードではChronos.exeと同じフォルダのDefault.confを変更すると他のユーザーにも影響が出る可能性がある。
+		// また、権限の問題でそもそもDefault.confを変更できない可能性もある。
+		// そのため、ユーザーフォルダにユーザー別ファイルとしてコピーし、そちらを書き込み対象とする。
+		CString userConfigPath = m_strUserDataFolderPath + baseName + _T(".conf");
+		if (PathFileExists(defaultConfPath))
+		{
+			if (theApp.m_AppSettings.IsEnableUserConfig())
+			{
+				// ユーザー設定を許可する場合はユーザー設定ファイルがない場合だけDefault.confで毎回上書する。
+				if (!PathFileExists(userConfigPath))
+				{
+					::CopyFile(defaultConfPath, userConfigPath, FALSE);
+					SetLastError(NO_ERROR);
+				}
+			}
+			else
+			{
+				// ユーザー設定を許可しない場合はDefault.confで毎回上書する。
+				::CopyFile(defaultConfPath, userConfigPath, FALSE);
+				SetLastError(NO_ERROR);
+			}
+		}
+
+		return userConfigPath;
+	}
+}
+
 /*
  * 次の設定ファイルを読み込む。
  *
@@ -743,87 +825,27 @@ void CSazabi::InitReadConfSetting()
 	// -------------------------
 	// RedirectFilterScript.conf
 	// -------------------------
-	CString strRedirectFilterScriptFullPath = m_strExeFolderPath;
-	strRedirectFilterScriptFullPath += _T("RedirectFilterScriptDefault.conf");
-	//一旦コピーする。
-	if (InVirtualEnvironment() == VE_THINAPP)
-	{
-		CString strTS_Path;
-		strTS_Path = GetThinAppEntryPointFolderPath();
-		strTS_Path += _T("RedirectFilterScript.conf");
-		//Fileが存在する場合は、コピーする。
-		if (PathFileExists(strTS_Path))
-		{
-			//Fileから設定値を読み込む許可
-			::CopyFile(strTS_Path, strRedirectFilterScriptFullPath, FALSE);
-			SetLastError(NO_ERROR);
-		}
-	}
+	CString strRedirectFilterScriptFullPath = InitConfFile(_T("RedirectFilterScript"));
 	m_cScriptSrc.SetFilePathAndSetData(strRedirectFilterScriptFullPath);
 
 	// -------------------------
 	// URL_DomainFilter.conf
 	// -------------------------
-	m_strDomainFilterFileFullPath = m_strExeFolderPath;
-	m_strDomainFilterFileFullPath += _T("URL_DomainFilterDefault.conf");
-	//一旦コピーする。
-	if (InVirtualEnvironment() == VE_THINAPP)
-	{
-		CString strTS_Path;
-		strTS_Path = GetThinAppEntryPointFolderPath();
-		strTS_Path += _T("URL_DomainFilter.conf");
-		//Fileが存在する場合は、コピーする。
-		if (PathFileExists(strTS_Path))
-		{
-			//Fileから設定値を読み込む許可
-			::CopyFile(strTS_Path, m_strDomainFilterFileFullPath, FALSE);
-			SetLastError(NO_ERROR);
-		}
-	}
+	m_strDomainFilterFileFullPath = InitConfFile(_T("URL_DomainFilter"));
 	m_cDomainFilterList.SetFilePathAndCreateArrayData(m_strDomainFilterFileFullPath);
 	m_cDomainFilterList.m_LogMsg.Empty();
 
 	// -------------------------
 	// PopupFilter.conf
 	// -------------------------
-	m_strPopupFilterFileFullPath = m_strExeFolderPath;
-	m_strPopupFilterFileFullPath += _T("PopupFilterDefault.conf");
-	// 一旦コピーする。
-	if (InVirtualEnvironment() == VE_THINAPP)
-	{
-		CString strTS_Path;
-		strTS_Path = GetThinAppEntryPointFolderPath();
-		strTS_Path += _T("PopupFilter.conf");
-		// Fileが存在する場合は、コピーする。
-		if (PathFileExists(strTS_Path))
-		{
-			// Fileから設定値を読み込む許可
-			::CopyFile(strTS_Path, m_strPopupFilterFileFullPath, FALSE);
-			SetLastError(NO_ERROR);
-		}
-	}
+	m_strPopupFilterFileFullPath = InitConfFile(_T("PopupFilter"));
 	m_cPopupFilterList.SetFilePathAndCreateArrayData(m_strPopupFilterFileFullPath);
 	m_cPopupFilterList.m_LogMsg.Empty();
 
 	// -------------------------
 	// CustomScript.conf
 	// -------------------------
-	m_strCustomScriptConfFullPath = m_strExeFolderPath;
-	m_strCustomScriptConfFullPath += _T("CustomScriptDefault.conf");
-	//一旦コピーする。
-	if (InVirtualEnvironment() == VE_THINAPP)
-	{
-		CString strTS_Path;
-		strTS_Path = GetThinAppEntryPointFolderPath();
-		strTS_Path += _T("CustomScript.conf");
-		//Fileが存在する場合は、コピーする。
-		if (PathFileExists(strTS_Path))
-		{
-			//Fileから設定値を読み込む許可
-			::CopyFile(strTS_Path, m_strCustomScriptConfFullPath, FALSE);
-			SetLastError(NO_ERROR);
-		}
-	}
+	m_strCustomScriptConfFullPath = InitConfFile(_T("CustomScript"));
 	m_cCustomScriptList.SetFilePathAndCreateArrayData(m_strCustomScriptConfFullPath);
 	m_cCustomScriptList.m_LogMsg.Empty();
 
@@ -1008,6 +1030,7 @@ void CSazabi::ParseSingleParam(CString param) {
 				CString strOriginalUserConfigFilePath = trimmedParam.Right(trimmedParam.GetLength() - pos - 1).Trim(_T('"'));
 				m_strUserConfigFilePath = SBUtil::ExpandEnvironmentStringsEx(strOriginalUserConfigFilePath);
 				
+
 				// 引数解析の際に、パラメータで使用している""が削除される。
 				// そのため、ここで明示的に""を足す。
 				m_strConfigParam.Format(_T("/ChronosConfig=\"%s\""), (LPCTSTR)m_strUserConfigFilePath);
@@ -4181,8 +4204,8 @@ void CSazabi::InitializeCef()
 			strLocalAppPath = m_strExeFolderPath;
 		}
 		strLocalAppPath = strLocalAppPath.TrimRight('\\');
-		m_strCEFCachePathBase.Format(_T("%s\\ChronosCache"), (LPCTSTR)strLocalAppPath);
-		m_strCEFCachePath.Format(_T("%s\\ChronosCache\\%d"), (LPCTSTR)strLocalAppPath, pidCurrent);
+		m_strCEFCachePathBase.Format(_T("%s\\Chronos\\ChronosCache"), (LPCTSTR)strLocalAppPath);
+		m_strCEFCachePath.Format(_T("%s\\Chronos\\ChronosCache\\%d"), (LPCTSTR)strLocalAppPath, pidCurrent);
 	}
 
 	if (IsFirstInstance())
