@@ -4137,10 +4137,10 @@ void CSazabi::InitializeCef()
 	settings.chrome_runtime = true;
 #endif
 
-	settings.no_sandbox = true;
+	if (m_IsSGMode)
+		settings.no_sandbox = true;
 	if (!m_IsSGMode)
 		settings.command_line_args_disabled = true;
-
 	CString strUA = GetUserAgent();
 	if (!strUA.IsEmpty())
 	{
