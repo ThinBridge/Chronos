@@ -98,7 +98,8 @@ public:
 		}
 		else
 		{
-			strPath = SBUtil::GetDownloadFolderPath();
+			m_strRootPath = theApp.m_AppSettings.GetNativeUploadPath();
+			strPath = m_strRootPath.IsEmpty() ? SBUtil::GetDownloadFolderPath() : m_strRootPath;
 		}
 		strPath = strPath.TrimRight('\\');
 		strPath += _T("\\");
@@ -350,7 +351,7 @@ public:
 				return hresult;
 			}
 
-			if (theApp.IsSGMode())
+			if (!m_strRootPath.IsEmpty())
 			{
 				CString strRoot(m_strRootPath);
 				strRoot.MakeUpper();
@@ -456,7 +457,11 @@ public:
 		}
 		else
 		{
-			strPath = SBUtil::GetDownloadFolderPath();
+			strPath = theApp.m_AppSettings.GetNativeDownloadPath();
+			if (strPath.IsEmpty())
+			{
+				strPath = SBUtil::GetDownloadFolderPath();
+			}
 		}
 
 		if (!theApp.m_strLastSelectFolderPath.IsEmpty() && theApp.IsFolderExists(theApp.m_strLastSelectFolderPath))
@@ -742,6 +747,45 @@ public:
 					strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strTSG_Upload, (LPCWSTR)strSelPath);
 					::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 					continue;
+				}
+			}
+			else
+			{
+				CString strSelPathUpper(strSelPath);
+				strSelPathUpper.MakeUpper();
+				if (strSelPathUpper.IsEmpty())
+				{
+					return hresult;
+				}
+				CString strDownloadPath = theApp.m_AppSettings.GetNativeDownloadPath();
+				if (!strDownloadPath.IsEmpty())
+				{
+					strDownloadPath.MakeUpper();
+					if (strSelPathUpper.Find(strDownloadPath) != 0)
+					{
+						CString strMsg;
+						strMsg.Format(L"ダウンロードフォルダー[%s]以外は指定できません。\n\n保存する場所から%sを指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strDownloadPath, (LPCWSTR)strDownloadPath, (LPCWSTR)strSelPath);
+						::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+						// 原因は不明だが、SGモードでは繰り返しm_originalDialog->Show(hwndOwner)を実行しても問題ないが、ネイティブモードでは
+						// メモリアクセス違反が発生しクラッシュする。そのため、Nativeモードではダイアログ自体を閉じるようにする。
+						return E_FAIL;
+					}
+				}
+
+				CStringW strUpload = theApp.m_AppSettings.GetNativeUploadPath();
+				if (!strUpload.IsEmpty())
+				{
+					CStringW strUploadUpper(strUpload);
+					strUploadUpper.MakeUpper();
+					if (strSelPathUpper.Find(strUploadUpper) == 0)
+					{
+						CString strMsg;
+						strMsg.Format(L"アップロードフォルダー[%s]には保存できません。\n\n指定しなおしてください。\n\n選択された場所[%s]", (LPCWSTR)strUploadUpper, (LPCWSTR)strSelPath);
+						::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
+						// 原因は不明だが、SGモードでは繰り返しm_originalDialog->Show(hwndOwner)を実行しても問題ないが、ネイティブモードでは
+						// メモリアクセス違反が発生しクラッシュする。そのため、Nativeモードではダイアログ自体を閉じるようにする。
+						return E_FAIL;
+					}
 				}
 			}
 

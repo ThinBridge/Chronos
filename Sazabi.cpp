@@ -3480,6 +3480,13 @@ void CSazabi::ShowSettingDlg(CWnd* pParentWnd)
 		titleFileMgr.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_FILEMGR);
 		this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetFileMgr), titleFileMgr, IDD_SETTINGS_DLG_FILEMGR, titleFileMgr);
 	}
+	else
+	{
+		//ファイル転送設定
+		CString titleFileTransfer;
+		titleFileTransfer.LoadString(IDS_STRING_SETTINGS_DLG_TITLE_NATIVE_FILE_TRANSFER);
+		this->m_pSettingDlg->AddPage(RUNTIME_CLASS(CDlgSetNativeFileTransfer), titleFileTransfer, IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER, titleFileTransfer);
+	}
 
 	this->m_pSettingDlg->DoModal();
 
