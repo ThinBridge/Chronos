@@ -65,6 +65,8 @@ cmake -E copy_directory "cef-cache\%CEFVER%\build\libcef_dll_wrapper\Release" rl
 cmake -E copy_directory "cef-cache\%CEFVER%\build\libcef_dll_wrapper\Debug" lib
 cmake -E copy "cef-cache\%CEFVER%\Release\libcef.lib" rlib
 cmake -E copy "cef-cache\%CEFVER%\Release\libcef.lib" lib
+cmake -E copy "cef-cache\%CEFVER%\Release\cef_sandbox.lib" rlib
+cmake -E copy "cef-cache\%CEFVER%\Release\cef_sandbox.lib" lib
 
 cmake -E copy_directory "cef-cache\%CEFVER%\Release" D32
 cmake -E copy_directory "cef-cache\%CEFVER%\Release" R32
