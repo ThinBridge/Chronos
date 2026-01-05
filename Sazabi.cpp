@@ -56,6 +56,10 @@ CSazabi::CSazabi()
 	m_bEnforceDeleteCache = FALSE;
 	m_bMultiThreadedMessageLoop = FALSE;
 	m_pMessageLoopWorker = NULL;
+#ifdef CEF_ENABLE_SANDBOX
+	m_pScopedSandbox = NULL;
+	m_pSandboxInfo = NULL;
+#endif
 }
 CSazabi::~CSazabi()
 {
@@ -63,6 +67,12 @@ CSazabi::~CSazabi()
 	{
 		delete m_pAPIHook;
 		m_pAPIHook = NULL;
+#ifdef CEF_ENABLE_SANDBOX
+		delete m_pSandboxInfo;
+		m_pSandboxInfo = NULL;
+		delete m_pScopedSandbox;
+		m_pScopedSandbox = NULL;
+#endif
 	}
 }
 CSazabi theApp;
@@ -4122,6 +4132,15 @@ void CSazabi::InitializeCef()
 
 	CefMainArgs mainargs(m_hInstance);
 	void* sandbox_info = NULL;
+#ifdef CEF_ENABLE_SANDBOX
+	if (!this->IsSGMode())
+	{
+		// SGモードではThinAppによりサンドボックス化されているので、CEFの機能のサンドボックスは使用しない。
+		m_pScopedSandbox = new CefScopedSandboxInfo();
+		m_pSandboxInfo = m_pScopedSandbox->sandbox_info();
+		sandbox_info = m_pSandboxInfo;
+	}
+#endif
 
 	CefSettings settings;
 
@@ -4138,6 +4157,13 @@ void CSazabi::InitializeCef()
 #endif
 
 	settings.no_sandbox = true;
+#ifdef CEF_ENABLE_SANDBOX
+	if (!theApp.IsSGMode())
+	{
+		settings.no_sandbox = false;
+	}
+#endif
+
 	if (!m_IsSGMode)
 		settings.command_line_args_disabled = true;
 
@@ -5136,6 +5162,14 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 #endif
 		CefMainArgs mainargs(hInstance);
 		void* sandbox_info = NULL;
+
+#ifdef CEF_ENABLE_SANDBOX
+		if (!theApp.IsSGMode())
+		{
+			// SGモードではThinAppによりサンドボックス化されているので、CEFの機能のサンドボックスは使用しない。
+			sandbox_info = theApp.m_pSandboxInfo;
+		}
+#endif
 		if (strCommandLineData.Find(_T("--type=renderer")) > 0)
 		{
 			CefRefPtr<CefApp> app;

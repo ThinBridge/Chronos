@@ -51,15 +51,21 @@
 #include "include/wrapper/cef_closure_task.h"
 #pragma warning(pop)
 // Set to 0 to disable sandbox support.
+
+#ifndef _DEBUG
 #define CEF_ENABLE_SANDBOX 1
-#if CEF_ENABLE_SANDBOX
-// The cef_sandbox.lib static library is currently built with VS2010. It may not
-// link successfully with other VS versions.
-#ifdef _DEBUG
-#pragma comment(lib, "lib/cef_sandbox.lib")
-#else
-#pragma comment(lib, "rlib/cef_sandbox.lib")
 #endif
+#if CEF_ENABLE_SANDBOX
+#pragma comment(lib, "wbemuuid.lib")
+#pragma comment(lib, "setupapi.lib")
+#pragma comment(lib, "shlwapi.lib")
+#pragma comment(lib, "dbghelp.lib")
+#pragma comment(lib, "powrprof.lib")
+#pragma comment(lib, "ntdll.lib")
+#pragma comment(lib, "shcore.lib")
+#pragma comment(lib, "runtimeobject.lib")
+#pragma comment(lib, "windowsapp.lib")
+#pragma comment(lib, "rlib/cef_sandbox.lib")
 #endif
 
 #define WM_APP_CEF_LOAD_START	   (WM_APP + 301)

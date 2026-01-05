@@ -21,6 +21,7 @@
 #include "DlgSetting.h"
 #include "DlgDebugWnd.h"
 #include "include\cef_parser.h"
+#include "include/cef_sandbox_win.h"
 #include "MessageLoopWorker.h"
 /////////////////////////////////////////////////////////////////////////////
 // CSazabi:
@@ -96,6 +97,10 @@ public:
 	BOOL m_bToBeShutdown;
 	BOOL m_bMultiThreadedMessageLoop;
 	MessageLoopWorker* m_pMessageLoopWorker;
+#ifdef CEF_ENABLE_SANDBOX
+	CefScopedSandboxInfo* m_pScopedSandbox;
+	void* m_pSandboxInfo;
+#endif
 
 	CefRefPtr<ClientApp> m_cefApp;
 
