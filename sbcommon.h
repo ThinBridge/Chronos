@@ -1053,6 +1053,10 @@ public:
 
 		//Config file-------------------------------
 		EnableUserConfig = 0;
+
+		// File Transfer----------------------------
+		NativeDownloadPath.Empty();
+		NativeUploadPath.Empty();
 	}
 	void CopyData(AppSettings& Data)
 	{
@@ -1145,6 +1149,10 @@ public:
 
 		//Config file-------------------------------
 		Data.EnableUserConfig = EnableUserConfig;
+
+		// File Transfer----------------------------
+		Data.NativeDownloadPath = NativeDownloadPath;
+		Data.NativeUploadPath = NativeUploadPath;
 	}
 
 private:
@@ -1252,7 +1260,9 @@ private:
 	int TASK_LIST_MODE_DETAIL;
 	//Config file-------------------------------
 	int EnableUserConfig;
-
+	// File Transfer----------------------------
+	CString NativeDownloadPath;
+	CString NativeUploadPath;
 
 public:
 	//SystemGuardModeの判定用
@@ -1376,6 +1386,10 @@ public:
 
 		//Config file-------------------------------
 		EnableUserConfig = 1;
+
+		// File Transfer----------------------------
+		NativeDownloadPath = _T("");
+		NativeUploadPath = _T("");
 	}
 
 	BOOL SaveDataToFileEx(LPCTSTR pstrFilePath)
@@ -1964,6 +1978,16 @@ public:
 					EnableUserConfig = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
+				if (strTemp2.CompareNoCase(_T("NativeDownloadPath")) == 0)
+				{
+					NativeDownloadPath = strTemp3;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("NativeUploadPath")) == 0)
+				{
+					NativeUploadPath = strTemp3;
+					continue;
+				}
 			}
 		}
 		in.Close();
@@ -2144,7 +2168,10 @@ public:
 		strRet += EXTVAL(EnableAutoTransfer);
 		strRet += EXTVAL(EnableOpenedOp);
 		strRet += EXTVAL(DisableOpenedOpAlert);
-
+		// File Transfer----------------------------
+		strRet += _T("# Native File Transfer\n");
+		strRet += EXTVAL(NativeDownloadPath);
+		strRet += EXTVAL(NativeUploadPath);
 		strRet += _T("# non GUI parameters\n");
 		strRet += EXTVAL(CEFCommandLine);
 		strRet += EXTVAL(EnableMediaAccessPermission);
@@ -2266,6 +2293,10 @@ public:
 	//Config file-------------------------------
 	inline BOOL IsEnableUserConfig() { return EnableUserConfig; }
 
+	// File Transfer----------------------------
+	inline CString GetNativeDownloadPath() { return NativeDownloadPath; }
+	inline CString GetNativeUploadPath() { return NativeUploadPath; }
+
 	//Set Functions Setter##########################################################
 	inline void SetAdvancedLogMode(DWORD dVal) { EnableAdvancedLogMode = dVal ? 1 : 0; }
 	inline void SetAdvancedLogVerboseMode(DWORD dVal) { EnableAdvancedLogVerboseMode = dVal ? 1 : 0; }
@@ -2385,6 +2416,10 @@ public:
 
 	// Config file-------------------------------
 	inline void SetEnableUserConfig(DWORD dVal) { EnableUserConfig = dVal; }
+
+	// File Transfer----------------------------
+	inline void SetNativeUploadPath(LPCTSTR str) { NativeUploadPath = str; }
+	inline void SetNativeDownloadPath(LPCTSTR str) { NativeDownloadPath = str; }
 };
 
 class CIconHelper
