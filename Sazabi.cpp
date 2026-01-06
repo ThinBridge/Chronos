@@ -329,6 +329,9 @@ BOOL CSazabi::InitFunc_Settings()
 					this->m_AppSettings.SaveDataToFileEx(m_strSettingFileFullPath);
 				}
 			}
+			// このパスを通るときはユーザー設定を使用しているので、強制的にEnableUserConfigをTRUEにする。
+			// ユーザー設定でEnableUserConfigにFALSEを指定していた場合の対策。
+			theApp.m_AppSettings.SetEnableUserConfig(TRUE);
 		}
 	}
 	else if (InVirtualEnvironment() == VE_THINAPP)
