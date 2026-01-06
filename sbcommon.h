@@ -2384,7 +2384,7 @@ public:
 	inline void SetTASK_LIST_MODE_DETAIL(DWORD dVal) { TASK_LIST_MODE_DETAIL = dVal; }
 
 	// Config file-------------------------------
-	inline int SetEnableUserConfig(DWORD dVal) { EnableUserConfig = dVal; }
+	inline void SetEnableUserConfig(DWORD dVal) { EnableUserConfig = dVal; }
 };
 
 class CIconHelper
