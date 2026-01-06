@@ -866,6 +866,29 @@ namespace SBUtil
 		}
 		return strRet;
 	}
+	static CString ExpandEnvironmentStringsEx(LPCTSTR lpSrc)
+	{
+		CString strRet;
+		if (!lpSrc)
+		{
+			return strRet;
+		}
+		DWORD dwSize = ExpandEnvironmentStrings(lpSrc, NULL, 0);
+		if (dwSize == 0)
+		{
+			return lpSrc;
+		}
+		LPWSTR pBuf = strRet.GetBuffer(dwSize);
+		dwSize = ExpandEnvironmentStrings(lpSrc, pBuf, dwSize);
+		strRet.ReleaseBuffer();
+		if (dwSize == 0)
+		{
+			return lpSrc;
+		}
+		return strRet;
+	}
+
+
 }; // namespace SBUtil
 //////////////////////////////////////////////////////////////////////
 static int wildcmp(const char* wild, const char* string)
