@@ -51,7 +51,7 @@ public:
 		}
 	}
 
-	HRESULT SetUp()
+	HRESULT SetUp(HWND hwndOwner)
 	{
 
 		CString strPath;
@@ -116,6 +116,9 @@ public:
 		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
 		if (FAILED(hresult))
 		{
+			CString strMsg;
+			strMsg.Format(L"アップロードフォルダー[%s]の取得に失敗しました。\n\nアップロードフォルダーが存在し、アクセス可能であることを確認してください。", (LPCWSTR)strPath);
+			::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 			return hresult;
 		}
 
@@ -315,7 +318,7 @@ public:
 			return E_ACCESSDENIED;
 		}
 
-		HRESULT hresult = SetUp();
+		HRESULT hresult = SetUp(hwndOwner);
 		if (FAILED(hresult))
 			return hresult;
 
@@ -430,7 +433,7 @@ public:
 		}
 	}
 
-	HRESULT SetUp()
+	HRESULT SetUp(HWND hwndOwner)
 	{
 		FILEOPENDIALOGOPTIONS option = 0;
 		CString strPath;
@@ -476,6 +479,9 @@ public:
 		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
 		if (FAILED(hresult))
 		{
+			CString strMsg;
+			strMsg.Format(L"ダウンロードフォルダー[%s]の取得に失敗しました。\n\nダウンロードフォルダーが存在し、アクセス可能であることを確認してください。", (LPCWSTR)strPath);
+			::MessageBoxW(hwndOwner, strMsg, theApp.m_strThisAppName, MB_OK | MB_ICONWARNING);
 			return hresult;
 		}
 
@@ -673,7 +679,7 @@ public:
 			return E_ACCESSDENIED;
 		}
 
-		HRESULT hresult = SetUp();
+		HRESULT hresult = SetUp(hwndOwner);
 		if (FAILED(hresult))
 			return hresult;
 
