@@ -66,6 +66,7 @@ CSazabi::~CSazabi()
 	}
 }
 CSazabi theApp;
+void* g_SandboxInfo = NULL;
 
 /*
  * ThinAppの配下のプロセスとしてChronosを起動する。
@@ -165,19 +166,20 @@ BOOL CSazabi::InitFunc_Base()
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
 	CWinApp::InitInstance();
-
 	::CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
 	::OleInitialize(NULL);
+
 	if (!AfxOleInit())
 	{
 		return FALSE;
 	}
-	AfxOleGetMessageFilter()->EnableNotRespondingDialog(FALSE);
-	AfxOleGetMessageFilter()->EnableBusyDialog(FALSE);
-	AfxEnableControlContainer();
 
-	/* Enable Direct2D support */
-	this->EnableD2DSupport();
+	//AfxOleGetMessageFilter()->EnableNotRespondingDialog(FALSE);
+	//AfxOleGetMessageFilter()->EnableBusyDialog(FALSE);
+	//AfxEnableControlContainer();
+
+	///* Enable Direct2D support */
+	//this->EnableD2DSupport();
 	return TRUE;
 }
 
@@ -476,7 +478,6 @@ BOOL CSazabi::InitInstance()
 	}
 
 	m_strThisAppName = gstrThisAppNameR;
-
 	if (!InitFunc_Events())
 	{
 		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
@@ -518,8 +519,10 @@ BOOL CSazabi::InitInstance()
 		CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 		return FALSE;
 	}
+
 	ReflectEnforcedOptionParam();
 	InitAtomParam();
+
 
 	// VOS以外（物理環境で直接このEXEが起動された場合は、VOS環境で再実行）
 	if (!InitFunc_ExecOnVOS())
@@ -535,8 +538,10 @@ BOOL CSazabi::InitInstance()
 		return TRUE;
 	}
 
+
 	// Chronos.exeのバージョンとChronosN.exeのバージョンが異なる場合、警告する
 	CheckChronosVersionMismatch();
+
 
 	// 保存 (ChronosDefault.conf)
 	this->m_AppSettings.SaveDataToFileEx(this->m_strSettingFileFullPath);
@@ -971,7 +976,7 @@ void CSazabi::ParseSingleParam(CString param) {
 	{
 		return;
 	}
-
+	return;
 	if (trimmedParam.Find(_T("-")) == 0 || trimmedParam.Find(_T("/")) == 0)
 	{
 		//-または/で始まる値はオプション
@@ -1041,7 +1046,7 @@ void CSazabi::InitParseCommandLine()
 
 	m_strCommandParam.Empty();
 	m_strOptionParam.Empty();
-
+	return;
 	for (int i = 1; i < __argc; i++)
 	{
 		CString param(__wargv[i]);
@@ -4121,7 +4126,6 @@ void CSazabi::InitializeCef()
 #endif
 
 	CefMainArgs mainargs(m_hInstance);
-	void* sandbox_info = NULL;
 
 	CefSettings settings;
 
@@ -4137,9 +4141,14 @@ void CSazabi::InitializeCef()
 	settings.chrome_runtime = true;
 #endif
 
-	settings.no_sandbox = true;
 	if (!m_IsSGMode)
+	{
 		settings.command_line_args_disabled = true;
+	}
+	else
+	{
+		settings.no_sandbox = true;
+	}
 
 	CString strUA = GetUserAgent();
 	if (!strUA.IsEmpty())
@@ -4187,6 +4196,7 @@ void CSazabi::InitializeCef()
 	{
 		DeleteCEFCacheAll();
 	}
+
 	settings.persist_session_cookies = true;
 	CefString(&settings.root_cache_path) = m_strCEFCachePath;
 	if (!this->m_AppSettings.IsEnableMemcache())
@@ -4238,7 +4248,7 @@ void CSazabi::InitializeCef()
 		settings.log_severity = cef_log_severity_t::LOGSEVERITY_DISABLE;
 	}
 
-	m_bCEFInitialized = CefInitialize(mainargs, settings, m_cefApp.get(), sandbox_info);
+	m_bCEFInitialized = true; // CefInitialize(mainargs, settings, m_cefApp.get(), g_SandboxInfo);
 	if (!m_bMultiThreadedMessageLoop)
 	{
 		m_pMessageLoopWorker = new MessageLoopWorker(m_hInstance);
@@ -5095,8 +5105,8 @@ int MY_WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 		return nReturnCode;
 	}
 
-	nReturnCode = pThread->Run();
-	AfxWinTerm();
+	//nReturnCode = pThread->Run();
+	//AfxWinTerm();
 	return nReturnCode;
 }
 
@@ -5155,4 +5165,65 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 	nRet = MY_WinMain(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	return nRet;
 }
+
+CEF_BOOTSTRAP_EXPORT int RunWinMain(HINSTANCE hInstance,
+	LPTSTR lpCmdLine,
+	int nCmdShow,
+	void* sandbox_info,
+	cef_version_info_t*)
+{
+	//return 1;
+	//#ifdef _DEBUG
+//	::_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
+//#endif
+//	g_SandboxInfo = sandbox_info;
+//	//HMODULE kernel32 = GetModuleHandleA("KERNEL32");
+//	//if (kernel32)
+//	//{
+//	//	typedef BOOL(WINAPI * Proc_pfnSetDllDirectoryW)(LPCWSTR);
+//	//	Proc_pfnSetDllDirectoryW pfnSetDllDirectoryW = (Proc_pfnSetDllDirectoryW)GetProcAddress(kernel32, "SetDllDirectoryW");
+//	//	if (pfnSetDllDirectoryW)
+//	//	{
+//	//		pfnSetDllDirectoryW(L"");
+//	//	}
+//	//	typedef BOOL(WINAPI * Proc_pfnSetSearchPathMode)(DWORD);
+//	//	Proc_pfnSetSearchPathMode pfnSetSearchPathMode = (Proc_pfnSetSearchPathMode)GetProcAddress(kernel32, "SetSearchPathMode");
+//	//	if (pfnSetSearchPathMode)
+//	//	{
+//	//		const DWORD dwBASE_SEARCH_PATH_ENABLE_SAFE_SEARCHMODE = 1;
+//	//		const DWORD dwBASE_SEARCH_PATH_PERMANENT = 0x8000;
+//	//		pfnSetSearchPathMode(dwBASE_SEARCH_PATH_ENABLE_SAFE_SEARCHMODE | dwBASE_SEARCH_PATH_PERMANENT);
+//	//	}
+//	//}
+//	setlocale(LC_ALL, "Japanese");
+//
+//	int nRet = 0;
+//	CString strCommandLineData;
+//	strCommandLineData = ::GetCommandLine();
+//	if (strCommandLineData.Find(_T("--type=")) > 0)
+//	{
+//#if CHROME_VERSION_MAJOR < 112
+//		CefEnableHighDPISupport();
+//#endif
+//		CefMainArgs mainargs(hInstance);
+//		if (strCommandLineData.Find(_T("--type=renderer")) > 0)
+//		{
+//			CefRefPtr<CefApp> app;
+//			app = new AppRenderer();
+//			int exitCode = CefExecuteProcess(mainargs, app.get(), g_SandboxInfo);
+//			if (exitCode >= 0)
+//			{
+//				return exitCode;
+//			}
+//		}
+//		int exit_code = CefExecuteProcess(mainargs, nullptr, g_SandboxInfo);
+//		if (exit_code >= 0)
+//		{
+//			return exit_code;
+//		}
+//	}
+	int nRet = MY_WinMain(hInstance, NULL, lpCmdLine, nCmdShow);
+	return nRet;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

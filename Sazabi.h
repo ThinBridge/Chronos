@@ -8,6 +8,7 @@
 #endif
 #include "StdAfx.h"
 #include "resource.h" // メイン シンボル
+#include "include/cef_sandbox_win.h"
 
 //////////////////////////////////////////////
 #include "Psapi.h"
