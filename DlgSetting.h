@@ -687,6 +687,37 @@ protected:
 	void ChangeStateULS();
 };
 
+class CDlgSetNativeFileTransfer : public CPropertyPage
+{
+	DECLARE_DYNCREATE(CDlgSetNativeFileTransfer)
+public:
+	CDlgSetNativeFileTransfer();
+	virtual ~CDlgSetNativeFileTransfer() {};
+	autoresize::CAutoResize m_autoResize;
+#pragma warning(push)
+// C26812 列挙型 'type-name' はスコープ外です。 'enum' より 'enum class' を優先します (Enum.3)
+// これはダイアログを自動生成した際に作成されるenumなので、enum classにせず、警告の方を無視する。
+#pragma warning(disable : 26812)
+	enum
+	{
+		IDD = IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER
+	};
+#pragma warning(pop)
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);
+
+protected:
+	//	afx_msg void OnButtonPopAdd();
+	virtual BOOL OnInitDialog();
+	afx_msg void OnDestroy() { CPropertyPage::OnDestroy(); }
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnPaint();
+	afx_msg void OnEnableCtrl();
+	LRESULT Set_OK(WPARAM wParam, LPARAM lParam);
+	DECLARE_MESSAGE_MAP()
+};
+
 class CDlgSetCustomScript : public CPropertyPage
 {
 	DECLARE_DYNCREATE(CDlgSetCustomScript)

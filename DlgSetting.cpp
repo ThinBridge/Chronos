@@ -2855,6 +2855,47 @@ LRESULT CDlgSetFileMgr::Set_OK(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 /////////////////////////////////////////////////////////////////////////////
+// CDlgSetNativeFileTransfer ダイアログ
+
+IMPLEMENT_DYNCREATE(CDlgSetNativeFileTransfer, CPropertyPage)
+CDlgSetNativeFileTransfer::CDlgSetNativeFileTransfer() : CPropertyPage(CDlgSetNativeFileTransfer::IDD)
+{
+}
+
+void CDlgSetNativeFileTransfer::DoDataExchange(CDataExchange* pDX)
+{
+	CPropertyPage::DoDataExchange(pDX);
+}
+
+BEGIN_MESSAGE_MAP(CDlgSetNativeFileTransfer, CPropertyPage)
+	ON_WM_DESTROY()
+	ON_MESSAGE(ID_SETTING_OK, Set_OK)
+END_MESSAGE_MAP()
+
+BOOL CDlgSetNativeFileTransfer::OnInitDialog()
+{
+	CPropertyPage::OnInitDialog();
+	SetDlgItemText(IDC_NativeTransferPath, theApp.m_AppSettingsDlgCurrent.GetNativeDownloadPath());
+	SetDlgItemText(IDC_NativeUploadPath, theApp.m_AppSettingsDlgCurrent.GetNativeUploadPath());
+	return FALSE;
+}
+
+LRESULT CDlgSetNativeFileTransfer::Set_OK(WPARAM wParam, LPARAM lParam)
+{
+	CString strValue;
+
+	strValue.Empty();
+	GetDlgItemText(IDC_NativeTransferPath, strValue);
+	theApp.m_AppSettingsDlgCurrent.SetNativeDownloadPath(strValue);
+
+	strValue.Empty();
+	GetDlgItemText(IDC_NativeUploadPath, strValue);
+	theApp.m_AppSettingsDlgCurrent.SetNativeUploadPath(strValue);
+
+	return 0;
+}
+
+/////////////////////////////////////////////////////////////////////////////
 // CDlgSetCustomScript プロパティ ページ
 IMPLEMENT_DYNCREATE(CDlgSetCustomScript, CPropertyPage)
 CDlgSetCustomScript::CDlgSetCustomScript() : CPropertyPage(CDlgSetCustomScript::IDD)

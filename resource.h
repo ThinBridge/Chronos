@@ -303,6 +303,8 @@
 #define IDD_DLG_POPUP                   443
 #define IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE 443
 #define IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME 444
+#define IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER 445
+#define IDS_STRING_SETTINGS_DLG_TITLE_NATIVE_FILE_TRANSFER 446
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002
@@ -320,7 +322,7 @@
 #define IDC_ShowUploadTab               1019
 #define IDC_CHECK_ENABLE_CUSTOM_SCRIPT  1020
 #define IDC_UploadSyncInterval          1021
-#define IDC_EnableOpenedOp               1022
+#define IDC_EnableOpenedOp              1022
 #define IDC_EnableUploadSync            1023
 #define IDC_EDIT_PW_NEW                 1024
 #define IDC_EDIT_PW_NEW2                1025
@@ -342,7 +344,7 @@
 #define IDC_TransferSubFolder           1043
 #define IDC_UploadPath                  1044
 #define IDC_EDIT_SEARCH                 1045
-#define IDC_DisableOpenedOpAlert         1046
+#define IDC_DisableOpenedOpAlert        1046
 #define IDC_SetShowUploadTab            1047
 #define IDC_EDIT_PW_CURRENT             1048
 #define IDC_CHECK_DISABLE_MULTIPLE_INSTANCE 1049
@@ -369,6 +371,8 @@
 #define IDC_CERTIFICATE_STATIC_SITE_INFO 1096
 #define IDC_CHECK_ENABLE_POPUP_FILTER   1097
 #define IDC_UPLOAD_LOGGING_URL_TYPE_COMBO 1098
+#define IDC_NativeUploadPath            1100
+#define IDC_NativeTransferPath          1101
 #define IDC_PAGE_FRAME                  1200
 #define IDC_TREE_CTRL                   1201
 #define IDC_CAPTION_BAR                 1202
@@ -534,7 +538,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        442
 #define _APS_NEXT_COMMAND_VALUE         33015
-#define _APS_NEXT_CONTROL_VALUE         1099
+#define _APS_NEXT_CONTROL_VALUE         1102
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
