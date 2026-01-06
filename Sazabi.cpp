@@ -1005,7 +1005,9 @@ void CSazabi::ParseSingleParam(CString param) {
 			int pos = trimmedParam.Find(_T('='));
 			if (pos != -1)
 			{
-				m_strUserConfigFilePath = trimmedParam.Right(trimmedParam.GetLength() - pos - 1).Trim(_T('"'));
+				CString strOriginalUserConfigFilePath = trimmedParam.Right(trimmedParam.GetLength() - pos - 1).Trim(_T('"'));
+				m_strUserConfigFilePath = SBUtil::ExpandEnvironmentStringsEx(strOriginalUserConfigFilePath);
+				
 				// 引数解析の際に、パラメータで使用している""が削除される。
 				// そのため、ここで明示的に""を足す。
 				m_strConfigParam.Format(_T("/ChronosConfig=\"%s\""), (LPCTSTR)m_strUserConfigFilePath);
