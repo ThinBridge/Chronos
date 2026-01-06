@@ -876,16 +876,15 @@ namespace SBUtil
 		DWORD dwSize = ExpandEnvironmentStrings(lpSrc, NULL, 0);
 		if (dwSize == 0)
 		{
-			return strRet;
+			return lpSrc;
 		}
 		LPWSTR pBuf = strRet.GetBuffer(dwSize);
-		if (ExpandEnvironmentStrings(strRet, pBuf, dwSize) == 0)
-		{
-			strRet.ReleaseBuffer(0);
-			return strRet;
-		}
-		ExpandEnvironmentStrings(lpSrc, pBuf, dwSize);
+		dwSize = ExpandEnvironmentStrings(lpSrc, pBuf, dwSize);
 		strRet.ReleaseBuffer();
+		if (dwSize == 0)
+		{
+			return lpSrc;
+		}
 		return strRet;
 	}
 
