@@ -122,6 +122,7 @@ public:
 	CString m_strExeFullPath;
 	CString m_strExeFileName;
 	CString m_strExeFolderPath;
+	CString m_strUserDataFolderPath;
 	CString m_strLogFileFullPath;
 	CString m_strRecoveryFileFullPath;
 	CString m_strRecoveryFileName;
@@ -133,6 +134,7 @@ public:
 	CString m_strDBL_EXE_Default_FullPath;
 	CString m_strDBL_EXE_FullPath;
 	CString m_strDBL_EXE_FolderPath;
+	CString m_strDefaultSettingFileFullPath;
 	CString m_strSettingFileFullPath;
 
 	CString m_strCEFCachePathBase;
@@ -274,6 +276,7 @@ public:
 	void InitAtomParam();
 	void ReflectEnforcedOptionParam();
 	BOOL InitMultipleInstance();
+	CString InitConfFile(CString baseName);
 	void InitReadConfSetting();
 	void InitializeCef();
 	////////////////////////////////////////////////
