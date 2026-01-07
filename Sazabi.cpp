@@ -2553,7 +2553,7 @@ void CSazabi::ExecStartUpProgram(const CString& strProgramPath, const CString& s
 			strMessage.Format(_T("ExecStartUpProgram: Failed to ShellExecute: Program Path[%ls], Program Arguments[%ls], Last Error[0x%08x]"), (LPCWSTR)strProgramPath, (LPCWSTR)strProgramArguments, lastErr);
 			WriteDebugTraceDateTime(strMessage, DEBUG_LOG_TYPE_DE);
 			SetLastError(NO_ERROR);
-			strMessage.Format(_T("起動時に実行するプログラムの実行に失敗しました。プログラム[%ls], プログラム引数[%ls]\n\nプログラムのパスと引数が正しいこと、実行可能であることを確認してください。"), (LPCWSTR)strProgramPath, (LPCWSTR)strProgramArguments);
+			strMessage.Format(_T("起動時に実行するプログラムの実行に失敗しました: プログラム[%ls], プログラム引数[%ls]。\n\nプログラムのパスと引数が正しいこと、実行可能であることを確認してください。"), (LPCWSTR)strProgramPath, (LPCWSTR)strProgramArguments);
 			::MessageBox(NULL, strMessage, m_strThisAppName, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
 		}
 	}
