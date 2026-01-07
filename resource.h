@@ -303,6 +303,8 @@
 #define IDD_DLG_POPUP                   443
 #define IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE 443
 #define IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME 444
+#define IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER 445
+#define IDS_STRING_SETTINGS_DLG_TITLE_NATIVE_FILE_TRANSFER 446
 #define IDC_EDIT1                       1000
 #define IDC_EDIT_PW                     1001
 #define IDC_EDIT2                       1002
@@ -371,6 +373,8 @@
 #define IDC_CERTIFICATE_STATIC_SITE_INFO 1096
 #define IDC_CHECK_ENABLE_POPUP_FILTER   1097
 #define IDC_UPLOAD_LOGGING_URL_TYPE_COMBO 1098
+#define IDC_NativeUploadPath            1100
+#define IDC_NativeTransferPath          1101
 #define IDC_PAGE_FRAME                  1200
 #define IDC_TREE_CTRL                   1201
 #define IDC_CAPTION_BAR                 1202
@@ -536,7 +540,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        442
 #define _APS_NEXT_COMMAND_VALUE         33015
-#define _APS_NEXT_CONTROL_VALUE         1099
+#define _APS_NEXT_CONTROL_VALUE         1102
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

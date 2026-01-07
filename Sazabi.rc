@@ -619,6 +619,17 @@ BEGIN
     PUSHBUTTON      "キャンセル",IDCANCEL,240,86,50,14
 END
 
+IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    LTEXT           "ダウンロードアイテム転送先",-1,8,12,80,8
+    EDITTEXT        IDC_NativeTransferPath,93,10,246,14,ES_AUTOHSCROLL
+    LTEXT           "アップロードアイテム受入元",-1,8,31,79,8
+    EDITTEXT        IDC_NativeUploadPath,93,28,246,14,ES_AUTOHSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -786,6 +797,10 @@ BEGIN
         RIGHTMARGIN, 290
         TOPMARGIN, 7
         BOTTOMMARGIN, 102
+    END
+
+    IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER, DIALOG
+    BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -1000,6 +1015,11 @@ BEGIN
 END
 
 IDD_DLG_POPUP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
@@ -1439,6 +1459,7 @@ BEGIN
     IDS_STRING_UPLOAD_LOGGING_TYPE_LAST_BROWSED "最後に読み込んだURLを出力する"
     IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "アドレスバーのURLを出力する"
     IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME "アクティブなフレームのURLを出力する"
+    IDS_STRING_SETTINGS_DLG_TITLE_NATIVE_FILE_TRANSFER "ファイル転送設定"
 END
 
 #endif    // 日本語 (日本) resources
@@ -2045,6 +2066,17 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,240,86,50,14
 END
 
+IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER DIALOGEX 0, 0, 370, 291
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION
+CAPTION "Dialog"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    LTEXT           "Transfer path for downloaded items",-1,7,15,80,8
+    EDITTEXT        IDC_NativeTransferPath,97,12,214,14,ES_AUTOHSCROLL
+    LTEXT           "Accepted path for upload items",-1,7,34,79,8
+    EDITTEXT        IDC_NativeUploadPath,96,31,215,14,ES_AUTOHSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -2212,6 +2244,10 @@ BEGIN
         RIGHTMARGIN, 290
         TOPMARGIN, 7
         BOTTOMMARGIN, 102
+    END
+
+    IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER, DIALOG
+    BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -2426,6 +2462,11 @@ BEGIN
 END
 
 IDD_DLG_POPUP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SETTINGS_DLG_NATIVE_FILE_TRANSFER AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
@@ -2889,6 +2930,7 @@ BEGIN
     IDS_STRING_UPLOAD_LOGGING_TYPE_LAST_BROWSED "Output last browsed URL"
     IDS_STRING_UPLOAD_LOGGING_TYPE_TOP_PAGE "Output URL of address bar"
     IDS_STRING_UPLOAD_LOGGING_TYPE_ACTIVE_FRAME "Output URL of active frame"
+    IDS_STRING_SETTINGS_DLG_TITLE_NATIVE_FILE_TRANSFER "File Transfer"
 END
 
 #endif    // 英語 (ニュートラル) resources
