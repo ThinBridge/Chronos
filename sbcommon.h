@@ -992,6 +992,8 @@ public:
 		CustomBrowser4.Empty();
 		CustomBrowser5.Empty();
 		InitMessage.Empty();
+		StartUpProgram.Empty();
+		StartUpProgramArguments.Empty();
 		CEFCommandLine.Empty();
 		ProxyAddress.Empty();
 		ProxyBypassAddress.Empty();
@@ -1089,6 +1091,8 @@ public:
 		Data.CustomBrowser4 = CustomBrowser4;
 		Data.CustomBrowser5 = CustomBrowser5;
 		Data.InitMessage = InitMessage;
+		Data.StartUpProgram = StartUpProgram;
+		Data.StartUpProgramArguments = StartUpProgramArguments;
 		Data.CEFCommandLine = CEFCommandLine;
 		Data.ProxyAddress = ProxyAddress;
 		Data.ProxyBypassAddress = ProxyBypassAddress;
@@ -1179,6 +1183,8 @@ private:
 	CString StartURL;
 	CString EnforceInitParam;
 	CString InitMessage;
+	CString StartUpProgram;
+	CString StartUpProgramArguments;
 	CString CEFCommandLine;
 
 	//インターネット接続設定
@@ -1296,6 +1302,8 @@ public:
 		StartURL = _T("https://www.google.com/");
 		EnforceInitParam = _T("");
 		InitMessage = _T("");
+		StartUpProgram = _T("");
+		StartUpProgramArguments = _T("");
 		CEFCommandLine = _T("");
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1507,6 +1515,16 @@ public:
 				if (strTemp2.CompareNoCase(_T("InitMessage")) == 0)
 				{
 					InitMessage = strTemp3;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("StartUpProgram")) == 0)
+				{
+					StartUpProgram = strTemp3;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("StartUpProgramArguments")) == 0)
+				{
+					StartUpProgramArguments = strTemp3;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("CEFCommandLine")) == 0)
@@ -2097,6 +2115,8 @@ public:
 		strRet += EXTVAL(StartURL);
 		strRet += EXTVAL(EnforceInitParam);
 		strRet += EXTVAL(InitMessage);
+		strRet += EXTVAL(StartUpProgram);
+		strRet += EXTVAL(StartUpProgramArguments);	
 
 		//インターネット接続設定
 		strRet += _T("# Internet Connection\n");
@@ -2233,6 +2253,9 @@ public:
 	inline CString GetCustomBrowser4() { return CustomBrowser4; }
 	inline CString GetCustomBrowser5() { return CustomBrowser5; }
 	inline CString GetInitMessage() { return InitMessage; }
+	inline CString GetStartUpProgram() { return StartUpProgram; }
+	inline CString GetStartUpProgramArguments() { return StartUpProgramArguments; }
+
 
 	inline int GetMemoryUsageLimit() { return MemoryUsageLimit; }
 	inline int GetWindowCountLimit() { return WindowCountLimit; }
@@ -2340,6 +2363,8 @@ public:
 	inline void SetCustomBrowser4(LPCTSTR str) { CustomBrowser4 = str; }
 	inline void SetCustomBrowser5(LPCTSTR str) { CustomBrowser5 = str; }
 	inline void SetInitMessage(LPCTSTR str) { InitMessage = str; }
+	inline void SetStartUpProgram(LPCTSTR str) { StartUpProgram	= str; }
+	inline void SetStartUpProgramArguments(LPCTSTR str) { StartUpProgramArguments = str; }
 
 	inline void SetEnableDownloadRestriction(DWORD dVal) { EnableDownloadRestriction = dVal ? 1 : 0; }
 	inline void SetEnableUploadRestriction(DWORD dVal) { EnableUploadRestriction = dVal ? 1 : 0; }
