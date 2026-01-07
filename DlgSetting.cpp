@@ -1453,6 +1453,22 @@ BOOL CDlgSetINIT::OnInitDialog()
 		SetDlgItemText(IDC_EDIT_INIT_MSG, strCustomMessage);
 	}
 
+	CString strStartUpProgram;
+	CString strStartUpProgramArguments;
+	strStartUpProgram = theApp.m_AppSettingsDlgCurrent.GetStartUpProgram();
+	strStartUpProgramArguments = theApp.m_AppSettingsDlgCurrent.GetStartUpProgramArguments();
+
+	strStartUpProgram.TrimLeft();
+	strStartUpProgram.TrimRight();
+	strStartUpProgram.Replace(_T("\""), _T(""));
+
+	strStartUpProgramArguments.TrimLeft();
+	strStartUpProgramArguments.TrimRight();
+	strStartUpProgramArguments.Replace(_T("\""), _T(""));
+
+	SetDlgItemText(IDC_EDIT_STARTUP_PROGRAM, strStartUpProgram);
+	SetDlgItemText(IDC_EDIT_STARTUP_PROGRAM_ARGUMENTS, strStartUpProgramArguments);
+
 	return FALSE;
 }
 void CDlgSetINIT::OnDestroy()
@@ -1486,6 +1502,22 @@ LRESULT CDlgSetINIT::Set_OK(WPARAM wParam, LPARAM lParam)
 	strCustomMessage.TrimRight();
 	strCustomMessage.Replace(_T("\r\n"), _T("\\n"));
 	theApp.m_AppSettingsDlgCurrent.SetInitMessage(strCustomMessage);
+
+	CString strStartUpProgram;
+	CString strStartUpProgramArguments;
+	GetDlgItemText(IDC_EDIT_STARTUP_PROGRAM, strStartUpProgram);
+	GetDlgItemText(IDC_EDIT_STARTUP_PROGRAM_ARGUMENTS, strStartUpProgramArguments);
+
+	strStartUpProgram.TrimLeft();
+	strStartUpProgram.TrimRight();
+	strStartUpProgram.Replace(_T("\""), _T(""));
+
+	strStartUpProgramArguments.TrimLeft();
+	strStartUpProgramArguments.TrimRight();
+	strStartUpProgramArguments.Replace(_T("\""), _T(""));
+
+	theApp.m_AppSettingsDlgCurrent.SetStartUpProgram(strStartUpProgram);
+	theApp.m_AppSettingsDlgCurrent.SetStartUpProgramArguments(strStartUpProgramArguments);
 
 	return 0;
 }

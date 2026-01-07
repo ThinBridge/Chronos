@@ -654,6 +654,8 @@ BOOL CSazabi::InitInstance()
 	::GetWindowThreadProcessId(pFrame->m_hWnd, &m_dwProcessId);
 	m_hProcess.Attach(::OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcessId));
 	InitProcessSetting();
+
+	ExecStartUpProgram(m_AppSettings.GetStartUpProgram(), m_AppSettings.GetStartUpProgramArguments());
 	CHRONOS_LEAVE_CRITICAL_SECTION(hMutex, dwWaitResult);
 	return TRUE;
 }
@@ -2515,6 +2517,44 @@ void CSazabi::ExecNewInstance(const CString strURL)
 			{
 				::ShellExecute(NULL, NULL, strCommand, NULL, NULL, SW_SHOW);
 			}
+		}
+	}
+	if (pi.hThread)
+	{
+		CloseHandle(pi.hThread);
+		pi.hThread = 0;
+	}
+	if (pi.hProcess)
+	{
+		CloseHandle(pi.hProcess);
+		pi.hProcess = 0;
+	}
+}
+void CSazabi::ExecStartUpProgram(const CString& strProgramPath, const CString& strProgramArguments)
+{
+	if (!strProgramPath || strProgramPath.IsEmpty())
+	{
+		return;
+	}
+	STARTUPINFO si = {0};
+	PROCESS_INFORMATION pi = {0};
+	si.cb = sizeof(si);
+
+	if (!CreateProcess((LPTSTR)(LPCTSTR)strProgramPath, (LPTSTR)(LPCTSTR)strProgramArguments, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+	{
+		DWORD lastErr = ::GetLastError();
+		CString strMessage;
+		strMessage.Format(_T("ExecStartUpProgram: Failed to CreateProcess: Program Path[%ls], Program Arguments[%ls], Last Error[0x%08x]"), (LPCWSTR)strProgramPath, (LPCWSTR)strProgramArguments, lastErr);
+		WriteDebugTraceDateTime(strMessage, DEBUG_LOG_TYPE_DE);
+		SetLastError(NO_ERROR);
+		if (::ShellExecute(NULL, _T("open"), strProgramPath, strProgramArguments, NULL, SW_SHOW) <= HINSTANCE(32))
+		{
+			lastErr = ::GetLastError();
+			strMessage.Format(_T("ExecStartUpProgram: Failed to ShellExecute: Program Path[%ls], Program Arguments[%ls], Last Error[0x%08x]"), (LPCWSTR)strProgramPath, (LPCWSTR)strProgramArguments, lastErr);
+			WriteDebugTraceDateTime(strMessage, DEBUG_LOG_TYPE_DE);
+			SetLastError(NO_ERROR);
+			strMessage.Format(_T("起動時に実行するプログラムの実行に失敗しました。プログラム[%ls], プログラム引数[%ls]\n\nプログラムのパスと引数が正しいこと、実行可能であることを確認してください。"), (LPCWSTR)strProgramPath, (LPCWSTR)strProgramArguments);
+			::MessageBox(NULL, strMessage, m_strThisAppName, MB_OK | MB_ICONEXCLAMATION | MB_SYSTEMMODAL);
 		}
 	}
 	if (pi.hThread)

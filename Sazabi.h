@@ -362,6 +362,7 @@ public:
 	void OpenDefaultBrowser(const CString& strURL, DWORD iType, const CString strPath);
 	void OpenFileExplorer(const CString& strURL);
 	void ExecNewInstance(const CString strURL);
+	void ExecStartUpProgram(const CString& strProgramPath, const CString& strProgramArguments);
 
 	void TraceLogBackup();
 	void WriteDebugTraceDateTime(LPCTSTR msg, int iLogType);
