@@ -4173,8 +4173,6 @@ void CSazabi::InitializeCef()
 #endif
 
 	settings.no_sandbox = true;
-	if (!m_IsSGMode)
-		settings.command_line_args_disabled = true;
 
 	CString strUA = GetUserAgent();
 	if (!strUA.IsEmpty())
