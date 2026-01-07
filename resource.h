@@ -352,7 +352,9 @@
 #define IDC_EDIT_INIT_URL_PARAM         1052
 #define IDC_EDIT_INIT_OP_PARAM          1053
 #define IDC_CHECK_SHOW_PRINTER_BUTTON   1054
+#define IDC_EDIT_STARTUP_PROGRAM           1054
 #define IDC_CHECK_GPU                   1055
+#define IDC_EDIT_STARTUP_PROGRAM_ARGUMENTS 1055
 #define IDC_CHECK_TAB                   1056
 #define IDC_CHECK_LOGO                  1057
 #define IDC_CHECK_PDF                   1058
