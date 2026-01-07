@@ -2568,7 +2568,7 @@ void CSazabi::ExecStartUpProgram(const CString& strProgramPath, const CString& s
 	PROCESS_INFORMATION pi = {0};
 	si.cb = sizeof(si);
 
-	if (!CreateProcess((LPTSTR)(LPCTSTR)strProgramPath, (LPTSTR)(LPCTSTR)strProgramArguments, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+	if (!CreateProcess(strProgramPath, (LPTSTR)(LPCTSTR)strProgramArguments, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
 	{
 		DWORD lastErr = ::GetLastError();
 		CString strMessage;
