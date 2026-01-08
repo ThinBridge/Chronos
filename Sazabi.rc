@@ -330,7 +330,7 @@ BEGIN
     EDITTEXT        IDC_EDIT_ProxyAddress,14,71,340,14,ES_AUTOHSCROLL
     LTEXT           "プロキシ例外",IDC_STATIC,14,103,41,8
     EDITTEXT        IDC_EDIT_ProxyBypassAddress,14,115,340,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
-    LTEXT           "例外サイトではプロキシを利用しない\nセミコロン;を使用してエントリを分けて下さい\nローカルアドレスにプロキシを利用しない場合は、<local>と指定して下さい。",IDC_STATIC,14,170,340,32,0,WS_EX_STATICEDGE
+    LTEXT           "例外サイトではプロキシを利用しない\nセミコロン;を使用してエントリを分けて下さい\nローカルアドレスはデフォルトで例外サイトとなっています。\nローカルアドレスにプロキシを利用する場合は、<-loopback>と指定して下さい。",IDC_STATIC,14,170,340,42,0,WS_EX_STATICEDGE
     LTEXT           "UserAgent追加文字列",IDC_STATIC,14,241,82,8
     EDITTEXT        IDC_UserAgentAppendStr,107,239,168,13,ES_AUTOHSCROLL
 END
@@ -1745,7 +1745,7 @@ BEGIN
     EDITTEXT        IDC_EDIT_ProxyAddress,14,71,340,14,ES_AUTOHSCROLL
     LTEXT           "Direct connection websites",IDC_STATIC,14,103,41,8
     EDITTEXT        IDC_EDIT_ProxyBypassAddress,14,115,340,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
-    LTEXT           "Listed websites will be connected directly without proxy.\nPlease list entries separated with semicolons ;\nPut <local> if local addresses to be connected directly.",IDC_STATIC,14,170,340,32,0,WS_EX_STATICEDGE
+    LTEXT           "Listed websites will be connected directly without proxy.\nPlease list entries separated with semicolons ;\nLocal addresses are connected directly by default.\nPut <-loopback> if the local addresses to be connected with proxy.",IDC_STATIC,14,170,340,40,0,WS_EX_STATICEDGE
     LTEXT           "Extra UserAgent string",IDC_STATIC,14,241,82,8
     EDITTEXT        IDC_UserAgentAppendStr,107,239,168,13,ES_AUTOHSCROLL
 END
