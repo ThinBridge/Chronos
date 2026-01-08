@@ -1624,46 +1624,38 @@ int CSazabi::ExitInstance()
 			{
 				DeleteDirectoryTempFolder(m_strDBL_EXE_FolderPath);
 
-				if (InVirtualEnvironment() != VE_NA && this->IsSGMode())
-				{
-					SetLastError(NO_ERROR);
+				SetLastError(NO_ERROR);
 
-					if (::GetLastError() != ERROR_ALREADY_EXISTS)
+				if (::GetLastError() != ERROR_ALREADY_EXISTS)
+				{
+					CString confirmMsg;
+					confirmMsg.LoadString(IDS_STRING_CONFIRM_CLOSE_APPLICATION);
+					CString strMsg;
+					strMsg.Format(confirmMsg, m_strThisAppName);
+					int iRt = 0;
+					//シャットダウン処理中は、メッセージボックスを表示しない。
+					if (m_bShutdownFlg)
 					{
-						CString confirmMsg;
-						confirmMsg.LoadString(IDS_STRING_CONFIRM_CLOSE_APPLICATION);
-						CString strMsg;
-						strMsg.Format(confirmMsg, m_strThisAppName);
-						int iRt = 0;
-						//シャットダウン処理中は、メッセージボックスを表示しない。
-						if (m_bShutdownFlg)
-						{
-							iRt = IDYES;
-						}
-						else
-						{
-							//settings.external_message_pump = trueを指定した状態では、Exit処理中にはMB_DEFAULT_DESKTOP_ONLYがないとダイアログが表示されない
-							iRt = ::MessageBox(NULL, strMsg, m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL | MB_DEFAULT_DESKTOP_ONLY);
-						}
-
-						if (iRt == IDCANCEL || iRt == IDNO || iRt == IDTIMEOUT)
-						{
-							ExecNewInstance(_T(""));
-						}
-						else
-						{
-							if (InVirtualEnvironment() == VE_THINAPP)
-								CloseVOSProcessOther();
-
-							this->UnInitializeCef();
-							this->DeleteCEFCacheAll();
-						}
+						iRt = IDYES;
 					}
-				}
-				else
-				{
-					this->UnInitializeCef();
-					this->DeleteCEFCacheAll();
+					else
+					{
+						//settings.external_message_pump = trueを指定した状態では、Exit処理中にはMB_DEFAULT_DESKTOP_ONLYがないとダイアログが表示されない
+						iRt = ::MessageBox(NULL, strMsg, m_strThisAppName, MB_YESNO | MB_ICONQUESTION | MB_SYSTEMMODAL | MB_DEFAULT_DESKTOP_ONLY);
+					}
+
+					if (iRt == IDCANCEL || iRt == IDNO || iRt == IDTIMEOUT)
+					{
+						ExecNewInstance(_T(""));
+					}
+					else
+					{
+						if (InVirtualEnvironment() == VE_THINAPP)
+							CloseVOSProcessOther();
+
+						this->UnInitializeCef();
+						this->DeleteCEFCacheAll();
+					}
 				}
 				//ゾンビプロセス化を防ぐ。
 				ExitKillZombieProcess();
