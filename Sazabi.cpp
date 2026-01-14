@@ -4339,7 +4339,9 @@ CString CSazabi::GetUserAgent()
 #ifdef _WIN64
 	strUA += _T(" Win64; x64");
 #endif //WIN64
-	strUA += sgSZB_UA_END;
+	strUA += theApp.IsSGMode() ? 
+		sgSZB_UA_END_SG : 
+		sgSZB_UA_END_R;
 
 	if (!strUA_Append.IsEmpty())
 	{
