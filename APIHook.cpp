@@ -476,6 +476,8 @@ public:
 		strPath += _T("\\");
 
 		PIDLIST_ABSOLUTE pidl;
+		// フォルダーを作成してみる。
+		::CreateDirectory(strPath, NULL);
 		hresult = ::SHParseDisplayName(strPath, 0, &pidl, SFGAO_FOLDER, 0);
 		if (FAILED(hresult))
 		{
