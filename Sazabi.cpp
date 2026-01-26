@@ -314,14 +314,12 @@ BOOL CSazabi::InitFunc_Settings()
 		{
 			if (PathFileExists(m_strUserConfigFilePath))
 			{
-				theApp.m_AppSettings.LoadDefaultData();
 				this->m_AppSettings.LoadDataFromFile(m_strUserConfigFilePath);
 			}
 			else
 			{
 				if (PathFileExists(m_strSettingFileFullPath))
 				{
-					theApp.m_AppSettings.LoadDefaultData();
 					this->m_AppSettings.LoadDataFromFile(m_strSettingFileFullPath);
 				}
 				else
