@@ -4274,7 +4274,14 @@ CString CSazabi::GetUserAgent()
 #ifdef _WIN64
 	strUA += _T(" Win64; x64");
 #endif //WIN64
-	strUA += sgSZB_UA_END;
+	if (theApp.m_AppSettings.IsUseChromiumStyleUserAgent())
+	{
+		strUA += sgSZB_UA_CHROMIUM_STYLE_END;
+	}
+	else
+	{
+		strUA += sgSZB_UA_END;
+	}
 
 	if (!strUA_Append.IsEmpty())
 	{

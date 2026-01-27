@@ -72,6 +72,7 @@ static TCHAR sgSZB_UA_START[] = _T("Mozilla/5.0 (");
 //デフォルトのUAをEdgeに変更する対応にする。
 //2021-11-30 ↑の対策がNGになっていることに気がついた。UAにEdgeをつけてもNG
 static TCHAR sgSZB_UA_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko;KA-ZUMA) Chrome/" SB_CHROME_VERSION " Safari/537.36 Chronos/SystemGuard");
+static TCHAR sgSZB_UA_CHROMIUM_STYLE_END[] = _T(") AppleWebKit/537.36 (KHTML, like Gecko) Chrome/" SB_CHROME_VERSION " Safari/537.36");
 #undef SB_CHROME_VERSION
 
 typedef HRESULT(WINAPI* pfnDwmIsCompositionEnabled)(BOOL* pfEnabled);
@@ -973,6 +974,7 @@ public:
 		ProxyAddress.Empty();
 		ProxyBypassAddress.Empty();
 		UserAgentAppendStr.Empty();
+		UseChromiumStyleUserAgent = 0;
 
 		MemoryUsageLimit = 0;
 		WindowCountLimit = 0;
@@ -1066,6 +1068,7 @@ public:
 		Data.ProxyAddress = ProxyAddress;
 		Data.ProxyBypassAddress = ProxyBypassAddress;
 		Data.UserAgentAppendStr = UserAgentAppendStr;
+		Data.UseChromiumStyleUserAgent = UseChromiumStyleUserAgent;
 
 		Data.MemoryUsageLimit = MemoryUsageLimit;
 		Data.WindowCountLimit = WindowCountLimit;
@@ -1155,6 +1158,7 @@ private:
 	CString ProxyAddress;
 	CString ProxyBypassAddress;
 	CString UserAgentAppendStr;
+	int UseChromiumStyleUserAgent;
 
 	//制限設定
 	int EnableDownloadRestriction;
@@ -1271,6 +1275,7 @@ public:
 		ProxyAddress = _T("");
 		ProxyBypassAddress = _T("");
 		UserAgentAppendStr = _T("");
+		UseChromiumStyleUserAgent = FALSE;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//制限設定
@@ -1680,6 +1685,11 @@ public:
 						ProxyType = iW;
 					else
 						ProxyType = 0;
+					continue;
+				}
+				if (strTemp2.CompareNoCase(_T("UseChromiumStyleUserAgent")) == 0)
+				{
+					UseChromiumStyleUserAgent = (strTemp3 == _T("1")) ? TRUE : FALSE;
 					continue;
 				}
 				if (strTemp2.CompareNoCase(_T("MemoryUsageLimit")) == 0)
@@ -2131,6 +2141,7 @@ public:
 		strRet += EXTVAL(EnableTransferLog);
 		strRet += EXTVAL(DisableExitOpAlert);
 		strRet += EXTVAL(ConfirmAutoRefresh);
+		strRet += EXTVAL(UseChromiumStyleUserAgent);
 		//ChTaskMGR---------------------------------
 		strRet += EXTVAL(TASK_LIST_TYPE);
 		strRet += EXTVAL(TASK_LIST_MODE_DETAIL);
@@ -2159,6 +2170,7 @@ public:
 	inline CString GetProxyAddress() { return ProxyAddress; }
 	inline CString GetProxyBypassAddress() { return ProxyBypassAddress; }
 	inline CString GetUserAgentAppendStr() { return UserAgentAppendStr; }
+	inline BOOL IsUseChromiumStyleUserAgent() { return UseChromiumStyleUserAgent; }
 	inline BOOL IsRebar() { return EnableRebar; }
 	inline BOOL IsStatusbar() { return EnableStatusbar; }
 	inline int GetAdvancedLogLevel() { return AdvancedLogLevel; }
@@ -2258,6 +2270,7 @@ public:
 	inline void SetProxyAddress(LPCTSTR str) { ProxyAddress = str; }
 	inline void SetProxyBypassAddress(LPCTSTR str) { ProxyBypassAddress = str; }
 	inline void SetUserAgentAppendStr(LPCTSTR str) { UserAgentAppendStr = str; }
+	inline void SetUseChromiumStyleUserAgent(DWORD dVal) { UseChromiumStyleUserAgent = dVal ? 1 : 0; }
 	inline void SetRebar(DWORD dVal) { EnableRebar = dVal ? 1 : 0; }
 	inline void SetStatusbar(DWORD dVal) { EnableStatusbar = dVal ? 1 : 0; }
 	inline void SetAdvancedLogLevel(DWORD dVal) { AdvancedLogLevel = dVal; }
