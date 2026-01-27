@@ -1260,7 +1260,7 @@ public:
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//起動関連設定
-		StartURL = _T("https://www.google.co.jp/");
+		StartURL = _T("https://www.google.com/");
 		EnforceInitParam = _T("");
 		InitMessage = _T("");
 		CEFCommandLine = _T("");

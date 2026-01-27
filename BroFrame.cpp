@@ -1138,7 +1138,7 @@ void CBrowserFrame::Search(CString strIn, BOOL bNewWindow)
 	strIn.TrimRight();
 	if (strIn.IsEmpty()) return;
 
-	CString strFindURL(_T("https://www.google.co.jp/search?hl=ja&q={searchTerms}"));
+	CString strFindURL(_T("https://www.google.com/search?hl=ja&q={searchTerms}"));
 	CString strEncU;
 	strEncU = theApp.ConvertStr2UTF8UrlEncode(strIn);
 	strFindURL.Replace(_T("{searchTerms}"), strEncU);
