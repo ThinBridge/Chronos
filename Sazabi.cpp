@@ -4141,11 +4141,6 @@ void CSazabi::InitializeCef()
 	if (!m_IsSGMode)
 		settings.command_line_args_disabled = true;
 
-	CString strUA = GetUserAgent();
-	if (!strUA.IsEmpty())
-	{
-		CefString(&settings.user_agent) = strUA.GetString();
-	}
 
 	CString strLocale;
 	strLocale.LoadString(IDS_STRING_CEF_LOCALE);

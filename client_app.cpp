@@ -26,6 +26,7 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 
 	// 追加のコマンドラインオプションはこの時点で反映する。
 	// 値付きSwitchは後勝ちなので、Chronosの設定により指定された値付きSwitchが優先されるようにするため。
+	// ただし、一部のSwitchは上書きを許可する。
 	CString commandLineFromConfig = theApp.m_AppSettings.GetCEFCommandLine();
 	if (!commandLineFromConfig.IsEmpty())
 	{
@@ -175,6 +176,13 @@ void ClientApp::OnBeforeCommandLineProcessing(const CefString& process_type, Cef
 					command_line->AppendSwitchWithValue(_T("proxy-bypass-list"), (LPCTSTR)strProxyBypassName);
 			}
 		}
+	}
+
+	// User Agentはコマンドライン引数による上書きを許可する
+	if (!command_line->HasSwitch("user-agent"))
+	{
+		CString strUA = theApp.GetUserAgent();
+		command_line->AppendSwitchWithValue(_T("user-agent"), (LPCTSTR)strUA);
 	}
 }
 
