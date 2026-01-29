@@ -763,8 +763,16 @@ void CBrowserFrame::CreateRebars()
 			int iSearchIndex = 0;
 			iSearchIndex = m_pwndToolBar->GetCount();
 			iSearchIndex -= 1;
+			// 末尾がセパレータであるという前提で、セパレータの上に検索エディットボックスを載せる。
 			if (iSearchIndex > 0)
 			{
+				UINT nID = m_pwndToolBar->GetItemID(iSearchIndex);
+				if (nID != ID_SEPARATOR)
+				{
+					// セパレータではないのでセパレータを追加する。
+					iSearchIndex += 1;
+					m_pwndToolBar->InsertSeparator(iSearchIndex);
+				}
 				// セパレータの幅を設定
 				m_pwndToolBar->SetButtonInfo(iSearchIndex, IDC_EDIT_SEARCH, TBBS_SEPARATOR, 500);
 				PROC_TIME_E(CreateRebars_TOOLBAR_LoadToolBar_STAGE2)
