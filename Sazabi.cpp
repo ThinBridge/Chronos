@@ -4204,11 +4204,6 @@ void CSazabi::InitializeCef()
 
 	settings.no_sandbox = true;
 
-	CString strUA = GetUserAgent();
-	if (!strUA.IsEmpty())
-	{
-		CefString(&settings.user_agent) = strUA.GetString();
-	}
 
 	CString strLocale;
 	strLocale.LoadString(IDS_STRING_CEF_LOCALE);
