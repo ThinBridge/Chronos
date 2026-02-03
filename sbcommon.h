@@ -1301,7 +1301,7 @@ public:
 		/////////////////////////////////////////////////////////////////////////////////////////////////
 		//起動関連設定
 		StartURL = _T("https://www.google.com/");
-		EnforceInitParam = _T("");
+		EnforceInitParam = _T("/NORMAL");
 		InitMessage = _T("");
 		StartUpProgram = _T("");
 		StartUpProgramArguments = _T("");
@@ -2246,7 +2246,12 @@ public:
 		else
 			return StartURL;
 	}
-	inline CString GetEnforceInitParam() { return EnforceInitParam; }
+	inline CString GetEnforceInitParam() {
+		if (EnforceInitParam.IsEmpty())
+			return _T("/NORMAL");
+		else
+			return EnforceInitParam;
+	}
 	inline CString GetCEFCommandLine() { return CEFCommandLine; }
 	inline CString GetCustomBrowser() { return CustomBrowser; }
 	inline CString GetCustomBrowser2() { return CustomBrowser2; }
