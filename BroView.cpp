@@ -1785,9 +1785,10 @@ LRESULT CChildView::OnNewWindow(WPARAM wParam, LPARAM lParam)
 	BOOL bDevTools = FALSE;
 
 	CefPopupFeatures* popupFeatures = NULL;
+	CefPopupFeatures defaultFeatures;
 	if (wParam == WND_TYPE_DEV_TOOLS)
 	{
-		popupFeatures = &CefPopupFeatures();
+		popupFeatures = &defaultFeatures;
 		bDevTools = TRUE;
 	}
 	else

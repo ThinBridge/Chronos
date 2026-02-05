@@ -18,12 +18,18 @@
 #include <codeanalysis/warnings.h>
 #pragma warning(disable \
 		: ALL_CODE_ANALYSIS_WARNINGS)
+#pragma push_macro("max")
+#pragma push_macro("min")
+#undef max
+#undef min
 #include "include/cef_browser.h"
 #include "include/cef_frame.h"
 #include "include/cef_path_util.h"
 #include "include/cef_process_util.h"
 #include "include/cef_trace.h"
 #include "include/wrapper/cef_helpers.h"
+#pragma pop_macro("max")
+#pragma pop_macro("min")
 #pragma warning(pop)
 #include "client_util.h"
 #include "DlgAuth.h"
@@ -1526,11 +1532,6 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	case ERR_TUNNEL_CONNECTION_FAILED:
 	{
 		strErrorMsg.LoadString(ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED);
-		break;
-	}
-	case ERR_NO_SSL_VERSIONS_ENABLED:
-	{
-		strErrorMsg.LoadString(ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED);
 		break;
 	}
 	case ERR_SSL_VERSION_OR_CIPHER_MISMATCH:
