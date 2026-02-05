@@ -637,8 +637,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 16,0,140,0
- PRODUCTVERSION 16,0,140,0
+ FILEVERSION 16,1,140,0
+ PRODUCTVERSION 16,1,140,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -654,12 +654,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "16.0.140.0"
+            VALUE "FileVersion", "16.1.140.0"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "16.0.140.0"
+            VALUE "ProductVersion", "16.1.140.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -2086,8 +2086,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 16,0,140,0
- PRODUCTVERSION 16,0,140,0
+ FILEVERSION 16,1,140,0
+ PRODUCTVERSION 16,1,140,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -2103,12 +2103,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "Chronos"
-            VALUE "FileVersion", "16.0.140.0"
+            VALUE "FileVersion", "16.1.140.0"
             VALUE "InternalName", "Chronos"
             VALUE "LegalCopyright", " "
             VALUE "OriginalFilename", "Chronos.EXE"
             VALUE "ProductName", "Chronos"
-            VALUE "ProductVersion", "16.0.140.0"
+            VALUE "ProductVersion", "16.1.140.0"
         END
     END
     BLOCK "VarFileInfo"
