@@ -10,7 +10,13 @@
 #include <codeanalysis/warnings.h>
 #pragma warning(disable \
 		: ALL_CODE_ANALYSIS_WARNINGS)
+#pragma push_macro("max")
+#pragma push_macro("min")
+#undef max
+#undef min
 #include "include/cef_task.h"
+#pragma pop_macro("max")
+#pragma pop_macro("min")
 #pragma warning(pop)
 
 #if defined(OS_WIN)
