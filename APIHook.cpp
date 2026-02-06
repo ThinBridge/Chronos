@@ -694,13 +694,17 @@ public:
 		strRootPath += _T("\\");
 
 		LPWSTR wstrOriginalFileName = nullptr;
+		CString strOriginalFileName;
 		hresult = m_originalDialog->GetFileName(&wstrOriginalFileName);
 		if (FAILED(hresult))
 		{
-			return hresult;
+			strOriginalFileName = _T("");
 		}
-		CString strOriginalFileName(wstrOriginalFileName);
-		CoTaskMemFree(wstrOriginalFileName);
+		else
+		{
+			strOriginalFileName = CString(wstrOriginalFileName);
+			CoTaskMemFree(wstrOriginalFileName);
+		}
 		CString originalExt = SBUtil::GetFileExt(strOriginalFileName);
 
 		for (;;)
@@ -797,7 +801,7 @@ public:
 				}
 			}
 
-			if (theApp.m_AppSettings.IsEnableFileExtChangeRestriction())
+			if (theApp.m_AppSettings.IsEnableFileExtChangeRestriction() && !originalExt.IsEmpty())
 			{
 				CString strSelExt = SBUtil::GetFileExt(strSelPath);
 				if (strSelExt.CompareNoCase(originalExt) != 0)
