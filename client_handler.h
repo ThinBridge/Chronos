@@ -11,9 +11,15 @@
 #include <codeanalysis/warnings.h>
 #pragma warning(disable \
 		: ALL_CODE_ANALYSIS_WARNINGS)
+#pragma push_macro("max")
+#pragma push_macro("min")
+#undef max
+#undef min
 #include "include/cef_client.h"
 #include "include/cef_version.h"
 #include "include/base/cef_lock.h"
+#pragma pop_macro("max")
+#pragma pop_macro("min")
 #pragma warning(pop)
 #include "resource.h"
 

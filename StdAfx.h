@@ -46,9 +46,15 @@
 #include <codeanalysis/warnings.h>
 #pragma warning(disable \
 		: ALL_CODE_ANALYSIS_WARNINGS)
+#pragma push_macro("max")
+#pragma push_macro("min")
+#undef max
+#undef min
 #include "include/cef_base.h"
 #include "include/cef_app.h"
 #include "include/wrapper/cef_closure_task.h"
+#pragma pop_macro("max")
+#pragma pop_macro("min")
 #pragma warning(pop)
 // Set to 0 to disable sandbox support.
 #define CEF_ENABLE_SANDBOX 0

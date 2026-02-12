@@ -6,7 +6,13 @@
 #include <sddl.h>
 #include <VersionHelpers.h>
 #include <strsafe.h>
+#pragma push_macro("max")
+#pragma push_macro("min")
+#undef max
+#undef min
 #include "include/cef_version.h"
+#pragma pop_macro("max")
+#pragma pop_macro("min")
 
 #include "mmsystem.h"
 #include <pathcch.h>
