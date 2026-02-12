@@ -1534,11 +1534,13 @@ void ClientHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		strErrorMsg.LoadString(ID_ERROR_MSG_TUNNEL_CONNECTION_FAILED);
 		break;
 	}
+#if CHROME_VERSION_MAJOR < 144
 	case ERR_NO_SSL_VERSIONS_ENABLED:
 	{
 		strErrorMsg.LoadString(ID_ERROR_MSG_NO_SSL_VERSIONS_ENABLED);
 		break;
 	}
+#endif
 	case ERR_SSL_VERSION_OR_CIPHER_MISMATCH:
 	{
 		strErrorMsg.LoadString(ID_ERROR_MSG_SSL_VERSION_OR_CIPHER_MISMATCH);
