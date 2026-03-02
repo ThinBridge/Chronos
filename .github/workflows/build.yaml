@@ -38,19 +38,19 @@ jobs:
         run: echo F | xcopy /V /F /Y Chronos\ChronosN.exe Chronos\Chronos.exe
       - if: matrix.version == 'current'
         name: Upload Build
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: Chronos
           path: Chronos
       - if: matrix.version == 'stable'
         name: Upload Build (stable)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: Chronos-stable
           path: Chronos
       - if: matrix.version == 'beta'
         name: Upload Build (beta)
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: Chronos-beta
           path: Chronos
