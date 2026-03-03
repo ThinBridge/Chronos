@@ -1580,7 +1580,7 @@ BEGIN
     POPUP "TAB_MENU"
     BEGIN
         MENUITEM "New Tab",                     ID_NEW_BLANK
-        MENUITEM "Suplicate Tab",               ID_NEW
+        MENUITEM "Duplicate Tab",               ID_NEW
         MENUITEM SEPARATOR
         MENUITEM "Close Tab",                   ID_W_CLOSE
         MENUITEM "Close All Tabs (&X)",         IDC_APP_EXIT
