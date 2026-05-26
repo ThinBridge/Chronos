@@ -4192,9 +4192,13 @@ void CSazabi::InitializeCef()
 
 	// 別スレッドでメッセージループを管理しない
 	// (CefDoMessageLoopWork()をメインプログラムから呼び出す)
-	m_bMultiThreadedMessageLoop = FALSE;
+	m_bMultiThreadedMessageLoop = TRUE;
 	settings.multi_threaded_message_loop = m_bMultiThreadedMessageLoop;
-	settings.external_message_pump = true;
+	settings.external_message_pump = false;
+	// NOTE: switched to CEF's own UI thread so HTML5 <datalist> and other
+	// features that depend on timely message-pump scheduling work on CEF 146.
+	// Chronos's accelerators are forwarded back to the MFC thread from
+	// ClientHandler::OnPreKeyEvent (see client_handler.cpp).
 #if CHROME_VERSION_MAJOR >= 125 && CHROME_VERSION_MAJOR <= 127
 	// CEF 124まではchrome_runtime = false（デフォルト値）を使用。
 	// CEF 128からは常にChrome runtimeを使用するため、chrome_runtimeオプションは削除された。
