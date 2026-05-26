@@ -93,6 +93,91 @@ void ClientHandler::CreateBrowser(CefWindowInfo const& info, CefBrowserSettings 
 {
 	CefBrowserHost::CreateBrowser(info, this, url, settings, nullptr, nullptr);
 }
+#if CHROME_VERSION_MAJOR >= 135
+// multi_threaded_message_loop = true の構成では、CEF ブラウザのレンダーウィジェット
+// HWND（Chrome_RenderWidgetHostHWND 等）は CEF UI スレッドで動作し、OnAfterCreated
+// 時点ではまだ存在しなかったり、ナビゲーション等で後から再生成されたりするため、
+// SetWindowSubclass で個別 HWND を狙う方式では取りこぼしが発生する。
+// 代わりに CEF UI スレッドへ WH_GETMESSAGE フックを 1 度だけインストールし、
+// 当該スレッドに届く WM_XBUTTONUP / WM_MOUSEWHEEL のうち、登録済み CEF ホスト
+// HWND 配下に届いたものだけを横取りして、それぞれ BroFrame の WM_COMMAND と
+// BroView の WM_APP_CEF_WHEEL_ZOOM に変換し ::PostMessage で MFC スレッドへ
+// 転送する。横取り時は msg.message = WM_NULL に書き換えて CEF／ページに渡さない
+// （Ctrl+ホイールが Chrome の標準ズームと二重発火するのを防ぐため）。
+
+// 以下のグローバルへのアクセスは全て CEF UI スレッド単独で発生する
+// （OnAfterCreated／OnBeforeClose は REQUIRE_UI_THREAD ガードあり、
+// GetMsgHook は CEF UI スレッドにインストールしたフックなので同一スレッドから呼ばれる）。
+// そのため排他制御は不要。
+	std::set<HWND> g_cefHosts;
+	HHOOK g_getMsgHook = NULL;
+
+	// hwnd 自身または親（GetParent は子→親、トップレベル→オーナーの両方を辿る）を
+	// 走査し、登録済み CEF ホスト HWND を見つければ返す。
+	HWND FindOwningCefHost(HWND hwnd)
+	{
+		for (HWND p = hwnd; p != NULL;)
+		{
+			if (g_cefHosts.count(p) > 0)
+				return p;
+			HWND next = ::GetParent(p);
+			if (next == p)
+				break;
+			p = next;
+		}
+		return NULL;
+	}
+
+	LRESULT CALLBACK GetMsgHook(int nCode, WPARAM wParam, LPARAM lParam)
+	{
+		if (nCode == HC_ACTION && wParam == PM_REMOVE && lParam != 0)
+		{
+			MSG* pMsg = reinterpret_cast<MSG*>(lParam);
+			if (pMsg->message == WM_XBUTTONUP || pMsg->message == WM_MOUSEWHEEL)
+			{
+				HWND host = FindOwningCefHost(pMsg->hwnd);
+				if (host != NULL)
+				{
+					if (pMsg->message == WM_XBUTTONUP)
+					{
+						const WORD xbtn = GET_XBUTTON_WPARAM(pMsg->wParam);
+						UINT cmd = 0;
+						if (xbtn == XBUTTON1)
+							cmd = ID_GO_BACK;
+						else if (xbtn == XBUTTON2)
+							cmd = ID_GO_FORWARD;
+						if (cmd != 0)
+						{
+							HWND hBroFrame = ::GetParent(::GetParent(host));
+							if (::IsWindow(hBroFrame))
+							{
+								::PostMessage(hBroFrame, WM_COMMAND,
+									      MAKEWPARAM(cmd, 0), 0);
+							}
+							pMsg->message = WM_NULL;
+						}
+					}
+					else // WM_MOUSEWHEEL
+					{
+						if ((GET_KEYSTATE_WPARAM(pMsg->wParam) & MK_CONTROL) != 0)
+						{
+							const int zDelta = GET_WHEEL_DELTA_WPARAM(pMsg->wParam);
+							HWND hBroView = ::GetParent(host);
+							if (::IsWindow(hBroView))
+							{
+								::PostMessage(hBroView, WM_APP_CEF_WHEEL_ZOOM,
+									      static_cast<WPARAM>(zDelta), 0);
+							}
+							pMsg->message = WM_NULL;
+						}
+					}
+				}
+			}
+		}
+		return ::CallNextHookEx(NULL, nCode, wParam, lParam);
+	}
+#endif
+
 void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
 	REQUIRE_UI_THREAD();
@@ -137,6 +222,19 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 			RevokeDragDrop(hWndHost);
 		}
 	}
+
+	// マウス（XButton／Ctrl+ホイール）を MFC スレッドへ転送するため、CEF UI スレッドに
+	// WH_GETMESSAGE フックを 1 度だけインストールし、当ブラウザの HWND を登録する。
+	// 詳細は GetMsgHook のコメント参照。
+	if (SafeWnd(hWndHost))
+	{
+		g_cefHosts.insert(hWndHost);
+		if (g_getMsgHook == NULL)
+		{
+			g_getMsgHook = ::SetWindowsHookEx(WH_GETMESSAGE, GetMsgHook,
+			                                  NULL, ::GetCurrentThreadId());
+		}
+	}
 #endif
 
 	// get browser ID
@@ -173,6 +271,14 @@ void ClientHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 {
 	REQUIRE_UI_THREAD();
 	PROC_TIME(OnBeforeClose)
+
+#if CHROME_VERSION_MAJOR >= 135
+	// OnAfterCreated で登録した CEF ホスト HWND をフックの追跡対象から外す。
+	if (HWND hHost = browser->GetHost()->GetWindowHandle())
+	{
+		g_cefHosts.erase(hHost);
+	}
+#endif
 	
 	// CEF135では、Chrome runtime styleのとき、JavaScriptのwindow.close()などで
 	// ウィンドウがクローズしたとき、ClientHandler::DoCloseは呼ばれず、またルート

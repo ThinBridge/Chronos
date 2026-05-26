@@ -119,6 +119,7 @@ BEGIN_MESSAGE_MAP(CChildView, ViewBaseClass)
 	ON_MESSAGE(WM_APP_CEF_PROGRESS_CHANGE, &CChildView::OnProgressChange)
 	ON_MESSAGE(WM_APP_CEF_WINDOW_ACTIVATE, &CChildView::OnWindowActivate)
 	ON_MESSAGE(WM_APP_CEF_SET_RENDERER_PID, &CChildView::OnSetRendererPID)
+	ON_MESSAGE(WM_APP_CEF_WHEEL_ZOOM, &CChildView::OnCefWheelZoom)
 END_MESSAGE_MAP()
 
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
@@ -929,11 +930,14 @@ BOOL CChildView::ZoomTo(double lFactor)
 		auto maxPair = m_mapScaleToZoomSize.rbegin();
 		lFactor = max(lFactor, minPair->second);
 		lFactor = min(lFactor, maxPair->second);
-		if (GetZoomSizeEx() != lFactor)
+		// multi_threaded_message_loop = true では SetZoomLevel が CEF UI スレッドへ
+		// 非同期で投げられ、直後の GetZoomLevel() は古い値を返す。そのため自前の
+		// m_dbZoomSize を権威データとして扱い、GetZoomLevel に頼らない。
+		if (m_dbZoomSize != lFactor)
 		{
 			m_cefBrowser->GetHost()->SetZoomLevel(lFactor);
 		}
-		m_dbZoomSize = GetZoomSizeEx();
+		m_dbZoomSize = lFactor;
 		bRet = TRUE;
 		if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
 		{
@@ -974,7 +978,9 @@ void CChildView::SetWheelZoom(int iDel)
 {
 	try
 	{
-		double iZoom = GetZoomSizeEx();
+		// GetZoomSizeEx() は multi_threaded_message_loop = true 下では SetZoomLevel
+		// の非同期遅延により古い値を返す。ZoomTo が更新する m_dbZoomSize を使う。
+		double iZoom = m_dbZoomSize;
 		int index = 0;
 		for (const auto& [key, value] : m_mapScaleToZoomSize)
 		{
@@ -2264,6 +2270,16 @@ LRESULT CChildView::OnSetRendererPID(WPARAM wParam, LPARAM lParam)
 		}
 	}
 	return S_OK;
+}
+
+// CEF UI スレッドから ::PostMessage された Ctrl+ホイールイベントを受け取り、
+// 既存の SetWheelZoom に転送する。WPARAM は元の WM_MOUSEWHEEL の zDelta（符号付き）。
+// multi_threaded_message_loop = true で MFC の PreTranslateMessage が呼ばれない
+// 環境向け。送信元は client_handler.cpp の CefMouseSubclassProc を参照。
+LRESULT CChildView::OnCefWheelZoom(WPARAM wParam, LPARAM /*lParam*/)
+{
+	SetWheelZoom(static_cast<int>(static_cast<INT_PTR>(wParam)));
+	return 0;
 }
 
 LRESULT CChildView::OnAddressChange(WPARAM wParam, LPARAM lParam)

@@ -79,6 +79,7 @@ protected:
 	afx_msg LRESULT OnWindowActivate(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetRendererPID(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCopyImage(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCefWheelZoom(WPARAM wParam, LPARAM lParam);
 
 public:
 	void SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser);

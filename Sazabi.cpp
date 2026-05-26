@@ -54,7 +54,7 @@ CSazabi::CSazabi()
 	m_IsSGMode = TRUE;
 	m_bFirstInstance = FALSE;
 	m_bEnforceDeleteCache = FALSE;
-	m_bMultiThreadedMessageLoop = FALSE;
+	m_bMultiThreadedMessageLoop = TRUE;
 	m_pMessageLoopWorker = NULL;
 }
 CSazabi::~CSazabi()
