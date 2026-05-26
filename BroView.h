@@ -16,6 +16,8 @@ public:
 	CString m_NavigateCompleteURL_Cache;
 
 	CString m_strTitle;
+	UINT m_iZoomTimerID;
+	BOOL m_bZoomInitialized;
 	void ResizeWindowPopup();
 	void ResizeWindowPopupInpl();
 	void ResizeFrmWindow(RECT& rectClient);
@@ -79,6 +81,7 @@ protected:
 	afx_msg LRESULT OnWindowActivate(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetRendererPID(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCopyImage(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCefZoomSync(WPARAM wParam, LPARAM lParam);
 
 public:
 	void SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser);
