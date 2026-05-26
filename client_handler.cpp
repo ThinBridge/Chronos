@@ -2291,16 +2291,17 @@ bool ClientHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
 //Chromeランタイムスタイルでは、Alt+F4をCEFが先に処理してしまい、BroFrameの「全てのタブを閉じる」
 //という動作より先に現在のタブが閉じてしまう。この問題に対処するため、Alt+F4が押されたとき、CEFに
 //よる処理はスキップしBroFrameにSC_CLOSEを投げる（「全てのタブを閉じる」処理を実行させる）。
-// With multi_threaded_message_loop = true, key events delivered to the CEF
-// browser HWND are handled on CEF's own UI thread and never reach MFC's
-// PreTranslateMessage / TranslateAccelerator. To keep Chronos's own shortcuts
-// working we intercept them here (CEF UI thread) and forward a WM_COMMAND to
-// the BroFrame on the MFC thread via ::PostMessage. The mapping below mirrors
-// Sazabi.rc IDR_MAINFRAME ACCELERATORS and the VK_BROWSER_* handling in
-// CChildView::PreTranslateMessage. Alt+F4 is kept as a special case so the
-// "close all tabs" prompt runs instead of CEF closing only the current tab.
-namespace {
-UINT MapKeyEventToChronosCommand(const CefKeyEvent& event)
+
+//multi_threaded_message_loop = true の構成では、CEFのHWNDに届くキー
+//イベントはCEF専用のUIスレッドで処理され、MFCのPreTranslateMessageや
+//TranslateAcceleratorには到達しない。Chronos独自のショートカットを動作させる
+//ため、ここ（CEF UIスレッド）でキーを横取りし、::PostMessageでBroFrame（MFC
+//スレッド）に WM_COMMAND を転送する。
+//下記のマッピングはSazabi.rcのIDR_MAINFRAME ACCELERATORSと
+//CChildView::PreTranslateMessage の VK_BROWSER_*処理を反映している。
+//Alt+F4 は特例として、CEF が現在のタブのみ閉じるのではなく
+//「全てのタブを閉じる」確認が走るようにしている。
+static UINT MapKeyEventToChronosCommand(const CefKeyEvent& event)
 {
 	const bool ctrl  = (event.modifiers & EVENTFLAG_CONTROL_DOWN) != 0;
 	const bool shift = (event.modifiers & EVENTFLAG_SHIFT_DOWN)   != 0;
@@ -2313,52 +2314,113 @@ UINT MapKeyEventToChronosCommand(const CefKeyEvent& event)
 
 	switch (event.windows_key_code)
 	{
-	case 'F': if (ctrlOnly)  return ID_FIND_PAGE;        break;
-	case 'N': if (ctrlOnly)  return ID_NEW_BLANK;        break;
-	case 'T': if (ctrlShift) return ID_REOPEN_CLOSE_TAB;
-	          if (ctrlOnly)  return ID_NEW_BLANK_TAB;    break;
-	case 'P': if (ctrlOnly)  return ID_PRINT;            break;
-	case 'D': if (altOnly)   return ID_SET_ADDRESSBAR;   break;
-	case 'L': if (ctrlOnly)  return ID_SET_ADDRESSBAR;   break;
-	case 'K': if (ctrlOnly)  return ID_SET_SEARCHBAR;    break;
-	case 'W': if (ctrlOnly)  return ID_W_CLOSE;          break;
-	case 'R': if (ctrlOnly)  return ID_VIEW_REFRESH;     break;
-	case '1': if (ctrlOnly)  return ID_SEL_TAB_1;        break;
-	case '2': if (ctrlOnly)  return ID_SEL_TAB_2;        break;
-	case '3': if (ctrlOnly)  return ID_SEL_TAB_3;        break;
-	case '4': if (ctrlOnly)  return ID_SEL_TAB_4;        break;
-	case '5': if (ctrlOnly)  return ID_SEL_TAB_5;        break;
-	case '6': if (ctrlOnly)  return ID_SEL_TAB_6;        break;
-	case '7': if (ctrlOnly)  return ID_SEL_TAB_7;        break;
-	case '8': if (ctrlOnly)  return ID_SEL_TAB_8;        break;
-	case '9': if (ctrlOnly)  return ID_SEL_TAB_LAST;     break;
-	case '0': if (ctrlOnly)  return ID_ZOOM_RESET;       break;
-	case VK_OEM_MINUS: if (ctrlOnly) return ID_ZOOM_DOWN; break;
-	case VK_OEM_PLUS:  if (ctrlOnly) return ID_ZOOM_UP;   break;
+	case 'F': 
+		if (ctrlOnly)  return ID_FIND_PAGE;
+		break;
+	case 'N': 
+		if (ctrlOnly)  return ID_NEW_BLANK;
+		break;
+	case 'T': 
+		if (ctrlShift) return ID_REOPEN_CLOSE_TAB;
+	    if (ctrlOnly)  return ID_NEW_BLANK_TAB;
+		break;
+	case 'P':
+		if (ctrlOnly) return ID_PRINT;
+		break;
+	case 'D':
+		if (altOnly) return ID_SET_ADDRESSBAR;
+		break;
+	case 'L':
+		if (ctrlOnly) return ID_SET_ADDRESSBAR;
+		break;
+	case 'K':
+		if (ctrlOnly) return ID_SET_SEARCHBAR;
+		break;
+	case 'W':
+		if (ctrlOnly) return ID_W_CLOSE;
+		break;
+	case 'R':
+		if (ctrlOnly) return ID_VIEW_REFRESH;
+		break;
+	case '1':
+		if (ctrlOnly) return ID_SEL_TAB_1;
+		break;
+	case '2':
+		if (ctrlOnly) return ID_SEL_TAB_2;
+		break;
+	case '3':
+		if (ctrlOnly) return ID_SEL_TAB_3;
+		break;
+	case '4':
+		if (ctrlOnly) return ID_SEL_TAB_4;
+		break;
+	case '5':
+		if (ctrlOnly) return ID_SEL_TAB_5;
+		break;
+	case '6':
+		if (ctrlOnly) return ID_SEL_TAB_6;
+		break;
+	case '7':
+		if (ctrlOnly) return ID_SEL_TAB_7;
+		break;
+	case '8':
+		if (ctrlOnly) return ID_SEL_TAB_8;
+		break;
+	case '9':
+		if (ctrlOnly) return ID_SEL_TAB_LAST;
+		break;
+	case '0':
+		if (ctrlOnly) return ID_ZOOM_RESET;
+		break;
+	case VK_OEM_MINUS:
+		if (ctrlOnly) return ID_ZOOM_DOWN;
+		break;
+	case VK_OEM_PLUS:
+		if (ctrlOnly) return ID_ZOOM_UP;
+		break;
 	case VK_TAB:
 		if (ctrlShift) return ID_PREV_WND;
-		if (ctrlOnly)  return ID_NEXT_WND;
+		if (ctrlOnly) return ID_NEXT_WND;
 		break;
-	case VK_LEFT:  if (altOnly) return ID_GO_BACK;       break;
-	case VK_RIGHT: if (altOnly) return ID_GO_FORWARD;    break;
-	case VK_HOME:  if (altOnly) return ID_GO_START_PAGE; break;
-	case VK_F4:    if (ctrlOnly) return ID_W_CLOSE;      break;
+	case VK_LEFT:
+		if (altOnly) return ID_GO_BACK;
+		break;
+	case VK_RIGHT:
+		if (altOnly) return ID_GO_FORWARD;
+		break;
+	case VK_HOME:
+		if (altOnly) return ID_GO_START_PAGE;
+		break;
+	case VK_F4:
+		if (ctrlOnly) return ID_W_CLOSE;
+		break;
 	case VK_F5:
 		if (noMod || ctrlOnly || shiftOnly) return ID_VIEW_REFRESH;
 		break;
-	case VK_F6:     if (noMod) return ID_SET_ADDRESSBAR; break;
-	case VK_F11:    if (noMod) return ID_FULL_SCREEN;    break;
-	case VK_ESCAPE: if (noMod) return ID_VIEW_STOP;      break;
-	case VK_BROWSER_BACK:    return ID_GO_BACK;
-	case VK_BROWSER_FORWARD: return ID_GO_FORWARD;
-	case VK_BROWSER_REFRESH: return ID_VIEW_REFRESH;
-	case VK_BROWSER_STOP:    return ID_VIEW_STOP;
-	case VK_BROWSER_HOME:    return ID_GO_START_PAGE;
-	default: break;
+	case VK_F6:
+		if (noMod) return ID_SET_ADDRESSBAR;
+		break;
+	case VK_F11:
+		if (noMod) return ID_FULL_SCREEN;
+		break;
+	case VK_ESCAPE:
+		if (noMod) return ID_VIEW_STOP;
+		break;
+	case VK_BROWSER_BACK:
+		return ID_GO_BACK;
+	case VK_BROWSER_FORWARD:
+		return ID_GO_FORWARD;
+	case VK_BROWSER_REFRESH:
+		return ID_VIEW_REFRESH;
+	case VK_BROWSER_STOP:
+		return ID_VIEW_STOP;
+	case VK_BROWSER_HOME:
+		return ID_GO_START_PAGE;
+	default:
+		break;
 	}
 	return 0;
 }
-} // namespace
 
 bool ClientHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser,
 				  const CefKeyEvent& event,
