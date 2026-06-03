@@ -2293,40 +2293,6 @@ LRESULT CChildView::OnSetRendererPID(WPARAM wParam, LPARAM lParam)
 	return S_OK;
 }
 
-void CChildView::SetStatusBarZoomScale()
-{
-	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
-	{
-		UINT dBestKey = 100;
-		double minDelta = DBL_MAX;
-		for (const auto& [key, value] : m_mapScaleToZoomSize)
-		{
-			double delta = std::abs(value - m_dbZoomSize);
-			if (delta < minDelta)
-			{
-				minDelta = delta;
-				dBestKey = key;
-			}
-		}
-		CString strZoomFmt;
-		strZoomFmt.Format(_T("%u%%"), dBestKey);
-		FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
-	}
-}
-
-LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
-{
-	LARGE_INTEGER li;
-	li.LowPart = static_cast<DWORD>(wParam);
-	li.HighPart = static_cast<LONG>(lParam);
-	double dNewZoom;
-	memcpy(&dNewZoom, &li.QuadPart, sizeof(double));
-	if (dNewZoom == m_dbZoomSize) return 0;
-	m_dbZoomSize = dNewZoom;
-	SetStatusBarZoomScale();
-	return 0;
-}
-
 LRESULT CChildView::OnAddressChange(WPARAM wParam, LPARAM lParam)
 {
 	CString strURL((LPCTSTR)wParam);
@@ -2409,6 +2375,41 @@ LRESULT CChildView::OnBadCertificate(WPARAM wParam, LPARAM lParam)
 {
 	return S_OK;
 }
+
+LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
+{
+	LARGE_INTEGER li;
+	li.LowPart = static_cast<DWORD>(wParam);
+	li.HighPart = static_cast<LONG>(lParam);
+	double dNewZoom;
+	memcpy(&dNewZoom, &li.QuadPart, sizeof(double));
+	if (dNewZoom == m_dbZoomSize) return 0;
+	m_dbZoomSize = dNewZoom;
+	SetStatusBarZoomScale();
+	return 0;
+}
+
+void CChildView::SetStatusBarZoomScale()
+{
+	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
+	{
+		UINT dBestKey = 100;
+		double minDelta = DBL_MAX;
+		for (const auto& [key, value] : m_mapScaleToZoomSize)
+		{
+			double delta = std::abs(value - m_dbZoomSize);
+			if (delta < minDelta)
+			{
+				minDelta = delta;
+				dBestKey = key;
+			}
+		}
+		CString strZoomFmt;
+		strZoomFmt.Format(_T("%u%%"), dBestKey);
+		FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
+	}
+}
+
 void CChildView::Navigate(LPCTSTR pszURL)
 {
 	PROC_TIME(Navigate)
