@@ -967,13 +967,13 @@ BOOL CChildView::ZoomTo(double lFactor)
 		if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
 		{
 			double dBestKey = 100.0;
-			double minDiff = DBL_MAX;
+			double minDelta = DBL_MAX;
 			for (const auto& [key, value] : m_mapScaleToZoomSize)
 			{
-				double diff = std::abs(value - m_dbZoomSize);
-				if (diff < minDiff)
+				double delta = std::abs(value - m_dbZoomSize);
+				if (delta < minDelta)
 				{
-					minDiff = diff;
+					minDelta = delta;
 					dBestKey = static_cast<double>(key);
 				}
 			}
@@ -2321,13 +2321,13 @@ LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
 	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
 	{
 		double dBestKey = 100.0;
-		double minDiff = DBL_MAX;
+		double minDelta = DBL_MAX;
 		for (const auto& [key, value] : m_mapScaleToZoomSize)
 		{
-			double diff = std::abs(value - dNewZoom);
-			if (diff < minDiff)
+			double delta = std::abs(value - dNewZoom);
+			if (delta < minDelta)
 			{
-				minDiff = diff;
+				minDelta = delta;
 				dBestKey = static_cast<double>(key);
 			}
 		}
