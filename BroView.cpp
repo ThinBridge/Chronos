@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "include\cef_command_ids.h"
+#include "include\cef_task.h"
 #include "Sazabi.h"
 #include "BroView.h"
 #include "MainFrm.h"
@@ -9,6 +10,28 @@
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif
+
+class ZoomReadTask : public CefTask
+{
+public:
+	ZoomReadTask(CefRefPtr<CefBrowser> browser, HWND hWnd)
+		: m_browser(browser), m_hWnd(hWnd) {}
+	void Execute() override
+	{
+		if (!m_browser || !m_browser->GetHost() || !::IsWindow(m_hWnd)) return;
+		double z = m_browser->GetHost()->GetZoomLevel();
+		LARGE_INTEGER li{};
+		memcpy(&li.QuadPart, &z, sizeof(double));
+		::PostMessage(m_hWnd, WM_APP_CEF_ZOOM_SYNC,
+				static_cast<WPARAM>(li.LowPart),
+				static_cast<LPARAM>(li.HighPart));
+	}
+
+private:
+	CefRefPtr<CefBrowser> m_browser;
+	HWND m_hWnd;
+	IMPLEMENT_REFCOUNTING(ZoomReadTask);
+};
 
 CChildView::CChildView()
 {
@@ -25,6 +48,7 @@ CChildView::CChildView()
 	m_nBrowserID = 0;
 	m_bDevToolsWnd = FALSE;
 	m_bFindNext = FALSE;
+	m_bZoomInitialized = FALSE;
 }
 
 CChildView::~CChildView()
@@ -119,6 +143,7 @@ BEGIN_MESSAGE_MAP(CChildView, ViewBaseClass)
 	ON_MESSAGE(WM_APP_CEF_PROGRESS_CHANGE, &CChildView::OnProgressChange)
 	ON_MESSAGE(WM_APP_CEF_WINDOW_ACTIVATE, &CChildView::OnWindowActivate)
 	ON_MESSAGE(WM_APP_CEF_SET_RENDERER_PID, &CChildView::OnSetRendererPID)
+	ON_MESSAGE(WM_APP_CEF_ZOOM_SYNC,  &CChildView::OnCefZoomSync)
 END_MESSAGE_MAP()
 
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
@@ -929,27 +954,17 @@ BOOL CChildView::ZoomTo(double lFactor)
 		auto maxPair = m_mapScaleToZoomSize.rbegin();
 		lFactor = max(lFactor, minPair->second);
 		lFactor = min(lFactor, maxPair->second);
-		if (GetZoomSizeEx() != lFactor)
+		// multi_threaded_message_loop = true では SetZoomLevel が CEF UI スレッドへ
+		// 非同期で投げられ、直後の GetZoomLevel() は古い値を返す。そのため自前の
+		// m_dbZoomSize を権威データとして扱い、GetZoomLevel に頼らない。
+		if (!m_bZoomInitialized || m_dbZoomSize != lFactor)
 		{
 			m_cefBrowser->GetHost()->SetZoomLevel(lFactor);
+			m_bZoomInitialized = TRUE;
 		}
-		m_dbZoomSize = GetZoomSizeEx();
+		m_dbZoomSize = lFactor;
 		bRet = TRUE;
-		if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
-		{
-			double dScale = 100;
-			for (const auto& [key, value] : m_mapScaleToZoomSize)
-			{
-				if (value == m_dbZoomSize)
-				{
-					dScale = key;
-					break;
-				}
-			}
-			CString strZoomFmt;
-			strZoomFmt.Format(_T("%.0f%%"), dScale);
-			FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
-		}
+		SetStatusBarZoomScale();
 	}
 	catch (...)
 	{
@@ -974,7 +989,9 @@ void CChildView::SetWheelZoom(int iDel)
 {
 	try
 	{
-		double iZoom = GetZoomSizeEx();
+		// GetZoomSizeEx() は multi_threaded_message_loop = true 下では SetZoomLevel
+		// の非同期遅延により古い値を返す。ZoomTo が更新する m_dbZoomSize を使う。
+		double iZoom = m_dbZoomSize;
 		int index = 0;
 		for (const auto& [key, value] : m_mapScaleToZoomSize)
 		{
@@ -1894,6 +1911,15 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
 	try
 	{
+		if (nIDEvent == BRO_VIEW_ZOOM_TIMER_ID)
+		{
+			if (!m_bZoomInitialized) return;
+			if (m_cefBrowser && ::IsWindow(this->m_hWnd))
+			{
+				CefPostTask(TID_UI, new ZoomReadTask(m_cefBrowser, this->m_hWnd));
+			}
+			return;
+		}
 		ViewBaseClass::OnTimer(nIDEvent);
 	}
 	catch (...)
@@ -1905,6 +1931,7 @@ void CChildView::OnDestroy()
 {
 	try
 	{
+		KillTimer(BRO_VIEW_ZOOM_TIMER_ID);
 
 		if (!IsBrowserNull())
 		{
@@ -2317,6 +2344,7 @@ void CChildView::SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser)
 	m_cefBrowser = browser;
 	m_nBrowserID = nBrowserId;
 	this->PostMessage(WM_SIZE);
+	SetTimer(BRO_VIEW_ZOOM_TIMER_ID, BRO_VIEW_ZOOM_TIMER_INTERVAL, NULL);
 }
 
 LRESULT CChildView::OnAuthenticate(WPARAM wParam, LPARAM lParam)
@@ -2347,6 +2375,41 @@ LRESULT CChildView::OnBadCertificate(WPARAM wParam, LPARAM lParam)
 {
 	return S_OK;
 }
+
+LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
+{
+	LARGE_INTEGER li;
+	li.LowPart = static_cast<DWORD>(wParam);
+	li.HighPart = static_cast<LONG>(lParam);
+	double dNewZoom;
+	memcpy(&dNewZoom, &li.QuadPart, sizeof(double));
+	if (dNewZoom == m_dbZoomSize) return 0;
+	m_dbZoomSize = dNewZoom;
+	SetStatusBarZoomScale();
+	return 0;
+}
+
+void CChildView::SetStatusBarZoomScale()
+{
+	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
+	{
+		UINT dBestKey = 100;
+		double minDelta = DBL_MAX;
+		for (const auto& [key, value] : m_mapScaleToZoomSize)
+		{
+			double delta = std::abs(value - m_dbZoomSize);
+			if (delta < minDelta)
+			{
+				minDelta = delta;
+				dBestKey = key;
+			}
+		}
+		CString strZoomFmt;
+		strZoomFmt.Format(_T("%u%%"), dBestKey);
+		FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
+	}
+}
+
 void CChildView::Navigate(LPCTSTR pszURL)
 {
 	PROC_TIME(Navigate)
