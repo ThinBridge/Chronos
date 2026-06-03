@@ -48,7 +48,6 @@ CChildView::CChildView()
 	m_nBrowserID = 0;
 	m_bDevToolsWnd = FALSE;
 	m_bFindNext = FALSE;
-	m_iZoomTimerID = 1367;
 	m_bZoomInitialized = FALSE;
 }
 
@@ -1931,7 +1930,7 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
 	try
 	{
-		if (nIDEvent == m_iZoomTimerID)
+		if (nIDEvent == BRO_VIEW_ZOOM_TIMER_ID)
 		{
 			if (!m_bZoomInitialized) return;
 			if (m_cefBrowser && ::IsWindow(this->m_hWnd))
@@ -1951,7 +1950,7 @@ void CChildView::OnDestroy()
 {
 	try
 	{
-		KillTimer(m_iZoomTimerID);
+		KillTimer(BRO_VIEW_ZOOM_TIMER_ID);
 
 		if (!IsBrowserNull())
 		{
@@ -2394,7 +2393,7 @@ void CChildView::SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser)
 	m_cefBrowser = browser;
 	m_nBrowserID = nBrowserId;
 	this->PostMessage(WM_SIZE);
-	SetTimer(m_iZoomTimerID, 250, NULL);
+	SetTimer(BRO_VIEW_ZOOM_TIMER_ID, BRO_VIEW_ZOOM_TIMER_INTERVAL, NULL);
 }
 
 LRESULT CChildView::OnAuthenticate(WPARAM wParam, LPARAM lParam)

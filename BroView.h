@@ -6,6 +6,9 @@
 #include "Sazabi.h"
 #define ViewBaseClass CWnd
 #define FRM	      ((CBrowserFrame*)m_pwndFrame)
+// 値に意味はなく、タイマーIDとしてユニークな値。
+#define BRO_VIEW_ZOOM_TIMER_ID  1367
+#define BRO_VIEW_ZOOM_TIMER_INTERVAL 250
 class CChildView : public ViewBaseClass
 {
 public:
@@ -16,7 +19,6 @@ public:
 	CString m_NavigateCompleteURL_Cache;
 
 	CString m_strTitle;
-	UINT m_iZoomTimerID;
 	BOOL m_bZoomInitialized;
 	void ResizeWindowPopup();
 	void ResizeWindowPopupInpl();
