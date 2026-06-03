@@ -85,6 +85,9 @@ protected:
 	afx_msg LRESULT OnCopyImage(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCefZoomSync(WPARAM wParam, LPARAM lParam);
 
+private:
+	void SetStatusBarZoomScale();
+
 public:
 	void SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser);
 	void ReSetRendererPID();

@@ -964,23 +964,7 @@ BOOL CChildView::ZoomTo(double lFactor)
 		}
 		m_dbZoomSize = lFactor;
 		bRet = TRUE;
-		if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
-		{
-			double dBestKey = 100.0;
-			double minDelta = DBL_MAX;
-			for (const auto& [key, value] : m_mapScaleToZoomSize)
-			{
-				double delta = std::abs(value - m_dbZoomSize);
-				if (delta < minDelta)
-				{
-					minDelta = delta;
-					dBestKey = static_cast<double>(key);
-				}
-			}
-			CString strZoomFmt;
-			strZoomFmt.Format(_T("%.0f%%"), dBestKey);
-			FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
-		}
+		SetStatusBarZoomScale();
 	}
 	catch (...)
 	{
@@ -2309,6 +2293,27 @@ LRESULT CChildView::OnSetRendererPID(WPARAM wParam, LPARAM lParam)
 	return S_OK;
 }
 
+void CChildView::SetStatusBarZoomScale()
+{
+	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
+	{
+		UINT dBestKey = 100;
+		double minDelta = DBL_MAX;
+		for (const auto& [key, value] : m_mapScaleToZoomSize)
+		{
+			double delta = std::abs(value - m_dbZoomSize);
+			if (delta < minDelta)
+			{
+				minDelta = delta;
+				dBestKey = key;
+			}
+		}
+		CString strZoomFmt;
+		strZoomFmt.Format(_T("%u%%"), dBestKey);
+		FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
+	}
+}
+
 LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
 {
 	LARGE_INTEGER li;
@@ -2318,23 +2323,7 @@ LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
 	memcpy(&dNewZoom, &li.QuadPart, sizeof(double));
 	if (dNewZoom == m_dbZoomSize) return 0;
 	m_dbZoomSize = dNewZoom;
-	if (theApp.IsWnd(FRM) && theApp.IsWnd(FRM->m_pwndStatusBar))
-	{
-		double dBestKey = 100.0;
-		double minDelta = DBL_MAX;
-		for (const auto& [key, value] : m_mapScaleToZoomSize)
-		{
-			double delta = std::abs(value - dNewZoom);
-			if (delta < minDelta)
-			{
-				minDelta = delta;
-				dBestKey = static_cast<double>(key);
-			}
-		}
-		CString strZoomFmt;
-		strZoomFmt.Format(_T("%.0f%%"), dBestKey);
-		FRM->m_pwndStatusBar->SetPaneText(nStatusZoom, strZoomFmt);
-	}
+	SetStatusBarZoomScale();
 	return 0;
 }
 
