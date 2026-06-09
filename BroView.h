@@ -9,6 +9,10 @@
 // 値に意味はなく、タイマーIDとしてユニークな値。
 #define BRO_VIEW_ZOOM_TIMER_ID  1367
 #define BRO_VIEW_ZOOM_TIMER_INTERVAL 250
+// ZoomLevelが変更されてから待機する時間。
+// ZoomLevelの変更から一定時間（検証環境では2秒弱）の間にタブのクローズ処理が行われると、Chronosがクラッシュする。
+// これを回避するため、ZoomLevelの最後の変更から、一定時間クローズ処理の実行をブロックする。
+#define BRO_VIEW_ZOOM_CLOSE_DEFER_MS 2000
 class CChildView : public ViewBaseClass
 {
 public:
@@ -24,10 +28,12 @@ public:
 	void ResizeWindowPopupInpl();
 	void ResizeFrmWindow(RECT& rectClient);
 	BOOL ZoomTo(double lFactor);
+	UINT GetRemainingCloseDeferMs() const;
 	double GetZoomSizeEx();
 	void SetWheelZoom(int iDel);
 	double m_dbZoomSize;
 	double m_dbZoomSizeDefault;
+	ULONGLONG m_dwLastSetZoomTick = 0;
 	CString m_strTopPageURL;
 	CString m_strLastBrowsedURL;
 	//scale = 100 * 1.2^zoomSize -> zoomSize = log1.2_(scale / 100)

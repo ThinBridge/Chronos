@@ -54,6 +54,7 @@ BEGIN_MESSAGE_MAP(CBrowserFrame, CFrameWndBase)
 	//ON_COMMAND(WM_CLOSE_DELAY,OnCloseDelay)
 	ON_COMMAND(ID_FULL_SCREEN, OnFullScreen)
 	ON_COMMAND(ID_W_CLOSE, OnWClose)
+	ON_WM_TIMER()
 	ON_MESSAGE(WM_ADD_FAVORITE, OnFavoriteAddSendMsg)
 
 	ON_COMMAND(ID_PREV_WND, OnPrevWnd)
@@ -2672,6 +2673,18 @@ void CBrowserFrame::PostWM_CLOSE()
 {
 	PostMessage(WM_CLOSE);
 }
+
+void CBrowserFrame::OnTimer(UINT_PTR nIDEvent)
+{
+	if (nIDEvent == BRO_FRAME_DEFER_CLOSE_TIMER_ID)
+	{
+		KillTimer(BRO_FRAME_DEFER_CLOSE_TIMER_ID);
+		// ズーム後の一定時間待機が完了し、クローズしても問題ない状態になった。
+		PostWM_CLOSE();
+		return;
+	}
+	CFrameWndBase::OnTimer(nIDEvent);
+}
 void CBrowserFrame::OnDestroy()
 {
 	try
@@ -2773,6 +2786,12 @@ void CBrowserFrame::OnCloseDelay()
 	CString logmsg;
 	if (theApp.IsWnd(&m_wndView))
 	{
+		UINT waitMs = m_wndView.GetRemainingCloseDeferMs();
+		if (waitMs > 0)
+		{
+			SetTimer(BRO_FRAME_DEFER_CLOSE_TIMER_ID, waitMs, NULL);
+			return;
+		}
 		PostWM_CLOSE();
 		return;
 	}
