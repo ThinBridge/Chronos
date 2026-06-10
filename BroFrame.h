@@ -22,6 +22,8 @@
 #define SBW_SHOW_TOOL_BAR    0x2
 #define SBW_SHOW_ADDRESS_BAR 0x4
 #define SBW_SHOW_STATUS_BAR  0x8
+// 値に意味はなく、タイマーIDとしてユニークな値。
+#define BRO_FRAME_DEFER_CLOSE_TIMER_ID 1368
 #include "CTabWnd.h"
 class CMyMenuBar;
 class CMyReBar;
@@ -134,6 +136,7 @@ public:
 	void OnCloseDelay();
 	void OnWClose();
 	void PostWM_CLOSE();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 	CString GetViewLocationURLOnly();
 	CPtrArray m_ptrAWnd;

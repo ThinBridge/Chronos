@@ -944,6 +944,15 @@ void CChildView::OnTitleChange(LPCWSTR lpwszText)
 	}
 }
 
+UINT CChildView::GetRemainingCloseDeferMs() const
+{
+	if (m_dwLastSetZoomTick == 0) return 0;
+	ULONGLONG now = ::GetTickCount64();
+	UINT elapsed = static_cast<UINT>(min(UINT_MAX, now - m_dwLastSetZoomTick));
+	if (elapsed >= BRO_VIEW_ZOOM_CLOSE_DEFER_MS) return 0;
+	return BRO_VIEW_ZOOM_CLOSE_DEFER_MS - elapsed;
+}
+
 BOOL CChildView::ZoomTo(double lFactor)
 {
 	BOOL bRet = FALSE;
@@ -961,6 +970,7 @@ BOOL CChildView::ZoomTo(double lFactor)
 		{
 			m_cefBrowser->GetHost()->SetZoomLevel(lFactor);
 			m_bZoomInitialized = TRUE;
+			m_dwLastSetZoomTick = ::GetTickCount64();
 		}
 		m_dbZoomSize = lFactor;
 		bRet = TRUE;
@@ -2385,6 +2395,7 @@ LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
 	memcpy(&dNewZoom, &li.QuadPart, sizeof(double));
 	if (dNewZoom == m_dbZoomSize) return 0;
 	m_dbZoomSize = dNewZoom;
+	m_dwLastSetZoomTick = ::GetTickCount64();
 	SetStatusBarZoomScale();
 	return 0;
 }
