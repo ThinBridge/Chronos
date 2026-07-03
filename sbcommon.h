@@ -3334,6 +3334,7 @@ public:
 		m_bStop = FALSE;
 		m_iIndexVal = 999;
 		m_bStopFin = 0;
+		m_nActiveWorkers = 0;
 	}
 	~CLogDispatcher()
 	{
@@ -3345,6 +3346,16 @@ public:
 					break;
 				::Sleep(100);
 			}
+		}
+		// m_bStopFin は MonitorThread の終了しか示さない。ログ送信ワーカー
+		// （MyThread）はリトライ中に最大数秒間本オブジェクトを参照し続けるため、
+		// 全ワーカーの終了（m_nActiveWorkers == 0）も待ってから破棄する。
+		// これを待たないとワーカーが解放済みメモリへアクセスしてクラッシュする。
+		for (int i = 0; i < 100; i++)
+		{
+			if (m_nActiveWorkers <= 0)
+				break;
+			::Sleep(100);
 		}
 		if (m_hEventSendMsg)
 		{
@@ -3367,6 +3378,9 @@ public:
 	CString m_strForceStopIdx;
 	BOOL m_bStop;
 	BOOL m_bStopFin;
+	// 実行中のログ送信ワーカー（MyThread）の数。SendLog で増やし、
+	// MyThread の最後（本オブジェクトへの最終アクセス）で減らす。
+	volatile LONG m_nActiveWorkers;
 	CWinThread* m_pMonitorThread;
 	void Init();
 	CString GetIndex()
