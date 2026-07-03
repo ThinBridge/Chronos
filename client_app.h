@@ -85,22 +85,11 @@ public:
 		return true;
 	}
 
-public:
-	void AddRef() const override
-	{
-	}
-	bool Release() const override
-	{
-		return true;
-	}
-	bool HasOneRef() const override
-	{
-		return false;
-	}
-	bool HasAtLeastOneRef() const override
-	{
-		return false;
-	}
+private:
+	// MTML mode: Visit() runs on the CEF UI thread and may fire after the
+	// caller's stack unwinds. Use real refcounting so the visitor survives
+	// asynchronous callback delivery.
+	IMPLEMENT_REFCOUNTING(CefNavigationEntryVisitorAdapter);
 };
 class CBrowserFrame;
 class DownloadFaviconCB : public CefDownloadImageCallback

@@ -33,6 +33,44 @@ private:
 	IMPLEMENT_REFCOUNTING(ZoomReadTask);
 };
 
+// 戻る/進む履歴スナップショットの受け渡し用。CEF UI スレッドで生成し、
+// PostMessage で MFC スレッドへ所有権ごと渡す（受信側で delete する）。
+struct TravelLogSnapshot
+{
+	CStringArray straTitles;
+	int iCurrentIndex = -1;
+};
+
+// CEF UI スレッド上で GetNavigationEntries を実行して履歴スナップショットを
+// 取得するタスク。UI スレッド上では Visit() が同期的に完了するため、
+// 呼び出し直後に結果を回収して WM_APP_CEF_TRAVELLOG_SYNC で通知できる。
+class TravelLogReadTask : public CefTask
+{
+public:
+	TravelLogReadTask(CefRefPtr<CefBrowser> browser, HWND hWnd)
+		: m_browser(browser), m_hWnd(hWnd) {}
+	void Execute() override
+	{
+		if (!m_browser || !m_browser->IsValid() || !m_browser->GetHost() || !::IsWindow(m_hWnd)) return;
+		CefRefPtr<CefNavigationEntryVisitorAdapter> visitor = new CefNavigationEntryVisitorAdapter();
+		m_browser->GetHost()->GetNavigationEntries(visitor, false);
+		TravelLogSnapshot* pSnap = new TravelLogSnapshot();
+		pSnap->straTitles.Copy(visitor->m_strArrayRet);
+		pSnap->iCurrentIndex = visitor->m_iCurrentIndex;
+		if (!::PostMessage(m_hWnd, WM_APP_CEF_TRAVELLOG_SYNC,
+				reinterpret_cast<WPARAM>(pSnap), 0))
+		{
+			// ウィンドウ破棄後などで届けられない場合はここで破棄する。
+			delete pSnap;
+		}
+	}
+
+private:
+	CefRefPtr<CefBrowser> m_browser;
+	HWND m_hWnd;
+	IMPLEMENT_REFCOUNTING(TravelLogReadTask);
+};
+
 CChildView::CChildView()
 {
 	m_pwndFrame = NULL;
@@ -144,6 +182,7 @@ BEGIN_MESSAGE_MAP(CChildView, ViewBaseClass)
 	ON_MESSAGE(WM_APP_CEF_WINDOW_ACTIVATE, &CChildView::OnWindowActivate)
 	ON_MESSAGE(WM_APP_CEF_SET_RENDERER_PID, &CChildView::OnSetRendererPID)
 	ON_MESSAGE(WM_APP_CEF_ZOOM_SYNC,  &CChildView::OnCefZoomSync)
+	ON_MESSAGE(WM_APP_CEF_TRAVELLOG_SYNC, &CChildView::OnCefTravelLogSync)
 END_MESSAGE_MAP()
 
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
@@ -2146,6 +2185,8 @@ LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 		}
 	}
 
+	// ナビゲーション完了により履歴が変化したので、スナップショットを更新する。
+	RequestTravelLogRefresh();
 	return S_OK;
 }
 
@@ -2316,6 +2357,9 @@ LRESULT CChildView::OnAddressChange(WPARAM wParam, LPARAM lParam)
 			IsRedirectWndAutoCloseChk();
 		}
 	}
+	// same-document navigation（アンカー移動や pushState）でも履歴は変化する
+	// ため、アドレス変化を契機にスナップショットを更新する。
+	RequestTravelLogRefresh();
 	return S_OK;
 }
 
@@ -2355,6 +2399,7 @@ void CChildView::SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser)
 	m_nBrowserID = nBrowserId;
 	this->PostMessage(WM_SIZE);
 	SetTimer(BRO_VIEW_ZOOM_TIMER_ID, BRO_VIEW_ZOOM_TIMER_INTERVAL, NULL);
+	RequestTravelLogRefresh();
 }
 
 LRESULT CChildView::OnAuthenticate(WPARAM wParam, LPARAM lParam)
@@ -2398,6 +2443,23 @@ LRESULT CChildView::OnCefZoomSync(WPARAM wParam, LPARAM lParam)
 	m_dwLastSetZoomTick = ::GetTickCount64();
 	SetStatusBarZoomScale();
 	return 0;
+}
+
+LRESULT CChildView::OnCefTravelLogSync(WPARAM wParam, LPARAM /*lParam*/)
+{
+	TravelLogSnapshot* pSnap = reinterpret_cast<TravelLogSnapshot*>(wParam);
+	if (!pSnap) return 0;
+	m_straTravelLog.Copy(pSnap->straTitles);
+	m_iTravelLogCurrent = pSnap->iCurrentIndex;
+	delete pSnap;
+	return 0;
+}
+
+void CChildView::RequestTravelLogRefresh()
+{
+	if (IsBrowserNull()) return;
+	if (!::IsWindow(this->m_hWnd)) return;
+	CefPostTask(TID_UI, new TravelLogReadTask(m_cefBrowser, this->m_hWnd));
 }
 
 void CChildView::SetStatusBarZoomScale()

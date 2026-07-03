@@ -65,6 +65,11 @@ protected:
 	CefRefPtr<ClientHandler> m_clientHandler;
 	CefPopupFeatures* m_popupFeatures;
 	BOOL m_bDevToolsWnd;
+	// 戻る/進む履歴のスナップショット。ナビゲーション発生時に CEF UI スレッドで
+	// 取得した結果を WM_APP_CEF_TRAVELLOG_SYNC 経由で受け取って保持する。
+	// 読み書きは MFC スレッドのみで行うため排他制御は不要。
+	CStringArray m_straTravelLog;
+	int m_iTravelLogCurrent = -1;
 	afx_msg LRESULT OnBeforeBrowse(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnDownloadUpdate(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnDownloadBlankPage(WPARAM wParam, LPARAM lParam);
@@ -90,12 +95,15 @@ protected:
 	afx_msg LRESULT OnSetRendererPID(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCopyImage(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCefZoomSync(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCefTravelLogSync(WPARAM wParam, LPARAM lParam);
 
 private:
 	void SetStatusBarZoomScale();
 
 public:
 	void SetBrowserPtr(INT nBrowserId, CefRefPtr<CefBrowser> browser);
+	// 戻る/進む履歴スナップショットの再取得を CEF UI スレッドへ依頼する（非同期）。
+	void RequestTravelLogRefresh();
 	void ReSetRendererPID();
 	CString GetLocationURL()
 	{
@@ -159,24 +167,26 @@ public:
 
 	void UpDateAddressBar();
 
+	// 戻る/進むドロップダウン用の履歴一覧を返す。
+	// MTML 構成では GetNavigationEntries の Visit() は CEF UI スレッドで実行される
+	// ため、ここでは CEF に直接問い合わせず、ナビゲーション発生時に
+	// RequestTravelLogRefresh() が取得しておいたスナップショット
+	// （m_straTravelLog / m_iTravelLogCurrent）を読むだけにする。
+	// これにより MFC スレッドをブロックせず、CEF とのスレッド競合も発生しない。
 	void GetTravelLog(CStringArray& strArrayRet, BOOL bBack = true)
 	{
 		try
 		{
-			if (IsBrowserNull())
-				return;
 			strArrayRet.RemoveAll();
-			CefNavigationEntryVisitorAdapter CefEntryVisitor;
-			m_cefBrowser->GetHost()->GetNavigationEntries(&CefEntryVisitor, false);
-			int iMax = (int)CefEntryVisitor.m_strArrayRet.GetSize();
-			int iCurrentIndex = 0;
-			iCurrentIndex = CefEntryVisitor.m_iCurrentIndex;
+			// 次回表示に備えてスナップショットの更新も依頼しておく（自己修復）。
+			RequestTravelLogRefresh();
+			int iMax = (int)m_straTravelLog.GetSize();
+			int iCurrentIndex = m_iTravelLogCurrent;
 			if (bBack)
 			{
 				for (int i = iCurrentIndex - 1; i >= 0; i--)
 				{
-					CString strData;
-					strData = CefEntryVisitor.m_strArrayRet.GetAt(i);
+					CString strData = m_straTravelLog.GetAt(i);
 					strData.TrimLeft();
 					strData.TrimRight();
 					if (strData.IsEmpty())
@@ -188,8 +198,7 @@ public:
 			{
 				for (int i = iCurrentIndex + 1; i < iMax; i++)
 				{
-					CString strData;
-					strData = CefEntryVisitor.m_strArrayRet.GetAt(i);
+					CString strData = m_straTravelLog.GetAt(i);
 					strData.TrimLeft();
 					strData.TrimRight();
 					if (strData.IsEmpty())
