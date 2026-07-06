@@ -85,22 +85,12 @@ public:
 		return true;
 	}
 
-public:
-	void AddRef() const override
-	{
-	}
-	bool Release() const override
-	{
-		return true;
-	}
-	bool HasOneRef() const override
-	{
-		return false;
-	}
-	bool HasAtLeastOneRef() const override
-	{
-		return false;
-	}
+private:
+	// multi_threaded_message_loopのとき、Visit()はCEFのUIスレッド上で実行され、
+	// 呼び出し元のスタックが巻き戻された後に発火する可能性がある。
+	// 非同期コールバック配信を通じてビジターが生存し続けられるよう、
+	// 実際の参照カウント機構を使用する。
+	IMPLEMENT_REFCOUNTING(CefNavigationEntryVisitorAdapter);
 };
 class CBrowserFrame;
 class DownloadFaviconCB : public CefDownloadImageCallback
