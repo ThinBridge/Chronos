@@ -2041,7 +2041,12 @@ bool ClientHandler::OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 			if (frame->IsMain())
 				bTopPage = TRUE;
 		}
-		::SendMessageTimeout(hWindow, WM_APP_CEF_BEFORE_BROWSE, (WPARAM)pszURL, (LPARAM)&bTopPage, SMTO_NORMAL, 1000, NULL);
+		// multi_threaded_message_loop = true では本ハンドラは CEF UI スレッドで動作する。
+		// リダイレクト時のキャンセル判定（*pbRet==2）を SendMessageTimeout のタイムアウトで
+		// 取りこぼすと、ナビゲーションがキャンセルされず OnAddressChange 側で二重に
+		// リダイレクト処理が走る。MFC 側ハンドラは判定のみ同期で行い重い副作用は
+		// 非同期化したため、ここは同期 SendMessage で判定完了を確実に待つ。
+		::SendMessage(hWindow, WM_APP_CEF_BEFORE_BROWSE, (WPARAM)pszURL, (LPARAM)&bTopPage);
 		//ナビゲーションをキャンセルする。
 		if (bTopPage == 2)
 		{

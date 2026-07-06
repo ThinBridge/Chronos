@@ -96,6 +96,7 @@ protected:
 	afx_msg LRESULT OnCopyImage(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCefZoomSync(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnCefTravelLogSync(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCefRedirectAction(WPARAM wParam, LPARAM lParam);
 
 private:
 	void SetStatusBarZoomScale();
@@ -344,6 +345,9 @@ public:
 	void IsRedirectWndAutoCloseChk();
 	BOOL IsRedirectURLChk(const CString& strURL, BOOL bTop);
 	BOOL IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL bTop);
+	BOOL IsKnownRedirectKeyword(const CString& strKeyword);
+	void ScheduleRedirectAction(const CString& strURL, const CString& strKeyword);
+	void DoRedirectAction(const CString& strURL, const CString& strKeyword);
 	BOOL IsFileURINavigation(const CString& strURL);
 
 	void CreateNewBrowserWindow(LPCTSTR lpszUrl, BOOL bActive = true);

@@ -183,6 +183,7 @@ BEGIN_MESSAGE_MAP(CChildView, ViewBaseClass)
 	ON_MESSAGE(WM_APP_CEF_SET_RENDERER_PID, &CChildView::OnSetRendererPID)
 	ON_MESSAGE(WM_APP_CEF_ZOOM_SYNC,  &CChildView::OnCefZoomSync)
 	ON_MESSAGE(WM_APP_CEF_TRAVELLOG_SYNC, &CChildView::OnCefTravelLogSync)
+	ON_MESSAGE(WM_APP_CEF_REDIRECT_ACTION, &CChildView::OnCefRedirectAction)
 END_MESSAGE_MAP()
 
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
@@ -398,6 +399,189 @@ BOOL CChildView::IsFileURINavigation(const CString& strURL)
 	return bRet;
 }
 
+// リダイレクト副作用（メッセージボックス表示・外部アプリ起動・自動クローズ）を
+// MFC スレッドへ非同期に渡すためのペイロード。PostMessage で所有権ごと渡し、
+// 受信側 OnCefRedirectAction で delete する。
+struct RedirectActionData
+{
+	CString strURL;
+	CString strKeyword;
+};
+
+// リダイレクトスクリプトが返し得る既知のキーワードか判定する。
+BOOL CChildView::IsKnownRedirectKeyword(const CString& strKeyword)
+{
+	return (strKeyword.CompareNoCase(_T("IE")) == 0
+		|| strKeyword.CompareNoCase(_T("Custom")) == 0
+		|| strKeyword.CompareNoCase(_T("Custom1")) == 0
+		|| strKeyword.CompareNoCase(_T("Custom2")) == 0
+		|| strKeyword.CompareNoCase(_T("Custom3")) == 0
+		|| strKeyword.CompareNoCase(_T("Custom4")) == 0
+		|| strKeyword.CompareNoCase(_T("Custom5")) == 0
+		|| strKeyword.CompareNoCase(_T("Block")) == 0
+		|| strKeyword.CompareNoCase(_T("Default")) == 0
+		|| strKeyword.CompareNoCase(_T("Firefox")) == 0
+		|| strKeyword.CompareNoCase(_T("Chrome")) == 0
+		|| strKeyword.CompareNoCase(_T("Edge")) == 0);
+}
+
+// リダイレクト副作用を MFC スレッドへ非同期でスケジュールする。
+void CChildView::ScheduleRedirectAction(const CString& strURL, const CString& strKeyword)
+{
+	RedirectActionData* pData = new RedirectActionData();
+	pData->strURL = strURL;
+	pData->strKeyword = strKeyword;
+	if (!::PostMessage(this->m_hWnd, WM_APP_CEF_REDIRECT_ACTION,
+			reinterpret_cast<WPARAM>(pData), 0))
+	{
+		// ウィンドウ破棄後などで届けられない場合はここで破棄する。
+		delete pData;
+	}
+}
+
+// リダイレクトの実処理（メッセージボックス表示と外部アプリ起動）。
+// 重い処理・モーダルダイアログを含むため、必ず MFC スレッド側の
+// OnCefRedirectAction から呼び出し、CEF UI スレッドはブロックしない。
+void CChildView::DoRedirectAction(const CString& strURL, const CString& strKeyword)
+{
+	CString strTimeoutMessage;
+	CString logmsg;
+	CString strURLMid;
+	strURLMid = strURL;
+	SBUtil::GetDivChar(strURL, 260, strURLMid, FALSE);
+
+	if (strKeyword.CompareNoCase(_T("IE")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageIE, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 1, _T(""));
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Custom")) == 0 || strKeyword.CompareNoCase(_T("Custom1")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser());
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Custom2")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser2());
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Custom3")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser3());
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Custom4")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser4());
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Custom5")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser5());
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Block")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageNG, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:<BLOCK> %s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONERROR, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Default")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageDBL, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 0, _T(""));
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Firefox")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageFF, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 2, _T(""));
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Chrome")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCHR, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 3, _T(""));
+		return;
+	}
+	if (strKeyword.CompareNoCase(_T("Edge")) == 0)
+	{
+		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageEDG, (LPCTSTR)strURLMid);
+		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
+		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
+		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
+			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
+		LockSetForegroundWindow(LSFW_UNLOCK);
+		theApp.OpenDefaultBrowser(strURL, 4, _T(""));
+		return;
+	}
+}
+
+// WM_APP_CEF_REDIRECT_ACTION 受信。リダイレクトを MFC スレッドで実行する。
+LRESULT CChildView::OnCefRedirectAction(WPARAM wParam, LPARAM /*lParam*/)
+{
+	RedirectActionData* pData = reinterpret_cast<RedirectActionData*>(wParam);
+	if (!pData) return 0;
+	DoRedirectAction(pData->strURL, pData->strKeyword);
+	IsRedirectWndAutoCloseChk();
+	delete pData;
+	return 0;
+}
+
 BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL bTop)
 {
 	PROC_TIME(IsRedirectScriptEx)
@@ -405,7 +589,7 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	CString strURL;
 	strURL = sURL;
 
-	//Scriptベースの判定
+	//Script ベースの判定
 	if (theApp.m_cScriptSrc.m_strSrc.IsEmpty())
 		return FALSE;
 
@@ -425,152 +609,16 @@ BOOL CChildView::IsRedirectScriptEx(LPCTSTR sURL, LPCTSTR sChkURLNoQuery, BOOL b
 	if (strRet.IsEmpty())
 		return FALSE;
 
-	CString strTimeoutMessage;
-	CString logmsg;
+	// 既知のキーワードでなければリダイレクトしない
+	if (!IsKnownRedirectKeyword(strRet))
+		return FALSE;
 
-	CString strURLMid;
-	strURLMid = strURL;
-	SBUtil::GetDivChar(strURL, 260, strURLMid, FALSE);
-
-	if (strRet.CompareNoCase(_T("IE")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageIE, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 1, _T(""));
-		return TRUE;
-	}
-
-	if (strRet.CompareNoCase(_T("Custom")) == 0 || strRet.CompareNoCase(_T("Custom1")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser());
-		return TRUE;
-	}
-	if (strRet.CompareNoCase(_T("Custom2")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser2());
-		return TRUE;
-	}
-	if (strRet.CompareNoCase(_T("Custom3")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser3());
-		return TRUE;
-	}
-	if (strRet.CompareNoCase(_T("Custom4")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser4());
-		return TRUE;
-	}
-	if (strRet.CompareNoCase(_T("Custom5")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCustom, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 5, theApp.m_AppSettings.GetCustomBrowser5());
-		return TRUE;
-	}
-
-	if (strRet.CompareNoCase(_T("Block")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageNG, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:<BLOCK> %s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONERROR, theApp.m_AppSettings.GetRedirectMsgTimeout());
-
-		return TRUE;
-	}
-
-	if (strRet.CompareNoCase(_T("Default")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageDBL, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 0, _T(""));
-		return TRUE;
-	}
-
-	if (strRet.CompareNoCase(_T("Firefox")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageFF, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 2, _T(""));
-		return TRUE;
-	}
-
-	if (strRet.CompareNoCase(_T("Chrome")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageCHR, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 3, _T(""));
-		return TRUE;
-	}
-
-	if (strRet.CompareNoCase(_T("Edge")) == 0)
-	{
-		strTimeoutMessage.Format(_T("%s\n%s"), (LPCTSTR)theApp.m_strZoneMessageEDG, (LPCTSTR)strURLMid);
-		logmsg.Format(_T("CV_WND:0x%08p IsRedirectScript:%s"), theApp.SafeWnd(this->m_hWnd), (LPCTSTR)strTimeoutMessage);
-		theApp.WriteDebugTraceDateTime(logmsg, DEBUG_LOG_TYPE_DE);
-
-		if (theApp.m_AppSettings.GetRedirectMsgTimeout() > 0)
-			ShowTimeoutMessageBox(strTimeoutMessage, MB_OK | MB_ICONINFORMATION, theApp.m_AppSettings.GetRedirectMsgTimeout());
-		LockSetForegroundWindow(LSFW_UNLOCK);
-		theApp.OpenDefaultBrowser(strURL, 4, _T(""));
-
-		return TRUE;
-	}
-	return FALSE;
+	// 判定のみここで同期的に確定する。メッセージボックス表示・外部アプリ起動などの
+	// 重い副作用は CEF UI スレッドをブロックしないよう PostMessage で非同期に実行する。
+	// これにより OnBeforeBrowse のキャンセル判定は SendMessage のタイムアウトに
+	// 依存せず確実に返せる。
+	ScheduleRedirectAction(strURL, strRet);
+	return TRUE;
 }
 
 BOOL CChildView::IsRedirectURLChk(const CString& strURL, BOOL bTop)
@@ -2046,7 +2094,8 @@ LRESULT CChildView::OnBeforeBrowse(WPARAM wParam, LPARAM lParam)
 				{
 					*pbRet = 2;
 				}
-				IsRedirectWndAutoCloseChk();
+				// リダイレクトの副作用（メッセージボックス・外部起動・自動クローズ）は
+				// IsRedirectScriptEx が WM_APP_CEF_REDIRECT_ACTION で非同期に実行する。
 			}
 		}
 	}
@@ -2352,10 +2401,9 @@ LRESULT CChildView::OnAddressChange(WPARAM wParam, LPARAM lParam)
 	if (!strURL.IsEmpty())
 	{
 		BOOL bTopPage = TRUE;
-		if (IsRedirectURLChk(strURL, bTopPage))
-		{
-			IsRedirectWndAutoCloseChk();
-		}
+		// リダイレクト判定に一致した場合、副作用は IsRedirectScriptEx が
+		// WM_APP_CEF_REDIRECT_ACTION で非同期に実行する（戻り値は使用しない）。
+		IsRedirectURLChk(strURL, bTopPage);
 	}
 	// same-document navigation（アンカー移動や pushState）でも履歴は変化する
 	// ため、アドレス変化を契機にスナップショットを更新する。
