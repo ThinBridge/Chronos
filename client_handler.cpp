@@ -2046,7 +2046,7 @@ bool ClientHandler::OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 		// 返却してキャンセルを指示する。元々はSendMessageTimeoutを使用していたが、タイムアウトで
 		// 書き戻しを取りこぼすと、ナビゲーションがキャンセルされず、この後OnAddressChangeも実行され
 		// 二重にリダイレクトが実行されることになる。
-		//、さらに、書き戻し先のbTopPageが解放済みスタックになるため不正参照になる。同期版のSendMessage
+		// さらに、書き戻し先のbTopPageが解放済みスタックになるため不正参照になる。同期版のSendMessage
 		// CChildView::OnBeforeBrowse側の処理完了（リダイレクトおよび書き戻し）を確実に待つ。
 		// リダイレクト発生時の「情報メッセージ表示時間」で長い時間を指定していると、その時間の間CEF側の
 		// 処理も停止してしまうが、通常それらのメッセージ表示時間中はCEF側の処理を止めたい
