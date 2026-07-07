@@ -2042,8 +2042,8 @@ bool ClientHandler::OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 				bTopPage = TRUE;
 		}
 		// multi_threaded_message_loop = true では本ハンドラはCEFのUIスレッドで動作する。
-		// bTopPageは入出力兼用で、CChildView::OnBeforeBrowseがリダイレクト一致時に2を
-		// 返却してキャンセルを指示する。元々はSendMessageTimeoutを使用していたが、タイムアウトで
+		// bTopPageは入出力兼用で、MFC側のスレッドで実行される、CChildView::OnBeforeBrowseがリダイレクト一致時に
+		// 2を返却してキャンセルを指示する。元々はSendMessageTimeoutを使用していたが、タイムアウトで
 		// 書き戻しを取りこぼすと、ナビゲーションがキャンセルされず、この後OnAddressChangeも実行され
 		// 二重にリダイレクトが実行されることになる。
 		// さらに、書き戻し先のbTopPageが解放済みスタックになるため不正参照になる。同期版のSendMessage
