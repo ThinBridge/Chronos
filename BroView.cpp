@@ -2125,6 +2125,11 @@ LRESULT CChildView::OnBeforeResourceLoad(WPARAM wParam, LPARAM lParam)
 LRESULT CChildView::OnLoadStart(WPARAM wParam, LPARAM lParam)
 {
 	PROC_TIME(OnLoadStart)
+	// multi_threaded_message_loop = trueのとき、CEFの画面生成とMFCの処理は別スレッドで動作する。
+	// そのため、起動/タブ生成直後のリサイズ（SetBrowserPtr の WM_SIZE 1 回）が低スペック端末ではCEF側に
+	// 上手く伝達されず、画面サイズが正しくなくなることがある。特に画面のDPI（画面サイズの拡大縮小）をしている時に発生しやすい。
+	// そのため、ロード開始時（フレーム配置は確定済み）に WM_SIZE を再送し、CEF側の画面を再サイズさせる。
+	this->PostMessage(WM_SIZE);
 	m_strTitle.Empty();
 	if (!theApp.IsWnd(FRM))
 		return S_OK;
@@ -2147,6 +2152,8 @@ LRESULT CChildView::OnLoadStart(WPARAM wParam, LPARAM lParam)
 LRESULT CChildView::OnLoadEnd(WPARAM wParam, LPARAM lParam)
 {
 	PROC_TIME(OnLoadEnd)
+	// OnLoadStart と同様の是正リサイズ。ロード開始が早すぎて間に合わない場合の保険。
+	this->PostMessage(WM_SIZE);
 	if (theApp.IsWnd(FRM))
 	{
 		if (theApp.IsWnd(FRM->m_pwndStatusBar))
