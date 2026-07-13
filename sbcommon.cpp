@@ -461,6 +461,9 @@ UINT MyThread(LPVOID ptr)
 		}
 	}
 	ptrDisp->CloseThreadList(strIndex);
+	// ptrDisp への最終アクセス。デストラクタはこのカウンタが 0 になるのを
+	// 待ってからオブジェクトを解放するため、これ以降 ptrDisp に触れないこと。
+	InterlockedDecrement(&ptrDisp->m_nActiveWorkers);
 	return 0;
 }
 void CLogDispatcher::SendLog(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTargetURL)
@@ -494,7 +497,14 @@ void CLogDispatcher::SendLog(int iLogType, LPCTSTR lpFileName, LPCTSTR lpTargetU
 						CString strIndexTmp;
 						strIndexTmp = this->GetIndex();
 						m_strIndexTMP = strIndexTmp;
-						AddThreadMGR(AfxBeginThread(MyThread, this), strIndexTmp);
+						// ワーカー起動前にカウントを増やす（デストラクタが全ワーカーの
+						// 終了を待てるようにするため）。起動失敗時は戻す。
+						InterlockedIncrement(&m_nActiveWorkers);
+						CWinThread* pWorker = AfxBeginThread(MyThread, this);
+						if (pWorker)
+							AddThreadMGR(pWorker, strIndexTmp);
+						else
+							InterlockedDecrement(&m_nActiveWorkers);
 					}
 				}
 			}
