@@ -399,18 +399,64 @@ GDI+やCOMの初期化は `CSazabi::InitFunc_Base()`(ブラウザープロセス
 したがって、疑わしいのはMFC自身の静的初期化(`#pragma init_seg(lib)` の
 オブジェクト群)ということになる。
 
+#### 例外の観測: VEH経由で型名を取得する
+
+`SetUnhandledExceptionFilter()` で仕掛けたフィルタは呼ばれなかった。
+Chromiumは第三者による最上位例外フィルタの差し替えを無効化するため。
+一方、**ベクタ例外ハンドラ(`AddVectoredExceptionHandler`)は差し替えを
+阻止されない**ので、こちらを使う。
+
+出力経路はイベントログの例外コードしかないため、コードそのものに情報を載せた。
+
+```
+0xE0 T C C C    T   = プロセス種別 (2:renderer 3:gpu 4:storage 5:その他utility)
+                CCC = 投げられたC++型名の先頭3文字
+```
+
+型名は `ExceptionInformation[2]` の `ThrowInfo` から
+`CatchableType` → `TypeDescriptor::name` をたどって取得する。
+なお **MFCは例外をポインタで投げる**ため、名前は `.?AV...` ではなく
+`.PAV...` で始まる点に注意(最初この分岐を誤って空振りした)。
+
+結果:
+
+| 例外コード | 回数 | プロセス種別 | 型名の先頭3文字 |
+|---|---|---|---|
+| `0xE4435265` | 4 | storage service | `CRe` |
+| `0xE2435265` | 2 | renderer | `CRe` |
+| `0xE5435265` | 1 | その他のutility | `CRe` |
+
+`CRe` はMFCの **`CResourceException`** と考えられる。
+**GPUプロセスでは発生していない**点が重要で、GPUはwin32kを必要とするため
+win32kロックダウンが適用されない。一方 renderer / utility には適用され、
+user32/gdi32 によるリソース読み込みが不可能になる。この差と症状は整合する。
+
+#### 未解決の疑問(ここで調査を止めた理由)
+
+上記には**確定していない点がある**。VEHは「プロセス内で最初に発生した
+C++例外」で発火させているが、MFCは内部で例外を投げて自分で捕捉する。
+実際、VEHを入れると1回の実行あたりのクラッシュ件数が25件から14件に変化した。
+これは**本来生き残るはずのプロセスまで計測が殺している**ことを意味し、
+観測した `CResourceException` が致命的な例外そのものとは限らない。
+
+また、`RunWinMain()` を `try` / `catch` で囲んだ切り分けにも穴があった。
+`AfxInitialize()` の呼び出しが `try` の外にあったため、
+「`RunWinMain()` の中では起きていない」は厳密には
+「`ChronosRunMain()` の中では起きていない」でしかない。
+
+加えて、`CWinApp` のコンストラクタはMFCのソースを確認したかぎり
+リソースを読み込んでいない。静的初期化で `CResourceException` が
+投げられる経路は、現時点では説明できていない。
+
 #### 次に試すこと
 
-1. `#pragma init_seg` の各段階(`compiler` / `lib` / `user` / 既定)に
-   ステージ番号を進めるグローバルオブジェクトを置き、
-   `init_seg(compiler)` で `SetUnhandledExceptionFilter()` を仕掛けて
-   `0xE0C40000 + ステージ番号` を投げる。どの段階で落ちているかを
-   1ビルドで特定できる
-2. あるいはWERのLocalDumps(`HKLM\SOFTWARE\Microsoft\Windows\
+1. WERのLocalDumps(`HKLM\SOFTWARE\Microsoft\Windows\
    Windows Error Reporting\LocalDumps`)を設定してミニダンプを採取し、
-   スタックを直接見る。管理者権限とシステム設定の変更が必要
-3. 原因のオブジェクトが特定できたら、サンドボックス下でも安全に
-   初期化できる形に変えるか、遅延初期化に変更する
+   スタックを直接見る。ここまでの間接的な観測をすべて置き換えられる、
+   もっとも確実な方法。管理者権限とシステム設定の変更が必要
+2. VEHを「最初の1回」ではなく「捕捉されずに終わった例外」でのみ
+   発火させる方法を用意する(`std::set_terminate` の併用など)
+3. 型名の全体(先頭3文字ではなく完全な名前)を取得できるようにする
 
 ## 検証チェックリスト(Phase 2以降)
 
