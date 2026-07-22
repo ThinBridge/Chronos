@@ -431,7 +431,97 @@ Chromiumは第三者による最上位例外フィルタの差し替えを無効
 win32kロックダウンが適用されない。一方 renderer / utility には適用され、
 user32/gdi32 によるリソース読み込みが不可能になる。この差と症状は整合する。
 
-#### 未解決の疑問(ここで調査を止めた理由)
+#### 原因の確定: MFCの `afxGlobalData` がwin32kを呼ぶ
+
+WERのLocalDumpsでフルダンプを採取し、解析して原因が確定した。
+WERは未処理例外の時点でダンプを採るため、以下が致命的な例外そのものである。
+
+投げられた例外(`ThrowInfo` の `CatchableType` を展開したもの):
+
+```
+.PAVCResourceException@@
+.PAVCSimpleException@@
+.PAVCException@@
+.PAVCObject@@
+.PAX
+```
+
+コールスタック:
+
+```
+__DllMainCRTStartup
+ -> dllmain_crt_process_attach        DLLのC++静的初期化
+  -> __initterm
+   -> ??__EafxGlobalData              MFCのグローバル afxGlobalData の初期化子
+    -> AFX_GLOBAL_DATA::AFX_GLOBAL_DATA()
+     -> AFX_GLOBAL_DATA::Initialize()
+      -> AFX_GLOBAL_DATA::UpdateSysColors()
+       -> CWindowDC::CWindowDC(CWnd*)
+        -> AfxThrowResourceException()
+         -> _CxxThrowException
+```
+
+MFCのソース(`atlmfc/src/mfc/afxglobals.cpp`、`wingdi.cpp`)を見ると:
+
+```cpp
+void AFX_GLOBAL_DATA::UpdateSysColors()
+{
+	...
+	CWindowDC dc(NULL);
+	m_nBitsPerPixel = dc.GetDeviceCaps(BITSPIXEL);
+	...
+}
+
+CWindowDC::CWindowDC(CWnd* pWnd)
+{
+	if (!Attach(::GetWindowDC(m_hWnd = pWnd->GetSafeHwnd())))
+		AfxThrowResourceException();
+}
+```
+
+**win32kロックダウン下では `::GetWindowDC(NULL)` がNULLを返すため、
+MFCのグローバルオブジェクトの初期化が必ず例外を投げる。**
+
+これは推測どおりの結論だったが、意味合いは当初の想定より重い。
+`afxGlobalData` はMFCのスタティックライブラリ内のグローバルオブジェクトであり、
+CRTの初期化中に無条件に構築される。Chronos側から抑止する手段はない。
+つまり、
+
+> **スタティックリンクされたMFCは、win32kロックダウンされたプロセスには
+> ロードできない。**
+
+GPUプロセスだけが無事だったのは、GPUがwin32kを必要とするため
+ロックダウンの対象外だからである。renderer / utility / storage には
+ロックダウンが適用されるため、すべて同じ場所で落ちる。
+
+なお、この制約はbootstrap構成に固有のものではない。EXE構成のChronosでも
+サブプロセスは同じEXEを起動し、`CefExecuteProcess()` の前に
+同じ静的初期化を通っていた。サンドボックスを無効にしていたため
+表面化していなかっただけである。
+
+#### 対応方針の選択肢
+
+1. **サブプロセス用の薄いDLLを分ける**(CEFが想定している構成)。
+   MFCをリンクしない小さなDLLを用意し、`RunWinMain` から
+   `CefExecuteProcess()` を呼ぶだけにする。
+   `CefBrowserProcessHandler::OnBeforeChildProcessLaunch()` で
+   子プロセスのコマンドラインに `--module=<名前>` を追加すれば、
+   bootstrap.exeはそちらのDLLを読み込む。
+   `AppRenderer` は `CString` を使っているため、MFC非依存に書き換えが必要。
+2. **遅延ロードの通知フックで `GetWindowDC` を差し替える**。
+   `user32.dll` は `DelayLoadDLLs` に含まれているため、
+   `__pfnDliNotifyHook2` の `dliNotePreGetProcAddress` で
+   `GetWindowDC` に自前のスタブを返せる。
+   `#pragma init_seg(compiler)` の初期化子でフックを仕掛ければ
+   MFCの `init_seg(lib)` より先に有効になる。
+   サブプロセスではUIを一切使わないため、`afxGlobalData` の値が
+   意味を持たなくても実害はない。変更は小さいが、MFCの内部実装に依存する。
+
+1が構成として正しく、2は影響範囲が小さく即効性がある。
+なお2で解決しても、win32kに依存する箇所が他にもある可能性は残るため、
+どちらを採るにせよサブプロセスでMFCを動かさない方向が本筋である。
+
+#### 調査の途中で誤っていた点
 
 上記には**確定していない点がある**。VEHは「プロセス内で最初に発生した
 C++例外」で発火させているが、MFCは内部で例外を投げて自分で捕捉する。
