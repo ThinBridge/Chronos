@@ -4190,10 +4190,10 @@ void CSazabi::HideRebar(CWnd* pWnd)
 }
 // Sandbox information object to hand to CefExecuteProcess()/CefInitialize().
 //
-// Phase 1 of the sandbox work only converts Chronos to the bootstrap.exe +
-// ChronosN.dll layout and keeps the sandbox disabled, so the object supplied by
-// bootstrap.exe is deliberately ignored. Defining CHRONOS_ENABLE_SANDBOX turns
-// the sandbox on (Phase 2). See doc/SANDBOX.md.
+// CHRONOS_ENABLE_SANDBOX decides whether the object supplied by bootstrap.exe is
+// used at all. Undefining it restores the unsandboxed sub-processes Chronos ran
+// with before this work, which is the quickest way to tell a sandbox regression
+// apart from an unrelated one. See doc/SANDBOX.md.
 void* CSazabi::GetSandboxInfo()
 {
 #if defined(CHRONOS_ENABLE_SANDBOX)
