@@ -52,7 +52,9 @@ IF NOT EXIST "cef-cache\%CEFVER%" (
 @REM Build CEF binaries
 @REM ------------------
 cd "%BASEDIR%\cef-cache\%CEFVER%"
-cmake -B build -D USE_ATL=Off -DUSE_SANDBOX=Off -A Win32 -DCMAKE_C_FLAGS="/utf-8" -DCMAKE_CXX_FLAGS="/utf-8" .
+@REM Chronos links the MFC shared DLL, so the wrapper must use the dynamic CRT
+@REM (/MD) too. CEF defaults to /MT. See doc/SANDBOX.md.
+cmake -B build -D USE_ATL=Off -DUSE_SANDBOX=Off -A Win32 -DCMAKE_C_FLAGS="/utf-8" -DCMAKE_CXX_FLAGS="/utf-8" -DCEF_RUNTIME_LIBRARY_FLAG=/MD .
 cmake --build build
 cmake --build build --config Release
 

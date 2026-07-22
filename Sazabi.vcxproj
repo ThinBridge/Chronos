@@ -20,13 +20,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfAtl>false</UseOfAtl>
@@ -60,7 +60,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">
     <ClCompile>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -118,14 +118,14 @@
       <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>true</OptimizeReferences>
-      <DelayLoadDLLs>libcef.dll;gdiplus.dll;VERSION.dll;WINMM.dll;IMM32.dll;WINHTTP.dll;WININET.dll;UxTheme.dll;WINSPOOL.DRV;MSIMG32.dll;user32.dll;gdi32.dll;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleaut32.dll;oledlg.dll;dwmapi.dll;secur32.dll;oleacc.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>libcef.dll;gdiplus.dll;VERSION.dll;WINMM.dll;WINHTTP.dll;WININET.dll;user32.dll;gdi32.dll;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleaut32.dll;dwmapi.dll;secur32.dll</DelayLoadDLLs>
       <AdditionalOptions>
       </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'">
     <ClCompile>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <Optimization>Disabled</Optimization>
@@ -279,6 +279,27 @@
     <Manifest Include="res\sazabi.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <!-- Chronos links the MFC shared DLL (see doc/SANDBOX.md), so the MFC and CRT
+       runtime DLLs have to sit next to the executable. Copy them out of the
+       installed toolset rather than checking them in, so they stay in step with
+       whatever toolset built the binaries. The items are built inside the target
+       because $(VCToolsRedistVersion) is not set during project evaluation. -->
+  <Target Name="ChronosCopyRedist" AfterTargets="Build">
+    <PropertyGroup>
+      <ChronosRedistDir>$(VCInstallDir)Redist\MSVC\$(VCToolsRedistVersion)\</ChronosRedistDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <!-- The localized MFC resources are resource only: there is no debug build. -->
+      <ChronosRedist Include="$(ChronosRedistDir)x86\Microsoft.VC143.MFCLOC\mfc140jpn.dll" />
+      <ChronosRedist Include="$(ChronosRedistDir)x86\Microsoft.VC143.MFC\mfc140u.dll" Condition="'$(Configuration)'=='R64_CSG'" />
+      <ChronosRedist Include="$(ChronosRedistDir)x86\Microsoft.VC143.CRT\msvcp140.dll" Condition="'$(Configuration)'=='R64_CSG'" />
+      <ChronosRedist Include="$(ChronosRedistDir)x86\Microsoft.VC143.CRT\vcruntime140.dll" Condition="'$(Configuration)'=='R64_CSG'" />
+      <ChronosRedist Include="$(ChronosRedistDir)debug_nonredist\x86\Microsoft.VC143.DebugMFC\mfc140ud.dll" Condition="'$(Configuration)'=='D64_CSG'" />
+      <ChronosRedist Include="$(ChronosRedistDir)debug_nonredist\x86\Microsoft.VC143.DebugCRT\msvcp140d.dll" Condition="'$(Configuration)'=='D64_CSG'" />
+      <ChronosRedist Include="$(ChronosRedistDir)debug_nonredist\x86\Microsoft.VC143.DebugCRT\vcruntime140d.dll" Condition="'$(Configuration)'=='D64_CSG'" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ChronosRedist)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
   <!-- Chronos builds as ChronosN.dll and is launched by the CEF bootstrap
        executable that setup-cef.bat installs as ChronosN.exe. Point the
        debugger at it so "Local Windows Debugger" works. These use

@@ -542,10 +542,22 @@ public:
 		CMFCStatusBar::SetPaneIcon(nIndex, hIcon, bUpdate);
 		return;
 	}
+	// CMFCStatusBar::_GetPanePtr() is protected and the MFC shared DLL does not
+	// export it, so the progress state cannot be read back out of MFC. Mirror it
+	// here instead. Every caller goes through CMyStatusBar, so hiding the
+	// non-virtual EnablePaneProgressBar() is enough to keep the two in step.
+	void EnablePaneProgressBar(int nIndex, long nTotal = 100 /* -1 - disable */,
+	    BOOL bDisplayText = FALSE, COLORREF clrBar = (COLORREF)-1,
+	    COLORREF clrBarDest = (COLORREF)-1, COLORREF clrProgressText = (COLORREF)-1)
+	{
+		m_mapProgressTotal[nIndex] = nTotal;
+		CMFCStatusBar::EnablePaneProgressBar(
+		    nIndex, nTotal, bDisplayText, clrBar, clrBarDest, clrProgressText);
+	}
 	long GetPainProgressTotal(int Index)
 	{
-		CMFCStatusBarPaneInfo* pSBP = _GetPanePtr(Index);
-		return pSBP->nProgressTotal;
+		long nTotal = -1;
+		return m_mapProgressTotal.Lookup(Index, nTotal) ? nTotal : -1;
 	}
 
 protected:
@@ -553,6 +565,9 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	DECLARE_MESSAGE_MAP()
+
+private:
+	CMap<int, int, long, long> m_mapProgressTotal;
 };
 class CMyToolBar : public CMFCToolBar
 {
