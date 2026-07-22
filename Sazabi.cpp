@@ -5196,6 +5196,32 @@ void* g_pChronosSandboxInfo = NULL;
 int ChronosRunMain(LPTSTR lpCmdLine, int nCmdShow)
 {
 
+	// Sub-processes must reach CefExecuteProcess() as early as possible. The
+	// Chromium sandbox is applied from process creation, so anything done
+	// before that call already runs under the restricted token. Keep this
+	// block first, ahead of the process-wide hardening below.
+	CString strCommandLineData;
+	strCommandLineData = ::GetCommandLine();
+	if (strCommandLineData.Find(_T("--type=")) > 0)
+	{
+#if CHROME_VERSION_MAJOR < 112
+		CefEnableHighDPISupport();
+#endif
+		CefMainArgs mainargs(g_hChronosProcessInstance);
+		CefRefPtr<CefApp> app;
+		if (strCommandLineData.Find(_T("--type=renderer")) > 0)
+		{
+			app = new AppRenderer();
+		}
+		// CefExecuteProcess() must run exactly once per process. Calling it a
+		// second time re-enters the sandbox target initialisation.
+		int exit_code = CefExecuteProcess(mainargs, app.get(), CSazabi::GetSandboxInfo());
+		if (exit_code >= 0)
+		{
+			return exit_code;
+		}
+	}
+
 #ifdef _DEBUG
 	::_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
 #endif
@@ -5220,31 +5246,6 @@ int ChronosRunMain(LPTSTR lpCmdLine, int nCmdShow)
 	setlocale(LC_ALL, "Japanese");
 
 	int nRet = 0;
-	CString strCommandLineData;
-	strCommandLineData = ::GetCommandLine();
-	if (strCommandLineData.Find(_T("--type=")) > 0)
-	{
-#if CHROME_VERSION_MAJOR < 112
-		CefEnableHighDPISupport();
-#endif
-		CefMainArgs mainargs(g_hChronosProcessInstance);
-		void* sandbox_info = CSazabi::GetSandboxInfo();
-		if (strCommandLineData.Find(_T("--type=renderer")) > 0)
-		{
-			CefRefPtr<CefApp> app;
-			app = new AppRenderer();
-			int exitCode = CefExecuteProcess(mainargs, app.get(), sandbox_info);
-			if (exitCode >= 0)
-			{
-				return exitCode;
-			}
-		}
-		int exit_code = CefExecuteProcess(mainargs, nullptr, sandbox_info);
-		if (exit_code >= 0)
-		{
-			return exit_code;
-		}
-	}
 	nRet = MY_WinMain(g_hChronosModuleInstance, NULL, lpCmdLine, nCmdShow);
 	return nRet;
 }
