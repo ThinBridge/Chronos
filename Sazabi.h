@@ -279,6 +279,7 @@ public:
 	CString InitConfFile(CString baseName);
 	void InitReadConfSetting();
 	void InitializeCef();
+	static void* GetSandboxInfo();
 	////////////////////////////////////////////////
 	virtual int ExitInstance();
 	void UnInitializeObjects();
@@ -1089,3 +1090,18 @@ public:
 };
 
 extern CSazabi theApp;
+
+// Entry point plumbing shared by the standalone executable build and the
+// bootstrap.exe + ChronosN.dll build. See doc/SANDBOX.md.
+//
+// g_hChronosModuleInstance: module owning the MFC resources. It is the
+//   executable itself in the standalone build, ChronosN.dll under bootstrap.
+// g_hChronosProcessInstance: instance handle of the running executable, handed
+//   to CefMainArgs. It is bootstrap.exe under bootstrap.
+// g_pChronosSandboxInfo: sandbox information object supplied by bootstrap.exe,
+//   NULL in the standalone build.
+extern HINSTANCE g_hChronosModuleInstance;
+extern HINSTANCE g_hChronosProcessInstance;
+extern void* g_pChronosSandboxInfo;
+
+int ChronosRunMain(LPTSTR lpCmdLine, int nCmdShow);

@@ -11,6 +11,9 @@
     <ClCompile Include="APIHook.cpp">
       <Filter>SB</Filter>
     </ClCompile>
+    <ClCompile Include="BootstrapMain.cpp">
+      <Filter>SB</Filter>
+    </ClCompile>
     <ClCompile Include="BroFrame.cpp">
       <Filter>SB</Filter>
     </ClCompile>

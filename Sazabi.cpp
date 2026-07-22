@@ -4176,6 +4176,21 @@ void CSazabi::HideRebar(CWnd* pWnd)
 	}
 	pFrame->ShowWindow(SW_MAXIMIZE);
 }
+// Sandbox information object to hand to CefExecuteProcess()/CefInitialize().
+//
+// Phase 1 of the sandbox work only converts Chronos to the bootstrap.exe +
+// ChronosN.dll layout and keeps the sandbox disabled, so the object supplied by
+// bootstrap.exe is deliberately ignored. Defining CHRONOS_ENABLE_SANDBOX turns
+// the sandbox on (Phase 2). See doc/SANDBOX.md.
+void* CSazabi::GetSandboxInfo()
+{
+#if defined(CHRONOS_ENABLE_SANDBOX)
+	return g_pChronosSandboxInfo;
+#else
+	return NULL;
+#endif
+}
+
 void CSazabi::InitializeCef()
 {
 	PROC_TIME(InitializeCef)
@@ -4185,8 +4200,8 @@ void CSazabi::InitializeCef()
 	CefEnableHighDPISupport();
 #endif
 
-	CefMainArgs mainargs(m_hInstance);
-	void* sandbox_info = NULL;
+	CefMainArgs mainargs(g_hChronosProcessInstance);
+	void* sandbox_info = GetSandboxInfo();
 
 	CefSettings settings;
 
@@ -4204,7 +4219,7 @@ void CSazabi::InitializeCef()
 	settings.chrome_runtime = true;
 #endif
 
-	settings.no_sandbox = true;
+	settings.no_sandbox = (sandbox_info == NULL);
 
 
 	CString strLocale;
@@ -5162,7 +5177,11 @@ int MY_WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 	return nReturnCode;
 }
 
-int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+HINSTANCE g_hChronosModuleInstance = NULL;
+HINSTANCE g_hChronosProcessInstance = NULL;
+void* g_pChronosSandboxInfo = NULL;
+
+int ChronosRunMain(LPTSTR lpCmdLine, int nCmdShow)
 {
 
 #ifdef _DEBUG
@@ -5196,8 +5215,8 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 #if CHROME_VERSION_MAJOR < 112
 		CefEnableHighDPISupport();
 #endif
-		CefMainArgs mainargs(hInstance);
-		void* sandbox_info = NULL;
+		CefMainArgs mainargs(g_hChronosProcessInstance);
+		void* sandbox_info = CSazabi::GetSandboxInfo();
 		if (strCommandLineData.Find(_T("--type=renderer")) > 0)
 		{
 			CefRefPtr<CefApp> app;
@@ -5214,7 +5233,20 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 			return exit_code;
 		}
 	}
-	nRet = MY_WinMain(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+	nRet = MY_WinMain(g_hChronosModuleInstance, NULL, lpCmdLine, nCmdShow);
 	return nRet;
 }
+
+#if !defined(CHRONOS_USE_BOOTSTRAP)
+// Standalone executable build. Under bootstrap.exe the entry point is
+// RunWinMain() in BootstrapMain.cpp instead.
+int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+{
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	g_hChronosModuleInstance = hInstance;
+	g_hChronosProcessInstance = hInstance;
+	g_pChronosSandboxInfo = NULL;
+	return ChronosRunMain(lpCmdLine, nCmdShow);
+}
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

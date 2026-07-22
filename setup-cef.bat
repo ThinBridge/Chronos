@@ -71,4 +71,13 @@ cmake -E copy_directory "cef-cache\%CEFVER%\Release" R32
 cmake -E copy_directory "cef-cache\%CEFVER%\Resources" D32
 cmake -E copy_directory "cef-cache\%CEFVER%\Resources" R32
 
+@REM ----------------------------------------------------
+@REM Install the bootstrap executable as ChronosN.exe
+@REM ----------------------------------------------------
+@REM Chronos is built as ChronosN.dll and launched through the CEF bootstrap
+@REM executable, which loads the DLL matching its own file name. The bootstrap
+@REM must be replaced whenever the CEF version changes. See doc/SANDBOX.md.
+cmake -E copy "cef-cache\%CEFVER%\Release\bootstrap.exe" "D32\ChronosN.exe"
+cmake -E copy "cef-cache\%CEFVER%\Release\bootstrap.exe" "R32\ChronosN.exe"
+
 endlocal
