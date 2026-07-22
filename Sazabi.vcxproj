@@ -50,6 +50,9 @@
     <LinkIncremental>false</LinkIncremental>
     <TargetName>ChronosN</TargetName>
     <CodeAnalysisRuleSet>Sazabi.ruleset</CodeAnalysisRuleSet>
+    <LocalDebuggerCommand>$(OutDir)ChronosN.exe</LocalDebuggerCommand>
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='D64_CSG|Win32'">
     <OutDir>.\D32\</OutDir>
@@ -57,6 +60,9 @@
     <LinkIncremental>false</LinkIncremental>
     <TargetName>ChronosN</TargetName>
     <CodeAnalysisRuleSet>Sazabi.ruleset</CodeAnalysisRuleSet>
+    <LocalDebuggerCommand>$(OutDir)ChronosN.exe</LocalDebuggerCommand>
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='R64_CSG|Win32'">
     <ClCompile>

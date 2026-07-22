@@ -21,6 +21,35 @@ Chronosの開発の手引き
  4. 構成を「R64_CSG」（リリース版）または「D64_CSG」（デバッグ版）から選択する。
  5. メニューから「Local Windows Debugger」を実行する。
 
+## デバッグ実行について
+
+Chronosのビルド成果物は`ChronosN.dll`であり、実行ファイルはCEFに同梱されている
+bootstrap実行ファイル（`setup-cef.bat`が`ChronosN.exe`という名前で`D32`/`R32`に配置する）である。
+詳しい経緯は[SANDBOX.md](doc/SANDBOX.md)を参照。
+
+このため、プロジェクトのデバッグ設定では起動対象として`$(OutDir)ChronosN.exe`を指定している。
+「Local Windows Debugger」を実行すればbootstrap経由で`ChronosN.dll`が読み込まれ、
+ブラウザープロセスにはそのままデバッガーがアタッチされる。
+
+なお、`Sazabi.vcxproj.user`は`.gitignore`の対象であり、Visual Studio上でデバッグ設定を
+変更すると同ファイルに書き出されてプロジェクトの設定を上書きする。
+「Local Windows Debugger」が起動しなくなった場合は、同ファイルを削除して確認するとよい。
+
+### サブプロセス（レンダラーなど）のデバッグ
+
+「Local Windows Debugger」でアタッチされるのはブラウザープロセスのみである。
+レンダラーやGPUプロセスを追う場合は、次のいずれかを使う。
+
+* コマンド引数に`--renderer-startup-dialog`を指定する。
+  レンダラープロセスが起動時にダイアログを表示して停止するので、
+  「デバッグ > プロセスにアタッチ」でそのプロセスにアタッチしてからダイアログを閉じる。
+  GPUプロセス用の`--gpu-startup-dialog`、ユーティリティプロセス用の
+  `--utility-startup-dialog`も同様。
+* Visual Studio Marketplaceの「Child Process Debugging Power Tool」を導入すると、
+  子プロセスにも自動的にアタッチされる。
+* 事象の切り分けだけであれば、`--single-process`で全処理を1プロセスに寄せる方法もある
+  （本来の構成とは異なるため、再現しない不具合もある点に注意）。
+
 ## Chromiumのバージョンの更新手順
 
  1. `setup-cef.bat`に記載されている`CEFVER`を更新する。

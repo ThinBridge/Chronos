@@ -1070,11 +1070,23 @@ void CSazabi::InitParseCommandLine()
 	m_strCommandParam.Empty();
 	m_strOptionParam.Empty();
 
-	for (int i = 1; i < __argc; i++)
+	// __argc and __wargv are only populated by the CRT startup code of an
+	// executable. Chronos is a DLL loaded by bootstrap.exe, so they are left
+	// uninitialized here and must not be used. Parse the process command line
+	// directly instead, which behaves the same in both builds.
+	int argCount = 0;
+	LPWSTR* argValues = ::CommandLineToArgvW(::GetCommandLineW(), &argCount);
+	if (!argValues)
 	{
-		CString param(__wargv[i]);
+		return;
+	}
+
+	for (int i = 1; i < argCount; i++)
+	{
+		CString param(argValues[i]);
 		ParseSingleParam(param);
 	}
+	::LocalFree(argValues);
 }
 
 void CSazabi::InitAtomParam()
